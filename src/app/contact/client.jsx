@@ -345,14 +345,6 @@ export default function Page() {
                             borderRadius:9, fontSize:14, fontWeight:600, textDecoration:"none" }}>
                           <WASvg/> Chat on WhatsApp
                         </a>
-                        <a href="/India-Entry-Starter-Guide.pdf"
-                          target="_blank" rel="noopener noreferrer"
-                          style={{ display:"inline-flex", alignItems:"center", justifyContent:"center",
-                            gap:8, background:T.stone, color:T.f, padding:"13px 24px",
-                            borderRadius:9, fontSize:13.5, fontWeight:600, textDecoration:"none",
-                            border:`1px solid ${T.bdr}` }}>
-                          📋 Download India Entry Guide
-                        </a>
                       </div>
                     </div>
                   ) : (
