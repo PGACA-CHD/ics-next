@@ -82,8 +82,8 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
             {description}
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation -></button>
-            <button className="ics-btn ics-btn-ghost ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["services"] || "/"; })()}>View Entity Types -></button>
+            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation →</button>
+            <button className="ics-btn ics-btn-ghost ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["services"] || "/"; })()}>View Entity Types →</button>
           </div>
         </div>
       </section>
@@ -194,7 +194,7 @@ function SEOCTAStrip({ setPage }) {
         </p>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
-        <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation -></button>
+        <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation →</button>
         <a href="https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20discuss%20setting%20up%20my%20company%20in%20India." target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "#25D366", color: "#fff", padding: "12px 22px", borderRadius: 9, fontSize: 13.5, fontWeight: 600, textDecoration: "none" }}>
           <WASvg/> WhatsApp us
         </a>
