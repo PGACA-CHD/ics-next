@@ -196,20 +196,6 @@ export default function Page() {
               ))}
             </div>
 
-            {/* WhatsApp CTA */}
-            <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              style={{ display:"flex", alignItems:"center", gap:12,
-                background:"#25D366", color:"#fff", padding:"14px 18px",
-                borderRadius:12, fontSize:14, fontWeight:600,
-                textDecoration:"none", marginBottom:20 }}>
-              <WASvg/>
-              <div>
-                <div style={{ lineHeight:1 }}>Chat on WhatsApp</div>
-                <div style={{ fontSize:11, fontWeight:300, opacity:.8, marginTop:3 }}>
-                  Usually replies within a few hours · Preferred by most international clients
-                </div>
-              </div>
-            </a>
 
             {/* PGA knowledge partner */}
             <div style={{ background:T.ch, borderRadius:12, padding:"18px 20px" }}>
