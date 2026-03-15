@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#0B3D2E"/>
-  <rect x="8" y="7" width="16" height="2.5" rx="1.25" fill="white"/>
-  <rect x="13" y="9.5" width="6" height="10" fill="white"/>
-  <rect x="8" y="19.5" width="16" height="2.5" rx="1.25" fill="white"/>
-  <path d="M16 24 L13.5 28 L16 27.2 L18.5 28 Z" fill="#E8900A"/>
+  <rect width="32" height="32" rx="6" fill="#0B3D2E"/>
+  <rect x="6" y="5" width="20" height="3" rx="1.5" fill="white"/>
+  <rect x="6" y="24" width="20" height="3" rx="1.5" fill="white"/>
+  <rect x="13" y="5" width="6" height="22" rx="1.5" fill="white"/>
+  <polygon points="16,6 10,17 16,14 22,17" fill="#E8900A"/>
+  <rect x="13.2" y="14" width="5.6" height="8" rx="1.2" fill="#E8900A"/>
 </svg>
