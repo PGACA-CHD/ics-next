@@ -39,7 +39,7 @@ export default function Nav() {
       }}>
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-          <Logo dark={true} size="md" />
+          <Logo dark={true} size="sm" />
         </Link>
 
         {/* Desktop nav links */}
