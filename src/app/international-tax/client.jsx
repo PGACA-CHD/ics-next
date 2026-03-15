@@ -84,8 +84,8 @@ export default function Page() {
               ))}
             </div>
             {(() => {
-              const [tf, setTf] = React.useState({ name:"", email:"", company:"", concern:"" });
-              const [ts, setTs] = React.useState("idle");
+              const [tf, setTf] = useState({ name:"", email:"", company:"", concern:"" });
+              const [ts, setTs] = useState("idle");
               const inpStyle = { width:"100%", padding:"10px 13px", border:`1px solid ${T.bdr}`, borderRadius:6,
                 fontFamily:"'DM Sans',sans-serif", fontSize:13, color:T.ch, background:T.ivory,
                 outline:"none", marginBottom:10, boxSizing:"border-box" };
@@ -185,7 +185,7 @@ export default function Page() {
                 { label:"FDI rules & FEMA compliance →", page:"seo_fdi" },
                 { label:"Foreign company registration →", page:"seo_fcri" },
               ].map(l => (
-                <button key={l.label} onClick={() => setPage(l.page)} style={{
+                <button key={l.label} onClick={() => router.push(ROUTES[l.page] || '/')} style={{
                   background:T.stone, border:`1px solid ${T.bdr}`, color:T.f,
                   padding:"8px 14px", borderRadius:50, fontSize:12.5, fontWeight:600,
                   cursor:"pointer", fontFamily:"'DM Sans',sans-serif", transition:"all .2s",
