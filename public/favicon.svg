@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Forest green background with rounded corners -->
+  <rect width="32" height="32" rx="6" fill="#0B3D2E"/>
+
+  <!-- Pillar mark — scaled from logo's 16×44 to fit 32×32 canvas -->
+  <!-- Original: x=0,y=4, w=16, h=3.2 top cap — scaled ~1.8x, centred -->
+  <!-- Top cap -->
+  <rect x="8" y="5" width="16" height="3" rx="1.4" fill="white"/>
+  <!-- Bottom cap -->
+  <rect x="8" y="24" width="16" height="3" rx="1.4" fill="white"/>
+  <!-- Single centre column (logo has one column at x=6,w=4) -->
+  <rect x="14" y="5" width="4" height="22" rx="1.4" fill="white"/>
+
+  <!-- Gold arrow — downward, same as logo polygon 8,5→3,16→8,13→13,16 scaled -->
+  <!-- Scaled: centre at x=16, arrowhead tip at y≈20, top at y≈7 -->
+  <polygon points="16,7 11,17 16,14 21,17" fill="#E8900A"/>
+  <rect x="14.2" y="13.5" width="3.6" height="8" rx="1" fill="#E8900A"/>
+</svg>
