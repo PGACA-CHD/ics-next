@@ -6,8 +6,9 @@ import { trackPageView, trackCalendlyBooking } from '@/lib/utils';
 export default function Analytics() {
   const pathname = usePathname();
 
-  // Track page views on route change
+  // Scroll to top + track page views on route change
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     trackPageView(pathname);
   }, [pathname]);
 
