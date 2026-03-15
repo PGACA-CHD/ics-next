@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; width: 100%; }
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5; color: #17170F;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    text-align: left;
+  }
+  #root { width: 100%; margin: 0; padding: 0; }
+  a { text-decoration: none; color: inherit; }
+
+  .font-display { font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; }
+
+  /* Reveal animation */
+  .reveal { opacity: 1; transform: none; transition: opacity .4s ease, transform .4s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Stagger children */
+  .stagger > * { opacity: 1; transform: none; transition: opacity .35s ease, transform .35s ease; }
+  .stagger.in > *:nth-child(1) { opacity:1; transform:none; transition-delay:.03s }
+  .stagger.in > *:nth-child(2) { opacity:1; transform:none; transition-delay:.08s }
+  .stagger.in > *:nth-child(3) { opacity:1; transform:none; transition-delay:.13s }
+  .stagger.in > *:nth-child(4) { opacity:1; transform:none; transition-delay:.18s }
+  .stagger.in > *:nth-child(5) { opacity:1; transform:none; transition-delay:.23s }
+  .stagger.in > *:nth-child(6) { opacity:1; transform:none; transition-delay:.28s }
+
+  /* Button base */
+  .ics-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 12px 24px; border-radius: 6px;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-size: 13.5px; font-weight: 600; letter-spacing: .2px;
+    cursor: pointer; border: none;
+    transition: all .2s cubic-bezier(.4,0,.2,1);
+    white-space: nowrap; text-decoration: none;
+  }
+  .ics-btn-primary {
+    background: #E8900A; color: #fff;
+    box-shadow: 0 1px 3px rgba(232,144,10,.3), 0 4px 12px rgba(232,144,10,.15);
+  }
+  .ics-btn-primary:hover {
+    background: #d4820a; transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(232,144,10,.4);
+  }
+  .ics-btn-ghost {
+    background: rgba(255,255,255,.08); color: rgba(255,255,255,.82);
+    border: 1.5px solid rgba(255,255,255,.18); backdrop-filter: blur(4px);
+  }
+  .ics-btn-ghost:hover {
+    border-color: rgba(255,255,255,.5); color: #fff;
+    background: rgba(255,255,255,.12);
+  }
+  .ics-btn-outline {
+    background: transparent; color: #0B3D2E;
+    border: 1.5px solid #0B3D2E;
+  }
+  .ics-btn-outline:hover { background: #0B3D2E; color: #fff; }
+  .ics-btn-lg { padding: 15px 32px; font-size: 14px; border-radius: 8px; }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: transform .22s cubic-bezier(.4,0,.2,1),
+                box-shadow .22s cubic-bezier(.4,0,.2,1),
+                border-color .22s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 56px rgba(11,61,46,.10);
+    border-color: rgba(11,61,46,.12) !important;
+  }
+
+  /* Input focus ring */
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0B3D2E !important;
+    box-shadow: 0 0 0 3px rgba(11,61,46,.08);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #FAFAF5; }
+  ::-webkit-scrollbar-thumb { background: #E0DDD4; border-radius: 10px; }
+
+  /* Mobile responsive */
+  /* ─── TABLET 1024px ──────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .ics-section-pad { padding-left: 32px !important; padding-right: 32px !important; }
+  }
+
+  /* ─── TABLET / IPAD 900px ────────────────────────────────── */
+  @media (max-width: 900px) {
+
+    /* Nav — hide desktop links, show hamburger */
+    .nav-desktop-links { display: none !important; }
+    .nav-phone { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+    .nav-mobile-menu {
+      position: fixed; top: 62px; left: 0; right: 0;
+      height: calc(100vh - 62px);
+      background: rgba(6,16,13,.98); z-index: 399; backdrop-filter: blur(8px);
+      display: flex; flex-direction: column; padding: 32px 28px;
+      gap: 6px; overflow-y: auto;
+    }
+
+    /* Section padding */
+    section, footer { padding-left: 24px !important; padding-right: 24px !important; }
+    .hero-section { padding-top: 100px !important; padding-bottom: 60px !important; }
+
+    /* Hero — stack vertically */
+    .hero-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    /* hero-card stays in natural order — copy first, card below */
+
+    /* Stats ribbon — 3 col on tablet */
+    .stats-ribbon {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .stats-ribbon > div:nth-child(4),
+    .stats-ribbon > div:nth-child(5) {
+      border-top: 1px solid rgba(255,255,255,.05) !important;
+    }
+
+    /* What We Do — service cards single col */
+    .service-cards-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* How It Works — stack left panel above steps */
+    .process-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    .process-sticky { position: static !important; }
+
+    /* Case studies — single col */
+    .cases-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Industries — 2 col */
+    .industries-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Global reach regions — 2 col */
+    .regions-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Why us — stack */
+    .whyus-grid {
+      grid-template-columns: 1fr !important;
+      gap: 48px !important;
+    }
+
+    /* Contact page — stack */
+    .contact-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .contact-sticky { position: static !important; }
+
+    /* Footer grid */
+    .footer-grid {
+      grid-template-columns: 1fr 1fr 1fr !important;
+      gap: 28px !important;
+    }
+    .footer-brand { grid-column: 1 / -1 !important; }
+
+    /* ── SEO page grids ── */
+    .seo-2col { grid-template-columns: 1fr !important; }
+    .seo-cta-strip { grid-template-columns: 1fr !important; gap: 20px !important; padding: 32px 28px !important; }
+    .seo-cta-strip > div:last-child { flex-direction: row !important; }
+
+    /* ── Inner page specific grids ── */
+
+    /* ServicesPage + GCCPage + TaxPage hero grids */
+    .hero-grid {
+      grid-template-columns: 1fr !important;
+      gap: 36px !important;
+    }
+
+    /* Inner page main content layout (2-col: tabs/content + sticky form) */
+    .inner-page-layout {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+    .inner-sticky { position: static !important; }
+
+    /* ServicesPage entity detail 2-col */
+    .entity-detail-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+
+    /* Comparison table — horizontal scroll on mobile */
+    .comparison-table-wrap {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    .comparison-table-wrap table,
+    .comparison-table-wrap > div[style*="grid"] {
+      min-width: 560px !important;
+    }
+
+    /* GCC / Tax service cards 3-col → 1-col */
+    .inner-service-cards {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Tax DTAA table — horizontal scroll */
+    .dtaa-table-wrap {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* About page grids */
+    .about-hero-grid {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+    .about-story-grid {
+      grid-template-columns: 1fr !important;
+      gap: 48px !important;
+    }
+    .about-values-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Post-setup services grid */
+    .post-setup-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Quote callout — stack */
+    .quote-callout {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+
+    /* DTAA callout — stack */
+    .dtaa-callout {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+
+    /* Process tab switcher full width */
+    .contact-tab-switcher {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+
+  /* ─── SEO PAGES ─────────────────────────────────────────────── */
+  .seo-content { padding-left: 24px !important; padding-right: 24px !important; }
+  @media (max-width: 600px) {
+    .seo-content { padding-left: 16px !important; padding-right: 16px !important; padding-top: 48px !important; }
+  }
+
+  /* ─── MOBILE 600px ───────────────────────────────────────── */
+  @media (max-width: 600px) {
+
+    /* Typography scale down */
+    .hero-h1 { font-size: 40px !important; line-height: 1.05 !important; }
+
+    /* Section padding tighter */
+    section, footer { padding-left: 16px !important; padding-right: 16px !important; }
+    section { padding-top: 64px !important; padding-bottom: 64px !important; }
+
+    /* Hero extra tight */
+    .hero-section { padding: 90px 16px 52px !important; }
+    .hero-card { padding: 24px 18px !important; border-radius: 14px !important; }
+
+    /* Hero grid: single col, card below */
+    .hero-grid {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+
+    /* Stats ribbon — 2×2+1 on mobile */
+    .stats-ribbon {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .stats-ribbon > div:last-child {
+      grid-column: 1 / -1 !important;
+      border-right: none !important;
+    }
+
+    /* Service cards — single col */
+    .service-cards-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Case studies — single col */
+    .cases-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Industries single col */
+    .industries-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Regions single col */
+    .regions-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Credentials grid 2 col */
+    .credentials-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Footer single col */
+    .footer-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .footer-brand { grid-column: auto !important; }
+
+    /* Contact form grid pairs — single col */
+    .form-pair {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Why Us grid — stack */
+    .whyus-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+
+    /* Inner page layout stack */
+    .inner-page-layout {
+      grid-template-columns: 1fr !important;
+    }
+    .inner-sticky { position: static !important; }
+    .entity-detail-grid { grid-template-columns: 1fr !important; }
+    .inner-service-cards { grid-template-columns: 1fr !important; }
+    .about-hero-grid { grid-template-columns: 1fr !important; }
+    .about-story-grid { grid-template-columns: 1fr !important; }
+    .about-values-grid { grid-template-columns: 1fr !important; }
+    .post-setup-grid { grid-template-columns: 1fr !important; }
+
+    /* Quote & DTAA callouts — stack */
+    .quote-callout, .dtaa-callout {
+      grid-template-columns: 1fr !important;
+      padding: 28px 20px !important;
+    }
+    .quote-callout button, .dtaa-callout button {
+      width: 100% !important;
+    }
+
+    /* Process grid — stack */
+    .process-grid {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+    .process-sticky { position: static !important; }
+
+    /* Contact page — stack */
+    .contact-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .contact-sticky { position: static !important; }
+
+    /* Trust bar — 2 col grid */
+    .hero-trust-bar {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+    }
+    .hero-trust-bar > div {
+      border-right: none !important;
+      padding-right: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    /* Eyebrow pill */
+    .hero-eyebrow {
+      font-size: 9px !important;
+      padding: 4px 12px !important;
+    }
+
+    /* PGA section stack */
+    .pga-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+  }
