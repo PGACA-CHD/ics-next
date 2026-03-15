@@ -39,32 +39,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
     <div>
       {/* Hero */}
       
-      {/* -- SEO Resource Links -- */}
-      <section style={{ padding:"0 56px 56px", background:T.ivory }}>
-        <div style={{ maxWidth:1400, margin:"0 auto" }}>
-          <div style={{ background:T.stone, borderRadius:14, padding:"24px 28px", border:`1px solid ${T.bdr}` }}>
-            <div style={{ fontSize:10, letterSpacing:2.5, textTransform:"uppercase", color:T.s, fontWeight:600, marginBottom:12 }}>Detailed Guides</div>
-            <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
-              {[
-                { label:"Foreign company registration in India →", page:"seo_fcri" },
-                { label:"Wholly owned subsidiary setup →", page:"seo_sub" },
-                { label:"FDI rules & automatic route →", page:"seo_fdi" },
-                { label:"Transfer pricing requirements →", page:"seo_tp" },
-              ].map(l => (
-                <button key={l.label} onClick={() => { window.location.href = ROUTES[l.page] || "/"; }} style={{
-                  background:"#fff", border:`1px solid ${T.bdr}`, color:T.f,
-                  padding:"8px 14px", borderRadius:50, fontSize:12.5, fontWeight:600,
-                  cursor:"pointer", fontFamily:"'DM Sans',sans-serif", transition:"all .2s",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background=T.f; e.currentTarget.style.color="#fff"; }}
-                onMouseLeave={e => { e.currentTarget.style.background="#fff"; e.currentTarget.style.color=T.f; }}>
-                  {l.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+
 <section style={{ background: T.f, padding: "110px 56px 72px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`, backgroundSize: "64px 64px" }}/>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 80% at 95% 50%,rgba(232,144,10,.07) 0%,transparent 55%)" }}/>
