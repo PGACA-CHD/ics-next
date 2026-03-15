@@ -171,7 +171,7 @@ export default function HomePage() {
                 { label:"Building a GCC or captive team", icon:"🏗️", page:"gcc" },
                 { label:"Already in India, need a fix", icon:"🔧", page:"contact" },
               ].map(p => (
-                <button key={p.label} onClick={() => setPage(p.page)} style={{
+                <button key={p.label} onClick={() => router.push(ROUTES[p.page] || "/")} style={{
                   display:"inline-flex", alignItems:"center", gap:6,
                   background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.14)",
                   color:"rgba(255,255,255,.75)", padding:"7px 14px", borderRadius:50,
@@ -430,7 +430,7 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <button onClick={() => setPage(a.page)} style={{
+                <button onClick={() => router.push(ROUTES[a.page] || "/")} style={{
                   background:"none", border:"none", cursor:"pointer", padding:0,
                   fontSize:13.5, fontWeight:700, color:T.f,
                   fontFamily:"'DM Sans',sans-serif", textAlign:"left",
@@ -502,7 +502,7 @@ export default function HomePage() {
                   color:T.ch, lineHeight:1.25, marginBottom:14 }}>{s.headline}</h3>
                 <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.78, fontWeight:300,
                   flex:1, marginBottom:22 }}>{s.desc}</p>
-                <button onClick={() => setPage(s.link)} style={{
+                <button onClick={() => router.push(ROUTES[s.link] || "/")} style={{
                   background:"none", border:"none", cursor:"pointer", padding:0,
                   fontSize:13, fontWeight:600, color:T.f,
                   fontFamily:"'DM Sans',sans-serif", textAlign:"left",
@@ -940,7 +940,7 @@ export default function HomePage() {
               { label:"Transfer pricing guide →", page:"seo_tp" },
               { label:"FDI rules India →", page:"seo_fdi" },
             ].map(l => (
-              <button key={l.label} onClick={() => setPage(l.page)} style={{
+              <button key={l.label} onClick={() => router.push(ROUTES[l.page] || "/")} style={{
                 background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.14)",
                 color:"rgba(255,255,255,.65)", padding:"6px 13px", borderRadius:50,
                 fontSize:12, fontWeight:500, cursor:"pointer",
