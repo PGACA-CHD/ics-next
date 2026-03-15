@@ -171,7 +171,7 @@ export default function HomePage() {
                 { label:"Building a GCC or captive team", icon:"🏗️", page:"gcc" },
                 { label:"Already in India, need a fix", icon:"🔧", page:"contact" },
               ].map(p => (
-                <button key={p.label} onClick={() => router.push(ROUTES[p.page] || "/")} style={{
+                <button key={p.label} onClick={() => { window.location.href = ROUTES[p.page] || "/"; }} style={{
                   display:"inline-flex", alignItems:"center", gap:6,
                   background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.14)",
                   color:"rgba(255,255,255,.75)", padding:"7px 14px", borderRadius:50,
@@ -187,7 +187,7 @@ export default function HomePage() {
 
             {/* CTAs */}
             <div style={{ display:"flex", gap:12, flexWrap:"wrap", marginBottom:52 }}>
-              <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>
+              <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
                 Book Free Consultation →
               </button>
               <button className="ics-btn ics-btn-ghost ics-btn-lg"
@@ -430,7 +430,7 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <button onClick={() => router.push(ROUTES[a.page] || "/")} style={{
+                <button onClick={() => { window.location.href = ROUTES[a.page] || "/"; }} style={{
                   background:"none", border:"none", cursor:"pointer", padding:0,
                   fontSize:13.5, fontWeight:700, color:T.f,
                   fontFamily:"'DM Sans',sans-serif", textAlign:"left",
@@ -502,7 +502,7 @@ export default function HomePage() {
                   color:T.ch, lineHeight:1.25, marginBottom:14 }}>{s.headline}</h3>
                 <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.78, fontWeight:300,
                   flex:1, marginBottom:22 }}>{s.desc}</p>
-                <button onClick={() => router.push(ROUTES[s.link] || "/")} style={{
+                <button onClick={() => { window.location.href = ROUTES[s.link] || "/"; }} style={{
                   background:"none", border:"none", cursor:"pointer", padding:0,
                   fontSize:13, fontWeight:600, color:T.f,
                   fontFamily:"'DM Sans',sans-serif", textAlign:"left",
@@ -533,7 +533,7 @@ export default function HomePage() {
                 — Pankaj Gupta, FCA · Diploma in International Taxation · 8 yrs KPMG Int'l Tax
               </p>
             </div>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>
+            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
               Talk to a CA →
             </button>
           </div>
@@ -780,10 +780,10 @@ export default function HomePage() {
               </p>
             </div>
             <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-              <button className="ics-btn ics-btn-primary" onClick={() => router.push(ROUTES["tax"] || "/")}>
+              <button className="ics-btn ics-btn-primary" onClick={() => { window.location.href = ROUTES["tax"] || "/"; }}>
                 International Tax →
               </button>
-              <button className="ics-btn ics-btn-ghost" onClick={() => router.push(ROUTES["seo_fdi"] || "/")}
+              <button className="ics-btn ics-btn-ghost" onClick={() => { window.location.href = ROUTES["seo_fdi"] || "/"; }}
                 style={{ fontSize:12.5, padding:"9px 16px" }}>
                 FDI Rules Guide →
               </button>
@@ -849,10 +849,10 @@ export default function HomePage() {
               </div>
 
               <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
-                <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>
+                <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
                   Talk to a CA →
                 </button>
-                <button className="ics-btn ics-btn-outline ics-btn-lg" onClick={() => router.push(ROUTES["about"] || "/")}>
+                <button className="ics-btn ics-btn-outline ics-btn-lg" onClick={() => { window.location.href = ROUTES["about"] || "/"; }}>
                   About Us
                 </button>
               </div>
@@ -940,7 +940,7 @@ export default function HomePage() {
               { label:"Transfer pricing guide →", page:"seo_tp" },
               { label:"FDI rules India →", page:"seo_fdi" },
             ].map(l => (
-              <button key={l.label} onClick={() => router.push(ROUTES[l.page] || "/")} style={{
+              <button key={l.label} onClick={() => { window.location.href = ROUTES[l.page] || "/"; }} style={{
                 background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.14)",
                 color:"rgba(255,255,255,.65)", padding:"6px 13px", borderRadius:50,
                 fontSize:12, fontWeight:500, cursor:"pointer",
@@ -954,7 +954,7 @@ export default function HomePage() {
           </div>
           <div style={{ display:"flex", gap:14, justifyContent:"center",
             flexWrap:"wrap", marginBottom:28 }}>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>
+            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
               Book Free Consultation →
             </button>
             <a href="tel:+919915731447" className="ics-btn ics-btn-ghost ics-btn-lg">
