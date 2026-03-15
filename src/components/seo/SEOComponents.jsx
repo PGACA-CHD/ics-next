@@ -36,8 +36,6 @@ function WASvg() {
 }
 
 function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
-  const pageRef = useRef();
-  useReveal(pageRef);
   return (
     <div ref={pageRef}>
       {/* Hero */}
