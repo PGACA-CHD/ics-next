@@ -49,12 +49,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
             <div style={{ fontSize:10, letterSpacing:2.5, textTransform:"uppercase", color:T.s, fontWeight:600, marginBottom:12 }}>Detailed Guides</div>
             <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
               {[
-                { label:"Foreign company registration in India →", page:"seo_fcri" },
-                { label:"Wholly owned subsidiary setup →", page:"seo_sub" },
-                { label:"FDI rules & automatic route →", page:"seo_fdi" },
-                { label:"Transfer pricing requirements →", page:"seo_tp" },
+                { label:"Foreign company registration in India ->", page:"seo_fcri" },
+                { label:"Wholly owned subsidiary setup ->", page:"seo_sub" },
+                { label:"FDI rules & automatic route ->", page:"seo_fdi" },
+                { label:"Transfer pricing requirements ->", page:"seo_tp" },
               ].map(l => (
-                <button key={l.label} onClick={() => setPage(l.page)} style={{
+                <button key={l.label} onClick={() => { window.location.href = ROUTES[l.page] || "/"; }} style={{
                   background:"#fff", border:`1px solid ${T.bdr}`, color:T.f,
                   padding:"8px 14px", borderRadius:50, fontSize:12.5, fontWeight:600,
                   cursor:"pointer", fontFamily:"'DM Sans',sans-serif", transition:"all .2s",
@@ -82,8 +82,8 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
             {description}
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation →</button>
-            <button className="ics-btn ics-btn-ghost ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["services"] || "/"; })()}>View Entity Types →</button>
+            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation -></button>
+            <button className="ics-btn ics-btn-ghost ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["services"] || "/"; })()}>View Entity Types -></button>
           </div>
         </div>
       </section>
@@ -194,7 +194,7 @@ function SEOCTAStrip({ setPage }) {
         </p>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
-        <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation →</button>
+        <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => (() => { if(typeof window !== "undefined") window.location.href = ROUTES["contact"] || "/"; })()}>Book Free Consultation -></button>
         <a href="https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20discuss%20setting%20up%20my%20company%20in%20India." target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "#25D366", color: "#fff", padding: "12px 22px", borderRadius: 9, fontSize: 13.5, fontWeight: 600, textDecoration: "none" }}>
           <WASvg/> WhatsApp us
         </a>
@@ -591,7 +591,7 @@ function SEONRIPage({ setPage }) {
             {
               icon:"🏡", type:"NRI returning to India",
               desc:"You are returning to India to start or run a business. Your residency status is changing — from NRI to Resident. This triggers specific FEMA obligations.",
-              points:["Residency transition — NRI → Resident Indian", "Existing foreign assets must be declared under FEMA", "India income now fully taxable from year of return", "Bank accounts: NRE/FCNR → Resident accounts within required timeframe"],
+              points:["Residency transition — NRI -> Resident Indian", "Existing foreign assets must be declared under FEMA", "India income now fully taxable from year of return", "Bank accounts: NRE/FCNR -> Resident accounts within required timeframe"],
               color:"#fff",
             },
           ].map(c => (
