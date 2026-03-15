@@ -38,12 +38,8 @@ export default function Nav() {
         fontFamily: "'DM Sans', sans-serif",
       }}>
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Logo size={32} />
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14.5, fontWeight: 600, color: T.ch, letterSpacing: -.3, lineHeight: 1.15 }}>
-            India Company<br />
-            <span style={{ fontSize: 8.5, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', color: T.lt }}>SETUP</span>
-          </span>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+          <Logo dark={true} size="md" />
         </Link>
 
         {/* Desktop nav links */}
