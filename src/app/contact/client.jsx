@@ -160,10 +160,10 @@ export default function Page() {
                   marginBottom:4, lineHeight:1.3 }}>India Entry Starter Guide</div>
                 <div style={{ fontSize:12, color:"rgba(255,255,255,.45)", lineHeight:1.5 }}>
                   Entity types · FDI routes · DTAA basics · Compliance calendar.
-                  Plain English. 8 pages.
+                  Plain English. 5 pages.
                 </div>
               </div>
-              <a href="/India-Entry-Checklist-IndiaCompanySetup.pdf" target="_blank" rel="noopener noreferrer"
+              <a href="/India-Entry-Starter-Guide.pdf" target="_blank" rel="noopener noreferrer"
                 onClick={() => trackGuideDownload()}
                 style={{ display:"flex", alignItems:"center", gap:6, background:T.s,
                   color:"#fff", padding:"10px 18px", borderRadius:8, fontSize:13,
@@ -345,7 +345,7 @@ export default function Page() {
                             borderRadius:9, fontSize:14, fontWeight:600, textDecoration:"none" }}>
                           <WASvg/> Chat on WhatsApp
                         </a>
-                        <a href="/India-Entry-Checklist-IndiaCompanySetup.pdf"
+                        <a href="/India-Entry-Starter-Guide.pdf"
                           target="_blank" rel="noopener noreferrer"
                           style={{ display:"inline-flex", alignItems:"center", justifyContent:"center",
                             gap:8, background:T.stone, color:T.f, padding:"13px 24px",
@@ -503,24 +503,6 @@ export default function Page() {
                             <span style={{ color:"#22c55e" }}>✓</span> {t}
                           </span>
                         ))}
-                      </div>
-
-                      <div style={{ marginTop:16, padding:"12px 14px",
-                        background:T.stone, borderRadius:9, border:`1px solid ${T.bdr}`,
-                        display:"flex", alignItems:"center", gap:12 }}>
-                        <span style={{ fontSize:20, flexShrink:0 }}>📋</span>
-                        <div style={{ flex:1 }}>
-                          <div style={{ fontSize:12.5, fontWeight:600, color:T.ch }}>
-                            India Entry Starter Guide
-                          </div>
-                          <div style={{ fontSize:11.5, color:T.lt }}>Free · 8 pages · Plain English</div>
-                        </div>
-                        <a href="/India-Entry-Checklist-IndiaCompanySetup.pdf"
-                          target="_blank" rel="noopener noreferrer"
-                          style={{ fontSize:12, fontWeight:600, color:T.f,
-                            textDecoration:"none", whiteSpace:"nowrap" }}>
-                          Download ↓
-                        </a>
                       </div>
                     </>
                   )}
