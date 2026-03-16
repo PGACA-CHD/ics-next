@@ -2,6 +2,7 @@ import ClientPage from './client';
 
 export const dynamic = 'force-dynamic';
 
+
 export const metadata = {
   title: 'Company Incorporation & Entity Setup in India',
   description: "Set up a Private Limited Company, WOS, Branch Office, or LLP in India. Complete incorporation service by KPMG-trained Chartered Accountants. Free structure review.",
@@ -28,7 +29,7 @@ export const schemaJson = JSON.stringify([{
       "name": "Company Incorporation & Entity Setup in India",
       "description": "Set up a Private Limited Company, WOS, Branch Office, or LLP in India. Complete incorporation service by KPMG-trained Chartered Accountants. Free structure review.",
       "url": "https://www.indiacompanysetup.com/setup",
-      "provider": {"@type": "Organization","@id": "https://www.indiacompanysetup.com/#organization","name": "India Company Setup"},
+      "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],
       "serviceType": "Business Advisory"
     },{
@@ -42,7 +43,7 @@ export const schemaJson = JSON.stringify([{
       "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
       "telephone": "+91-99157-31447",
       "email": "info@indiacompanysetup.com",
-      "address": {"@type": "PostalAddress","streetAddress": "SCO 18, Top Floor, Sector 20-D","addressLocality": "Chandigarh","postalCode": "160020","addressCountry": "IN"},
+      "address": {"@type": "PostalAddress", "streetAddress": "SCO 18, Top Floor, Sector 20-D", "addressLocality": "Chandigarh", "postalCode": "160020", "addressCountry": "IN"},
       "areaServed": ["US", "GB", "AE", "SG", "AU", "IN"],
       "priceRange": "$$"
     }]);
