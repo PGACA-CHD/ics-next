@@ -1,6 +1,7 @@
-import ClientPage from './client';
+import CountryClientPage from '@/components/seo/CountryClient';
 
 export const dynamic = 'force-dynamic';
+
 
 export const metadata = {
   title: 'US Company Setting Up in India | India Subsidiary for US Firms',
@@ -28,7 +29,7 @@ export const schemaJson = JSON.stringify([{
       "name": "US Company Setting Up in India | India Subsidiary for US Firms",
       "description": "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-KPMG India entry specialists.",
       "url": "https://www.indiacompanysetup.com/us-company-setting-up-india",
-      "provider": {"@type": "Organization","@id": "https://www.indiacompanysetup.com/#organization","name": "India Company Setup"},
+      "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],
       "serviceType": "Business Advisory"
     },{
@@ -42,7 +43,7 @@ export const schemaJson = JSON.stringify([{
       "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
       "telephone": "+91-99157-31447",
       "email": "info@indiacompanysetup.com",
-      "address": {"@type": "PostalAddress","streetAddress": "SCO 18, Top Floor, Sector 20-D","addressLocality": "Chandigarh","postalCode": "160020","addressCountry": "IN"},
+      "address": {"@type": "PostalAddress", "streetAddress": "SCO 18, Top Floor, Sector 20-D", "addressLocality": "Chandigarh", "postalCode": "160020", "addressCountry": "IN"},
       "areaServed": ["US", "GB", "AE", "SG", "AU", "IN"],
       "priceRange": "$$"
     }]);
@@ -51,7 +52,7 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaJson }} />
-      <ClientPage />
+      <CountryClientPage country="us" />
     </>
   );
 }
