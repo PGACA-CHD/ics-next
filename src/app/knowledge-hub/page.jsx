@@ -2,13 +2,56 @@ import ClientPage from './client';
 
 export const dynamic = 'force-dynamic';
 
-
 export const metadata = {
   title: 'India Entry Knowledge Hub | Incorporation, Tax & Compliance Guides',
-  description: 'Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India.',
+  description: "Free guides on company incorporation, transfer pricing, FDI rules, DTAA, and ongoing compliance in India. Written by CAs for CFOs and decision-makers.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/knowledge-hub' },
+  openGraph: {
+    title: 'India Entry Knowledge Hub | Incorporation, Tax & Compliance Guides',
+    description: "Free guides on company incorporation, transfer pricing, FDI rules, DTAA, and ongoing compliance in India. Written by CAs for CFOs and decision-makers.",
+    url: 'https://www.indiacompanysetup.com/knowledge-hub',
+    images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
+    type: 'website',
+    siteName: 'India Company Setup',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'India Entry Knowledge Hub | Incorporation, Tax & Compliance Guides',
+    description: "Free guides on company incorporation, transfer pricing, FDI rules, DTAA, and ongoing compliance in India. Written by CAs for CFOs and decision-makers.",
+    images: ['https://www.indiacompanysetup.com/og-image.jpg'],
+  },
 };
 
+export const schemaJson = JSON.stringify([{
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "India Entry Knowledge Hub | Incorporation, Tax & Compliance Guides",
+      "description": "Free guides on company incorporation, transfer pricing, FDI rules, DTAA, and ongoing compliance in India. Written by CAs for CFOs and decision-makers.",
+      "url": "https://www.indiacompanysetup.com/knowledge-hub",
+      "provider": {"@type": "Organization","@id": "https://www.indiacompanysetup.com/#organization","name": "India Company Setup"},
+      "areaServed": ["US", "GB", "AE", "SG", "AU"],
+      "serviceType": "Business Advisory"
+    },{
+      "@context": "https://schema.org",
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://www.indiacompanysetup.com/#organization",
+      "name": "India Company Setup",
+      "url": "https://www.indiacompanysetup.com",
+      "logo": "https://www.indiacompanysetup.com/og-image.jpg",
+      "image": "https://www.indiacompanysetup.com/og-image.jpg",
+      "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
+      "telephone": "+91-99157-31447",
+      "email": "info@indiacompanysetup.com",
+      "address": {"@type": "PostalAddress","streetAddress": "SCO 18, Top Floor, Sector 20-D","addressLocality": "Chandigarh","postalCode": "160020","addressCountry": "IN"},
+      "areaServed": ["US", "GB", "AE", "SG", "AU", "IN"],
+      "priceRange": "$$"
+    }]);
+
 export default function Page() {
-  return <ClientPage />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaJson }} />
+      <ClientPage />
+    </>
+  );
 }
