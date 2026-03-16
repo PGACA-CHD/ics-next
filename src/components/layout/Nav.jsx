@@ -43,7 +43,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav links */}
-        <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           {NAV_LINKS.map(({ label, href }) => {
             const active = pathname === href || (href !== '/' && pathname.startsWith(href));
             return (
@@ -66,6 +66,7 @@ export default function Nav() {
             {PHONE}
           </a>
           <Link href="/contact"
+            className="nav-cta-btn"
             style={{ background: T.s, color: '#fff', padding: '9px 18px', borderRadius: 8, fontSize: 13.5, fontWeight: 600, textDecoration: 'none', fontFamily: "'DM Sans', sans-serif", whiteSpace: 'nowrap' }}>
             Free Consultation →
           </Link>
@@ -85,25 +86,42 @@ export default function Nav() {
 
       {/* Mobile menu overlay */}
       {menuOpen && (
-        <div style={{
-          position: 'fixed', inset: 0, zIndex: 390,
-          background: 'rgba(17,17,11,0.97)',
-          display: 'flex', flexDirection: 'column',
-          paddingTop: 90, paddingLeft: 32,
-        }}
+        <div className="nav-mobile-menu"
           onClick={() => setMenuOpen(false)}>
-          {NAV_LINKS.map(({ label, href }) => (
-            <Link key={href} href={href}
-              style={{ fontSize: 28, fontWeight: 500, color: '#fff', textDecoration: 'none', padding: '14px 0', fontFamily: "'Cormorant Garamond', serif" }}
-              onClick={() => setMenuOpen(false)}>
-              {label}
-            </Link>
-          ))}
+          <div style={{ marginBottom: 8 }}>
+            <Logo size="sm" />
+          </div>
+          {NAV_LINKS.map(({ label, href }) => {
+            const active = pathname === href || (href !== '/' && pathname.startsWith(href));
+            return (
+              <Link key={href} href={href}
+                style={{
+                  fontSize: 26, fontWeight: active ? 600 : 400,
+                  color: active ? T.sl : 'rgba(255,255,255,.88)',
+                  textDecoration: 'none', padding: '12px 0',
+                  borderBottom: '1px solid rgba(255,255,255,.07)',
+                  fontFamily: "'Cormorant Garamond', serif",
+                  display: 'block',
+                }}
+                onClick={() => setMenuOpen(false)}>
+                {label}
+              </Link>
+            );
+          })}
           <Link href="/contact"
-            style={{ marginTop: 24, display: 'inline-flex', background: T.s, color: '#fff', padding: '12px 24px', borderRadius: 8, fontSize: 15, fontWeight: 600, textDecoration: 'none', fontFamily: "'DM Sans', sans-serif", width: 'fit-content' }}
+            style={{
+              marginTop: 24, display: 'inline-flex', alignItems: 'center',
+              background: T.s, color: '#fff', padding: '13px 26px',
+              borderRadius: 8, fontSize: 15, fontWeight: 600,
+              textDecoration: 'none', fontFamily: "'DM Sans', sans-serif",
+              width: 'fit-content',
+            }}
             onClick={() => setMenuOpen(false)}>
             Free Consultation →
           </Link>
+          <div style={{ marginTop: 32, fontSize: 12, color: 'rgba(255,255,255,.3)', fontFamily: "'DM Sans', sans-serif" }}>
+            {PHONE} · info@indiacompanysetup.com
+          </div>
         </div>
       )}
 
