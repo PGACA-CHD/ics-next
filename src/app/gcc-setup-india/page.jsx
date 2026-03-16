@@ -2,6 +2,7 @@ import ClientPage from './client';
 
 export const dynamic = 'force-dynamic';
 
+
 export const metadata = {
   title: 'GCC Setup in India | Global Capability Centre Advisory',
   description: "End-to-end GCC setup in India. Entity incorporation, cost-plus pricing, ESOP, payroll, and compliance retainer. Ex-KPMG advisory team.",
@@ -28,7 +29,7 @@ export const schemaJson = JSON.stringify([{
       "name": "GCC Setup in India | Global Capability Centre Advisory",
       "description": "End-to-end GCC setup in India. Entity incorporation, cost-plus pricing, ESOP, payroll, and compliance retainer. Ex-KPMG advisory team.",
       "url": "https://www.indiacompanysetup.com/gcc-setup-india",
-      "provider": {"@type": "Organization","@id": "https://www.indiacompanysetup.com/#organization","name": "India Company Setup"},
+      "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],
       "serviceType": "Business Advisory"
     },{
@@ -42,7 +43,7 @@ export const schemaJson = JSON.stringify([{
       "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
       "telephone": "+91-99157-31447",
       "email": "info@indiacompanysetup.com",
-      "address": {"@type": "PostalAddress","streetAddress": "SCO 18, Top Floor, Sector 20-D","addressLocality": "Chandigarh","postalCode": "160020","addressCountry": "IN"},
+      "address": {"@type": "PostalAddress", "streetAddress": "SCO 18, Top Floor, Sector 20-D", "addressLocality": "Chandigarh", "postalCode": "160020", "addressCountry": "IN"},
       "areaServed": ["US", "GB", "AE", "SG", "AU", "IN"],
       "priceRange": "$$"
     }]);
