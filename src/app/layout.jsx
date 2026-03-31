@@ -36,7 +36,10 @@ export default function RootLayout({ children }) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA4_ID}', { send_page_view: false });
+              gtag('config', '${GA4_ID}', {
+                send_page_view: true,
+                cookie_flags: 'SameSite=None;Secure',
+              });
               window._icsTrack = function(event, params) {
                 if (window.gtag) gtag('event', event, params || {});
               };

@@ -63,7 +63,11 @@ export function trackEvent(eventName, params = {}) {
 
 export function trackPageView(path) {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', 'G-VFH7W7VQ44', { page_path: path });
+    window.gtag('event', 'page_view', {
+      page_path: path,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
   }
 }
 
