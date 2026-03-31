@@ -96,7 +96,7 @@ export default function Page() {
             <div>
               <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: 'rgba(245,168,40,.8)', fontWeight: 600, marginBottom: 6 }}>Senior Advisor</div>
               <div style={{ fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 4 }}>Pankaj Gupta</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)', marginBottom: 14 }}>FCA · Diploma in International Taxation · 8 years KPMG International Tax & Advisory</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)', marginBottom: 14 }}>FCA · Diploma in International Taxation · 8 years Ex-KPMG</div>
               <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.7)', lineHeight: 1.7, maxWidth: 640, fontWeight: 300 }}>
                 Leads all international tax, transfer pricing, and India entry engagements. Advised 100+ foreign companies on India incorporation, DTAA structuring, and FEMA compliance.
               </p>

@@ -282,7 +282,7 @@ const PAGE_META = {
   },
   "/about": {
     title: "About India Company Setup — Ex-KPMG CA Firm, Chandigarh | India Company Setup",
-    description: "India Company Setup is led by Pankaj Gupta, CA with 18+ years experience including 8 years at KPMG International Tax. 100+ companies incorporated. PGA & Co. CA."
+    description: "India Company Setup is led by Pankaj Gupta, CA with 18+ years experience including 8 years at Ex-KPMG. 100+ companies incorporated.."
   },
   "/contact": {
     title: "Free Consultation — India Company Setup | India Company Setup",

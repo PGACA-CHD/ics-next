@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'International Tax Advisory India | DTAA, Transfer Pricing, FEMA',
-  description: "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG International Tax team.",
+  description: "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG team.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/international-tax' },
   openGraph: {
     title: 'International Tax Advisory India | DTAA, Transfer Pricing, FEMA',
-    description: "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG International Tax team.",
+    description: "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG team.",
     url: 'https://www.indiacompanysetup.com/international-tax',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'International Tax Advisory India | DTAA, Transfer Pricing, FEMA',
-    description: "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG International Tax team.",
+    description: "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG team.",
     images: ['https://www.indiacompanysetup.com/og-image.jpg'],
   },
 };
@@ -27,7 +27,7 @@ export const schemaJson = JSON.stringify([{
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "International Tax Advisory India | DTAA, Transfer Pricing, FEMA",
-      "description": "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG International Tax team.",
+      "description": "DTAA structuring, transfer pricing, FEMA compliance, and PE risk management for foreign companies in India. Ex-KPMG team.",
       "url": "https://www.indiacompanysetup.com/international-tax",
       "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],
