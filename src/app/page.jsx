@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Company Incorporation in India for Foreign Companies',
-  description: "End-to-end company setup in India for foreign businesses. WOS, branch office, LLP. Ex-KPMG led CA team. 100+ companies incorporated. Free consultation.",
+  description: "End-to-end company setup in India for foreign businesses. WOS, branch office, LLP. Ex-Big 4 led CA team. 100+ companies incorporated. Free consultation.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/' },
   openGraph: {
     title: 'Company Incorporation in India for Foreign Companies',
-    description: "End-to-end company setup in India for foreign businesses. WOS, branch office, LLP. Ex-KPMG led CA team. 100+ companies incorporated. Free consultation.",
+    description: "End-to-end company setup in India for foreign businesses. WOS, branch office, LLP. Ex-Big 4 led CA team. 100+ companies incorporated. Free consultation.",
     url: 'https://www.indiacompanysetup.com/',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Company Incorporation in India for Foreign Companies',
-    description: "End-to-end company setup in India for foreign businesses. WOS, branch office, LLP. Ex-KPMG led CA team. 100+ companies incorporated. Free consultation.",
+    description: "End-to-end company setup in India for foreign businesses. WOS, branch office, LLP. Ex-Big 4 led CA team. 100+ companies incorporated. Free consultation.",
     images: ['https://www.indiacompanysetup.com/og-image.jpg'],
   },
 };
@@ -31,7 +31,7 @@ export const schemaJson = JSON.stringify([{
       "url": "https://www.indiacompanysetup.com",
       "logo": "https://www.indiacompanysetup.com/og-image.jpg",
       "image": "https://www.indiacompanysetup.com/og-image.jpg",
-      "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
+      "description": "End-to-end company setup in India for foreign businesses. Ex-Big 4 led CA team. 100+ foreign companies incorporated.",
       "telephone": "+91-99157-31447",
       "email": "info@indiacompanysetup.com",
       "address": {"@type": "PostalAddress", "streetAddress": "SCO 18, Top Floor, Sector 20-D", "addressLocality": "Chandigarh", "postalCode": "160020", "addressCountry": "IN"},

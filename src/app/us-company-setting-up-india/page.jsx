@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'US Company Setting Up in India | India Subsidiary for US Firms',
-  description: "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-KPMG India entry specialists.",
+  description: "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-Big 4 India entry specialists.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/us-company-setting-up-india' },
   openGraph: {
     title: 'US Company Setting Up in India | India Subsidiary for US Firms',
-    description: "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-KPMG India entry specialists.",
+    description: "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-Big 4 India entry specialists.",
     url: 'https://www.indiacompanysetup.com/us-company-setting-up-india',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'US Company Setting Up in India | India Subsidiary for US Firms',
-    description: "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-KPMG India entry specialists.",
+    description: "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-Big 4 India entry specialists.",
     images: ['https://www.indiacompanysetup.com/og-image.jpg'],
   },
 };
@@ -27,7 +27,7 @@ export const schemaJson = JSON.stringify([{
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "US Company Setting Up in India | India Subsidiary for US Firms",
-      "description": "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-KPMG India entry specialists.",
+      "description": "How US companies set up in India. WOS incorporation, DTAA USA-India, transfer pricing, FEMA compliance. Ex-Big 4 India entry specialists.",
       "url": "https://www.indiacompanysetup.com/us-company-setting-up-india",
       "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],
@@ -40,7 +40,7 @@ export const schemaJson = JSON.stringify([{
       "url": "https://www.indiacompanysetup.com",
       "logo": "https://www.indiacompanysetup.com/og-image.jpg",
       "image": "https://www.indiacompanysetup.com/og-image.jpg",
-      "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
+      "description": "End-to-end company setup in India for foreign businesses. Ex-Big 4 led CA team. 100+ foreign companies incorporated.",
       "telephone": "+91-99157-31447",
       "email": "info@indiacompanysetup.com",
       "address": {"@type": "PostalAddress", "streetAddress": "SCO 18, Top Floor, Sector 20-D", "addressLocality": "Chandigarh", "postalCode": "160020", "addressCountry": "IN"},

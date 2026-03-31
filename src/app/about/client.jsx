@@ -4,7 +4,7 @@ import { T } from '@/lib/config';
 
 export default function Page() {
   const teamDisciplines = [
-    { icon: '📋', role: 'International Tax & Advisory', creds: 'FCA · ICAI Diploma in International Taxation · Ex-KPMG',
+    { icon: '📋', role: 'International Tax & Advisory', creds: 'FCA · ICAI Diploma in International Taxation · Ex-Big 4',
       skills: ['DTAA structuring & TRC advisory', 'Transfer pricing — design, benchmarking, 3CEB', 'PE risk assessment & FEMA compliance', 'Withholding tax optimisation', 'Form 15CA/15CB for foreign payments'], accent: '#0B3D2E' },
     { icon: '🏢', role: 'Company Secretary & MCA', creds: 'CS · ICSI Qualified',
       skills: ['Company incorporation & SPICe+ filing', 'FCGPR & FLA — RBI filings', 'Board resolutions & statutory registers', 'Annual ROC filings (MGT-7, AOC-4)', 'Share issuance & FCTRS'], accent: '#4A6FA5' },
@@ -38,7 +38,7 @@ export default function Page() {
               Built for your scale.
             </h1>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.82, fontWeight: 300, maxWidth: 500, marginBottom: 36 }}>
-              India Company Setup was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees. We are a team of Chartered Accountants, Company Secretaries, accountants, and lawyers — Ex-KPMG led — serving mid-market foreign companies entering India.
+              India Company Setup was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees. We are a team of Chartered Accountants, Company Secretaries, accountants, and lawyers — Ex-Big 4 led — serving mid-market foreign companies entering India.
             </p>
             <div style={{ display: 'flex', gap: 0, flexWrap: 'wrap', borderLeft: '1px solid rgba(255,255,255,.09)' }}>
               {[['18+','Years of experience'],['100+','Companies incorporated'],['5','Continents'],['0','TP audits lost']].map(([n,l]) => (
@@ -56,7 +56,7 @@ export default function Page() {
             <h3 className="font-display" style={{ fontSize: 20, fontWeight: 600, color: '#17170F', marginBottom: 4 }}>CA &middot; CS &middot; Accountants &middot; Legal</h3>
             <p style={{ fontSize: 12.5, color: '#9A9A8E', marginBottom: 20, lineHeight: 1.5 }}>A full-service advisory team for every stage of your India journey.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
-              {[['🎓','FCA — ICAI'],['🎓',"ICAI Int'l Tax Diploma"],['🏛️','Ex-KPMG'],['📋','CS — ICSI'],['⚖️','LLB'],['🌍','100+ Foreign Companies']].map(([ico, label]) => (
+              {[['🎓','FCA — ICAI'],['🎓',"ICAI Int'l Tax Diploma"],['🏛️','Ex-Big 4'],['📋','CS — ICSI'],['⚖️','LLB'],['🌍','100+ Foreign Companies']].map(([ico, label]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#E4F0EB', borderRadius: 20, padding: '4px 10px', fontSize: 11, fontWeight: 600, color: '#0B3D2E' }}>
                   <span style={{ fontSize: 11 }}>{ico}</span> {label}
                 </div>
@@ -70,7 +70,7 @@ export default function Page() {
               <div style={{ background: '#E4F0EB', borderRadius: 9, padding: '11px 14px', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <span style={{ fontSize: 16, flexShrink: 0 }}>🏛️</span>
                 <p style={{ fontSize: 12, color: '#0B3D2E', fontWeight: 500, lineHeight: 1.55, margin: 0 }}>
-                  Ex-KPMG CA practice. Specialists in India entry, transfer pricing, DTAA, and FEMA for foreign companies.
+                  Ex-Big 4 CA practice. Specialists in India entry, transfer pricing, DTAA, and FEMA for foreign companies.
                 </p>
               </div>
             </div>
@@ -96,13 +96,13 @@ export default function Page() {
             <div>
               <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: 'rgba(245,168,40,.8)', fontWeight: 600, marginBottom: 6 }}>Senior Advisor</div>
               <div style={{ fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 4 }}>Pankaj Gupta</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)', marginBottom: 14 }}>FCA · Diploma in International Taxation · 8 years Ex-KPMG</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)', marginBottom: 14 }}>FCA · Diploma in International Taxation · 8 years Ex-Big 4</div>
               <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.7)', lineHeight: 1.7, maxWidth: 640, fontWeight: 300 }}>
                 Leads all international tax, transfer pricing, and India entry engagements. Advised 100+ foreign companies on India incorporation, DTAA structuring, and FEMA compliance.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flexShrink: 0 }}>
-              {['FCA — ICAI', "Int'l Tax Diploma", 'Ex-KPMG', '100+ Companies'].map(tag => (
+              {['FCA — ICAI', "Int'l Tax Diploma", 'Ex-Big 4', '100+ Companies'].map(tag => (
                 <div key={tag} style={{ background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 6, padding: '5px 12px', fontSize: 11.5, fontWeight: 600, color: 'rgba(255,255,255,.75)', whiteSpace: 'nowrap', textAlign: 'center' }}>{tag}</div>
               ))}
             </div>

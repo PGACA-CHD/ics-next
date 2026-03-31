@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Transfer Pricing in India | Form 3CEB, Benchmarking, Documentation',
-  description: "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-KPMG transfer pricing specialists.",
+  description: "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-Big 4 transfer pricing specialists.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/transfer-pricing-india' },
   openGraph: {
     title: 'Transfer Pricing in India | Form 3CEB, Benchmarking, Documentation',
-    description: "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-KPMG transfer pricing specialists.",
+    description: "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-Big 4 transfer pricing specialists.",
     url: 'https://www.indiacompanysetup.com/transfer-pricing-india',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Transfer Pricing in India | Form 3CEB, Benchmarking, Documentation',
-    description: "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-KPMG transfer pricing specialists.",
+    description: "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-Big 4 transfer pricing specialists.",
     images: ['https://www.indiacompanysetup.com/og-image.jpg'],
   },
 };
@@ -27,7 +27,7 @@ export const schemaJson = JSON.stringify([{
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Transfer Pricing in India | Form 3CEB, Benchmarking, Documentation",
-      "description": "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-KPMG transfer pricing specialists.",
+      "description": "India transfer pricing advisory — policy design, annual benchmarking study, Form 3CEB filing, and APA advisory. Ex-Big 4 transfer pricing specialists.",
       "url": "https://www.indiacompanysetup.com/transfer-pricing-india",
       "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],
@@ -40,7 +40,7 @@ export const schemaJson = JSON.stringify([{
       "url": "https://www.indiacompanysetup.com",
       "logo": "https://www.indiacompanysetup.com/og-image.jpg",
       "image": "https://www.indiacompanysetup.com/og-image.jpg",
-      "description": "End-to-end company setup in India for foreign businesses. Ex-KPMG led CA team. 100+ foreign companies incorporated.",
+      "description": "End-to-end company setup in India for foreign businesses. Ex-Big 4 led CA team. 100+ foreign companies incorporated.",
       "telephone": "+91-99157-31447",
       "email": "info@indiacompanysetup.com",
       "address": {"@type": "PostalAddress", "streetAddress": "SCO 18, Top Floor, Sector 20-D", "addressLocality": "Chandigarh", "postalCode": "160020", "addressCountry": "IN"},

@@ -262,7 +262,7 @@ export default function Page() {
 const PAGE_META = {
   "/": {
     title: "Company Incorporation in India for Foreign Companies | India Company Setup",
-    description: "End-to-end company setup in India for foreign businesses. Wholly owned subsidiary, branch office, LLP. Ex-KPMG led CA team. 100+ companies incorporated. Free consultation."
+    description: "End-to-end company setup in India for foreign businesses. Wholly owned subsidiary, branch office, LLP. Ex-Big 4 led CA team. 100+ companies incorporated. Free consultation."
   },
   "/setup": {
     title: "Company Incorporation & Entity Setup in India | India Company Setup",
@@ -274,15 +274,15 @@ const PAGE_META = {
   },
   "/international-tax": {
     title: "International Tax Advisory India — DTAA, Transfer Pricing, FEMA | India Company Setup",
-    description: "DTAA planning, transfer pricing documentation, FEMA compliance, PE risk assessment for foreign companies in India. Ex-KPMG international tax team. 18+ years experience."
+    description: "DTAA planning, transfer pricing documentation, FEMA compliance, PE risk assessment for foreign companies in India. Ex-Big 4 international tax team. 18+ years experience."
   },
   "/knowledge-hub": {
     title: "India Business Setup Knowledge Hub — Guides & Articles | India Company Setup",
     description: "Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India."
   },
   "/about": {
-    title: "About India Company Setup — Ex-KPMG CA Firm, Chandigarh | India Company Setup",
-    description: "India Company Setup is led by Pankaj Gupta, CA with 18+ years experience including 8 years at Ex-KPMG. 100+ companies incorporated.."
+    title: "About India Company Setup — Ex-Big 4 CA Firm, Chandigarh | India Company Setup",
+    description: "India Company Setup is led by Pankaj Gupta, CA with 18+ years experience including 8 years at Ex-Big 4. 100+ companies incorporated.."
   },
   "/contact": {
     title: "Free Consultation — India Company Setup | India Company Setup",

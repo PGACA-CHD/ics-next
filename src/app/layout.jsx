@@ -13,7 +13,7 @@ export const metadata = {
     default: 'Company Incorporation in India for Foreign Companies | India Company Setup',
     template: '%s | India Company Setup',
   },
-  description: 'End-to-end company setup in India for foreign businesses. Wholly owned subsidiary, branch office, LLP. Ex-KPMG led CA team. 100+ companies incorporated. Free consultation.',
+  description: 'End-to-end company setup in India for foreign businesses. Wholly owned subsidiary, branch office, LLP. Ex-Big 4 led CA team. 100+ companies incorporated. Free consultation.',
   openGraph: {
     type: 'website',
     siteName: SITE_NAME,

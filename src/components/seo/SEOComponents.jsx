@@ -289,9 +289,9 @@ function SEOFDIRulesPage({ setPage }) {
 
 function SEOForeignCompanyPage({ setPage }) {
   return (
-    <SEOPageLayout eyebrow="India Market Entry . Ex-KPMG Advisory" setPage={setPage}
+    <SEOPageLayout eyebrow="India Market Entry . Ex-Big 4" setPage={setPage}
       title={<>Foreign Company Registration<br/><span style={{ fontStyle:"italic", color:T.sl }}>in India – Complete Guide</span></>}
-      description="How to register a foreign company in India – entity types, FDI routes, RBI filings, and compliance timelines. Ex-KPMG CA team. 100+ foreign companies registered.">
+      description="How to register a foreign company in India – entity types, FDI routes, RBI filings, and compliance timelines. Ex-Big 4 CA team. 100+ foreign companies registered.">
 
       <SEOSection label="What It Means" title="Foreign company registration in India – what it actually involves">
         <SEOProseP>Registering a foreign company in India is not a single form – it is a multi-step process involving the Ministry of Corporate Affairs (MCA), the Reserve Bank of India (RBI), and in most cases, the GST department and income tax authorities. The process differs significantly depending on the entity type you choose and the FDI route applicable to your sector.</SEOProseP>
@@ -476,7 +476,7 @@ function SEOMarketEntryPage({ setPage }) {
       <SEOSection label="What Is India Market Entry Advisory" title="More than incorporation – a strategic starting point">
         <SEOProseP>India market entry advisory covers everything that happens before the first document is filed. The entity type, FDI route, transfer pricing model, DTAA structure, and intercompany framework must be decided in the right sequence – because getting any one of them wrong creates restructuring work that typically costs 3 - 5x more than getting it right at inception.</SEOProseP>
         <SEOProseP>Most CA firms start with incorporation. We start with strategy. A 45-minute conversation about your business model, sector, headcount plans, and intercompany flows determines whether you need a WOS, a branch, a GCC, or a combination. The incorporation follows once the structure is clear.</SEOProseP>
-        <SEOProseP>Our advisory work is led by Ex-KPMG professionals – the same people who advise large multinationals on India entry. The difference is that we work with mid-market companies at fees that match mid-market reality.</SEOProseP>
+        <SEOProseP>Our advisory work is led by Ex-Big 4 professionals – the same people who advise large multinationals on India entry. The difference is that we work with mid-market companies at fees that match mid-market reality.</SEOProseP>
       </SEOSection>
 
       <SEOSection label="What We Advise On" title="The full scope of India market entry advisory">

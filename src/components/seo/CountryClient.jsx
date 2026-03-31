@@ -9,7 +9,7 @@ const COUNTRY_DATA = {
     title: "US Company Setting Up in India",
     subtitle: "The complete guide for American businesses entering India",
     description: "Over 30 US companies have used our platform to incorporate in India. Here is exactly what US companies face — Delaware vs India structure, Section 482 transfer pricing, and DTAA planning.",
-    eyebrow: "USA · India Entry · Ex-KPMG Advisory",
+    eyebrow: "USA · India Entry · Ex-Big 4",
     stats: [["30+", "US companies advised"], ["$0", "FEMA penalties"], ["22 days", "Avg. incorporation"], ["100%", "FDI permitted (most sectors)"]],
     whySection: "Why US companies choose India",
     whyPoints: [
@@ -44,7 +44,7 @@ const COUNTRY_DATA = {
     title: "UK Company Setting Up in India",
     subtitle: "The complete guide for British businesses entering India",
     description: "India and the UK share a common legal heritage and deep business ties. Over 20 UK companies use our platform. Here is what UK companies face — UK-India DTAA, FCA-regulated entities, and post-Brexit structuring.",
-    eyebrow: "UK · India Entry · Ex-KPMG Advisory",
+    eyebrow: "UK · India Entry · Ex-Big 4",
     stats: [["20+", "UK companies advised"], ["24 days", "Avg. incorporation"], ["£0", "FEMA penalties"], ["Strong", "UK-India DTAA"]],
     whySection: "Why UK companies choose India",
     whyPoints: [
@@ -79,7 +79,7 @@ const COUNTRY_DATA = {
     title: "UAE Company Setting Up in India",
     subtitle: "The complete guide for UAE-based businesses entering India",
     description: "UAE companies have a unique India entry profile — trading groups, NRI promoters, and holding structures via DIFC or mainland UAE. Over 15 UAE companies use our platform.",
-    eyebrow: "UAE · India Entry · Ex-KPMG Advisory",
+    eyebrow: "UAE · India Entry · Ex-Big 4",
     stats: [["15+", "UAE companies advised"], ["Strong", "India-UAE DTAA"], ["6 weeks", "Complex restructures"], ["NRI", "Specialist advisory"]],
     whySection: "Why UAE-based companies enter India",
     whyPoints: [
@@ -114,7 +114,7 @@ const COUNTRY_DATA = {
     title: "Singapore Company Setting Up in India",
     subtitle: "The complete guide for Singapore-based businesses entering India",
     description: "Singapore is the #1 source of FDI into India by country. APAC tech companies, GCCs, and semiconductor firms frequently use Singapore as their India holding structure. Over 20 APAC companies use our platform.",
-    eyebrow: "Singapore · India Entry · Ex-KPMG Advisory",
+    eyebrow: "Singapore · India Entry · Ex-Big 4",
     stats: [["20+", "APAC companies advised"], ["#1", "Singapore → India FDI source"], ["8 weeks", "Full GCC setup"], ["Strong", "India-Singapore DTAA"]],
     whySection: "Why Singapore companies enter India",
     whyPoints: [

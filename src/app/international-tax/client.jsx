@@ -59,7 +59,7 @@ export default function Page() {
             </p>
             {/* Credential strip */}
             <div style={{ display: "flex", gap: 0, flexWrap: "wrap" }}>
-              {[["🏛️","Ex-KPMG Led Team","18+ years — India incorporations"],["📜","CA, CS & Accountants","Full multidisciplinary team"],["🌍","100+ Companies","Including foreign companies"]].map(([ico,h,s]) => (
+              {[["🏛️","Ex-Big 4 Led Team","18+ years — India incorporations"],["📜","CA, CS & Accountants","Full multidisciplinary team"],["🌍","100+ Companies","Including foreign companies"]].map(([ico,h,s]) => (
                 <div key={h} style={{ padding: "13px 18px", background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.09)", borderRight: "none", display: "flex", gap: 10, alignItems: "center" }}>
                   <div style={{ width: 32, height: 32, borderRadius: 7, background: "rgba(232,144,10,.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>{ico}</div>
                   <div>

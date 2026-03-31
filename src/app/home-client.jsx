@@ -530,7 +530,7 @@ export default function HomePage() {
                 We design it right the first time — saving you 2–3× the cost in corrections."
               </p>
               <p style={{ fontSize:12.5, color:"rgba(255,255,255,.4)", marginTop:12, textAlign:"left" }}>
-                — Pankaj Gupta, FCA · Diploma in International Taxation · 8 yrs Ex-KPMG
+                — Pankaj Gupta, FCA · Diploma in International Taxation · 8 yrs Ex-Big 4
               </p>
             </div>
             <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>

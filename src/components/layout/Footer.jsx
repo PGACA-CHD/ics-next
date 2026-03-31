@@ -18,7 +18,7 @@ export default function Footer() {
               <Logo size="sm" />
             </div>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,.38)', lineHeight: 1.75, maxWidth: 260, marginBottom: 20 }}>
-              Your end-to-end partner for India market entry — incorporation, transfer pricing, FEMA, and ongoing compliance. A team of CAs, CS & accountants. Ex-KPMG led. 18+ years setting up foreign entities in India.
+              Your end-to-end partner for India market entry — incorporation, transfer pricing, FEMA, and ongoing compliance. A team of CAs, CS & accountants. Ex-Big 4 led. 18+ years setting up foreign entities in India.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               <a href={`tel:${PHONE.replace(/\s/g,'')}`} style={{ fontSize: 13, color: 'rgba(255,255,255,.45)', textDecoration: 'none' }}>{PHONE}</a>

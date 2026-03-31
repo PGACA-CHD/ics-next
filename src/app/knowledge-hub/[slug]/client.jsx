@@ -205,7 +205,7 @@ export default function ArticlePage({ params }) {
                   <div style={{ fontSize:12, color:T.lt, lineHeight:1.5 }}>Senior Advisor, India Company Setup<br/>Diploma in International Taxation</div>
                 </div>
               </div>
-              <p style={{ fontSize:12.5, color:T.mid, lineHeight:1.65 }}>8 years at Ex-KPMG. 100+ foreign companies incorporated in India.</p>
+              <p style={{ fontSize:12.5, color:T.mid, lineHeight:1.65 }}>8 years at Ex-Big 4. 100+ foreign companies incorporated in India.</p>
             </div>
 
             {/* CTA card */}
