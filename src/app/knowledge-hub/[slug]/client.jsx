@@ -49,7 +49,7 @@ export default function ArticlePage({ params }) {
           date: item.fields.publishedDate ? new Date(item.fields.publishedDate).toLocaleDateString("en-IN",{month:"short",year:"numeric"}) : "",
           readTime: item.fields.readTime || "5 min read",
           tag: item.fields.tag || "Guide",
-          author: item.fields.author || "Pankaj Gupta, FCA",
+          author: (item.fields.author && item.fields.author !== "PGA & Co." && item.fields.author !== "PGA & Co") ? item.fields.author : "Pankaj Gupta, FCA",
         });
         // Fetch related (same category)
         const cat = item.fields.category || "General";
@@ -89,15 +89,18 @@ export default function ArticlePage({ params }) {
     if (body.nodeType === "document" && body.content) {
       return body.content.map((node, i) => {
         if (node.nodeType === "paragraph") {
-          const text = node.content?.map(n => n.value || "").join("") || "";
+          const raw = node.content?.map(n => n.value || "").join("") || "";
+          const text = raw.replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
           return <p key={i} style={{ fontSize:16, color:T.mid, lineHeight:1.88, marginBottom:20, fontWeight:300 }}>{text}</p>;
         }
         if (node.nodeType === "heading-2") {
-          const text = node.content?.map(n => n.value || "").join("") || "";
+          const raw = node.content?.map(n => n.value || "").join("") || "";
+          const text = raw.replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
           return <h2 key={i} className="font-display" style={{ fontSize:26, fontWeight:600, color:T.ch, marginTop:40, marginBottom:14, lineHeight:1.2 }}>{text}</h2>;
         }
         if (node.nodeType === "heading-3") {
-          const text = node.content?.map(n => n.value || "").join("") || "";
+          const raw = node.content?.map(n => n.value || "").join("") || "";
+          const text = raw.replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
           return <h3 key={i} className="font-display" style={{ fontSize:20, fontWeight:600, color:T.ch, marginTop:32, marginBottom:10 }}>{text}</h3>;
         }
         if (node.nodeType === "unordered-list") {

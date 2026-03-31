@@ -53,7 +53,7 @@ export default function Page() {
           date: item.fields.publishedDate ? new Date(item.fields.publishedDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" }) : "",
           readTime: item.fields.readTime || "5 min read",
           tag: item.fields.tag || "Guide",
-          author: item.fields.author || "Pankaj Gupta, FCA",
+          author: (item.fields.author && item.fields.author !== "PGA & Co." && item.fields.author !== "PGA & Co") ? item.fields.author : "Pankaj Gupta, FCA",
         }));
         setArticles(mapped);
       } catch (err) {
