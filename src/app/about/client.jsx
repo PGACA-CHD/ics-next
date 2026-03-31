@@ -78,6 +78,65 @@ export default function Page() {
         </div>
       </section>
 
+      {/* TEAM MEMBER CARDS */}
+      <section style={{ padding: '80px 56px 64px', background: '#fff' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#E8900A', fontWeight: 600, marginBottom: 12 }}>Meet The Team</div>
+            <h2 className="font-display" style={{ fontSize: 'clamp(26px,2.8vw,40px)', fontWeight: 600, color: '#17170F', lineHeight: 1.1 }}>
+              The people behind <span style={{ fontStyle: 'italic', color: '#0B3D2E' }}>your India entry.</span>
+            </h2>
+          </div>
+
+          {/* Featured — Pankaj Gupta */}
+          <div style={{ background: 'linear-gradient(135deg,#0B3D2E 0%,#155C46 100%)', borderRadius: 20, padding: '40px 44px', marginBottom: 24, display: 'grid', gridTemplateColumns: '80px 1fr auto', gap: 28, alignItems: 'center' }}>
+            <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,.15)', border: '3px solid rgba(245,168,40,.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <span className="font-display" style={{ fontSize: 28, fontWeight: 700, color: '#fff' }}>PG</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: 'rgba(245,168,40,.8)', fontWeight: 600, marginBottom: 6 }}>Managing Partner</div>
+              <div style={{ fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 4 }}>Pankaj Gupta</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)', marginBottom: 14 }}>FCA · Diploma in International Taxation · 8 years KPMG International Tax & Advisory</div>
+              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.7)', lineHeight: 1.7, maxWidth: 640, fontWeight: 300 }}>
+                Leads all international tax, transfer pricing, and India entry engagements. Advised 100+ foreign companies on India incorporation, DTAA structuring, and FEMA compliance.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flexShrink: 0 }}>
+              {['FCA — ICAI', "Int'l Tax Diploma", 'Ex-KPMG ITA', '100+ Companies'].map(tag => (
+                <div key={tag} style={{ background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 6, padding: '5px 12px', fontSize: 11.5, fontWeight: 600, color: 'rgba(255,255,255,.75)', whiteSpace: 'nowrap', textAlign: 'center' }}>{tag}</div>
+              ))}
+            </div>
+          </div>
+
+          {/* Supporting team cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+            {[
+              { initials: 'CS', role: 'Company Secretary', cred: 'CS · ICSI Qualified', bio: 'Handles all MCA filings, RBI/FCGPR submissions, board resolutions, and share issuance documentation.', tags: ['CS — ICSI', 'MCA & ROC', 'FEMA Filings'], accent: '#4A6FA5' },
+              { initials: 'CA', role: 'Accounts & GST Lead', cred: 'CA · B.Com', bio: 'Manages monthly bookkeeping, GST compliance, TDS returns, payroll processing, and statutory audit coordination.', tags: ['CA — ICAI', 'GST & TDS', 'Payroll'], accent: '#5C7A4A' },
+              { initials: 'LG', role: 'Legal & Contracts', cred: 'LLB', bio: 'Drafts and reviews shareholder agreements, intercompany MSAs, employment contracts, and ESOP plan documentation.', tags: ['LLB', 'Corporate Law', 'ESOP & Contracts'], accent: '#7B5EA7' },
+            ].map(m => (
+              <div key={m.role} style={{ background: '#FAFAF5', border: '1px solid #E0DDD4', borderRadius: 16, padding: '28px 24px', borderTop: `4px solid ${m.accent}` }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
+                  <div style={{ width: 52, height: 52, borderRadius: '50%', background: m.accent + '18', border: `2px solid ${m.accent}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span className="font-display" style={{ fontSize: 16, fontWeight: 700, color: m.accent }}>{m.initials}</span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: '#17170F', lineHeight: 1.2 }}>{m.role}</div>
+                    <div style={{ fontSize: 11.5, color: '#9A9A8E', marginTop: 2 }}>{m.cred}</div>
+                  </div>
+                </div>
+                <p style={{ fontSize: 13, color: '#5C5C52', lineHeight: 1.72, fontWeight: 300, marginBottom: 16 }}>{m.bio}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {m.tags.map(tag => (
+                    <span key={tag} style={{ background: m.accent + '12', border: `1px solid ${m.accent}30`, color: m.accent, borderRadius: 20, padding: '3px 10px', fontSize: 11, fontWeight: 600 }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* OUR STORY + TEAM CAPABILITIES */}
       <section style={{ padding: '88px 56px', background: '#FAFAF5' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto' }}>
