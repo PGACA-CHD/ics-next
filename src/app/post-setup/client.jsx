@@ -299,7 +299,7 @@ export default function Page() {
               ["⚖️", "Penalties are automatic and compounding", "India's tax system imposes interest (12–18% p.a.) and late fees automatically. There is no grace period for GST and TDS. Errors compound quickly if not corrected early."],
               ["🔗", "Compliance and tax are interlinked", "Your GST returns feed into your income tax filing. Your TDS workings affect your transfer pricing. Your FEMA filings affect your repatriation. A single firm that handles all of it prevents gaps."],
               ["📈", "Audit readiness throughout the year", "India requires an annual statutory audit. If your books are maintained properly month by month, the audit is straightforward. If not, you face year-end pressure, restatements, and delays."],
-              ["🛡️", "One point of contact — always", "Rather than managing a payroll vendor, a GST consultant, an FEMA specialist, and an auditor separately, you have one team that handles everything and one senior CA who knows your full picture."],
+              ["🛡️", "One point of contact — always", "Rather than managing a payroll vendor, a GST consultant, an FEMA specialist, and an auditor separately, you have one team that handles everything and one qualified CA who knows your full picture."],
             ].map(([ico, title, desc]) => (
               <div key={title} style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 13, padding: "26px 24px" }}>
                 <div style={{ fontSize: 28, marginBottom: 14 }}>{ico}</div>

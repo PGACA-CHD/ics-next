@@ -62,7 +62,7 @@ export default function Footer() {
             © {year} {SITE_NAME} · PGA & Co., Chartered Accountants · Chandigarh, India
           </span>
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,.2)' }}>
-            CA advisory services by PGA & Co. · Not a law firm
+            CA advisory services · ICAI registered · Confidentiality maintained
           </span>
         </div>
 

@@ -19,7 +19,7 @@ export default function Page() {
     ['🔗','Integrated Advisory','DTAA, transfer pricing, and FEMA are treated as one picture — not three separate workstreams. Getting one wrong affects the others.'],
     ['🛡️','Documentation That Defends','Every document is written to survive audit scrutiny — not to meet a minimum compliance threshold.'],
     ['💬','Plain English — Always','CEOs and CFOs should understand their India tax position without jargon. We translate technical positions into clear commercial language.'],
-    ['👥','Senior Attention — Always','Every engagement is led by our senior CA, supported by the full team — CS, accountants, and legal. Full depth, senior attention, every time.'],
+    ['👥','Senior Attention — Always','Every engagement is led by a qualified CA, supported by the full team — CS, accountants, and legal. Full depth, senior attention, every time.'],
     ['🔄','Long-term Partnership','Most clients start with an incorporation engagement and stay on retainer for years. We are built for the full India journey.'],
   ];
 

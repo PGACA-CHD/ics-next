@@ -162,7 +162,7 @@ function SEOCTAStrip({ setPage }) {
           Ready to get started? Book a free 30-minute consultation.
         </h3>
         <p style={{ fontSize: 14, color: "rgba(255,255,255,.55)", lineHeight: 1.7 }}>
-          Senior CA reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.
+          Expert team reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.
         </p>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
@@ -532,7 +532,7 @@ function SEOMarketEntryPage({ setPage }) {
           { q:"What does India market entry advisory cost?", a:"The initial 30-minute consultation is free. A full India entry advisory report – structure, FDI route, DTAA analysis, TP framework, compliance calendar – typically costs Rs.75,000 - Rs.1,50,000 depending on complexity. Implementation (incorporation + FEMA + TP documentation) is additional and separately quoted." },
           { q:"Can you advise on India entry if we already have an entity that was set up incorrectly?", a:"Yes – this is a significant part of our work. We assess existing structures for FDI compliance, transfer pricing gaps, FEMA violations, and entity type mismatch. Where issues are found, we design and implement a remediation plan including any necessary RBI compounding applications." },
           { q:"Do you only handle the Indian side or can you coordinate with our home country advisors?", a:"We handle the Indian side comprehensively. We regularly coordinate with US CPAs (on Form 5471 and GILTI), UK accountants (on UK TP documentation and CFC rules), and Singapore advisors (on substance requirements and DTAA claims). We provide an India advisory memo that your home country advisor can incorporate into their advice." },
-          { q:"What makes your India market entry advisory different from a Big 4 firm?", a:"The depth of analysis is equivalent – our lead advisor spent 8 years doing exactly this work at KPMG. The difference is fees and accessibility. Big 4 India market entry engagements for mid-market companies typically cost Rs.5 - 15 lakhs. Our equivalent engagement costs Rs.1 - 3 lakhs. And every engagement is led by a senior CA, not staffed to a junior team." },
+          { q:"What makes your India market entry advisory different from a Big 4 firm?", a:"The depth of analysis is equivalent – our lead advisor spent 8 years doing exactly this work at KPMG. The difference is fees and accessibility. Big 4 India market entry engagements for mid-market companies typically cost Rs.5 - 15 lakhs. Our equivalent engagement costs Rs.1 - 3 lakhs. And every engagement is led by a qualified CA, not staffed to a junior team." },
         ]}/>
       </SEOSection>
 

@@ -85,7 +85,7 @@ export default function Page() {
           </h1>
           <p style={{ fontSize:15, color:"rgba(255,255,255,.5)", lineHeight:1.82,
             fontWeight:300, maxWidth:520, marginBottom:32 }}>
-            Book a slot directly, or fill the form and our senior CA responds within 24 hours.
+            Book a slot directly, or fill the form and our expert team responds within 24 hours.
             No commitment, no jargon, no sales pressure.
           </p>
 
@@ -93,8 +93,8 @@ export default function Page() {
           <div style={{ display:"flex", gap:0, flexWrap:"wrap" }}>
             {[
               { icon:"⏱️", text:"Response within 24 hours" },
-              { icon:"🔒", text:"Confidential — no spam" },
-              { icon:"🎯", text:"Senior CA — not a junior" },
+              { icon:"🔒", text:"Confidentiality maintained" },
+              { icon:"🎯", text:"Expert team — qualified CAs" },
               { icon:"🌍", text:"All time zones welcome" },
             ].map((item, i) => (
               <div key={item.text} style={{
@@ -126,7 +126,7 @@ export default function Page() {
               <div style={{ display:"flex", flexDirection:"column", gap:0 }}>
                 {[
                   { n:"1", title:"Book or submit a form", desc:"Takes 2 minutes. Choose a calendar slot directly or fill the form below — whichever works best for your time zone." },
-                  { n:"2", title:"We confirm within 24 hours", desc:"Our senior CA reviews your submission and sends a short prep note on what to bring to the call." },
+                  { n:"2", title:"We confirm within 24 hours", desc:"Our expert team reviews your submission and sends a short prep note on what to bring to the call." },
                   { n:"3", title:"30-minute consultation", desc:"We review your business, recommend a structure, and give you a clear India entry plan — no charge." },
                   { n:"4", title:"You decide", desc:"No obligation. Most clients engage after the call because the advice is immediately useful." },
                 ].map((step, i) => (
@@ -309,7 +309,7 @@ export default function Page() {
                   <h2 className="font-display" style={{ fontSize:22, fontWeight:600,
                     color:"#fff", marginBottom:4 }}>Request a Consultation</h2>
                   <p style={{ fontSize:12.5, color:"rgba(255,255,255,.45)", lineHeight:1.5, marginBottom:14 }}>
-                    CA, CS & accountant team · Confidential · Response within 24 hrs
+                    CA, CS & accountant team · Confidentiality maintained · Response within 24 hrs
                   </p>
                   <div style={{ background:"rgba(255,255,255,.08)", borderRadius:9, padding:"12px 14px" }}>
                     <div style={{ fontSize:9.5, letterSpacing:1.5, textTransform:"uppercase", color:"rgba(255,255,255,.5)", fontWeight:700, marginBottom:8 }}>After the call you receive</div>
@@ -330,7 +330,7 @@ export default function Page() {
                         color:T.f, marginBottom:10 }}>We'll be in touch!</h3>
                       <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.7,
                         marginBottom:24, maxWidth:320, margin:"0 auto 24px" }}>
-                        Our senior CA will respond within 24 hours to confirm your consultation slot.
+                        Our expert team will respond within 24 hours to confirm your consultation slot.
                       </p>
                       <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                         <a href={CAL_URL} target="_blank" rel="noopener noreferrer"
@@ -489,7 +489,7 @@ export default function Page() {
 
                       <div style={{ display:"flex", justifyContent:"center", gap:16,
                         marginTop:12, flexWrap:"wrap" }}>
-                        {["Confidential", "No spam", "24hr response", "Senior CA"].map(t => (
+                        {["Confidentiality maintained", "24hr response", "Expert team"].map(t => (
                           <span key={t} style={{ fontSize:11.5, color:T.lt,
                             display:"flex", alignItems:"center", gap:4 }}>
                             <span style={{ color:"#22c55e" }}>✓</span> {t}

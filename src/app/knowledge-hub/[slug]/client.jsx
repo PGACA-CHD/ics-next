@@ -199,7 +199,7 @@ export default function ArticlePage({ params }) {
                 </div>
                 <div>
                   <div style={{ fontSize:14, fontWeight:600, color:T.ch }}>Pankaj Gupta, FCA</div>
-                  <div style={{ fontSize:12, color:T.lt, lineHeight:1.5 }}>Managing Partner, PGA & Co.<br/>Diploma in International Taxation</div>
+                  <div style={{ fontSize:12, color:T.lt, lineHeight:1.5 }}>Managing Partner, India Company Setup<br/>Diploma in International Taxation</div>
                 </div>
               </div>
               <p style={{ fontSize:12.5, color:T.mid, lineHeight:1.65 }}>8 years at KPMG International Tax & Advisory. 100+ foreign companies incorporated in India.</p>
@@ -208,7 +208,7 @@ export default function ArticlePage({ params }) {
             {/* CTA card */}
             <div style={{ background:T.f, borderRadius:14, padding:"24px 22px" }}>
               <div style={{ fontSize:15, fontWeight:600, color:"#fff", marginBottom:10, lineHeight:1.3 }}>Need advice on this topic?</div>
-              <p style={{ fontSize:12.5, color:"rgba(255,255,255,.55)", lineHeight:1.65, marginBottom:16 }}>Free 30-minute consultation. Senior CA responds within 24 hours.</p>
+              <p style={{ fontSize:12.5, color:"rgba(255,255,255,.55)", lineHeight:1.65, marginBottom:16 }}>Free 30-minute consultation. Expert team responds within 24 hours.</p>
               <button className="ics-btn ics-btn-primary" onClick={() => router.push({ contact:"/contact" }["contact"] || "/")} style={{ width:"100%", justifyContent:"center", fontSize:13 }}>Book Free Consultation →</button>
               <div style={{ marginTop:12, fontSize:11.5, color:"rgba(255,255,255,.4)", textAlign:"center" }}>No commitment · Confidential · 24hr response</div>
             </div>
@@ -220,7 +220,7 @@ export default function ArticlePage({ params }) {
                 <div style={{ fontSize:13, fontWeight:600, color:T.ch, marginBottom:3 }}>India Entry Guide</div>
                 <div style={{ fontSize:11.5, color:T.lt }}>Free · 8 pages · Plain English</div>
               </div>
-              <a href="/India-Entry-Checklist-IndiaCompanySetup.pdf" target="_blank" rel="noopener noreferrer"
+              <a href="/India-Entry-Starter-Guide.pdf" target="_blank" rel="noopener noreferrer"
                 onClick={() => trackGuideDownload()}
                 style={{ fontSize:12, fontWeight:600, color:T.f, textDecoration:"none", whiteSpace:"nowrap" }}>
                 Download ↓

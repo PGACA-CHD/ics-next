@@ -92,7 +92,7 @@ export default function HomePage() {
     { icon: "💻", name: "SaaS & Technology",          proof: "30+ companies",  detail: "Primarily from USA, Singapore & UK" },
     { icon: "🏗️", name: "GCC / Captive Centres",      proof: "15+ setups",     detail: "10–200 person teams across sectors" },
     { icon: "🏦", name: "Financial Services",          proof: "20+ companies",  detail: "Fintech, funds, wealth management" },
-    { icon: "🏭", name: "Manufacturing & Engineering", proof: "15+ companies",  detail: "UAE, Germany, Japan, South Korea" },
+    { icon: "🏭", name: "Manufacturing & Engineering", proof: "15+ companies",  detail: "UAE, Germany, Japan" },
     { icon: "🏥", name: "Healthcare & Pharma",         proof: "10+ companies",  detail: "Research, devices, distribution" },
     { icon: "🏪", name: "E-commerce & Retail",         proof: "10+ companies",  detail: "D2C, marketplace, omnichannel" },
   ];
@@ -103,7 +103,7 @@ export default function HomePage() {
     { flag: "🇦🇪", name: "UAE & Middle East",   count: "15+", industries: "Trading · Tech · Shared Services" },
     { flag: "🇸🇬", name: "Singapore & APAC",    count: "20+", industries: "SaaS · GCC · Semiconductors" },
     { flag: "🇦🇺", name: "Australia & NZ",      count: "10+", industries: "Resources · Professional Services" },
-    { flag: "🌍",  name: "Other Markets",        count: "5+",  industries: "Japan · Germany · South Korea · Israel" },
+    { flag: "🌍",  name: "Other Markets",        count: "5+",  industries: "Japan · Germany · Other Regions" },
   ];
 
   const inp = (extra = {}) => ({
@@ -143,7 +143,7 @@ export default function HomePage() {
               background:"rgba(232,144,10,.13)", border:"1px solid rgba(232,144,10,.28)",
               color:T.sl, padding:"5px 16px", borderRadius:50, fontSize:10.5,
               fontWeight:600, letterSpacing:".8px", textTransform:"uppercase", marginBottom:28 }}>
-              🇮🇳 &nbsp;India Market Entry · Ex-KPMG Advisory
+              🇮🇳 &nbsp;India Company Setup
             </div>
 
             {/* H1 */}
@@ -229,7 +229,7 @@ export default function HomePage() {
                 <div style={{ fontSize:52, marginBottom:16 }}>🎉</div>
                 <h3 className="font-display" style={{ fontSize:24, fontWeight:600, color:T.f, marginBottom:10 }}>We'll be in touch!</h3>
                 <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.7, marginBottom:22 }}>
-                  Our senior CA responds within 24 hours. In the meantime, reach us directly on WhatsApp.
+                  Our expert team responds within 24 hours. In the meantime, reach us directly on WhatsApp.
                 </p>
                 <a href="https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20discuss%20setting%20up%20my%20company%20in%20India."
                   target="_blank" rel="noopener noreferrer"
@@ -245,7 +245,7 @@ export default function HomePage() {
                   Book Free Consultation
                 </h3>
                 <p style={{ fontSize:12.5, color:T.lt, lineHeight:1.5, marginBottom:16 }}>
-                  Senior CA responds within 24 hours. No commitment.
+                  Expert team responds within 24 hours. No commitment.
                 </p>
 
                 {/* What you get block */}
@@ -254,7 +254,7 @@ export default function HomePage() {
                   <div style={{ fontSize:9.5, letterSpacing:1.5, textTransform:"uppercase",
                     color:T.f, fontWeight:700, marginBottom:10 }}>What happens after you submit</div>
                   {[
-                    { step:"Within 24 hrs", text:"Senior CA reviews your submission and confirms a 30-min slot" },
+                    { step:"Within 24 hrs", text:"Our expert team reviews your submission and confirms a 30-min slot" },
                     { step:"On the call", text:"We review your structure, flag risks, and recommend the right entity & tax setup" },
                     { step:"After the call", text:"You receive a short written summary — structure recommendation, FDI route, next steps" },
                   ].map((s, i) => (
@@ -534,7 +534,7 @@ export default function HomePage() {
               </p>
             </div>
             <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
-              Talk to a CA →
+              Talk to Our Expert Team →
             </button>
           </div>
         </div>
@@ -800,12 +800,12 @@ export default function HomePage() {
 
             {/* Left — four differentiators */}
             <div>
-              <div style={{ fontSize:10, letterSpacing:3, textTransform:"uppercase",
-                color:T.s, fontWeight:600, marginBottom:14 }}>Why Us</div>
-              <h2 className="font-display" style={{ fontSize:"clamp(32px,3.5vw,48px)",
+              <div style={{ fontSize:12, letterSpacing:3, textTransform:"uppercase",
+                color:T.s, fontWeight:700, marginBottom:16 }}>Why Us</div>
+              <h2 className="font-display" style={{ fontSize:"clamp(36px,4vw,56px)",
                 fontWeight:600, lineHeight:1.08, color:T.ch, marginBottom:32, textAlign:"left" }}>
-                Big 4 quality.<br/>
-                <span style={{ fontStyle:"italic", color:T.f }}>Without the Big 4 cost.</span>
+                The right team for{" "}
+                <span style={{ fontStyle:"italic", color:T.f }}>your India entry.</span>
               </h2>
 
               <div style={{ display:"flex", flexDirection:"column", gap:0, marginBottom:36 }}>
@@ -850,7 +850,7 @@ export default function HomePage() {
 
               <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
                 <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
-                  Talk to a CA →
+                  Talk to Our Expert Team →
                 </button>
                 <button className="ics-btn ics-btn-outline ics-btn-lg" onClick={() => { window.location.href = ROUTES["about"] || "/"; }}>
                   About Us
@@ -962,7 +962,7 @@ export default function HomePage() {
             </a>
           </div>
           <div style={{ display:"flex", gap:24, justifyContent:"center", flexWrap:"wrap" }}>
-            {["No retainer to start", "Senior CA responds within 24 hrs", "Fixed transparent fees"].map(t => (
+            {["No retainer to start", "Expert team responds within 24 hrs", "Fixed transparent fees"].map(t => (
               <span key={t} style={{ fontSize:12, color:"rgba(255,255,255,.3)",
                 display:"flex", alignItems:"center", gap:6 }}>
                 <span style={{ color:T.sl }}>✓</span> {t}

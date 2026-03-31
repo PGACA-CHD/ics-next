@@ -33,11 +33,11 @@ export default function Page() {
     { flag: "🇮🇳", country: "India (domestic law)", div: "20%", roy: "10%", fts: "10%", int: "20%", highlight: false },
     { flag: "🇺🇸", country: "United States", div: "15–25%", roy: "10–15%", fts: "10–15%", int: "10–15%", highlight: false },
     { flag: "🇬🇧", country: "United Kingdom", div: "15%", roy: "10–15%", fts: "10%", int: "10–15%", highlight: false },
-    { flag: "🇦🇪", country: "UAE", div: "10%", roy: "10%", fts: "Nil–10%", int: "Nil–12.5%", highlight: true },
+    { flag: "🇦🇪", country: "UAE", div: "10%", roy: "10%", fts: "Nil–10%", int: "Nil–12.5%", highlight: false },
     { flag: "🇸🇬", country: "Singapore", div: "10–15%", roy: "10%", fts: "10%", int: "10–15%", highlight: false },
     { flag: "🇦🇺", country: "Australia", div: "15%", roy: "10–15%", fts: "10–15%", int: "15%", highlight: false },
     { flag: "🇩🇪", country: "Germany", div: "10–15%", roy: "10%", fts: "10%", int: "10%", highlight: false },
-    { flag: "🇯🇵", country: "Japan", div: "10%", roy: "10%", fts: "10%", int: "10%", highlight: true },
+    { flag: "🇯🇵", country: "Japan", div: "10%", roy: "10%", fts: "10%", int: "10%", highlight: false },
   ];
 
   return (

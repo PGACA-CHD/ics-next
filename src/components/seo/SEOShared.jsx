@@ -187,7 +187,7 @@ function SEOCTAStrip({ setPage }) {
           Ready to get started? Book a free 30-minute consultation.
         </h3>
         <p style={{ fontSize: 14, color: "rgba(255,255,255,.55)", lineHeight: 1.7 }}>
-          Senior CA reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.
+          Expert team reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.
         </p>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
