@@ -202,7 +202,7 @@ export default function ArticlePage({ params }) {
                 </div>
                 <div>
                   <div style={{ fontSize:14, fontWeight:600, color:T.ch }}>Pankaj Gupta, FCA</div>
-                  <div style={{ fontSize:12, color:T.lt, lineHeight:1.5 }}>Managing Partner, India Company Setup<br/>Diploma in International Taxation</div>
+                  <div style={{ fontSize:12, color:T.lt, lineHeight:1.5 }}>Senior Advisor, India Company Setup<br/>Diploma in International Taxation</div>
                 </div>
               </div>
               <p style={{ fontSize:12.5, color:T.mid, lineHeight:1.65 }}>8 years at KPMG International Tax & Advisory. 100+ foreign companies incorporated in India.</p>

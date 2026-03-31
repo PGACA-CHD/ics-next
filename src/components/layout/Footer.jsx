@@ -14,12 +14,8 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="footer-brand">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
               <Logo size="sm" />
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, color: '#fff', letterSpacing: -.2, lineHeight: 1.2 }}>
-                India Company<br />
-                <span style={{ fontSize: 8.5, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', color: 'rgba(255,255,255,.4)' }}>SETUP</span>
-              </span>
             </div>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,.38)', lineHeight: 1.75, maxWidth: 260, marginBottom: 20 }}>
               Your end-to-end partner for India market entry — incorporation, transfer pricing, FEMA, and ongoing compliance. A team of CAs, CS & accountants. Ex-KPMG led. 18+ years setting up foreign entities in India.
