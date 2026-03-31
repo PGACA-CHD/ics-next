@@ -151,7 +151,7 @@ export default function Page() {
   ];
 
   const complianceCalendar = [
-    { month: "Monthly", color: T.f, items: ["GSTR-1 (11th)", "GSTR-3B (20th)", "TDS challan (7th)", "PF & ESI (15th)", "Payroll processing"] },
+    { month: "Monthly", color: T.sl, items: ["GSTR-1 (11th)", "GSTR-3B (20th)", "TDS challan (7th)", "PF & ESI (15th)", "Payroll processing"] },
     { month: "Quarterly", color: T.s, items: ["Advance tax (15th Jun/Sep/Dec/Mar)", "TDS returns (24Q, 26Q)", "GSTR-9 reconciliation", "MIS review"] },
     { month: "Annual", color: "#4A6FA5", items: ["ITR-6 (Oct 31)", "Form 3CEB (Oct 31)", "AOC-4 & MGT-7 (Nov/Dec)", "FLA Return (Jul 15)", "DIR-3 KYC"] },
   ];
