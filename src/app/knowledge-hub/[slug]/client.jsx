@@ -205,7 +205,7 @@ export default function ArticlePage({ params }) {
                   <div style={{ fontSize:12, color:T.lt, lineHeight:1.5 }}>Senior Advisor, India Company Setup<br/>Diploma in International Taxation</div>
                 </div>
               </div>
-              <p style={{ fontSize:12.5, color:T.mid, lineHeight:1.65 }}>8 years at KPMG International Tax & Advisory. 100+ foreign companies incorporated in India.</p>
+              <p style={{ fontSize:12.5, color:T.mid, lineHeight:1.65 }}>8 years at Ex-KPMG. 100+ foreign companies incorporated in India.</p>
             </div>
 
             {/* CTA card */}
@@ -221,7 +221,7 @@ export default function ArticlePage({ params }) {
               <span style={{ fontSize:24 }}>📋</span>
               <div style={{ flex:1 }}>
                 <div style={{ fontSize:13, fontWeight:600, color:T.ch, marginBottom:3 }}>India Entry Guide</div>
-                <div style={{ fontSize:11.5, color:T.lt }}>Free · 8 pages · Plain English</div>
+                <div style={{ fontSize:11.5, color:T.lt }}>Free · 3 pages · Plain English</div>
               </div>
               <a href="/India-Entry-Starter-Guide.pdf" target="_blank" rel="noopener noreferrer"
                 onClick={() => trackGuideDownload()}

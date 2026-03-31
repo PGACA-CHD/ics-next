@@ -530,7 +530,7 @@ export default function HomePage() {
                 We design it right the first time — saving you 2–3× the cost in corrections."
               </p>
               <p style={{ fontSize:12.5, color:"rgba(255,255,255,.4)", marginTop:12, textAlign:"left" }}>
-                — Pankaj Gupta, FCA · Diploma in International Taxation · 8 yrs KPMG Int'l Tax
+                — Pankaj Gupta, FCA · Diploma in International Taxation · 8 yrs Ex-KPMG
               </p>
             </div>
             <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
@@ -813,7 +813,7 @@ export default function HomePage() {
                   {
                     icon: "💷",
                     title: "Big 4 quality without Big 4 cost",
-                    desc: "8 years at KPMG International Tax. The same depth of analysis, structured advice, and documentation rigour — at fees that work for mid-market companies.",
+                    desc: "8 years at KPMG. The same depth of analysis, structured advice, and documentation rigour — at fees that work for mid-market companies.",
                   },
                   {
                     icon: "🔗",
@@ -861,7 +861,7 @@ export default function HomePage() {
             {/* Right — credential stat cards */}
             <div className="credentials-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
               {[
-                { n:"8+", label:"Years at KPMG Int'l Tax", sub:"Lead advisor background" },
+                { n:"8+", label:"Years at KPMG", sub:"Lead advisor background" },
                 { n:"100+", label:"Companies incorporated", sub:"Foreign & domestic clients" },
                 { n:"0", label:"Transfer pricing audits lost", sub:"Across all client engagements" },
                 { n:"FCA", label:"+ Diploma Int'l Tax", sub:"ICAI qualified, both credentials" },

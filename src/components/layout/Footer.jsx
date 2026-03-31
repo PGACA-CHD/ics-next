@@ -55,10 +55,10 @@ export default function Footer() {
         {/* Divider */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,.25)' }}>
-            © {year} {SITE_NAME} · PGA & Co., Chartered Accountants · Chandigarh, India
+            © {year} {SITE_NAME} · Chandigarh, India
           </span>
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,.2)' }}>
-            CA advisory services · ICAI registered · Confidentiality maintained
+            Confidentiality maintained
           </span>
         </div>
 

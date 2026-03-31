@@ -4,7 +4,7 @@ import { T } from '@/lib/config';
 
 export default function Page() {
   const teamDisciplines = [
-    { icon: '📋', role: 'International Tax & Advisory', creds: 'FCA · ICAI Diploma in International Taxation · Ex-KPMG ITA',
+    { icon: '📋', role: 'International Tax & Advisory', creds: 'FCA · ICAI Diploma in International Taxation · Ex-KPMG',
       skills: ['DTAA structuring & TRC advisory', 'Transfer pricing — design, benchmarking, 3CEB', 'PE risk assessment & FEMA compliance', 'Withholding tax optimisation', 'Form 15CA/15CB for foreign payments'], accent: '#0B3D2E' },
     { icon: '🏢', role: 'Company Secretary & MCA', creds: 'CS · ICSI Qualified',
       skills: ['Company incorporation & SPICe+ filing', 'FCGPR & FLA — RBI filings', 'Board resolutions & statutory registers', 'Annual ROC filings (MGT-7, AOC-4)', 'Share issuance & FCTRS'], accent: '#4A6FA5' },
@@ -56,7 +56,7 @@ export default function Page() {
             <h3 className="font-display" style={{ fontSize: 20, fontWeight: 600, color: '#17170F', marginBottom: 4 }}>CA &middot; CS &middot; Accountants &middot; Legal</h3>
             <p style={{ fontSize: 12.5, color: '#9A9A8E', marginBottom: 20, lineHeight: 1.5 }}>A full-service advisory team for every stage of your India journey.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
-              {[['🎓','FCA — ICAI'],['🎓',"ICAI Int'l Tax Diploma"],['🏛️','Ex-KPMG ITA'],['📋','CS — ICSI'],['⚖️','LLB'],['🌍','100+ Foreign Companies']].map(([ico, label]) => (
+              {[['🎓','FCA — ICAI'],['🎓',"ICAI Int'l Tax Diploma"],['🏛️','Ex-KPMG'],['📋','CS — ICSI'],['⚖️','LLB'],['🌍','100+ Foreign Companies']].map(([ico, label]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#E4F0EB', borderRadius: 20, padding: '4px 10px', fontSize: 11, fontWeight: 600, color: '#0B3D2E' }}>
                   <span style={{ fontSize: 11 }}>{ico}</span> {label}
                 </div>
@@ -70,7 +70,7 @@ export default function Page() {
               <div style={{ background: '#E4F0EB', borderRadius: 9, padding: '11px 14px', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <span style={{ fontSize: 16, flexShrink: 0 }}>🏛️</span>
                 <p style={{ fontSize: 12, color: '#0B3D2E', fontWeight: 500, lineHeight: 1.55, margin: 0 }}>
-                  Ex-KPMG International Tax & Advisory practice. Specialists in India entry, transfer pricing, DTAA, and FEMA for foreign companies.
+                  Ex-KPMG CA practice. Specialists in India entry, transfer pricing, DTAA, and FEMA for foreign companies.
                 </p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function Page() {
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flexShrink: 0 }}>
-              {['FCA — ICAI', "Int'l Tax Diploma", 'Ex-KPMG ITA', '100+ Companies'].map(tag => (
+              {['FCA — ICAI', "Int'l Tax Diploma", 'Ex-KPMG', '100+ Companies'].map(tag => (
                 <div key={tag} style={{ background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 6, padding: '5px 12px', fontSize: 11.5, fontWeight: 600, color: 'rgba(255,255,255,.75)', whiteSpace: 'nowrap', textAlign: 'center' }}>{tag}</div>
               ))}
             </div>

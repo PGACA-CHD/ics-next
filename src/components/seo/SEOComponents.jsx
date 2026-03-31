@@ -476,7 +476,7 @@ function SEOMarketEntryPage({ setPage }) {
       <SEOSection label="What Is India Market Entry Advisory" title="More than incorporation – a strategic starting point">
         <SEOProseP>India market entry advisory covers everything that happens before the first document is filed. The entity type, FDI route, transfer pricing model, DTAA structure, and intercompany framework must be decided in the right sequence – because getting any one of them wrong creates restructuring work that typically costs 3 - 5x more than getting it right at inception.</SEOProseP>
         <SEOProseP>Most CA firms start with incorporation. We start with strategy. A 45-minute conversation about your business model, sector, headcount plans, and intercompany flows determines whether you need a WOS, a branch, a GCC, or a combination. The incorporation follows once the structure is clear.</SEOProseP>
-        <SEOProseP>Our advisory work is led by ex-KPMG International Tax professionals – the same people who advise large multinationals on India entry. The difference is that we work with mid-market companies at fees that match mid-market reality.</SEOProseP>
+        <SEOProseP>Our advisory work is led by Ex-KPMG professionals – the same people who advise large multinationals on India entry. The difference is that we work with mid-market companies at fees that match mid-market reality.</SEOProseP>
       </SEOSection>
 
       <SEOSection label="What We Advise On" title="The full scope of India market entry advisory">
