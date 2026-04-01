@@ -80,59 +80,182 @@ export default function ArticlePage({ params }) {
     </div>
   );
   if (!article) return null;
-
   // Render Contentful rich text body
-  function renderBody(body) {
-    if (!body) return <p style={{ color:T.mid }}>No content available.</p>;
-    if (typeof body === "string") return <div dangerouslySetInnerHTML={{ __html: body }}/>;
-    // Contentful rich text document
+    function getNodeText(node) {
+    if (!node) return "";
+    if (node.nodeType === "text") {
+      return (node.value || "").replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
+    }
+    if (!node.content) return "";
+    return node.content.map(getNodeText).join("");
+  }
+    function renderBody(body) {
+    if (!body) return <p style={{ color: T.mid }}>No content available.</p>;
+    if (typeof body === "string") return <div dangerouslySetInnerHTML={{ __html: body }} />;
+
     if (body.nodeType === "document" && body.content) {
       return body.content.map((node, i) => {
         if (node.nodeType === "paragraph") {
-          const raw = node.content?.map(n => n.value || "").join("") || "";
-          const text = raw.replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
-          return <p key={i} style={{ fontSize:16, color:T.mid, lineHeight:1.88, marginBottom:20, fontWeight:300 }}>{text}</p>;
+          const text = getNodeText(node);
+          return (
+            <p
+              key={i}
+              style={{ fontSize: 16, color: T.mid, lineHeight: 1.88, marginBottom: 20, fontWeight: 300 }}
+            >
+              {text}
+            </p>
+          );
         }
+
         if (node.nodeType === "heading-2") {
-          const raw = node.content?.map(n => n.value || "").join("") || "";
-          const text = raw.replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
-          return <h2 key={i} className="font-display" style={{ fontSize:26, fontWeight:600, color:T.ch, marginTop:40, marginBottom:14, lineHeight:1.2 }}>{text}</h2>;
+          const text = getNodeText(node);
+          return (
+            <h2
+              key={i}
+              className="font-display"
+              style={{ fontSize: 26, fontWeight: 600, color: T.ch, marginTop: 40, marginBottom: 14, lineHeight: 1.2 }}
+            >
+              {text}
+            </h2>
+          );
         }
+
         if (node.nodeType === "heading-3") {
-          const raw = node.content?.map(n => n.value || "").join("") || "";
-          const text = raw.replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
-          return <h3 key={i} className="font-display" style={{ fontSize:20, fontWeight:600, color:T.ch, marginTop:32, marginBottom:10 }}>{text}</h3>;
+          const text = getNodeText(node);
+          return (
+            <h3
+              key={i}
+              className="font-display"
+              style={{ fontSize: 20, fontWeight: 600, color: T.ch, marginTop: 32, marginBottom: 10 }}
+            >
+              {text}
+            </h3>
+          );
         }
+
         if (node.nodeType === "unordered-list") {
-          return <ul key={i} style={{ paddingLeft:0, listStyle:"none", marginBottom:20 }}>
-            {node.content?.map((li, j) => (
-              <li key={j} style={{ display:"flex", gap:10, marginBottom:10, alignItems:"flex-start" }}>
-                <span style={{ color:T.s, fontWeight:700, flexShrink:0, fontSize:14 }}>✓</span>
-                <span style={{ fontSize:15, color:T.mid, lineHeight:1.72, fontWeight:300 }}>
-                  {li.content?.[0]?.content?.map(n => n.value || "").join("") || ""}
-                </span>
-              </li>
-            ))}
-          </ul>;
+          return (
+            <ul key={i} style={{ paddingLeft: 0, listStyle: "none", marginBottom: 20 }}>
+              {node.content?.map((li, j) => (
+                <li key={j} style={{ display: "flex", gap: 10, marginBottom: 10, alignItems: "flex-start" }}>
+                  <span style={{ color: T.s, fontWeight: 700, flexShrink: 0, fontSize: 14 }}>✓</span>
+                  <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300 }}>
+                    {getNodeText(li)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          );
         }
+
         if (node.nodeType === "ordered-list") {
-          return <ol key={i} style={{ paddingLeft:0, listStyle:"none", marginBottom:20, counterReset:"item" }}>
-            {node.content?.map((li, j) => (
-              <li key={j} style={{ display:"flex", gap:12, marginBottom:12, alignItems:"flex-start" }}>
-                <span style={{ background:T.f, color:"#fff", width:24, height:24, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:700, flexShrink:0 }}>{j+1}</span>
-                <span style={{ fontSize:15, color:T.mid, lineHeight:1.72, fontWeight:300 }}>
-                  {li.content?.[0]?.content?.map(n => n.value || "").join("") || ""}
-                </span>
-              </li>
-            ))}
-          </ol>;
+          return (
+            <ol key={i} style={{ paddingLeft: 0, listStyle: "none", marginBottom: 20 }}>
+              {node.content?.map((li, j) => (
+                <li key={j} style={{ display: "flex", gap: 12, marginBottom: 12, alignItems: "flex-start" }}>
+                  <span
+                    style={{
+                      background: T.f,
+                      color: "#fff",
+                      width: 24,
+                      height: 24,
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {j + 1}
+                  </span>
+                  <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300 }}>
+                    {getNodeText(li)}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          );
         }
+
         if (node.nodeType === "blockquote") {
-          const text = node.content?.[0]?.content?.map(n => n.value || "").join("") || "";
-          return <blockquote key={i} style={{ borderLeft:`4px solid ${T.s}`, paddingLeft:20, marginLeft:0, marginBottom:20 }}>
-            <p style={{ fontSize:16, color:T.mid, lineHeight:1.8, fontStyle:"italic", fontWeight:300 }}>{text}</p>
-          </blockquote>;
+          const text = getNodeText(node);
+          return (
+            <blockquote
+              key={i}
+              style={{ borderLeft: `4px solid ${T.s}`, paddingLeft: 20, marginLeft: 0, marginBottom: 20 }}
+            >
+              <p style={{ fontSize: 16, color: T.mid, lineHeight: 1.8, fontStyle: "italic", fontWeight: 300 }}>
+                {text}
+              </p>
+            </blockquote>
+          );
         }
+
+        if (node.nodeType === "table") {
+          return (
+            <div
+              key={i}
+              style={{
+                overflowX: "auto",
+                marginBottom: 24,
+                border: `1px solid ${T.bdr}`,
+                borderRadius: 12,
+                background: "#fff",
+              }}
+            >
+              <table
+                style={{
+                  width: "100%",
+                  minWidth: 640,
+                  borderCollapse: "collapse",
+                }}
+              >
+                <tbody>
+                  {node.content?.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.content?.map((cell, cellIndex) => {
+                        const isHeader = cell.nodeType === "table-header-cell";
+                        const CellTag = isHeader ? "th" : "td";
+
+                        return (
+                          <CellTag
+                            key={cellIndex}
+                            style={{
+                              padding: "14px 16px",
+                              textAlign: "left",
+                              verticalAlign: "top",
+                              borderRight: `1px solid ${T.bdr}`,
+                              borderBottom: `1px solid ${T.bdr}`,
+                              background: isHeader ? T.ivory : "#fff",
+                              color: T.mid,
+                              fontSize: 14,
+                              lineHeight: 1.7,
+                              fontWeight: isHeader ? 600 : 300,
+                            }}
+                          >
+                            {cell.content?.map((child, childIndex) => (
+                              <div
+                                key={childIndex}
+                                style={{
+                                  marginBottom: childIndex === (cell.content?.length || 0) - 1 ? 0 : 8,
+                                }}
+                              >
+                                {getNodeText(child)}
+                              </div>
+                            ))}
+                          </CellTag>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+
         return null;
       });
     }
