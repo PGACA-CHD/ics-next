@@ -1,5 +1,5 @@
 import './globals.css';
-import { GA4_ID, SITE_NAME, SITE_URL } from '@/lib/config';
+import { SITE_NAME, SITE_URL } from '@/lib/config';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
 import WhatsAppFloat from '@/components/shared/WhatsAppFloat';
@@ -25,42 +25,40 @@ export const metadata = {
 };
 
 const GTM_ID = 'GT-WKRW9GQZ';
+const GA4_ID = 'G-VFH7W7VQ44';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${GTM_ID}');
-            `,
-          }}
-        />
-        {/* End Google Tag Manager */}
-        {/* Keep direct gtag as fallback for custom event tracking */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
+        {/* ── Google Tag Manager ── */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
+              (function(w,d,s,l,i){
+                w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+                j.async=true;
+                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+
+              /* gtag shim so window.gtag() calls still work */
+              function gtag(){window.dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', '${GA4_ID}', { send_page_view: false });
               window._icsTrack = function(event, params) {
-                if (window.gtag) gtag('event', event, params || {});
+                window.dataLayer.push({ event: event, ...(params || {}) });
               };
             `,
           }}
         />
+        {/* ── End Google Tag Manager ── */}
       </head>
       <body>
-        {/* Google Tag Manager (noscript) */}
+        {/* Google Tag Manager (noscript fallback) */}
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -69,7 +67,6 @@ export default function RootLayout({ children }) {
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
         <Nav />
         <main>{children}</main>
         <Footer />
