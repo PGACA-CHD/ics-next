@@ -26,7 +26,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav style={{
+      <nav className="site-nav" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 400,
         height: 70,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -38,7 +38,7 @@ export default function Nav() {
         fontFamily: "'DM Sans', sans-serif",
       }}>
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+        <Link href="/" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
           <Logo dark={true} size="sm" />
         </Link>
 
@@ -59,7 +59,7 @@ export default function Nav() {
         </div>
 
         {/* Right side */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <a href={`tel:${PHONE.replace(/\s/g, '')}`}
             className="nav-phone"
             style={{ fontSize: 13, fontWeight: 500, color: T.mid, textDecoration: 'none', fontFamily: "'DM Sans', sans-serif" }}>
@@ -76,7 +76,7 @@ export default function Nav() {
             className="nav-hamburger"
             onClick={() => setMenuOpen(o => !o)}
             aria-label="Toggle menu"
-            style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
+            style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 0, width: 44, height: 44, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <div style={{ width: 22, height: 2, background: T.ch, marginBottom: 5, borderRadius: 2, transition: 'transform .2s', transform: menuOpen ? 'rotate(45deg) translate(5px,5px)' : 'none' }} />
             <div style={{ width: 22, height: 2, background: T.ch, marginBottom: 5, borderRadius: 2, opacity: menuOpen ? 0 : 1, transition: 'opacity .2s' }} />
             <div style={{ width: 22, height: 2, background: T.ch, borderRadius: 2, transition: 'transform .2s', transform: menuOpen ? 'rotate(-45deg) translate(5px,-5px)' : 'none' }} />
