@@ -197,6 +197,11 @@ textarea:focus {
   border-radius: 10px;
 }
 
+/* Nav defaults */
+.nav-hamburger {
+  display: none;
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
   .ics-section-pad {
@@ -207,7 +212,6 @@ textarea:focus {
 
 /* Tablet / iPad */
 @media (max-width: 900px) {
-  /* Nav */
   .site-nav {
     padding: 0 24px !important;
   }
@@ -226,11 +230,13 @@ textarea:focus {
 
   .nav-hamburger {
     display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     width: 44px;
     height: 44px;
     flex: 0 0 44px;
-    align-items: center;
-    justify-content: center;
     position: relative;
     z-index: 500;
     padding: 0 !important;
@@ -252,7 +258,6 @@ textarea:focus {
     overflow-y: auto;
   }
 
-  /* Section padding */
   section,
   footer {
     padding-left: 24px !important;
@@ -264,13 +269,11 @@ textarea:focus {
     padding-bottom: 60px !important;
   }
 
-  /* Hero */
   .hero-grid {
     grid-template-columns: 1fr !important;
     gap: 36px !important;
   }
 
-  /* Stats ribbon */
   .stats-ribbon {
     grid-template-columns: repeat(3, 1fr) !important;
   }
@@ -280,12 +283,10 @@ textarea:focus {
     border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
   }
 
-  /* Service cards */
   .service-cards-grid {
     grid-template-columns: 1fr !important;
   }
 
-  /* Process */
   .process-grid {
     grid-template-columns: 1fr !important;
     gap: 40px !important;
@@ -295,28 +296,23 @@ textarea:focus {
     position: static !important;
   }
 
-  /* Cases */
   .cases-grid {
     grid-template-columns: 1fr !important;
   }
 
-  /* Industries */
   .industries-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  /* Regions */
   .regions-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  /* Why us */
   .whyus-grid {
     grid-template-columns: 1fr !important;
     gap: 48px !important;
   }
 
-  /* Contact */
   .contact-grid {
     grid-template-columns: 1fr !important;
   }
@@ -325,7 +321,6 @@ textarea:focus {
     position: static !important;
   }
 
-  /* Footer */
   .footer-grid {
     grid-template-columns: 1fr 1fr 1fr !important;
     gap: 28px !important;
@@ -335,7 +330,6 @@ textarea:focus {
     grid-column: 1 / -1 !important;
   }
 
-  /* SEO page grids */
   .seo-2col {
     grid-template-columns: 1fr !important;
   }
@@ -350,7 +344,6 @@ textarea:focus {
     flex-direction: row !important;
   }
 
-  /* Inner pages */
   .inner-page-layout {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
@@ -429,7 +422,6 @@ textarea:focus {
 
 /* Mobile */
 @media (max-width: 600px) {
-  /* Nav */
   .site-nav {
     padding: 0 16px !important;
   }
@@ -450,11 +442,13 @@ textarea:focus {
 
   .nav-hamburger {
     display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     width: 44px;
     height: 44px;
     flex: 0 0 44px;
-    align-items: center;
-    justify-content: center;
     position: relative;
     z-index: 500;
     padding: 0 !important;
@@ -464,13 +458,11 @@ textarea:focus {
     display: none !important;
   }
 
-  /* Typography */
   .hero-h1 {
     font-size: 40px !important;
     line-height: 1.05 !important;
   }
 
-  /* Mobile form usability */
   input,
   select,
   textarea {
@@ -482,7 +474,6 @@ textarea:focus {
     min-height: 44px;
   }
 
-  /* Spacing */
   section,
   footer {
     padding-left: 16px !important;
@@ -508,7 +499,6 @@ textarea:focus {
     gap: 32px !important;
   }
 
-  /* Stats ribbon */
   .stats-ribbon {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -518,7 +508,6 @@ textarea:focus {
     border-right: none !important;
   }
 
-  /* Cards and content */
   .service-cards-grid,
   .cases-grid,
   .industries-grid,
@@ -555,12 +544,10 @@ textarea:focus {
     position: static !important;
   }
 
-  /* Credentials */
   .credentials-grid {
     grid-template-columns: 1fr 1fr !important;
   }
 
-  /* Footer */
   .footer-grid {
     grid-template-columns: 1fr !important;
   }
@@ -569,12 +556,10 @@ textarea:focus {
     grid-column: auto !important;
   }
 
-  /* Contact form */
   .form-pair {
     grid-template-columns: 1fr !important;
   }
 
-  /* Quote / DTAA callouts */
   .quote-callout,
   .dtaa-callout {
     grid-template-columns: 1fr !important;
@@ -586,7 +571,6 @@ textarea:focus {
     width: 100% !important;
   }
 
-  /* Trust bar */
   .hero-trust-bar {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
