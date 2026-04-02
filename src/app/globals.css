@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
 
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   html, body { margin: 0; padding: 0; width: 100%; }
@@ -283,6 +281,16 @@
     .hero-grid {
       grid-template-columns: 1fr !important;
       gap: 32px !important;
+      input,
+select,
+textarea {
+  font-size: 16px !important;
+}
+
+button,
+.ics-btn {
+  min-height: 44px;
+}
     }
 
     /* Stats ribbon — 2×2+1 on mobile */
@@ -384,7 +392,7 @@
 
     /* Eyebrow pill */
     .hero-eyebrow {
-      font-size: 9px !important;
+      font-size: 11px !important;
       padding: 4px 12px !important;
     }
 
