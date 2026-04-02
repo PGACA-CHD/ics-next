@@ -14,7 +14,7 @@ export const revalidate = 21600;
 
 async function getAllSlugs() {
   const res = await fetch(
-    `${CF_URL}?content_type=knowledgeHubArticle&select=fields.slug&limit=200&access_token=${CF_TOKEN}`,
+    `${CF_URL}?content_type=article&select=fields.slug&limit=200&access_token=${CF_TOKEN}`,
     { next: { revalidate: 21600 } }
   );
   if (!res.ok) return [];
@@ -24,7 +24,7 @@ async function getAllSlugs() {
 
 async function getArticle(slug) {
   const res = await fetch(
-    `${CF_URL}?content_type=knowledgeHubArticle&fields.slug=${slug}&limit=1&access_token=${CF_TOKEN}`,
+    `${CF_URL}?content_type=article&fields.slug=${slug}&limit=1&access_token=${CF_TOKEN}`,
     { next: { revalidate: 21600 } }
   );
   if (!res.ok) return null;
