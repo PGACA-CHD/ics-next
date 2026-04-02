@@ -8,12 +8,21 @@ const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLI
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 
 export const metadata = {
-  title: 'India Entry Knowledge Hub | Incorporation, Tax & Compliance Guides',
-  description: 'Practical guides on company incorporation, transfer pricing, FEMA, and international tax — written by CAs for decision-makers expanding into India.',
+  title: 'India Business Setup Knowledge Hub — Guides & Articles | India Company Setup',
+  description: 'Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/knowledge-hub' },
 };
 
 export const revalidate = 21600;
+
+const tagColors = {
+  "Guide": "#0B3D2E",
+  "Deep Dive": "#4A6FA5",
+  "Compliance": "#C17D2A",
+  "Tax Planning": "#5C7A4A",
+  "How-To": "#5C5C52",
+  "Update": "#7B4A9A",
+};
 
 async function getArticles() {
   try {
@@ -24,17 +33,15 @@ async function getArticles() {
     if (!res.ok) return [];
     const data = await res.json();
     return (data.items || []).map((item) => ({
-      slug: item.fields.slug || '',
+      id: item.sys.id,
+      slug: item.fields.slug || item.sys.id,
       title: item.fields.title || '',
       summary: item.fields.summary || '',
-      category: item.fields.category || '',
-      readTime: item.fields.readTime || '',
-      publishedDate: item.fields.publishedDate
-        ? new Date(item.fields.publishedDate).toLocaleDateString('en-IN', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-          })
+      category: item.fields.category || 'General',
+      readTime: item.fields.readTime || '5 min read',
+      tag: item.fields.tag || 'Guide',
+      date: item.fields.publishedDate
+        ? new Date(item.fields.publishedDate).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })
         : '',
       author:
         item.fields.author &&
@@ -49,148 +56,102 @@ async function getArticles() {
   }
 }
 
-const categoryColors = {
-  'Company Setup': '#1B4F8A',
-  'International Tax': '#6B3FA0',
-  'Compliance': '#1A5276',
-  'Transfer Pricing': '#2E7D5E',
-  'FEMA & RBI': '#8B4513',
-  'GST': '#B8600F',
-};
-
 export default async function KnowledgeHubPage() {
   const articles = await getArticles();
+  const categories = ['All', ...Array.from(new Set(articles.map((a) => a.category)))];
 
   return (
-    <main style={{ background: '#FAFAF7', minHeight: '100vh' }}>
+    <div>
       <style>{`
-        .article-card {
-          background: #FFFFFF;
-          border-radius: 12px;
-          padding: 28px 28px 24px;
-          border: 1px solid #E8E4DC;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          transition: box-shadow 0.2s, transform 0.2s;
-          text-decoration: none;
-        }
-        .article-card:hover {
-          box-shadow: 0 8px 32px rgba(15,30,53,0.12);
-          transform: translateY(-2px);
-        }
-        .articles-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-          gap: 28px;
-        }
+        .kh-card { background: #fff; border: 1px solid #E0DDD4; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; transition: box-shadow 0.2s, transform 0.2s; }
+        .kh-card:hover { box-shadow: 0 8px 32px rgba(11,61,46,0.13); transform: translateY(-2px); }
+        .kh-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 900px) { .kh-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .kh-grid { grid-template-columns: 1fr; } }
+        .kh-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size: 64px 64px; }
       `}</style>
 
       {/* Hero */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0F1E35 0%, #1B4F8A 100%)',
-        padding: '72px 24px 56px',
-        textAlign: 'center',
-      }}>
-        <p style={{
-          fontSize: 12, letterSpacing: '0.15em', textTransform: 'uppercase',
-          color: '#B8943F', fontWeight: 600, marginBottom: 16,
-        }}>
-          Knowledge Hub
-        </p>
-        <h1 className="font-display" style={{
-          fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 700, color: '#FFFFFF',
-          lineHeight: 1.15, maxWidth: 700, margin: '0 auto 20px',
-        }}>
-          India entry — explained clearly and in depth.
-        </h1>
-        <p style={{
-          fontSize: 16, color: 'rgba(255,255,255,0.75)', maxWidth: 540,
-          margin: '0 auto', lineHeight: 1.7, fontWeight: 300,
-        }}>
-          Practical guides on company incorporation, transfer pricing, FEMA, and
-          international tax — written by CAs, for decision-makers.
-        </p>
-      </section>
-
-      {/* Articles grid */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 24px' }}>
-        {articles.length === 0 ? (
-          <p style={{ textAlign: 'center', color: '#888', fontSize: 15 }}>
-            No articles available yet. Check back soon.
-          </p>
-        ) : (
-          <div className="articles-grid">
-            {articles.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/knowledge-hub/${article.slug}`}
-                className="article-card"
-              >
-                {article.category && (
-                  <span style={{
-                    display: 'inline-block', fontSize: 11, fontWeight: 600,
-                    letterSpacing: '0.08em', textTransform: 'uppercase',
-                    color: categoryColors[article.category] || '#1B4F8A',
-                    background: `${categoryColors[article.category] || '#1B4F8A'}18`,
-                    borderRadius: 4, padding: '3px 10px', marginBottom: 14, width: 'fit-content',
-                  }}>
-                    {article.category}
-                  </span>
-                )}
-                <h2 className="font-display" style={{
-                  fontSize: 19, fontWeight: 600, color: '#0F1E35',
-                  lineHeight: 1.35, marginBottom: 12, flex: 0,
-                }}>
-                  {article.title}
-                </h2>
-                <p style={{
-                  fontSize: 14, color: '#5A6472', lineHeight: 1.72,
-                  fontWeight: 300, flex: 1, marginBottom: 20,
-                }}>
-                  {article.summary}
-                </p>
-                <div style={{
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  borderTop: '1px solid #F0EDE8', paddingTop: 14,
-                  fontSize: 12, color: '#8A8F98',
-                }}>
-                  <span>{article.author}</span>
-                  <span style={{ display: 'flex', gap: 12 }}>
-                    {article.readTime && <span>{article.readTime}</span>}
-                    {article.publishedDate && <span>{article.publishedDate}</span>}
-                  </span>
-                </div>
-              </Link>
-            ))}
+      <section style={{ background: '#0B3D2E', padding: 'clamp(72px,8vw,100px) clamp(20px,4vw,56px) clamp(52px,6vw,72px)', position: 'relative', overflow: 'hidden' }}>
+        <div className="kh-hero-grid" />
+        <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(232,144,10,.13)', border: '1px solid rgba(232,144,10,.28)', color: '#F5A828', padding: '5px 13px', borderRadius: 50, fontSize: 10.5, fontWeight: 600, letterSpacing: '.6px', textTransform: 'uppercase', marginBottom: 20 }}>
+            Knowledge Hub
           </div>
-        )}
-
-        {/* CTA */}
-        <div style={{
-          marginTop: 64, background: '#0F1E35', borderRadius: 16,
-          padding: '40px 32px', textAlign: 'center',
-        }}>
-          <h3 className="font-display" style={{
-            fontSize: 22, fontWeight: 600, color: '#FFFFFF', marginBottom: 10,
-          }}>
-            Rather talk to a CA directly?
-          </h3>
-          <p style={{
-            fontSize: 14, color: 'rgba(255,255,255,0.7)', marginBottom: 24, fontWeight: 300,
-          }}>
-            Our team handles incorporation, transfer pricing, FEMA, GST, payroll, and
-            international tax. Free 30-minute consultation.
+          <h1 className="font-display" style={{ fontSize: 'clamp(32px,4vw,56px)', fontWeight: 600, color: '#fff', lineHeight: 1.06, marginBottom: 16, maxWidth: 680 }}>
+            India entry — explained<br />
+            <span style={{ fontStyle: 'italic', color: '#F5A828', fontWeight: 400 }}>clearly and in depth.</span>
+          </h1>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,.5)', lineHeight: 1.82, fontWeight: 300, maxWidth: 520 }}>
+            Practical guides on company incorporation, transfer pricing, FEMA, and international tax — written by CAs, for decision-makers.
           </p>
-          <Link href="/contact" style={{
-            display: 'inline-block', background: '#B8943F', color: '#FFFFFF',
-            borderRadius: 8, padding: '12px 28px', fontSize: 14,
-            fontWeight: 600, textDecoration: 'none',
-          }}>
-            Book Free Consultation →
-          </Link>
         </div>
       </section>
-    </main>
+
+      {/* Articles */}
+      <section style={{ padding: 'clamp(40px,5vw,64px) clamp(20px,4vw,56px) clamp(60px,7vw,88px)', background: '#FAFAF5' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+
+          {articles.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '80px 0' }}>
+              <div style={{ fontSize: 40, marginBottom: 16 }}>📝</div>
+              <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: '#17170F', marginBottom: 8 }}>No articles published yet</h3>
+              <p style={{ fontSize: 14, color: '#9A9A8E', maxWidth: 400, margin: '0 auto 24px' }}>
+                Add articles in your Contentful space and they'll appear here automatically.
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Article grid — server rendered, no category filter (static) */}
+              <div className="kh-grid">
+                {articles.map((a) => (
+                  <Link key={a.id} href={`/knowledge-hub/${a.slug}`} className="kh-card">
+                    <div style={{ height: 4, background: 'linear-gradient(90deg, #0B3D2E, #E8900A)' }} />
+                    <div style={{ padding: '24px 22px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                        <span style={{ background: tagColors[a.tag] || '#0B3D2E', color: '#fff', padding: '3px 10px', borderRadius: 50, fontSize: 10, fontWeight: 700 }}>
+                          {a.tag}
+                        </span>
+                        <span style={{ fontSize: 11, color: '#9A9A8E' }}>{a.category}</span>
+                      </div>
+                      <h3 className="font-display" style={{ fontSize: 17, fontWeight: 600, color: '#17170F', lineHeight: 1.35, marginBottom: 10, flex: 1 }}>
+                        {a.title}
+                      </h3>
+                      <p style={{ fontSize: 12.5, color: '#5C5C52', lineHeight: 1.7, marginBottom: 16 }}>
+                        {a.summary}
+                      </p>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 14, borderTop: '1px solid #E0DDD4' }}>
+                        <span style={{ fontSize: 11, color: '#9A9A8E' }}>{a.date} · {a.readTime}</span>
+                        <span style={{ fontSize: 12, color: '#0B3D2E', fontWeight: 600 }}>Read →</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* Bottom CTA */}
+          <div style={{ marginTop: 64, background: '#17170F', borderRadius: 16, padding: '40px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 40, alignItems: 'center' }}>
+            <div>
+              <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#F5A828', fontWeight: 600, marginBottom: 10 }}>Have a question?</div>
+              <h3 className="font-display" style={{ fontSize: 26, fontWeight: 600, color: '#fff', marginBottom: 8 }}>
+                Rather talk to a CA directly?
+              </h3>
+              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.42)', lineHeight: 1.7 }}>
+                Our team handles incorporation, transfer pricing, FEMA, GST, payroll, and international tax. Free 30-minute consultation.
+              </p>
+            </div>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <Link href="/contact" className="ics-btn ics-btn-primary ics-btn-lg" style={{ display: 'inline-block' }}>
+                Book Free Consultation →
+              </Link>
+              <div style={{ fontSize: 11, color: 'rgba(255,255,255,.25)', marginTop: 8 }}>CA, CS & accountant team</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
   );
 }
