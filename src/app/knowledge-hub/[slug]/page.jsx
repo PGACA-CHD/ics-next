@@ -1,5 +1,5 @@
 // /src/app/knowledge-hub/[slug]/page.jsx
-// SERVER COMPONENT — each article statically generated at build time
+// SERVER COMPONENT â each article statically generated at build time
 
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -102,7 +102,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// Rich text renderer — matches original renderBody() exactly
+// Rich text renderer â matches original renderBody() exactly
 function richTextOptions(article) {
   return {
     renderMark: {
@@ -130,7 +130,7 @@ function richTextOptions(article) {
       ),
       [BLOCKS.LIST_ITEM]: (node, children) => (
         <li style={{ display: 'flex', gap: 10, marginBottom: 10, alignItems: 'flex-start' }}>
-          <span style={{ color: T.s, fontWeight: 700, flexShrink: 0, fontSize: 14, marginTop: 3 }}>✓</span>
+          <span style={{ color: T.s, fontWeight: 700, flexShrink: 0, fontSize: 14, marginTop: 3 }}>â</span>
           <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300 }}>{children}</span>
         </li>
       ),
@@ -151,10 +151,14 @@ function richTextOptions(article) {
       ),
       [BLOCKS.TABLE_ROW]: (node, children) => <tr>{children}</tr>,
       [BLOCKS.TABLE_HEADER_CELL]: (node, children) => (
-        <th style={{ padding: '14px 16px', textAlign: 'left', verticalAlign: 'top', borderRight: `1px solid ${T.bdr}`, borderBottom: `1px solid ${T.bdr}`, background: T.ivory, color: T.mid, fontSize: 14, fontWeight: 600 }}>{children}</th>
+        <th style={{ padding: '14px 16px', textAlign: 'left', verticalAlign: 'top', borderRight: `1px solid ${T.bdr}`, borderBottom: `1px solid ${T.bdr}`, background: T.stone, color: T.ch, fontSize: 13, fontWeight: 700 }}>
+          {children}
+        </th>
       ),
       [BLOCKS.TABLE_CELL]: (node, children) => (
-        <td style={{ padding: '14px 16px', textAlign: 'left', verticalAlign: 'top', borderRight: `1px solid ${T.bdr}`, borderBottom: `1px solid ${T.bdr}`, background: '#fff', color: T.mid, fontSize: 14, fontWeight: 300, lineHeight: 1.7 }}>{children}</td>
+        <td style={{ padding: '14px 16px', textAlign: 'left', verticalAlign: 'top', borderRight: `1px solid ${T.bdr}`, borderBottom: `1px solid ${T.bdr}`, background: '#fff', color: T.mid, fontSize: 14, fontWeight: 300, lineHeight: 1.7 }}>
+          {children}
+        </td>
       ),
       [INLINES.HYPERLINK]: (node, children) => (
         <a href={node.data.uri} style={{ color: T.f, textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{children}</a>
@@ -181,12 +185,12 @@ export default async function ArticlePage({ params }) {
         .kh-hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size:64px 64px; }
       `}</style>
 
-      {/* Hero — dark green matching original */}
+      {/* Hero â dark green matching original */}
       <section style={{ background: '#0B3D2E', padding: 'clamp(72px,8vw,100px) clamp(20px,4vw,56px) clamp(40px,5vw,52px)', position: 'relative', overflow: 'hidden' }}>
         <div className="kh-hero-grid" />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/knowledge-hub" style={{ background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.2)', color: 'rgba(255,255,255,.7)', padding: '7px 16px', borderRadius: 50, fontSize: 12, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 32, textDecoration: 'none' }}>
-            ← Knowledge Hub
+            â Knowledge Hub
           </Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <span style={{ background: tagColors[article.tag] || '#0B3D2E', color: '#fff', padding: '4px 14px', borderRadius: 50, fontSize: 11, fontWeight: 700 }}>{article.tag}</span>
@@ -196,9 +200,9 @@ export default async function ArticlePage({ params }) {
           <p style={{ fontSize: 16, color: 'rgba(255,255,255,.52)', lineHeight: 1.8, marginBottom: 24, maxWidth: 700 }}>{article.summary}</p>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
             <span style={{ fontSize: 13, color: 'rgba(255,255,255,.38)' }}>By {article.author}</span>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,.2)' }}>·</span>
+            <span style={{ fontSize: 11, color: 'rgba(255,255,255,.2)' }}>Â·</span>
             <span style={{ fontSize: 13, color: 'rgba(255,255,255,.38)' }}>{article.date}</span>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,.2)' }}>·</span>
+            <span style={{ fontSize: 11, color: 'rgba(255,255,255,.2)' }}>Â·</span>
             <span style={{ fontSize: 13, color: 'rgba(255,255,255,.38)' }}>{article.readTime}</span>
           </div>
         </div>
@@ -223,7 +227,7 @@ export default async function ArticlePage({ params }) {
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link href="/contact" style={{ display: 'inline-block', background: '#0B3D2E', color: '#fff', padding: '10px 20px', borderRadius: 8, fontSize: 13.5, fontWeight: 600, textDecoration: 'none' }}>
-                  Book Free Consultation →
+                  Book Free Consultation â
                 </Link>
                 <a href={WA_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', padding: '10px 18px', borderRadius: 8, fontSize: 13.5, fontWeight: 600, textDecoration: 'none' }}>
                   WhatsApp
@@ -255,20 +259,20 @@ export default async function ArticlePage({ params }) {
               <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', marginBottom: 10, lineHeight: 1.3 }}>Need advice on this topic?</div>
               <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,.55)', lineHeight: 1.65, marginBottom: 16 }}>Free 30-minute consultation. Expert team responds within 24 hours.</p>
               <Link href="/contact" style={{ display: 'block', textAlign: 'center', background: '#E8900A', color: '#fff', padding: '12px 0', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
-                Book Free Consultation →
+                Book Free Consultation â
               </Link>
-              <div style={{ marginTop: 12, fontSize: 11.5, color: 'rgba(255,255,255,.4)', textAlign: 'center' }}>No commitment · Confidential · 24hr response</div>
+              <div style={{ marginTop: 12, fontSize: 11.5, color: 'rgba(255,255,255,.4)', textAlign: 'center' }}>No commitment Â· Confidential Â· 24hr response</div>
             </div>
 
             {/* Guide download */}
             <div style={{ background: '#F2EFE8', borderRadius: 14, padding: '20px', border: '1px solid #E0DDD4', display: 'flex', gap: 14, alignItems: 'center' }}>
-              <span style={{ fontSize: 24 }}>📋</span>
+              <span style={{ fontSize: 24 }}>ð</span>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 13, fontWeight: 600, color: '#17170F', marginBottom: 3 }}>India Entry Guide</div>
-                <div style={{ fontSize: 11.5, color: '#9A9A8E' }}>Free · 3 pages · Plain English</div>
+                <div style={{ fontSize: 11.5, color: '#9A9A8E' }}>Free Â· 5 pages Â· Plain English</div>
               </div>
               <a href="/India-Entry-Starter-Guide.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 600, color: '#0B3D2E', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-                Download ↓
+                Download â
               </a>
             </div>
 
@@ -286,7 +290,7 @@ export default async function ArticlePage({ params }) {
                 <Link key={r.id} href={`/knowledge-hub/${r.slug}`} style={{ background: '#FAFAF5', border: '1px solid #E0DDD4', borderRadius: 14, padding: '24px 22px', textDecoration: 'none', display: 'block' }}>
                   <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#E8900A', marginBottom: 8 }}>{r.tag}</div>
                   <h3 className="font-display" style={{ fontSize: 17, fontWeight: 600, color: '#17170F', lineHeight: 1.3, marginBottom: 8 }}>{r.title}</h3>
-                  <p style={{ fontSize: 13, color: '#5C5C52', lineHeight: 1.65, fontWeight: 300, marginBottom: 12 }}>{r.summary}…</p>
+                  <p style={{ fontSize: 13, color: '#5C5C52', lineHeight: 1.65, fontWeight: 300, marginBottom: 12 }}>{r.summary}â¦</p>
                   <div style={{ fontSize: 12, color: '#9A9A8E' }}>{r.date}</div>
                 </Link>
               ))}
