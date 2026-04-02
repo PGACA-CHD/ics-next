@@ -20,7 +20,7 @@ export const revalidate = 21600;
 async function getArticles() {
   try {
     const res = await fetch(
-      `${CF_URL}?content_type=knowledgeHubArticle&order=-fields.publishedDate&limit=50&access_token=${CF_TOKEN}`,
+      `${CF_URL}?content_type=article&order=-fields.publishedDate&limit=50&access_token=${CF_TOKEN}`,
       { next: { revalidate: 21600 } }
     );
     if (!res.ok) return [];
