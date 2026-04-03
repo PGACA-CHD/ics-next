@@ -9,9 +9,9 @@ import Script from 'next/script';
 export const viewport = { };
 
 export const metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL('https://www.indiacompanysetup.com'),
   title: {
-    default: 'Company Incorporation in India for Foreign Companies | India Company Setup',
+    default: 'India Company Setup | Ex-Big 4 CA Team for Foreign Companies',
     template: '%s | India Company Setup',
   },
   description: 'End-to-end company setup in India for foreign businesses. Wholly owned subsidiary, branch office, LLP. Ex-Big 4 led CA team. 100+ companies incorporated. Free consultation.',
