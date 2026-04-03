@@ -1,23 +1,76 @@
-import { SITE_URL } from '@/lib/config';
+// src/app/sitemap.js
+// Dynamic sitemap — fetches all Contentful article slugs at build time
 
-export default function sitemap() {
+const CF_SPACE_ID = 'qjo3cpray5h2';
+const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN;
+const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
+
+const SITE = 'https://www.indiacompanysetup.com';
+
+// Static routes with their priorities and change frequencies
+const STATIC_ROUTES = [
+  { url: '/',                                        priority: 1.0,  changeFrequency: 'monthly' },
+  { url: '/setup',                                   priority: 0.8,  changeFrequency: 'monthly' },
+  { url: '/post-setup',                              priority: 0.8,  changeFrequency: 'monthly' },
+  { url: '/international-tax',                       priority: 0.8,  changeFrequency: 'monthly' },
+  { url: '/knowledge-hub',                           priority: 0.8,  changeFrequency: 'weekly'  },
+  { url: '/about',                                   priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/contact',                                 priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/industries',                              priority: 0.7,  changeFrequency: 'monthly' },
+  // High-value SEO pages
+  { url: '/foreign-company-registration-india',      priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/subsidiary-company-india',                priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/transfer-pricing-india',                  priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/fdi-rules-india',                         priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/us-company-setting-up-india',             priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/uk-company-setting-up-india',             priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/uae-company-setting-up-india',            priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/singapore-company-setting-up-india',      priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/gcc-setup-india',                         priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/india-market-entry-advisory',             priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/private-limited-company-registration-india', priority: 0.9, changeFrequency: 'monthly' },
+  { url: '/nri-company-registration-india',          priority: 0.9,  changeFrequency: 'monthly' },
+  { url: '/startup-foreign-investment-india',        priority: 0.9,  changeFrequency: 'monthly' },
+];
+
+async function getArticleSlugs() {
+  try {
+    const res = await fetch(
+      `${CF_URL}?content_type=article&select=fields.slug,sys.updatedAt&limit=200&access_token=${CF_TOKEN}`,
+      { next: { revalidate: 21600 } }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.items || []).map((item) => ({
+      slug: item.fields.slug,
+      lastModified: item.sys.updatedAt,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function sitemap() {
   const now = new Date().toISOString();
-  const routes = [
-    ['/', 1.0], ['/setup', 0.8], ['/post-setup', 0.8],
-    ['/international-tax', 0.8], ['/knowledge-hub', 0.8],
-    ['/about', 0.7], ['/contact', 0.7], ['/industries', 0.7],
-    ['/foreign-company-registration-india', 0.9],
-    ['/subsidiary-company-india', 0.9],
-    ['/transfer-pricing-india', 0.9], ['/fdi-rules-india', 0.9],
-    ['/us-company-setting-up-india', 0.9], ['/uk-company-setting-up-india', 0.9],
-    ['/uae-company-setting-up-india', 0.9], ['/singapore-company-setting-up-india', 0.9],
-    ['/gcc-setup-india', 0.9], ['/india-market-entry-advisory', 0.9],
-    ['/private-limited-company-registration-india', 0.9],
-    ['/nri-company-registration-india', 0.9],
-    ['/startup-foreign-investment-india', 0.9],
-  ];
-  return routes.map(([path, priority]) => ({
-    url: `${SITE_URL}${path === '/' ? '' : path}`,
-    lastModified: now, changeFrequency: 'monthly', priority,
+
+  // Static routes
+  const staticEntries = STATIC_ROUTES.map(({ url, priority, changeFrequency }) => ({
+    url: `${SITE}${url}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
   }));
+
+  // Dynamic article routes from Contentful
+  const articles = await getArticleSlugs();
+  const articleEntries = articles
+    .filter((a) => a.slug)
+    .map((a) => ({
+      url: `${SITE}/knowledge-hub/${a.slug}`,
+      lastModified: a.lastModified || now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }));
+
+  return [...staticEntries, ...articleEntries];
 }
