@@ -8,7 +8,7 @@ const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLI
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 
 export const metadata = {
-  title: 'India Business Setup Knowledge Hub — Guides & Articles | India Company Setup',
+  title: 'India Business Setup Knowledge Hub — Guides & Articles',
   description: 'Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/knowledge-hub' },
 };
