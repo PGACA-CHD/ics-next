@@ -6,12 +6,12 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'UK Company Setting Up in India | India Subsidiary for UK Firms',
   description: "How UK companies set up in India. WOS incorporation, DTAA UK-India, transfer pricing, FEMA compliance. Ex-Big 4 India entry specialists.",
-  alternates: { canonical: 'https://www.indiaCompaniesetup.com/uk-company-setting-up-india' },
+  alternates: { canonical: 'https://www.indiacompanysetup.com/uk-company-setting-up-india' },
   openGraph: {
     title: 'UK Company Setting Up in India | India Subsidiary for UK Firms',
     description: "How UK companies set up in India. WOS incorporation, DTAA UK-India, transfer pricing, FEMA compliance. Ex-Big 4 India entry specialists.",
     url: 'https://www.indiaCompaniesetup.com/uk-company-setting-up-india',
-    images: [{ url: 'https://www.indiaCompaniesetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
+    images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
     siteName: 'India Company Setup',
   },
