@@ -2,12 +2,300 @@
 const nextConfig = {
   // Enable static export compatibility
   trailingSlash: false,
-  // Image domains for any future use
+
+  // Image domains
   images: {
     domains: ['images.ctfassets.net'],
   },
+
   // Suppress powered-by header
   poweredByHeader: false,
+
+  // ── 301 Redirects: WordPress to Next.js migration ────────────────────────
+  async redirects() {
+    return [
+
+      // ── BLOG POSTS to Knowledge Hub articles ─────────────────────────────
+      {
+        source: '/company-incorporation-mistakes-india',
+        destination: '/knowledge-hub/common-mistakes-incorporating-company-india',
+        permanent: true,
+      },
+      {
+        source: '/company-incorporation-nri-india-2025',
+        destination: '/knowledge-hub/company-incorporation-nri-foreign-nationals-india',
+        permanent: true,
+      },
+      {
+        source: '/company-incorporation-india-2025',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/subsidiary-company-registration-india-2025',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/steps-to-register-a-company-in-india-online',
+        destination: '/knowledge-hub/how-to-register-a-private-limited-company-in-india-online',
+        permanent: true,
+      },
+      {
+        source: '/how-to-register-a-private-limited-company-in-india-online',
+        destination: '/knowledge-hub/how-to-register-a-private-limited-company-in-india-online',
+        permanent: true,
+      },
+      {
+        source: '/spice-plus-form-company-incorporation-india',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/private-limited-v-s-llp-v-s-opc-which-one-is-right-for-your-startup',
+        destination: '/knowledge-hub/best-company-structure-india-foreign-business',
+        permanent: true,
+      },
+      {
+        source: '/private-limited-compliance-checklist-2025',
+        destination: '/knowledge-hub/post-incorporation-compliance-private-limited',
+        permanent: true,
+      },
+      {
+        source: '/llp-vs-private-limited-in-2025-what-has-changed',
+        destination: '/knowledge-hub/best-company-structure-india-foreign-business',
+        permanent: true,
+      },
+      {
+        source: '/cost-of-company-registration-in-india-complete-guide-with-fees-charges',
+        destination: '/knowledge-hub/best-company-structure-india-foreign-business',
+        permanent: true,
+      },
+      {
+        source: '/company-registration-cost-india',
+        destination: '/knowledge-hub/best-company-structure-india-foreign-business',
+        permanent: true,
+      },
+      {
+        source: '/din-dsc-process-importance-india-2025',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/digital-signature-dsc-din-company-registration-guide',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/fdi-rules-private-limited-company-india-2025',
+        destination: '/fdi-rules-india',
+        permanent: true,
+      },
+
+      // ── GST POSTS to Knowledge Hub ────────────────────────────────────────
+      {
+        source: '/gst-registration',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/gst-revocation',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/gst-reconciliation',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/gst-return-filing-tips-avoid-mistakes-penalties',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/gst-return-filing-gstr-1-and-gstr-3b',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/gst-annual-return-filing-gstr-9',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/itc-reconciliation-avoid-gst-notices-2025',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/claim-gst-refund-india-2025',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+
+      // ── TAX POSTS to International Tax ───────────────────────────────────
+      {
+        source: '/income-tax',
+        destination: '/international-tax',
+        permanent: true,
+      },
+      {
+        source: '/income-tax-return-filing',
+        destination: '/international-tax',
+        permanent: true,
+      },
+      {
+        source: '/corporate-tax-filing',
+        destination: '/international-tax',
+        permanent: true,
+      },
+      {
+        source: '/form-15ca-15cb-filing',
+        destination: '/international-tax',
+        permanent: true,
+      },
+
+      // ── SERVICE PAGES to nearest current page ────────────────────────────
+      {
+        source: '/subsidiary-company',
+        destination: '/subsidiary-company-india',
+        permanent: true,
+      },
+      {
+        source: '/startup',
+        destination: '/startup-foreign-investment-india',
+        permanent: true,
+      },
+      {
+        source: '/startup-india',
+        destination: '/startup-foreign-investment-india',
+        permanent: true,
+      },
+      {
+        source: '/registration',
+        destination: '/private-limited-company-registration-india',
+        permanent: true,
+      },
+      {
+        source: '/limited-liability-partnership',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/llp-compliance',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/public-limited-company',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/partnership',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/trust-registration',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/digital-signature',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/tan-registration',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/import-export-code',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/registered-office-company-incorporation',
+        destination: '/foreign-company-registration-india',
+        permanent: true,
+      },
+      {
+        source: '/registered-office-change',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/director-change',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/moa-and-aoa-amendment',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/mca',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/dpt-3-filing',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/dormant-status-filing',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/outsource-accounting-for-company-registration',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/shop-and-establishment-act-registration',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/pricing',
+        destination: '/contact',
+        permanent: true,
+      },
+
+      // ── UTILITY / MISC ────────────────────────────────────────────────────
+      {
+        source: '/about-us',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/faqs',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/category/uncategorized',
+        destination: '/knowledge-hub',
+        permanent: true,
+      },
+      {
+        source: '/what-is-education-cess-and-surcharge-in-india',
+        destination: '/knowledge-hub',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
