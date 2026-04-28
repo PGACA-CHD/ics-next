@@ -1,15 +1,4 @@
 'use client';
-// ============================================================
-// DEPLOY TO: src/components/shared/ChatWidget.jsx
-// Then import + add <ChatWidget /> in src/app/layout.jsx
-// ============================================================
-
-import { useState, useRef, useEffect, useCallback } from 'react';
-// ============================================================
-// DEPLOY TO: src/components/shared/ChatWidget.jsx
-// Then import + add <ChatWidget /> in src/app/layout.jsx
-// ============================================================
-
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 const INITIAL_QUICK_REPLIES = [
@@ -361,4 +350,5 @@ function TypingDots() {
     </span>
   );
 }
+ 
  
