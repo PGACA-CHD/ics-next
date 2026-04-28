@@ -220,16 +220,14 @@ export default function ChatWidget() {
   };
 
   const BotIcon = () => (
-    <svg width="11" height="11" fill="none" viewBox="0 0 24 24">
-      <path d="M12 2a5 5 0 015 5v1h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h1V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v1h6V7a3 3 0 00-3-3zm-1 9a1 1 0 112 0v2a1 1 0 11-2 0v-2z" fill="rgba(255,255,255,.85)"/>
-    </svg>
+    <svg width="13" height="18" viewBox="0 0 32 44" fill="none"><rect x="2" y="4" width="28" height="4" rx="2" fill="rgba(255,255,255,.9)"/><rect x="2" y="36" width="28" height="4" rx="2" fill="rgba(255,255,255,.9)"/><rect x="13" y="4" width="6" height="36" rx="2" fill="rgba(255,255,255,.9)"/><polygon points="16,4 9,18 16,14 23,18" fill="#E8900A"/><rect x="13.5" y="14" width="5" height="14" rx="1.5" fill="#E8900A"/></svg>
   );
 
   return (
     <>
       <div style={s.window} role="dialog" aria-label="India Entry AI Assistant">
         <div style={s.header}>
-          <div style={s.avatar}><svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5v1h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h1V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v1h6V7a3 3 0 00-3-3zm-1 9a1 1 0 112 0v2a1 1 0 11-2 0v-2z" fill="rgba(255,255,255,.85)"/></svg></div>
+          <div style={s.avatar}><svg width="20" height="28" viewBox="0 0 32 44" fill="none"><rect x="2" y="4" width="28" height="4" rx="2" fill="rgba(255,255,255,.92)"/><rect x="2" y="36" width="28" height="4" rx="2" fill="rgba(255,255,255,.92)"/><rect x="13" y="4" width="6" height="36" rx="2" fill="rgba(255,255,255,.92)"/><polygon points="16,4 9,18 16,14 23,18" fill="#E8900A"/><rect x="13.5" y="14" width="5" height="14" rx="1.5" fill="#E8900A"/></svg></div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', fontFamily: "'Cormorant Garamond', serif", letterSpacing: '.01em' }}>Arya — India Entry Advisor</div>
             <div style={{ fontSize: 11, color: 'rgba(255,255,255,.6)', display: 'flex', alignItems: 'center', gap: 5, marginTop: 1 }}>
@@ -313,7 +311,7 @@ export default function ChatWidget() {
           </button>
         </div>
         <div style={s.footer}>
-          Powered by <a href="https://indiacompanysetup.com" style={{ color: '#0B3D2E' }}>indiacompanysetup.com</a> · PGA & Co. CA
+          Powered by <a href="https://indiacompanysetup.com" style={{ color: '#0B3D2E' }}>indiacompanysetup.com</a>
         </div>
       </div>
 
@@ -330,7 +328,7 @@ export default function ChatWidget() {
         {isOpen ? (
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/></svg>
         ) : (
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 3C7.03 3 3 6.86 3 11.5c0 1.92.67 3.7 1.8 5.12L3 21l4.7-1.55A9.14 9.14 0 0012 20c4.97 0 9-3.86 9-8.5S16.97 3 12 3z" fill="white"/></svg>
+          <svg width="22" height="30" viewBox="0 0 32 44" fill="none"><rect x="2" y="4" width="28" height="4" rx="2" fill="white"/><rect x="2" y="36" width="28" height="4" rx="2" fill="white"/><rect x="13" y="4" width="6" height="36" rx="2" fill="white"/><polygon points="16,4 9,18 16,14 23,18" fill="#E8900A"/><rect x="13.5" y="14" width="5" height="14" rx="1.5" fill="#E8900A"/></svg>
         )}
       </button>
     </>
@@ -357,4 +355,5 @@ function TypingDots() {
     </span>
   );
 }
+ 
  
