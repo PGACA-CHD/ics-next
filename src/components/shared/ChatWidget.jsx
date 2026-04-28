@@ -54,9 +54,7 @@ export default function ChatWidget() {
     setTimeout(() => {
       setMessages([{
         role: 'bot',
-        text: "Hi! I'm Arya. I help foreign companies navigate India entry — from choosing the right structure to staying fully compliant.
-
-What brings you here today?",
+        text: "Hi! I'm Arya. I help foreign companies navigate India entry — from choosing the right structure to staying fully compliant.\n\nWhat brings you here today?",
         id: Date.now(),
       }]);
     }, 500);
@@ -113,9 +111,7 @@ What brings you here today?",
     if (!leadData.name || !leadData.email) return;
     setShowLeadForm(false);
     setLeadCaptured(true);
-    addBotMessage(`Thank you, ${leadData.name}! The India Entry Starter Guide is on its way to ${leadData.email}.
-
-Our team will reach out within 1 business day. Feel free to ask anything else, or book a free 30-min consultation at indiacompanysetup.com/contact`);
+    addBotMessage(`Thank you, ${leadData.name}! The India Entry Starter Guide is on its way to ${leadData.email}.\n\nOur team will reach out within 1 business day. Feel free to ask anything else, or book a free 30-min consultation at indiacompanysetup.com/contact`);
     setQuickReplies(['Book free consultation', 'Ask another question']);
     if (typeof window !== 'undefined' && window._icsTrack) {
       window._icsTrack('chatbot_lead_captured', {
@@ -361,3 +357,4 @@ function TypingDots() {
     </span>
   );
 }
+ 
