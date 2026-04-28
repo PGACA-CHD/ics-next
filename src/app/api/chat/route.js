@@ -1,5 +1,5 @@
 // src/app/api/chat/route.js
-// Keeps Anthropic API key server-side. Add ANTHROPIC_API_KEY to Vercel env vars.
+ // Keeps Anthropic API key server-side. Add ANTHROPIC_API_KEY to Vercel env vars.
 
 import { NextResponse } from 'next/server';
 
