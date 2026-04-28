@@ -1,9 +1,5 @@
 import ClientPage from './client';
 
-
-
-
-
 export const metadata = {
   title: 'Free 30-Min Consultation — India Entry Advisory',
   description: "Book a free consultation with our Ex-Big 4 CA team. India entry, incorporation, transfer pricing, FEMA, and ongoing compliance. Expert team responds within 24 hours.",
@@ -24,15 +20,36 @@ export const metadata = {
   },
 };
 
+const schemaData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Free 30-Min Consultation — India Entry Advisory",
+    "description": "Book a free consultation with our Ex-Big 4 CA team. India entry, incorporation, transfer pricing, FEMA, and ongoing compliance. Expert team responds within 24 hours.",
+    "url": "https://www.indiacompanysetup.com/contact",
+    "provider": { "@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup" },
+    "areaServed": ["US", "GB", "AE", "SG", "AU"],
+    "serviceType": "Business Advisory"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.indiacompanysetup.com" },
+      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.indiacompanysetup.com/contact" }
+    ]
+  }
+];
 
-export const schemaJson = JSON.stringify([{
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Free 30-Min Consultation — India Entry Advisory",
-      "description": "Book a free consultation with our Ex-Big 4 CA team. India entry, incorporation, transfer pricing, FEMA, and ongoing compliance. Expert team responds within 24 hours.",
-      "url": "https://www.indiacompanysetup.com/contact",
-      "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
-      "areaServed": ["US", "GB", "AE", "SG", "AU"],
-      "serviceType": "Business Advisory"
-    },{
-      "@context": "https://schema.org",
+export default function ContactPage() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+      <ClientPage />
+    </>
+  );
+}
+ 
