@@ -60,7 +60,7 @@ export default function ChatWidget() {
     setTimeout(() => {
       setMessages([{
         role: 'bot',
-        text: "Hi! I'm Arya. I help foreign companies navigate India entry — from choosing the right structure to staying fully compliant.\n\nWhat brings you here today?",
+        text: "Hi! I'm Arya. I help NRI's, foreigners and foreign companies navigate India entry — from choosing the right structure to staying fully compliant.\n\nWhat brings you here today?",
         id: Date.now(),
       }]);
     }, 500);
