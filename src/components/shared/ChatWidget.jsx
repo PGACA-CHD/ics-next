@@ -5,6 +5,12 @@
 // ============================================================
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+// ============================================================
+// DEPLOY TO: src/components/shared/ChatWidget.jsx
+// Then import + add <ChatWidget /> in src/app/layout.jsx
+// ============================================================
+
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 const INITIAL_QUICK_REPLIES = [
   'Which structure suits my company?',
@@ -328,7 +334,7 @@ export default function ChatWidget() {
         {isOpen ? (
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/></svg>
         ) : (
-          <svg width="22" height="30" viewBox="0 0 32 44" fill="none"><rect x="2" y="4" width="28" height="4" rx="2" fill="white"/><rect x="2" y="36" width="28" height="4" rx="2" fill="white"/><rect x="13" y="4" width="6" height="36" rx="2" fill="white"/><polygon points="16,4 9,18 16,14 23,18" fill="#E8900A"/><rect x="13.5" y="14" width="5" height="14" rx="1.5" fill="#E8900A"/></svg>
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 3C7.03 3 3 6.86 3 11.5c0 1.92.67 3.7 1.8 5.12L3 21l4.7-1.55A9.14 9.14 0 0012 20c4.97 0 9-3.86 9-8.5S16.97 3 12 3z" fill="white"/></svg>
         )}
       </button>
     </>
@@ -355,5 +361,4 @@ function TypingDots() {
     </span>
   );
 }
- 
  
