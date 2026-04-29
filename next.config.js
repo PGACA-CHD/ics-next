@@ -294,8 +294,24 @@ const nextConfig = {
         destination: '/knowledge-hub',
         permanent: true,
       },
+
+      // ── MISSING WordPress redirects (added Apr 2026) ───────────────────
+      { source: '/company-compliance', destination: '/post-setup', permanent: true },
+      { source: '/company-registration-india-2025-mca-updates', destination: '/foreign-company-registration-india', permanent: true },
+      { source: '/contact-us', destination: '/contact', permanent: true },
+      { source: '/convert-pvt-ltd-to-llp-india-2025', destination: '/knowledge-hub/best-company-structure-india-foreign-business', permanent: true },
+      { source: '/corporate-identification-number-cin', destination: '/post-setup', permanent: true },
+      { source: '/gst', destination: '/knowledge-hub/gst-registration-foreign-company-india', permanent: true },
+      { source: '/gst-amendment', destination: '/knowledge-hub/gst-registration-foreign-company-india', permanent: true },
+      { source: '/gst-compliance-calendar-2025', destination: '/knowledge-hub/gst-registration-foreign-company-india', permanent: true },
+      { source: '/gstr-9-annual-gst-return-filing-2025', destination: '/knowledge-hub/gst-registration-foreign-company-india', permanent: true },
+      { source: '/llp-registration-india-2025', destination: '/knowledge-hub/llp-registration-india-advantages-procedure-2025', permanent: true },
+      { source: '/private-limited-company', destination: '/private-limited-company-registration-india', permanent: true },
+      { source: '/tds-filing', destination: '/post-setup', permanent: true },
+      { source: '/udyam-registration', destination: '/setup', permanent: true },
     ];
   },
 };
 
 module.exports = nextConfig;
+ 
