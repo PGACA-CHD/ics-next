@@ -72,5 +72,15 @@ export default async function sitemap() {
       priority: 0.7,
     }));
 
-  return [...staticEntries, ...articleEntries];
+  // Deduplicate by URL (prevents duplicate Knowledge Hub entries)
+  const allEntries = [...staticEntries, ...articleEntries];
+  const seen = new Set();
+  const deduped = allEntries.filter((entry) => {
+    if (seen.has(entry.url)) return false;
+    seen.add(entry.url);
+    return true;
+  });
+
+  return deduped;
 }
+ 
