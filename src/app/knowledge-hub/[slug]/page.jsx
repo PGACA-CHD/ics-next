@@ -22,13 +22,13 @@ const tagColors = {
   'Tax Planning': '#5C7A4A', 'How-To': '#5C5C52', 'Update': '#7B4A9A',
 };
 
-export const revalidate = 21600;
+export const revalidate = 300;
 
 async function getAllSlugs() {
   try {
     const res = await fetch(
       `${CF_URL}?content_type=article&select=fields.slug&limit=200&access_token=${CF_TOKEN}`,
-      { next: { revalidate: 21600 } }
+      { next: { revalidate: 300 } }
     );
     if (!res.ok) return [];
     const data = await res.json();
@@ -66,7 +66,7 @@ async function getArticle(slug) {
   try {
     const res = await fetch(
       `${CF_URL}?content_type=article&fields.slug=${slug}&limit=1&access_token=${CF_TOKEN}`,
-      { next: { revalidate: 21600 } }
+      { next: { revalidate: 300 } }
     );
     if (!res.ok) return null;
     const data = await res.json();
@@ -102,7 +102,7 @@ async function getRelated(category, excludeId) {
   try {
     const res = await fetch(
       `${CF_URL}?content_type=article&fields.category=${category}&limit=4&access_token=${CF_TOKEN}`,
-      { next: { revalidate: 21600 } }
+      { next: { revalidate: 300 } }
     );
     if (!res.ok) return [];
     const data = await res.json();
