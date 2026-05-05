@@ -1,7 +1,5 @@
 // src/app/knowledge-hub/[slug]/page.jsx
 // SERVER COMPONENT - each article statically generated at build time
-// Fixes: UTF-8 arrows/emoji, og:image, twitter:image, Article schema,
-//        title template (no double suffix), FAQPage schema, BreadcrumbList schema
 
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -12,9 +10,8 @@ const CF_SPACE_ID = 'qjo3cpray5h2';
 const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN;
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 const SITE = 'https://www.indiacompanysetup.com';
-const OG_DEFAULT_IMAGE = `${SITE}/og-default.png`; // place a 1200x630 image here in /public
+const OG_DEFAULT_IMAGE = `${SITE}/og-default.png`;
 
-// Design tokens
 const T = {
   f: '#0B3D2E', s: '#E8900A', ivory: '#FAFAF5', stone: '#F2EFE8',
   ch: '#17170F', mid: '#5C5C52', lt: '#9A9A8E', bdr: '#E0DDD4',
@@ -27,8 +24,6 @@ const tagColors = {
 
 export const revalidate = 21600;
 
-// ── Data fetchers ────────────────────────────────────────────────────────────
-
 async function getAllSlugs() {
   try {
     const res = await fetch(
@@ -39,6 +34,32 @@ async function getAllSlugs() {
     const data = await res.json();
     return (data.items || []).map((i) => ({ slug: i.fields.slug }));
   } catch { return []; }
+}
+
+
+// ── Auto-extract FAQs from rich text body ────────────────────────────────────
+function extractFAQsFromBody(body) {
+  if (!body?.content) return [];
+  const nodes = body.content;
+  let inFaq = false;
+  const faqs = [];
+  let currentQ = null;
+  for (const node of nodes) {
+    if (node.nodeType === 'heading-2') {
+      const text = node.content?.map(n => n.value || '').join('').toLowerCase();
+      inFaq = text.includes('frequently asked') || text.includes('faq');
+      continue;
+    }
+    if (!inFaq) continue;
+    if (node.nodeType === 'heading-3') {
+      currentQ = node.content?.map(n => n.value || '').join('').trim();
+    }
+    if (node.nodeType === 'paragraph' && currentQ) {
+      const answer = node.content?.map(n => n.value || '').join('').trim();
+      if (answer) { faqs.push({ question: currentQ, answer }); currentQ = null; }
+    }
+  }
+  return faqs;
 }
 
 async function getArticle(slug) {
@@ -55,12 +76,12 @@ async function getArticle(slug) {
       id: item.sys.id,
       title: item.fields.title || '',
       slug: item.fields.slug || '',
-      summary: item.fields.summary || '',
+      summary: item.fields.summary || item.fields.excerpt || '',
       category: item.fields.category || 'General',
       readTime: item.fields.readTime || '5 min read',
-      tag: item.fields.tag || 'Guide',
+      tag: item.fields.tag || item.fields.articleType || 'Guide',
       body: item.fields.body || null,
-      faqs: item.fields.faqs || [],   // optional array of {question, answer} from Contentful
+      faqs: item.fields.faqs?.length ? item.fields.faqs : extractFAQsFromBody(item.fields.body),
       ogImage: item.fields.ogImage?.fields?.file?.url
         ? `https:${item.fields.ogImage.fields.file.url}`
         : OG_DEFAULT_IMAGE,
@@ -101,13 +122,9 @@ async function getRelated(category, excludeId) {
   } catch { return []; }
 }
 
-// ── Static generation ────────────────────────────────────────────────────────
-
 export async function generateStaticParams() {
   return await getAllSlugs();
 }
-
-// ── SEO metadata (title template, og:image, twitter:image) ──────────────────
 
 export async function generateMetadata({ params }) {
   const article = await getArticle(params.slug);
@@ -117,7 +134,6 @@ export async function generateMetadata({ params }) {
   const canonical = `${SITE}/knowledge-hub/${article.slug}`;
 
   return {
-    // No "| India Company Setup" here — layout.jsx template appends it once
     title: article.title,
     description: article.summary,
     alternates: { canonical },
@@ -138,8 +154,6 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-
-// ── Rich-text renderer ───────────────────────────────────────────────────────
 
 function getRichTextOptions() {
   return {
@@ -200,7 +214,6 @@ function getRichTextOptions() {
       [BLOCKS.HR]: () => (
         <hr style={{ border: 'none', borderTop: `1px solid ${T.bdr}`, margin: '32px 0' }} />
       ),
-      // Tables - fixed: no div wrapper inside th/td, children rendered directly
       [BLOCKS.TABLE]: (node, children) => (
         <div style={{ overflowX: 'auto', marginBottom: 24, border: `1px solid ${T.bdr}`, borderRadius: 12, background: '#fff' }}>
           <table style={{ width: '100%', minWidth: 540, borderCollapse: 'collapse' }}>
@@ -237,8 +250,6 @@ function getRichTextOptions() {
     },
   };
 }
-
-// ── JSON-LD schemas ──────────────────────────────────────────────────────────
 
 function ArticleSchema({ article }) {
   const schema = {
@@ -312,8 +323,6 @@ function FaqSchema({ faqs }) {
   );
 }
 
-// ── Page component ───────────────────────────────────────────────────────────
-
 export default async function ArticlePage({ params }) {
   const article = await getArticle(params.slug);
   if (!article) notFound();
@@ -323,7 +332,6 @@ export default async function ArticlePage({ params }) {
 
   return (
     <div>
-      {/* JSON-LD schemas */}
       <ArticleSchema article={article} />
       <BreadcrumbSchema article={article} />
       <FaqSchema faqs={article.faqs} />
@@ -336,9 +344,9 @@ export default async function ArticlePage({ params }) {
         @media (max-width: 900px) { .related-grid { grid-template-columns: 1fr; } }
         .kh-hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size:64px 64px; }
         .article-body table p { margin-bottom: 0; }
+        details summary::-webkit-details-marker { display: none; }
       `}</style>
 
-      {/* Breadcrumb nav (visible) */}
       <nav style={{ background: '#F2EFE8', padding: '10px clamp(20px,4vw,56px)', fontSize: 12, color: '#9A9A8E' }}
         aria-label="Breadcrumb">
         <Link href="/" style={{ color: '#9A9A8E', textDecoration: 'none' }}>Home</Link>
@@ -348,7 +356,6 @@ export default async function ArticlePage({ params }) {
         <span style={{ color: '#5C5C52' }}>{article.title.substring(0, 60)}{article.title.length > 60 ? '...' : ''}</span>
       </nav>
 
-      {/* Hero */}
       <section style={{
         background: '#0B3D2E',
         padding: 'clamp(56px,7vw,88px) clamp(20px,4vw,56px) clamp(36px,4vw,52px)',
@@ -395,14 +402,12 @@ export default async function ArticlePage({ params }) {
         </div>
       </section>
 
-      {/* Body + Sidebar */}
       <section style={{
         padding: 'clamp(32px,4vw,52px) clamp(20px,4vw,56px) clamp(48px,6vw,80px)',
         background: '#FAFAF5',
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }} className="inner-page-layout">
 
-          {/* Article body */}
           <div style={{
             background: '#fff', borderRadius: 16,
             padding: 'clamp(24px,4vw,44px) clamp(20px,4vw,48px)',
@@ -412,6 +417,33 @@ export default async function ArticlePage({ params }) {
               ? documentToReactComponents(article.body, getRichTextOptions())
               : <p style={{ color: '#9A9A8E', fontStyle: 'italic' }}>Full article content coming soon.</p>
             }
+
+
+            {/* FAQ Accordion - auto-rendered from extracted body FAQs */}
+            {article.faqs?.length > 0 && (
+              <div style={{ marginTop: 44, paddingTop: 32, borderTop: '1px solid #E0DDD4' }}>
+                <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#E8900A', fontWeight: 700, marginBottom: 16 }}>
+                  Frequently Asked Questions
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {article.faqs.map((faq, i) => (
+                    <details key={i} style={{ border: '1px solid #E0DDD4', borderRadius: 12, overflow: 'hidden' }}>
+                      <summary style={{
+                        padding: '14px 18px', background: '#F2EFE8', cursor: 'pointer',
+                        fontSize: 14.5, fontWeight: 600, color: '#17170F', lineHeight: 1.4,
+                        listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      }}>
+                        {faq.question}
+                        <span style={{ color: '#0B3D2E', fontSize: 20, flexShrink: 0, marginLeft: 12 }}>&#43;</span>
+                      </summary>
+                      <div style={{ padding: '14px 18px', fontSize: 14, color: '#5C5C52', lineHeight: 1.75, background: '#fff' }}>
+                        {faq.answer}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Footer CTA */}
             <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid #E0DDD4' }}>
@@ -444,10 +476,8 @@ export default async function ArticlePage({ params }) {
             </div>
           </div>
 
-          {/* Sidebar */}
           <div className="inner-sticky" style={{ position: 'sticky', top: 90, display: 'flex', flexDirection: 'column', gap: 20 }}>
 
-            {/* Author card */}
             <div style={{ background: '#fff', borderRadius: 14, padding: '24px 22px', border: '1px solid #E0DDD4' }}>
               <div style={{ fontSize: 9.5, letterSpacing: 2, textTransform: 'uppercase', color: '#E8900A', fontWeight: 700, marginBottom: 12 }}>
                 Written by
@@ -472,7 +502,6 @@ export default async function ArticlePage({ params }) {
               </p>
             </div>
 
-            {/* CTA card */}
             <div style={{ background: '#0B3D2E', borderRadius: 14, padding: '24px 22px' }}>
               <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', marginBottom: 10, lineHeight: 1.3 }}>
                 Need advice on this topic?
@@ -492,7 +521,6 @@ export default async function ArticlePage({ params }) {
               </div>
             </div>
 
-            {/* Guide download */}
             <div style={{
               background: '#F2EFE8', borderRadius: 14, padding: '20px',
               border: '1px solid #E0DDD4', display: 'flex', gap: 14, alignItems: 'center',
@@ -512,7 +540,6 @@ export default async function ArticlePage({ params }) {
         </div>
       </section>
 
-      {/* Related articles */}
       {related.length > 0 && (
         <section style={{
           padding: 'clamp(40px,5vw,56px) clamp(20px,4vw,56px) clamp(48px,6vw,80px)',
