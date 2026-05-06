@@ -1,8 +1,5 @@
 import ClientPage from './client';
 
-export const dynamic = 'force-dynamic';
-
-
 export const metadata = {
   title: 'GCC Setup in India | Global Capability Centre Advisory',
   description: "End-to-end GCC setup in India. Entity incorporation, cost-plus pricing, ESOP, payroll, and compliance retainer. Ex-Big 4 advisory team.",
@@ -56,3 +53,4 @@ export default function Page() {
     </>
   );
 }
+ 
