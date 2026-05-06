@@ -38,7 +38,7 @@ export default function Page() {
               Built for your scale.
             </h1>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.82, fontWeight: 300, maxWidth: 500, marginBottom: 36 }}>
-              India Company Setup was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees. We are a team of Chartered Accountants, Company Secretaries, accountants, and lawyers — Ex-Big 4 led — serving mid-market foreign companies entering India.
+              India Company Setup, a venture of Divsam Consultants LLP, was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees. We are a team of Chartered Accountants, Company Secretaries, accountants, and lawyers — Ex-Big 4 led — serving mid-market foreign companies entering India.
             </p>
             <div style={{ display: 'flex', gap: 0, flexWrap: 'wrap', borderLeft: '1px solid rgba(255,255,255,.09)' }}>
               {[['18+','Years of experience'],['100+','Companies incorporated'],['5','Continents'],['0','TP audits lost']].map(([n,l]) => (
