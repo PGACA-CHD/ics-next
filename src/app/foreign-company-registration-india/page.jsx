@@ -1,8 +1,5 @@
 import ClientPage from './client';
 
-export const dynamic = 'force-dynamic';
-
-
 export const metadata = {
   title: 'Foreign Company Registration in India',
   description: "How to register a foreign company in India. Entity types, FDI routes, RBI filings, and compliance timelines. Ex-Big 4 CA team. 100+ foreign companies registered.",
@@ -56,3 +53,4 @@ export default function Page() {
     </>
   );
 }
+ 
