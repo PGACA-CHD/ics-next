@@ -1,8 +1,5 @@
 import ClientPage from './client';
 
-export const dynamic = 'force-dynamic';
-
-
 export const metadata = {
   title: 'FDI Rules India | Automatic Route, FEMA, RBI Compliance',
   description: "FDI rules and FEMA compliance for foreign companies investing in India. Automatic vs Government route, FCGPR, FLA returns. Ex-Big 4 CA team.",
@@ -56,3 +53,4 @@ export default function Page() {
     </>
   );
 }
+ 
