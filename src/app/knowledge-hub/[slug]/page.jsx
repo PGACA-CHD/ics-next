@@ -77,6 +77,11 @@ async function getArticle(slug) {
       title: item.fields.title || '',
       slug: item.fields.slug || '',
       summary: item.fields.summary || item.fields.excerpt || '',
+      metaTitle: item.fields.metaTitle || '',
+      metaDescription: item.fields.metaDescription || '',
+      heroImage: item.fields.heroImage?.fields?.file?.url
+      ? `https:${item.fields.heroImage.fields.file.url}`
+      : OG_DEFAULT_IMAGE,
       category: item.fields.category || 'General',
       readTime: item.fields.readTime || '5 min read',
       tag: item.fields.tag || item.fields.articleType || 'Guide',
@@ -131,15 +136,18 @@ export async function generateMetadata({ params }) {
   if (!article) return { title: 'Article Not Found' };
 
   const ogImage = article.ogImage || OG_DEFAULT_IMAGE;
+  const seoTitle = article.metaTitle || article.title;
+  const seoDesc = article.metaDescription || article.summary;
+  const ogImage = article.heroImage || article.ogImage || OG_DEFAULT_IMAGE;
   const canonical = `${SITE}/knowledge-hub/${article.slug}`;
 
   return {
-    title: article.title,
-    description: article.summary,
+    title: seoTitle,
+    description: seoDesc,
     alternates: { canonical },
     openGraph: {
-      title: article.title,
-      description: article.summary,
+      title: seoTitle,
+      description: seoDesc,
       url: canonical,
       type: 'article',
       publishedTime: article.dateISO,
@@ -148,8 +156,8 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
-      description: article.summary,
+      title: seoTitle,
+      description: seoDesc
       images: [ogImage],
     },
   };
@@ -257,7 +265,7 @@ function ArticleSchema({ article }) {
     '@type': 'Article',
     headline: article.title,
     description: article.summary,
-    image: article.ogImage || OG_DEFAULT_IMAGE,
+    image: article.heroImage || article.ogImage || OG_DEFAULT_IMAGE,
     datePublished: article.dateISO,
     dateModified: article.dateISO,
     author: {
