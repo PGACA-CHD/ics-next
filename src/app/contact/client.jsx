@@ -47,6 +47,15 @@ export default function Page() {
       ].filter(Boolean).join("\n\n");
       await submitToZoho({ ...f, description: desc, source: "Website Contact Form" });
       setStatus("success");
+      // GA4 generate_lead event — fires only on actual contact form submission
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'generate_lead',
+        lead_source: 'contact_form',
+        lead_name: f.name || '',
+        lead_email: f.email || '',
+        lead_company: f.company || '',
+      });
       trackConsultationRequest("Contact Page Form");
     } catch { setStatus("error"); }
   };
@@ -561,3 +570,4 @@ function renderRichText(node) {
   }
   return null;
 }
+ 
