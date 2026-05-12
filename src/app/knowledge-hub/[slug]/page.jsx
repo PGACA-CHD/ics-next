@@ -135,7 +135,6 @@ export async function generateMetadata({ params }) {
   const article = await getArticle(params.slug);
   if (!article) return { title: 'Article Not Found' };
 
-  const ogImage = article.ogImage || OG_DEFAULT_IMAGE;
   const seoTitle = article.metaTitle || article.title;
   const seoDesc = article.metaDescription || article.summary;
   const ogImage = article.heroImage || article.ogImage || OG_DEFAULT_IMAGE;
