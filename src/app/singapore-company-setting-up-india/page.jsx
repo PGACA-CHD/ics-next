@@ -1,7 +1,5 @@
 import CountryClientPage from '@/components/seo/CountryClient';
 
-export const dynamic = 'force-dynamic';
-
 export const metadata = {
   title: 'Singapore Company Setting Up in India | DTAA, GAAR, GCC Setup Guide 2026',
   description: "Singapore companies setting up in India — WOS incorporation, India-Singapore DTAA, GAAR & Tiger Global ruling impact, GCC setup, ESOP structures, FEMA compliance. Ex-Big 4 CA team. Free consultation.",
@@ -136,4 +134,5 @@ export default function Page() {
     </>
   );
 }
+ 
  
