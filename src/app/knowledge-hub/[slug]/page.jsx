@@ -157,7 +157,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: 'summary_large_image',
       title: seoTitle,
-      description: seoDesc
+      description: seoDesc,
       images: [ogImage],
     },
   };
