@@ -106,6 +106,15 @@ export default function ChatWidget() {
     if (!leadData.name || !leadData.email) return;
     setShowLeadForm(false);
     setLeadCaptured(true);
+    // GA4 generate_lead event — fires only on actual chatbot lead capture
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'generate_lead',
+      lead_source: 'arya_chatbot',
+      lead_name: leadData.name,
+      lead_email: leadData.email,
+      lead_company: leadData.company || '',
+    });
     addBotMessage(`Thank you, ${leadData.name}! The India Entry Starter Guide is on its way to ${leadData.email}.\n\nOur team will reach out within 1 business day. Feel free to ask anything else, or book a free 30-min consultation at indiacompanysetup.com/contact`);
     setQuickReplies(['Book free consultation', 'Ask another question']);
     if (typeof window !== 'undefined' && window._icsTrack) {
@@ -350,5 +359,6 @@ function TypingDots() {
     </span>
   );
 }
+ 
  
  
