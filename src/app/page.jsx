@@ -1,7 +1,5 @@
 import ClientPage from './home-client';
 
-export const dynamic = 'force-dynamic';
-
 
 export const metadata = {
   title: 'Company Incorporation in India for Foreign Companies',
