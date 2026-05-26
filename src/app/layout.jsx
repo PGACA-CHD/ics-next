@@ -1,4 +1,20 @@
 import './globals.css';
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
+
+const cormorant = Cormorant_Garamond({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    style: ['normal', 'italic'],
+    variable: '--font-cormorant',
+    display: 'swap',
+});
+
+const dmSans = DM_Sans({
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '600', '700'],
+    variable: '--font-dm-sans',
+    display: 'swap',
+});
 import { SITE_NAME, SITE_URL } from '@/lib/config';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
@@ -31,7 +47,7 @@ const GTM_ID = 'GT-WKRW9GQZ';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <head>
         {/* GTM dataLayer init */}
         <script dangerouslySetInnerHTML={{ __html: `
