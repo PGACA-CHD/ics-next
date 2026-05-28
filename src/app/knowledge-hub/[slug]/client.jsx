@@ -31,7 +31,6 @@ export default function ArticlePage({ params }) {
     async function load() {
       try {
         setLoading(true);
-        // Fetch by slug
         const res = await fetch(
           `${CF_URL}?content_type=article&fields.slug=${slug}&limit=1`,
           { headers: { Authorization: `Bearer ${CF_TOKEN}` } }
@@ -51,7 +50,6 @@ export default function ArticlePage({ params }) {
           tag: item.fields.tag || "Guide",
           author: (item.fields.author && item.fields.author !== "PGA & Co." && item.fields.author !== "PGA & Co") ? item.fields.author : "Pankaj Gupta, FCA",
         });
-        // Fetch related (same category)
         const cat = item.fields.category || "General";
         const res2 = await fetch(
           `${CF_URL}?content_type=article&fields.category=${cat}&limit=4`,
@@ -80,8 +78,8 @@ export default function ArticlePage({ params }) {
     </div>
   );
   if (!article) return null;
-  // Render Contentful rich text body
-    function getNodeText(node) {
+
+  function getNodeText(node) {
     if (!node) return "";
     if (node.nodeType === "text") {
       return (node.value || "").replace(/PGA\s*&\s*Co\.?/gi, "India Company Setup");
@@ -89,7 +87,8 @@ export default function ArticlePage({ params }) {
     if (!node.content) return "";
     return node.content.map(getNodeText).join("");
   }
-    function renderBody(body) {
+
+  function renderBody(body) {
     if (!body) return <p style={{ color: T.mid }}>No content available.</p>;
     if (typeof body === "string") return <div dangerouslySetInnerHTML={{ __html: body }} />;
 
@@ -100,7 +99,7 @@ export default function ArticlePage({ params }) {
           return (
             <p
               key={i}
-              style={{ fontSize: 16, color: T.mid, lineHeight: 1.88, marginBottom: 20, fontWeight: 300 }}
+              style={{ fontSize: 16, color: T.mid, lineHeight: 1.88, marginBottom: 20, fontWeight: 300, textAlign: "justify" }}
             >
               {text}
             </p>
@@ -139,7 +138,7 @@ export default function ArticlePage({ params }) {
               {node.content?.map((li, j) => (
                 <li key={j} style={{ display: "flex", gap: 10, marginBottom: 10, alignItems: "flex-start" }}>
                   <span style={{ color: T.s, fontWeight: 700, flexShrink: 0, fontSize: 14 }}>✓</span>
-                  <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300 }}>
+                  <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300, textAlign: "justify" }}>
                     {getNodeText(li)}
                   </span>
                 </li>
@@ -170,7 +169,7 @@ export default function ArticlePage({ params }) {
                   >
                     {j + 1}
                   </span>
-                  <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300 }}>
+                  <span style={{ fontSize: 15, color: T.mid, lineHeight: 1.72, fontWeight: 300, textAlign: "justify" }}>
                     {getNodeText(li)}
                   </span>
                 </li>
@@ -186,7 +185,7 @@ export default function ArticlePage({ params }) {
               key={i}
               style={{ borderLeft: `4px solid ${T.s}`, paddingLeft: 20, marginLeft: 0, marginBottom: 20 }}
             >
-              <p style={{ fontSize: 16, color: T.mid, lineHeight: 1.8, fontStyle: "italic", fontWeight: 300 }}>
+              <p style={{ fontSize: 16, color: T.mid, lineHeight: 1.8, fontStyle: "italic", fontWeight: 300, textAlign: "justify" }}>
                 {text}
               </p>
             </blockquote>
@@ -218,7 +217,6 @@ export default function ArticlePage({ params }) {
                       {row.content?.map((cell, cellIndex) => {
                         const isHeader = cell.nodeType === "table-header-cell";
                         const CellTag = isHeader ? "th" : "td";
-
                         return (
                           <CellTag
                             key={cellIndex}
