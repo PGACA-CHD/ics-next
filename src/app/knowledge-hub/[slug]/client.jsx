@@ -1,4 +1,4 @@
-'use client';
+'use client'; // justify text
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
