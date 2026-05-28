@@ -214,7 +214,7 @@ function getRichTextOptions() {
       [BLOCKS.QUOTE]: (node, children) => (
         <blockquote style={{ borderLeft: `4px solid ${T.s}`, paddingLeft: 20, marginLeft: 0, marginBottom: 20 }}>
           <div style={{ fontSize: 16, color: T.mid, lineHeight: 1.8, fontStyle: 'italic', fontWeight: 300 }}>
-            {children
+            {children}
           </div>
         </blockquote>
       ),
