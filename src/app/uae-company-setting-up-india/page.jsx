@@ -1,6 +1,6 @@
 import CountryClientPage from '@/components/seo/CountryClient';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export const metadata = {
   title: 'UAE Company Setting Up in India | India Subsidiary for UAE Firms',
