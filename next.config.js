@@ -3,9 +3,15 @@ const nextConfig = {
   // Enable static export compatibility
   trailingSlash: false,
 
-  // Image domains
+  // Image optimisation
   images: {
-    domains: ['images.ctfassets.net'],
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'images.ctfassets.net',
+    }],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
   // Suppress powered-by header
@@ -14,6 +20,14 @@ const nextConfig = {
   // ── 301 Redirects: WordPress to Next.js migration ────────────────────────
   async redirects() {
     return [
+
+      // ── TRAILING SLASH normalisation (fixes 44 x "Page with redirect" in GSC) ──
+      // These catch www.indiacompanysetup.com/slug/ and strip the trailing slash
+      {
+        source: '/:path+/',
+        destination: '/:path+',
+        permanent: true,
+      },
 
       // ── BLOG POSTS to Knowledge Hub articles ─────────────────────────────
       {
@@ -89,6 +103,63 @@ const nextConfig = {
       {
         source: '/fdi-rules-private-limited-company-india-2025',
         destination: '/fdi-rules-india',
+        permanent: true,
+      },
+      // ── NEW: Missing blog redirects (fixes 10 x 404s) ───────────────────
+      {
+        source: '/blogs',
+        destination: '/knowledge-hub',
+        permanent: true,
+      },
+      {
+        source: '/company-registration-timeline-india',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/cost-of-private-limited-company-registration-india',
+        destination: '/knowledge-hub/best-company-structure-india-foreign-business',
+        permanent: true,
+      },
+      {
+        source: '/documents-required-company-incorporation-india',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      {
+        source: '/e-invoicing-gst-2025',
+        destination: '/knowledge-hub/gst-registration-foreign-company-india',
+        permanent: true,
+      },
+      {
+        source: '/llp-form-11-filing',
+        destination: '/post-setup',
+        permanent: true,
+      },
+      {
+        source: '/online-vs-offline-private-limited-company-registration',
+        destination: '/knowledge-hub/how-to-register-a-private-limited-company-in-india-online',
+        permanent: true,
+      },
+      {
+        source: '/section-8-company',
+        destination: '/setup',
+        permanent: true,
+      },
+      {
+        source: '/top-10-common-mistakes-to-avoid-during-company-registration-in-india',
+        destination: '/knowledge-hub/common-mistakes-incorporating-company-india',
+        permanent: true,
+      },
+      {
+        source: '/unique-company-name-mca-naming-rules',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
+        permanent: true,
+      },
+      // ── Also covers the long DSC/DIN URL seen in redirect report ─────────
+      {
+        source: '/digital-signature-certificate-dsc-director-identification-number-din-a-complete-guide-for-company-registration-in-india',
+        destination: '/knowledge-hub/register-subsidiary-company-india-foreign-entity',
         permanent: true,
       },
 
@@ -295,7 +366,7 @@ const nextConfig = {
         permanent: true,
       },
 
-      // ── MISSING WordPress redirects (added Apr 2026) ───────────────────
+      // ── MISSING WordPress redirects (added Apr 2026) ──────────────────────
       { source: '/company-compliance', destination: '/post-setup', permanent: true },
       { source: '/company-registration-india-2025-mca-updates', destination: '/foreign-company-registration-india', permanent: true },
       { source: '/contact-us', destination: '/contact', permanent: true },
@@ -314,4 +385,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
- 
