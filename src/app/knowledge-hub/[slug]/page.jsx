@@ -37,6 +37,61 @@ async function getAllSlugs() {
 }
 
 
+// ── Slug helper shared by heading extractor and renderer ─────────────────────
+function slugify(text) {
+  return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
+// ── Auto-extract H2/H3 headings for Table of Contents ────────────────────────
+function extractHeadings(body) {
+  if (!body?.content) return [];
+  return body.content
+    .filter(n => n.nodeType === 'heading-2' || n.nodeType === 'heading-3')
+    .map(n => ({
+      text: n.content?.map(c => c.value || '').join('').trim(),
+      id: slugify(n.content?.map(c => c.value || '').join('').trim()),
+      level: n.nodeType === 'heading-2' ? 2 : 3,
+    }))
+    .filter(h => h.text); // drop any empty headings
+}
+
+// ── Table of Contents component ───────────────────────────────────────────────
+function TableOfContents({ headings }) {
+  if (!headings || headings.length < 2) return null;
+  return (
+    <nav aria-label="Table of contents" style={{
+      background: '#F2EFE8', border: '1px solid #E0DDD4',
+      borderRadius: 12, padding: '20px 24px', marginBottom: 36,
+    }}>
+      <div style={{
+        fontSize: 10, letterSpacing: 2, textTransform: 'uppercase',
+        color: '#E8900A', fontWeight: 700, marginBottom: 14,
+      }}>
+        In this article
+      </div>
+      <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {headings.map((h, i) => (
+          <li key={i} style={{ paddingLeft: h.level === 3 ? 16 : 0 }}>
+            <a href={`#${h.id}`} style={{
+              fontSize: h.level === 2 ? 14 : 13,
+              color: '#0B3D2E',
+              textDecoration: 'none',
+              fontWeight: h.level === 2 ? 500 : 400,
+              lineHeight: 1.5,
+              display: 'inline-block',
+            }}>
+              {h.level === 3 && (
+                <span style={{ color: '#E8900A', marginRight: 6, fontSize: 11 }}>&#8212;</span>
+              )}
+              {h.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 // ── Auto-extract FAQs from rich text body ────────────────────────────────────
 function extractFAQsFromBody(body) {
   if (!body?.content) return [];
@@ -180,18 +235,24 @@ function getRichTextOptions() {
           {children}
         </p>
       ),
-      [BLOCKS.HEADING_2]: (node, children) => (
-        <h2 className="font-display"
-          style={{ fontSize: 26, fontWeight: 600, color: T.ch, marginTop: 40, marginBottom: 14, lineHeight: 1.2 }}>
-          {children}
-        </h2>
-      ),
-      [BLOCKS.HEADING_3]: (node, children) => (
-        <h3 className="font-display"
-          style={{ fontSize: 20, fontWeight: 600, color: T.ch, marginTop: 32, marginBottom: 10 }}>
-          {children}
-        </h3>
-      ),
+      [BLOCKS.HEADING_2]: (node, children) => {
+        const id = slugify(node.content?.map(c => c.value || '').join('').trim());
+        return (
+          <h2 id={id} className="font-display"
+            style={{ fontSize: 26, fontWeight: 600, color: T.ch, marginTop: 40, marginBottom: 14, lineHeight: 1.2, scrollMarginTop: 100 }}>
+            {children}
+          </h2>
+        );
+      },
+      [BLOCKS.HEADING_3]: (node, children) => {
+        const id = slugify(node.content?.map(c => c.value || '').join('').trim());
+        return (
+          <h3 id={id} className="font-display"
+            style={{ fontSize: 20, fontWeight: 600, color: T.ch, marginTop: 32, marginBottom: 10, scrollMarginTop: 100 }}>
+            {children}
+          </h3>
+        );
+      },
       [BLOCKS.HEADING_4]: (node, children) => (
         <h4 style={{ fontSize: 16, fontWeight: 600, color: T.ch, marginTop: 24, marginBottom: 8 }}>
           {children}
@@ -335,6 +396,7 @@ export default async function ArticlePage({ params }) {
   if (!article) notFound();
 
   const related = await getRelated(article.category, article.id);
+  const tocHeadings = extractHeadings(article.body);
   const WA_URL = `https://wa.me/919915731447?text=Hi%2C%20I%20read%20your%20article%20on%20${encodeURIComponent(article.title)}%20and%20have%20a%20question.`;
 
   return (
@@ -420,6 +482,7 @@ export default async function ArticlePage({ params }) {
             padding: 'clamp(24px,4vw,44px) clamp(20px,4vw,48px)',
             border: '1px solid #E0DDD4',
           }} className="article-body">
+            <TableOfContents headings={tocHeadings} />
             {article.body
               ? documentToReactComponents(article.body, getRichTextOptions())
               : <p style={{ color: '#9A9A8E', fontStyle: 'italic' }}>Full article content coming soon.</p>
