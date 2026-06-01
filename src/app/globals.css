@@ -586,3 +586,29 @@ textarea:focus {
     padding: 4px 12px !important;
   }
 }
+
+/* ─── Tools pages ──────────────────────────────────────────────────────────── */
+.tools-calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .tools-calc-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .tools-calc-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .tools-section-pad {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}

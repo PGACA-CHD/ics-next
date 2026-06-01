@@ -42,6 +42,7 @@ export const NAV_LINKS = [
   { label: "Post Setup",    href: "/post-setup" },
   { label: "Int'l Tax",     href: "/international-tax" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
+  { label: "Tools",         href: "/tools" },
   { label: "About",         href: "/about" },
   { label: "Contact",       href: "/contact" },
 ];
@@ -84,6 +85,15 @@ export const FOOTER_COLS = [
       { label: "UK Company in India",         href: "/uk-company-setting-up-india" },
       { label: "UAE Company in India",        href: "/uae-company-setting-up-india" },
       { label: "Singapore in India",          href: "/singapore-company-setting-up-india" },
+    ],
+  },
+  {
+    title: "Free Tools",
+    links: [
+      { label: "Income Tax Calculator",        href: "/tools/income-tax-calculator" },
+      { label: "TDS Rates FY 2026-27",         href: "/tools/tds-rates" },
+      { label: "GST HSN / SAC Finder",         href: "/tools/hsn-sac-finder" },
+      { label: "All Tools",                    href: "/tools" },
     ],
   },
   {
