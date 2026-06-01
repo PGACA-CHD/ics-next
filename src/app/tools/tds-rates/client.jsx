@@ -60,7 +60,7 @@ export default function Page() {
     });
   }, [q, cat]);
 
-  const thStyle = { padding: '11px 14px', fontSize: 11.5, fontWeight: 700, color: T.lt, textAlign: 'left', letterSpacing: 0.8, textTransform: 'uppercase', whiteSpace: 'nowrap', borderBottom: `2px solid ${T.bdr}`, background: T.stone };
+  const thStyle = { padding: '11px 14px', fontSize: 12, fontWeight: 600, color: T.mid, textAlign: 'left', letterSpacing: 0.2, whiteSpace: 'nowrap', borderBottom: `2px solid ${T.bdr}`, background: T.stone };
   const tdStyle = { padding: '11px 14px', fontSize: 13, color: T.ink, verticalAlign: 'top', borderBottom: `1px solid ${T.bdr}` };
   const catBadge = (c) => {
     const colors = { Resident: { bg: '#E4F0EB', color: T.f }, 'Non-Resident': { bg: '#FDE8CC', color: '#8B4F00' }, Any: { bg: '#E8EAF0', color: '#3A4066' } }[c] || {};
@@ -128,7 +128,7 @@ export default function Page() {
                   <tr><td colSpan={7} style={{ ...tdStyle, textAlign: 'center', padding: 40, color: T.lt }}>No matching sections found.</td></tr>
                 ) : filtered.map((row, i) => (
                   <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#2C3E6B', fontSize: 13.5 }}>§{row.sec}</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#2C3E6B', fontSize: 13.5 }}>Sec {row.sec}</td>
                     <td style={tdStyle}>{catBadge(row.cat)}</td>
                     <td style={{ ...tdStyle, maxWidth: 280 }}>{row.desc}</td>
                     <td style={{ ...tdStyle, fontSize: 12.5, color: T.mid }}>{row.threshold}</td>
