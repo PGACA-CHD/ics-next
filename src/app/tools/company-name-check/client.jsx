@@ -51,7 +51,7 @@ export default function Page() {
             <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:name.trim()?20:0}}>
               <a href="https://www.mca.gov.in/content/mca/global/en/mca/fo-llpin-services/run.html" target="_blank" rel="noopener noreferrer"
                 className="ics-btn ics-btn-primary" style={{fontSize:13.5}}>Check on MCA RUN Portal ↗</a>
-              <a href="https://www.mca.gov.in/content/mca/global/en/mca/fo-llpin-services/search.html" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.mca.gov.in/content/mca/global/en/mca/fo-llp-services/company-llp-name-search.html" target="_blank" rel="noopener noreferrer"
                 className="ics-btn ics-btn-outline" style={{fontSize:13.5}}>Search Existing Companies ↗</a>
             </div>
             {name.trim() && (
@@ -141,7 +141,7 @@ export default function Page() {
           {/* External links */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:14}}>
             {[
-              {icon:'🏛️',title:'MCA Company Search',desc:'Search all registered companies in India',href:'https://www.mca.gov.in/content/mca/global/en/mca/fo-llpin-services/search.html'},
+              {icon:'🏛️',title:'MCA Company Search',desc:'Search all registered companies in India',href:'https://www.mca.gov.in/content/mca/global/en/mca/fo-llp-services/company-llp-name-search.html'},
               {icon:'📝',title:'MCA RUN Service',desc:'Reserve your company name online',href:'https://www.mca.gov.in/content/mca/global/en/mca/fo-llpin-services/run.html'},
               {icon:'™️',title:'Trademark Search',desc:'Check if name conflicts with trademarks',href:'https://ipindiaonline.gov.in/tmrpublicsearch/frmmain.aspx'},
               {icon:'📋',title:'SPICe+ Incorporation',desc:'All-in-one incorporation form',href:'https://www.mca.gov.in/content/mca/global/en/mca/spice.html'},
