@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { T } from '@/lib/config';
+import { HSN_HEADINGS } from './hsn-data';
 
 // ─── STATIC DATA ─────────────────────────────────────────────────────────────
 
@@ -152,14 +153,31 @@ export default function Page() {
   const [apiError, setApiError] = useState(false);
   const debounceRef = useRef(null);
 
-  // Local chapter/SAC filter for browse mode
-  const chapterFilter = q.trim()
-    ? HSN_CHAPTERS.filter(c => c.ch.startsWith(q.trim()) || c.desc.toLowerCase().includes(q.toLowerCase()))
+  // Browse mode filters
+  const lq = q.trim().toLowerCase();
+
+  // HSN: search through 4/6-digit headings; fall back to chapters if no match
+  const hsnHeadingFilter = lq
+    ? HSN_HEADINGS.filter(c => c.code.startsWith(q.trim()) || c.desc.toLowerCase().includes(lq))
+    : HSN_HEADINGS;
+
+  // Chapter-level (2-digit) browse used as an overview/index when no filter
+  const chapterFilter = lq
+    ? HSN_CHAPTERS.filter(c => c.ch.startsWith(q.trim()) || c.desc.toLowerCase().includes(lq))
     : HSN_CHAPTERS;
 
-  const sacFilter = q.trim()
-    ? SAC_CODES.filter(c => c.code.startsWith(q.trim()) || c.desc.toLowerCase().includes(q.toLowerCase()))
+  const sacFilter = lq
+    ? SAC_CODES.filter(c => c.code.startsWith(q.trim()) || c.desc.toLowerCase().includes(lq))
     : SAC_CODES;
+
+  // Code level badge helper
+  const codeLevelBadge = (code) => {
+    const len = code.replace(/\s/g, '').length;
+    const label = len <= 2 ? 'Chapter' : len <= 4 ? 'Heading' : 'Subheading';
+    const bg = len <= 2 ? '#E8EAF0' : len <= 4 ? '#E4F0EB' : '#FDE8CC';
+    const color = len <= 2 ? '#3A4066' : len <= 4 ? T.f : '#8B4F00';
+    return <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 10, background: bg, color, marginLeft: 6, whiteSpace: 'nowrap' }}>{label}</span>;
+  };
 
   async function doSearch(query, type) {
     if (!query || query.length < 2) { setResults(null); return; }
@@ -206,7 +224,7 @@ export default function Page() {
             HSN / SAC Code Finder
           </h1>
           <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 680 }}>
-            Find the correct HSN code for goods or SAC code for services for GST invoicing, returns and classification. Search by description or code, or browse all 99 HSN chapters.
+            Find the correct HSN code for goods or SAC code for services. Search by description or code — results include <strong style={{ color: 'rgba(255,255,255,.8)' }}>4-digit headings and 6-digit subheadings</strong> across all 99 chapters. For 8-digit codes, live CBIC search is available.
           </p>
         </div>
       </section>
@@ -306,25 +324,79 @@ export default function Page() {
           {/* ── BROWSE MODE ── */}
           {view === 'browse' && mode === 'hsn' && (
             <div>
-              <div style={{ fontSize: 13, color: T.mid, marginBottom: 16 }}>Showing {chapterFilter.length} of 99 HSN chapters (2-digit level). For detailed 4–8 digit codes, use the Search tab or visit the <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: T.f, fontWeight: 600 }}>official CBIC portal ↗</a>.</div>
-              <div className="comparison-table-wrap" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 500 }}>
-                  <thead>
-                    <tr>
-                      <th style={{ ...thStyle, width: 110 }}>Chapter</th>
-                      <th style={thStyle}>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {chapterFilter.map((c, i) => (
-                      <tr key={c.ch} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                        <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace' }}>{c.ch}</td>
-                        <td style={tdStyle}>{c.desc}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              {!lq ? (
+                // No filter — show chapter index as navigation
+                <div>
+                  <div style={{ fontSize: 13, color: T.mid, marginBottom: 16 }}>
+                    Showing all <strong>99 chapters</strong> (2-digit). Type a keyword, description, or code prefix above to browse <strong>4-digit headings</strong> and <strong>6-digit subheadings</strong> (500+ codes available).
+                  </div>
+                  <div className="comparison-table-wrap" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, overflow: 'hidden' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 440 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ ...thStyle, width: 100 }}>Chapter</th>
+                          <th style={thStyle}>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {HSN_CHAPTERS.map((c, i) => (
+                          <tr key={c.ch} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5', cursor: 'pointer' }}
+                            onClick={() => setQ(c.ch)}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace' }}>
+                              {c.ch}
+                              {codeLevelBadge(c.ch)}
+                            </td>
+                            <td style={{ ...tdStyle, color: T.mid }}>{c.desc}
+                              <span style={{ fontSize: 11.5, color: T.f, marginLeft: 8 }}>→ click to expand</span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : hsnHeadingFilter.length > 0 ? (
+                // Filtered — show 4/6-digit headings
+                <div>
+                  <div style={{ fontSize: 13, color: T.mid, marginBottom: 16 }}>
+                    <strong>{hsnHeadingFilter.length}</strong> code{hsnHeadingFilter.length !== 1 ? 's' : ''} matching <em>"{q}"</em> — showing 4-digit headings and 6-digit subheadings.
+                    {hsnHeadingFilter.length === 0 && <> No matches. Try the <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: T.f, fontWeight: 600 }}>CBIC portal ↗</a> for full 8-digit codes.</>}
+                  </div>
+                  <div className="comparison-table-wrap" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, overflow: 'hidden' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 560 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ ...thStyle, width: 160 }}>HSN Code</th>
+                          <th style={{ ...thStyle, width: 80 }}>Chapter</th>
+                          <th style={thStyle}>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {hsnHeadingFilter.slice(0, 200).map((c, i) => (
+                          <tr key={`${c.code}-${i}`} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace', whiteSpace: 'nowrap' }}>
+                              {c.code}
+                              {codeLevelBadge(c.code)}
+                            </td>
+                            <td style={{ ...tdStyle, color: T.mid, fontSize: 12.5 }}>{c.ch}</td>
+                            <td style={tdStyle}>{c.desc}</td>
+                          </tr>
+                        ))}
+                        {hsnHeadingFilter.length > 200 && (
+                          <tr><td colSpan={3} style={{ ...tdStyle, textAlign: 'center', color: T.lt, fontSize: 12.5 }}>
+                            Showing first 200 of {hsnHeadingFilter.length} results. Refine your search.
+                          </td></tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '36px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 14, color: T.mid, marginBottom: 10 }}>No codes found for <strong>"{q}"</strong></div>
+                  <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13.5, color: T.f, fontWeight: 600 }}>Search the CBIC portal for 8-digit codes ↗</a>
+                </div>
+              )}
             </div>
           )}
 
