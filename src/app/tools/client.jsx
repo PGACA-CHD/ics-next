@@ -17,7 +17,7 @@ const TOOLS = [
     href: '/tools/tds-rates',
     icon: '📋',
     title: 'TDS Rate Chart',
-    subtitle: 'FY 2026-27',
+    subtitle: 'FY 2025-26',
     desc: 'Comprehensive TDS/TCS rate reference across all major sections — 192 to 196D. Search by section number, payment type or keyword. Includes threshold limits and deductee-specific rates.',
     tags: ['Section 194', 'Section 195', 'Non-Residents', 'All Sections'],
     cta: 'View TDS Rates',
