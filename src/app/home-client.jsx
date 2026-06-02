@@ -148,20 +148,21 @@ export default function HomePage() {
 
             {/* H1 */}
             <h1 className="font-display hero-h1" style={{
-              fontSize:"clamp(46px,5.5vw,74px)", fontWeight:600,
-              lineHeight:1.0, color:"#fff", marginBottom:24, letterSpacing:"-.02em",
+              fontSize:"clamp(36px,4.5vw,62px)", fontWeight:600,
+              lineHeight:1.08, color:"#fff", marginBottom:24, letterSpacing:"-.02em",
             }}>
-              Set up your India<br/>
-              business in{" "}
-              <span style={{ fontStyle:"italic", color:T.sl }}>30 days.</span>
+              India entry for foreign companies —{" "}
+              <span style={{ fontStyle:"italic", color:T.sl }}>incorporation to ongoing compliance,</span>{" "}
+              led by Ex-Big 4 CAs.
             </h1>
 
-            {/* Subhead — outcome-first, no jargon */}
-            <p style={{ fontSize:17.5, color:"rgba(255,255,255,.58)", lineHeight:1.75,
-              fontWeight:300, maxWidth:500, marginBottom:36 }}>
-              Your India subsidiary, up and running.
-              Structure designed, entity incorporated, bank account open, compliance sorted.
-              One firm handles it all.
+            {/* Subhead */}
+            <p style={{ fontSize:16, color:"rgba(255,255,255,.58)", lineHeight:1.8,
+              fontWeight:300, maxWidth:520, marginBottom:36 }}>
+              One CA-led team handles incorporation, FEMA, transfer pricing, GST, payroll,
+              and ongoing compliance for 100+ foreign companies entering India.
+              Remote setup. No travel required. Median time to operational entity:{" "}
+              <strong style={{ color:"rgba(255,255,255,.82)", fontWeight:500 }}>22 business days.</strong>
             </p>
 
             {/* Audience path pills */}
@@ -188,7 +189,7 @@ export default function HomePage() {
             {/* CTAs */}
             <div style={{ display:"flex", gap:12, flexWrap:"wrap", marginBottom:52 }}>
               <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
-                Book Free Consultation →
+                Book Free 30-min Strategy Call →
               </button>
               <button className="ics-btn ics-btn-ghost ics-btn-lg"
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({behavior:'smooth'})}>
@@ -242,7 +243,7 @@ export default function HomePage() {
             ) : (
               <>
                 <h3 className="font-display" style={{ fontSize:22, fontWeight:600, color:T.ch, marginBottom:4 }}>
-                  Book Free Consultation
+                  Book Free 30-min Strategy Call
                 </h3>
                 <p style={{ fontSize:12.5, color:T.lt, lineHeight:1.5, marginBottom:16 }}>
                   Expert team responds within 24 hours. No commitment.
