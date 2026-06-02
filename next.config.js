@@ -366,6 +366,19 @@ const nextConfig = {
         permanent: true,
       },
 
+      // ── Knowledge Hub slug case fixes ─────────────────────────────────────
+      // Mixed-case slug in URL → canonical lowercase slug in Contentful
+      {
+        source: '/knowledge-hub/set-up-company-in-India-from-USA',
+        destination: '/knowledge-hub/set-up-company-in-india-from-usa',
+        permanent: true,
+      },
+      {
+        source: '/knowledge-hub/set-up-company-in-india-from-USA',
+        destination: '/knowledge-hub/set-up-company-in-india-from-usa',
+        permanent: true,
+      },
+
       // ── MISSING WordPress redirects (added Apr 2026) ──────────────────────
       { source: '/company-compliance', destination: '/post-setup', permanent: true },
       { source: '/company-registration-india-2025-mca-updates', destination: '/foreign-company-registration-india', permanent: true },
