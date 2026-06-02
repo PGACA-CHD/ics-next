@@ -31,7 +31,7 @@ export default function Page() {
         <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)',backgroundSize:'64px 64px'}}/>
         <div style={{maxWidth:860,margin:'0 auto',position:'relative',zIndex:2}}>
           <Link href="/tools" style={{fontSize:12.5,color:'rgba(255,255,255,.45)',marginBottom:18,display:'inline-block'}}>← Back to Tools</Link>
-          <div style={{display:'inline-block',fontSize:10,letterSpacing:3,textTransform:'uppercase',color:T.sl,fontWeight:600,marginBottom:16,padding:'4px 12px',border:'1px solid rgba(245,168,40,.25)',borderRadius:20}}>MCA · SPICe+</div>
+          <div style={{display:'inline-block',fontSize:10,letterSpacing:3,textTransform:'uppercase',color:T.sl,fontWeight:600,marginBottom:16,padding:'4px 12px',border:'1px solid rgba(245,168,40,.25)',borderRadius:20}}>MCA · Name Guidelines</div>
           <h1 className="font-display" style={{fontSize:'clamp(30px,4vw,52px)',fontWeight:600,color:'#fff',lineHeight:1.08,marginBottom:14}}>Company Name Check</h1>
           <p style={{fontSize:15,color:'rgba(255,255,255,.55)',lineHeight:1.7,maxWidth:620}}>
             Name availability guide and rules for India company registration. Check your proposed name before filing.
@@ -49,10 +49,10 @@ export default function Page() {
             <input value={name} onChange={e=>setName(e.target.value)} placeholder="e.g. Acme Technologies Private Limited"
               style={{width:'100%',padding:'12px 16px',fontSize:15,border:`1.5px solid ${T.bdr}`,borderRadius:10,color:T.ch,fontFamily:'inherit',marginBottom:16,boxSizing:'border-box'}}/>
             <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:name.trim()?20:0}}>
-              <a href="https://www.mca.gov.in/content/mca/global/en/mca/fo-llpin-services/run.html" target="_blank" rel="noopener noreferrer"
-                className="ics-btn ics-btn-primary" style={{fontSize:13.5}}>Check on MCA RUN Portal ↗</a>
               <a href="https://www.mca.gov.in/content/mca/global/en/mca/fo-llp-services/company-llp-name-search.html" target="_blank" rel="noopener noreferrer"
-                className="ics-btn ics-btn-outline" style={{fontSize:13.5}}>Search Existing Companies ↗</a>
+                className="ics-btn ics-btn-primary" style={{fontSize:13.5}}>Search Existing Companies on MCA ↗</a>
+              <a href="https://tmrsearch.ipindia.gov.in/tmrpublicsearch/" target="_blank" rel="noopener noreferrer"
+                className="ics-btn ics-btn-outline" style={{fontSize:13.5}}>Trademark Search ↗</a>
             </div>
             {name.trim() && (
               <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -107,12 +107,12 @@ export default function Page() {
 
             {/* RUN process */}
             <div style={{background:'#fff',border:`1px solid ${T.bdr}`,borderRadius:14,padding:'22px 22px'}}>
-              <div style={{fontSize:13.5,fontWeight:700,color:T.ch,marginBottom:14}}>RUN / SPICe+ Process</div>
+              <div style={{fontSize:13.5,fontWeight:700,color:T.ch,marginBottom:14}}>Name Reservation & Incorporation</div>
               {[
-                ['RUN Service','Reserve Unique Name — standalone name reservation, valid for 20 days. Can submit 2 name preferences.'],
-                ['SPICe+ Form','Incorporation form that includes name reservation. Name validity: 20 days from approval.'],
-                ['Approval Time','Typically 1–3 working days. Rejected names can be re-submitted with changes.'],
-                ['Name Change','After incorporation, name change requires special resolution + MCA approval (Form INC-24).'],
+                ['RUN Service','Reserve Unique Name (RUN) — standalone name reservation, valid for 20 days. Up to 2 name preferences. Filed by a registered CA/CS via MCA portal (login required).'],
+                ['SPICe+ Form','All-in-one incorporation form that includes name reservation as part of the process. Filed by a registered professional via MCA login.'],
+                ['Approval Time','Name approval typically takes 1–3 working days. Rejected names can be re-submitted with modifications.'],
+                ['Name Change','Post-incorporation name change requires special resolution + MCA approval (Form INC-24). Involves additional fees and ROC processing time.'],
               ].map(([t,d])=>(
                 <div key={t} style={{marginBottom:12}}>
                   <div style={{fontSize:12.5,fontWeight:700,color:T.ch}}>{t}</div>
@@ -141,10 +141,8 @@ export default function Page() {
           {/* External links */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:14}}>
             {[
-              {icon:'🏛️',title:'MCA Company Search',desc:'Search all registered companies in India',href:'https://www.mca.gov.in/content/mca/global/en/mca/fo-llp-services/company-llp-name-search.html'},
-              {icon:'📝',title:'MCA RUN Service',desc:'Reserve your company name online',href:'https://www.mca.gov.in/content/mca/global/en/mca/fo-llpin-services/run.html'},
-              {icon:'™️',title:'Trademark Search',desc:'Check if name conflicts with trademarks',href:'https://ipindiaonline.gov.in/tmrpublicsearch/frmmain.aspx'},
-              {icon:'📋',title:'SPICe+ Incorporation',desc:'All-in-one incorporation form',href:'https://www.mca.gov.in/content/mca/global/en/mca/spice.html'},
+              {icon:'🏛️',title:'MCA Company Name Search',desc:'Search all registered company and LLP names in India',href:'https://www.mca.gov.in/content/mca/global/en/mca/fo-llp-services/company-llp-name-search.html'},
+              {icon:'™️',title:'Trademark Search (IP India)',desc:'Check if your proposed name conflicts with a registered trademark',href:'https://tmrsearch.ipindia.gov.in/tmrpublicsearch/'},
             ].map(l=>(
               <a key={l.title} href={l.href} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
                 <div className="card-lift" style={{background:'#fff',border:`1px solid ${T.bdr}`,borderRadius:12,padding:'18px 18px'}}>
