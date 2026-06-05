@@ -333,12 +333,6 @@ const nextConfig = {
         destination: '/setup',
         permanent: true,
       },
-      {
-        source: '/pricing',
-        destination: '/contact',
-        permanent: true,
-      },
-
       // ── UTILITY / MISC ────────────────────────────────────────────────────
       {
         source: '/about-us',
