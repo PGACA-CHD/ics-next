@@ -142,45 +142,34 @@ export default function Page() {
       {/* TOOLS GRID */}
       <section style={{ background: T.ivory, padding: '72px 56px 100px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          {['Tax Calculators', 'GST & Compliance', 'International Tax', 'Incorporation'].map(group => {
-            const groupTools = TOOLS.filter(t => t.group === group);
-            if (!groupTools.length) return null;
-            return (
-              <div key={group} style={{ marginBottom: 60 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
-                  <h2 style={{ fontSize: 15, fontWeight: 700, color: T.ch, margin: 0 }}>{group}</h2>
-                  <div style={{ flex: 1, height: 1, background: T.bdr }} />
-                  <span style={{ fontSize: 12, color: T.lt }}>{groupTools.length} tool{groupTools.length !== 1 ? 's' : ''}</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 22 }}>
+            {TOOLS.map((tool) => (
+              <Link key={tool.href} href={tool.href} style={{ textDecoration: 'none' }}>
+                <div className="card-lift" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 16, padding: '28px 26px', height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: tool.accent, borderRadius: '16px 16px 0 0' }} />
+                  <div style={{ fontSize: 34, marginBottom: 14 }}>{tool.icon}</div>
+                  <div style={{ marginBottom: 4 }}>
+                    <h2 style={{ fontSize: 16, fontWeight: 700, color: T.ch, margin: 0 }}>{tool.title}</h2>
+                    <div style={{ fontSize: 11, color: tool.accent, fontWeight: 600, marginTop: 3 }}>{tool.subtitle}</div>
+                  </div>
+                  <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.7, marginTop: 10, flexGrow: 1 }}>{tool.desc}</p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 14 }}>
+                    {tool.tags.map((tag) => (
+                      <span key={tag} style={{ fontSize: 10.5, background: T.stone, color: T.mid, borderRadius: 20, padding: '3px 9px', fontWeight: 500 }}>{tag}</span>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 600, color: tool.accent }}>
+                      {tool.cta} →
+                    </div>
+                    <span style={{ fontSize: 10, fontWeight: 600, color: T.lt, textTransform: 'uppercase', letterSpacing: 1 }}>{tool.group}</span>
+                  </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
-                  {groupTools.map((tool) => (
-                    <Link key={tool.href} href={tool.href} style={{ textDecoration: 'none' }}>
-                      <div className="card-lift" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 16, padding: '28px 26px', height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer', position: 'relative', overflow: 'hidden' }}>
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: tool.accent, borderRadius: '16px 16px 0 0' }} />
-                        <div style={{ fontSize: 34, marginBottom: 14 }}>{tool.icon}</div>
-                        <div style={{ marginBottom: 4 }}>
-                          <h3 style={{ fontSize: 16, fontWeight: 700, color: T.ch, margin: 0 }}>{tool.title}</h3>
-                          <div style={{ fontSize: 11, color: tool.accent, fontWeight: 600, marginTop: 3 }}>{tool.subtitle}</div>
-                        </div>
-                        <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.7, marginTop: 10, flexGrow: 1 }}>{tool.desc}</p>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 14 }}>
-                          {tool.tags.map((tag) => (
-                            <span key={tag} style={{ fontSize: 10.5, background: T.stone, color: T.mid, borderRadius: 20, padding: '3px 9px', fontWeight: 500 }}>{tag}</span>
-                          ))}
-                        </div>
-                        <div style={{ marginTop: 18, display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 600, color: tool.accent }}>
-                          {tool.cta} →
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-
+              </Link>
+            ))}
+          </div>
           {/* disclaimer */}
-          <div style={{ marginTop: 16, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 24px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+          <div style={{ marginTop: 32, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 24px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <div style={{ fontSize: 18, flexShrink: 0 }}>ℹ️</div>
             <p style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.65, margin: 0 }}>
               <strong style={{ color: T.ch }}>Disclaimer:</strong> These tools are for reference and general information only. Tax rates are based on Finance Act 2025. Always consult a qualified Chartered Accountant for professional tax advice.

@@ -86,6 +86,33 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ── SEO INTRO ─────────────────────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '52px 40px 0' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
+            TDS Rate Chart FY 2026-27 — All Sections 192 to 196D
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Tax Deducted at Source (TDS) is one of the most operationally demanding aspects of India tax compliance. Under the Income Tax Act, any specified person making a payment above a prescribed threshold — to a resident or non-resident — is required to deduct tax at source, deposit it with the government within the prescribed time, and file quarterly TDS returns. Failure to deduct, short deduction, or late deposit attracts interest at 1–1.5% per month and disqualifies the payer from claiming the expense as a deduction.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                The TDS framework spans over 40 sections, each covering a specific payment category: salaries (Section 192), bank interest (Section 194A), contractor payments (Section 194C), professional fees (Section 194J), rent (Section 194I), e-commerce operator payments (Section 194O), purchase of goods (Section 194Q), crypto and virtual digital assets (Section 194S), and all payments to non-residents (Section 195). Each section has its own threshold, rate, and conditions — with many sections carrying separate rates for Individual/HUF payees versus companies.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                This TDS rate chart covers all major sections from Section 192 to Section 196D for FY 2026-27. Key features include separate columns for Individual/HUF rates versus Company/Other rates, threshold limits above which TDS becomes mandatory, and practical notes on critical rules — including the higher 20% rate under Section 206AA when the deductee's PAN is not furnished, the Form 15G/15H submission process for nil TDS in eligible cases, and the option to obtain a lower deduction certificate from the Assessing Officer under Section 197.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                For cross-border payments to non-residents under Section 195, the domestic TDS rate is the starting point — but applicable DTAA treaty rates can reduce this significantly, provided the non-resident holds a Tax Residency Certificate and files Form 10F. Use this chart alongside our DTAA Rate Finder for a complete picture of non-resident withholding obligations. Built by our Ex-Big 4 CA team, searchable and filterable by section, payee type, or keyword.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* TABLE SECTION */}
       <section style={{ background: T.ivory, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>

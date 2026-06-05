@@ -175,6 +175,29 @@ export default function GSTDueDates() {
         </div>
       </section>
 
+      <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                GST compliance in India requires businesses to file multiple returns every month and quarter — and missing a due date carries immediate financial consequences. Late filing of GSTR-3B attracts interest at 18% per annum on the outstanding tax liability, plus a late fee of ₹50 per day (₹20 per day for nil returns), subject to a maximum cap. For GSTR-1, a late fee of ₹50 per day (₹20 for nil returns) applies, capped at ₹10,000 per return. Persistent non-compliance can result in cancellation of GST registration and block of e-Way Bill generation.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                The three primary returns are: GSTR-1 (details of outward supplies, due on the 11th of the following month for monthly filers), GSTR-3B (monthly summary return with tax payment, due on the 20th), and GSTR-9 (annual return, due by 31 December after the financial year ends). Composition scheme taxpayers file GSTR-4 annually. For businesses with annual turnover up to ₹5 crore, the QRMP (Quarterly Return Monthly Payment) scheme allows quarterly GSTR-1 and GSTR-3B filing, with monthly tax payments through a fixed-sum challan in the first two months of each quarter.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Under the QRMP scheme, taxpayers can also use the Invoice Furnishing Facility (IFF) to upload B2B invoices for the first two months of each quarter — this allows their recipients to claim input tax credit without waiting for the full quarterly GSTR-1. The IFF due date is the 13th of the month following each non-quarter-end month. Reconciling GSTR-1 and GSTR-3B data, and ensuring GSTR-2A/2B matches claimed input tax credits, is an ongoing compliance obligation that penalties can compound quickly if neglected.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                This GST due dates calendar covers all major GST returns for FY 2026-27: GSTR-1 and GSTR-3B for both monthly and QRMP filers, IFF, GSTR-4 (composition), GSTR-9, and GSTR-9C. Due dates are flagged as overdue (in red), upcoming within 7 days (in amber), or future. You can filter by filer type — Monthly, QRMP, or Composition — to see only the dates relevant to your business. Built and maintained by our Ex-Big 4 CA team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── MAIN ── */}
       <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>

@@ -76,6 +76,33 @@ export default function Page(){
         </div>
       </section>
 
+      {/* ── SEO INTRO ─────────────────────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '52px 40px 0' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
+            Advance Tax Calculator India — Quarterly Instalments FY 2026-27
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Advance tax is India's mechanism for collecting income tax in instalments throughout the financial year rather than in a lump sum at year-end. Any taxpayer — individual, company, or LLP — whose estimated total tax liability for the year exceeds ₹10,000 (after deducting TDS credit) is required to pay advance tax in four quarterly instalments under the Income Tax Act 1961. Failure to pay on time triggers interest under Section 234C at 1% per month on the shortfall, while failure to pay 90% of total tax by year-end attracts additional interest under Section 234B.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                For FY 2026-27, the four advance tax due dates are: 15 June 2026 (15% of total advance tax payable), 15 September 2026 (cumulative 45%), 15 December 2026 (cumulative 75%), and 15 March 2027 (100%). Missing any instalment — or underpaying relative to the cumulative percentage — triggers interest from the due date regardless of whether the full tax is paid by March 31.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                There are two important exceptions. Senior citizens aged 75 or above who earn only pension and interest income from specified banks are fully exempt from advance tax under Section 207 — their tax is collected by the bank itself. Taxpayers opting for presumptive taxation under Section 44AD or 44ADA must pay their entire advance tax liability in a single instalment by 15 March 2027, not spread across four instalments.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                This calculator takes your estimated annual income and expected TDS credits, computes net advance tax payable, and splits it across all four instalments with exact rupee amounts and due dates. Dates that have already passed are clearly marked. If your net liability falls below ₹10,000, the calculator confirms no advance tax is required. For an accurate base tax figure, use this alongside our Income Tax Calculator.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section style={{background:T.stone,padding:'48px 40px 80px'}}>
         <div style={{maxWidth:1100,margin:'0 auto'}}>
           <div className="tools-calc-grid">

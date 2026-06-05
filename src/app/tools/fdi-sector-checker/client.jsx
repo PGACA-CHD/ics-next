@@ -120,6 +120,29 @@ export default function FDISectorChecker() {
         </div>
       </section>
 
+      <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Foreign Direct Investment (FDI) in India is governed by the DPIIT Consolidated FDI Policy and the Foreign Exchange Management Act (FEMA). Before investing, foreign entities must determine whether their target sector is open to FDI, the maximum permissible equity limit, and which approval route applies. Getting this wrong can result in regulatory violations, compounding penalties under FEMA, and delays in receiving RBI approval for downstream operations.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                Most sectors in India are open to 100% FDI under the Automatic Route — meaning no prior government approval is needed, and the investment only needs to be reported to the RBI within 30 days of receipt of funds through the FC-GPR form. However, certain strategically sensitive sectors — including defence, broadcasting, print media, banking (private), and multi-brand retail — require prior approval from the Government of India through the relevant administrative ministry, processed via the Foreign Investment Facilitation Portal (FIFP). A handful of sectors, such as lottery services, gambling, and manufacturing of cigars, are fully prohibited for FDI.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                FDI limits are often sector-specific and come with conditions that go beyond just the equity percentage. Defence manufacturing, for instance, permits 74% FDI under the Automatic Route but requires 100% government approval above that threshold. Similarly, single-brand retail allows 100% FDI with conditions on local sourcing. For certain financial services, the applicable limit depends on whether the entity is regulated by SEBI, RBI, IRDAI, or PFRDA. These conditions must be satisfied continuously — not just at the time of initial investment.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                This FDI Sector Limit Checker covers all major sectors from the DPIIT Consolidated FDI Policy, displaying FDI limits, applicable route (Automatic, Government, Prohibited, or Mixed), and key conditions. You can filter by sector category or approval route, and search by keyword. Use this as a first-pass reference before engaging legal counsel for structuring — sector classifications can be nuanced, and specific conditions often require professional interpretation. Built by our Ex-Big 4 CA team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── TABLE SECTION ────────────────────────────────────────────────── */}
       <section style={{ background: T.ivory, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1300, margin: '0 auto' }}>

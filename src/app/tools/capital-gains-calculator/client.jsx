@@ -172,6 +172,33 @@ export default function CapitalGainsCalc() {
         </div>
       </section>
 
+      {/* ── SEO INTRO ─────────────────────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '52px 40px 0' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
+            India Capital Gains Tax Calculator — LTCG &amp; STCG (Budget 2024 Rates)
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Capital gains tax in India underwent significant changes in Budget 2024, making accurate computation more important — and more complex — than ever. Whether you have sold listed equity shares, equity mutual fund units, immovable property, or unlisted shares, the applicable tax rate, holding period threshold, and exemption limit now depend on both the asset type and the date of sale. Errors in classification can lead to material tax underpayment and penalty exposure.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                For listed equity shares and equity mutual funds (where STT is paid), Short-Term Capital Gains (STCG) are now taxed at 20% — increased from 15% effective 23 July 2024. Long-Term Capital Gains (LTCG, held more than 12 months) are taxed at 12.5% with an annual exemption of ₹1.25 lakh, up from the earlier ₹1 lakh. Capital losses on equity can be set off against capital gains and carried forward for eight years.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                For immovable property — land, residential houses, commercial buildings — LTCG (held more than 24 months) is taxed at 12.5% without indexation benefit, following Budget 2024's removal of the indexation option for most property sales. STCG on property is taxed at the seller's applicable income tax slab rate. For debt mutual funds purchased after 1 April 2023, all gains are taxed at slab rates regardless of holding period — LTCG treatment is not available.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                This capital gains tax calculator supports five asset classes: listed equity and equity mutual funds, immovable property, debt mutual funds, unlisted shares, and other assets (gold, bonds, foreign securities). It computes the holding period automatically from your purchase and sale dates, classifies the gain as STCG or LTCG, applies the LTCG exemption threshold where applicable, and shows the final tax amount. Built using Finance Act 2024 / 2025 rates by our Ex-Big 4 CA team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── MAIN ── */}
       <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>

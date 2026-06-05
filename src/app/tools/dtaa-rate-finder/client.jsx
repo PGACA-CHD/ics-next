@@ -37,6 +37,29 @@ export default function Page() {
         </div>
       </section>
 
+      <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                When a foreign company or individual receives income from India — dividends, interest, royalties, or fees for technical services — they are ordinarily subject to Indian withholding tax (TDS) at domestic rates, which can be as high as 40% for foreign companies. India's network of Double Tax Avoidance Agreements (DTAAs) with over 90 countries allows qualifying non-residents to reduce this withholding tax to treaty-specified rates — often 10–15% on dividends and interest, and 10% on royalties — provided the correct documentation is in place.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                To claim treaty benefits, a non-resident must hold a valid Tax Residency Certificate (TRC) issued by the tax authority of their home country. They must also file Form 10F with the Indian payer before the payment is made. Without these documents, the Indian payer is required to deduct TDS at the higher domestic rate under Section 206AA. The treaty rate applies only if the non-resident is the "beneficial owner" of the income — conduit arrangements or pass-through structures may be challenged by Indian tax authorities under General Anti-Avoidance Rules (GAAR).
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                DTAA rates vary significantly by country and income type. For example, India's treaty with Singapore provides a 10% rate on dividends for substantial holdings, while the treaty with Mauritius offers different rates depending on the payment type. Some treaties also provide a "Most Favoured Nation" (MFN) clause, which may entitle the non-resident to rates lower than those explicitly listed in the treaty if India signs a more favourable treaty with another OECD country. The MFN clause requires careful analysis and has been subject to recent judicial controversy in India.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                This DTAA Rate Finder covers withholding tax rates for four income categories — dividends, interest, royalties, and fees for technical services (FTS) — across all major treaty countries, with notes on specific conditions and TRC requirements. For non-resident payments under Section 195, use this tool alongside our TDS Rate Chart to compare treaty rates against domestic rates and determine the applicable deduction rate. Built by our Ex-Big 4 CA team based on current India DTAA schedules.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 

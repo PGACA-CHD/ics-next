@@ -174,6 +174,33 @@ export default function PayrollCalculator() {
         </div>
       </section>
 
+      {/* ── SEO INTRO ─────────────────────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '52px 40px 0' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
+            India Payroll Calculator — CTC to Take-Home Salary (PF, ESI, Tax)
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                The difference between CTC (Cost to Company) and take-home salary in India is frequently misunderstood and routinely underestimated — often amounting to 20–35% of CTC. This gap exists because CTC includes employer contributions that never appear in your bank account: employer Provident Fund (12% of basic, capped at ₹21,600 per year), employer gratuity provision (4.81% of basic), and in some cases health insurance premiums. Understanding this split is essential for salary negotiations, financial planning, and HR payroll budgeting.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                From your gross salary, four categories of deductions reduce take-home pay. Employee PF contribution mirrors the employer side at 12% of basic salary (capped at ₹21,600 per year). ESI (Employee State Insurance) applies at 0.75% of gross salary for employees earning ₹21,000 or below per month — above this threshold, ESI does not apply. Professional tax is a state-level levy (typically ₹2,400 per year in Maharashtra, Karnataka, and West Bengal). Income tax is computed based on your chosen regime and total taxable income.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                This payroll calculator supports both the New Tax Regime (FY 2025-26 slabs with ₹75,000 standard deduction and Section 87A rebate for income up to ₹12 lakh) and the Old Tax Regime (₹50,000 standard deduction, HRA exemption computed as the minimum of actual HRA received, actual rent paid minus 10% of basic, and 50% or 40% of basic for metro or non-metro cities respectively). Switching between regimes instantly recalculates take-home.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                The calculator outputs a full monthly and annual salary breakup — basic salary, HRA, special allowance, gross salary, all deductions line by line, and net take-home. This is the same structure used in Indian offer letters and Form 16. Useful for employees reviewing offers, HR teams building CTC structures, and foreign companies setting up India payroll for the first time. Built by our Ex-Big 4 CA team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── MAIN ── */}
       <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>

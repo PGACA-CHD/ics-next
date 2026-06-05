@@ -229,6 +229,29 @@ export default function Page() {
         </div>
       </section>
 
+      <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Every GST invoice in India must carry either an HSN (Harmonised System of Nomenclature) code for goods or a SAC (Services Accounting Code) for services. The CBIC mandates HSN code usage based on annual turnover: businesses with turnover above ₹5 crore must use 8-digit HSN codes, those with ₹1.5–5 crore turnover must use 6-digit codes, and those below ₹1.5 crore must use 4-digit codes. Using an incorrect HSN or SAC code on an invoice can lead to mismatches in GST returns, disputes during audits, and denial of input tax credit to the recipient.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                The HSN system is an internationally standardised commodity classification framework developed by the World Customs Organisation, adopted by over 200 countries. In India, the GST Council has mapped all goods to their respective HSN codes and assigned applicable GST rates — 0%, 5%, 12%, 18%, or 28% — at the 4-digit, 6-digit, and 8-digit levels. The same good may carry different GST rates depending on its specific 8-digit classification, so selecting the most precise code available for your product is important for correct tax computation.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                SAC codes, by contrast, are India-specific and always begin with "99". They classify services into categories such as IT services (998), legal services (9982), construction (9954), health (9993), and education (9992), among others. Unlike HSN codes, SAC codes use a 6-digit structure. Every service supplied under GST must be classified under an SAC code, and the applicable GST rate depends on the specific SAC category — for example, most IT and software services attract 18% GST, while certain health and education services may be exempt.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                This HSN/SAC finder lets you search by description or code number across all 99 HSN chapters (4-digit headings and 6-digit subheadings) and major SAC categories. Results include the applicable GST rate where standardised. For 8-digit HSN codes with product-specific rates, the tool links directly to the official CBIC search portal. Switch between HSN and SAC modes using the tab selector above the search. Built using CBIC classification data by our Ex-Big 4 CA team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* MAIN */}
       <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>

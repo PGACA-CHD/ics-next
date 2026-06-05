@@ -232,6 +232,33 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ── SEO INTRO ─────────────────────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '52px 40px 0' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
+            India Income Tax Calculator — Companies, LLP &amp; Individuals (FY 2025-26)
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                India's income tax system operates across multiple slabs, different rates for different taxpayer categories, and a choice between two distinct regimes — making accurate computation genuinely complex without the right tool. This free income tax calculator covers every major taxpayer category: domestic companies, foreign companies, Limited Liability Partnerships (LLPs), and individuals — including resident and non-resident individuals — under both the New Tax Regime and the Old Tax Regime for FY 2025-26 (Assessment Year 2026-27).
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                Under the New Regime (Budget 2025), individual tax slabs start at nil for income up to ₹4 lakh and rise to 30% for income above ₹24 lakh. The calculator automatically applies the standard deduction of ₹75,000 for salaried individuals, the Section 87A rebate — which makes income up to ₹12 lakh effectively tax-free under the new regime — and the 4% Health &amp; Education Cess on the final tax liability.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                For companies, the calculator handles four rate structures: the normal domestic company rate (25% for turnover ≤ ₹400 crore, 30% above), the concessional Section 115BAA rate (22%), the new manufacturing company rate under Section 115BAB (15%), and the foreign company flat rate of 40%. Each computation includes the applicable surcharge — which varies between 7% and 12% for domestic companies — and the 4% cess. The calculator also flags potential Minimum Alternate Tax (MAT) and Alternate Minimum Tax (AMT) liability when regular tax falls below the statutory minimum.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                LLP and partnership firm tax is calculated at a flat 30% rate with applicable surcharge and cess. Every computation shows a slab-wise breakdown — not just a final number — so you can verify exactly how each portion of income is taxed. Built by our Ex-Big 4 CA team and based on Finance Act 2025 rates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* MAIN */}
       <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>

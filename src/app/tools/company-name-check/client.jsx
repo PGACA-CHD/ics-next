@@ -39,6 +39,29 @@ export default function Page() {
         </div>
       </section>
 
+      <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Choosing the right name is one of the first and most critical steps in registering a company in India. The Ministry of Corporate Affairs (MCA) scrutinises every proposed company name against a strict set of rules before approving incorporation. A rejected name delays your entire incorporation timeline — typically by 3–7 working days — and requires a fresh application with revised choices. Understanding the rules upfront prevents avoidable rejections and wasted professional fees.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                The most common reasons for name rejection are: the proposed name being identical or too similar to an already registered company or LLP; use of words that imply government connection or require special approval (such as "National", "Bank", "Insurance", "Reserve", or "Parliament"); use of a word that is a registered trademark owned by a third party; a name that is purely generic or consists only of common words like "India Services Solutions"; and names that are offensive or misleading. The MCA system performs phonetic similarity checks — not just exact-match — so minor spelling variations on existing names are typically rejected.
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+                Every company type in India must carry a mandatory suffix. Private Limited Companies must end with "Private Limited" or "Pvt. Ltd." Public Limited Companies must end with "Limited" or "Ltd." One Person Companies must carry "OPC Private Limited." Limited Liability Partnerships must end with "LLP." These suffixes cannot be omitted, abbreviated differently, or placed mid-name. Name approval also does not grant trademark protection — a separately registered trademark provides stronger, enforceable rights against third-party use.
+              </p>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+                Once a name is approved, companies can reserve it for 20 days through the MCA's Reserve Unique Name (RUN) service, filed by a registered CA or CS. Alternatively, name reservation can be done as part of the SPICe+ all-in-one incorporation form. This tool lets you run a quick pre-check on your proposed name — identifying prohibited words, missing suffixes, and single-word issues — before you engage a professional and incur filing fees. For final verification, always search the official MCA company name database.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section style={{background:T.stone,padding:'48px 40px 80px'}}>
         <div style={{maxWidth:1100,margin:'0 auto',display:'flex',flexDirection:'column',gap:28}}>
 
