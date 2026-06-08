@@ -38,8 +38,22 @@ export const GA4_ID        = "G-VFH7W7VQ44";
 // ─── NAVIGATION ───────────────────────────────────────────────────────────────
 export const NAV_LINKS = [
   { label: "Home",          href: "/" },
-  { label: "Setup",         href: "/setup" },
-  { label: "Post Setup",    href: "/post-setup" },
+  {
+    label: "Company Registration",
+    href:  "/setup",
+    children: [
+      { label: "Setup & Incorporation",   href: "/setup" },
+      { divider: true, groupLabel: "Register from Your Country" },
+      { label: "🇺🇸  From USA",            href: "/company-registration/from-usa" },
+      { label: "🇬🇧  From UK",             href: "/company-registration/from-uk" },
+      { label: "🇦🇪  From Dubai / UAE",    href: "/company-registration/from-dubai" },
+      { label: "🇸🇬  From Singapore",      href: "/company-registration/from-singapore" },
+      { label: "🇨🇦  From Canada",         href: "/company-registration/from-canada" },
+      { label: "🇦🇺  From Australia",      href: "/company-registration/from-australia" },
+      { divider: true },
+      { label: "Post-Setup Compliance",   href: "/post-setup" },
+    ],
+  },
   { label: "Int'l Tax",     href: "/international-tax" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Tools",         href: "/tools" },
