@@ -10,7 +10,7 @@ const CF_SPACE_ID = 'qjo3cpray5h2';
 const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN;
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 const SITE = 'https://www.indiacompanysetup.com';
-const OG_DEFAULT_IMAGE = `${SITE}/og-default.png`;
+const OG_DEFAULT_IMAGE = `${SITE}/og-image.jpg`;
 
 const T = {
   f: '#0B3D2E', s: '#E8900A', ivory: '#FAFAF5', stone: '#F2EFE8',

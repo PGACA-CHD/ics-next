@@ -11,6 +11,20 @@ export const metadata = {
   title: 'India Business Setup Knowledge Hub — Guides & Articles',
   description: 'Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/knowledge-hub' },
+  openGraph: {
+    title: 'India Business Setup Knowledge Hub — Guides & Articles',
+    description: 'Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India.',
+    url: 'https://www.indiacompanysetup.com/knowledge-hub',
+    images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup Knowledge Hub' }],
+    type: 'website',
+    siteName: 'India Company Setup',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'India Business Setup Knowledge Hub — Guides & Articles',
+    description: 'Free guides on company incorporation, FEMA compliance, transfer pricing, and international tax for foreign businesses entering India.',
+    images: ['https://www.indiacompanysetup.com/og-image.jpg'],
+  },
 };
 
 export const revalidate = 21600;
