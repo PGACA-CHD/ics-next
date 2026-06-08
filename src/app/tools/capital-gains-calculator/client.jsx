@@ -52,7 +52,7 @@ const ASSET_CONFIG = {
     ltcgExemption: 0,
     indexation: false,
     stcgLabel: 'Slab Rate (STCG, ≤24 months)',
-    ltcgLabel: '12.5% (LTCG, >24 months) — no indexation post-Budget 2024',
+    ltcgLabel: '12.5% (LTCG, >24 months) — no indexation post-Budget 2025',
   },
   debt: {
     label: 'Debt Mutual Funds (bought after 1 Apr 2023)',
@@ -82,7 +82,7 @@ const ASSET_CONFIG = {
     ltcgExemption: 0,
     indexation: false,
     stcgLabel: 'Slab Rate (STCG, ≤36 months)',
-    ltcgLabel: '12.5% (LTCG, >36 months) — indexation removed post-Budget 2024',
+    ltcgLabel: '12.5% (LTCG, >36 months) — indexation removed post-Budget 2025',
   },
 };
 
@@ -161,13 +161,13 @@ export default function CapitalGainsCalc() {
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>← Back to Tools</Link>
           <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: T.sl, fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(245,168,40,.25)', borderRadius: 20 }}>
-            Budget 2024 Rates · FY 2025-26 / AY 2026-27
+            Budget 2025 Rates · FY 2025-26 / AY 2026-27
           </div>
           <h1 className="font-display" style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
             Capital Gains Tax Calculator
           </h1>
           <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 620 }}>
-            Equity, property, debt MF, unlisted shares &amp; other assets · STCG / LTCG · New Budget 2024 rates
+            Equity, property, debt MF, unlisted shares &amp; other assets · STCG / LTCG · Budget 2025 rates
           </p>
         </div>
       </section>
@@ -176,23 +176,23 @@ export default function CapitalGainsCalc() {
       <section style={{ background: '#fff', padding: '52px 40px 0' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
-            India Capital Gains Tax Calculator — LTCG &amp; STCG (Budget 2024 Rates)
+            India Capital Gains Tax Calculator — LTCG &amp; STCG (Budget 2025 Rates)
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
             <div>
               <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
-                Capital gains tax in India underwent significant changes in Budget 2024, making accurate computation more important — and more complex — than ever. Whether you have sold listed equity shares, equity mutual fund units, immovable property, or unlisted shares, the applicable tax rate, holding period threshold, and exemption limit now depend on both the asset type and the date of sale. Errors in classification can lead to material tax underpayment and penalty exposure.
+                Capital gains tax in India was significantly overhauled in Budget 2024 and those revised rates have been retained unchanged in Budget 2025 (Union Budget 2025-26). Whether you have sold listed equity shares, equity mutual fund units, immovable property, or unlisted shares, the applicable tax rate, holding period threshold, and exemption limit depend on both the asset type and the date of sale. Errors in classification can lead to material tax underpayment and penalty exposure.
               </p>
               <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
-                For listed equity shares and equity mutual funds (where STT is paid), Short-Term Capital Gains (STCG) are now taxed at 20% — increased from 15% effective 23 July 2024. Long-Term Capital Gains (LTCG, held more than 12 months) are taxed at 12.5% with an annual exemption of ₹1.25 lakh, up from the earlier ₹1 lakh. Capital losses on equity can be set off against capital gains and carried forward for eight years.
+                For listed equity shares and equity mutual funds (where STT is paid), Short-Term Capital Gains (STCG) are taxed at 20% and Long-Term Capital Gains (LTCG, held more than 12 months) are taxed at 12.5% with an annual exemption of ₹1.25 lakh — rates introduced in Budget 2024 and confirmed unchanged in Budget 2025. Capital losses on equity can be set off against capital gains and carried forward for eight assessment years.
               </p>
             </div>
             <div>
               <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
-                For immovable property — land, residential houses, commercial buildings — LTCG (held more than 24 months) is taxed at 12.5% without indexation benefit, following Budget 2024's removal of the indexation option for most property sales. STCG on property is taxed at the seller's applicable income tax slab rate. For debt mutual funds purchased after 1 April 2023, all gains are taxed at slab rates regardless of holding period — LTCG treatment is not available.
+                For immovable property — land, residential houses, commercial buildings — LTCG (held more than 24 months) is taxed at 12.5% without indexation benefit for property acquired on or after 23 July 2024. For property acquired before 23 July 2024, taxpayers may choose the more favourable option: 20% with indexation (old regime) or 12.5% without indexation. STCG on property is taxed at slab rate. Budget 2025 made no changes to these property rules.
               </p>
               <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
-                This capital gains tax calculator supports five asset classes: listed equity and equity mutual funds, immovable property, debt mutual funds, unlisted shares, and other assets (gold, bonds, foreign securities). It computes the holding period automatically from your purchase and sale dates, classifies the gain as STCG or LTCG, applies the LTCG exemption threshold where applicable, and shows the final tax amount. Built using Finance Act 2024 / 2025 rates by our Ex-Big 4 CA team.
+                This capital gains tax calculator supports five asset classes: listed equity and equity mutual funds, immovable property, debt mutual funds (always slab-taxed if bought after 1 April 2023), unlisted shares, and other assets (gold, bonds, foreign securities). It computes the holding period automatically from purchase and sale dates, classifies the gain as STCG or LTCG, applies the ₹1.25 lakh LTCG exemption where applicable, and shows the estimated tax. Built using Budget 2025 / Finance Act 2025 rates by our Ex-Big 4 CA team.
               </p>
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function CapitalGainsCalc() {
               {/* Property note */}
               {assetType === 'property' && (
                 <div style={{ marginBottom: 18, background: '#FFF8ED', border: '1px solid #F5E2B8', borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: '#7A5C1E' }}>
-                  <strong>Budget 2024 Change:</strong> Indexation benefit has been removed for property acquired on or after 23 July 2024. LTCG is taxable at 12.5% without indexation. Property acquired before 23 July 2024 may have options — consult a CA.
+                  <strong>Budget 2024/2025 Rules:</strong> For property acquired on/after 23 July 2024 — LTCG @ 12.5% without indexation. For property acquired before 23 July 2024 — you may choose the more favourable option: 20% with indexation OR 12.5% without. Consult a CA for your specific case.
                 </div>
               )}
               {assetType === 'debt' && (
@@ -297,7 +297,7 @@ export default function CapitalGainsCalc() {
 
               {/* Quick rates reference */}
               <div style={{ marginTop: 20, background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '20px 22px' }}>
-                <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 12 }}>Budget 2024 Capital Gains Rates</div>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 12 }}>Budget 2025 Capital Gains Rates</div>
                 {Object.values(ASSET_CONFIG).map(c => (
                   <div key={c.label} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: `1px solid ${T.bdr}` }}>
                     <div style={{ fontSize: 12, fontWeight: 600, color: T.ink }}>{c.label}</div>
@@ -310,7 +310,7 @@ export default function CapitalGainsCalc() {
           </div>
 
           <div style={{ marginTop: 40, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 24px', fontSize: 12.5, color: T.mid, lineHeight: 1.65 }}>
-            <strong style={{ color: T.ch }}>Disclaimer:</strong> This calculator uses Budget 2024 / Finance Act 2024 rates for FY 2025-26. Surcharge (10%–37% for individuals) and Health &amp; Education Cess @ 4% are additional. Indexation has been removed for property and other assets post-Budget 2024; consult a CA for transitional provisions. NRI rates may differ. Section 54/54EC/54F exemptions for property reinvestment are not reflected. Always consult a qualified CA.
+            <strong style={{ color: T.ch }}>Disclaimer:</strong> This calculator uses Budget 2025 / Finance Act 2025 rates for FY 2025-26. Surcharge (10%–25% for individuals) and Health &amp; Education Cess @ 4% are additional. For property acquired before 23 July 2024, a choice of 20% with indexation or 12.5% without is available — consult a CA for transitional provisions. NRI rates may differ. Section 54/54EC/54F exemptions for property reinvestment are not reflected. Always consult a qualified CA.
           </div>
         </div>
       </section>
