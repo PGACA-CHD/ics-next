@@ -185,8 +185,8 @@ export default function Page() {
             <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 1080 }}>
               <thead>
                 <tr>
-                  <th style={{ ...thStyle, width: 90 }}>Old Sec{'\n'}(IT 1961)</th>
-                  <th style={{ ...thStyle, width: 100 }}>New Sec{'\n'}(IT 2025)</th>
+                  <th style={{ ...thStyle, width: 90 }}>Old Sec<br />(IT 1961)</th>
+                  <th style={{ ...thStyle, width: 100 }}>New Sec<br />(IT 2025)</th>
                   <th style={{ ...thStyle, width: 80 }}>Payee</th>
                   <th style={thStyle}>Nature of Payment</th>
                   <th style={{ ...thStyle, width: 170 }}>Threshold</th>
