@@ -91,7 +91,7 @@ export const FOOTER_COLS = [
     title: "Free Tools",
     links: [
       { label: "Income Tax Calculator",        href: "/tools/income-tax-calculator" },
-      { label: "TDS Rates FY 2025-26",         href: "/tools/tds-rates" },
+      { label: "TDS Rates FY 2026-27",         href: "/tools/tds-rates" },
       { label: "GST HSN / SAC Finder",         href: "/tools/hsn-sac-finder" },
       { label: "All Tools",                    href: "/tools" },
     ],
