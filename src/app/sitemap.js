@@ -31,6 +31,25 @@ const STATIC_ROUTES = [
   { url: '/private-limited-company-registration-india', priority: 0.9, changeFrequency: 'monthly' },
   { url: '/nri-company-registration-india',          priority: 0.9,  changeFrequency: 'monthly' },
   { url: '/startup-foreign-investment-india',        priority: 0.9,  changeFrequency: 'monthly' },
+  // Country-specific registration pages
+  { url: '/company-registration/from-usa',           priority: 0.85, changeFrequency: 'monthly' },
+  { url: '/company-registration/from-uk',            priority: 0.85, changeFrequency: 'monthly' },
+  { url: '/company-registration/from-dubai',         priority: 0.85, changeFrequency: 'monthly' },
+  { url: '/company-registration/from-singapore',     priority: 0.85, changeFrequency: 'monthly' },
+  { url: '/company-registration/from-canada',        priority: 0.85, changeFrequency: 'monthly' },
+  { url: '/company-registration/from-australia',     priority: 0.85, changeFrequency: 'monthly' },
+  // Free tools
+  { url: '/tools',                                   priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/tools/income-tax-calculator',             priority: 0.75, changeFrequency: 'monthly' },
+  { url: '/tools/payroll-calculator',                priority: 0.75, changeFrequency: 'monthly' },
+  { url: '/tools/capital-gains-calculator',          priority: 0.75, changeFrequency: 'monthly' },
+  { url: '/tools/tds-rates',                         priority: 0.75, changeFrequency: 'monthly' },
+  { url: '/tools/advance-tax-calculator',            priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/tools/dtaa-rate-finder',                  priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/tools/fdi-sector-checker',                priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/tools/gst-due-dates',                     priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/tools/company-name-check',                priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/tools/hsn-sac-finder',                    priority: 0.7,  changeFrequency: 'monthly' },
 ];
 
 async function getArticleSlugs() {
