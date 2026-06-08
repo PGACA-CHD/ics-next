@@ -8,7 +8,7 @@ const TDS = [
   { sec: '192A',   cat: 'Resident',     desc: 'PF withdrawal before 5 years of service',                              threshold: '₹50,000',                          indRate: '10%',         othRate: '10%',       notes: 'If PAN not furnished: 20%. Exempt if withdrawn after 5 years.' },
   { sec: '193',    cat: 'Resident',     desc: 'Interest on securities (debentures, listed bonds)',                     threshold: '₹10,000 (listed); ₹5,000 (others)', indRate: '10%',        othRate: '10%',       notes: 'No TDS on interest on government securities in certain cases.' },
   { sec: '194',    cat: 'Resident',     desc: 'Dividend from domestic company',                                       threshold: '₹5,000',                           indRate: '10%',         othRate: '10%',       notes: 'Includes deemed dividend. No TDS on dividends paid to LIC, GIC, etc.' },
-  { sec: '194A',   cat: 'Resident',     desc: 'Interest other than on securities (banks)',                            threshold: '₹50,000 (senior citizens); ₹40,000 (others)', indRate: '10%', othRate: '10%', notes: 'Senior citizen threshold ₹50,000 p.a. per bank/branch.' },
+  { sec: '194A',   cat: 'Resident',     desc: 'Interest other than on securities (banks / co-op banks / post office)', threshold: '₹1,00,000 (senior citizens); ₹50,000 (others)', indRate: '10%', othRate: '10%', notes: 'Budget 2025: senior citizen threshold raised to ₹1,00,000 p.a.; general threshold raised to ₹50,000 p.a. per bank/branch.' },
   { sec: '194A',   cat: 'Resident',     desc: 'Interest other than on securities (non-banks)',                        threshold: '₹5,000',                           indRate: '10%',         othRate: '10%',       notes: 'Applies to co-op societies, companies, firms etc. paying interest.' },
   { sec: '194B',   cat: 'Any',          desc: 'Winnings from lottery, crossword puzzle, card games or other games',   threshold: '₹10,000 per transaction',          indRate: '30%',         othRate: '30%',       notes: 'No threshold aggregation; each transaction evaluated separately.' },
   { sec: '194BA',  cat: 'Any',          desc: 'Winnings from online games',                                           threshold: 'Nil (net winnings at year-end / withdrawal)', indRate: '30%', othRate: '30%',    notes: 'TDS on net winnings computed at end of year or on withdrawal.' },
@@ -23,7 +23,7 @@ const TDS = [
   { sec: '194I(a)', cat: 'Resident',    desc: 'Rent — Plant, machinery or equipment',                                threshold: '₹2,40,000 per year',               indRate: '2%',          othRate: '2%',        notes: 'Applies to all payers (individual/HUF only if liable to tax audit).' },
   { sec: '194I(b)', cat: 'Resident',    desc: 'Rent — Land, building, furniture or fittings',                        threshold: '₹2,40,000 per year',               indRate: '10%',         othRate: '10%',       notes: 'For residential / commercial property rent paid to resident.' },
   { sec: '194IA',  cat: 'Resident',     desc: 'Payment on transfer of immovable property (buyer deducts)',           threshold: '₹50,00,000',                       indRate: '1%',          othRate: '1%',        notes: 'Buyer deducts TDS. Applies to agricultural land in rural area? No.' },
-  { sec: '194IB',  cat: 'Resident',     desc: 'Rent paid by individual / HUF (not subject to tax audit)',            threshold: '₹50,000 per month',                indRate: '5%',          othRate: '—',         notes: 'Deducted once a year (March) or when property is vacated. Not for companies.' },
+  { sec: '194IB',  cat: 'Resident',     desc: 'Rent paid by individual / HUF (not subject to tax audit)',            threshold: '₹50,000 per month',                indRate: '2%',          othRate: '—',         notes: 'Rate reduced from 5% to 2% w.e.f. 1 Oct 2024 (Finance Act 2024). Deducted once a year (March) or when property is vacated. Not for companies.' },
   { sec: '194IC',  cat: 'Resident',     desc: 'Monetary consideration under Joint Development Agreement (JDA)',       threshold: 'Nil',                              indRate: '10%',         othRate: '10%',       notes: 'Paid to individual / HUF only. Part of JDA where landowner gets consideration.' },
   { sec: '194J(a)', cat: 'Resident',    desc: 'Fees for technical services / royalty for software sale/distribution', threshold: '₹30,000',                         indRate: '2%',          othRate: '2%',        notes: 'Reduced rate of 2% for technical services (not professional). Software royalty: 2%.' },
   { sec: '194J(b)', cat: 'Resident',    desc: 'Professional services fees / royalties / non-compete fees / director remuneration', threshold: '₹30,000',           indRate: '10%',         othRate: '10%',       notes: 'Applies to lawyers, doctors, architects, CAs, etc. Also directors\' non-salary remuneration.' },
@@ -35,9 +35,11 @@ const TDS = [
   { sec: '194M',   cat: 'Resident',     desc: 'Professional/technical or contractor payments by individual/HUF (not audit-liable)', threshold: '₹50,00,000 in FY', indRate: '5%',         othRate: '—',         notes: 'Only for individual/HUF deductors not subject to tax audit. Sec 194C/194J don\'t apply then.' },
   { sec: '194N',   cat: 'Any',          desc: 'Cash withdrawal from bank / post office / co-op bank',                threshold: '₹1 Cr (ITR filer); ₹20 lakh (non-filer)', indRate: '2%/5%', othRate: '2%/5%',  notes: '2% for ITR filers (on excess over ₹1 Cr); 5% for non-filers (on excess over ₹20 lakh).' },
   { sec: '194O',   cat: 'Resident',     desc: 'Payments to e-commerce participants through digital platform',        threshold: '₹5,00,000 (individual/HUF only)',  indRate: '1%',          othRate: '1%',        notes: 'E-commerce operator deducts. Nil threshold for companies/firms.' },
+  { sec: '194P',   cat: 'Resident',     desc: 'TDS by specified bank for senior citizens aged 75+ years (ITR exemption cases)', threshold: 'Income above basic exemption limit', indRate: 'Slab rate', othRate: '—',        notes: 'Finance Act 2021. Specified senior citizen (75+) with only pension + interest income from the same bank — bank computes tax and deducts TDS; such person need not file ITR.' },
   { sec: '194Q',   cat: 'Resident',     desc: 'Purchase of goods (buyer with turnover > ₹10 Cr deducts)',           threshold: '₹50,00,000 per seller per FY',     indRate: '0.1%',        othRate: '0.1%',      notes: 'Not applicable if TCS u/s 206C(1H) or TDS u/s 194O applies to the same transaction.' },
   { sec: '194R',   cat: 'Resident',     desc: 'Benefit or perquisite arising from business or profession',          threshold: '₹20,000 per recipient per FY',     indRate: '10%',         othRate: '10%',       notes: 'If benefit is in kind, payer must bear the TDS or ensure deductee pays it.' },
   { sec: '194S',   cat: 'Any',          desc: 'Payment for Virtual Digital Assets (crypto, NFTs, etc.)',             threshold: '₹10,000 (specified persons); ₹50,000 (others)', indRate: '1%', othRate: '1%',  notes: '"Specified persons" = those with turnover > ₹1 Cr (business) or ₹50L (profession).' },
+  { sec: '194T',   cat: 'Resident',     desc: 'Payments by partnership firm / LLP to partners (salary, remuneration, interest, bonus, commission)', threshold: '₹20,000 per year', indRate: '10%', othRate: '10%', notes: 'NEW — Finance Act 2025, effective 1 April 2025. Applies to all amounts paid/credited to a partner. PAN mandatory; 20% if PAN not furnished (Sec 206AA).' },
   { sec: '195',    cat: 'Non-Resident', desc: 'All payments / remittances to non-residents (various income types)',  threshold: 'Nil (if income is chargeable to tax)', indRate: '30%+',      othRate: '40%+',      notes: 'Rate varies by income type. DTAA may provide lower rate with Form 10F/Tax Residency Certificate.' },
   { sec: '196A',   cat: 'Non-Resident', desc: 'Income from units of mutual fund / UTI to non-resident',             threshold: 'Nil',                              indRate: '20%',         othRate: '20%',       notes: 'Plus surcharge and cess.' },
   { sec: '196B',   cat: 'Non-Resident', desc: 'Income (incl. LTCG) from units of offshore funds',                   threshold: 'Nil',                              indRate: '10%',         othRate: '10%',       notes: 'Plus surcharge and cess.' },
@@ -75,7 +77,7 @@ export default function Page() {
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
           <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#90CAF9', fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(144,202,249,.25)', borderRadius: 20 }}>
-            Finance Act 2025 · FY 2026-27
+            Finance Act 2025 · FY 2025-26 / AY 2026-27
           </div>
           <h1 className="font-display" style={{ fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
             TDS Rate Chart
@@ -90,7 +92,7 @@ export default function Page() {
       <section style={{ background: '#fff', padding: '52px 40px 0' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
-            TDS Rate Chart FY 2026-27 — All Sections 192 to 196D
+            TDS Rate Chart FY 2025-26 — All Sections 192 to 196D
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
             <div>
@@ -103,7 +105,7 @@ export default function Page() {
             </div>
             <div>
               <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
-                This TDS rate chart covers all major sections from Section 192 to Section 196D for FY 2026-27. Key features include separate columns for Individual/HUF rates versus Company/Other rates, threshold limits above which TDS becomes mandatory, and practical notes on critical rules — including the higher 20% rate under Section 206AA when the deductee's PAN is not furnished, the Form 15G/15H submission process for nil TDS in eligible cases, and the option to obtain a lower deduction certificate from the Assessing Officer under Section 197.
+                This TDS rate chart covers all major sections from Section 192 to Section 196D for FY 2025-26 (AY 2026-27). Key features include separate columns for Individual/HUF rates versus Company/Other rates, threshold limits above which TDS becomes mandatory, and practical notes on critical rules — including the higher 20% rate under Section 206AA when the deductee's PAN is not furnished, the Form 15G/15H submission process for nil TDS in eligible cases, and the option to obtain a lower deduction certificate from the Assessing Officer under Section 197.
               </p>
               <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
                 For cross-border payments to non-residents under Section 195, the domestic TDS rate is the starting point — but applicable DTAA treaty rates can reduce this significantly, provided the non-resident holds a Tax Residency Certificate and files Form 10F. Use this chart alongside our DTAA Rate Finder for a complete picture of non-resident withholding obligations. Built by our Ex-Big 4 CA team, searchable and filterable by section, payee type, or keyword.
@@ -175,6 +177,7 @@ export default function Page() {
               ['Higher Rate — No PAN', 'If deductee does not furnish PAN, TDS is deducted at the higher of: (a) prescribed rate, or (b) 20% (Sec 206AA).'],
               ['Lower Deduction Certificate', 'Deductees can apply to AO for a certificate allowing lower/nil TDS deduction under Sec 197 of the Income Tax Act.'],
               ['Form 15G / 15H', 'Individuals/HUFs can submit Form 15G (below 60) or Form 15H (senior citizens) for nil TDS if income is below taxable limit.'],
+              ['Finance Act 2025 Key Changes', 'New Sec 194T: TDS @ 10% on firm/LLP payments to partners (salary, interest, bonus) above ₹20,000. Sec 194A senior citizen threshold raised to ₹1,00,000. Sec 194-IB rate reduced to 2%. Sec 194P codified for senior citizens aged 75+.'],
             ].map(([title, text]) => (
               <div key={title} style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 20px' }}>
                 <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 7 }}>{title}</div>

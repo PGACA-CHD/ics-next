@@ -42,26 +42,33 @@ function slabTax(income, slabs) {
 }
 
 function computeIncomeTax(taxableIncome, regime, resident, employeePF) {
-  let deductions = 0;
-  let stdDed = 0;
-
   if (regime === 'new') {
-    stdDed = 75000;
+    const stdDed = 75000;
     const taxable = Math.max(0, taxableIncome - stdDed);
-    let base = slabTax(taxable, NEW_SLABS);
-    // 87A rebate: NIL if taxable ≤ ₹12L
-    const rebate = taxable <= 1200000 ? Math.min(base, 60000) : 0;
-    const afterRebate = Math.max(0, base - rebate);
-    return afterRebate * 1.04; // +4% cess
+    const base = slabTax(taxable, NEW_SLABS);
+    // 87A rebate + marginal relief
+    let rebate = 0;
+    if (taxable <= 1200000) {
+      rebate = Math.min(base, 60000);
+    } else {
+      const excess = taxable - 1200000;
+      if (base > excess) rebate = base - excess; // marginal relief
+    }
+    return Math.max(0, base - rebate) * 1.04; // +4% cess
   } else {
-    stdDed = 50000;
+    const stdDed = 50000;
     const pf80C = Math.min(employeePF, 150000);
-    deductions = pf80C;
-    const taxable = Math.max(0, taxableIncome - stdDed - deductions);
-    let base = slabTax(taxable, OLD_SLABS);
-    const rebate = taxable <= 500000 ? Math.min(base, 12500) : 0;
-    const afterRebate = Math.max(0, base - rebate);
-    return afterRebate * 1.04;
+    const taxable = Math.max(0, taxableIncome - stdDed - pf80C);
+    const base = slabTax(taxable, OLD_SLABS);
+    // 87A rebate + marginal relief
+    let rebate = 0;
+    if (taxable <= 500000) {
+      rebate = Math.min(base, 12500);
+    } else {
+      const excess = taxable - 500000;
+      if (base > excess) rebate = base - excess; // marginal relief
+    }
+    return Math.max(0, base - rebate) * 1.04;
   }
 }
 
@@ -374,15 +381,35 @@ function PayrollResult({ result, regime }) {
             </tr>
           </thead>
           <tbody>
+            {/* ── Section A: Gross Salary components ───────────────────────── */}
+            <tr>
+              <td colSpan={3} style={{ padding: '6px 14px', fontSize: 10.5, fontWeight: 700, color: T.lt, background: '#F8FAF9', textTransform: 'uppercase', letterSpacing: 0.9, borderBottom: `1px solid ${T.bdr}` }}>
+                Gross Salary Components
+              </td>
+            </tr>
             {tableRow('Basic Salary', basicAnnual)}
             {tableRow('HRA (House Rent Allowance)', hraAnnual)}
-            {tableRow('Special Allowance', Math.max(specialAllowance, 0), 'CTC − Basic − HRA − Employer PF − Gratuity')}
-            {tableRow('Employer PF', employerPF, '12% of Basic, max ₹21,600/yr')}
-            {tableRow('Gratuity (employer)', gratuity, '4.81% of Basic')}
-            <tr style={{ background: '#F5F9F7', borderTop: `2px solid ${T.f}` }}>
-              <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.ch }}>Gross Salary</td>
+            {tableRow('Special Allowance', Math.max(specialAllowance, 0), 'Balancing figure: Gross − Basic − HRA')}
+            <tr style={{ background: '#EDF6F0', borderTop: `1.5px solid ${T.f}` }}>
+              <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.f }}>Gross Salary</td>
               <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.f, textAlign: 'right' }}>{fmt(grossAnnual)}</td>
               <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.f, textAlign: 'right' }}>{fmt(grossMonthly)}</td>
+            </tr>
+
+            {/* ── Section B: Employer statutory contributions (above gross) ─── */}
+            <tr>
+              <td colSpan={3} style={{ padding: '6px 14px', fontSize: 10.5, fontWeight: 700, color: T.lt, background: '#F8FAF9', textTransform: 'uppercase', letterSpacing: 0.9, borderBottom: `1px solid ${T.bdr}` }}>
+                Employer Contributions (part of CTC — not part of Gross Salary)
+              </td>
+            </tr>
+            {tableRow('Employer PF', employerPF, '12% of Basic, max ₹21,600/yr — paid to EPFO by employer')}
+            {tableRow('Gratuity (employer provision)', gratuity, '4.81% of Basic — actuarial provision, paid on exit after 5 yrs')}
+
+            {/* ── CTC Total ─────────────────────────────────────────────────── */}
+            <tr style={{ background: '#F5F9F7', borderTop: `2px solid ${T.ch}` }}>
+              <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.ch }}>Total Annual CTC</td>
+              <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.ch, textAlign: 'right' }}>{fmt(annualCTC)}</td>
+              <td style={{ padding: '10px 14px', fontSize: 13.5, fontWeight: 700, color: T.ch, textAlign: 'right' }}>{fmt(annualCTC / 12)}</td>
             </tr>
           </tbody>
         </table>

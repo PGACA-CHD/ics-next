@@ -134,10 +134,35 @@ export default function Page() {
 
       const { total: baseTax, rows } = slabTax(taxable, slabs);
 
+      // ── Rebate u/s 87A with Marginal Relief ─────────────────────────────
+      // Marginal relief ensures tax payable never exceeds the amount by
+      // which income exceeds the 87A threshold. Without it, crossing ₹12L
+      // by ₹1 would jump tax from ₹0 to ~₹61,500 — which is absurd.
       let rebate = 0;
+      let marginalReliefApplied = false;
       if (resident) {
-        if (regime === 'new' && taxable <= 1200000) rebate = Math.min(baseTax, 60000);
-        else if (regime === 'old' && taxable <= 500000) rebate = Math.min(baseTax, 12500);
+        if (regime === 'new') {
+          if (taxable <= 1200000) {
+            rebate = Math.min(baseTax, 60000);          // full 87A rebate
+          } else {
+            // Marginal relief: tax payable = min(baseTax, taxable − 12,00,000)
+            const excess = taxable - 1200000;
+            if (baseTax > excess) {
+              rebate = baseTax - excess;
+              marginalReliefApplied = true;
+            }
+          }
+        } else if (regime === 'old') {
+          if (taxable <= 500000) {
+            rebate = Math.min(baseTax, 12500);
+          } else {
+            const excess = taxable - 500000;
+            if (baseTax > excess) {
+              rebate = baseTax - excess;
+              marginalReliefApplied = true;
+            }
+          }
+        }
       }
 
       const afterRebate = Math.max(0, baseTax - rebate);
@@ -148,7 +173,7 @@ export default function Page() {
 
       res = {
         type: 'individual', gross, stdDed, addlDed, taxable, rows, baseTax,
-        rebate, afterRebate, srchRate, srch, cess, total,
+        rebate, afterRebate, marginalReliefApplied, srchRate, srch, cess, total,
         effRate: gross > 0 ? total / gross : 0,
       };
 
@@ -423,8 +448,8 @@ export default function Page() {
                 <div style={{ fontSize: 12, fontWeight: 700, color: T.ch, marginBottom: 12 }}>Quick Reference</div>
                 <div style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.7 }}>
                   <div style={{ marginBottom: 6 }}><strong>Health &amp; Education Cess:</strong> 4% on (tax + surcharge)</div>
-                  <div style={{ marginBottom: 6 }}><strong>New Regime 87A:</strong> NIL tax for taxable income ≤ ₹12L</div>
-                  <div style={{ marginBottom: 6 }}><strong>Old Regime 87A:</strong> Up to ₹12,500 rebate for income ≤ ₹5L</div>
+                  <div style={{ marginBottom: 6 }}><strong>New Regime 87A:</strong> NIL tax for taxable income ≤ ₹12L; marginal relief applies for income just above ₹12L</div>
+                  <div style={{ marginBottom: 6 }}><strong>Old Regime 87A:</strong> Up to ₹12,500 rebate for income ≤ ₹5L; marginal relief applies for income just above ₹5L</div>
                   <div style={{ marginBottom: 6 }}><strong>MAT (Companies):</strong> 15% of book profit — may apply if regular tax is lower</div>
                   <div><strong>AMT (LLP):</strong> 18.5% of adjusted total income — may apply if regular tax is lower</div>
                 </div>
@@ -434,7 +459,7 @@ export default function Page() {
 
           {/* Disclaimer */}
           <div style={{ marginTop: 40, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 24px', fontSize: 12.5, color: T.mid, lineHeight: 1.65 }}>
-            <strong style={{ color: T.ch }}>Disclaimer:</strong> This calculator uses Finance Act 2025 rates (FY 2025-26 / AY 2026-27). Rates for FY 2026-27 should be verified against Finance Act 2026. Marginal relief on surcharge is not computed. MAT/AMT is not computed (requires book profit/adjusted income figures). This tool is for indicative purposes only — consult a qualified CA for professional advice.
+            <strong style={{ color: T.ch }}>Disclaimer:</strong> This calculator uses Finance Act 2025 rates (FY 2025-26 / AY 2026-27). Rates for FY 2026-27 should be verified against Finance Act 2026. Rebate u/s 87A with marginal relief is computed. Marginal relief on surcharge is not computed. MAT/AMT is not computed (requires book profit/adjusted income figures). This tool is for indicative purposes only — consult a qualified CA for professional advice.
           </div>
         </div>
       </section>
@@ -506,15 +531,22 @@ function ResultCard({ result }) {
           </div>
         )}
 
-        {/* Rebate */}
+        {/* Rebate / Marginal Relief */}
         {result.rebate > 0 && (
-          <div style={rowStyle}>
-            <span style={{ color: '#2E7D32' }}>Less: Rebate u/s 87A</span>
-            <span style={{ color: '#2E7D32' }}>({fmt(result.rebate)})</span>
-          </div>
-        )}
-        {result.afterRebate !== undefined && result.rebate > 0 && (
-          <div style={rowStyle}><span style={{ fontWeight: 600, color: T.ch }}>Tax after Rebate</span><span style={{ fontWeight: 600, color: T.ch }}>{fmt(result.afterRebate)}</span></div>
+          <>
+            <div style={rowStyle}>
+              <span style={{ color: '#2E7D32' }}>
+                Less: {result.marginalReliefApplied ? 'Marginal Relief u/s 87A' : 'Rebate u/s 87A'}
+              </span>
+              <span style={{ color: '#2E7D32' }}>({fmt(result.rebate)})</span>
+            </div>
+            {result.marginalReliefApplied && (
+              <div style={{ fontSize: 11.5, color: '#4CAF50', padding: '4px 0 10px', lineHeight: 1.65 }}>
+                ℹ️ Marginal relief u/s 87A: your tax is capped at the amount by which your income exceeds the ₹{result.taxable > 1200000 ? '12,00,000' : '5,00,000'} rebate threshold, preventing a tax cliff at the boundary.
+              </div>
+            )}
+            <div style={rowStyle}><span style={{ fontWeight: 600, color: T.ch }}>Tax after Rebate / Relief</span><span style={{ fontWeight: 600, color: T.ch }}>{fmt(result.afterRebate)}</span></div>
+          </>
         )}
 
         {/* Surcharge */}
