@@ -6,8 +6,8 @@ import { T } from '@/lib/config';
 // ─── TDS DATA — IT Act 1961 section → IT Act 2025 new section ───────────────
 // Rates and thresholds updated for FY 2026-27 (IT Act 2025 in force from 1 Apr 2026)
 // newSec = counterpart section under the Income Tax Act 2025
-// All domestic 194-series → §393(1); winnings/games → §393(3);
-// foreign/NR payments → §393(2); salary → §392
+// All domestic 194-series → Sec. 393(1); winnings/games → Sec. 393(3);
+// foreign/NR payments → Sec. 393(2); salary → Sec. 392
 
 const TDS = [
   // ── SALARY ────────────────────────────────────────────────────────────────
@@ -165,7 +165,7 @@ export default function Page() {
           <div style={{ display: 'flex', gap: 14, marginBottom: 28, flexWrap: 'wrap', alignItems: 'center' }}>
             <div style={{ position: 'relative', flexGrow: 1, minWidth: 260 }}>
               <span style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', fontSize: 16, color: T.lt }}>🔍</span>
-              <input value={q} onChange={e => setQ(e.target.value)} placeholder="Search by old section, new section (§393), description or keyword…"
+              <input value={q} onChange={e => setQ(e.target.value)} placeholder="Search by old section (194A), new section (Sec. 393), description or keyword…"
                 style={{ width: '100%', padding: '10px 14px 10px 38px', fontSize: 14, border: `1.5px solid ${T.bdr}`, borderRadius: 8, background: '#fff', color: T.ch, fontFamily: 'inherit' }} />
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -221,7 +221,6 @@ export default function Page() {
               ['Higher Rate — No PAN', 'If the deductee does not furnish a PAN, TDS is at the higher of: (a) prescribed rate, or (b) 20% under Sec. 397(2) of IT Act 2025 (old: Sec 206AA of IT Act 1961).'],
               ['Lower Deduction Certificate', 'Deductees can apply to the Assessing Officer for a certificate permitting lower/nil TDS deduction under Sec. 351 of IT Act 2025 (old: Sec 197 of IT Act 1961).'],
               ['Form 15G / 15H', 'Individuals/HUFs can submit Form 15G (below 60 yrs) or Form 15H (senior citizens) to the deductor for nil TDS where income is below the basic taxable limit.'],
-              ['IT Act 2025 Rate Cuts (FY 2026-27)', 'Sections 194D, 194G, 194H: rate cut from 5% to 2%. Section 194DA: 5% → 2%. Section 194O: 1% → 0.1%. Section 194J thresholds raised to ₹50,000. New Sec 194T: TDS on firm-to-partner payments.'],
             ].map(([title, text]) => (
               <div key={title} style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 20px' }}>
                 <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 7 }}>{title}</div>
@@ -231,7 +230,7 @@ export default function Page() {
           </div>
 
           <div style={{ marginTop: 24, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '16px 22px', fontSize: 12.5, color: T.mid }}>
-            <strong style={{ color: T.ch }}>Disclaimer:</strong> TDS rates and section references shown are for FY 2026-27 (AY 2027-28) under the Income Tax Act 2025, which came into force from 1 April 2026. New section numbers (Sec. 392, § 393, § 394) replace the old 192–196D numbering of the IT Act 1961. This table is for reference only. Consult a qualified CA for TDS compliance advice.
+            <strong style={{ color: T.ch }}>Disclaimer:</strong> TDS rates and section references shown are for FY 2026-27 (AY 2027-28) under the Income Tax Act 2025, which came into force from 1 April 2026. New section numbers (Sec. 392, Sec. 393, Sec. 394) replace the old 192–196D numbering of the IT Act 1961. This table is for reference only. Consult a qualified CA for TDS compliance advice.
           </div>
         </div>
       </section>
