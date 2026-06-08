@@ -44,6 +44,7 @@ const STATIC_ROUTES = [
   { url: '/tools/payroll-calculator',                priority: 0.75, changeFrequency: 'monthly' },
   { url: '/tools/capital-gains-calculator',          priority: 0.75, changeFrequency: 'monthly' },
   { url: '/tools/tds-rates',                         priority: 0.75, changeFrequency: 'monthly' },
+  { url: '/tools/tcs-rates',                         priority: 0.75, changeFrequency: 'monthly' },
   { url: '/tools/advance-tax-calculator',            priority: 0.7,  changeFrequency: 'monthly' },
   { url: '/tools/dtaa-rate-finder',                  priority: 0.7,  changeFrequency: 'monthly' },
   { url: '/tools/fdi-sector-checker',                priority: 0.7,  changeFrequency: 'monthly' },
