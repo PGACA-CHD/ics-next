@@ -55,6 +55,11 @@ const structured = {
     { '@type': 'WebPage', name: 'Register a Company in India from USA', url: 'https://www.indiacompanysetup.com/company-registration/from-usa', description: 'Complete guide for US-based NRIs and foreign nationals to register a company in India online — no India visit required.' },
     { '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
     { '@type': 'HowTo', name: 'How to Register a Company in India from the USA', step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.description })) },
+    { '@type': 'BreadcrumbList', 'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.indiacompanysetup.com' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Company Registration', 'item': 'https://www.indiacompanysetup.com/setup' },
+      { '@type': 'ListItem', 'position': 3, 'name': 'From USA', 'item': 'https://www.indiacompanysetup.com/company-registration/from-usa' },
+    ] },
   ],
 };
 
