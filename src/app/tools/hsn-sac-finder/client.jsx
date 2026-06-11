@@ -212,7 +212,7 @@ export default function Page() {
   return (
     <div>
       {/* HERO */}
-      <section style={{ background: '#6B3A2E', padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 80% at 90% 50%, rgba(232,144,10,.09) 0%, transparent 55%)' }} />
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
@@ -331,7 +331,7 @@ export default function Page() {
                     <tbody>
                       {results.map((r, i) => (
                         <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                          <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace' }}>{r.code}</td>
+                          <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace' }}>{r.code}</td>
                           <td style={tdStyle}>{r.desc || r.description}</td>
                           {mode === 'hsn' && <td style={{ ...tdStyle, color: T.mid, fontSize: 12.5 }}>{r.chapter || r.code?.slice(0, 2)}</td>}
                           {r.gst && <td style={{ ...tdStyle, fontWeight: 600, color: T.f }}>{r.gst}</td>}
@@ -365,7 +365,7 @@ export default function Page() {
                         {HSN_CHAPTERS.map((c, i) => (
                           <tr key={c.ch} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5', cursor: 'pointer' }}
                             onClick={() => setQ(c.ch)}>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace' }}>
                               {c.ch}
                               {codeLevelBadge(c.ch)}
                             </td>
@@ -397,7 +397,7 @@ export default function Page() {
                       <tbody>
                         {hsnHeadingFilter.slice(0, 200).map((c, i) => (
                           <tr key={`${c.code}-${i}`} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace', whiteSpace: 'nowrap' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace', whiteSpace: 'nowrap' }}>
                               {c.code}
                               {codeLevelBadge(c.code)}
                             </td>
@@ -438,7 +438,7 @@ export default function Page() {
                   <tbody>
                     {sacFilter.map((c, i) => (
                       <tr key={c.code} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                        <td style={{ ...tdStyle, fontWeight: 700, color: '#6B3A2E', fontSize: 14, fontFamily: 'monospace' }}>{c.code}</td>
+                        <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace' }}>{c.code}</td>
                         <td style={tdStyle}>{c.desc}</td>
                         <td style={{ ...tdStyle, fontSize: 12.5, color: T.f, fontWeight: 600 }}>{c.gst}</td>
                       </tr>

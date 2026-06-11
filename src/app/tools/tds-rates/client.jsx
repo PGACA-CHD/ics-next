@@ -102,7 +102,7 @@ export default function Page() {
 
   const newSecCell = (newSec, tableRef) => (
     <div>
-      <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 8, background: '#E8ECF5', color: '#2C3E6B', fontFamily: 'monospace', letterSpacing: 0.2, whiteSpace: 'nowrap', display: 'inline-block' }}>{newSec}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 8, background: '#E8F4EA', color: '#1B5E35', fontFamily: 'monospace', letterSpacing: 0.2, whiteSpace: 'nowrap', display: 'inline-block' }}>{newSec}</span>
       {tableRef && (
         <div style={{ fontSize: 10.5, color: T.lt, marginTop: 5, fontFamily: 'monospace', lineHeight: 1.4 }}>{tableRef}</div>
       )}
@@ -120,11 +120,11 @@ export default function Page() {
   return (
     <div>
       {/* HERO */}
-      <section style={{ background: '#2C3E6B', padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
-          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#90CAF9', fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(144,202,249,.25)', borderRadius: 20 }}>
+          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: T.sl, fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(245,168,40,.25)', borderRadius: 20 }}>
             IT Act 2025 · FY 2026-27 / AY 2027-28
           </div>
           <h1 className="font-display" style={{ fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
@@ -168,12 +168,12 @@ export default function Page() {
         <div style={{ maxWidth: 1500, margin: '0 auto' }}>
 
           {/* IT Act 2025 section mapping quick-reference banner */}
-          <div style={{ marginBottom: 24, background: '#EEF2FA', border: '1px solid #C5D0E8', borderRadius: 12, padding: '14px 20px', display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'center' }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: '#2C3E6B' }}>IT Act 2025 Section Map:</span>
+          <div style={{ marginBottom: 24, background: '#EAF4EE', border: '1px solid #B8D9C4', borderRadius: 12, padding: '14px 20px', display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'center' }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: '#1B5E35' }}>IT Act 2025 Section Map:</span>
             {[['Sec. 392', 'Salary (old: 192)'], ['Sec. 393(1)', 'Domestic payments (old: 193–194T)'], ['Sec. 393(2)', 'Foreign / NR payments (old: 194E, 195–196D)'], ['Sec. 393(3)', 'Winnings, lottery, cash, partner (old: 194B–194T selected)'], ['Sec. 397(2)', 'Higher rate — no PAN (old: 206AA)']].map(([sec, desc]) => (
               <div key={sec} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: '#2C3E6B', color: '#fff', fontFamily: 'monospace' }}>{sec}</span>
-                <span style={{ fontSize: 11.5, color: '#3A4A6B' }}>{desc}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: T.f, color: '#fff', fontFamily: 'monospace' }}>{sec}</span>
+                <span style={{ fontSize: 11.5, color: '#1B5E35' }}>{desc}</span>
               </div>
             ))}
           </div>
@@ -189,7 +189,7 @@ export default function Page() {
               {CATS.map(c => (
                 <button key={c} onClick={() => setCat(c)}
                   style={{ padding: '8px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
-                    background: cat === c ? '#2C3E6B' : T.stone, color: cat === c ? '#fff' : T.mid, transition: 'all .15s' }}>
+                    background: cat === c ? T.f : T.stone, color: cat === c ? '#fff' : T.mid, transition: 'all .15s' }}>
                   {c}
                 </button>
               ))}
@@ -218,14 +218,14 @@ export default function Page() {
                   <tr><td colSpan={9} style={{ ...tdStyle, textAlign: 'center', padding: 40, color: T.lt }}>No matching sections found.</td></tr>
                 ) : filtered.map((row, i) => (
                   <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#2C3E6B', fontSize: 13.5 }}>Sec {row.sec}</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 13.5 }}>Sec {row.sec}</td>
                     <td style={{ ...tdStyle }}>{newSecCell(row.newSec, row.tableRef)}</td>
                     <td style={{ ...tdStyle }}>{challanCell(row.challan)}</td>
                     <td style={tdStyle}>{catBadge(row.cat)}</td>
                     <td style={{ ...tdStyle, maxWidth: 240 }}>{row.desc}</td>
                     <td style={{ ...tdStyle, fontSize: 12.5, color: T.mid }}>{row.threshold}</td>
                     <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14 }}>{row.indRate}</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: row.othRate === '—' ? T.lt : '#2C3E6B', fontSize: 14 }}>{row.othRate}</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: row.othRate === '—' ? T.lt : T.f, fontSize: 14 }}>{row.othRate}</td>
                     <td style={{ ...tdStyle, fontSize: 12, color: T.mid, lineHeight: 1.55 }}>{row.notes}</td>
                   </tr>
                 ))}
