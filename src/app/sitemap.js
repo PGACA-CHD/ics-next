@@ -16,6 +16,7 @@ const STATIC_ROUTES = [
   { url: '/knowledge-hub',                           priority: 0.8,  changeFrequency: 'weekly'  },
   { url: '/about',                                   priority: 0.7,  changeFrequency: 'monthly' },
   { url: '/contact',                                 priority: 0.7,  changeFrequency: 'monthly' },
+  { url: '/pricing',                                 priority: 0.9,  changeFrequency: 'monthly' },
   { url: '/industries',                              priority: 0.7,  changeFrequency: 'monthly' },
   // High-value SEO pages
   { url: '/foreign-company-registration-india',      priority: 0.9,  changeFrequency: 'monthly' },

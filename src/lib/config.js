@@ -56,6 +56,7 @@ export const NAV_LINKS = [
   { label: "Int'l Tax",     href: "/international-tax" },
   { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Tools",         href: "/tools" },
+  { label: "Pricing",       href: "/pricing" },
   { label: "About",         href: "/about" },
   { label: "Contact",       href: "/contact" },
 ];
@@ -113,6 +114,7 @@ export const FOOTER_COLS = [
     title: "Company",
     links: [
       { label: "Home",                        href: "/" },
+      { label: "Pricing",                     href: "/pricing" },
       { label: "About Us",                    href: "/about" },
       { label: "Industries",                  href: "/industries" },
       { label: "Knowledge Hub",               href: "/knowledge-hub" },
