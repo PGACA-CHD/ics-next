@@ -1,6 +1,6 @@
-# India Company Setup — PGA & Co.
+# India Company Setup
 
-> India Company Setup (indiacompanysetup.com) is a professional advisory platform by PGA & Co., Chartered Accountants, specialising in foreign company registration in India, FDI compliance, international taxation, and post-incorporation regulatory support. We help businesses from the USA, UK, UAE, Singapore, Canada, and Australia set up legal entities in India.
+> India Company Setup (indiacompanysetup.com) is a venture of Divsam Consultants LLP with knoweldge partner namely PGA & Co., Chartered Accountants, specialising in foreign company registration in India, FDI compliance, international taxation, and post-incorporation regulatory support. We help businesses from the USA, UK, UAE, Singapore, Canada, and Australia set up legal entities in India.
 
 ## Core Services
 
@@ -48,5 +48,5 @@
 
 ## About
 
-- [About Us](https://www.indiacompanysetup.com/about): PGA & Co., Chartered Accountants — credentials, team, and firm background.
+- [About Us](https://www.indiacompanysetup.com/about): Divsam Consultants LLP — credentials, team, and firm background.
 - [Contact](https://www.indiacompanysetup.com/contact): Get in touch for a free consultation on India company setup.
