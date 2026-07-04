@@ -77,7 +77,7 @@ export default function Nav() {
                       letterSpacing: 0.9,
                       textTransform: 'uppercase',
                       paddingTop:    8,
-                      fontFamily:    "'DM Sans', sans-serif",
+                      fontFamily:    "var(--font-cardo),'Cardo',Georgia,serif",
                     }}
                   >
                     {child.groupLabel}
@@ -103,7 +103,7 @@ export default function Nav() {
                 color:          childActive ? T.f : T.mid,
                 textDecoration: 'none',
                 transition:     'background .12s, color .12s',
-                fontFamily:     "'DM Sans', sans-serif",
+                fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = T.stone;
@@ -142,7 +142,7 @@ export default function Nav() {
           backdropFilter: 'blur(12px)',
           borderBottom:   `1px solid ${scrolled ? T.bdr : 'transparent'}`,
           transition:     'background .25s, border-color .25s',
-          fontFamily:     "'DM Sans', sans-serif",
+          fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
         }}
       >
         {/* ── Logo ── */}
@@ -185,7 +185,7 @@ export default function Nav() {
                       borderRadius:   6,
                       transition:     'color .18s',
                       borderBottom:   active ? `2px solid ${T.f}` : '2px solid transparent',
-                      fontFamily:     "'DM Sans', sans-serif",
+                      fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
                     }}
                   >
                     {link.label}
@@ -227,7 +227,7 @@ export default function Nav() {
                   borderRadius:   6,
                   transition:     'color .18s',
                   borderBottom:   active ? `2px solid ${T.f}` : '2px solid transparent',
-                  fontFamily:     "'DM Sans', sans-serif",
+                  fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
                 }}
               >
                 {link.label}
@@ -246,7 +246,7 @@ export default function Nav() {
               fontWeight:     500,
               color:          T.mid,
               textDecoration: 'none',
-              fontFamily:     "'DM Sans', sans-serif",
+              fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
             }}
           >
             {PHONE}
@@ -263,7 +263,7 @@ export default function Nav() {
               fontSize:       13.5,
               fontWeight:     600,
               textDecoration: 'none',
-              fontFamily:     "'DM Sans', sans-serif",
+              fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
               whiteSpace:     'nowrap',
             }}
           >
@@ -357,7 +357,7 @@ export default function Nav() {
                         fontSize:    26,
                         fontWeight:  active ? 600 : 400,
                         color:       active ? T.sl : 'rgba(255,255,255,.88)',
-                        fontFamily:  "'Cormorant Garamond', serif",
+                        fontFamily:  "var(--font-cormorant),'Cormorant Garamond',serif",
                       }}
                     >
                       {link.label}
@@ -399,7 +399,7 @@ export default function Nav() {
                                     letterSpacing: 0.9,
                                     textTransform: 'uppercase',
                                     padding:       '10px 0 4px',
-                                    fontFamily:    "'DM Sans', sans-serif",
+                                    fontFamily:    "var(--font-cardo),'Cardo',Georgia,serif",
                                   }}
                                 >
                                   {child.groupLabel}
@@ -424,7 +424,7 @@ export default function Nav() {
                               color:          childActive ? T.sl : 'rgba(255,255,255,.75)',
                               textDecoration: 'none',
                               padding:        '9px 0',
-                              fontFamily:     "'Cormorant Garamond', serif",
+                              fontFamily:     "var(--font-cormorant),'Cormorant Garamond',serif",
                             }}
                             onClick={() => setMenuOpen(false)}
                           >
@@ -450,7 +450,7 @@ export default function Nav() {
                   textDecoration: 'none',
                   padding:        '12px 0',
                   borderBottom:   '1px solid rgba(255,255,255,.07)',
-                  fontFamily:     "'Cormorant Garamond', serif",
+                  fontFamily:     "var(--font-cormorant),'Cormorant Garamond',serif",
                   display:        'block',
                 }}
                 onClick={() => setMenuOpen(false)}
@@ -473,7 +473,7 @@ export default function Nav() {
               fontSize:       15,
               fontWeight:     600,
               textDecoration: 'none',
-              fontFamily:     "'DM Sans', sans-serif",
+              fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
               width:          'fit-content',
             }}
             onClick={() => setMenuOpen(false)}
@@ -486,7 +486,7 @@ export default function Nav() {
               marginTop:  32,
               fontSize:   12,
               color:      'rgba(255,255,255,.3)',
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
             }}
           >
             {PHONE} · info@indiacompanysetup.com

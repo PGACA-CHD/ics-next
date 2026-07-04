@@ -1,5 +1,5 @@
 import './globals.css';
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans, Poppins, Montserrat, Cardo } from 'next/font/google';
 
 const cormorant = Cormorant_Garamond({
     subsets: ['latin'],
@@ -15,6 +15,29 @@ const dmSans = DM_Sans({
     variable: '--font-dm-sans',
     display: 'swap',
 });
+
+const poppins = Poppins({
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '600', '700'],
+    variable: '--font-poppins',
+    display: 'swap',
+});
+
+const montserrat = Montserrat({
+    subsets: ['latin'],
+    weight: ['500', '600', '700', '800'],
+    variable: '--font-montserrat',
+    display: 'swap',
+});
+
+const cardo = Cardo({
+    subsets: ['latin'],
+    weight: ['400', '700'],
+    style: ['normal', 'italic'],
+    variable: '--font-cardo',
+    display: 'swap',
+});
+
 import { SITE_NAME, SITE_URL } from '@/lib/config';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
@@ -47,7 +70,7 @@ const GTM_ID = 'GT-WKRW9GQZ';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${poppins.variable} ${montserrat.variable} ${cardo.variable}`}>
       <head>
         {/* GTM dataLayer init */}
         <script dangerouslySetInnerHTML={{ __html: `

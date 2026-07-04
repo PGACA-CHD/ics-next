@@ -18,7 +18,7 @@ body {
 }
 
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-cardo), 'Cardo', Georgia, serif;
   background: #fafaf5;
   color: #17170f;
   overflow-x: hidden;
@@ -40,7 +40,12 @@ a {
 }
 
 .font-display {
-  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+}
+
+.font-number {
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-weight: 500;
 }
 
 /* Reveal animation */
@@ -105,7 +110,7 @@ a {
   gap: 7px;
   padding: 12px 24px;
   border-radius: 6px;
-  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 13.5px;
   font-weight: 600;
   letter-spacing: 0.2px;
@@ -585,6 +590,327 @@ textarea:focus {
     font-size: 11px !important;
     padding: 4px 12px !important;
   }
+}
+
+/* ─── Industries cards ────────────────────────────────────────────────────── */
+.ind-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+/* ─── Global reach wrapper ────────────────────────────────────────────────── */
+.gr-wrap {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  align-items: stretch;
+}
+.gr-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.gr-map {
+  overflow: hidden;
+  min-height: 320px;
+}
+.gr-map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.region-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+/* ─── Pricing grid ────────────────────────────────────────────────────────── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .ind-cards    { grid-template-columns: repeat(3, 1fr) !important; }
+  .gr-wrap      { grid-template-columns: 1fr !important; }
+  .gr-left      { border-right: none !important; border-bottom: 1px solid #ECE7E1 !important; }
+  .gr-map       { min-height: 260px !important; }
+  .region-pills { grid-template-columns: repeat(3, 1fr) !important; }
+  .pricing-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 768px) {
+  .ind-cards    { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
+  .ind-cards > div { padding: 20px 12px 18px !important; min-height: auto !important; }
+  .gr-left      { padding: 32px 24px !important; }
+  .gr-map       { min-height: 220px !important; }
+  .region-pills { grid-template-columns: repeat(2, 1fr) !important; }
+  .pricing-grid { grid-template-columns: 1fr !important; max-width: 480px; margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .ind-cards    { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+  .region-pills { grid-template-columns: 1fr 1fr !important; }
+  .pricing-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ─── Logo marquee ────────────────────────────────────────────────────────── */
+@keyframes logo-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes logo-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.logo-row-left {
+  animation: logo-left 55s linear infinite;
+}
+.logo-row-right {
+  animation: logo-right 55s linear infinite;
+}
+.logo-row-left:hover,
+.logo-row-right:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 600px) {
+  .logo-row-left,
+  .logo-row-right {
+    animation-duration: 35s;
+  }
+}
+
+/* ─── Process section ────────────────────────────────────────────────────── */
+#how-it-works .process-step-grid {
+  grid-template-columns: 72px 1fr;
+}
+@media (max-width: 600px) {
+  #how-it-works .process-step-grid {
+    grid-template-columns: 52px 1fr !important;
+  }
+}
+
+/* ─── Stats ribbon ───────────────────────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+.stat-cell {
+  padding-left: 28px;
+  padding-right: 28px;
+  border-left: 1px solid rgba(255,255,255,.10);
+}
+.stat-cell:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+.stat-cell:last-child {
+  padding-right: 0;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    row-gap: 32px !important;
+  }
+  .stat-cell {
+    padding: 0 16px !important;
+    border-left: 1px solid rgba(255,255,255,.10) !important;
+    border-top: none !important;
+  }
+  .stat-cell:nth-child(odd) {
+    padding-left: 0 !important;
+    border-left: none !important;
+  }
+  .stat-cell:nth-child(3),
+  .stat-cell:nth-child(4),
+  .stat-cell:nth-child(5) {
+    padding-top: 28px !important;
+    border-top: 1px solid rgba(255,255,255,.10) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ─── Hide amCharts watermark ────────────────────────────────────────────── */
+g[class*="amcharts-amlink"],
+a[href*="amcharts.com"],
+.amcharts-logo { display: none !important; }
+
+/* ─── Hero globe layout ──────────────────────────────────────────────────── */
+.hero-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hero-globe-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 20px;
+  padding: 22px;
+}
+.hero-globe-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 980px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .hero-right-col {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .hero-right-col { max-width: 100%; }
+  .hero-globe-card { padding: 16px; }
+}
+
+/* ─── What We Do section ─────────────────────────────────────────────────── */
+.wwd-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+.wwd-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+  .wwd-cards { grid-template-columns: 1fr !important; }
+  .wwd-strip { grid-template-columns: 1fr 1fr !important; }
+  .wwd-strip > div:nth-child(2n+1) { border-left: none !important; }
+  .wwd-strip > div:nth-child(3),
+  .wwd-strip > div:nth-child(4) { border-top: 1px solid #E0DDD4; }
+}
+
+@media (max-width: 600px) {
+  .wwd-cards { gap: 12px !important; }
+  .wwd-strip { grid-template-columns: 1fr !important; }
+  .wwd-strip > div { border-left: none !important; border-top: 1px solid #E0DDD4 !important; }
+  .wwd-strip > div:first-child { border-top: none !important; }
+}
+
+/* ─── Pricing tabs (pricing.jsx) ─────────────────────────────────────────── */
+.pt-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  justify-content: center;
+}
+.pt-tabs::-webkit-scrollbar { display: none; }
+.pt-tab-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+}
+.pt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .pt-grid { grid-template-columns: 1fr !important; }
+  .pt-card-popular { order: -1; }
+}
+@media (max-width: 640px) {
+  .pt-heading { font-size: 26px !important; }
+  .pt-tabs { justify-content: flex-start; }
+}
+
+/* ─── Why Us section ─────────────────────────────────────────────────────── */
+@keyframes row-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.whyus-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  border: 1px solid #E0DDD4;
+  overflow: hidden;
+}
+.whyus-row {
+  animation: row-in 0.4s ease both;
+}
+.whyus-cards {
+  display: none;
+}
+.whyus-bottom {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .whyus-table-wrap { display: none; }
+  .whyus-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  .whyus-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .whyus-bottom > div:last-child {
+    grid-column: 1 / -1;
+    justify-content: flex-start !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .whyus-cards { grid-template-columns: 1fr !important; }
+  .whyus-bottom { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* ─── Testimonial marquee ─────────────────────────────────────────────────── */
+@keyframes marquee-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+@keyframes marquee-down {
+  0%   { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+.animate-marquee-up {
+  animation: marquee-up 20s linear infinite;
+}
+.animate-marquee-down {
+  animation: marquee-down 20s linear infinite;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }
 
 /* ─── Tools pages ──────────────────────────────────────────────────────────── */
