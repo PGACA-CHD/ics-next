@@ -200,7 +200,7 @@ function HeroGlobe() {
   }, []);
 
   return (
-    <div ref={divRef} style={{ width:"100%", height:"420px", borderRadius:12, overflow:"hidden" }}/>
+    <div ref={divRef} style={{ width:"100%", height:"560px", borderRadius:12, overflow:"hidden" }}/>
   );
 }
 
@@ -481,10 +481,6 @@ export default function HomePage() {
         background: T.f, minHeight: "100vh", display: "flex",
         alignItems: "center", padding: "130px 56px 90px", position: "relative", overflow: "hidden",
       }}>
-        {/* Grid texture */}
-        <div style={{ position:"absolute", inset:0, pointerEvents:"none",
-          backgroundImage:`linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`,
-          backgroundSize:"64px 64px" }}/>
         {/* Warm glow */}
         <div style={{ position:"absolute", inset:0, pointerEvents:"none",
           background:`radial-gradient(ellipse 55% 70% at 105% 40%,rgba(232,144,10,.11) 0%,transparent 55%),
