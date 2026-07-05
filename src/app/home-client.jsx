@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import NewHeroSection from './NewHeroSection';
 import Link from 'next/link';
 import { T, CALENDLY_URL, PHONE, PHONE_RAW } from '@/lib/config';
 import { submitToZoho, trackConsultationRequest, trackGuideDownload, trackWhatsApp } from '@/lib/utils';
@@ -225,12 +226,12 @@ function ClockIcon({ size = 72 }) {
   const r = size / 2;
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <circle cx={r} cy={r} r={r - 3} fill="none" stroke="#C8D0C8" strokeWidth="1.5"/>
-      <circle cx={r} cy={r} r="2.5" fill="#17170F"/>
+      <circle cx={r} cy={r} r={r - 3} fill="none" stroke="#C8D0C8" strokeWidth="1.5" />
+      <circle cx={r} cy={r} r="2.5" fill="#17170F" />
       <line x1={r} y1={r} x2={r} y2={10} stroke="#17170F" strokeWidth="1.8" strokeLinecap="round"
-        transform={`rotate(${minDeg}, ${r}, ${r})`}/>
+        transform={`rotate(${minDeg}, ${r}, ${r})`} />
       <line x1={r} y1={r} x2={r} y2={8} stroke="#E8900A" strokeWidth="1" strokeLinecap="round"
-        transform={`rotate(${secDeg}, ${r}, ${r})`}/>
+        transform={`rotate(${secDeg}, ${r}, ${r})`} />
     </svg>
   );
 }
@@ -249,7 +250,7 @@ function useWindowWidth() {
 }
 
 function AudiencePathsSection({ T, ROUTES }) {
-  const [active, setActive]  = useState(0);
+  const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const frameRef = useRef(null);
   const startRef = useRef(null);
@@ -259,52 +260,52 @@ function AudiencePathsSection({ T, ROUTES }) {
 
   const SITUATIONS = [
     {
-      n:"01", tab:"Setting up a subsidiary",
-      headline:"Setting up an India subsidiary",
-      desc:"You're a CFO, legal counsel, or finance director at a foreign company that needs an India presence. You need the right structure, compliant FDI filings, and a team that handles the full picture — not just the paperwork.",
-      bullets:["WOS or Branch Office structure","FDI route & RBI compliance","Transfer pricing from day one","Full post-incorporation handover"],
-      stat:"2–3 wk", statLabel:"Typical time from structure sign-off to incorporation certificate.",
-      cta:"Foreign company guide", page:"seo_fcri",
+      n: "01", tab: "Setting up a subsidiary",
+      headline: "Setting up an India subsidiary",
+      desc: "You're a CFO, legal counsel, or finance director at a foreign company that needs an India presence. You need the right structure, compliant FDI filings, and a team that handles the full picture — not just the paperwork.",
+      bullets: ["WOS or Branch Office structure", "FDI route & RBI compliance", "Transfer pricing from day one", "Full post-incorporation handover"],
+      stat: "2–3 wk", statLabel: "Typical time from structure sign-off to incorporation certificate.",
+      cta: "Foreign company guide", page: "seo_fcri",
     },
     {
-      n:"02", tab:"Building from scratch",
-      headline:"Building a team in India",
-      desc:"You're setting up a Global Capability Centre — 10 to 200+ people. You need entity setup, payroll, ESOP structuring, cost-plus pricing, and a compliance retainer that scales as you hire.",
-      bullets:["End-to-end GCC advisory","Payroll & HR compliance","ESOP & incentive structuring","Ongoing compliance retainer"],
-      stat:"6 wk", statLabel:"Typical time from engagement to first hire onboarded.",
-      cta:"GCC advisory", page:"gcc",
+      n: "02", tab: "Building from scratch",
+      headline: "Building a team in India",
+      desc: "You're setting up a Global Capability Centre — 10 to 200+ people. You need entity setup, payroll, ESOP structuring, cost-plus pricing, and a compliance retainer that scales as you hire.",
+      bullets: ["End-to-end GCC advisory", "Payroll & HR compliance", "ESOP & incentive structuring", "Ongoing compliance retainer"],
+      stat: "6 wk", statLabel: "Typical time from engagement to first hire onboarded.",
+      cta: "GCC advisory", page: "gcc",
     },
     {
-      n:"03", tab:"Something isn't right",
-      headline:"Something isn't right",
-      desc:"Your India entity is live but the structure was set up quickly, the transfer pricing is undocumented, or your compliance is behind. We assess, fix, and maintain — without starting over.",
-      bullets:["Structure & TP health check","FEMA & RBI regularisation","Back-filing & penalty mitigation","Ongoing compliance takeover"],
-      stat:"< 30 days", statLabel:"Typical time to full compliance from first review call.",
-      cta:"Get a review", page:"contact",
+      n: "03", tab: "Something isn't right",
+      headline: "Something isn't right",
+      desc: "Your India entity is live but the structure was set up quickly, the transfer pricing is undocumented, or your compliance is behind. We assess, fix, and maintain — without starting over.",
+      bullets: ["Structure & TP health check", "FEMA & RBI regularisation", "Back-filing & penalty mitigation", "Ongoing compliance takeover"],
+      stat: "< 30 days", statLabel: "Typical time to full compliance from first review call.",
+      cta: "Get a review", page: "contact",
     },
     {
-      n:"04", tab:"NRI investing in India",
-      headline:"NRI investing or returning to India",
-      desc:"You live abroad and want to invest in or start a business in India — or you're returning to India and your FEMA and tax status is changing. Two situations, one advisory team.",
-      bullets:["Schedule 4 FEMA — NRI investment route","Residency transition planning","NRE/FCNR account handling","RNOR tax optimisation"],
-      stat:"1–2 wk", statLabel:"Typical time to structure advice and filing readiness.",
-      cta:"NRI guide", page:"seo_nri",
+      n: "04", tab: "NRI investing in India",
+      headline: "NRI investing or returning to India",
+      desc: "You live abroad and want to invest in or start a business in India — or you're returning to India and your FEMA and tax status is changing. Two situations, one advisory team.",
+      bullets: ["Schedule 4 FEMA — NRI investment route", "Residency transition planning", "NRE/FCNR account handling", "RNOR tax optimisation"],
+      stat: "1–2 wk", statLabel: "Typical time to structure advice and filing readiness.",
+      cta: "NRI guide", page: "seo_nri",
     },
     {
-      n:"05", tab:"Raising an India round",
-      headline:"Raising your first foreign round",
-      desc:"Your startup is raising from foreign angels or VCs. CCPS, CCD, SAFE — getting the instrument, valuation, and FCGPR right determines how clean your cap table looks at Series A.",
-      bullets:["CCPS / CCD structuring","Angel tax — DPIIT recognition","FEMA valuation compliance","FC-GPR within 30 days"],
-      stat:"30 days", statLabel:"FC-GPR must be filed within 30 days of share allotment.",
-      cta:"Startup funding guide", page:"seo_startup",
+      n: "05", tab: "Raising an India round",
+      headline: "Raising your first foreign round",
+      desc: "Your startup is raising from foreign angels or VCs. CCPS, CCD, SAFE — getting the instrument, valuation, and FCGPR right determines how clean your cap table looks at Series A.",
+      bullets: ["CCPS / CCD structuring", "Angel tax — DPIIT recognition", "FEMA valuation compliance", "FC-GPR within 30 days"],
+      stat: "30 days", statLabel: "FC-GPR must be filed within 30 days of share allotment.",
+      cta: "Startup funding guide", page: "seo_startup",
     },
     {
-      n:"06", tab:"Incorporating a Pvt Ltd",
-      headline:"Incorporating a Pvt Ltd in India",
-      desc:"You're an Indian founder, entrepreneur, or promoter incorporating a Private Limited Company. You want it done right — right objects clause, right share structure, FDI-ready if investors come later.",
-      bullets:["MOA objects clause advice","Share capital structure","FDI-ready from day one","Post-incorporation compliance"],
-      stat:"7–10 days", statLabel:"Typical MCA incorporation after document submission.",
-      cta:"Pvt Ltd registration guide", page:"seo_pvtltd",
+      n: "06", tab: "Incorporating a Pvt Ltd",
+      headline: "Incorporating a Pvt Ltd in India",
+      desc: "You're an Indian founder, entrepreneur, or promoter incorporating a Private Limited Company. You want it done right — right objects clause, right share structure, FDI-ready if investors come later.",
+      bullets: ["MOA objects clause advice", "Share capital structure", "FDI-ready from day one", "Post-incorporation compliance"],
+      stat: "7–10 days", statLabel: "Typical MCA incorporation after document submission.",
+      cta: "Pvt Ltd registration guide", page: "seo_pvtltd",
     },
   ];
 
@@ -330,45 +331,53 @@ function AudiencePathsSection({ T, ROUTES }) {
   const s = SITUATIONS[active];
 
   // Responsive values
-  const secPad   = isMobile ? "48px 20px 40px" : isTablet ? "60px 32px 48px" : "80px 56px 48px";
+  const secPad = isMobile ? "48px 20px 40px" : isTablet ? "60px 32px 48px" : "80px 56px 48px";
   const tabFontSz = isMobile ? 12 : isTablet ? 13 : 14.5;
-  const tabNumSz  = isMobile ? 9  : 10;
-  const tabPad    = isMobile ? "8px 10px" : "9px 14px";
+  const tabNumSz = isMobile ? 9 : 10;
+  const tabPad = isMobile ? "8px 10px" : "9px 14px";
   // On mobile: pills wrap in 2 columns; tablet+: single row stretch
-  const pillsRow  = isMobile
-    ? { display:"grid", gridTemplateColumns:"1fr 1fr", gap:8, marginBottom:12, width:"100%" }
-    : { display:"flex", gap:8, marginBottom:14, width:"100%" };
+  const pillsRow = isMobile
+    ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12, width: "100%" }
+    : { display: "flex", gap: 8, marginBottom: 14, width: "100%" };
 
   // Detail panel layout
   const panelCols = isMobile ? "1fr" : isTablet ? "1fr 220px" : "1fr 280px";
-  const leftPad   = isMobile ? "20px" : isTablet ? "20px 28px" : "24px 40px";
-  const rightPad  = isMobile ? "20px" : "28px";
+  const leftPad = isMobile ? "20px" : isTablet ? "20px 28px" : "24px 40px";
+  const rightPad = isMobile ? "20px" : "28px";
   // Inside left: desc + bullets row on desktop/tablet, stacked on mobile
   const innerCols = isMobile ? "1fr" : "1fr auto";
-  const innerGap  = isMobile ? 16 : 28;
+  const innerGap = isMobile ? 16 : 28;
 
   return (
     <section style={{ padding: secPad, background: T.ivory }}>
-      <div style={{ maxWidth:1320, margin:"0 auto" }}>
+      <div style={{ maxWidth: 1320, margin: "0 auto" }}>
 
         {/* Eyebrow */}
-        <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:16 }}>
-          <div style={{ width:24, height:1, background:T.s }}/>
-          <span style={{ fontSize:10, letterSpacing:"0.38em", textTransform:"uppercase",
-            color:T.s, fontWeight:700 }}>Where You Fit In</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+          <div style={{ width: 24, height: 1, background: T.s }} />
+          <span style={{
+            fontSize: 10, letterSpacing: "0.38em", textTransform: "uppercase",
+            color: T.s, fontWeight: 700
+          }}>Where You Fit In</span>
         </div>
 
         {/* Heading */}
-        <h2 className="font-display" style={{ fontSize:"clamp(26px,3.5vw,50px)",
-          fontWeight:600, lineHeight:1.08, color:T.ch, marginBottom:4 }}>
+        <h2 className="font-display" style={{
+          fontSize: "clamp(26px,3.5vw,50px)",
+          fontWeight: 600, lineHeight: 1.08, color: T.ch, marginBottom: 4
+        }}>
           Six situations.
         </h2>
-        <h2 className="font-display" style={{ fontSize:"clamp(26px,3.5vw,50px)",
-          fontWeight:600, lineHeight:1.08, marginBottom:12, marginTop:0 }}>
-          <em style={{ fontStyle:"italic", color:T.f }}>One structure conversation.</em>
+        <h2 className="font-display" style={{
+          fontSize: "clamp(26px,3.5vw,50px)",
+          fontWeight: 600, lineHeight: 1.08, marginBottom: 12, marginTop: 0
+        }}>
+          <em style={{ fontStyle: "italic", color: T.f }}>One structure conversation.</em>
         </h2>
-        <p style={{ fontSize: isMobile ? 14 : 15, color:T.mid, lineHeight:1.75, fontWeight:300,
-          maxWidth:520, marginBottom: isMobile ? 24 : 36 }}>
+        <p style={{
+          fontSize: isMobile ? 14 : 15, color: T.mid, lineHeight: 1.75, fontWeight: 300,
+          maxWidth: 520, marginBottom: isMobile ? 24 : 36
+        }}>
           Pick the one closest to where you are — we'll show you exactly what
           changes for your structure, your timeline, and your compliance load.
         </p>
@@ -381,29 +390,37 @@ function AudiencePathsSection({ T, ROUTES }) {
               style={{
                 flex: isMobile ? undefined : "1 1 0",
                 background: "#fff",
-                border: `1.5px solid ${i===active ? T.ch : T.bdr}`,
+                border: `1.5px solid ${i === active ? T.ch : T.bdr}`,
                 borderRadius: 50,
                 padding: tabPad,
-                cursor:"pointer", fontFamily:"inherit",
-                position:"relative", overflow:"hidden",
-                transition:"border-color .2s",
-                textAlign:"center",
-                whiteSpace:"nowrap",
+                cursor: "pointer", fontFamily: "inherit",
+                position: "relative", overflow: "hidden",
+                transition: "border-color .2s",
+                textAlign: "center",
+                whiteSpace: "nowrap",
               }}>
-              <span style={{ fontSize: tabNumSz, fontWeight:700,
-                color: i===active ? T.f : T.lt,
-                marginRight:4 }}>{sit.n}</span>
-              <span style={{ fontSize: tabFontSz, fontWeight:600,
-                color: T.ch }}>
+              <span style={{
+                fontSize: tabNumSz, fontWeight: 700,
+                color: i === active ? T.f : T.lt,
+                marginRight: 4
+              }}>{sit.n}</span>
+              <span style={{
+                fontSize: tabFontSz, fontWeight: 600,
+                color: T.ch
+              }}>
                 {sit.tab}
               </span>
               {/* Progress bar — subtle track + fill */}
               {i === active && (
-                <div style={{ position:"absolute", bottom:0, left:0, right:0, height:2,
-                  background: T.bdr }}>
-                  <div style={{ height:"100%", background: T.ch,
-                    width:`${progress}%`, transition:"none",
-                    borderRadius:"0 2px 2px 0" }}/>
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, height: 2,
+                  background: T.bdr
+                }}>
+                  <div style={{
+                    height: "100%", background: T.ch,
+                    width: `${progress}%`, transition: "none",
+                    borderRadius: "0 2px 2px 0"
+                  }} />
                 </div>
               )}
             </button>
@@ -412,51 +429,61 @@ function AudiencePathsSection({ T, ROUTES }) {
 
         {/* Detail panel */}
         <div className="ap-panel" style={{
-          background:"#fff", border:`1px solid ${T.bdr}`,
-          borderRadius:14, overflow:"hidden",
-          display:"grid", gridTemplateColumns: panelCols,
-          alignItems:"stretch",
+          background: "#fff", border: `1px solid ${T.bdr}`,
+          borderRadius: 14, overflow: "hidden",
+          display: "grid", gridTemplateColumns: panelCols,
+          alignItems: "stretch",
         }}>
           {/* Left */}
-          <div style={{ padding: leftPad, borderBottom: isMobile ? `1px solid ${T.bdr}` : "none",
+          <div style={{
+            padding: leftPad, borderBottom: isMobile ? `1px solid ${T.bdr}` : "none",
             borderRight: isMobile ? "none" : `1px solid ${T.bdr}`,
-            display:"flex", flexDirection:"column", justifyContent:"center" }}>
+            display: "flex", flexDirection: "column", justifyContent: "center"
+          }}>
 
             {/* Single grid: [heading + desc] left | pills right */}
             <div style={{
-              display:"grid",
+              display: "grid",
               gridTemplateColumns: isMobile ? "1fr" : "1fr auto",
               gridTemplateRows: isMobile ? "auto" : "auto 1fr",
               gap: isMobile ? 12 : `10px ${innerGap}px`,
-              alignItems:"start",
+              alignItems: "start",
             }}>
               {/* Heading — left col, row 1 */}
-              <div style={{ display:"flex", alignItems:"center", gap:10,
-                gridColumn:1, gridRow:1 }}>
-                <span style={{ fontSize:12, fontWeight:700, color:T.f, flexShrink:0 }}>{s.n}</span>
-                <div style={{ width:20, height:1, background:T.bdr, flexShrink:0 }}/>
-                <h3 className="font-display" style={{ fontSize:"clamp(16px,1.7vw,22px)",
-                  fontWeight:600, color:T.ch, margin:0, lineHeight:1.3 }}>{s.headline}</h3>
+              <div style={{
+                display: "flex", alignItems: "center", gap: 10,
+                gridColumn: 1, gridRow: 1
+              }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: T.f, flexShrink: 0 }}>{s.n}</span>
+                <div style={{ width: 20, height: 1, background: T.bdr, flexShrink: 0 }} />
+                <h3 className="font-display" style={{
+                  fontSize: "clamp(16px,1.7vw,22px)",
+                  fontWeight: 600, color: T.ch, margin: 0, lineHeight: 1.3
+                }}>{s.headline}</h3>
               </div>
 
               {/* Description — left col, row 2 */}
-              <p style={{ fontSize:14, color:T.mid, lineHeight:1.75,
-                fontWeight:300, margin:0,
-                gridColumn:1, gridRow: isMobile ? "auto" : 2 }}>{s.desc}</p>
+              <p style={{
+                fontSize: 14, color: T.mid, lineHeight: 1.75,
+                fontWeight: 300, margin: 0,
+                gridColumn: 1, gridRow: isMobile ? "auto" : 2
+              }}>{s.desc}</p>
 
               {/* Pills — right col, spans both rows */}
               {!isMobile && (
                 <div style={{
-                  gridColumn:2, gridRow:"1 / 3",
-                  display:"flex", flexDirection:"column",
-                  justifyContent:"center", gap:7,
-                  alignSelf:"stretch",
+                  gridColumn: 2, gridRow: "1 / 3",
+                  display: "flex", flexDirection: "column",
+                  justifyContent: "center", gap: 7,
+                  alignSelf: "stretch",
                 }}>
                   {s.bullets.map(b => (
-                    <span key={b} style={{ display:"inline-flex", alignItems:"center",
-                      background:T.stone, border:`1px solid ${T.bdr}`,
-                      borderRadius:50, padding:"6px 14px",
-                      fontSize:12.5, color:T.ch, whiteSpace:"nowrap" }}>
+                    <span key={b} style={{
+                      display: "inline-flex", alignItems: "center",
+                      background: T.stone, border: `1px solid ${T.bdr}`,
+                      borderRadius: 50, padding: "6px 14px",
+                      fontSize: 12.5, color: T.ch, whiteSpace: "nowrap"
+                    }}>
                       {b}
                     </span>
                   ))}
@@ -465,12 +492,14 @@ function AudiencePathsSection({ T, ROUTES }) {
 
               {/* Pills on mobile — below description, wrap */}
               {isMobile && (
-                <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                   {s.bullets.map(b => (
-                    <span key={b} style={{ display:"inline-flex", alignItems:"center",
-                      background:T.stone, border:`1px solid ${T.bdr}`,
-                      borderRadius:50, padding:"5px 12px",
-                      fontSize:12, color:T.ch, whiteSpace:"nowrap" }}>
+                    <span key={b} style={{
+                      display: "inline-flex", alignItems: "center",
+                      background: T.stone, border: `1px solid ${T.bdr}`,
+                      borderRadius: 50, padding: "5px 12px",
+                      fontSize: 12, color: T.ch, whiteSpace: "nowrap"
+                    }}>
                       {b}
                     </span>
                   ))}
@@ -481,18 +510,24 @@ function AudiencePathsSection({ T, ROUTES }) {
 
           {/* Right — clock + stat + CTA */}
           {!isMobile && (
-            <div style={{ padding: rightPad, background:T.stone,
-              display:"flex", flexDirection:"column", justifyContent:"center", gap:12 }}>
-              <div style={{ display:"flex", alignItems:"center", gap:14 }}>
-                <ClockIcon size={isTablet ? 52 : 64}/>
-                <div className="font-number" style={{ fontSize:"clamp(20px,2.2vw,32px)",
-                  color:T.ch, lineHeight:1 }}>{s.stat}</div>
+            <div style={{
+              padding: rightPad, background: T.stone,
+              display: "flex", flexDirection: "column", justifyContent: "center", gap: 12
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <ClockIcon size={isTablet ? 52 : 64} />
+                <div className="font-number" style={{
+                  fontSize: "clamp(20px,2.2vw,32px)",
+                  color: T.ch, lineHeight: 1
+                }}>{s.stat}</div>
               </div>
-              <p style={{ fontSize:13, color:T.mid, lineHeight:1.65, margin:0 }}>{s.statLabel}</p>
-              <button style={{ background:T.ch, color:"#fff", border:"none",
-                borderRadius:7, padding:"12px 18px", fontSize:13, fontWeight:600,
-                cursor:"pointer", fontFamily:"inherit", marginTop:4 }}
-                onClick={() => { window.location.href = ROUTES[s.page]||"/"; }}>
+              <p style={{ fontSize: 13, color: T.mid, lineHeight: 1.65, margin: 0 }}>{s.statLabel}</p>
+              <button style={{
+                background: T.ch, color: "#fff", border: "none",
+                borderRadius: 7, padding: "12px 18px", fontSize: 13, fontWeight: 600,
+                cursor: "pointer", fontFamily: "inherit", marginTop: 4
+              }}
+                onClick={() => { window.location.href = ROUTES[s.page] || "/"; }}>
                 {s.cta} →
               </button>
             </div>
@@ -500,19 +535,23 @@ function AudiencePathsSection({ T, ROUTES }) {
 
           {/* On mobile: stat + CTA stacked below in a compact row */}
           {isMobile && (
-            <div style={{ padding:"20px", background:T.stone,
-              display:"flex", alignItems:"center", gap:16 }}>
-              <div style={{ display:"flex", alignItems:"center", gap:10, flex:1 }}>
-                <ClockIcon size={44}/>
+            <div style={{
+              padding: "20px", background: T.stone,
+              display: "flex", alignItems: "center", gap: 16
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
+                <ClockIcon size={44} />
                 <div>
-                  <div className="font-number" style={{ fontSize:22, color:T.ch, lineHeight:1 }}>{s.stat}</div>
-                  <p style={{ fontSize:12, color:T.mid, lineHeight:1.5, margin:"4px 0 0" }}>{s.statLabel}</p>
+                  <div className="font-number" style={{ fontSize: 22, color: T.ch, lineHeight: 1 }}>{s.stat}</div>
+                  <p style={{ fontSize: 12, color: T.mid, lineHeight: 1.5, margin: "4px 0 0" }}>{s.statLabel}</p>
                 </div>
               </div>
-              <button style={{ background:T.ch, color:"#fff", border:"none",
-                borderRadius:7, padding:"10px 14px", fontSize:12.5, fontWeight:600,
-                cursor:"pointer", fontFamily:"inherit", flexShrink:0 }}
-                onClick={() => { window.location.href = ROUTES[s.page]||"/"; }}>
+              <button style={{
+                background: T.ch, color: "#fff", border: "none",
+                borderRadius: 7, padding: "10px 14px", fontSize: 12.5, fontWeight: 600,
+                cursor: "pointer", fontFamily: "inherit", flexShrink: 0
+              }}
+                onClick={() => { window.location.href = ROUTES[s.page] || "/"; }}>
                 {s.cta} →
               </button>
             </div>
@@ -538,14 +577,14 @@ function KnowledgeHubSection({ T, ROUTES }) {
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(data => {
         const mapped = (data.items || []).slice(0, 4).map(item => ({
-          slug:    item.fields.slug || item.sys.id,
-          title:   item.fields.title || "",
+          slug: item.fields.slug || item.sys.id,
+          title: item.fields.title || "",
           summary: item.fields.summary || "",
-          date:    item.fields.publishedDate
-            ? new Date(item.fields.publishedDate).toLocaleDateString("en-IN", { day:"numeric", month:"short", year:"numeric" })
+          date: item.fields.publishedDate
+            ? new Date(item.fields.publishedDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
             : "",
-          tag:     item.fields.tag || item.fields.category || "Guide",
-          readTime:item.fields.readTime || "5 min read",
+          tag: item.fields.tag || item.fields.category || "Guide",
+          readTime: item.fields.readTime || "5 min read",
         }));
         setPosts(mapped);
       })
@@ -554,24 +593,30 @@ function KnowledgeHubSection({ T, ROUTES }) {
 
   // Tag colours
   const TAG_COLORS = {
-    "Guide":"#0B3D2E","Deep Dive":"#4A6FA5","Compliance":"#C17D2A",
-    "Tax Planning":"#5C7A4A","How-To":"#5C5C52","Update":"#7B4A9A","General":"#888",
+    "Guide": "#0B3D2E", "Deep Dive": "#4A6FA5", "Compliance": "#C17D2A",
+    "Tax Planning": "#5C7A4A", "How-To": "#5C5C52", "Update": "#7B4A9A", "General": "#888",
   };
 
   return (
-    <section style={{ padding:"80px 56px", background:T.stone }}>
-      <div style={{ maxWidth:1360, margin:"0 auto" }}>
+    <section style={{ padding: "80px 56px", background: T.stone }}>
+      <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
         {/* Header row */}
-        <div style={{ display:"flex", alignItems:"flex-end",
-          justifyContent:"space-between", flexWrap:"wrap", gap:16, marginBottom:48 }}>
+        <div style={{
+          display: "flex", alignItems: "flex-end",
+          justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 48
+        }}>
           <div>
-            <div style={{ fontSize:10, letterSpacing:"0.4em", textTransform:"uppercase",
-              color:T.s, fontWeight:600, marginBottom:12 }}>Knowledge Hub</div>
-            <h2 className="font-display" style={{ fontSize:"clamp(26px,3vw,42px)",
-              fontWeight:600, lineHeight:1.1, color:T.ch, margin:0 }}>
+            <div style={{
+              fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase",
+              color: T.s, fontWeight: 600, marginBottom: 12
+            }}>Knowledge Hub</div>
+            <h2 className="font-display" style={{
+              fontSize: "clamp(26px,3vw,42px)",
+              fontWeight: 600, lineHeight: 1.1, color: T.ch, margin: 0
+            }}>
               Insights for global companies{" "}
-              <em style={{ fontStyle:"italic", color:T.f }}>entering India.</em>
+              <em style={{ fontStyle: "italic", color: T.f }}>entering India.</em>
             </h2>
           </div>
           <button className="ics-btn ics-btn-outline"
@@ -583,76 +628,97 @@ function KnowledgeHubSection({ T, ROUTES }) {
         {/* Cards grid */}
         {posts.length === 0 ? (
           /* Skeleton */
-          <div className="kh-grid" style={{ display:"grid",
-            gridTemplateColumns:"repeat(4,1fr)", gap:20 }}>
-            {[1,2,3,4].map(i => (
-              <div key={i} style={{ background:"#fff", borderRadius:16,
-                padding:"28px 24px", border:`1px solid ${T.bdr}` }}>
-                <div style={{ height:12, background:T.bdr, borderRadius:4,
-                  marginBottom:12, width:"40%" }}/>
-                <div style={{ height:18, background:T.bdr, borderRadius:4,
-                  marginBottom:8 }}/>
-                <div style={{ height:14, background:T.bdr, borderRadius:4,
-                  width:"80%" }}/>
+          <div className="kh-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4,1fr)", gap: 20
+          }}>
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} style={{
+                background: "#fff", borderRadius: 16,
+                padding: "28px 24px", border: `1px solid ${T.bdr}`
+              }}>
+                <div style={{
+                  height: 12, background: T.bdr, borderRadius: 4,
+                  marginBottom: 12, width: "40%"
+                }} />
+                <div style={{
+                  height: 18, background: T.bdr, borderRadius: 4,
+                  marginBottom: 8
+                }} />
+                <div style={{
+                  height: 14, background: T.bdr, borderRadius: 4,
+                  width: "80%"
+                }} />
               </div>
             ))}
           </div>
         ) : (
-          <div className="kh-grid" style={{ display:"grid",
-            gridTemplateColumns:"repeat(4,1fr)", gap:20 }}>
+          <div className="kh-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4,1fr)", gap: 20
+          }}>
             {posts.map(post => (
               <a key={post.slug}
                 href={`/knowledge-hub/${post.slug}`}
-                style={{ textDecoration:"none", display:"flex", flexDirection:"column",
-                  background:"#fff", borderRadius:16, padding:"28px 24px",
-                  border:`1px solid ${T.bdr}`,
-                  transition:"transform .2s, box-shadow .2s",
-                  cursor:"pointer",
+                style={{
+                  textDecoration: "none", display: "flex", flexDirection: "column",
+                  background: "#fff", borderRadius: 16, padding: "28px 24px",
+                  border: `1px solid ${T.bdr}`,
+                  transition: "transform .2s, box-shadow .2s",
+                  cursor: "pointer",
                 }}
-                onMouseEnter={e=>{
-                  e.currentTarget.style.transform="translateY(-4px)";
-                  e.currentTarget.style.boxShadow="0 12px 36px rgba(0,0,0,.09)";
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,.09)";
                 }}
-                onMouseLeave={e=>{
-                  e.currentTarget.style.transform="translateY(0)";
-                  e.currentTarget.style.boxShadow="none";
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 {/* Tag + date */}
-                <div style={{ display:"flex", alignItems:"center",
-                  justifyContent:"space-between", marginBottom:16, flexWrap:"wrap", gap:8 }}>
+                <div style={{
+                  display: "flex", alignItems: "center",
+                  justifyContent: "space-between", marginBottom: 16, flexWrap: "wrap", gap: 8
+                }}>
                   <span style={{
-                    fontSize:10, fontWeight:700, letterSpacing:".06em",
-                    textTransform:"uppercase",
+                    fontSize: 10, fontWeight: 700, letterSpacing: ".06em",
+                    textTransform: "uppercase",
                     color: TAG_COLORS[post.tag] || "#888",
                     background: (TAG_COLORS[post.tag] || "#888") + "18",
-                    padding:"3px 10px", borderRadius:50,
+                    padding: "3px 10px", borderRadius: 50,
                   }}>{post.tag}</span>
-                  <span style={{ fontSize:11, color:T.lt }}>{post.date}</span>
+                  <span style={{ fontSize: 11, color: T.lt }}>{post.date}</span>
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display" style={{ fontSize:17, fontWeight:600,
-                  color:T.ch, lineHeight:1.35, marginBottom:10, flex:1 }}>
+                <h3 className="font-display" style={{
+                  fontSize: 17, fontWeight: 600,
+                  color: T.ch, lineHeight: 1.35, marginBottom: 10, flex: 1
+                }}>
                   {post.title}
                 </h3>
 
                 {/* Summary */}
                 {post.summary && (
-                  <p style={{ fontSize:13, color:T.mid, lineHeight:1.7,
-                    fontWeight:300, marginBottom:18,
-                    display:"-webkit-box", WebkitLineClamp:2,
-                    WebkitBoxOrient:"vertical", overflow:"hidden" }}>
+                  <p style={{
+                    fontSize: 13, color: T.mid, lineHeight: 1.7,
+                    fontWeight: 300, marginBottom: 18,
+                    display: "-webkit-box", WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical", overflow: "hidden"
+                  }}>
                     {post.summary}
                   </p>
                 )}
 
                 {/* Footer */}
-                <div style={{ display:"flex", alignItems:"center",
-                  justifyContent:"space-between", borderTop:`1px solid ${T.bdr}`,
-                  paddingTop:14, marginTop:"auto" }}>
-                  <span style={{ fontSize:11.5, color:T.lt }}>{post.readTime}</span>
-                  <span style={{ fontSize:12.5, fontWeight:600, color:T.f }}>
+                <div style={{
+                  display: "flex", alignItems: "center",
+                  justifyContent: "space-between", borderTop: `1px solid ${T.bdr}`,
+                  paddingTop: 14, marginTop: "auto"
+                }}>
+                  <span style={{ fontSize: 11.5, color: T.lt }}>{post.readTime}</span>
+                  <span style={{ fontSize: 12.5, fontWeight: 600, color: T.f }}>
                     Read →
                   </span>
                 </div>
@@ -669,7 +735,7 @@ function KnowledgeHubSection({ T, ROUTES }) {
 // ─── MAP LINES OVERLAY (animated SVG connection lines over the world map image)
 function MapLinesOverlay() {
   const canvasRef = useRef(null);
-  const rafRef    = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -680,39 +746,39 @@ function MapLinesOverlay() {
     // City positions as % of container — equirectangular
     // x=(lon+180)/360*100  y=(90-lat)/180*100
     const NODES = [
-      { x:68.0, y:45.0 },  // India (hub) — shifted slightly inward
-      { x:49.5, y:22.0 },  // London
-      { x:63.5, y:37.0 },  // Dubai
-      { x:22.0, y:31.0 },  // New York — far left
-      { x:79.5, y:51.0 },  // Singapore — far right
-      { x:86.5, y:70.0 },  // Sydney — bottom right
+      { x: 68.0, y: 45.0 },  // India (hub) — shifted slightly inward
+      { x: 49.5, y: 22.0 },  // London
+      { x: 63.5, y: 37.0 },  // Dubai
+      { x: 22.0, y: 31.0 },  // New York — far left
+      { x: 79.5, y: 51.0 },  // Singapore — far right
+      { x: 86.5, y: 70.0 },  // Sydney — bottom right
     ];
-    const EDGES = [[0,1],[0,2],[0,3],[0,4],[0,5]];
+    const EDGES = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5]];
 
     // One animated pulse per edge, staggered start
-    const pulses = EDGES.map(([a,b],i) => ({
+    const pulses = EDGES.map(([a, b], i) => ({
       a, b, t: i / EDGES.length,
-      speed: 0.004 + Math.random()*0.002,
+      speed: 0.004 + Math.random() * 0.002,
     }));
 
     function resize() {
       const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.style.width  = rect.width  + "px";
+      canvas.style.width = rect.width + "px";
       canvas.style.height = rect.height + "px";
-      canvas.width  = Math.round(rect.width  * dpr);
+      canvas.width = Math.round(rect.width * dpr);
       canvas.height = Math.round(rect.height * dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function pt(xPct, yPct) {
       return [
-        xPct / 100 * (canvas.width  / dpr),
+        xPct / 100 * (canvas.width / dpr),
         yPct / 100 * (canvas.height / dpr),
       ];
     }
 
     function draw() {
-      const W = canvas.width  / dpr;
+      const W = canvas.width / dpr;
       const H = canvas.height / dpr;
       ctx.clearRect(0, 0, W, H);
 
@@ -727,7 +793,7 @@ function MapLinesOverlay() {
         ctx.moveTo(ax, ay);
         ctx.quadraticCurveTo(cpx, cpy, bx, by);
         ctx.strokeStyle = "rgba(11,61,46,0.65)";
-        ctx.lineWidth   = 1.8;
+        ctx.lineWidth = 1.8;
         ctx.setLineDash([5, 5]);
         ctx.stroke();
         ctx.setLineDash([]);
@@ -741,7 +807,7 @@ function MapLinesOverlay() {
         ctx.beginPath();
         ctx.arc(nx, ny, isHub ? 10 : 7, 0, Math.PI * 2);
         ctx.strokeStyle = isHub ? "rgba(11,61,46,0.6)" : "rgba(11,61,46,0.5)";
-        ctx.lineWidth   = 1.5;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
         // Fill dot
         ctx.beginPath();
@@ -762,9 +828,9 @@ function MapLinesOverlay() {
         const [bx, by] = pt(NODES[pulse.b].x, NODES[pulse.b].y);
         const cpx = (ax + bx) / 2;
         const cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.32;
-        const t   = pulse.t;
-        const qx  = (1-t)*(1-t)*ax + 2*(1-t)*t*cpx + t*t*bx;
-        const qy  = (1-t)*(1-t)*ay + 2*(1-t)*t*cpy + t*t*by;
+        const t = pulse.t;
+        const qx = (1 - t) * (1 - t) * ax + 2 * (1 - t) * t * cpx + t * t * bx;
+        const qy = (1 - t) * (1 - t) * ay + 2 * (1 - t) * t * cpy + t * t * by;
 
         // Glow
         const g = ctx.createRadialGradient(qx, qy, 0, qx, qy, 10);
@@ -799,17 +865,17 @@ function MapLinesOverlay() {
 
   return (
     <canvas ref={canvasRef} style={{
-      position:"absolute", top:0, left:0,
-      width:"100%", height:"100%",
-      pointerEvents:"none",
-    }}/>
+      position: "absolute", top: 0, left: 0,
+      width: "100%", height: "100%",
+      pointerEvents: "none",
+    }} />
   );
 }
 
 // ─── WORLD MAP CANVAS (dot map + animated connection lines) ──────────────────
 function WorldMapCanvas() {
   const canvasRef = useRef(null);
-  const rafRef    = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -820,111 +886,111 @@ function WorldMapCanvas() {
     // City nodes — [x%, y%] on a 800×400 equirectangular map
     // x = (lon+180)/360*100,  y = (90-lat)/180*100
     const NODES = [
-      { id:"India",     x:71.7, y:42.8 },  // Mumbai
-      { id:"UK",        x:50.0, y:21.4 },  // London
-      { id:"UAE",       x:65.2, y:36.0 },  // Dubai
-      { id:"USA",       x:26.5, y:30.0 },  // New York
-      { id:"Singapore", x:78.8, y:49.3 },  // Singapore
-      { id:"Australia", x:83.7, y:69.4 },  // Sydney
+      { id: "India", x: 71.7, y: 42.8 },  // Mumbai
+      { id: "UK", x: 50.0, y: 21.4 },  // London
+      { id: "UAE", x: 65.2, y: 36.0 },  // Dubai
+      { id: "USA", x: 26.5, y: 30.0 },  // New York
+      { id: "Singapore", x: 78.8, y: 49.3 },  // Singapore
+      { id: "Australia", x: 83.7, y: 69.4 },  // Sydney
     ];
 
     // Connection pairs (from→to index)
     const EDGES = [
-      [0,1],[0,2],[0,3],[0,4],[0,5],[1,2],[3,1],
+      [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 2], [3, 1],
     ];
 
     // Dot grid — continent positions encoded as [x%,y%] rows
     // Simplified Natural Earth coverage
     const DOT_REGIONS = [];
     // North America
-    for (let x=14;x<=32;x+=1.2) for (let y=18;y<=52;y+=1.4) {
-      if (x<18&&y>45) continue; if (x>28&&y<22) continue;
-      DOT_REGIONS.push([x,y]);
+    for (let x = 14; x <= 32; x += 1.2) for (let y = 18; y <= 52; y += 1.4) {
+      if (x < 18 && y > 45) continue; if (x > 28 && y < 22) continue;
+      DOT_REGIONS.push([x, y]);
     }
     // South America
-    for (let x=24;x<=40;x+=1.2) for (let y=53;y<=90;y+=1.4) {
-      if (x>35&&y<60) continue; if (x<28&&y>80) continue;
-      DOT_REGIONS.push([x,y]);
+    for (let x = 24; x <= 40; x += 1.2) for (let y = 53; y <= 90; y += 1.4) {
+      if (x > 35 && y < 60) continue; if (x < 28 && y > 80) continue;
+      DOT_REGIONS.push([x, y]);
     }
     // Europe
-    for (let x=47;x<=58;x+=1.2) for (let y=13;y<=32;y+=1.4) {
-      DOT_REGIONS.push([x,y]);
+    for (let x = 47; x <= 58; x += 1.2) for (let y = 13; y <= 32; y += 1.4) {
+      DOT_REGIONS.push([x, y]);
     }
     // Africa
-    for (let x=46;x<=60;x+=1.2) for (let y=33;y<=78;y+=1.4) {
-      if (x<48&&y>65) continue;
-      DOT_REGIONS.push([x,y]);
+    for (let x = 46; x <= 60; x += 1.2) for (let y = 33; y <= 78; y += 1.4) {
+      if (x < 48 && y > 65) continue;
+      DOT_REGIONS.push([x, y]);
     }
     // Russia/Asia top
-    for (let x=55;x<=95;x+=1.2) for (let y=8;y<=28;y+=1.4) {
-      DOT_REGIONS.push([x,y]);
+    for (let x = 55; x <= 95; x += 1.2) for (let y = 8; y <= 28; y += 1.4) {
+      DOT_REGIONS.push([x, y]);
     }
     // Middle East
-    for (let x=58;x<=72;x+=1.2) for (let y=28;y<=42;y+=1.4) {
-      DOT_REGIONS.push([x,y]);
+    for (let x = 58; x <= 72; x += 1.2) for (let y = 28; y <= 42; y += 1.4) {
+      DOT_REGIONS.push([x, y]);
     }
     // South/SE Asia
-    for (let x=63;x<=90;x+=1.2) for (let y=28;y<=55;y+=1.4) {
-      if (x>85&&y<35) continue;
-      DOT_REGIONS.push([x,y]);
+    for (let x = 63; x <= 90; x += 1.2) for (let y = 28; y <= 55; y += 1.4) {
+      if (x > 85 && y < 35) continue;
+      DOT_REGIONS.push([x, y]);
     }
     // Australia
-    for (let x=78;x<=96;x+=1.2) for (let y=58;y<=80;y+=1.4) {
-      if (x<82&&y>72) continue; if (x>90&&y<63) continue;
-      DOT_REGIONS.push([x,y]);
+    for (let x = 78; x <= 96; x += 1.2) for (let y = 58; y <= 80; y += 1.4) {
+      if (x < 82 && y > 72) continue; if (x > 90 && y < 63) continue;
+      DOT_REGIONS.push([x, y]);
     }
 
     // Animated pulses along each edge
-    const pulses = EDGES.map(([a,b]) => ({
+    const pulses = EDGES.map(([a, b]) => ({
       a, b,
       t: Math.random(), // 0-1 progress
-      speed: 0.003 + Math.random()*0.002,
+      speed: 0.003 + Math.random() * 0.002,
     }));
 
     function resize() {
       const w = canvas.parentElement.offsetWidth;
       const h = canvas.parentElement.offsetHeight || 340;
-      canvas.style.width  = w+"px";
-      canvas.style.height = h+"px";
-      canvas.width  = w*dpr;
-      canvas.height = h*dpr;
-      ctx.setTransform(dpr,0,0,dpr,0,0);
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function px(xPct,yPct) {
-      const W = canvas.width/dpr;
-      const H = canvas.height/dpr;
-      return [xPct/100*W, yPct/100*H];
+    function px(xPct, yPct) {
+      const W = canvas.width / dpr;
+      const H = canvas.height / dpr;
+      return [xPct / 100 * W, yPct / 100 * H];
     }
 
     function draw() {
-      const W = canvas.width/dpr;
-      const H = canvas.height/dpr;
-      ctx.clearRect(0,0,W,H);
+      const W = canvas.width / dpr;
+      const H = canvas.height / dpr;
+      ctx.clearRect(0, 0, W, H);
 
       // Background
       ctx.fillStyle = "#F2F4F0";
-      ctx.fillRect(0,0,W,H);
+      ctx.fillRect(0, 0, W, H);
 
       // Dots
-      DOT_REGIONS.forEach(([x,y]) => {
-        const [px2,py2] = px(x,y);
+      DOT_REGIONS.forEach(([x, y]) => {
+        const [px2, py2] = px(x, y);
         ctx.beginPath();
-        ctx.arc(px2,py2,1.1,0,Math.PI*2);
+        ctx.arc(px2, py2, 1.1, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(11,61,46,0.22)";
         ctx.fill();
       });
 
       // Connection lines
-      EDGES.forEach(([ai,bi]) => {
-        const [ax,ay] = px(NODES[ai].x, NODES[ai].y);
-        const [bx,by] = px(NODES[bi].x, NODES[bi].y);
-        const cpx = (ax+bx)/2;
-        const cpy = Math.min(ay,by) - Math.abs(bx-ax)*0.18;
+      EDGES.forEach(([ai, bi]) => {
+        const [ax, ay] = px(NODES[ai].x, NODES[ai].y);
+        const [bx, by] = px(NODES[bi].x, NODES[bi].y);
+        const cpx = (ax + bx) / 2;
+        const cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.18;
 
         ctx.beginPath();
-        ctx.moveTo(ax,ay);
-        ctx.quadraticCurveTo(cpx,cpy,bx,by);
+        ctx.moveTo(ax, ay);
+        ctx.quadraticCurveTo(cpx, cpy, bx, by);
         ctx.strokeStyle = "rgba(11,61,46,0.14)";
         ctx.lineWidth = 1.2;
         ctx.stroke();
@@ -933,49 +999,49 @@ function WorldMapCanvas() {
       // Animated pulse dots
       pulses.forEach(pulse => {
         pulse.t = (pulse.t + pulse.speed) % 1;
-        const [ai,bi] = EDGES[pulses.indexOf(pulse)];
-        const [ax,ay] = px(NODES[ai].x, NODES[ai].y);
-        const [bx,by] = px(NODES[bi].x, NODES[bi].y);
-        const cpx = (ax+bx)/2;
-        const cpy = Math.min(ay,by) - Math.abs(bx-ax)*0.18;
+        const [ai, bi] = EDGES[pulses.indexOf(pulse)];
+        const [ax, ay] = px(NODES[ai].x, NODES[ai].y);
+        const [bx, by] = px(NODES[bi].x, NODES[bi].y);
+        const cpx = (ax + bx) / 2;
+        const cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.18;
 
         const t = pulse.t;
-        const qx = (1-t)*(1-t)*ax + 2*(1-t)*t*cpx + t*t*bx;
-        const qy = (1-t)*(1-t)*ay + 2*(1-t)*t*cpy + t*t*by;
+        const qx = (1 - t) * (1 - t) * ax + 2 * (1 - t) * t * cpx + t * t * bx;
+        const qy = (1 - t) * (1 - t) * ay + 2 * (1 - t) * t * cpy + t * t * by;
 
         // Glow
-        const grad = ctx.createRadialGradient(qx,qy,0,qx,qy,7);
-        grad.addColorStop(0,"rgba(232,144,10,0.6)");
-        grad.addColorStop(1,"rgba(232,144,10,0)");
+        const grad = ctx.createRadialGradient(qx, qy, 0, qx, qy, 7);
+        grad.addColorStop(0, "rgba(232,144,10,0.6)");
+        grad.addColorStop(1, "rgba(232,144,10,0)");
         ctx.beginPath();
-        ctx.arc(qx,qy,7,0,Math.PI*2);
+        ctx.arc(qx, qy, 7, 0, Math.PI * 2);
         ctx.fillStyle = grad;
         ctx.fill();
 
         // Dot
         ctx.beginPath();
-        ctx.arc(qx,qy,2.5,0,Math.PI*2);
+        ctx.arc(qx, qy, 2.5, 0, Math.PI * 2);
         ctx.fillStyle = "#E8900A";
         ctx.fill();
       });
 
       // City nodes
       NODES.forEach(node => {
-        const [nx,ny] = px(node.x, node.y);
+        const [nx, ny] = px(node.x, node.y);
         // Outer ring
         ctx.beginPath();
-        ctx.arc(nx,ny,7,0,Math.PI*2);
-        ctx.strokeStyle = node.id==="India" ? "rgba(11,61,46,0.5)" : "rgba(11,61,46,0.25)";
+        ctx.arc(nx, ny, 7, 0, Math.PI * 2);
+        ctx.strokeStyle = node.id === "India" ? "rgba(11,61,46,0.5)" : "rgba(11,61,46,0.25)";
         ctx.lineWidth = 1;
         ctx.stroke();
         // Fill
         ctx.beginPath();
-        ctx.arc(nx,ny,node.id==="India"?5:3.5,0,Math.PI*2);
-        ctx.fillStyle = node.id==="India" ? "#0B3D2E" : "#0B3D2E";
+        ctx.arc(nx, ny, node.id === "India" ? 5 : 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = node.id === "India" ? "#0B3D2E" : "#0B3D2E";
         ctx.fill();
         // Centre dot
         ctx.beginPath();
-        ctx.arc(nx,ny,1.5,0,Math.PI*2);
+        ctx.arc(nx, ny, 1.5, 0, Math.PI * 2);
         ctx.fillStyle = "#fff";
         ctx.fill();
       });
@@ -994,7 +1060,7 @@ function WorldMapCanvas() {
   }, []);
 
   return (
-    <canvas ref={canvasRef} style={{ display:"block", width:"100%", height:"100%" }}/>
+    <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
   );
 }
 
@@ -1131,32 +1197,42 @@ function StatsRibbon() {
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
 
         {/* Eyebrow + heading + CTA in one row */}
-        <div style={{ display:"flex", alignItems:"flex-end",
-          justifyContent:"space-between", flexWrap:"wrap", gap:16, marginBottom:40 }}>
+        <div style={{
+          display: "flex", alignItems: "flex-end",
+          justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 40
+        }}>
           <div>
-            <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:14 }}>
-              <div style={{ width:24, height:2, background:T.s, borderRadius:2 }}/>
-              <span style={{ fontSize:10, letterSpacing:"0.42em", textTransform:"uppercase",
-                color:T.s, fontWeight:700 }}>Track Record</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
+              <div style={{ width: 24, height: 2, background: T.s, borderRadius: 2 }} />
+              <span style={{
+                fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase",
+                color: T.s, fontWeight: 700
+              }}>Track Record</span>
             </div>
-            <h2 className="font-display" style={{ fontSize:"clamp(26px,3vw,40px)",
-              fontWeight:600, color:T.ch, margin:0 }}>
+            <h2 className="font-display" style={{
+              fontSize: "clamp(26px,3vw,40px)",
+              fontWeight: 600, color: T.ch, margin: 0
+            }}>
               Numbers that speak{" "}
-              <em style={{ fontStyle:"italic", color:T.f }}>for themselves.</em>
+              <em style={{ fontStyle: "italic", color: T.f }}>for themselves.</em>
             </h2>
           </div>
           <button
             className="ics-btn ics-btn-primary"
-            style={{ background:T.s, flexShrink:0,
-              padding:"13px 28px", borderRadius:8, whiteSpace:"nowrap" }}
+            style={{
+              background: T.s, flexShrink: 0,
+              padding: "13px 28px", borderRadius: 8, whiteSpace: "nowrap"
+            }}
             onClick={() => { window.location.href = "/contact"; }}>
             Book Free Consultation →
           </button>
         </div>
 
         {/* Cards */}
-        <div className="stats-grid" style={{ display: "grid",
-          gridTemplateColumns: "repeat(5,1fr)", gap: 16 }}>
+        <div className="stats-grid" style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5,1fr)", gap: 16
+        }}>
           {[
             {
               target: 100, suffix: "+", label: "ENTITIES",
@@ -1185,7 +1261,7 @@ function StatsRibbon() {
             },
           ].map((s, i) => (
             <StatCell key={s.label} target={s.target} suffix={s.suffix}
-              label={s.label} subLabel={s.subLabel} gradient={s.gradient}/>
+              label={s.label} subLabel={s.subLabel} gradient={s.gradient} />
           ))}
         </div>
 
@@ -1303,14 +1379,14 @@ export default function HomePage() {
   });
 
   return (
-    <div style={{ overflowX:"hidden", width:"100%" }}>
+    <div style={{ overflowX: "hidden", width: "100%" }}>
 
       {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
-      <section className="hero-section" style={{
+      {/* <section className="hero-section" style={{
         background: T.f, minHeight: "100vh", display: "flex",
         alignItems: "center", padding: "130px 56px 90px", position: "relative", overflow: "hidden",
       }}>
-        {/* Warm glow */}
+        
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
           background: `radial-gradient(ellipse 55% 70% at 105% 40%,rgba(232,144,10,.11) 0%,transparent 55%),
@@ -1322,7 +1398,7 @@ export default function HomePage() {
           alignItems: "center", position: "relative", zIndex: 2
         }}>
 
-          {/* ── Left copy ── */}
+         
           <div className="stagger in" style={{ textAlign: "left" }}>
             <div className="hero-eyebrow" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
@@ -1400,12 +1476,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* ── Right — globe only, no border, no caption ── */}
+        
           <div className="hero-right-col">
             <HeroGlobe />
           </div>
         </div>
-      </section>
+      </section> */}
+      <NewHeroSection T={T} ROUTES={ROUTES} />
       {/* ══ CLIENT LOGOS MARQUEE ══════════════════════════════════════════════ */}
       <section style={{ padding: "44px 0", background: T.ivory }}>
 
@@ -1466,7 +1543,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <SmarterDecisionsScroll accentColor={T.f} />
+      {/* <SmarterDecisionsScroll accentColor={T.f} /> */}
       {/* ══ STATS RIBBON ══════════════════════════════════════════════════════ */}
       <StatsRibbon />
 
@@ -1476,34 +1553,40 @@ export default function HomePage() {
       <WhatWeDoSection T={T} ROUTES={ROUTES} />
 
       {/* ══ QUOTE CALLOUT ═════════════════════════════════════════════════════ */}
-      <section style={{ padding:"0 56px 60px", background:T.ivory }}>
-        <div style={{ maxWidth:1360, margin:"0 auto" }}>
+      <section style={{ padding: "0 56px 60px", background: T.ivory }}>
+        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div className="quote-callout reveal" style={{
-            position:"relative", overflow:"hidden",
-            backgroundImage:"url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=60')",
-            backgroundSize:"cover", backgroundPosition:"center",
-            borderRadius:18, padding:"38px 44px",
-            display:"grid", gridTemplateColumns:"1fr auto",
-            gap:32, alignItems:"center",
+            position: "relative", overflow: "hidden",
+            backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=60')",
+            backgroundSize: "cover", backgroundPosition: "center",
+            borderRadius: 18, padding: "38px 44px",
+            display: "grid", gridTemplateColumns: "1fr auto",
+            gap: 32, alignItems: "center",
           }}>
             {/* Dark green overlay */}
-            <div style={{ position:"absolute", inset:0,
-              background:`linear-gradient(135deg,rgba(11,61,46,0.90) 0%,rgba(21,92,70,0.88) 100%)`,
-              borderRadius:18 }}/>
-            <div style={{ position:"relative", zIndex:1 }}>
-              <p style={{ fontSize:19, color:"rgba(255,255,255,.95)", lineHeight:1.65,
-                fontWeight:400, fontFamily:"var(--font-cormorant),'Cormorant Garamond',serif",
-                fontStyle:"italic", textAlign:"left", margin:0 }}>
+            <div style={{
+              position: "absolute", inset: 0,
+              background: `linear-gradient(135deg,rgba(11,61,46,0.90) 0%,rgba(21,92,70,0.88) 100%)`,
+              borderRadius: 18
+            }} />
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <p style={{
+                fontSize: 19, color: "rgba(255,255,255,.95)", lineHeight: 1.65,
+                fontWeight: 400, fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
+                fontStyle: "italic", textAlign: "left", margin: 0
+              }}>
                 "Most foreign companies enter India with the wrong structure and fix it at audit time.
                 We design it right the first time — saving you 2–3× the cost in corrections."
               </p>
-              <p style={{ fontSize:12.5, color:"rgba(255,255,255,.4)", marginTop:12,
-                textAlign:"left", margin:"12px 0 0" }}>
+              <p style={{
+                fontSize: 12.5, color: "rgba(255,255,255,.4)", marginTop: 12,
+                textAlign: "left", margin: "12px 0 0"
+              }}>
                 — P.G., FCA · Diploma in International Taxation · 8 yrs Ex-Big 4
               </p>
             </div>
             <button className="ics-btn ics-btn-primary ics-btn-lg"
-              style={{ flexShrink:0, position:"relative", zIndex:1 }}
+              style={{ flexShrink: 0, position: "relative", zIndex: 1 }}
               onClick={() => { window.location.href = ROUTES["contact"]; }}>
               Talk to Our Expert Team →
             </button>
@@ -1825,10 +1908,14 @@ export default function HomePage() {
             }}>
               {/* Heading */}
               <div>
-                <p style={{ fontSize: 10, letterSpacing: "0.45em", textTransform: "uppercase",
-                  color: T.s, fontWeight: 600, margin: "0 0 10px" }}>Global Reach</p>
-                <h2 className="font-display" style={{ fontSize: "clamp(22px,2.2vw,34px)",
-                  fontWeight: 600, lineHeight: 1.12, color: T.ch, margin: "0 0 14px" }}>
+                <p style={{
+                  fontSize: 10, letterSpacing: "0.45em", textTransform: "uppercase",
+                  color: T.s, fontWeight: 600, margin: "0 0 10px"
+                }}>Global Reach</p>
+                <h2 className="font-display" style={{
+                  fontSize: "clamp(22px,2.2vw,34px)",
+                  fontWeight: 600, lineHeight: 1.12, color: T.ch, margin: "0 0 14px"
+                }}>
                   Clients from every{" "}
                   <em style={{ color: T.f, fontStyle: "italic" }}>major market.</em>
                 </h2>
@@ -1836,18 +1923,20 @@ export default function HomePage() {
               </div>
 
               {/* Stats — 2x2 grid, bigger */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr",
-                border: "1px solid #ECE7E1", borderRadius: 10, overflow: "hidden" }}>
+              <div style={{
+                display: "grid", gridTemplateColumns: "1fr 1fr",
+                border: "1px solid #ECE7E1", borderRadius: 10, overflow: "hidden"
+              }}>
                 {[
                   { Icon: ClientsIcon, num: "200+", label: "Clients Worldwide" },
-                  { Icon: GlobeIcon,   num: "90+",  label: "Countries Covered" },
-                  { Icon: MarketIcon,  num: "10+",  label: "Markets Operate" },
-                  { Icon: StarIcon,    num: "98%",  label: "Client Satisfaction" },
+                  { Icon: GlobeIcon, num: "90+", label: "Countries Covered" },
+                  { Icon: MarketIcon, num: "10+", label: "Markets Operate" },
+                  { Icon: StarIcon, num: "98%", label: "Client Satisfaction" },
                 ].map(({ Icon, num, label }, i) => (
                   <div key={label} style={{
                     padding: "20px 16px", textAlign: "center",
-                    borderLeft:   i % 2 !== 0 ? "1px solid #ECE7E1" : "none",
-                    borderTop:    i >= 2       ? "1px solid #ECE7E1" : "none",
+                    borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none",
+                    borderTop: i >= 2 ? "1px solid #ECE7E1" : "none",
                     display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
                   }}>
                     <div><Icon /></div>
@@ -1861,20 +1950,24 @@ export default function HomePage() {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                 {[
                   { dot: "#E8900A", label: "USA & Canada" },
-                  { dot: T.f,       label: "UK & Europe" },
+                  { dot: T.f, label: "UK & Europe" },
                   { dot: "#F5A828", label: "UAE & Middle East" },
                   { dot: "#1B78CB", label: "Singapore & APAC" },
                   { dot: "#6B7280", label: "Australia & NZ" },
                   { dot: "#9A9A8E", label: "Other Markets" },
                 ].map(p => (
-                  <div key={p.label} style={{ display: "inline-flex", alignItems: "center", gap: 5,
+                  <div key={p.label} style={{
+                    display: "inline-flex", alignItems: "center", gap: 5,
                     border: "1px solid #ECE7E1", borderRadius: 50,
                     padding: "4px 10px", fontSize: 10.5, color: T.mid,
-                    cursor: "default", transition: "border-color .15s", whiteSpace: "nowrap" }}
+                    cursor: "default", transition: "border-color .15s", whiteSpace: "nowrap"
+                  }}
                     onMouseEnter={e => e.currentTarget.style.borderColor = T.f}
                     onMouseLeave={e => e.currentTarget.style.borderColor = "#ECE7E1"}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%",
-                      background: p.dot, flexShrink: 0 }} />
+                    <div style={{
+                      width: 6, height: 6, borderRadius: "50%",
+                      background: p.dot, flexShrink: 0
+                    }} />
                     {p.label}
                   </div>
                 ))}
@@ -1895,22 +1988,22 @@ export default function HomePage() {
 
             {/* ── Right — world map image + animated lines centered and overlaid ── */}
             <div className="gr-map" style={{
-              position:"relative",
-              display:"flex", alignItems:"center", justifyContent:"center",
-              background:"#fff", padding:"16px",
+              position: "relative",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              background: "#fff", padding: "16px",
             }}>
               {/* Wrapper — canvas is positioned relative to this, same size as image */}
-              <div style={{ position:"relative", width:"100%" }}>
+              <div style={{ position: "relative", width: "100%" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/worldmap.png" alt="World map"
                   style={{
-                    width:"100%", height:"auto", display:"block",
-                    filter:"saturate(0.18) brightness(1.08) sepia(0.06)",
-                    opacity:0.75,
+                    width: "100%", height: "auto", display: "block",
+                    filter: "saturate(0.18) brightness(1.08) sepia(0.06)",
+                    opacity: 0.75,
                   }}
                 />
                 {/* Canvas overlay — same size as image */}
-                <MapLinesOverlay/>
+                <MapLinesOverlay />
               </div>
             </div>
 
@@ -1919,44 +2012,52 @@ export default function HomePage() {
       </section>
 
       {/* ══ DTAA CALLOUT ══════════════════════════════════════════════════════ */}
-      <section style={{ padding:"0 56px 60px", background:T.ivory }}>
-        <div style={{ maxWidth:1360, margin:"0 auto" }}>
+      <section style={{ padding: "0 56px 60px", background: T.ivory }}>
+        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div style={{
-            position:"relative", borderRadius:20, overflow:"hidden",
-            backgroundImage:"url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60')",
-            backgroundSize:"cover", backgroundPosition:"center",
+            position: "relative", borderRadius: 20, overflow: "hidden",
+            backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60')",
+            backgroundSize: "cover", backgroundPosition: "center",
           }}>
             {/* Dark overlay */}
-            <div style={{ position:"absolute", inset:0,
-              background:"rgba(11,61,46,0.82)" }}/>
+            <div style={{
+              position: "absolute", inset: 0,
+              background: "rgba(11,61,46,0.82)"
+            }} />
 
             {/* Content */}
             <div className="dtaa-callout" style={{
-              position:"relative", zIndex:1,
-              padding:"40px 48px",
-              display:"grid", gridTemplateColumns:"1fr auto",
-              gap:28, alignItems:"center",
+              position: "relative", zIndex: 1,
+              padding: "40px 48px",
+              display: "grid", gridTemplateColumns: "1fr auto",
+              gap: 28, alignItems: "center",
             }}>
               <div>
-                <div style={{ fontSize:10, letterSpacing:3, textTransform:"uppercase",
-                  color:T.sl, fontWeight:600, marginBottom:10 }}>Tax Advantage</div>
-                <div className="font-display" style={{ fontSize:"clamp(18px,2vw,22px)",
-                  fontWeight:600, color:"#fff", lineHeight:1.3 }}>
+                <div style={{
+                  fontSize: 10, letterSpacing: 3, textTransform: "uppercase",
+                  color: T.sl, fontWeight: 600, marginBottom: 10
+                }}>Tax Advantage</div>
+                <div className="font-display" style={{
+                  fontSize: "clamp(18px,2vw,22px)",
+                  fontWeight: 600, color: "#fff", lineHeight: 1.3
+                }}>
                   India's DTAA network covers 90+ countries — most companies we onboard are overpaying.
                 </div>
-                <p style={{ fontSize:13.5, color:"rgba(255,255,255,.58)",
-                  marginTop:10, lineHeight:1.65 }}>
+                <p style={{
+                  fontSize: 13.5, color: "rgba(255,255,255,.58)",
+                  marginTop: 10, lineHeight: 1.65
+                }}>
                   Proper treaty planning reduces withholding tax on dividends, royalties, and fees.
                   We identify the savings before you commit to a structure.
                 </p>
               </div>
-              <div style={{ display:"flex", flexDirection:"column", gap:10, flexShrink:0 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
                 <button className="ics-btn ics-btn-primary"
                   onClick={() => { window.location.href = ROUTES["tax"]; }}>
                   International Tax →
                 </button>
                 <button className="ics-btn ics-btn-ghost"
-                  style={{ fontSize:12.5, padding:"9px 16px" }}
+                  style={{ fontSize: 12.5, padding: "9px 16px" }}
                   onClick={() => { window.location.href = ROUTES["seo_fdi"]; }}>
                   FDI Rules Guide →
                 </button>
@@ -2198,54 +2299,70 @@ export default function HomePage() {
       </section>
 
       {/* ══ FINAL CTA ═════════════════════════════════════════════════════════ */}
-      <section style={{ background:T.f, padding:"80px 56px",
-        position:"relative", overflow:"hidden" }}>
-        <div style={{ position:"absolute", inset:0, pointerEvents:"none",
-          background:"radial-gradient(ellipse 50% 70% at 50% 0%,rgba(232,144,10,.09) 0%,transparent 60%)" }}/>
+      <section style={{
+        background: T.f, padding: "80px 56px",
+        position: "relative", overflow: "hidden"
+      }}>
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(ellipse 50% 70% at 50% 0%,rgba(232,144,10,.09) 0%,transparent 60%)"
+        }} />
 
-        <div style={{ maxWidth:1200, margin:"0 auto", position:"relative",
-          display:"grid", gridTemplateColumns:"1fr 420px", gap:64, alignItems:"center" }}
+        <div style={{
+          maxWidth: 1200, margin: "0 auto", position: "relative",
+          display: "grid", gridTemplateColumns: "1fr 420px", gap: 64, alignItems: "center"
+        }}
           className="final-cta-grid">
 
           {/* ── Left copy ── */}
           <div>
-            <div style={{ fontSize:10, letterSpacing:3, textTransform:"uppercase",
-              color:T.sl, fontWeight:600, marginBottom:18 }}>Get Started</div>
-            <h2 className="font-display" style={{ fontSize:"clamp(32px,4vw,52px)",
-              fontWeight:600, color:"#fff", lineHeight:1.08, marginBottom:18 }}>
-              Ready to enter India<br/>
-              <em style={{ fontStyle:"italic", color:T.sl }}>the right way?</em>
+            <div style={{
+              fontSize: 10, letterSpacing: 3, textTransform: "uppercase",
+              color: T.sl, fontWeight: 600, marginBottom: 18
+            }}>Get Started</div>
+            <h2 className="font-display" style={{
+              fontSize: "clamp(32px,4vw,52px)",
+              fontWeight: 600, color: "#fff", lineHeight: 1.08, marginBottom: 18
+            }}>
+              Ready to enter India<br />
+              <em style={{ fontStyle: "italic", color: T.sl }}>the right way?</em>
             </h2>
-            <p style={{ fontSize:15, color:"rgba(255,255,255,.45)", lineHeight:1.82,
-              fontWeight:300, marginBottom:32, maxWidth:440 }}>
+            <p style={{
+              fontSize: 15, color: "rgba(255,255,255,.45)", lineHeight: 1.82,
+              fontWeight: 300, marginBottom: 32, maxWidth: 440
+            }}>
               Book a free 30-minute consultation. We'll review your India objectives
               and give you a clear structure recommendation — no commitment, no jargon.
             </p>
             {/* SEO resource links */}
-            <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:28 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
               {[
-                { label:"Foreign company registration →", page:"seo_fcri" },
-                { label:"Subsidiary company setup →",    page:"seo_sub" },
-                { label:"Transfer pricing guide →",      page:"seo_tp" },
-                { label:"FDI rules India →",             page:"seo_fdi" },
+                { label: "Foreign company registration →", page: "seo_fcri" },
+                { label: "Subsidiary company setup →", page: "seo_sub" },
+                { label: "Transfer pricing guide →", page: "seo_tp" },
+                { label: "FDI rules India →", page: "seo_fdi" },
               ].map(l => (
                 <button key={l.label}
-                  onClick={() => { window.location.href = ROUTES[l.page]||"/"; }}
-                  style={{ background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.14)",
-                    color:"rgba(255,255,255,.65)", padding:"6px 13px", borderRadius:50,
-                    fontSize:12, fontWeight:500, cursor:"pointer",
-                    fontFamily:"var(--font-poppins),'Poppins',sans-serif", transition:"all .2s" }}
-                  onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,255,255,.13)";e.currentTarget.style.color="#fff";}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,.07)";e.currentTarget.style.color="rgba(255,255,255,.65)";}}>
+                  onClick={() => { window.location.href = ROUTES[l.page] || "/"; }}
+                  style={{
+                    background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.14)",
+                    color: "rgba(255,255,255,.65)", padding: "6px 13px", borderRadius: 50,
+                    fontSize: 12, fontWeight: 500, cursor: "pointer",
+                    fontFamily: "var(--font-poppins),'Poppins',sans-serif", transition: "all .2s"
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,.13)"; e.currentTarget.style.color = "#fff"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.07)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; }}>
                   {l.label}
                 </button>
               ))}
             </div>
-            <div style={{ display:"flex", gap:24, flexWrap:"wrap" }}>
-              {["No retainer to start","Expert team responds within 24 hrs","Fixed transparent fees"].map(t => (
-                <span key={t} style={{ fontSize:12, color:"rgba(255,255,255,.3)",
-                  display:"flex", alignItems:"center", gap:6 }}>
-                  <span style={{ color:T.sl }}>✓</span> {t}
+            <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+              {["No retainer to start", "Expert team responds within 24 hrs", "Fixed transparent fees"].map(t => (
+                <span key={t} style={{
+                  fontSize: 12, color: "rgba(255,255,255,.3)",
+                  display: "flex", alignItems: "center", gap: 6
+                }}>
+                  <span style={{ color: T.sl }}>✓</span> {t}
                 </span>
               ))}
             </div>
@@ -2253,72 +2370,86 @@ export default function HomePage() {
 
           {/* ── Right: consultation form card ── */}
           <div className="reveal in hero-card" style={{
-            background:"#fff", borderRadius:20, padding:"36px 32px",
-            boxShadow:"0 40px 100px rgba(0,0,0,.32)", position:"relative",
+            background: "#fff", borderRadius: 20, padding: "36px 32px",
+            boxShadow: "0 40px 100px rgba(0,0,0,.32)", position: "relative",
           }}>
-            <div style={{ position:"absolute", top:0, left:0, right:0, height:4,
-              background:`linear-gradient(90deg,${T.f},${T.s})`,
-              borderRadius:"20px 20px 0 0" }}/>
+            <div style={{
+              position: "absolute", top: 0, left: 0, right: 0, height: 4,
+              background: `linear-gradient(90deg,${T.f},${T.s})`,
+              borderRadius: "20px 20px 0 0"
+            }} />
 
             {hStatus === "success" ? (
-              <div style={{ textAlign:"center", padding:"28px 0" }}>
-                <div style={{ fontSize:52, marginBottom:16 }}>🎉</div>
-                <h3 className="font-display" style={{ fontSize:24, fontWeight:600,
-                  color:T.f, marginBottom:10 }}>We'll be in touch!</h3>
-                <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.7, marginBottom:22 }}>
+              <div style={{ textAlign: "center", padding: "28px 0" }}>
+                <div style={{ fontSize: 52, marginBottom: 16 }}>🎉</div>
+                <h3 className="font-display" style={{
+                  fontSize: 24, fontWeight: 600,
+                  color: T.f, marginBottom: 10
+                }}>We'll be in touch!</h3>
+                <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.7, marginBottom: 22 }}>
                   Our expert team responds within 24 hours.
                 </p>
                 <a href="https://wa.me/919915731447"
                   target="_blank" rel="noopener noreferrer"
-                  style={{ display:"inline-flex", alignItems:"center", gap:8,
-                    background:"#25D366", color:"#fff", padding:"12px 24px",
-                    borderRadius:9, fontSize:14, fontWeight:600 }}>
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 8,
+                    background: "#25D366", color: "#fff", padding: "12px 24px",
+                    borderRadius: 9, fontSize: 14, fontWeight: 600
+                  }}>
                   Chat on WhatsApp
                 </a>
               </div>
             ) : (
               <>
-                <h3 className="font-display" style={{ fontSize:22, fontWeight:600,
-                  color:T.ch, marginBottom:4 }}>Book Free 30-min Strategy Call</h3>
-                <p style={{ fontSize:12.5, color:T.lt, lineHeight:1.5, marginBottom:16 }}>
+                <h3 className="font-display" style={{
+                  fontSize: 22, fontWeight: 600,
+                  color: T.ch, marginBottom: 4
+                }}>Book Free 30-min Strategy Call</h3>
+                <p style={{ fontSize: 12.5, color: T.lt, lineHeight: 1.5, marginBottom: 16 }}>
                   Expert team responds within 24 hours. No commitment.
                 </p>
-                <div style={{ background:T.stone, borderRadius:10, padding:"14px 16px",
-                  marginBottom:18, border:`1px solid ${T.bdr}` }}>
-                  <div style={{ fontSize:9.5, letterSpacing:1.5, textTransform:"uppercase",
-                    color:T.f, fontWeight:700, marginBottom:10 }}>What happens after you submit</div>
+                <div style={{
+                  background: T.stone, borderRadius: 10, padding: "14px 16px",
+                  marginBottom: 18, border: `1px solid ${T.bdr}`
+                }}>
+                  <div style={{
+                    fontSize: 9.5, letterSpacing: 1.5, textTransform: "uppercase",
+                    color: T.f, fontWeight: 700, marginBottom: 10
+                  }}>What happens after you submit</div>
                   {[
-                    { step:"Within 24 hrs", text:"Our expert team reviews your submission and confirms a 30-min slot" },
-                    { step:"On the call",   text:"We review your structure, flag risks, and recommend the right entity & tax setup" },
-                    { step:"After the call",text:"You receive a short written summary — structure recommendation, FDI route, next steps" },
-                  ].map((s,i) => (
-                    <div key={i} style={{ display:"grid", gridTemplateColumns:"80px 1fr", gap:10,
-                      paddingBottom: i<2 ? 10 : 0,
-                      borderBottom: i<2 ? `1px solid ${T.bdr}` : "none",
-                      marginBottom: i<2 ? 10 : 0 }}>
-                      <div style={{ fontSize:10.5, fontWeight:700, color:T.s, lineHeight:1.4 }}>{s.step}</div>
-                      <div style={{ fontSize:12, color:T.mid, lineHeight:1.55 }}>{s.text}</div>
+                    { step: "Within 24 hrs", text: "Our expert team reviews your submission and confirms a 30-min slot" },
+                    { step: "On the call", text: "We review your structure, flag risks, and recommend the right entity & tax setup" },
+                    { step: "After the call", text: "You receive a short written summary — structure recommendation, FDI route, next steps" },
+                  ].map((s, i) => (
+                    <div key={i} style={{
+                      display: "grid", gridTemplateColumns: "80px 1fr", gap: 10,
+                      paddingBottom: i < 2 ? 10 : 0,
+                      borderBottom: i < 2 ? `1px solid ${T.bdr}` : "none",
+                      marginBottom: i < 2 ? 10 : 0
+                    }}>
+                      <div style={{ fontSize: 10.5, fontWeight: 700, color: T.s, lineHeight: 1.4 }}>{s.step}</div>
+                      <div style={{ fontSize: 12, color: T.mid, lineHeight: 1.55 }}>{s.text}</div>
                     </div>
                   ))}
                 </div>
                 <input type="text" placeholder="Your full name *"
                   value={hf.nameTitle} onChange={setH("nameTitle")}
-                  style={inp({ borderColor: hStatus==="error"&&!hf.nameTitle.trim()?"#E74C3C":T.bdr })}
-                  onFocus={e=>e.target.style.borderColor=T.f}
-                  onBlur={e=>e.target.style.borderColor=(hStatus==="error"&&!hf.nameTitle.trim())?"#E74C3C":T.bdr}
+                  style={inp({ borderColor: hStatus === "error" && !hf.nameTitle.trim() ? "#E74C3C" : T.bdr })}
+                  onFocus={e => e.target.style.borderColor = T.f}
+                  onBlur={e => e.target.style.borderColor = (hStatus === "error" && !hf.nameTitle.trim()) ? "#E74C3C" : T.bdr}
                 />
                 <input type="email" placeholder="Work email address *"
                   value={hf.email} onChange={setH("email")}
-                  style={inp({ borderColor: hStatus==="error"&&!hf.email.trim()?"#E74C3C":T.bdr })}
-                  onFocus={e=>e.target.style.borderColor=T.f}
-                  onBlur={e=>e.target.style.borderColor=(hStatus==="error"&&!hf.email.trim())?"#E74C3C":T.bdr}
+                  style={inp({ borderColor: hStatus === "error" && !hf.email.trim() ? "#E74C3C" : T.bdr })}
+                  onFocus={e => e.target.style.borderColor = T.f}
+                  onBlur={e => e.target.style.borderColor = (hStatus === "error" && !hf.email.trim()) ? "#E74C3C" : T.bdr}
                 />
                 <input type="text" placeholder="Company name, Country"
                   value={hf.companyCountry} onChange={setH("companyCountry")}
-                  style={inp()} onFocus={e=>e.target.style.borderColor=T.f}
-                  onBlur={e=>e.target.style.borderColor=T.bdr}
+                  style={inp()} onFocus={e => e.target.style.borderColor = T.f}
+                  onBlur={e => e.target.style.borderColor = T.bdr}
                 />
-                <select value={hf.service} onChange={setH("service")} style={inp({ cursor:"pointer" })}>
+                <select value={hf.service} onChange={setH("service")} style={inp({ cursor: "pointer" })}>
                   <option value="">What do you need help with?</option>
                   <option>Foreign Company Incorporation</option>
                   <option>GCC / Captive Centre Setup</option>
@@ -2327,25 +2458,31 @@ export default function HomePage() {
                   <option>FEMA Compliance</option>
                   <option>Ongoing Compliance Retainer</option>
                 </select>
-                {hStatus==="error" && (
-                  <div style={{ background:"#FFF0F0", border:"1px solid #FFCCCC",
-                    borderRadius:7, padding:"9px 14px", marginBottom:10,
-                    fontSize:12.5, color:"#C0392B" }}>
+                {hStatus === "error" && (
+                  <div style={{
+                    background: "#FFF0F0", border: "1px solid #FFCCCC",
+                    borderRadius: 7, padding: "9px 14px", marginBottom: 10,
+                    fontSize: 12.5, color: "#C0392B"
+                  }}>
                     Please enter your name and email address.
                   </div>
                 )}
-                <button onClick={handleHeroSubmit} disabled={hStatus==="submitting"}
+                <button onClick={handleHeroSubmit} disabled={hStatus === "submitting"}
                   className="ics-btn ics-btn-primary"
-                  style={{ width:"100%", justifyContent:"center", padding:"14px 20px",
-                    fontSize:14.5, opacity:hStatus==="submitting"?0.7:1,
-                    borderRadius:9, marginTop:4, letterSpacing:.2 }}>
-                  {hStatus==="submitting" ? "Sending…" : "Request Free Consultation →"}
+                  style={{
+                    width: "100%", justifyContent: "center", padding: "14px 20px",
+                    fontSize: 14.5, opacity: hStatus === "submitting" ? 0.7 : 1,
+                    borderRadius: 9, marginTop: 4, letterSpacing: .2
+                  }}>
+                  {hStatus === "submitting" ? "Sending…" : "Request Free Consultation →"}
                 </button>
-                <div style={{ display:"flex", justifyContent:"center", gap:18, marginTop:14 }}>
-                  {["No commitment","Confidential","24hr response"].map(t => (
-                    <span key={t} style={{ fontSize:11.5, color:T.lt,
-                      display:"flex", alignItems:"center", gap:4 }}>
-                      <span style={{ color:"#22c55e" }}>✓</span> {t}
+                <div style={{ display: "flex", justifyContent: "center", gap: 18, marginTop: 14 }}>
+                  {["No commitment", "Confidential", "24hr response"].map(t => (
+                    <span key={t} style={{
+                      fontSize: 11.5, color: T.lt,
+                      display: "flex", alignItems: "center", gap: 4
+                    }}>
+                      <span style={{ color: "#22c55e" }}>✓</span> {t}
                     </span>
                   ))}
                 </div>
