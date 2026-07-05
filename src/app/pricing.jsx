@@ -372,7 +372,7 @@ export default function PricingTabsSection({ T, ROUTES }) {
                   color: isPopular ? 'rgba(255,255,255,.35)' : T.lt, fontWeight: 600, marginBottom: 16 }}>
                   {plan.includedLabel}
                 </div>
-                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 11 }}>
+                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 11, flex: 1 }}>
                   {plan.features.map(f => (
                     <li key={f} style={{ display: 'flex', gap: 10, fontSize: 13.5, lineHeight: 1.5,
                       color: isPopular ? 'rgba(255,255,255,.78)' : T.mid }}>

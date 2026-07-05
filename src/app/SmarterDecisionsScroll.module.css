@@ -1,0 +1,102 @@
+.sdrStickyContainer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.sdrHeaderArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: -48px; /* Card overlaps this by 48px */
+}
+
+.sdrLabelTab {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  padding: 24px 40px 56px 40px;
+  margin: 0 -12px;
+  position: relative;
+  z-index: 1; /* Behind card */
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.02);
+}
+
+.sdrKnobWrap {
+  width: 104px;
+  height: 104px;
+  position: relative;
+  z-index: 3; /* Above card */
+}
+
+.sdrCardOuter {
+  width: min(880px, 94vw);
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.16);
+  z-index: 2; /* Above tabs, below knob */
+}
+
+.sdrCardPad {
+  position: relative;
+  background: #eef0f2;
+  transition: background 0.4s ease;
+  padding: 72px 48px 56px 48px; /* top padding to account for knob overlap */
+}
+
+/* media queries */
+@media (max-width: 900px) {
+  .sdrCardOuter {
+    width: min(720px, 94vw);
+  }
+}
+
+@media (max-width: 720px) {
+  .sdrHeaderArea {
+    margin-bottom: -40px;
+  }
+  .sdrLabelTab {
+    padding: 16px 20px 48px 20px;
+    margin: 0 -8px;
+  }
+  .sdrLabelTab span {
+    font-size: 12px !important;
+  }
+  .sdrKnobWrap {
+    width: 84px;
+    height: 84px;
+  }
+  .sdrCardPad {
+    padding: 56px 28px 40px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sdrHeaderArea {
+    margin-bottom: -32px;
+  }
+  .sdrLabelTab {
+    padding: 12px 12px 40px 12px;
+    border-radius: 14px 14px 0 0;
+  }
+  .sdrLabelTab span {
+    font-size: 10px !important;
+  }
+  .sdrKnobWrap {
+    width: 68px;
+    height: 68px;
+  }
+  .sdrCardPad {
+    padding: 48px 20px 32px 20px;
+  }
+}
