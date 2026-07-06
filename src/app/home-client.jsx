@@ -1,13 +1,15 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import NewHeroSection from './NewHeroSection';
+
 import Link from 'next/link';
 import { T, CALENDLY_URL, PHONE, PHONE_RAW } from '@/lib/config';
 import { submitToZoho, trackConsultationRequest, trackGuideDownload, trackWhatsApp } from '@/lib/utils';
 import PricingTabsSection from './pricing';
 import WhatWeDoSection from './WhatWeDoSection';
 import SmarterDecisionsScroll from './SmarterDecisionsScroll';
+import NewHeroSection from './NewHeroSection';
+import ClientStoriesCarousel from './ClientStoriesCarousel';
 const FONT_HEADING = "var(--font-cormorant),'Cormorant Garamond',serif";
 const FONT_BODY = "var(--font-cardo),'Cardo',Georgia,serif";
 
@@ -1889,6 +1891,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      {/* Client Stories Carousel */}
+      <ClientStoriesCarousel />
 
       {/* ══ GLOBAL REACH ══════════════════════════════════════════════════════ */}
       <section style={{ padding: "0 64px 72px", background: "#FAF8F4" }}>
