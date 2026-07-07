@@ -1,0 +1,23 @@
+/* Base global styles for the Vite React app */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, hsl(210, 30%, 12%), hsl(220, 20%, 8%));
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Smooth scroll & subtle transitions */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}

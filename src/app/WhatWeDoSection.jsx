@@ -231,6 +231,8 @@ export default function WhatWeDoSection({ T, ROUTES }) {
                         opacity: introVisible ? 1 : 0,
                         transform: introVisible ? "translateY(0)" : "translateY(14px)",
                         transition: "opacity 0.6s ease, transform 0.6s ease",
+                        textAlign: "center",
+                        display: "flex", flexDirection: "column", alignItems: "center",
                     }}
                 >
                     <div>
@@ -250,7 +252,7 @@ export default function WhatWeDoSection({ T, ROUTES }) {
                     </div>
                     <p style={{
                         fontFamily: FONT_BODY, fontSize: 15.5, color: T.mid,
-                        lineHeight: 1.85, fontWeight: 300, maxWidth: 420
+                        lineHeight: 1.85, fontWeight: 300, maxWidth: 520
                     }}>
                         Not just paper-filing. Strategy first — the structure is designed
                         before a single document is touched.

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useId } from 'react';
 import { useRouter } from 'next/navigation';
 
 import Link from 'next/link';
@@ -9,7 +9,9 @@ import PricingTabsSection from './pricing';
 import WhatWeDoSection from './WhatWeDoSection';
 import SmarterDecisionsScroll from './SmarterDecisionsScroll';
 import NewHeroSection from './NewHeroSection';
+import GoogleReviews from '../../client/src/components/GoogleReviews';
 import ClientStoriesCarousel from './ClientStoriesCarousel';
+import ClientOutcomes from './clientOutcomes';
 const FONT_HEADING = "var(--font-cormorant),'Cormorant Garamond',serif";
 const FONT_BODY = "var(--font-cardo),'Cardo',Georgia,serif";
 
@@ -214,26 +216,31 @@ function HeroGlobe() {
 }
 
 // ─── CLOCK ICON ───────────────────────────────────────────────────────────────
-function ClockIcon({ size = 72 }) {
-  const [tick, setTick] = useState(0);
+function SpeedIcon({ size = 72 }) {
+  const [pulse, setPulse] = useState(false);
   useEffect(() => {
-    const id = setInterval(() => setTick(t => t + 1), 1000);
+    const id = setInterval(() => setPulse(p => !p), 1500);
     return () => clearInterval(id);
   }, []);
-  const base = new Date();
-  const s = (base.getSeconds() + tick) % 60;
-  const m = (base.getMinutes() + Math.floor((base.getSeconds() + tick) / 60)) % 60;
-  const secDeg = (s / 60) * 360;
-  const minDeg = (m / 60) * 360;
   const r = size / 2;
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <circle cx={r} cy={r} r={r - 3} fill="none" stroke="#C8D0C8" strokeWidth="1.5" />
-      <circle cx={r} cy={r} r="2.5" fill="#17170F" />
-      <line x1={r} y1={r} x2={r} y2={10} stroke="#17170F" strokeWidth="1.8" strokeLinecap="round"
-        transform={`rotate(${minDeg}, ${r}, ${r})`} />
-      <line x1={r} y1={r} x2={r} y2={8} stroke="#E8900A" strokeWidth="1" strokeLinecap="round"
-        transform={`rotate(${secDeg}, ${r}, ${r})`} />
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transition: "transform 0.3s", transform: pulse ? "scale(1.06)" : "scale(1)" }}>
+      <defs>
+        <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#0B3D2E" />
+          <stop offset="100%" stopColor="#e69819" />
+        </linearGradient>
+      </defs>
+      <circle cx={r} cy={r} r={r - 3} fill="none" stroke="url(#speedGrad)" strokeWidth="2.5" />
+      <circle cx={r} cy={r} r={r - 8} fill="none" stroke="#0B3D2E" strokeWidth="0.8" strokeDasharray="4 3" opacity="0.3" />
+      {/* Gauge needle */}
+      <line x1={r} y1={r} x2={r + (r * 0.55)} y2={r - (r * 0.25)} stroke="#e69819" strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx={r} cy={r} r="3.5" fill="#0B3D2E" />
+      <circle cx={r} cy={r} r="1.8" fill="#e69819" />
+      {/* Speed tick marks */}
+      {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(deg => (
+        <line key={deg} x1={r} y1={5} x2={r} y2={9} stroke="#0B3D2E" strokeWidth="1.2" strokeLinecap="round" opacity="0.35" transform={`rotate(${deg}, ${r}, ${r})`} />
+      ))}
     </svg>
   );
 }
@@ -266,7 +273,7 @@ function AudiencePathsSection({ T, ROUTES }) {
       headline: "Setting up an India subsidiary",
       desc: "You're a CFO, legal counsel, or finance director at a foreign company that needs an India presence. You need the right structure, compliant FDI filings, and a team that handles the full picture — not just the paperwork.",
       bullets: ["WOS or Branch Office structure", "FDI route & RBI compliance", "Transfer pricing from day one", "Full post-incorporation handover"],
-      stat: "2–3 wk", statLabel: "Typical time from structure sign-off to incorporation certificate.",
+      stat: "2–3 Weeks", statLabel: "Typical time from structure sign-off to incorporation certificate.",
       cta: "Foreign company guide", page: "seo_fcri",
     },
     {
@@ -274,7 +281,7 @@ function AudiencePathsSection({ T, ROUTES }) {
       headline: "Building a team in India",
       desc: "You're setting up a Global Capability Centre — 10 to 200+ people. You need entity setup, payroll, ESOP structuring, cost-plus pricing, and a compliance retainer that scales as you hire.",
       bullets: ["End-to-end GCC advisory", "Payroll & HR compliance", "ESOP & incentive structuring", "Ongoing compliance retainer"],
-      stat: "6 wk", statLabel: "Typical time from engagement to first hire onboarded.",
+      stat: "6 Weeks", statLabel: "Typical time from engagement to first hire onboarded.",
       cta: "GCC advisory", page: "gcc",
     },
     {
@@ -290,7 +297,7 @@ function AudiencePathsSection({ T, ROUTES }) {
       headline: "NRI investing or returning to India",
       desc: "You live abroad and want to invest in or start a business in India — or you're returning to India and your FEMA and tax status is changing. Two situations, one advisory team.",
       bullets: ["Schedule 4 FEMA — NRI investment route", "Residency transition planning", "NRE/FCNR account handling", "RNOR tax optimisation"],
-      stat: "1–2 wk", statLabel: "Typical time to structure advice and filing readiness.",
+      stat: "1–2 Weeks", statLabel: "Typical time to structure advice and filing readiness.",
       cta: "NRI guide", page: "seo_nri",
     },
     {
@@ -355,7 +362,7 @@ function AudiencePathsSection({ T, ROUTES }) {
       <div style={{ maxWidth: 1320, margin: "0 auto" }}>
 
         {/* Eyebrow */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 16 }}>
           <div style={{ width: 24, height: 1, background: T.s }} />
           <span style={{
             fontSize: 10, letterSpacing: "0.38em", textTransform: "uppercase",
@@ -366,23 +373,24 @@ function AudiencePathsSection({ T, ROUTES }) {
         {/* Heading */}
         <h2 className="font-display" style={{
           fontSize: "clamp(26px,3.5vw,50px)",
-          fontWeight: 600, lineHeight: 1.08, color: T.ch, marginBottom: 4
+          fontWeight: 600, lineHeight: 1.08, color: T.ch, marginBottom: 4, textAlign: "center"
         }}>
           Six situations.
         </h2>
         <h2 className="font-display" style={{
           fontSize: "clamp(26px,3.5vw,50px)",
-          fontWeight: 600, lineHeight: 1.08, marginBottom: 12, marginTop: 0
+          fontWeight: 600, lineHeight: 1.08, marginBottom: 12, marginTop: 0, textAlign: "center"
         }}>
-          <em style={{ fontStyle: "italic", color: T.f }}>One structure conversation.</em>
+          <em style={{ fontStyle: "italic", color: T.f }}>One structured conversation.</em>
         </h2>
-        <p style={{
+        {/* <p style={{
           fontSize: isMobile ? 14 : 15, color: T.mid, lineHeight: 1.75, fontWeight: 300,
-          maxWidth: 520, marginBottom: isMobile ? 24 : 36
+          maxWidth: 520, marginBottom: isMobile ? 24 : 36, textAlign: "center", margin: "0 auto",
+          marginBottom: isMobile ? 24 : 36
         }}>
           Pick the one closest to where you are — we'll show you exactly what
           changes for your structure, your timeline, and your compliance load.
-        </p>
+        </p> */}
 
         {/* Tab pills */}
         <div style={pillsRow}>
@@ -510,25 +518,30 @@ function AudiencePathsSection({ T, ROUTES }) {
             </div>
           </div>
 
-          {/* Right — clock + stat + CTA */}
+          {/* Right — speed icon + stat + CTA */}
           {!isMobile && (
             <div style={{
-              padding: rightPad, background: T.stone,
-              display: "flex", flexDirection: "column", justifyContent: "center", gap: 12
+              padding: rightPad, background: "linear-gradient(160deg, #f0f7f4 0%, #fdf6e8 100%)",
+              display: "flex", flexDirection: "column", justifyContent: "center", gap: 14,
+              borderLeft: "3px solid #e69819",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <ClockIcon size={isTablet ? 52 : 64} />
+                <SpeedIcon size={isTablet ? 52 : 64} />
                 <div className="font-number" style={{
-                  fontSize: "clamp(20px,2.2vw,32px)",
-                  color: T.ch, lineHeight: 1
+                  fontSize: "clamp(22px,2.4vw,34px)",
+                  color: "#e69819", lineHeight: 1, fontWeight: 700
                 }}>{s.stat}</div>
               </div>
-              <p style={{ fontSize: 13, color: T.mid, lineHeight: 1.65, margin: 0 }}>{s.statLabel}</p>
+              <p style={{ fontSize: 13, color: "#5C5C54", lineHeight: 1.65, margin: 0 }}>{s.statLabel}</p>
               <button style={{
-                background: T.ch, color: "#fff", border: "none",
+                background: "linear-gradient(135deg, #0B3D2E, #145c42)", color: "#fff", border: "none",
                 borderRadius: 7, padding: "12px 18px", fontSize: 13, fontWeight: 600,
-                cursor: "pointer", fontFamily: "inherit", marginTop: 4
+                cursor: "pointer", fontFamily: "inherit", marginTop: 4,
+                transition: "transform 0.2s, box-shadow 0.2s",
+                boxShadow: "0 2px 8px rgba(11,61,46,0.2)",
               }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(11,61,46,0.3)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(11,61,46,0.2)"; }}
                 onClick={() => { window.location.href = ROUTES[s.page] || "/"; }}>
                 {s.cta} →
               </button>
@@ -538,20 +551,22 @@ function AudiencePathsSection({ T, ROUTES }) {
           {/* On mobile: stat + CTA stacked below in a compact row */}
           {isMobile && (
             <div style={{
-              padding: "20px", background: T.stone,
-              display: "flex", alignItems: "center", gap: 16
+              padding: "20px", background: "linear-gradient(160deg, #f0f7f4 0%, #fdf6e8 100%)",
+              display: "flex", alignItems: "center", gap: 16,
+              borderTop: "3px solid #e69819",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
-                <ClockIcon size={44} />
+                <SpeedIcon size={44} />
                 <div>
-                  <div className="font-number" style={{ fontSize: 22, color: T.ch, lineHeight: 1 }}>{s.stat}</div>
-                  <p style={{ fontSize: 12, color: T.mid, lineHeight: 1.5, margin: "4px 0 0" }}>{s.statLabel}</p>
+                  <div className="font-number" style={{ fontSize: 22, color: "#e69819", lineHeight: 1, fontWeight: 700 }}>{s.stat}</div>
+                  <p style={{ fontSize: 12, color: "#5C5C54", lineHeight: 1.5, margin: "4px 0 0" }}>{s.statLabel}</p>
                 </div>
               </div>
               <button style={{
-                background: T.ch, color: "#fff", border: "none",
+                background: "linear-gradient(135deg, #0B3D2E, #145c42)", color: "#fff", border: "none",
                 borderRadius: 7, padding: "10px 14px", fontSize: 12.5, fontWeight: 600,
-                cursor: "pointer", fontFamily: "inherit", flexShrink: 0
+                cursor: "pointer", fontFamily: "inherit", flexShrink: 0,
+                boxShadow: "0 2px 8px rgba(11,61,46,0.2)",
               }}
                 onClick={() => { window.location.href = ROUTES[s.page] || "/"; }}>
                 {s.cta} →
@@ -1181,7 +1196,7 @@ function StatCell({ target, suffix = "", label, subLabel, gradient }) {
       {/* Number */}
       <div className="font-number" style={{
         fontSize: "clamp(32px,3.2vw,52px)", fontWeight: 500,
-        color: T.ch, lineHeight: 1, letterSpacing: "-.02em",
+        color: "#06231A", lineHeight: 1, letterSpacing: "-.02em",
         marginBottom: 8, whiteSpace: "nowrap",
       }}>{display}</div>
 
@@ -1198,27 +1213,25 @@ function StatsRibbon() {
     <section style={{ background: "#EDEFF4", padding: "80px 56px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
 
-        {/* Eyebrow + heading + CTA in one row */}
+        {/* Eyebrow + heading + CTA centered */}
         <div style={{
-          display: "flex", alignItems: "flex-end",
-          justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 40
+          display: "flex", flexDirection: "column", alignItems: "center",
+          textAlign: "center", marginBottom: 40
         }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-              <div style={{ width: 24, height: 2, background: T.s, borderRadius: 2 }} />
-              <span style={{
-                fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase",
-                color: T.s, fontWeight: 700
-              }}>Track Record</span>
-            </div>
-            <h2 className="font-display" style={{
-              fontSize: "clamp(26px,3vw,40px)",
-              fontWeight: 600, color: T.ch, margin: 0
-            }}>
-              Numbers that speak{" "}
-              <em style={{ fontStyle: "italic", color: T.f }}>for themselves.</em>
-            </h2>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
+            <div style={{ width: 24, height: 2, background: T.s, borderRadius: 2 }} />
+            <span style={{
+              fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase",
+              color: T.s, fontWeight: 700
+            }}>Track Record</span>
           </div>
+          <h2 className="font-display" style={{
+            fontSize: "clamp(26px,3vw,40px)",
+            fontWeight: 600, color: T.ch, margin: "0 0 16px"
+          }}>
+            Numbers that speak{" "}
+            <em style={{ fontStyle: "italic", color: T.f }}>for themselves.</em>
+          </h2>
           <button
             className="ics-btn ics-btn-primary"
             style={{
@@ -1239,27 +1252,27 @@ function StatsRibbon() {
             {
               target: 100, suffix: "+", label: "ENTITIES",
               subLabel: "Companies incorporated",
-              gradient: "linear-gradient(135deg, #FFF1F1 0%, #F1FFEC 100%)",
+              gradient: "linear-gradient(135deg, rgba(11,61,46,0.2) 0%, rgba(245,168,40,0.2) 100%)",
             },
             {
               target: 18, suffix: " yrs", label: "EXPERIENCE",
               subLabel: "In continuous practice",
-              gradient: "linear-gradient(135deg, #FFF1FE 0%, #ECFFFE 100%)",
+              gradient: "linear-gradient(135deg, rgba(245,168,40,0.2) 0%, rgba(92,92,84,0.2) 100%)",
             },
             {
               target: 22, suffix: " days", label: "SPEED",
               subLabel: "Median time to operational entity",
-              gradient: "linear-gradient(135deg, #F1F7FF 0%, #FFECEC 100%)",
+              gradient: "linear-gradient(135deg, rgba(92,92,84,0.2) 0%, rgba(11,61,46,0.2) 100%)",
             },
             {
               target: 0, suffix: "", label: "TP AUDITS",
               subLabel: "Transfer pricing audits lost",
-              gradient: "linear-gradient(135deg, #FFF1F1 0%, #F1FFEC 100%)",
+              gradient: "linear-gradient(135deg, rgba(11,61,46,0.2) 0%, rgba(245,168,40,0.2) 100%)",
             },
             {
               target: 90, suffix: "+", label: "TREATIES",
               subLabel: "Jurisdictions covered",
-              gradient: "linear-gradient(135deg, #FFF1FE 0%, #ECFFFE 100%)",
+              gradient: "linear-gradient(135deg, rgba(245,168,40,0.2) 0%, rgba(92,92,84,0.2) 100%)",
             },
           ].map((s, i) => (
             <StatCell key={s.label} target={s.target} suffix={s.suffix}
@@ -1534,7 +1547,7 @@ export default function HomePage() {
                       src={`/logos/${encodeURIComponent(name)}.png`}
                       alt={name}
                       style={{
-                        maxWidth: "110px", maxHeight: "40px",
+                        maxWidth: "130px", maxHeight: "50px",
                         width: "auto", height: "auto", objectFit: "contain"
                       }}
                     />
@@ -1551,7 +1564,8 @@ export default function HomePage() {
 
       {/* ══ AUDIENCE PATHS ════════════════════════════════════════════════════ */}
       <AudiencePathsSection T={T} ROUTES={ROUTES} />
-
+      <ClientOutcomes />
+      <GoogleReviews />
       <WhatWeDoSection T={T} ROUTES={ROUTES} />
 
       {/* ══ QUOTE CALLOUT ═════════════════════════════════════════════════════ */}
@@ -1722,7 +1736,7 @@ export default function HomePage() {
       </section> */}
 
       {/* ══ CLIENT REVIEWS ═══════════════════════════════════════════════════ */}
-      <section style={{
+      {/* <section style={{
         background: "#0a6055",
         padding: "0 56px", overflow: "hidden",
       }}>
@@ -1730,8 +1744,6 @@ export default function HomePage() {
           maxWidth: 1200, margin: "0 auto", width: "100%",
           display: "flex", alignItems: "stretch", gap: 80, flexWrap: "wrap",
         }}>
-
-          {/* ── Left: heading + quote ── */}
           <div style={{
             flex: "1 1 340px", display: "flex", flexDirection: "column",
             gap: 20, padding: "80px 0", justifyContent: "center",
@@ -1756,12 +1768,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* ── Right: two auto-scrolling columns ── */}
+         
           <div style={{
             flex: "1 1 380px", display: "flex", gap: 14,
             height: 560, overflow: "hidden", padding: "24px 0",
           }}>
-            {/* Column 1 — scrolls up */}
+            
             <div className="scrollbar-hidden" style={{ flex: 1, overflow: "hidden" }}>
               <div className="animate-marquee-up" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {[
@@ -1770,7 +1782,7 @@ export default function HomePage() {
                   { text: "We had been operating a branch for over a decade with no TP documentation. ICS converted it, filed 3CEB, and built a defensible policy. Passed scrutiny without a single adjustment.", name: "F.A.", sub: "Group Director · 🇦🇪 UAE", av: "F" },
                   { text: "Went from zero to a 40-person GCC in Pune. Entity, payroll, ESOP, cost-plus pricing — all handled in parallel. Fully compliant from the first hire.", name: "L.W.", sub: "CEO · 🇸🇬 Singapore", av: "L" },
                   { text: "A previous firm set us up with the wrong entity structure. ICS identified the issue immediately, managed the restructure, and fixed the compliance gaps.", name: "R.D.", sub: "Founder · 🇦🇺 Australia", av: "R" },
-                  /* duplicated for seamless loop */
+             
                   { text: "The team handled our incorporation end-to-end — FCGPR, transfer pricing policy, first payroll — all within 30 days. No gaps, no surprises.", name: "A.K.", sub: "CFO · 🇺🇸 USA", av: "A" },
                   { text: "Our parent company's auditors had raised PE risk concerns. ICS restructured the intercompany setup and documented everything properly. Clean audit since.", name: "N.R.", sub: "Finance Head · 🇬🇧 UK", av: "N" },
                   { text: "We had been operating a branch for over a decade with no TP documentation. ICS converted it, filed 3CEB, and built a defensible policy. Passed scrutiny without a single adjustment.", name: "F.A.", sub: "Group Director · 🇦🇪 UAE", av: "F" },
@@ -1794,7 +1806,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Column 2 — scrolls down */}
+           
             <div className="scrollbar-hidden" style={{ flex: 1, overflow: "hidden" }}>
               <div className="animate-marquee-down" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {[
@@ -1803,7 +1815,7 @@ export default function HomePage() {
                   { text: "The fixed-fee retainer removed all uncertainty. GST, TDS, payroll, annual audit — one number, full coverage. No invoice surprises mid-year.", name: "M.B.", sub: "COO · 🇩🇪 Germany", av: "M" },
                   { text: "WOS incorporated in 11 working days. Bank account open by week three. Their DTAA analysis upfront reduced our withholding tax exposure significantly.", name: "C.W.", sub: "CFO · 🇸🇬 Singapore", av: "C" },
                   { text: "Three other firms gave us conflicting FDI route advice. ICS gave one clear recommendation with the reasoning behind it. That confidence was worth the engagement alone.", name: "T.A.", sub: "Managing Director · 🇦🇪 UAE", av: "T" },
-                  /* duplicated for seamless loop */
+                  
                   { text: "We were raising a foreign round and had no idea how to structure it. ICS handled DPIIT recognition, FEMA valuation, and FC-GPR filing. Cap table is clean going into Series A.", name: "S.V.", sub: "Co-founder · 🇮🇳 India", av: "S" },
                   { text: "They aligned our India compliance calendar to our UK group reporting cycle. No year-end surprises. That level of commercial thinking is rare from an Indian CA firm.", name: "P.H.", sub: "Finance Director · 🇬🇧 UK", av: "P" },
                   { text: "The fixed-fee retainer removed all uncertainty. GST, TDS, payroll, annual audit — one number, full coverage. No invoice surprises mid-year.", name: "M.B.", sub: "COO · 🇩🇪 Germany", av: "M" },
@@ -1829,7 +1841,7 @@ export default function HomePage() {
           </div>
 
         </div>
-      </section>
+      </section> */}
 
       {/* ══ PRICING / PACKAGES ═══════════════════════════════════════════════ */}
       <PricingTabsSection T={T} ROUTES={ROUTES} />
@@ -1892,44 +1904,120 @@ export default function HomePage() {
         </div>
       </section>
       {/* Client Stories Carousel */}
-      <ClientStoriesCarousel />
+      {/* <ClientStoriesCarousel /> */}
 
       {/* ══ GLOBAL REACH ══════════════════════════════════════════════════════ */}
-      <section style={{ padding: "0 64px 72px", background: "#FAF8F4" }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <div className="gr-wrap" style={{
-            background: "#fff", borderRadius: 30,
-            boxShadow: "0 2px 40px rgba(0,0,0,.06)",
-            border: "1px solid #ECE7E1",
-            display: "grid", gridTemplateColumns: "38% 62%",
-            alignItems: "stretch", overflow: "hidden",
-          }}>
+      <section className="gr-section" style={{ padding: "0 40px 72px", background: "#FAF8F4" }}>
+        <style>{`
+    .gr-wrap {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 2px 40px rgba(0,0,0,.06);
+      border: 1px solid #ECE7E1;
+      display: grid;
+      grid-template-columns: 38% 62%;
+      align-items: stretch;
+      overflow: hidden;
+    }
+    .gr-left {
+      padding: 36px 32px;
+      border-right: 1px solid #ECE7E1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      height: fit-content;
+    }
+    /* Map panel — same height as left, clipped */
+    .gr-map {
+      position: relative;
+      overflow: hidden;
+      /* Inner padding so image has breathing room on all sides */
+      padding: 20px;
+    }
+    /* Image fills the padded area, contained — no cropping */
+    .gr-map-img {
+      position: absolute;
+      inset: 20px; /* matches the padding — gap on all 4 sides */
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+      filter: saturate(0.18) brightness(1.08) sepia(0.06);
+      opacity: 0.75;
+    }
+    /* Canvas must match the same inset so dots align with the image */
+    .gr-map canvas {
+      position: absolute !important;
+      inset: 20px !important;
+      width: calc(100% - 40px) !important;
+      height: calc(100% - 40px) !important;
+      pointer-events: none;
+    }
+
+    /* ── Tablet ── */
+    @media (max-width: 1024px) {
+      .gr-wrap { grid-template-columns: 1fr; }
+      .gr-left { border-right: none !important; border-bottom: 1px solid #ECE7E1; }
+      .gr-map  { height: 320px; padding: 16px; }
+      .gr-map-img {
+        inset: 16px !important;
+        width: calc(100% - 32px) !important;
+        height: calc(100% - 32px) !important;
+      }
+      .gr-map canvas {
+        inset: 16px !important;
+        width: calc(100% - 32px) !important;
+        height: calc(100% - 32px) !important;
+      }
+    }
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .gr-section  { padding: 0 16px 48px !important; }
+      .gr-wrap     { border-radius: 16px; }
+      .gr-left     { padding: 24px 18px !important; gap: 14px !important; }
+      .gr-map      { height: 240px; padding: 12px; }
+      .gr-map-img  {
+        inset: 12px !important;
+        width: calc(100% - 24px) !important;
+        height: calc(100% - 24px) !important;
+      }
+      .gr-map canvas {
+        inset: 12px !important;
+        width: calc(100% - 24px) !important;
+        height: calc(100% - 24px) !important;
+      }
+      .gr-stat-num { font-size: 22px !important; }
+      .gr-btns     { flex-direction: column !important; }
+      .gr-btns button { width: 100%; justify-content: center; }
+    }
+  `}</style>
+
+        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
+          <div className="gr-wrap">
 
             {/* ── Left ── */}
-            <div className="gr-left" style={{
-              padding: "40px 36px", borderRight: "1px solid #ECE7E1",
-              display: "flex", flexDirection: "column", gap: 20,
-            }}>
-              {/* Heading */}
+            <div className="gr-left">
+
               <div>
                 <p style={{
                   fontSize: 10, letterSpacing: "0.45em", textTransform: "uppercase",
-                  color: T.s, fontWeight: 600, margin: "0 0 10px"
+                  color: T.s, fontWeight: 600, margin: "0 0 10px",
                 }}>Global Reach</p>
                 <h2 className="font-display" style={{
-                  fontSize: "clamp(22px,2.2vw,34px)",
-                  fontWeight: 600, lineHeight: 1.12, color: T.ch, margin: "0 0 14px"
+                  fontSize: "clamp(20px,2vw,30px)",
+                  fontWeight: 600, lineHeight: 1.12, color: T.ch, margin: "0 0 12px",
                 }}>
                   Clients from every{" "}
                   <em style={{ color: T.f, fontStyle: "italic" }}>major market.</em>
                 </h2>
-                <div style={{ width: 32, height: 3, background: T.f, borderRadius: 3 }} />
+                <div style={{ width: 28, height: 2.5, background: T.f, borderRadius: 3 }} />
               </div>
 
-              {/* Stats — 2x2 grid, bigger */}
+              {/* Stats 2×2 */}
               <div style={{
                 display: "grid", gridTemplateColumns: "1fr 1fr",
-                border: "1px solid #ECE7E1", borderRadius: 10, overflow: "hidden"
+                border: "1px solid #ECE7E1", borderRadius: 10, overflow: "hidden",
               }}>
                 {[
                   { Icon: ClientsIcon, num: "200+", label: "Clients Worldwide" },
@@ -1938,19 +2026,22 @@ export default function HomePage() {
                   { Icon: StarIcon, num: "98%", label: "Client Satisfaction" },
                 ].map(({ Icon, num, label }, i) => (
                   <div key={label} style={{
-                    padding: "20px 16px", textAlign: "center",
+                    padding: "16px 12px", textAlign: "center",
                     borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none",
                     borderTop: i >= 2 ? "1px solid #ECE7E1" : "none",
-                    display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+                    display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
                   }}>
-                    <div><Icon /></div>
-                    <div className="font-number" style={{ fontSize: 28, color: T.ch, lineHeight: 1 }}>{num}</div>
-                    <div style={{ fontSize: 12, color: T.lt, lineHeight: 1.4 }}>{label}</div>
+                    <Icon />
+                    <div className="gr-stat-num font-number"
+                      style={{ fontSize: 26, color: T.ch, lineHeight: 1 }}>
+                      {num}
+                    </div>
+                    <div style={{ fontSize: 11, color: T.lt, lineHeight: 1.35 }}>{label}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Region pills — single row, wrapping */}
+              {/* Region pills */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                 {[
                   { dot: "#E8900A", label: "USA & Canada" },
@@ -1964,13 +2055,14 @@ export default function HomePage() {
                     display: "inline-flex", alignItems: "center", gap: 5,
                     border: "1px solid #ECE7E1", borderRadius: 50,
                     padding: "4px 10px", fontSize: 10.5, color: T.mid,
-                    cursor: "default", transition: "border-color .15s", whiteSpace: "nowrap"
+                    cursor: "default", transition: "border-color .15s", whiteSpace: "nowrap",
                   }}
                     onMouseEnter={e => e.currentTarget.style.borderColor = T.f}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = "#ECE7E1"}>
+                    onMouseLeave={e => e.currentTarget.style.borderColor = "#ECE7E1"}
+                  >
                     <div style={{
                       width: 6, height: 6, borderRadius: "50%",
-                      background: p.dot, flexShrink: 0
+                      background: p.dot, flexShrink: 0,
                     }} />
                     {p.label}
                   </div>
@@ -1978,7 +2070,7 @@ export default function HomePage() {
               </div>
 
               {/* CTAs */}
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <div className="gr-btns" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <button className="ics-btn ics-btn-primary"
                   onClick={() => { window.location.href = ROUTES["contact"]; }}>
                   Explore Global Presence →
@@ -1990,25 +2082,19 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* ── Right — world map image + animated lines centered and overlaid ── */}
-            <div className="gr-map" style={{
-              position: "relative",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              background: "#fff", padding: "16px",
-            }}>
-              {/* Wrapper — canvas is positioned relative to this, same size as image */}
-              <div style={{ position: "relative", width: "100%" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/worldmap.png" alt="World map"
-                  style={{
-                    width: "100%", height: "auto", display: "block",
-                    filter: "saturate(0.18) brightness(1.08) sepia(0.06)",
-                    opacity: 0.75,
-                  }}
-                />
-                {/* Canvas overlay — same size as image */}
-                <MapLinesOverlay />
-              </div>
+            {/* ── Right: map with padding so image breathes ── */}
+            <div className="gr-map">
+              <img
+                src="/worldmap.png"
+                alt="World map"
+                className="gr-map-img"
+              />
+              {/*
+          MapLinesOverlay canvas is forced via CSS to match the same
+          inset as the image — so dots and lines align perfectly with
+          the visible map and never go outside it.
+        */}
+              <MapLinesOverlay />
             </div>
 
           </div>
@@ -2076,7 +2162,7 @@ export default function HomePage() {
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
 
           {/* Heading */}
-          <div style={{ marginBottom: 52 }}>
+          <div style={{ marginBottom: 52, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <div style={{
               fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase",
               color: T.s, fontWeight: 600, marginBottom: 14
@@ -2090,169 +2176,128 @@ export default function HomePage() {
             </h2>
           </div>
 
-          {/* ── Comparison table — desktop ── */}
-          <div className="whyus-table-wrap">
-            <table style={{
-              width: "100%", borderCollapse: "separate",
-              borderSpacing: 0, minWidth: 680
+          {/* ── Comparison Matrix — visible on all devices ── */}
+          <div style={{ overflowX: "auto", paddingBottom: 20 }}>
+            <div style={{
+              minWidth: 860, maxWidth: 1140, margin: "0 auto",
+              background: "#fff",
+              borderRadius: 20,
+              boxShadow: "0 8px 30px rgba(0,0,0,0.04)",
+              overflow: "hidden"
             }}>
-              <thead>
-                <tr>
-                  <th style={{
-                    padding: "12px 20px", textAlign: "left",
-                    fontSize: 10.5, letterSpacing: ".1em", textTransform: "uppercase",
-                    color: T.lt, fontWeight: 600,
-                    borderBottom: `1px solid ${T.bdr}`,
-                    background: T.stone
-                  }} />
-                  {[
-                    { label: "India Company Setup", hl: true },
-                    { label: "Big Four Firm", hl: false },
-                    { label: "Generic Local CA", hl: false },
-                  ].map(({ label, hl }) => (
-                    <th key={label} style={{
-                      padding: "14px 18px", textAlign: "left",
-                      fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase",
-                      fontWeight: 700,
-                      color: hl ? "#fff" : T.lt,
-                      background: hl ? T.f : T.stone,
-                      borderBottom: hl ? "none" : `1px solid ${T.bdr}`,
-                      borderRadius: hl ? "10px 10px 0 0" : 0,
-                    }}>{label}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  {
-                    feature: "Senior attention",
-                    ics: "✓ Partner-led throughout", big4: "Delegated to junior staff",
-                    local: "Varies, often solo", diy: "—"
-                  },
-                  {
-                    feature: "Tax + legal + filing, integrated",
-                    ics: "✓ One accountable team", big4: "✓ Yes, at premium pricing",
-                    local: "Usually one discipline", diy: "—"
-                  },
-                  {
-                    feature: "Cross-border / DTAA depth",
-                    ics: "✓ Core specialism", big4: "✓ Yes",
-                    local: "Limited exposure", diy: "—"
-                  },
-                  {
-                    feature: "Cost position",
-                    ics: "Mid-market, fixed-scope", big4: "Premium retainer",
-                    local: "Lowest cost", diy: "Lowest cost, highest risk"
-                  },
-                  {
-                    feature: "Response time",
-                    ics: "< 24 hrs, named contact", big4: "Varies by account tier",
-                    local: "Varies", diy: "N/A"
-                  },
-                  {
-                    feature: "Transfer pricing record",
-                    ics: "✓ Zero audits lost", big4: "Varies",
-                    local: "Rarely documented", diy: "—"
-                  },
-                ].map((row, ri) => (
-                  <tr key={row.feature} className="whyus-row"
-                    style={{ animationDelay: `${ri * 80}ms` }}>
-                    <td style={{
-                      padding: "16px 20px", fontSize: 13.5, fontWeight: 600,
-                      color: T.ch, borderBottom: `1px solid ${T.bdr}`,
-                      background: T.stone,
-                    }}>{row.feature}</td>
-
-                    {/* ICS column — highlighted */}
-                    <td style={{
-                      padding: "16px 18px", fontSize: 13, lineHeight: 1.55,
-                      background: "rgba(11,61,46,.06)",
-                      borderBottom: `1px solid rgba(11,61,46,.1)`,
-                      color: row.ics.startsWith("✓") ? T.f : T.ch,
-                      fontWeight: row.ics.startsWith("✓") ? 600 : 400,
-                    }}>
-                      {row.ics.startsWith("✓") && (
-                        <span style={{
-                          display: "inline-flex", alignItems: "center",
-                          justifyContent: "center", width: 18, height: 18,
-                          background: T.f, borderRadius: "50%",
-                          color: "#fff", fontSize: 10, fontWeight: 700,
-                          marginRight: 8, flexShrink: 0
-                        }}>✓</span>
-                      )}
-                      {row.ics.startsWith("✓") ? row.ics.slice(2) : row.ics}
-                    </td>
-
-                    {/* Other columns */}
-                    {[row.big4, row.local].map((val, ci) => (
-                      <td key={ci} style={{
-                        padding: "16px 18px", fontSize: 13, lineHeight: 1.55,
-                        color: val === "—" ? T.bdr : T.mid,
-                        borderBottom: `1px solid ${T.bdr}`,
-                        background: T.stone,
-                      }}>{val}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* ── Mobile cards — visible only on small screens ── */}
-          <div className="whyus-cards">
-            {[
-              { icon: "🏆", title: "Partner-led throughout", desc: "Every engagement handled by a senior CA — no hand-off to juniors." },
-              { icon: "🔗", title: "One team, full picture", desc: "Tax, legal, filings, payroll, audit — one firm, zero gaps." },
-              { icon: "🌐", title: "Cross-border specialists", desc: "DTAA planning, PE risk, FEMA — our core, not a side service." },
-              { icon: "💰", title: "Mid-market fixed fees", desc: "Big 4 rigour without Big 4 retainer pricing." },
-              { icon: "⚡", title: "< 24 hr response", desc: "Named contact who knows your file. Always." },
-              { icon: "✅", title: "Zero TP audits lost", desc: "Transfer pricing record across all client engagements." },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} style={{
-                background: "#fff", border: `1px solid ${T.bdr}`,
-                borderRadius: 14, padding: "20px 18px",
-                display: "flex", gap: 14, alignItems: "flex-start",
+              {/* Header Row */}
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1.2fr 1.3fr 1fr 1fr",
+                background: "#fafaf5",
               }}>
-                <div style={{ fontSize: 22, flexShrink: 0, marginTop: 2 }}>{icon}</div>
-                <div>
-                  <div style={{ fontSize: 13.5, fontWeight: 600, color: T.ch, marginBottom: 4 }}>{title}</div>
-                  <div style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.6 }}>{desc}</div>
+                <div style={{ padding: "32px 24px", borderBottom: "1px solid #ECE7E1" }}></div>
+                <div style={{
+                  padding: "28px 24px 24px",
+                  background: "#0B3D2E",
+                  borderTop: "4px solid #e69819",
+                  display: "flex", flexDirection: "column", justifyContent: "center",
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e69819" }} />
+                    <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", letterSpacing: "0.01em" }}>India Company Setup</div>
+                  </div>
+                  <div style={{ fontSize: 11.5, fontWeight: 600, color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "0.12em", paddingLeft: 18 }}>One Accountable Team</div>
                 </div>
+                <div style={{ padding: "32px 24px 24px", display: "flex", alignItems: "flex-end", fontSize: 13, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, color: "#8b8b80", borderBottom: "1px solid #ECE7E1" }}>Big Four Firm</div>
+                <div style={{ padding: "32px 24px 24px", display: "flex", alignItems: "flex-end", fontSize: 13, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, color: "#8b8b80", borderBottom: "1px solid #ECE7E1" }}>Generic Local CA</div>
               </div>
-            ))}
+
+              {/* Body Rows */}
+              {[
+                {
+                  feature: "Senior attention",
+                  ics: "Partner-led throughout", big4: "Delegated to junior staff", local: "Varies, often solo"
+                },
+                {
+                  feature: "Tax + legal + filing",
+                  ics: "One integrated team", big4: "Yes, at premium pricing", local: "Usually one discipline"
+                },
+                {
+                  feature: "Cross-border depth",
+                  ics: "Core specialism (DTAA/FEMA)", big4: "Yes", local: "Limited exposure"
+                },
+                {
+                  feature: "Cost position",
+                  ics: "Mid-market, fixed-scope", big4: "Premium retainer", local: "Lowest cost, highest risk"
+                },
+                {
+                  feature: "Response time",
+                  ics: "< 24 hrs, named contact", big4: "Varies by account tier", local: "Varies widely"
+                },
+                {
+                  feature: "Transfer pricing record",
+                  ics: "Zero audits lost", big4: "Varies", local: "Rarely documented"
+                },
+              ].map((row, i, arr) => (
+                <div key={row.feature} style={{
+                  display: "grid",
+                  gridTemplateColumns: "1.2fr 1.3fr 1fr 1fr",
+                  transition: "background 0.2s",
+                }}
+                  onMouseEnter={e => e.currentTarget.style.background = "#fafaf5"}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                >
+                  <div style={{
+                    padding: "26px 24px", fontSize: 15, fontWeight: 700, color: "#0B3D2E",
+                    display: "flex", alignItems: "center",
+                    borderBottom: i === arr.length - 1 ? "none" : "1px solid #ECE7E1"
+                  }}>
+                    {row.feature}
+                  </div>
+                  <div style={{
+                    padding: "26px 24px",
+                    background: "rgba(11,61,46,0.04)",
+                    display: "flex", alignItems: "flex-start", gap: 12,
+                  }}>
+                    <div style={{
+                      width: 20, height: 20, borderRadius: "50%", background: "#0B3D2E",
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1
+                    }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: "#0B3D2E", lineHeight: 1.4 }}>{row.ics}</span>
+                  </div>
+                  <div style={{
+                    padding: "26px 24px", fontSize: 14.5, color: "#5C5C54", lineHeight: 1.5,
+                    display: "flex", alignItems: "center",
+                    borderBottom: i === arr.length - 1 ? "none" : "1px solid #ECE7E1"
+                  }}>
+                    {row.big4}
+                  </div>
+                  <div style={{
+                    padding: "26px 24px", fontSize: 14.5, color: "#5C5C54", lineHeight: 1.5,
+                    display: "flex", alignItems: "center",
+                    borderBottom: i === arr.length - 1 ? "none" : "1px solid #ECE7E1"
+                  }}>
+                    {row.local}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Stats + CTAs */}
-          <div className="whyus-bottom" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4,1fr) auto", gap: 20,
-            alignItems: "center", marginTop: 48,
-            paddingTop: 36, borderTop: `1px solid ${T.bdr}`
-          }}>
-            {[
-              { n: "8+", label: "Years Ex-Big 4" },
-              { n: "100+", label: "Companies incorporated" },
-              { n: "0", label: "TP audits lost" },
-              { n: "FCA", label: "+ Diploma Int'l Tax" },
-            ].map(({ n, label }) => (
-              <div key={label}>
-                <div className="font-number" style={{
-                  fontSize: 30, color: T.f,
-                  lineHeight: 1, marginBottom: 4
-                }}>{n}</div>
-                <div style={{ fontSize: 12, color: T.lt }}>{label}</div>
-              </div>
-            ))}
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "flex-end" }}>
-              <button className="ics-btn ics-btn-primary"
-                onClick={() => { window.location.href = ROUTES["contact"]; }}>
-                Talk to Our Team →
-              </button>
-              <button className="ics-btn ics-btn-outline"
-                onClick={() => { window.location.href = ROUTES["about"]; }}>
-                About Us
-              </button>
-            </div>
+          {/* CTAs */}
+          <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginTop: 40 }}>
+            <button className="ics-btn ics-btn-primary"
+              style={{
+                background: "linear-gradient(135deg, #0B3D2E, #145c42)",
+                padding: "16px 36px", borderRadius: 8, fontSize: 14.5, fontWeight: 600,
+                boxShadow: "0 6px 20px rgba(11,61,46,0.25)", border: "none", color: "#fff", cursor: "pointer"
+              }}
+              onClick={() => { window.location.href = ROUTES["contact"]; }}>
+              Talk to Our Team →
+            </button>
+            <button className="ics-btn ics-btn-outline"
+              style={{ padding: "15px 32px", borderRadius: 8, fontSize: 14.5, fontWeight: 600 }}
+              onClick={() => { window.location.href = ROUTES["about"]; }}>
+              About Us
+            </button>
           </div>
 
         </div>
@@ -2304,12 +2349,19 @@ export default function HomePage() {
 
       {/* ══ FINAL CTA ═════════════════════════════════════════════════════════ */}
       <section style={{
-        background: T.f, padding: "80px 56px",
-        position: "relative", overflow: "hidden"
+        padding: "80px 56px",
+        position: "relative", overflow: "hidden",
+        backgroundImage: "url('/homepage.avif')",
+        backgroundSize: "cover",
+        backgroundPosition: "center 38%"
       }}>
+        {/* Dark overlay for readability */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse 50% 70% at 50% 0%,rgba(232,144,10,.09) 0%,transparent 60%)"
+          background: `
+            linear-gradient(100deg, rgba(5,15,12,.96) 4%, rgba(8,32,24,.88) 42%, rgba(8,32,24,.65) 78%),
+            linear-gradient(0deg, rgba(4,12,9,.6) 0%, transparent 40%)
+          `
         }} />
 
         <div style={{
@@ -2321,121 +2373,269 @@ export default function HomePage() {
           {/* ── Left copy ── */}
           <div>
             <div style={{
-              fontSize: 10, letterSpacing: 3, textTransform: "uppercase",
-              color: T.sl, fontWeight: 600, marginBottom: 18
+              fontSize: 11, letterSpacing: 2.5, textTransform: "uppercase",
+              color: T.sl, fontWeight: 700, marginBottom: 18,
+              fontFamily: "var(--font-poppins),'Poppins',sans-serif"
             }}>Get Started</div>
             <h2 className="font-display" style={{
-              fontSize: "clamp(32px,4vw,52px)",
-              fontWeight: 600, color: "#fff", lineHeight: 1.08, marginBottom: 18
+              fontSize: "clamp(36px, 4.5vw, 56px)",
+              fontWeight: 600, color: "#fff", lineHeight: 1.05, marginBottom: 22
             }}>
               Ready to enter India<br />
-              <em style={{ fontStyle: "italic", color: T.sl }}>the right way?</em>
+              <em style={{ fontStyle: "italic", color: T.sl, fontWeight: 500 }}>the right way?</em>
             </h2>
             <p style={{
-              fontSize: 15, color: "rgba(255,255,255,.45)", lineHeight: 1.82,
-              fontWeight: 300, marginBottom: 32, maxWidth: 440
+              fontSize: 16, color: "rgba(255, 255, 255, 0.9)", lineHeight: 1.75,
+              fontWeight: 400, marginBottom: 36, maxWidth: 460
             }}>
               Book a free 30-minute consultation. We'll review your India objectives
               and give you a clear structure recommendation — no commitment, no jargon.
             </p>
+
             {/* SEO resource links */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 36 }}>
               {[
-                { label: "Foreign company registration →", page: "seo_fcri" },
-                { label: "Subsidiary company setup →", page: "seo_sub" },
-                { label: "Transfer pricing guide →", page: "seo_tp" },
-                { label: "FDI rules India →", page: "seo_fdi" },
+                { label: "Foreign company registration", page: "seo_fcri" },
+                { label: "Subsidiary company setup", page: "seo_sub" },
+                { label: "Transfer pricing guide", page: "seo_tp" },
+                { label: "FDI rules India", page: "seo_fdi" },
               ].map(l => (
                 <button key={l.label}
                   onClick={() => { window.location.href = ROUTES[l.page] || "/"; }}
                   style={{
-                    background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.14)",
-                    color: "rgba(255,255,255,.65)", padding: "6px 13px", borderRadius: 50,
-                    fontSize: 12, fontWeight: 500, cursor: "pointer",
-                    fontFamily: "var(--font-poppins),'Poppins',sans-serif", transition: "all .2s"
+                    background: "#fff", border: "none",
+                    color: "#082018", padding: "8px 16px", borderRadius: 50,
+                    fontSize: 12.5, fontWeight: 600, cursor: "pointer",
+                    fontFamily: "var(--font-poppins),'Poppins',sans-serif",
+                    transition: "all 0.2s ease",
+                    display: "flex", alignItems: "center", gap: 6,
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,.13)"; e.currentTarget.style.color = "#fff"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,.07)"; e.currentTarget.style.color = "rgba(255,255,255,.65)"; }}>
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1.5px)"; e.currentTarget.style.background = "#f4f4f4"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "#fff"; }}>
                   {l.label}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
                 </button>
               ))}
             </div>
+
+            {/* Checkmark benefits */}
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
               {["No retainer to start", "Expert team responds within 24 hrs", "Fixed transparent fees"].map(t => (
                 <span key={t} style={{
-                  fontSize: 12, color: "rgba(255,255,255,.3)",
-                  display: "flex", alignItems: "center", gap: 6
+                  fontSize: 13, color: "rgba(255, 255, 255, 0.85)", fontWeight: 500,
+                  display: "flex", alignItems: "center", gap: 8,
+                  fontFamily: "var(--font-poppins),'Poppins',sans-serif"
                 }}>
-                  <span style={{ color: T.sl }}>✓</span> {t}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={T.sl} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {t}
                 </span>
               ))}
             </div>
           </div>
-
           {/* ── Right: consultation form card ── */}
           <div className="reveal in hero-card" style={{
             background: "#fff", borderRadius: 20, padding: "36px 32px",
             boxShadow: "0 40px 100px rgba(0,0,0,.32)", position: "relative",
           }}>
+
+            {/* Top gradient bar */}
             <div style={{
-              position: "absolute", top: 0, left: 0, right: 0, height: 4,
+              position: "absolute", top: 0, left: 0, right: 0, height: 3,
               background: `linear-gradient(90deg,${T.f},${T.s})`,
-              borderRadius: "20px 20px 0 0"
+              borderRadius: "20px 20px 0 0",
             }} />
 
+            {/* Step animation CSS — injected once */}
+            <style>{`
+    ._sdot {
+      opacity:0; transform:scale(0.3) translateY(10px);
+      transition:opacity 0.48s cubic-bezier(0.34,1.56,0.64,1),
+                 transform 0.48s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    ._sdot.s { opacity:1; transform:scale(1) translateY(0); }
+
+    ._sline {
+      transform:scaleY(0); opacity:0; transform-origin:top;
+      transition:transform 0.36s ease, opacity 0.36s ease;
+    }
+    ._sline.s { transform:scaleY(1); opacity:1; }
+
+    ._stag {
+      opacity:0; transform:translateY(6px);
+      transition:opacity 0.28s ease, transform 0.28s ease;
+    }
+    ._stag.s { opacity:1; transform:translateY(0); }
+
+    ._stxt {
+      opacity:0; transform:translateY(5px);
+      transition:opacity 0.28s ease, transform 0.28s ease;
+    }
+    ._stxt.s { opacity:1; transform:translateY(0); }
+  `}</style>
+
             {hStatus === "success" ? (
+
+              /* ── Success state ── */
               <div style={{ textAlign: "center", padding: "28px 0" }}>
-                <div style={{ fontSize: 52, marginBottom: 16 }}>🎉</div>
-                <h3 className="font-display" style={{
-                  fontSize: 24, fontWeight: 600,
-                  color: T.f, marginBottom: 10
-                }}>We'll be in touch!</h3>
+                <div style={{
+                  width: 56, height: 56, borderRadius: "50%",
+                  background: "rgba(11,61,46,0.08)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  margin: "0 auto 16px",
+                }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                    stroke={T.f} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <h3 className="font-display" style={{ fontSize: 22, fontWeight: 600, color: T.ch, marginBottom: 8 }}>
+                  We'll be in touch!
+                </h3>
                 <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.7, marginBottom: 22 }}>
                   Our expert team responds within 24 hours.
                 </p>
-                <a href="https://wa.me/919915731447"
-                  target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/919915731447" target="_blank" rel="noopener noreferrer"
                   style={{
                     display: "inline-flex", alignItems: "center", gap: 8,
-                    background: "#25D366", color: "#fff", padding: "12px 24px",
-                    borderRadius: 9, fontSize: 14, fontWeight: 600
+                    background: "#25D366", color: "#fff", padding: "12px 22px",
+                    borderRadius: 9, fontSize: 13.5, fontWeight: 600, textDecoration: "none",
                   }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" />
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.843L0 24l6.327-1.497A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.015-1.375l-.36-.214-3.732.882.898-3.636-.234-.374A9.818 9.818 0 1112 21.818z" />
+                  </svg>
                   Chat on WhatsApp
                 </a>
               </div>
+
             ) : (
+
+              /* ── Form state ── */
               <>
-                <h3 className="font-display" style={{
-                  fontSize: 22, fontWeight: 600,
-                  color: T.ch, marginBottom: 4
-                }}>Book Free 30-min Strategy Call</h3>
-                <p style={{ fontSize: 12.5, color: T.lt, lineHeight: 1.5, marginBottom: 16 }}>
+                <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: T.ch, marginBottom: 4 }}>
+                  Book Free 30-min Strategy Call
+                </h3>
+                <p style={{ fontSize: 12.5, color: T.lt, lineHeight: 1.5, marginBottom: 18 }}>
                   Expert team responds within 24 hours. No commitment.
                 </p>
-                <div style={{
-                  background: T.stone, borderRadius: 10, padding: "14px 16px",
-                  marginBottom: 18, border: `1px solid ${T.bdr}`
-                }}>
-                  <div style={{
-                    fontSize: 9.5, letterSpacing: 1.5, textTransform: "uppercase",
-                    color: T.f, fontWeight: 700, marginBottom: 10
-                  }}>What happens after you submit</div>
-                  {[
-                    { step: "Within 24 hrs", text: "Our expert team reviews your submission and confirms a 30-min slot" },
-                    { step: "On the call", text: "We review your structure, flag risks, and recommend the right entity & tax setup" },
-                    { step: "After the call", text: "You receive a short written summary — structure recommendation, FDI route, next steps" },
-                  ].map((s, i) => (
-                    <div key={i} style={{
-                      display: "grid", gridTemplateColumns: "80px 1fr", gap: 10,
-                      paddingBottom: i < 2 ? 10 : 0,
-                      borderBottom: i < 2 ? `1px solid ${T.bdr}` : "none",
-                      marginBottom: i < 2 ? 10 : 0
+
+                {/* ── Infinitely looping 1-2-3 steps ── */}
+                {(() => {
+                  const uid = React.useId().replace(/:/g, '');
+
+                  const SEQ = [
+                    [0, `d0${uid}`],
+                    [200, `tg0${uid}`],
+                    [310, `tx0${uid}`],
+                    [560, `l0${uid}`],
+                    [740, `d1${uid}`],
+                    [940, `tg1${uid}`],
+                    [1050, `tx1${uid}`],
+                    [1300, `l1${uid}`],
+                    [1480, `d2${uid}`],
+                    [1680, `tg2${uid}`],
+                    [1790, `tx2${uid}`],
+                  ];
+                  const ALL_IDS = SEQ.map(s => s[1]);
+                  const TOTAL_MS = 1790 + 300;
+                  const HOLD_MS = 1400;
+
+                  React.useEffect(() => {
+                    const timers = [];
+
+                    const show = id => { const e = document.getElementById(id); if (e) e.classList.add('s'); };
+                    const hide = id => { const e = document.getElementById(id); if (e) e.classList.remove('s'); };
+
+                    function run() {
+                      /* 1. hide all */
+                      ALL_IDS.forEach(hide);
+
+                      /* 2. tiny gap so CSS sees the class removal before re-adding */
+                      timers.push(setTimeout(() => {
+                        /* 3. reveal one by one */
+                        SEQ.forEach(([delay, id]) => {
+                          timers.push(setTimeout(() => show(id), delay));
+                        });
+
+                        /* 4. hold at end, then loop */
+                        timers.push(setTimeout(run, TOTAL_MS + HOLD_MS));
+                      }, 80));
+                    }
+
+                    run();
+                    return () => timers.forEach(clearTimeout);
+                  }, []);
+
+                  const steps = [
+                    { tag: "Within 24 hrs", txt: "Our expert team reviews your submission and confirms a 30-min slot." },
+                    { tag: "On the call", txt: "We review your structure, flag risks, and recommend the right entity and tax setup." },
+                    { tag: "After the call", txt: "You receive a written summary — structure recommendation, FDI route, next steps." },
+                  ];
+
+                  return (
+                    <div style={{
+                      background: T.stone, borderRadius: 10, padding: "14px 15px 12px",
+                      marginBottom: 18, border: `1px solid ${T.bdr}`,
                     }}>
-                      <div style={{ fontSize: 10.5, fontWeight: 700, color: T.s, lineHeight: 1.4 }}>{s.step}</div>
-                      <div style={{ fontSize: 12, color: T.mid, lineHeight: 1.55 }}>{s.text}</div>
+                      <p style={{
+                        fontSize: 9.5, letterSpacing: "0.22em", textTransform: "uppercase",
+                        color: T.s, fontWeight: 700, marginBottom: 14,
+                        fontFamily: "var(--font-poppins,'Poppins',sans-serif)",
+                      }}>
+                        What happens after you submit
+                      </p>
+
+                      {steps.map((step, i) => (
+                        <div key={i} style={{ display: "flex", gap: 13, position: "relative" }}>
+
+                          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0, width: 28 }}>
+                            {/* Dot */}
+                            <div id={`d${i}${uid}`} className="_sdot" style={{
+                              width: 28, height: 28, borderRadius: "50%", background: T.f,
+                              display: "flex", alignItems: "center", justifyContent: "center",
+                              fontFamily: "var(--font-cormorant,'Cormorant Garamond',Georgia,serif)",
+                              fontSize: 15, fontWeight: 700, color: "#fff", flexShrink: 0, zIndex: 1,
+                            }}>
+                              {i + 1}
+                            </div>
+                            {/* Connector */}
+                            {i < 2 && (
+                              <div id={`l${i}${uid}`} className="_sline" style={{
+                                width: 1.5, flex: 1, minHeight: 12, margin: "4px 0",
+                                background: `linear-gradient(to bottom,${T.f}44,${T.bdr})`,
+                              }} />
+                            )}
+                          </div>
+
+                          <div style={{ paddingBottom: i < 2 ? 13 : 0, paddingTop: 3 }}>
+                            <p id={`tg${i}${uid}`} className="_stag" style={{
+                              fontSize: 10, fontWeight: 700, letterSpacing: "0.14em",
+                              textTransform: "uppercase", color: T.s, marginBottom: 3,
+                              fontFamily: "var(--font-poppins,'Poppins',sans-serif)",
+                            }}>
+                              {step.tag}
+                            </p>
+                            <p id={`tx${i}${uid}`} className="_stxt" style={{
+                              fontSize: 12, color: T.mid, lineHeight: 1.62, margin: 0,
+                              fontFamily: "var(--font-cardo,'Cardo',Georgia,serif)",
+                            }}>
+                              {step.txt}
+                            </p>
+                          </div>
+
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  );
+                })()}
+
+                {/* ── Inputs ── */}
                 <input type="text" placeholder="Your full name *"
                   value={hf.nameTitle} onChange={setH("nameTitle")}
                   style={inp({ borderColor: hStatus === "error" && !hf.nameTitle.trim() ? "#E74C3C" : T.bdr })}
@@ -2450,43 +2650,51 @@ export default function HomePage() {
                 />
                 <input type="text" placeholder="Company name, Country"
                   value={hf.companyCountry} onChange={setH("companyCountry")}
-                  style={inp()} onFocus={e => e.target.style.borderColor = T.f}
+                  style={inp()}
+                  onFocus={e => e.target.style.borderColor = T.f}
                   onBlur={e => e.target.style.borderColor = T.bdr}
                 />
                 <select value={hf.service} onChange={setH("service")} style={inp({ cursor: "pointer" })}>
                   <option value="">What do you need help with?</option>
                   <option>Foreign Company Incorporation</option>
                   <option>GCC / Captive Centre Setup</option>
-                  <option>International Tax & DTAA</option>
+                  <option>International Tax &amp; DTAA</option>
                   <option>Transfer Pricing</option>
                   <option>FEMA Compliance</option>
                   <option>Ongoing Compliance Retainer</option>
                 </select>
+
                 {hStatus === "error" && (
                   <div style={{
                     background: "#FFF0F0", border: "1px solid #FFCCCC",
                     borderRadius: 7, padding: "9px 14px", marginBottom: 10,
-                    fontSize: 12.5, color: "#C0392B"
+                    fontSize: 12.5, color: "#C0392B",
                   }}>
                     Please enter your name and email address.
                   </div>
                 )}
+
                 <button onClick={handleHeroSubmit} disabled={hStatus === "submitting"}
                   className="ics-btn ics-btn-primary"
                   style={{
                     width: "100%", justifyContent: "center", padding: "14px 20px",
                     fontSize: 14.5, opacity: hStatus === "submitting" ? 0.7 : 1,
-                    borderRadius: 9, marginTop: 4, letterSpacing: .2
+                    borderRadius: 9, marginTop: 4, letterSpacing: 0.2,
                   }}>
                   {hStatus === "submitting" ? "Sending…" : "Request Free Consultation →"}
                 </button>
+
                 <div style={{ display: "flex", justifyContent: "center", gap: 18, marginTop: 14 }}>
                   {["No commitment", "Confidential", "24hr response"].map(t => (
                     <span key={t} style={{
-                      fontSize: 11.5, color: T.lt,
-                      display: "flex", alignItems: "center", gap: 4
+                      fontSize: 11, color: T.lt, display: "flex", alignItems: "center", gap: 4,
+                      fontFamily: "var(--font-poppins,'Poppins',sans-serif)",
                     }}>
-                      <span style={{ color: "#22c55e" }}>✓</span> {t}
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                        stroke="#22c55e" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      {t}
                     </span>
                   ))}
                 </div>
