@@ -9,7 +9,6 @@ import PricingTabsSection from './pricing';
 import WhatWeDoSection from './WhatWeDoSection';
 import SmarterDecisionsScroll from './SmarterDecisionsScroll';
 import NewHeroSection from './NewHeroSection';
-import GoogleReviews from '../../client/src/components/GoogleReviews';
 import ClientStoriesCarousel from './ClientStoriesCarousel';
 import ClientOutcomes from './clientOutcomes';
 const FONT_HEADING = "var(--font-cormorant),'Cormorant Garamond',serif";
@@ -1565,7 +1564,6 @@ export default function HomePage() {
       {/* ══ AUDIENCE PATHS ════════════════════════════════════════════════════ */}
       <AudiencePathsSection T={T} ROUTES={ROUTES} />
       <ClientOutcomes />
-      <GoogleReviews />
       <WhatWeDoSection T={T} ROUTES={ROUTES} />
 
       {/* ══ QUOTE CALLOUT ═════════════════════════════════════════════════════ */}
