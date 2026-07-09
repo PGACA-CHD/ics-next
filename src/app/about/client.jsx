@@ -8,8 +8,8 @@ const GLASS = "rgba(255,255,255,0.28)";
 const BLUR = "blur(16px)";
 const GREEN = "#093024";
 
-const LOGOS_ROW1 = ['Protiviti India', 'Mahindra Defence Systems', 'Saregama India', 'Ethos Limited', 'Polyplex Corporation', 'Kuantom Papers', 'Tube Investment of India', 'Vibracoustic India', 'Newtech Filter', 'Godrej UAE', 'Ognibene Power', 'Cloud EQ'];
-const LOGOS_ROW2 = ['Defacto Infotech', 'CrimsonInsights', 'Alleshealth', 'Foodjam', 'Grid Advertising', 'Talink', 'Mcube Capital', 'SML Mahindra', 'Cheema Boilers', 'AWFIS India', 'Skin Elements', 'Vyra Life'];
+const LOGOS_ROW1 = ['Protiviti India', 'Mahindra Defence Systems', 'Saregama India', 'Ethos Limited', 'Polyplex Corporation Limited (Listed)', 'Damco soft', 'Tube Investment of India', 'Vibracoustic India Private Limited', 'Newtech Filter (BOSCH group Company)', 'Godrej, UAE entities', 'Ognibene power', 'Cloud EQ'];
+const LOGOS_ROW2 = ['Defacto Infotech India, AU, US', 'CrimsonInsights', 'Alleshealth', 'Foodjam', 'Grid advertising', 'Talink', 'Mcube capital', 'SML Mahindra Limited', 'Cheema Boilers Limited', 'AWFIS India Private Limited', 'Skin elements', 'Vyra Life (Modebencura)'];
 
 /* ── scroll-reveal ── */
 function useReveal(t = 0.12) {
