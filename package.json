@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14.2.0",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
     "@contentful/rich-text-react-renderer": "^16.1.6",
-    "@contentful/rich-text-types": "^17.2.5"
+    "@contentful/rich-text-types": "^17.2.5",
+    "next": "^14.2.0",
+    "ogl": "^1.0.11",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

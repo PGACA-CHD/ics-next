@@ -22,13 +22,31 @@ const PILL = {
   purple: { bg: 'rgba(137,68,171,0.10)', text: '#5e1f80', bdr: 'rgba(137,68,171,0.40)' },
 };
 
+/* SpotlightCard effect — color per tool, tied to each card's accent */
+const SPOTLIGHT = {
+  blue: 'rgba(0,113,227,0.35)',
+  green: 'rgba(36,138,61,0.35)',
+  red: 'rgba(215,0,21,0.35)',
+  purple: 'rgba(137,68,171,0.35)',
+};
+
 export default function Page() {
+  const handleCardSpotlight = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
     <div className="lg-page">
       <style>{`
         * { box-sizing: border-box; }
         .lg-page {
           --blue:#0071e3; --green:#248a3d; --red:#d70015; --purple:#8944ab;
+          --brand:#093024; --brand-hover:#0f4a35;
           --dark:#1d1d1f; --mid:#3c3c40;
           --bdr:rgba(0,0,0,0.48); --bdr-lt:rgba(0,0,0,0.09);
           font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -58,7 +76,7 @@ export default function Page() {
         }
         .lg-hero h1 .ul-line {
           position:absolute; left:0; bottom:-4px;
-          width:100%; height:5px; background:#b3e000; border-radius:2px;
+          width:100%; height:5px; background:var(--brand); border-radius:2px;
         }
         .lg-hero p {
           font-size:17px; color:#555; line-height:1.75;
@@ -67,14 +85,14 @@ export default function Page() {
         }
         .lg-hero-btn {
           display:inline-flex; align-items:center; gap:8px;
-          background:#b3e000; color:#111;
+          background:var(--brand); color:#fff;
           font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
           font-size:15px; font-weight:700;
           padding:14px 28px; border-radius:6px; border:none;
           cursor:pointer; text-decoration:none;
           transition:background 0.2s ease, transform 0.15s ease;
         }
-        .lg-hero-btn:hover { background:#c8f000; transform:translateY(-1px); }
+        .lg-hero-btn:hover { background:var(--brand-hover); transform:translateY(-1px); }
 
         /* ── SECTION ── */
         .lg-section { max-width:1320px; margin:0 auto; padding:48px 28px 80px; }
@@ -82,18 +100,31 @@ export default function Page() {
         /* ── GRID ── */
         .lg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
 
-        /* ── CARD ── */
+        /* ── CARD (with SpotlightCard hover effect) ── */
         .lg-card {
+          position:relative;
+          --mouse-x:50%; --mouse-y:50%;
+          --spotlight-color: rgba(255,255,255,0.25);
           background:rgba(255,255,255,0.28); backdrop-filter:blur(16px);
           -webkit-backdrop-filter:blur(16px); border-radius:16px;
           border:1px solid var(--bdr); box-shadow:0 4px 20px rgba(0,0,0,0.06);
           padding:22px 20px; display:flex; flex-direction:column;
-          text-decoration:none; color:inherit;
+          text-decoration:none; color:inherit; overflow:hidden;
           transition:transform 0.25s ease,box-shadow 0.25s ease,background 0.25s ease;
         }
+        .lg-card::before {
+          content:''; position:absolute; inset:0; z-index:0;
+          background:radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%);
+          opacity:0; transition:opacity 0.5s ease; pointer-events:none;
+        }
+        .lg-card:hover::before, .lg-card:focus-within::before { opacity:1; }
         .lg-card:hover {
           transform:translateY(-4px); background:rgba(255,255,255,0.55);
           box-shadow:0 10px 32px rgba(0,0,0,0.11);
+        }
+        .lg-card-content {
+          position:relative; z-index:1;
+          display:flex; flex-direction:column; flex-grow:1;
         }
         .lg-card-head { display:flex; align-items:flex-start; gap:16px; margin-bottom:14px; }
         .lg-icon {
@@ -153,30 +184,38 @@ export default function Page() {
         }
         .lg-disclaimer strong { color:var(--dark); }
 
-        /* ── CTA BAND ── */
+        /* ── CTA BAND (dark card style, matches reference) ── */
         .lg-cta-band {
-          width:100%; text-align:center; padding:72px 24px 80px;
-          border-top:1px solid var(--bdr-lt); background:#fff;
+          width:100%; padding:72px 24px 96px; background:#fff;
         }
-        .lg-cta-band h2 {
-          font-size:clamp(24px,3vw,36px); font-weight:800; letter-spacing:-0.025em;
-          margin:0 0 12px; color:#111;
+        .lg-cta-card {
+          max-width:1180px; margin:0 auto;
+          background:var(--brand);
+          border-radius:24px;
+          padding:56px 60px;
+          display:flex; align-items:center; justify-content:space-between; gap:40px;
+          box-shadow:0 24px 60px rgba(9,48,36,0.28);
+        }
+        .lg-cta-text { text-align:left; max-width:620px; }
+        .lg-cta-card h2 {
+          font-size:clamp(22px,2.6vw,30px); font-weight:800; letter-spacing:-0.02em;
+          margin:0 0 12px; color:#fff;
           font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
         }
-        .lg-cta-band p {
-          color:var(--mid); font-size:15px; max-width:510px;
-          margin:0 auto 30px; line-height:1.7;
+        .lg-cta-card p {
+          color:rgba(255,255,255,0.78); font-size:15px; line-height:1.75;
+          margin:0; font-weight:400;
           font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
         }
         .lg-cta-btn {
-          display:inline-flex; align-items:center; gap:8px;
-          background:#b3e000; color:#111;
-          font-size:15px; font-weight:700; padding:14px 30px; border-radius:6px;
+          display:inline-flex; align-items:center; gap:8px; flex-shrink:0; white-space:nowrap;
+          background:#e8983a; color:#1d1d1f;
+          font-size:15px; font-weight:700; padding:15px 28px; border-radius:8px;
           border:none; text-decoration:none; cursor:pointer;
           font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
           transition:background 0.2s ease, transform 0.15s ease;
         }
-        .lg-cta-btn:hover { background:#c8f000; transform:translateY(-1px); }
+        .lg-cta-btn:hover { background:#f0a94f; transform:translateY(-1px); }
 
         /* ── RESPONSIVE ── */
         @media(max-width:960px){
@@ -184,14 +223,20 @@ export default function Page() {
           .lg-section{padding:40px 18px 64px;}
           .lg-hero{padding:72px 28px 64px;}
         }
+        @media(max-width:760px){
+          .lg-cta-card{flex-direction:column; align-items:flex-start; padding:40px 28px;}
+          .lg-cta-text{text-align:left;}
+          .lg-cta-btn{width:100%; justify-content:center;}
+        }
         @media(max-width:520px){
           .lg-grid{grid-template-columns:1fr;gap:12px;}
           .lg-hero{padding:56px 18px 52px;}
           .lg-section{padding:32px 14px 56px;}
+          .lg-cta-band{padding:56px 16px 72px;}
         }
       `}</style>
 
-      {/* ── HERO — full width, off-white, left-aligned, lime underline ── */}
+      {/* ── HERO — full width, off-white, left-aligned, brand-color underline ── */}
       <section className="lg-hero">
         <div className="lg-hero-inner">
           <div className="lg-label">Free Tools</div>
@@ -219,23 +264,31 @@ export default function Page() {
           {TOOLS.map((tool) => {
             const p = PILL[tool.color];
             return (
-              <Link key={tool.href} href={tool.href} className="lg-card">
-                <div className="lg-card-head">
-                  <div className={`lg-icon c-${tool.color}`}><i className={tool.icon}></i></div>
-                  <div className="lg-title-block">
-                    <h2>{tool.title}</h2>
-                    <div className={`sub c-${tool.color}`}>{tool.subtitle}</div>
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="lg-card"
+                onMouseMove={handleCardSpotlight}
+                style={{ '--spotlight-color': SPOTLIGHT[tool.color] }}
+              >
+                <div className="lg-card-content">
+                  <div className="lg-card-head">
+                    <div className={`lg-icon c-${tool.color}`}><i className={tool.icon}></i></div>
+                    <div className="lg-title-block">
+                      <h2>{tool.title}</h2>
+                      <div className={`sub c-${tool.color}`}>{tool.subtitle}</div>
+                    </div>
                   </div>
-                </div>
-                <p>{tool.desc}</p>
-                <div className="lg-tags">
-                  {tool.tags.map((tag) => (
-                    <span key={tag} className="lg-tag" style={{ background: p.bg, color: p.text, border: `1px solid ${p.bdr}` }}>{tag}</span>
-                  ))}
-                </div>
-                <div className="lg-foot">
-                  <span className={`lg-cta-label c-${tool.color}`}>{tool.cta} &rarr;</span>
-                  <span className="lg-group-label">{tool.group}</span>
+                  <p>{tool.desc}</p>
+                  <div className="lg-tags">
+                    {tool.tags.map((tag) => (
+                      <span key={tag} className="lg-tag" style={{ background: p.bg, color: p.text, border: `1px solid ${p.bdr}` }}>{tag}</span>
+                    ))}
+                  </div>
+                  <div className="lg-foot">
+                    <span className={`lg-cta-label c-${tool.color}`}>{tool.cta} &rarr;</span>
+                    <span className="lg-group-label">{tool.group}</span>
+                  </div>
                 </div>
               </Link>
             );
@@ -249,11 +302,15 @@ export default function Page() {
         </div>
       </div>
 
-      {/* ── CTA BAND ── */}
+      {/* ── CTA BAND — dark green rounded card, matching reference layout ── */}
       <section className="lg-cta-band">
-        <h2>Need expert tax advice?</h2>
-        <p>Our Ex-Big 4 CA team handles international tax, transfer pricing, DTAA structuring, and India incorporation for foreign companies.</p>
-        <Link href="/contact" className="lg-cta-btn">Book a Free Consultation &rarr;</Link>
+        <div className="lg-cta-card">
+          <div className="lg-cta-text">
+            <h2>Need expert tax advice?</h2>
+            <p>Our Ex-Big 4 CA team handles international tax, transfer pricing, DTAA structuring, and India incorporation for foreign companies.</p>
+          </div>
+          <Link href="/contact" className="lg-cta-btn">Book a Free Consultation &rarr;</Link>
+        </div>
       </section>
     </div>
   );
