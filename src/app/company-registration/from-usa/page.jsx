@@ -374,12 +374,17 @@ export default function Page() {
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
         .sec-div { border-top:1px solid rgba(0,0,0,0.08); }
 
-        /* why grid */
-        .why-row { display:grid; grid-template-columns:1fr 1fr; }
-        .why-row:not(:last-child) { border-bottom:1px solid rgba(0,0,0,0.08); }
-        .why-cell { padding:28px 0; }
-        .why-cell:first-child { padding-right:48px; border-right:1px solid rgba(0,0,0,0.08); }
-        .why-cell:last-child { padding-left:48px; }
+        /* why grid card layout */
+        .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid rgba(0,0,0,0.15); border-radius:18px; overflow:hidden; }
+        .why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); border-bottom:none; cursor:default; position:relative; }
+        .why-card.no-right { border-right:none; }
+        .why-row-divider { grid-column: 1 / -1; height: 1px; background: rgba(0,0,0,0.13); margin: 0; }
+        @media(max-width:860px){
+          .why-grid { grid-template-columns:1fr !important; border-radius:14px; }
+          .why-card { border-right:none !important; padding:26px 22px; border-bottom:1px solid rgba(0,0,0,0.13); }
+          .why-card:last-child { border-bottom:none !important; }
+          .why-row-divider { height:1px; }
+        }
 
         /* structure table */
         .stbl { width:100%; border-collapse:collapse; font-family:${HV}; }
@@ -484,35 +489,35 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── WHY INDIA — newspaper grid ── */}
+      {/* ── WHY INDIA — card grid ── */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
             <span className="lbl" style={{ marginBottom: 14 }}>Why India</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 4, fontFamily: HV }}>
+            <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 6, fontFamily: HV }}>
               Why US Founders Are Setting Up in India
             </h2>
-            <p style={{ fontSize: 15, color: '#666', marginBottom: 40, fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
+            <p style={{ fontSize: 15, color: '#666', marginBottom: 36, fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
           </Fade>
-          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-            {[
-              [whyPoints[0], whyPoints[1]],
-              [whyPoints[2], whyPoints[3]],
-              [whyPoints[4], whyPoints[5]],
-            ].map((pair, ri) => (
-              <Fade key={ri} delay={ri * 80}>
-                <div className="why-row">
-                  {pair.map(([heading, body], ci) => (
-                    <div key={ci} className="why-cell">
-                      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: GREEN, fontFamily: HV, marginBottom: 10 }}>{String(ri * 2 + ci + 1).padStart(2, '0')}</div>
-                      <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111', marginBottom: 8, fontFamily: HV, lineHeight: 1.25 }}>{heading}</h3>
-                      <p style={{ fontSize: 13.5, color: '#666', lineHeight: 1.7, margin: 0, fontFamily: HV }}>{body}</p>
-                    </div>
-                  ))}
+          <Fade delay={60}>
+            <div className="why-grid">
+              {whyPoints.slice(0, 3).map(([heading, body], i) => (
+                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`}>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 1).padStart(2, '0')}</div>
+                  <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
+                  <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
                 </div>
-              </Fade>
-            ))}
-          </div>
+              ))}
+              <div className="why-row-divider" />
+              {whyPoints.slice(3).map(([heading, body], i) => (
+                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`}>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 4).padStart(2, '0')}</div>
+                  <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
+                  <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                </div>
+              ))}
+            </div>
+          </Fade>
         </div>
       </section>
 
