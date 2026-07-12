@@ -563,6 +563,86 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         }
 
         /* ══════════════════════════════════════
+           SECTOR CAPS LIST — row-list style (no arrow).
+           Rows stagger-reveal on scroll; first row is
+           highlighted dark green by default; hover/click
+           any row to make it the highlighted one. The cap
+           value sits as a pill on the right in place of
+           an arrow button.
+        ══════════════════════════════════════ */
+        .seo-caplist {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          background: #f5f5f0;
+          border-radius: 20px;
+          padding: 8px;
+        }
+        .seo-caprow {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          gap: 16px;
+          padding: 16px 20px;
+          border-radius: 14px;
+          background: transparent;
+          border: none;
+          text-align: left;
+          width: 100%;
+          cursor: pointer;
+          opacity: 0;
+          transform: translateY(10px);
+          animation: capRowIn .5s ease forwards;
+          transition: background .25s ease;
+        }
+        .seo-caprow:hover:not(.is-active) { background: rgba(255,255,255,.6); }
+        .seo-caprow.is-active {
+          background: #0f3320;
+          box-shadow: 0 10px 24px rgba(15,51,32,.18);
+        }
+        @keyframes capRowIn {
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .seo-caprow-main { min-width: 0; }
+        .seo-caprow-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: #111;
+          line-height: 1.35;
+          margin-bottom: 4px;
+          transition: color .25s;
+        }
+        .seo-caprow.is-active .seo-caprow-name { color: #fff; }
+        .seo-caprow-route {
+          font-size: 12.5px;
+          color: #6b7280;
+          line-height: 1.5;
+          transition: color .25s;
+        }
+        .seo-caprow.is-active .seo-caprow-route { color: rgba(255,255,255,.62); }
+        .seo-caprow-cap {
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 800;
+          padding: 7px 18px;
+          border-radius: 100px;
+          white-space: nowrap;
+          background: #e8f5e9;
+          color: #1b5e20;
+          transition: background .25s, color .25s, transform .25s;
+        }
+        .seo-caprow-cap.is-zero { background: #fee2e2; color: #dc2626; }
+        .seo-caprow.is-active .seo-caprow-cap {
+          background: rgba(255,255,255,.16);
+          color: #fff;
+          transform: scale(1.04);
+        }
+        @media (max-width: 560px) {
+          .seo-caprow { grid-template-columns: 1fr; gap: 8px; padding: 14px 16px; }
+          .seo-caprow-cap { justify-self: flex-start; }
+        }
+
+        /* ══════════════════════════════════════
            PYRAMID PROCESS
         ══════════════════════════════════════ */
         .seo-pyramid {
@@ -1125,41 +1205,81 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           line-height: 1.5;
         }
 
-        /* ── FDI 2-col cards ── */
-        .seo-fdi-grid {
+        /* ══════════════════════════════════════
+           TWO ROUTES — icon-card grid (FDI Automatic
+           vs Government Route). Static cards: icon
+           badge, title, and all details rendered as
+           always-visible pill badges (no hover reveal,
+           no click-to-open state). Cards scroll-reveal
+           with stagger on first view only.
+        ══════════════════════════════════════ */
+        .seo-routes-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
           margin-bottom: 24px;
         }
-        .seo-fdi-card {
-          border-radius: 14px;
+        .seo-route-card {
+          border-radius: 18px;
           padding: 24px 22px;
+          opacity: 0;
+          transform: translateY(16px);
+          animation: routeCardIn .55s ease forwards;
         }
-        .seo-fdi-route-label {
+        @keyframes routeCardIn {
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .seo-route-card-top {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          margin-bottom: 4px;
+        }
+        .seo-route-icon {
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .seo-route-icon svg { width: 19px; height: 19px; }
+        .seo-route-card-headtext { min-width: 0; }
+        .seo-route-route-label {
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
           font-weight: 700;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }
-        .seo-fdi-title {
+        .seo-route-title {
           font-size: 15px;
           font-weight: 700;
           color: #0d1117;
-          margin-bottom: 14px;
+          line-height: 1.35;
         }
-        .seo-fdi-point {
+        /* Static pill list — always visible, no reveal animation */
+        .seo-route-pills {
           display: flex;
-          gap: 9px;
-          margin-bottom: 7px;
-          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 14px;
         }
-        .seo-fdi-check { flex-shrink: 0; margin-top: 2px; }
-        .seo-fdi-check svg { width: 12px; height: 12px; }
-        .seo-fdi-point-text { font-size: 13px; color: #4a5568; line-height: 1.55; }
+        .seo-route-pill {
+          display: inline-flex;
+          align-items: center;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1.4;
+          padding: 7px 14px;
+          border-radius: 100px;
+          background: rgba(255,255,255,.7);
+          border: 1px solid rgba(0,0,0,0.08);
+          color: #374151;
+        }
         .seo-fdi-warning {
-          margin-top: 12px;
+          margin-top: 14px;
           background: #fef3c7;
           border-radius: 7px;
           padding: 8px 12px;
@@ -1167,8 +1287,11 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           color: #92400e;
           font-weight: 600;
         }
+        @media (max-width: 680px) {
+          .seo-routes-grid { grid-template-columns: 1fr; }
+        }
 
-        /* ── Sector table ── */
+        /* ── Sector table (legacy, kept for other pages) ── */
         .seo-sector-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .seo-sector-table {
           background: #fff;
@@ -1317,7 +1440,14 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-audience-label { font-size: 14.5px; font-weight: 700; color: #0d1117; line-height: 1.4; }
         .seo-audience-desc { font-size: 13.5px; color: #6b7280; line-height: 1.75; font-weight: 300; }
 
-        /* ── NRI comparison table ── */
+        /* ══════════════════════════════════════
+           TWO TYPES OF CLIENTS (NRI) — animated:
+           scroll-reveal per column, hover lift, and
+           each point staggers in on reveal. Clicking a
+           column's tag toggles an "active" emphasis
+           state (subtle scale + border glow) so the
+           section feels interactive, not just static.
+        ══════════════════════════════════════ */
         .seo-nri-compare {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -1329,10 +1459,24 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-nri-col {
           padding: 32px 28px;
           background: #fff;
+          opacity: 0;
+          transform: translateY(18px);
+          animation: nriColIn .6s ease forwards;
+          transition: background .25s ease, box-shadow .25s ease;
+          cursor: pointer;
+          position: relative;
+        }
+        @keyframes nriColIn {
+          to { opacity: 1; transform: translateY(0); }
         }
         .seo-nri-col:first-child {
           border-right: 1px solid #e8e8e8;
           background: #f7faf7;
+        }
+        .seo-nri-col:hover { background: #eef6ee; }
+        .seo-nri-col.is-active {
+          box-shadow: inset 0 0 0 2px #2e7d32;
+          background: #eef6ee;
         }
         .seo-nri-col-tag {
           display: inline-block;
@@ -1345,6 +1489,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           padding: 5px 14px;
           border-radius: 100px;
           margin-bottom: 16px;
+          transition: background .25s, color .25s, transform .25s;
+        }
+        .seo-nri-col.is-active .seo-nri-col-tag {
+          background: #2e7d32;
+          color: #fff;
+          transform: scale(1.05);
         }
         .seo-nri-col-title {
           font-size: 18px;
@@ -1368,6 +1518,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           gap: 10px;
           align-items: flex-start;
           margin-bottom: 10px;
+          opacity: 0;
+          transform: translateX(-8px);
+          animation: nriPointIn .45s ease forwards;
+        }
+        @keyframes nriPointIn {
+          to { opacity: 1; transform: translateX(0); }
         }
         .seo-nri-check {
           width: 18px; height: 18px;
@@ -1377,6 +1533,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
           margin-top: 1px;
+          transition: background .25s, color .25s, transform .25s;
+        }
+        .seo-nri-col:hover .seo-nri-check {
+          background: #2e7d32;
+          color: #fff;
+          transform: scale(1.1);
         }
         .seo-nri-check svg { width: 10px; height: 10px; }
         .seo-nri-point-text {
@@ -1600,7 +1762,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           .seo-hero-inner { padding: 0 24px; }
           .seo-content-wrap { padding: 60px 24px 80px; }
           .seo-entity-grid { grid-template-columns: 1fr; }
-          .seo-fdi-grid { grid-template-columns: 1fr; }
+          .seo-routes-grid { grid-template-columns: 1fr; }
 
           .seo-audience-item { grid-template-columns: 1fr; gap: 8px; }
           .seo-nri-grid { grid-template-columns: 1fr; }
@@ -1788,6 +1950,59 @@ function SEOPicksReveal({ items }) {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════
+   SECTOR CAPS — animated row list (no arrow).
+   items: [{ name, cap, route }]
+   Rows stagger-reveal on scroll into view. First row is
+   highlighted by default; hovering/clicking any row
+   promotes it to the highlighted state. Cap value is
+   shown as a pill on the right (green, or red for 0%).
+══════════════════════════════════════════════════════ */
+function SEOSectorCapsList({ items }) {
+  const [active, setActive] = useState(0);
+  const wrapRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div className="seo-caplist" ref={wrapRef}>
+      {items.map((row, i) => {
+        const isZero = row.cap === '0%';
+        const isActive = active === i;
+        return (
+          <button
+            key={row.name}
+            type="button"
+            className={`seo-caprow${isActive ? ' is-active' : ''}`}
+            onClick={() => setActive(i)}
+            onMouseEnter={() => setActive(i)}
+            style={{
+              animationDelay: visible ? `${i * 0.055}s` : '0s',
+              animationPlayState: visible ? 'running' : 'paused',
+            }}
+          >
+            <div className="seo-caprow-main">
+              <div className="seo-caprow-name">{row.name}</div>
+              <div className="seo-caprow-route">{row.route}</div>
+            </div>
+            <span className={`seo-caprow-cap${isZero ? ' is-zero' : ''}`}>{row.cap}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -2164,6 +2379,48 @@ function SEOCTAStrip({ setPage }) {
    FDI RULES PAGE
 ══════════════════════════════════════════════════════ */
 function SEOFDIRulesPage({ setPage }) {
+  const routesWrapRef = useRef(null);
+  const [routesVisible, setRoutesVisible] = useState(false);
+
+  useEffect(() => {
+    const el = routesWrapRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setRoutesVisible(true); obs.disconnect(); } },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const ROUTES_DATA = [
+    {
+      route: "Automatic Route", color: "#2e7d32", light: "#f0f7f0", border: "#c8e6c9", title: "No prior approval needed",
+      points: ["Investment can proceed immediately", "FCGPR filing required within 30 days of share allotment", "Covers most manufacturing, IT, services, e-commerce", "Most foreign companies use this route"],
+      warning: null
+    },
+    {
+      route: "Government Route", color: "#b45309", light: "#fffbf5", border: "#fed7aa", title: "Prior FIPB/Cabinet approval required",
+      points: ["Application filed through DPIIT portal", "Timeline: 8–12 weeks for approval", "Required for defence, insurance, broadcasting, telecom, multi-brand retail", "Some sectors have mandatory conditions (e.g., local sourcing)"],
+      warning: "Investment before approval is a FEMA violation"
+    },
+  ];
+
+  const SECTOR_CAPS = [
+    { name: "Manufacturing", cap: "100%", route: "Automatic Route" },
+    { name: "IT / Software Services", cap: "100%", route: "Automatic Route" },
+    { name: "E-commerce (marketplace)", cap: "100%", route: "Automatic Route" },
+    { name: "Construction & real estate", cap: "100%", route: "Automatic Route" },
+    { name: "Insurance", cap: "74%", route: "Automatic up to 49%, Government above" },
+    { name: "Telecom", cap: "100%", route: "Automatic up to 49%, Government above 49%" },
+    { name: "Defence", cap: "74%", route: "Automatic up to 74%, Government above" },
+    { name: "Multi-brand retail", cap: "51%", route: "Government Route" },
+    { name: "Banking (private sector)", cap: "74%", route: "Automatic up to 49%" },
+    { name: "Print media", cap: "26%", route: "Government Route" },
+    { name: "Lottery, gambling, casino", cap: "0%", route: "Prohibited" },
+    { name: "Real estate business (speculation)", cap: "0%", route: "Prohibited" },
+  ];
+
   return (
     <SEOPageLayout eyebrow="FDI & FEMA Compliance · India Entry" setPage={setPage}
       ctaLabel="Talk to our CA team →"
@@ -2183,28 +2440,34 @@ function SEOFDIRulesPage({ setPage }) {
       </SEOSection>
 
       <SEOSection label="The Two Routes" title="Automatic Route vs. Government Route – the critical distinction">
-        <div className="seo-fdi-grid">
-          {[
-            {
-              route: "Automatic Route", color: "#2e7d32", light: "#f0f7f0", border: "#c8e6c9", title: "No prior approval needed",
-              points: ["Investment can proceed immediately", "FCGPR filing required within 30 days of share allotment", "Covers most manufacturing, IT, services, e-commerce", "Most foreign companies use this route"],
-              warning: null
-            },
-            {
-              route: "Government Route", color: "#b45309", light: "#fffbf5", border: "#fed7aa", title: "Prior FIPB/Cabinet approval required",
-              points: ["Application filed through DPIIT portal", "Timeline: 8–12 weeks for approval", "Required for defence, insurance, broadcasting, telecom, multi-brand retail", "Some sectors have mandatory conditions (e.g., local sourcing)"],
-              warning: "Investment before approval is a FEMA violation"
-            },
-          ].map(r => (
-            <div key={r.route} className="seo-fdi-card" style={{ background: r.light, border: `1px solid ${r.border}` }}>
-              <div className="seo-fdi-route-label" style={{ color: r.color }}>{r.route}</div>
-              <div className="seo-fdi-title">{r.title}</div>
-              {r.points.map(p => (
-                <div key={p} className="seo-fdi-point">
-                  <span className="seo-fdi-check" style={{ color: r.color }}>{Ic.check}</span>
-                  <span className="seo-fdi-point-text">{p}</span>
+        <div className="seo-routes-grid" ref={routesWrapRef}>
+          {ROUTES_DATA.map((r, i) => (
+            <div
+              key={r.route}
+              className="seo-route-card"
+              style={{
+                background: r.light,
+                border: `1px solid ${r.border}`,
+                animationDelay: routesVisible ? `${i * 0.12}s` : '0s',
+                animationPlayState: routesVisible ? 'running' : 'paused',
+              }}
+            >
+              <div className="seo-route-card-top">
+                <span className="seo-route-icon" style={{ background: r.color, color: '#fff' }}>
+                  {r.route === "Automatic Route" ? Ic.route : Ic.shield}
+                </span>
+                <div className="seo-route-card-headtext">
+                  <div className="seo-route-route-label" style={{ color: r.color }}>{r.route}</div>
+                  <div className="seo-route-title">{r.title}</div>
                 </div>
-              ))}
+              </div>
+              <div className="seo-route-pills">
+                {r.points.map(p => (
+                  <span key={p} className="seo-route-pill" style={{ color: r.color, borderColor: r.border }}>
+                    {p}
+                  </span>
+                ))}
+              </div>
               {r.warning && <div className="seo-fdi-warning">{r.warning}</div>}
             </div>
           ))}
@@ -2212,36 +2475,8 @@ function SEOFDIRulesPage({ setPage }) {
       </SEOSection>
 
       <SEOSection label="Sector Caps" title="Key sector FDI limits at a glance">
-        <div className="seo-sector-scroll">
-          <div className="seo-sector-table">
-            <div className="seo-sector-header">
-              {["Sector", "FDI Cap", "Route"].map(h => (
-                <div key={h} className="seo-sector-header-text">{h}</div>
-              ))}
-            </div>
-            {[
-              ["Manufacturing", "100%", "Automatic"],
-              ["IT / Software Services", "100%", "Automatic"],
-              ["E-commerce (marketplace)", "100%", "Automatic"],
-              ["Construction & real estate", "100%", "Automatic"],
-              ["Insurance", "74%", "Automatic up to 49%, Government above"],
-              ["Telecom", "100%", "Automatic up to 49%, Government above 49%"],
-              ["Defence", "74%", "Automatic up to 74%, Government above"],
-              ["Multi-brand retail", "51%", "Government Route"],
-              ["Banking (private sector)", "74%", "Automatic up to 49%"],
-              ["Print media", "26%", "Government Route"],
-              ["Lottery, gambling, casino", "0%", "Prohibited"],
-              ["Real estate business (speculation)", "0%", "Prohibited"],
-            ].map((row, i) => (
-              <div key={row[0]} className="seo-sector-row" style={{ background: i % 2 === 0 ? '#fff' : '#fafafa' }}>
-                <span className="seo-sector-name">{row[0]}</span>
-                <span className="seo-sector-cap" style={{ color: row[1] === "0%" ? "#dc2626" : "#2e7d32" }}>{row[1]}</span>
-                <span className="seo-sector-route">{row[2]}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <p style={{ fontSize: 12.5, color: '#9ca3af', marginTop: 6 }}>This is a simplified summary. FDI policy changes periodically – always verify current rules before proceeding.</p>
+        <SEOSectorCapsList items={SECTOR_CAPS} />
+        <p style={{ fontSize: 12.5, color: '#9ca3af', marginTop: 14 }}>This is a simplified summary. FDI policy changes periodically – always verify current rules before proceeding.</p>
       </SEOSection>
 
       <SEOSection label="FEMA Compliance" title="Mandatory FEMA filings after FDI">
@@ -2542,33 +2777,69 @@ function SEOMarketEntryPage({ setPage }) {
    NRI PAGE
 ══════════════════════════════════════════════════════ */
 function SEONRIPage({ setPage }) {
+  const [activeCol, setActiveCol] = useState(null);
+  const compareRef = useRef(null);
+  const [compareVisible, setCompareVisible] = useState(false);
+
+  useEffect(() => {
+    const el = compareRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setCompareVisible(true); obs.disconnect(); } },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const NRI_COLS = [
+    {
+      tag: "Investing from Abroad",
+      type: "NRI investing from abroad",
+      desc: "You live and work outside India. You want to invest in or incorporate a company in India – for a business you'll manage remotely or through a local team.",
+      points: ["Investment under Schedule 4 of FEMA (NRI route)", "No RBI FCGPR required – different from FDI route", "Can repatriate dividends freely after tax", "Can be director of an India company while residing abroad"],
+    },
+    {
+      tag: "Returning to India",
+      type: "NRI returning to India",
+      desc: "You are returning to India to start or run a business. Your residency status is changing – from NRI to Resident. This triggers specific FEMA obligations.",
+      points: ["Residency transition – NRI → Resident Indian", "Existing foreign assets must be declared under FEMA", "India income now fully taxable from year of return", "Bank accounts: NRE/FCNR → Resident accounts within required timeframe"],
+    },
+  ];
+
   return (
     <SEOPageLayout eyebrow="NRI · India Business Setup · FEMA Advisory" setPage={setPage}
       title={<>NRI Company Registration<br /><em>in India – Complete Guide</em></>}
       description="NRIs can incorporate a company in India or invest in an existing one. Two routes, different compliance. FEMA Schedule 4, repatriation rules, and residency transition – explained plainly.">
 
       <SEOSection label="Two Types of NRI Clients" title="Which situation applies to you?">
-        <div className="seo-nri-compare">
-          {[
-            {
-              tag: "Investing from Abroad",
-              type: "NRI investing from abroad",
-              desc: "You live and work outside India. You want to invest in or incorporate a company in India – for a business you'll manage remotely or through a local team.",
-              points: ["Investment under Schedule 4 of FEMA (NRI route)", "No RBI FCGPR required – different from FDI route", "Can repatriate dividends freely after tax", "Can be director of an India company while residing abroad"],
-            },
-            {
-              tag: "Returning to India",
-              type: "NRI returning to India",
-              desc: "You are returning to India to start or run a business. Your residency status is changing – from NRI to Resident. This triggers specific FEMA obligations.",
-              points: ["Residency transition – NRI → Resident Indian", "Existing foreign assets must be declared under FEMA", "India income now fully taxable from year of return", "Bank accounts: NRE/FCNR → Resident accounts within required timeframe"],
-            },
-          ].map(c => (
-            <div key={c.type} className="seo-nri-col">
+        <div className="seo-nri-compare" ref={compareRef}>
+          {NRI_COLS.map((c, ci) => (
+            <div
+              key={c.type}
+              className={`seo-nri-col${activeCol === ci ? ' is-active' : ''}`}
+              style={{
+                opacity: compareVisible ? undefined : 0,
+                animationDelay: compareVisible ? `${ci * 0.15}s` : '0s',
+                animationPlayState: compareVisible ? 'running' : 'paused',
+              }}
+              onClick={() => setActiveCol(activeCol === ci ? null : ci)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={e => e.key === 'Enter' && setActiveCol(activeCol === ci ? null : ci)}
+            >
               <span className="seo-nri-col-tag">{c.tag}</span>
               <div className="seo-nri-col-title">{c.type}</div>
               <p className="seo-nri-col-desc">{c.desc}</p>
-              {c.points.map(p => (
-                <div key={p} className="seo-nri-point">
+              {c.points.map((p, pi) => (
+                <div
+                  key={p}
+                  className="seo-nri-point"
+                  style={{
+                    animationDelay: compareVisible ? `${ci * 0.15 + 0.25 + pi * 0.08}s` : '0s',
+                    animationPlayState: compareVisible ? 'running' : 'paused',
+                  }}
+                >
                   <span className="seo-nri-check">{Ic.check}</span>
                   <span className="seo-nri-point-text">{p}</span>
                 </div>
@@ -2980,7 +3251,7 @@ function SEOTransferPricingPage({ setPage }) {
 export {
   SEOPageLayout, SEOSection, SEOProseP, SEOSteps, SEOMistakes, SEOFAQs,
   SEOClientStory, SEOCTAStrip, ROUTES, WASvg,
-  SEOPicksReveal, SEOWhatItIs, SEOInfoCards, SEOStatRow,
+  SEOPicksReveal, SEOWhatItIs, SEOInfoCards, SEOStatRow, SEOSectorCapsList,
   SEOFDIRulesPage, SEOForeignCompanyPage, SEOGCCSetupPage, SEOMarketEntryPage,
   SEONRIPage, SEOPvtLtdPage, SEOStartupFDIPage, SEOSubsidiaryPage, SEOTransferPricingPage
 };
