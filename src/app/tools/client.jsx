@@ -272,11 +272,8 @@ export default function Page() {
               >
                 <div className="lg-card-content">
 
-                  {/* Icon + title */}
+                  {/* Title only (Icon removed) */}
                   <div className="lg-card-head">
-                    <div className={`lg-icon c-${tool.color}`}>
-                      <i className={tool.icon}></i>
-                    </div>
                     <div className="lg-title-block">
                       <h2>{tool.title}</h2>
                       {/* subtitle keeps its accent color — only place color appears */}

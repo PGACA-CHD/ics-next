@@ -291,7 +291,7 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
             ref={ref}
             className="wwd-card"
             style={{
-                background: "rgba(255,255,255,.55)",
+                background: "rgba(235, 245, 238, 0.65)",
                 backdropFilter: "blur(18px)",
                 WebkitBackdropFilter: "blur(18px)",
                 border: `1.5px solid ${T.bdr}`,
@@ -320,7 +320,7 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
                 <SideRays
                     speed={1.6}
                     rayColor1={T.f || "#0f3e06"}
-                    rayColor2={T.s || "#b79f44"}
+                    rayColor2={"#34a87a"}
                     intensity={1.4}
                     spread={1.6}
                     origin="top-right"

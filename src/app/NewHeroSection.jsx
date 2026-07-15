@@ -63,14 +63,12 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         }
         .nhero-bg {
           position: absolute; inset: 0;
-          background-image: url('/homepage.avif');
+          background-image: url('/banners and logos/1.png');
           background-size: cover; background-position: center 38%;
         }
         .nhero-bg-tint {
           position: absolute; inset: 0;
-          background:
-            linear-gradient(100deg, rgba(5,15,12,.95) 4%, rgba(8,32,24,.86) 42%, rgba(8,32,24,.58) 78%),
-            linear-gradient(0deg, rgba(4,12,9,.55) 0%, transparent 40%);
+          background: none;
         }
         .nhero-wrap {
           position: relative; z-index: 2;

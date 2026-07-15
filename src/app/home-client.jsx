@@ -324,7 +324,7 @@ function useCountUp(target, dur = 1600, suffix = "") {
   return [val, ref];
 }
 
-function StatCard({ target, suffix = "", label, subLabel, gradient, idx }) {
+function StatCard({ target, suffix = "", label, subLabel, gradient, border, valueColor, idx }) {
   const [val, numRef] = useCountUp(target, 1600, suffix);
   const [vis, setVis] = useState(false);
   const [hov, setHov] = useState(false);
@@ -345,7 +345,7 @@ function StatCard({ target, suffix = "", label, subLabel, gradient, idx }) {
       style={{
         background: gradient, borderRadius: 16, padding: "32px 28px",
         display: "flex", flexDirection: "column", minWidth: 0,
-        border: "1px solid rgba(0,0,0,0.06)",
+        border: `1px solid ${border || "rgba(0,0,0,0.06)"}`,
         opacity: vis ? 1 : 0,
         transform: vis ? (hov ? "translateY(-6px)" : "translateY(0)") : "translateY(24px)",
         transition: vis
@@ -359,7 +359,7 @@ function StatCard({ target, suffix = "", label, subLabel, gradient, idx }) {
         color: "#777", display: "block", marginBottom: 24, fontFamily: HV
       }}>{label}</span>
       <div style={{
-        fontSize: "clamp(32px,3.2vw,52px)", fontWeight: 700, color: "#000", lineHeight: 1,
+        fontSize: "clamp(32px,3.2vw,52px)", fontWeight: 700, color: valueColor || GOLD, lineHeight: 1,
         letterSpacing: "-.02em", marginBottom: 8, whiteSpace: "nowrap", fontFamily: HV
       }}>{val}</div>
       <span style={{ fontSize: 12.5, color: "#555", display: "block", marginTop: 4, fontFamily: HV }}>{subLabel}</span>
@@ -369,31 +369,48 @@ function StatCard({ target, suffix = "", label, subLabel, gradient, idx }) {
 
 function StatsRibbon() {
   return (
-    <section style={{ background: "#fff", padding: "80px 56px", fontFamily: HV }}>
+    <section style={{ background: "#fff", padding: "80px 20px", fontFamily: HV }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 40 }}>
-          {/* Same SH component — green + gold */}
           <SH green="Numbers that speak" gold="for themselves." mb={16} />
-          <button onClick={() => { window.location.href = "/contact"; }}
-            style={{
-              background: G, color: "#fff", border: "none", borderRadius: 8,
-              padding: "13px 28px", fontSize: 14, fontWeight: 600, cursor: "pointer",
-              fontFamily: HV, marginTop: 8
-            }}>
-            Book Free Consultation →
-          </button>
         </div>
 
         <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16 }}>
           {[
-            { target: 100, suffix: "+", label: "ENTITIES", subLabel: "Companies incorporated", gradient: "linear-gradient(135deg,rgba(9,48,36,0.10) 0%,rgba(232,144,10,0.10) 100%)" },
-            { target: 18, suffix: " yrs", label: "EXPERIENCE", subLabel: "In continuous practice", gradient: "linear-gradient(135deg,rgba(232,144,10,0.10) 0%,rgba(92,92,84,0.10) 100%)" },
-            { target: 22, suffix: " days", label: "SPEED", subLabel: "Median time to operational entity", gradient: "linear-gradient(135deg,rgba(26,92,154,0.10) 0%,rgba(9,48,36,0.10) 100%)" },
-            { target: 0, suffix: "", label: "TP AUDITS", subLabel: "Transfer pricing audits lost", gradient: "linear-gradient(135deg,rgba(74,58,138,0.10) 0%,rgba(232,144,10,0.10) 100%)" },
-            { target: 90, suffix: "+", label: "TREATIES", subLabel: "Jurisdictions covered", gradient: "linear-gradient(135deg,rgba(232,144,10,0.10) 0%,rgba(9,48,36,0.10) 100%)" },
+            {
+              target: 100, suffix: "+", label: "ENTITIES", subLabel: "Companies incorporated",
+              gradient: "linear-gradient(160deg,#EAF4EF 0%,#F5FAF7 100%)", border: "rgba(9,48,36,0.16)", valueColor: G
+            },
+            {
+              target: 18, suffix: " yrs", label: "EXPERIENCE", subLabel: "In continuous practice",
+              gradient: "linear-gradient(160deg,#EAF1F8 0%,#F5F9FC 100%)", border: "rgba(26,92,154,0.18)", valueColor: "#1a5c9a"
+            },
+            {
+              target: 22, suffix: " days", label: "SPEED", subLabel: "Median time to operational entity",
+              gradient: "linear-gradient(160deg,#FCF3E1 0%,#FEFAF0 100%)", border: "rgba(230,152,25,0.24)", valueColor: GOLD
+            },
+            {
+              target: 0, suffix: "", label: "TP AUDITS", subLabel: "Transfer pricing audits lost",
+              gradient: "#ffffff", border: "rgba(0,0,0,0.10)", valueColor: "#222"
+            },
+            {
+              target: 90, suffix: "+", label: "TREATIES", subLabel: "Jurisdictions covered",
+              gradient: "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)", border: "rgba(9,48,36,0.14)", valueColor: G
+            },
           ].map((s, i) => (
             <StatCard key={s.label} {...s} idx={i} />
           ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 36 }}>
+          <button onClick={() => { window.location.href = "/contact"; }}
+            style={{
+              background: G, color: "#fff", border: "none", borderRadius: 8,
+              padding: "14px 32px", fontSize: 14.5, fontWeight: 600, cursor: "pointer",
+              fontFamily: HV, boxShadow: "0 4px 16px rgba(11,61,46,0.18)"
+            }}>
+            Get in touch now! →
+          </button>
         </div>
       </div>
     </section>
@@ -408,7 +425,7 @@ function MapLinesOverlay() {
     const canvas = canvasRef.current; if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const NODES = [{ x: 68, y: 45 }, { x: 49.5, y: 22 }, { x: 63.5, y: 37 }, { x: 22, y: 31 }, { x: 79.5, y: 51 }, { x: 86.5, y: 70 }];
+    const NODES = [{ x: 71, y: 51 }, { x: 49.5, y: 22 }, { x: 63.5, y: 37 }, { x: 22, y: 31 }, { x: 79.5, y: 51 }, { x: 86.5, y: 70 }];
     const EDGES = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5]];
     const pulses = EDGES.map(([a, b], i) => ({ a, b, t: i / EDGES.length, speed: 0.004 + Math.random() * 0.002 }));
     function resize() {
@@ -616,7 +633,8 @@ export default function HomePage() {
         }
         /* Stats responsive */
         @media(max-width:900px){.stats-grid{grid-template-columns:repeat(3,1fr)!important;}}
-        @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;}}
+        @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px!important;}}
+        @media(max-width:420px){.stats-grid{grid-template-columns:1fr!important;}}
         /* KH grid responsive */
         @media(max-width:900px){.kh-grid{grid-template-columns:repeat(2,1fr)!important;}}
         @media(max-width:600px){.kh-grid{grid-template-columns:1fr!important;}}
@@ -631,13 +649,31 @@ export default function HomePage() {
         .gr-map canvas{position:absolute!important;inset:20px!important;width:calc(100% - 40px)!important;height:calc(100% - 40px)!important;pointer-events:none;}
         @media(max-width:1024px){.gr-wrap{grid-template-columns:1fr;}.gr-left{border-right:none!important;border-bottom:1px solid #ECE7E1;}.gr-map{height:320px;}}
         @media(max-width:640px){.gr-section{padding:0 16px 48px!important;}.gr-wrap{border-radius:16px;}.gr-left{padding:24px 18px!important;}.gr-map{height:240px;}.gr-btns{flex-direction:column!important;}}
+        @media(max-width:480px){.gr-map{height:200px;padding:12px;}.gr-map-img{inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);}.gr-map canvas{inset:12px!important;width:calc(100% - 24px)!important;height:calc(100% - 24px)!important;}.gr-left{gap:14px!important;}}
         /* Pricing — non-featured buttons green */
         .pricing-card:not(.pricing-featured) .pricing-cta-btn{background:#0B3D2E!important;color:#fff!important;border-color:#0B3D2E!important;}
         .pricing-card:not(.pricing-featured) .pricing-cta-btn:hover{background:#145c42!important;border-color:#145c42!important;}
         /* Process grid responsive */
-        @media(max-width:900px){.process-grid{grid-template-columns:1fr!important;}}
+        @media(max-width:900px){.process-grid{grid-template-columns:1fr!important;}.process-sticky{position:relative!important;top:0!important;margin-bottom:32px;}}
         /* Final CTA grid responsive */
         @media(max-width:900px){.final-cta-grid{grid-template-columns:1fr!important;}}
+        /* Quote callout ("Talk to Our Expert Team") responsive */
+        @media(max-width:768px){
+          .quote-callout-sec{padding:0 16px 48px!important;}
+          .quote-callout-grid{grid-template-columns:1fr!important;padding:28px 24px!important;gap:20px!important;text-align:center;}
+          .quote-callout-grid button{width:100%;justify-content:center;}
+        }
+        /* DTAA / Tax Advantage section responsive */
+        @media(max-width:768px){
+          .dtaa-sec{padding:0 16px 48px!important;}
+          .dtaa-grid{grid-template-columns:1fr!important;padding:28px 24px!important;gap:20px!important;}
+          .dtaa-grid > div:last-child{flex-direction:row!important;flex-wrap:wrap;}
+          .dtaa-grid > div:last-child button{flex:1 1 auto;}
+        }
+        @media(max-width:480px){
+          .dtaa-grid > div:last-child{flex-direction:column!important;}
+          .dtaa-grid > div:last-child button{width:100%;}
+        }
       `}</style>
 
       {/* ── HERO ── */}
@@ -656,7 +692,7 @@ export default function HomePage() {
         <div style={{ position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "8%", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,#fff,transparent)" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "8%", zIndex: 2, pointerEvents: "none", background: "linear-gradient(270deg,#fff,transparent)" }} />
-          
+
           {/* Row 1: Scrolls Left */}
           <div className="logo-row-left" style={{ display: "flex", width: "max-content", alignItems: "center" }}>
             {[...Array(2)].map((_, di) => (
@@ -698,23 +734,20 @@ export default function HomePage() {
 
       {/* ── AUDIENCE PATHS ── */}
       <AudiencePathsSection />
-
-      <ClientOutcomes />
-
       {/* WhatWeDoSection — bg white, card numbers black, wave gradient cards */}
       <WhatWeDoSection T={T} ROUTES={ROUTES} />
+      <ClientOutcomes />
 
-      {/* ── QUOTE CALLOUT ── */}
-      <section style={{ padding: "0 56px 60px", background: "#fff" }}>
+      <section className="quote-callout-sec" style={{ padding: "0 56px 60px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <div style={{
+          <div className="quote-callout-grid" style={{
             position: "relative", overflow: "hidden",
-            backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=60')",
+            backgroundImage: "url('/banners and logos/2.png')",
             backgroundSize: "cover", backgroundPosition: "center",
             borderRadius: 18, padding: "38px 44px",
             display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center"
           }}>
-            <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg,rgba(11,61,46,0.90) 0%,rgba(21,92,70,0.88) 100%)`, borderRadius: 18 }} />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", borderRadius: 18 }} />
             <div style={{ position: "relative", zIndex: 1 }}>
               <p style={{ fontSize: 19, color: "rgba(255,255,255,.95)", lineHeight: 1.65, fontWeight: 400, fontFamily: HV, fontStyle: "italic", margin: 0 }}>
                 "Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."
@@ -763,13 +796,13 @@ export default function HomePage() {
           <SH eyebrow="Industries We Serve" green="Sectors we know" gold="deeply." mb={40} />
           <div className="ind-cards" style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16 }}>
             {[
-              { Icon: LaptopIcon, name: "SaaS &\nTechnology", proof: "30+ companies", detail: "USA, Singapore & UK" },
-              { Icon: BuildingIcon, name: "GCC / Captive\nCentres", proof: "15+ setups", detail: "10–200 person teams" },
-              { Icon: BankIcon, name: "Financial\nServices", proof: "20+ companies", detail: "Fintech, funds, wealth" },
-              { Icon: FactoryIcon, name: "Manufacturing\n& Engineering", proof: "15+ companies", detail: "UAE, Germany, Japan" },
-              { Icon: MedicalIcon, name: "Healthcare\n& Pharma", proof: "10+ companies", detail: "Research, devices" },
-              { Icon: CartIcon, name: "E-commerce\n& Retail", proof: "10+ companies", detail: "D2C, marketplace" },
-            ].map(({ Icon, name, proof, detail }) => (
+              { img: "/banners and logos/SAAS.png", name: "SaaS &\nTechnology", proof: "30+ companies", detail: "USA, Singapore & UK" },
+              { img: "/banners and logos/GCCI Captive center.png", name: "GCC / Captive\nCentres", proof: "15+ setups", detail: "10–200 person teams" },
+              { img: "/banners and logos/Financial Services.png", name: "Financial\nServices", proof: "20+ companies", detail: "Fintech, funds, wealth" },
+              { img: "/banners and logos/Manufacturing.png", name: "Manufacturing\n& Engineering", proof: "15+ companies", detail: "UAE, Germany, Japan" },
+              { img: "/banners and logos/Health and Pharma.png", name: "Healthcare\n& Pharma", proof: "10+ companies", detail: "Research, devices" },
+              { img: "/banners and logos/E commerce.png", name: "E-commerce\n& Retail", proof: "10+ companies", detail: "D2C, marketplace" },
+            ].map(({ img, name, proof, detail }) => (
               <div key={name} style={{
                 background: "#fff", borderRadius: 22, padding: "36px 24px 32px", border: "1px solid #ECE7E1",
                 textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center",
@@ -778,7 +811,9 @@ export default function HomePage() {
               }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 24px 56px rgba(0,0,0,.10)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 12px 35px rgba(0,0,0,.05)"; }}>
-                <div style={{ marginBottom: 24 }}><Icon /></div>
+                <div style={{ marginBottom: 24, height: 56, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img src={img} alt={name} style={{ maxHeight: "100%", maxWidth: 80, objectFit: "contain" }} />
+                </div>
                 <div style={{ fontSize: 13.5, fontWeight: 700, color: "#000", lineHeight: 1.4, marginBottom: 8, whiteSpace: "pre-line", fontFamily: HV }}>{name}</div>
                 <div style={{ fontSize: 12, color: G, fontWeight: 700, marginBottom: 6, fontFamily: HV }}>{proof}</div>
                 <div style={{ fontSize: 11.5, color: "#555", lineHeight: 1.6, fontFamily: HV }}>{detail}</div>
@@ -843,27 +878,27 @@ export default function HomePage() {
       </section>
 
       {/* ── DTAA ── */}
-      <section style={{ padding: "0 56px 60px", background: "#fff" }}>
+      <section className="dtaa-sec" style={{ padding: "0 56px 60px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div style={{
             position: "relative", borderRadius: 20, overflow: "hidden",
-            backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60')",
+            backgroundImage: "url('/banners and logos/Home pg medium size banner.png')",
             backgroundSize: "cover", backgroundPosition: "center"
           }}>
-            <div style={{ position: "absolute", inset: 0, background: "rgba(11,61,46,0.82)" }} />
-            <div style={{ position: "relative", zIndex: 1, padding: "40px 48px", display: "grid", gridTemplateColumns: "1fr auto", gap: 28, alignItems: "center" }}>
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
+            <div className="dtaa-grid" style={{ position: "relative", zIndex: 1, padding: "40px 48px", display: "grid", gridTemplateColumns: "1fr auto", gap: 28, alignItems: "center" }}>
               <div>
                 <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: GOLD, fontWeight: 600, marginBottom: 10, fontFamily: HV }}>Tax Advantage</div>
                 <div style={{ fontSize: "clamp(18px,2vw,22px)", fontWeight: 700, color: "#fff", lineHeight: 1.3, fontFamily: HV }}>
                   India's DTAA network covers 90+ countries — most companies we onboard are overpaying.
                 </div>
-                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,.58)", marginTop: 10, lineHeight: 1.65, fontFamily: HV }}>
+                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.78)", marginTop: 10, lineHeight: 1.65, fontFamily: HV }}>
                   Proper treaty planning reduces withholding tax on dividends, royalties, and fees. We identify the savings before you commit to a structure.
                 </p>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
                 <button className="ics-btn ics-btn-primary" onClick={() => { window.location.href = ROUTES.tax; }}>International Tax →</button>
-                <button className="ics-btn ics-btn-ghost" style={{ fontSize: 12.5, padding: "9px 16px" }} onClick={() => { window.location.href = ROUTES.seo_fdi; }}>FDI Rules Guide →</button>
+                <button className="ics-btn ics-btn-ghost" style={{ fontSize: 12.5, padding: "9px 16px", borderColor: "rgba(255,255,255,0.5)", color: "#fff" }} onClick={() => { window.location.href = ROUTES.seo_fdi; }}>FDI Rules Guide →</button>
               </div>
             </div>
           </div>
@@ -941,8 +976,8 @@ export default function HomePage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/homepage.avif')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `linear-gradient(100deg,rgba(5,15,12,.96) 4%,rgba(8,32,24,.88) 42%,rgba(8,32,24,.65) 78%),linear-gradient(0deg,rgba(4,12,9,.6) 0%,transparent 40%)` }} />
+      <section style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(100deg, rgba(0,0,0,0.85) 4%, rgba(0,0,0,0.68) 42%, rgba(0,0,0,0.45) 78%)" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", display: "grid", gridTemplateColumns: "1fr 420px", gap: 64, alignItems: "center" }} className="final-cta-grid">
           <div>
             <div style={{ fontSize: 11, letterSpacing: 2.5, textTransform: "uppercase", color: GOLD, fontWeight: 700, marginBottom: 18, fontFamily: HV }}>Get Started</div>
@@ -950,7 +985,7 @@ export default function HomePage() {
               Ready to enter India<br />
               <em style={{ fontStyle: "italic", color: GOLD, fontWeight: 500 }}>the right way?</em>
             </h2>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.9)", lineHeight: 1.75, fontWeight: 400, marginBottom: 36, maxWidth: 460, fontFamily: HV }}>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.78)", lineHeight: 1.75, fontWeight: 400, marginBottom: 36, maxWidth: 460, fontFamily: HV }}>
               Book a free 30-minute consultation. We'll review your India objectives and give you a clear structure recommendation — no commitment, no jargon.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 36 }}>

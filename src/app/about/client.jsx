@@ -100,7 +100,7 @@ function HeroStats() {
     obs.observe(el); return () => obs.disconnect();
   }, []);
   return (
-    <div ref={secRef} style={{ background: GLASS, backdropFilter: BLUR, WebkitBackdropFilter: BLUR, border: BDR, borderRadius: 20, padding: '10px', fontFamily: F, display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+    <div ref={secRef} className="about-stats" style={{ background: GLASS, backdropFilter: BLUR, WebkitBackdropFilter: BLUR, border: BDR, borderRadius: 20, padding: '10px', fontFamily: F, display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
       {STATS.map((s, i) => (
         <div key={s.label} style={{ padding: '26px 22px', borderRight: i % 2 === 0 ? '1px solid rgba(0,0,0,0.09)' : 'none', borderBottom: i < 2 ? '1px solid rgba(0,0,0,0.09)' : 'none', opacity: secVis ? 1 : 0, transform: secVis ? 'translateY(0)' : 'translateY(10px)', transition: `opacity .5s ease ${i * 90}ms, transform .5s ease ${i * 90}ms` }}>
           <div style={{ fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 800, color: GREEN, lineHeight: 1, letterSpacing: '-0.03em', marginBottom: 8, fontFamily: F }}>
@@ -130,28 +130,36 @@ function WhyVisual() {
   };
   useEffect(() => { runLoop(); return () => timers.current.forEach(clearTimeout); }, []);
   return (
-    <div className="spot-card" onMouseMove={handleSpotlight} style={{ background: GREEN, borderRadius: 24, padding: '40px 36px', position: 'relative', overflow: 'hidden', fontFamily: F, '--spot-color': 'rgba(245,168,40,0.28)' }}>
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px)', backgroundSize: '36px 36px' }} />
-      <div style={{ position: 'absolute', top: -60, right: -60, width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle,rgba(245,168,40,0.14),transparent 70%)', pointerEvents: 'none' }} />
-      <p style={{ fontFamily: F, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#F5A828', marginBottom: 22, position: 'relative', zIndex: 1 }}>The founding principle</p>
-      <blockquote style={{ fontFamily: F, fontSize: 'clamp(17px,2vw,22px)', fontWeight: 400, fontStyle: 'italic', color: '#fff', lineHeight: 1.5, margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
+    <div className="spot-card" onMouseMove={handleSpotlight} style={{ background: '#f9f9f6', borderRadius: 24, padding: '40px 36px', position: 'relative', overflow: 'hidden', fontFamily: F, '--spot-color': 'rgba(245,168,40,0.15)', border: '1px solid rgba(0,0,0,0.06)' }}>
+      {/* Dotted fade pattern */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
+        backgroundSize: '24px 24px',
+        opacity: 0.05,
+        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)'
+      }} />
+      <div style={{ position: 'absolute', top: -60, right: -60, width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle,rgba(245,168,40,0.12),transparent 70%)', pointerEvents: 'none' }} />
+      <p style={{ fontFamily: F, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#d98200', marginBottom: 22, position: 'relative', zIndex: 1 }}>The founding principle</p>
+      <blockquote style={{ fontFamily: F, fontSize: 'clamp(17px,2vw,22px)', fontWeight: 500, fontStyle: 'italic', color: '#111', lineHeight: 1.5, margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
         "The technical answer is rarely the hard part of entering a new market. Staying accountable for it, eighteen months after the invoice is paid, is."
       </blockquote>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, position: 'relative', zIndex: 1 }}>
         {CHIPS.map((t, i) => (
           <div key={t} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, opacity: visible[i] ? 1 : 0, transform: visible[i] ? 'translateY(0)' : 'translateY(10px)', transition: 'opacity 0.42s ease, transform 0.42s cubic-bezier(0.34,1.56,0.64,1)' }}>
             <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(245,168,40,0.15)', border: '1px solid rgba(245,168,40,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1, transform: visible[i] ? 'scale(1)' : 'scale(0.5)', transition: 'transform 0.38s cubic-bezier(0.34,1.56,0.64,1)', transitionDelay: visible[i] ? '0.05s' : '0s' }}>
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#F5A828" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#d98200" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
             </div>
-            <span style={{ fontFamily: F, fontSize: 13, color: 'rgba(255,255,255,0.72)', lineHeight: 1.55 }}>{t}</span>
+            <span style={{ fontFamily: F, fontSize: 13, color: '#555', lineHeight: 1.55 }}>{t}</span>
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', gap: 0, marginTop: 32, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 24, position: 'relative', zIndex: 1 }}>
+      <div style={{ display: 'flex', gap: 0, marginTop: 32, borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, position: 'relative', zIndex: 1 }}>
         {[['100+', 'Companies'], ['5', 'Continents'], ['Zero', 'Audits lost']].map(([n, l], i) => (
-          <div key={n} style={{ flex: 1, textAlign: 'center', borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none', padding: '0 12px' }}>
-            <p style={{ fontFamily: F, fontSize: 28, fontWeight: 800, color: '#fff', lineHeight: 1, marginBottom: 4 }}>{n}</p>
-            <p style={{ fontFamily: F, fontSize: 10.5, color: 'rgba(255,255,255,0.42)', letterSpacing: '0.04em' }}>{l}</p>
+          <div key={n} style={{ flex: 1, textAlign: 'center', borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none', padding: '0 12px' }}>
+            <p style={{ fontFamily: F, fontSize: 28, fontWeight: 800, color: '#111', lineHeight: 1, marginBottom: 4 }}>{n}</p>
+            <p style={{ fontFamily: F, fontSize: 10.5, color: '#666', letterSpacing: '0.04em' }}>{l}</p>
           </div>
         ))}
       </div>
@@ -162,9 +170,9 @@ function WhyVisual() {
 /* ── Structure ── */
 function StructureAnimation() {
   const ITEMS = [
-    { letter: 'I', name: 'India Company Setup', role: 'Market-facing brand', detail: 'Your single point of contact for all foreign-entry advisory', accent: '#6d4fd1', bg: 'rgba(109,79,209,0.08)' },
-    { letter: 'D', name: 'Divsam Consultants LLP', role: 'Primary contracting entity', detail: 'Carries PI insurance · Signs all engagement letters', accent: GREEN, bg: 'rgba(9,48,36,0.08)' },
-    { letter: 'P', name: 'PGA & Co., CA', role: 'Knowledge partner', detail: 'ICAI-registered · Chartered Accountants · Named on deliverables · Statutory audit · High-volume compliance', accent: '#b08d2a', bg: 'rgba(245,168,40,0.08)' },
+    { letter: 'I', name: 'India Company Setup', role: 'Market-facing brand', detail: 'Your single point of contact for all foreign-entry advisory', accent: '#2F3C51', bg: 'rgba(47,60,81,0.08)' },
+    { letter: 'D', name: 'Divsam Consultants LLP', role: 'Primary contracting entity', detail: 'Carries PI insurance · Signs all engagement letters', accent: '#2F3C51', bg: 'rgba(47,60,81,0.08)' },
+    { letter: 'P', name: 'PGA & Co., CA', role: 'Knowledge partner', detail: 'ICAI-registered · Chartered Accountants · Named on deliverables · Statutory audit · High-volume compliance', accent: '#2F3C51', bg: 'rgba(47,60,81,0.08)' },
   ];
   const secRef = useRef(null);
   const [secVis, setSecVis] = useState(false);
@@ -183,7 +191,13 @@ function StructureAnimation() {
             <div>
               <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: item.accent, marginBottom: 5, fontFamily: F }}>{item.role}</div>
               <div style={{ fontSize: 16.5, fontWeight: 800, color: '#111', fontFamily: F, lineHeight: 1.2, marginBottom: 6, letterSpacing: '-0.01em' }}>{item.name}</div>
-              <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: 0, fontFamily: F }}>{item.detail}</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
+                {item.detail.split('·').map((d, idx) => (
+                  <span key={idx} style={{ fontSize: 12.5, color: '#111', lineHeight: 1, fontFamily: F, display: 'inline-block', padding: '6px 16px', borderRadius: 50, background: 'rgba(9,48,36,0.06)', border: '1px solid #000' }}>
+                    {d.trim()}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -203,7 +217,7 @@ function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
       onMouseMove={handleSpotlight}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="spot-card"
+      className="spot-card team-card-inner"
       style={{
         display: 'grid',
         gridTemplateColumns: '200px 1fr',
@@ -222,7 +236,7 @@ function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
       }}
     >
       {/* Left — photo */}
-      <div style={{ width: 200, height: '100%', minHeight: 280, background: '#EDEFF4', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
+      <div className="team-card-photo" style={{ width: 200, height: '100%', minHeight: 280, background: '#EDEFF4', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
         {photo ? (
           <img src={photo} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }} />
         ) : (
@@ -231,7 +245,7 @@ function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
           </div>
         )}
         {/* subtle gradient overlay at bottom */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 60, background: 'linear-gradient(to top, rgba(0,0,0,0.18), transparent)', pointerEvents: 'none' }} />
+        <div className="team-card-overlay" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 60, background: 'linear-gradient(to top, rgba(0,0,0,0.18), transparent)', pointerEvents: 'none' }} />
       </div>
 
       {/* Right — content */}
@@ -364,11 +378,26 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           .reg-card  { border-right:none; padding:0 0 14px; margin:0; border-bottom:1px solid rgba(0,0,0,.09); }
           .reg-card:last-child { border-bottom:none; padding-bottom:0; }
           .team-card-inner { grid-template-columns:1fr!important; }
-          .team-card-inner > div:first-child { height:220px!important; width:100%!important; min-height:unset!important; }
+          .team-card-inner > .team-card-photo {
+            height:auto!important; width:100%!important; min-height:unset!important;
+          }
+          .team-card-inner > .team-card-photo img {
+            width:100%!important; height:auto!important;
+            object-fit:contain!important; object-position:top center!important;
+          }
+          .team-card-inner > .team-card-overlay { display:none!important; }
+          .team-card-inner > .spot-card-content { padding: 24px 20px !important; }
         }
         @media(max-width:540px){
           .wwe { padding:56px 18px!important; }
           .sec { padding-left:18px!important; padding-right:18px!important; }
+          .team-card-inner > .spot-card-content { padding: 20px 16px !important; }
+        }
+        @media(max-width:420px){
+          .sec { padding-left:12px!important; padding-right:12px!important; }
+          .team-card-inner > .spot-card-content { padding: 18px 12px !important; }
+          .about-stats { padding: 6px !important; border-radius: 14px !important; }
+          .about-stats > div { padding: 18px 14px !important; }
         }
       `}</style>
 
@@ -557,7 +586,6 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
             <div className="reg-strip">
               {[
                 { title: 'MCA / LLP Identification', desc: 'LLPIN [XXXXXXXXXXX], Ministry of Corporate Affairs, Government of India.' },
-                { title: 'ICSI Membership', desc: 'CS team members hold active membership with the Institute of Company Secretaries of India.' },
                 { title: 'Data Handling', desc: 'Client documents handled under a written confidentiality policy. Full statement available on request.' },
                 { title: 'Professional Indemnity', desc: 'Engagements covered under professional liability insurance. Details available on request.' },
               ].map(item => (

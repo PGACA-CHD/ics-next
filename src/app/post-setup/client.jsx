@@ -152,7 +152,7 @@ const SVC_COLOR = {
   compliance: { acc: "#093024", bg: "rgba(9,48,36,0.09)", bdr: "rgba(9,48,36,0.30)" },
   payroll: { acc: "#1a5c9a", bg: "rgba(26,92,154,0.09)", bdr: "rgba(26,92,154,0.30)" },
   accounting: { acc: "#7a5f10", bg: "rgba(176,141,42,0.09)", bdr: "rgba(176,141,42,0.30)" },
-  audit: { acc: "#3a2d72", bg: "rgba(74,58,138,0.09)", bdr: "rgba(74,58,138,0.30)" },
+  audit: { acc: "#093024", bg: "rgba(9,48,36,0.09)", bdr: "rgba(9,48,36,0.30)" },
   fema: { acc: "#093024", bg: "rgba(9,48,36,0.09)", bdr: "rgba(9,48,36,0.30)" },
   transfer_pricing: { acc: "#1a5c9a", bg: "rgba(26,92,154,0.09)", bdr: "rgba(26,92,154,0.30)" },
 };
@@ -453,7 +453,7 @@ export default function Page() {
           </Fade>
           <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18 }}>
             {WHY.map(([title, body], i) => {
-              const c = ACCENTS[i];
+              const c = ACCENTS[0];
               return (
                 <Fade key={i} delay={i * 60}>
                   <WaveCard acc={c.acc} bg={c.bg} bdr={c.bdr} index={i} title={title} body={body} />

@@ -452,7 +452,7 @@ export default function PricingTabsSection({ ROUTES }) {
                 key={plan.tier}
                 style={{
                   fontFamily: FONT,
-                  background: isPopular ? GREEN : WHITE,
+                  background: isPopular ? GREEN : '#eef7f2',
                   borderRadius: 20,
                   padding: '36px 32px',
                   border: `1px solid ${BLACK}`,
@@ -492,8 +492,8 @@ export default function PricingTabsSection({ ROUTES }) {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, marginBottom: 6, flexWrap: 'wrap' }}>
                     <span style={{
-                      fontFamily: FONT, fontWeight: 700, fontSize: 44,
-                      color: textColor, lineHeight: 1
+                      fontFamily: FONT, fontWeight: 700, fontSize: isPopular ? 56 : 44,
+                      color: isPopular ? GOLD : GREEN, lineHeight: 1
                     }}>{plan.price}</span>
                     <span style={{ fontSize: 13, color: textColor, paddingBottom: 6 }}>
                       {plan.unit === 'onwards' ? '' : plan.unit}
