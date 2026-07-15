@@ -291,12 +291,10 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
             ref={ref}
             className="wwd-card"
             style={{
-                background: "rgba(235, 245, 238, 0.65)",
-                backdropFilter: "blur(18px)",
-                WebkitBackdropFilter: "blur(18px)",
-                border: `1.5px solid ${T.bdr}`,
+                background: "linear-gradient(145deg, #1a4d2e 0%, #0d3320 45%, #0a2a1a 100%)",
+                border: `1.5px solid rgba(255,255,255,0.08)`,
                 borderRadius: 22,
-                boxShadow: "0 10px 34px rgba(0,0,0,.05)",
+                boxShadow: "0 10px 34px rgba(0,0,0,.18)",
                 padding: "36px 32px",
                 display: "flex",
                 flexDirection: "column",
@@ -304,7 +302,7 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
                 overflow: "hidden",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(18px)",
-                transition: `opacity 0.55s ease ${index * 90}ms, transform 0.55s ease ${index * 90}ms, box-shadow .3s ease, background .3s ease, border-color .3s ease`,
+                transition: `opacity 0.55s ease ${index * 90}ms, transform 0.55s ease ${index * 90}ms`,
             }}
         >
             {/* SideRays WebGL background — replaces the old gradient blob effect */}
@@ -319,22 +317,22 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
             }}>
                 <SideRays
                     speed={1.6}
-                    rayColor1={T.f || "#0f3e06"}
+                    rayColor1={"#ffffff"}
                     rayColor2={"#34a87a"}
-                    intensity={1.4}
+                    intensity={1.0}
                     spread={1.6}
                     origin="top-right"
                     tilt={0}
                     saturation={1.3}
                     blend={0.7}
                     falloff={1.8}
-                    opacity={0.9}
+                    opacity={0.3}
                 />
             </div>
 
             <div className="wwd-accent" style={{
                 position: "absolute", top: 0, left: 22, right: 22, height: 2, width: 0,
-                background: T.f, borderRadius: 2, transition: "width .35s ease",
+                background: "#ffffff", borderRadius: 2, transition: "width .35s ease",
                 zIndex: 1,
             }} />
 
@@ -342,21 +340,21 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
                 <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{
                         fontFamily: FONT_BODY, fontSize: 10.5, letterSpacing: "0.18em",
-                        textTransform: "uppercase", color: T.s, fontWeight: 600, marginBottom: 12
+                        textTransform: "uppercase", color: "rgba(255,255,255,0.8)", fontWeight: 600, marginBottom: 12
                     }}>
                         {item.label}
                     </div>
 
                     <h3 className="font-display" style={{
                         fontFamily: FONT_HEADING, fontSize: 23.5,
-                        fontWeight: 600, color: T.ch, lineHeight: 1.3, margin: 0
+                        fontWeight: 600, color: "#fff", lineHeight: 1.3, margin: 0
                     }}>
                         {item.headline}
                     </h3>
                 </div>
 
                 <div className="wwd-index" style={{
-                    fontFamily: FONT_HEADING, fontSize: 30, fontWeight: 300, color: BLACK,
+                    fontFamily: FONT_HEADING, fontSize: 30, fontWeight: 300, color: "rgba(255,255,255,0.25)",
                     opacity: .82, lineHeight: 1, flexShrink: 0,
                     transition: "opacity .3s ease, transform .3s ease",
                 }}>
@@ -365,7 +363,7 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
             </div>
 
             <p style={{
-                fontFamily: FONT_BODY, fontSize: 13.5, color: BLACK, lineHeight: 1.78,
+                fontFamily: FONT_BODY, fontSize: 13.5, color: "rgba(255,255,255,0.9)", lineHeight: 1.78,
                 fontWeight: 300, flex: 1, marginBottom: 24, position: "relative", zIndex: 1
             }}>
                 {item.desc}
@@ -376,7 +374,7 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
                 onClick={() => { window.location.href = ROUTES[item.link] || "/"; }}
                 style={{
                     background: "none", border: "none", cursor: "pointer", padding: 0,
-                    fontFamily: FONT_BODY, fontSize: 13, fontWeight: 600, color: T.f,
+                    fontFamily: FONT_BODY, fontSize: 13, fontWeight: 600, color: "#fff",
                     display: "flex", alignItems: "center", gap: 6, alignSelf: "flex-start",
                     position: "relative", zIndex: 1
                 }}
@@ -428,8 +426,9 @@ function FeaturePill({ icon, label, desc, index, T }) {
             }}
         >
             <div style={{
-                width: 38, height: 38, borderRadius: "50%",
-                background: `${T.f}12`, display: "flex", alignItems: "center",
+                width: 40, height: 40, borderRadius: "50%",
+                background: "#fff", border: "1px solid #000",
+                display: "flex", alignItems: "center",
                 justifyContent: "center", flexShrink: 0,
             }}>
                 {icon}
@@ -496,10 +495,10 @@ export default function WhatWeDoSection({ T, ROUTES }) {
     ];
 
     const features = [
-        { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.f} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>, label: "Strategy first", desc: "Structure designed before you file." },
-        { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.f} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>, label: "Compliance always", desc: "Every detail handled, every time." },
-        { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.f} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>, label: "Time zone aligned", desc: "Responsive support across the globe." },
-        { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.f} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>, label: "Senior led", desc: "Direct access to experienced advisors." },
+        { icon: <img src="/banners and logos/Strategy First.png" alt="Strategy first" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Strategy first", desc: "Structure designed before you file." },
+        { icon: <img src="/banners and logos/Complaince always.png" alt="Compliance always" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Compliance always", desc: "Every detail handled, every time." },
+        { icon: <img src="/banners and logos/Time Zone alligned.png" alt="Time zone aligned" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Time zone aligned", desc: "Responsive support across the globe." },
+        { icon: <img src="/banners and logos/Senior Led.png" alt="Senior led" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Senior led", desc: "Direct access to experienced advisors." },
     ];
 
     return (

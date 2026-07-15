@@ -16,31 +16,7 @@
 }
 
 .section :global(.wwd-card) {
-  transition: box-shadow .3s ease, background .3s ease, border-color .3s ease;
-}
-
-.section :global(.wwd-card:hover) {
-  background: rgba(225, 242, 232, 0.9) !important;
-  border-color: var(--theme-f) !important;
-  box-shadow: 0 26px 64px rgba(0, 0, 0, .09) !important;
-  transform: translateY(-4px) !important;
-}
-
-.section :global(.wwd-card:hover) :global(.waveContainer) {
-  opacity: 1 !important;
-}
-
-.section :global(.wwd-card:hover .wwd-accent) {
-  width: calc(100% - 44px);
-}
-
-.section :global(.wwd-card:hover .wwd-index) {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.section :global(.wwd-card:hover .wwd-arrow) {
-  transform: translateX(4px);
+  /* No hover animations */
 }
 
 .section :global(.wwd-grid) {

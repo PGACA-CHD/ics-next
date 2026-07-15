@@ -288,7 +288,7 @@ export default function Page() {
       <section className="hero-pad" style={{ 
         position: 'relative',
         padding: "96px 56px 88px",
-        backgroundImage: "url('/banners and logos/INTL TAX.png')",
+        backgroundImage: "url('/banners%20and%20logos/INTL%20TAX-2.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>

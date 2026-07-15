@@ -64,28 +64,30 @@ export default function Page() {
 
         /* ── HERO ── */
         .lg-hero {
-          width: 100%; background: #fff;
+          width: 100%;
           padding: 96px 56px 88px; text-align: center;
           border-bottom: 1px solid rgba(0,0,0,0.08);
+          background: url('/banners%20and%20logos/Tools%20page%20main%20.png') center/cover no-repeat;
+          position: relative;
         }
-        .lg-hero-inner { max-width: 860px; margin: 0 auto; }
+        .lg-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
 
         .lg-hero-eyebrow {
           display: block; font-size: 10px; letter-spacing: 0.42em;
-          text-transform: uppercase; font-weight: 700; color: ${G};
+          text-transform: uppercase; font-weight: 700; color: ${GOLD};
           margin: 0 0 14px;
         }
 
         /* heading — same HS as every other section */
         .lg-hero h1 {
           font-size: ${HS}; font-weight: 700; line-height: 1.1;
-          letter-spacing: -0.01em; margin: 0 0 20px; color: #000;
+          letter-spacing: -0.01em; margin: 0 0 20px; color: #fff;
         }
-        .lg-hero h1 .h-green { color: ${G}; }
+        .lg-hero h1 .h-green { color: #fff; }
         .lg-hero h1 .h-gold  { color: ${GOLD}; font-style: italic; }
 
         .lg-hero p {
-          font-size: 16px; color: #000; line-height: 1.75;
+          font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.75;
           max-width: 580px; margin: 0 auto 36px; font-weight: 400;
         }
         .lg-hero-btn {
@@ -191,7 +193,7 @@ export default function Page() {
         .lg-cta-band { width: 100%; padding: 72px 24px 96px; background: #fff; }
         .lg-cta-card {
           max-width: 1180px; margin: 0 auto;
-          background: ${G};
+          background: linear-gradient(rgba(11,61,46,0.75), rgba(11,61,46,0.75)), url('/banners%20and%20logos/Tools%20page%20cta%20.png') center/cover no-repeat;
           border-radius: 24px; padding: 56px 60px;
           display: flex; align-items: center; justify-content: space-between; gap: 40px;
           box-shadow: 0 24px 60px rgba(9,48,36,0.22);
