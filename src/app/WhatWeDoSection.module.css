@@ -5,6 +5,16 @@
   position: relative;
 }
 
+/* ── merged in from SideRays.css ── */
+.section :global(.side-rays-container) {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
 .section :global(.wwd-card) {
   transition: box-shadow .3s ease, background .3s ease, border-color .3s ease;
 }
@@ -16,12 +26,16 @@
   transform: translateY(-4px) !important;
 }
 
+.section :global(.wwd-card:hover) :global(.waveContainer) {
+  opacity: 1 !important;
+}
+
 .section :global(.wwd-card:hover .wwd-accent) {
   width: calc(100% - 44px);
 }
 
 .section :global(.wwd-card:hover .wwd-index) {
-  opacity: .28;
+  opacity: 1;
   transform: translateY(-2px);
 }
 
@@ -36,14 +50,6 @@
   position: relative;
 }
 
-/* NOTE: the JSX already renders a separate ambient-glow <div> with an inline
-   style behind the card grid — that div does the same job this ::before was
-   trying to do. Keeping both is redundant, and the var(--theme-f)10 syntax
-   below isn't valid CSS anyway (that "append digits to a hex color" alpha
-   trick only works inside a JS template literal building a string, not as
-   a real CSS custom-property reference). Using color-mix() here instead,
-   which IS valid CSS, in case you want the pseudo-element glow too. Safe to
-   delete this whole rule if you're keeping the JSX glow div instead. */
 .section :global(.wwd-grid::before) {
   content: "";
   position: absolute;
@@ -56,11 +62,8 @@
 }
 
 .section :global(.wwd-intro) {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: end;
-  margin-bottom: 64px;
+  text-align: center;
+  margin-bottom: 56px;
 }
 
 .section :global(.wwd-pills-row) {
@@ -84,13 +87,6 @@
 @media (max-width: 900px) {
   .section :global(.wwd-grid) {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .section :global(.wwd-intro) {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    align-items: start;
-    margin-bottom: 40px;
   }
 }
 

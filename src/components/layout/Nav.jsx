@@ -23,10 +23,10 @@ function isLinkActive(link, pathname) {
 /* ─── component ───────────────────────────────────────────────── */
 
 export default function Nav() {
-  const [scrolled,          setScrolled]          = useState(false);
-  const [menuOpen,          setMenuOpen]           = useState(false);
-  const [openDropdown,      setOpenDropdown]       = useState(null); // desktop hover
-  const [mobileExpanded,    setMobileExpanded]     = useState(null); // mobile toggle
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null); // desktop hover
+  const [mobileExpanded, setMobileExpanded] = useState(null); // mobile toggle
   const pathname = usePathname();
 
   /* scroll listener */
@@ -49,18 +49,18 @@ export default function Nav() {
     return (
       <div
         style={{
-          position:     'absolute',
-          top:          'calc(100% + 6px)',
-          left:         '50%',
-          transform:    'translateX(-50%)',
-          background:   '#fff',
-          border:       `1px solid ${T.bdr}`,
+          position: 'absolute',
+          top: 'calc(100% + 6px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#fff',
+          border: `1px solid ${T.bdr}`,
           borderRadius: 12,
-          padding:      '6px 0',
-          minWidth:     236,
-          boxShadow:    '0 8px 28px rgba(11,61,46,.10), 0 2px 8px rgba(0,0,0,.06)',
-          zIndex:       500,
-          whiteSpace:   'nowrap',
+          padding: '6px 0',
+          minWidth: 236,
+          boxShadow: '0 8px 28px rgba(11,61,46,.10), 0 2px 8px rgba(0,0,0,.06)',
+          zIndex: 500,
+          whiteSpace: 'nowrap',
         }}
       >
         {items.map((child, idx) => {
@@ -71,13 +71,13 @@ export default function Nav() {
                 {child.groupLabel && (
                   <div
                     style={{
-                      fontSize:      10,
-                      fontWeight:    700,
-                      color:         T.lt,
+                      fontSize: 10,
+                      fontWeight: 700,
+                      color: T.lt,
                       letterSpacing: 0.9,
                       textTransform: 'uppercase',
-                      paddingTop:    8,
-                      fontFamily:    "var(--font-cardo),'Cardo',Georgia,serif",
+                      paddingTop: 8,
+                      fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
                     }}
                   >
                     {child.groupLabel}
@@ -96,22 +96,22 @@ export default function Nav() {
               key={child.href}
               href={child.href}
               style={{
-                display:        'block',
-                padding:        '9px 18px',
-                fontSize:       13.5,
-                fontWeight:     childActive ? 600 : 400,
-                color:          childActive ? T.f : T.mid,
+                display: 'block',
+                padding: '9px 18px',
+                fontSize: 13.5,
+                fontWeight: childActive ? 600 : 400,
+                color: childActive ? T.f : T.mid,
                 textDecoration: 'none',
-                transition:     'background .12s, color .12s',
-                fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
+                transition: 'background .12s, color .12s',
+                fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = T.stone;
-                e.currentTarget.style.color      = T.f;
+                e.currentTarget.style.color = T.f;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color      = childActive ? T.f : T.mid;
+                e.currentTarget.style.color = childActive ? T.f : T.mid;
               }}
             >
               {child.label}
@@ -128,21 +128,21 @@ export default function Nav() {
       <nav
         className="site-nav"
         style={{
-          position:       'fixed',
-          top:            0,
-          left:           0,
-          right:          0,
-          zIndex:         400,
-          height:         70,
-          display:        'flex',
-          alignItems:     'center',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 400,
+          height: 70,
+          display: 'flex',
+          alignItems: 'center',
           justifyContent: 'space-between',
-          padding:        '0 40px',
-          background:     navBg,
+          padding: '0 40px',
+          background: navBg,
           backdropFilter: 'blur(12px)',
-          borderBottom:   `1px solid ${scrolled ? T.bdr : 'transparent'}`,
-          transition:     'background .25s, border-color .25s',
-          fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
+          borderBottom: `1px solid ${scrolled ? T.bdr : 'transparent'}`,
+          transition: 'background .25s, border-color .25s',
+          fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
         }}
       >
         {/* ── Logo ── */}
@@ -174,18 +174,18 @@ export default function Nav() {
                   <Link
                     href={link.href}
                     style={{
-                      display:        'inline-flex',
-                      alignItems:     'center',
-                      gap:            4,
-                      fontSize:       13.5,
-                      fontWeight:     active ? 600 : 400,
-                      color:          active ? T.f : T.mid,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      fontSize: 13.5,
+                      fontWeight: active ? 600 : 400,
+                      color: active ? T.f : T.mid,
                       textDecoration: 'none',
-                      padding:        '6px 12px',
-                      borderRadius:   6,
-                      transition:     'color .18s',
-                      borderBottom:   active ? `2px solid ${T.f}` : '2px solid transparent',
-                      fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
+                      padding: '6px 12px',
+                      borderRadius: 6,
+                      transition: 'color .18s',
+                      borderBottom: active ? `2px solid ${T.f}` : '2px solid transparent',
+                      fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
                     }}
                   >
                     {link.label}
@@ -197,9 +197,9 @@ export default function Nav() {
                       fill="none"
                       style={{
                         transition: 'transform .2s',
-                        transform:  openDropdown === link.href ? 'rotate(180deg)' : 'none',
+                        transform: openDropdown === link.href ? 'rotate(180deg)' : 'none',
                         flexShrink: 0,
-                        opacity:    0.55,
+                        opacity: 0.55,
                       }}
                     >
                       <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -219,15 +219,15 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize:       13.5,
-                  fontWeight:     active ? 600 : 400,
-                  color:          active ? T.f : T.mid,
+                  fontSize: 13.5,
+                  fontWeight: active ? 600 : 400,
+                  color: active ? T.f : T.mid,
                   textDecoration: 'none',
-                  padding:        '6px 12px',
-                  borderRadius:   6,
-                  transition:     'color .18s',
-                  borderBottom:   active ? `2px solid ${T.f}` : '2px solid transparent',
-                  fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  transition: 'color .18s',
+                  borderBottom: active ? `2px solid ${T.f}` : '2px solid transparent',
+                  fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
                 }}
               >
                 {link.label}
@@ -242,11 +242,11 @@ export default function Nav() {
             href={`tel:${PHONE.replace(/\s/g, '')}`}
             className="nav-phone"
             style={{
-              fontSize:       13,
-              fontWeight:     500,
-              color:          T.mid,
+              fontSize: 13,
+              fontWeight: 500,
+              color: T.mid,
               textDecoration: 'none',
-              fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
+              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
             }}
           >
             {PHONE}
@@ -256,15 +256,15 @@ export default function Nav() {
             href="/contact"
             className="nav-cta-btn"
             style={{
-              background:     T.s,
-              color:          '#fff',
-              padding:        '9px 18px',
-              borderRadius:   8,
-              fontSize:       13.5,
-              fontWeight:     600,
+              background: T.s,
+              color: '#fff',
+              padding: '9px 18px',
+              borderRadius: 8,
+              fontSize: 13.5,
+              fontWeight: 600,
               textDecoration: 'none',
-              fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
-              whiteSpace:     'nowrap',
+              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+              whiteSpace: 'nowrap',
             }}
           >
             Free Consultation →
@@ -278,42 +278,42 @@ export default function Nav() {
             type="button"
             style={{
               background: 'none',
-              border:     'none',
-              cursor:     'pointer',
-              padding:    0,
-              width:      44,
-              height:     44,
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              width: 44,
+              height: 44,
               flexShrink: 0,
             }}
           >
             <div
               style={{
-                width:      22,
-                height:     2,
+                width: 22,
+                height: 2,
                 background: T.ch,
                 borderRadius: 2,
                 transition: 'transform .2s ease',
-                transform:  menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+                transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
               }}
             />
             <div
               style={{
-                width:      22,
-                height:     2,
+                width: 22,
+                height: 2,
                 background: T.ch,
                 borderRadius: 2,
-                opacity:    menuOpen ? 0 : 1,
+                opacity: menuOpen ? 0 : 1,
                 transition: 'opacity .2s ease',
               }}
             />
             <div
               style={{
-                width:      22,
-                height:     2,
+                width: 22,
+                height: 2,
                 background: T.ch,
                 borderRadius: 2,
                 transition: 'transform .2s ease',
-                transform:  menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
+                transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
               }}
             />
           </button>
@@ -338,12 +338,12 @@ export default function Nav() {
                   {/* parent toggle row */}
                   <div
                     style={{
-                      display:         'flex',
-                      alignItems:      'center',
-                      justifyContent:  'space-between',
-                      padding:         '12px 0',
-                      borderBottom:    '1px solid rgba(255,255,255,.07)',
-                      cursor:          'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '12px 0',
+                      borderBottom: '1px solid rgba(255,255,255,.07)',
+                      cursor: 'pointer',
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -354,10 +354,10 @@ export default function Nav() {
                   >
                     <span
                       style={{
-                        fontSize:    26,
-                        fontWeight:  active ? 600 : 400,
-                        color:       active ? T.sl : 'rgba(255,255,255,.88)',
-                        fontFamily:  "var(--font-cormorant),'Cormorant Garamond',serif",
+                        fontSize: 26,
+                        fontWeight: active ? 600 : 400,
+                        color: active ? T.sl : 'rgba(255,255,255,.88)',
+                        fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
                       }}
                     >
                       {link.label}
@@ -369,7 +369,7 @@ export default function Nav() {
                       fill="none"
                       style={{
                         transition: 'transform .2s',
-                        transform:  expanded ? 'rotate(180deg)' : 'none',
+                        transform: expanded ? 'rotate(180deg)' : 'none',
                         flexShrink: 0,
                       }}
                     >
@@ -381,9 +381,9 @@ export default function Nav() {
                   {expanded && (
                     <div
                       style={{
-                        paddingLeft:   16,
+                        paddingLeft: 16,
                         paddingBottom: 8,
-                        borderBottom:  '1px solid rgba(255,255,255,.07)',
+                        borderBottom: '1px solid rgba(255,255,255,.07)',
                       }}
                     >
                       {link.children.map((child, idx) => {
@@ -393,13 +393,13 @@ export default function Nav() {
                               {child.groupLabel && (
                                 <div
                                   style={{
-                                    fontSize:      10,
-                                    fontWeight:    700,
-                                    color:         'rgba(255,255,255,.35)',
+                                    fontSize: 10,
+                                    fontWeight: 700,
+                                    color: 'rgba(255,255,255,.35)',
                                     letterSpacing: 0.9,
                                     textTransform: 'uppercase',
-                                    padding:       '10px 0 4px',
-                                    fontFamily:    "var(--font-cardo),'Cardo',Georgia,serif",
+                                    padding: '10px 0 4px',
+                                    fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
                                   }}
                                 >
                                   {child.groupLabel}
@@ -418,13 +418,13 @@ export default function Nav() {
                             key={child.href}
                             href={child.href}
                             style={{
-                              display:        'block',
-                              fontSize:       20,
-                              fontWeight:     childActive ? 600 : 400,
-                              color:          childActive ? T.sl : 'rgba(255,255,255,.75)',
+                              display: 'block',
+                              fontSize: 20,
+                              fontWeight: childActive ? 600 : 400,
+                              color: childActive ? T.sl : 'rgba(255,255,255,.75)',
                               textDecoration: 'none',
-                              padding:        '9px 0',
-                              fontFamily:     "var(--font-cormorant),'Cormorant Garamond',serif",
+                              padding: '9px 0',
+                              fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
                             }}
                             onClick={() => setMenuOpen(false)}
                           >
@@ -444,14 +444,14 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize:       26,
-                  fontWeight:     active ? 600 : 400,
-                  color:          active ? T.sl : 'rgba(255,255,255,.88)',
+                  fontSize: 26,
+                  fontWeight: active ? 600 : 400,
+                  color: active ? T.sl : 'rgba(255,255,255,.88)',
                   textDecoration: 'none',
-                  padding:        '12px 0',
-                  borderBottom:   '1px solid rgba(255,255,255,.07)',
-                  fontFamily:     "var(--font-cormorant),'Cormorant Garamond',serif",
-                  display:        'block',
+                  padding: '12px 0',
+                  borderBottom: '1px solid rgba(255,255,255,.07)',
+                  fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
+                  display: 'block',
                 }}
                 onClick={() => setMenuOpen(false)}
               >
@@ -463,18 +463,18 @@ export default function Nav() {
           <Link
             href="/contact"
             style={{
-              marginTop:      24,
-              display:        'inline-flex',
-              alignItems:     'center',
-              background:     T.s,
-              color:          '#fff',
-              padding:        '13px 26px',
-              borderRadius:   8,
-              fontSize:       15,
-              fontWeight:     600,
+              marginTop: 24,
+              display: 'inline-flex',
+              alignItems: 'center',
+              background: T.s,
+              color: '#fff',
+              padding: '13px 26px',
+              borderRadius: 8,
+              fontSize: 15,
+              fontWeight: 600,
               textDecoration: 'none',
-              fontFamily:     "var(--font-cardo),'Cardo',Georgia,serif",
-              width:          'fit-content',
+              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+              width: 'fit-content',
             }}
             onClick={() => setMenuOpen(false)}
           >
@@ -483,9 +483,9 @@ export default function Nav() {
 
           <div
             style={{
-              marginTop:  32,
-              fontSize:   12,
-              color:      'rgba(255,255,255,.3)',
+              marginTop: 32,
+              fontSize: 12,
+              color: 'rgba(255,255,255,.3)',
               fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
             }}
           >

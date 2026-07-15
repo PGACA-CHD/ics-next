@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
+import LightPillar from '@/components/shared/LightPillar';
+import ColorBends from '@/components/shared/ColorBends';
 
 function useReveal(t = 0.12) {
   const ref = useRef(null);
@@ -51,7 +53,19 @@ function FAQCard({ q, a, open, onToggle }) {
   const [h, setH] = useState(0);
   useEffect(() => { if (body.current) setH(body.current.scrollHeight); }, [open]);
   return (
-    <div onClick={onToggle} style={{ border: open ? `1.5px solid ${GREEN}` : '1px solid rgba(0,0,0,0.12)', borderRadius: 14, background: open ? 'rgba(9,48,36,0.03)' : '#fff', cursor: 'pointer', marginBottom: 14, padding: '0 24px', transition: 'border-color 0.3s, background 0.3s, box-shadow 0.3s', boxShadow: open ? '0 8px 24px rgba(9,48,36,0.08)' : '0 1px 3px rgba(0,0,0,0.03)' }}>
+    <div
+      onClick={onToggle}
+      style={{
+        border: open ? `1.5px solid ${GREEN}` : '1px solid rgba(0,0,0,0.12)',
+        borderRadius: 14,
+        background: open ? 'rgba(9,48,36,0.03)' : '#fff',
+        cursor: 'pointer',
+        marginBottom: 14,
+        padding: '0 24px',
+        transition: 'border-color 0.3s, background 0.3s, box-shadow 0.3s',
+        boxShadow: open ? '0 8px 24px rgba(9,48,36,0.08)' : '0 1px 3px rgba(0,0,0,0.03)',
+      }}
+    >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0', gap: 20 }}>
         <span style={{ fontSize: 15, fontWeight: 600, color: open ? GREEN : '#111', fontFamily: HV, lineHeight: 1.35, transition: 'color 0.3s' }}>{q}</span>
         <div style={{ width: 26, height: 26, borderRadius: '50%', border: `1.5px solid ${open ? GREEN : 'rgba(0,0,0,0.25)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.3s', transform: open ? 'rotate(45deg)' : 'none', background: open ? GREEN : 'transparent' }}>
@@ -68,12 +82,12 @@ function FAQCard({ q, a, open, onToggle }) {
 }
 
 const docIcons = [
-  <svg key="i0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2" /><circle cx="12" cy="9.5" r="2.6" /><line x1="8.5" y1="16" x2="15.5" y2="16" /><line x1="9.5" y1="18.6" x2="14.5" y2="18.6" /></svg>,
-  <svg key="i1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V21h13V9.5" /><line x1="9" y1="14" x2="15" y2="14" /><line x1="9" y1="17" x2="13.5" y2="17" /></svg>,
-  <svg key="i2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><line x1="2.5" y1="10" x2="21.5" y2="10" /><line x1="6" y1="14.5" x2="11" y2="14.5" /></svg>,
-  <svg key="i3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7a2.1 2.1 0 0 0-3-3l-7 7-1.5 4.5L12 19z" /><path d="M3 21h18" /></svg>,
-  <svg key="i4" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" /></svg>,
-  <svg key="i5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="1.5" /><line x1="8.5" y1="7.5" x2="10.5" y2="7.5" /><line x1="13.5" y1="7.5" x2="15.5" y2="7.5" /><line x1="8.5" y1="11.5" x2="10.5" y2="11.5" /><line x1="13.5" y1="11.5" x2="15.5" y2="11.5" /><path d="M10 21v-4h4v4" /></svg>,
+  <svg key="i0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2" /><circle cx="12" cy="9.5" r="2.6" /><line x1="8.5" y1="16" x2="15.5" y2="16" /><line x1="9.5" y1="18.6" x2="14.5" y2="18.6" /></svg>,
+  <svg key="i1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V21h13V9.5" /><line x1="9" y1="14" x2="15" y2="14" /><line x1="9" y1="17" x2="13.5" y2="17" /></svg>,
+  <svg key="i2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><line x1="2.5" y1="10" x2="21.5" y2="10" /><line x1="6" y1="14.5" x2="11" y2="14.5" /></svg>,
+  <svg key="i3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7a2.1 2.1 0 0 0-3-3l-7 7-1.5 4.5L12 19z" /><path d="M3 21h18" /></svg>,
+  <svg key="i4" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" /></svg>,
+  <svg key="i5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="1.5" /><line x1="8.5" y1="7.5" x2="10.5" y2="7.5" /><line x1="13.5" y1="7.5" x2="15.5" y2="7.5" /><line x1="8.5" y1="11.5" x2="10.5" y2="11.5" /><line x1="13.5" y1="11.5" x2="15.5" y2="11.5" /><path d="M10 21v-4h4v4" /></svg>,
 ];
 
 function useReducedMotion() {
@@ -104,22 +118,32 @@ function DocRow({ doc, i, isMobile, reduced }) {
   const left = i % 2 === 0;
   const show = reduced ? true : vis;
   const slideFrom = isMobile ? -36 : (left ? -44 : 44);
-  const contentStyle = { opacity: show ? 1 : 0, transform: show ? 'translateX(0)' : `translateX(${slideFrom}px)`, transition: reduced ? 'none' : 'opacity .6s ease .15s, transform .6s cubic-bezier(0.22,1,0.36,1) .15s', willChange: 'transform, opacity' };
-  const nodeStyle = { opacity: show ? 1 : 0, transform: show ? 'scale(1)' : 'scale(0.4)', transition: reduced ? 'none' : 'opacity .45s ease, transform .55s cubic-bezier(0.34,1.56,0.64,1)', willChange: 'transform, opacity' };
-  const eyebrow = <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.6px', textTransform: 'uppercase', color: GREEN, fontFamily: HV, marginBottom: 6 }}>{String(i + 1).padStart(2, '0')}</div>;
-  const title = <h3 style={{ fontSize: 16.5, fontWeight: 800, color: '#111', margin: '0 0 6px', fontFamily: HV, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{doc.label}</h3>;
+  const contentStyle = {
+    opacity: show ? 1 : 0,
+    transform: show ? 'translateX(0)' : `translateX(${slideFrom}px)`,
+    transition: reduced ? 'none' : 'opacity .6s ease .15s, transform .6s cubic-bezier(0.22,1,0.36,1) .15s',
+    willChange: 'transform, opacity',
+  };
+  const nodeStyle = {
+    opacity: show ? 1 : 0,
+    transform: show ? 'scale(1)' : 'scale(0.4)',
+    transition: reduced ? 'none' : 'opacity .45s ease, transform .55s cubic-bezier(0.34,1.56,0.64,1)',
+    willChange: 'transform, opacity',
+  };
+  const eyebrow = <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.6px', textTransform: 'uppercase', color: '#c8870a', fontFamily: HV, marginBottom: 6 }}>{String(i + 1).padStart(2, '0')}</div>;
+  const title = <h3 style={{ fontSize: 20.5, fontWeight: 800, color: '#111', margin: '0 0 6px', fontFamily: HV, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{doc.label}</h3>;
   return (
     <div ref={ref} className={`doc-tl-row ${left ? 'tl-left' : 'tl-right'}`} style={{ display: 'grid', gridTemplateColumns: '1fr 88px 1fr', alignItems: 'center', minHeight: 118 }}>
       <div className="doc-tl-content-l" style={{ textAlign: 'right', paddingRight: 28, visibility: left ? 'visible' : 'hidden', ...(left ? contentStyle : {}) }}>
-        {left && <>{eyebrow}{title}<p style={{ fontSize: 13, color: '#777', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320, marginLeft: 'auto' }}>{doc.detail}</p></>}
+        {left && (<>{eyebrow}{title}<p style={{ fontSize: 15.5, color: '#666', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320, marginLeft: 'auto' }}>{doc.detail}</p></>)}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-        <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#fff', border: `1.5px solid ${show ? 'rgba(9,48,36,0.45)' : 'rgba(9,48,36,0.28)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: show ? '0 8px 22px rgba(9,48,36,0.16)' : '0 6px 18px rgba(9,48,36,0.10)', position: 'relative', zIndex: 1, ...nodeStyle }}>
-          <div style={{ width: 50, height: 50, borderRadius: '50%', background: 'rgba(9,48,36,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{docIcons[i % docIcons.length]}</div>
+        <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#fff', border: `1.5px solid ${show ? 'rgba(200,135,10,0.45)' : 'rgba(200,135,10,0.28)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: show ? '0 8px 22px rgba(200,135,10,0.16)' : '0 6px 18px rgba(200,135,10,0.10)', position: 'relative', zIndex: 1, ...nodeStyle }}>
+          <div style={{ width: 50, height: 50, borderRadius: '50%', background: 'rgba(200,135,10,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{docIcons[i % docIcons.length]}</div>
         </div>
       </div>
       <div className="doc-tl-content-r" style={{ textAlign: 'left', paddingLeft: 28, visibility: left ? 'hidden' : 'visible', ...(!left ? contentStyle : {}) }}>
-        {!left && <>{eyebrow}{title}<p style={{ fontSize: 13, color: '#777', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320 }}>{doc.detail}</p></>}
+        {!left && (<>{eyebrow}{title}<p style={{ fontSize: 15.5, color: '#666', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320 }}>{doc.detail}</p></>)}
       </div>
     </div>
   );
@@ -137,14 +161,20 @@ function DocTimeline({ items }) {
       raf = 0;
       const el = wrapRef.current; if (!el) return;
       const rect = el.getBoundingClientRect();
-      const p = (window.innerHeight * 0.7 - rect.top) / rect.height;
+      const vh = window.innerHeight;
+      const target = vh * 0.7;
+      const p = (target - rect.top) / rect.height;
       setProgress(Math.max(0, Math.min(1, p)));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) cancelAnimationFrame(raf); };
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, [reduced]);
   return (
     <div ref={wrapRef} className="doc-tl" style={{ position: 'relative', maxWidth: 860, margin: '0 auto', padding: '10px 0' }}>
@@ -152,7 +182,7 @@ function DocTimeline({ items }) {
       <div className="doc-tl-line" style={{ position: 'absolute', top: 0, left: '50%', width: 2, height: `${progress * 100}%`, background: GREEN, transform: 'translateX(-1px)', transition: 'height 0.15s linear', borderRadius: 2 }} />
       <div className="doc-tl-cap" style={{ position: 'absolute', top: -4, left: '50%', width: 10, height: 10, borderRadius: '50%', background: GREEN, transform: 'translateX(-5px)' }} />
       <div className="doc-tl-cap" style={{ position: 'absolute', bottom: -4, left: '50%', width: 10, height: 10, borderRadius: '50%', background: progress > 0.98 ? GREEN : 'rgba(9,48,36,0.18)', transform: 'translateX(-5px)', transition: 'background 0.3s ease' }} />
-      {items.map((doc, i) => <DocRow key={i} doc={doc} i={i} isMobile={isMobile} reduced={reduced} />)}
+      {items.map((doc, i) => (<DocRow key={i} doc={doc} i={i} isMobile={isMobile} reduced={reduced} />))}
     </div>
   );
 }
@@ -167,47 +197,89 @@ function ProcessLayout({ steps }) {
   }, [vis, steps.length]);
   const cur = steps[active];
   return (
-    <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.48)', borderRadius: 18, overflow: 'hidden' }} className="proc-3col">
-      <div style={{ background: GREEN, padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px)', backgroundSize: '28px 28px', pointerEvents: 'none' }} />
-        <div style={{ position: 'relative' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
-          <div key={'num-' + active} style={{ fontSize: 72, fontWeight: 800, color: '#fff', lineHeight: 1, fontFamily: HV, letterSpacing: '-0.04em', animation: 'stepIn 0.4s ease both' }}>{cur.n}</div>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.50)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
+    <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
+
+      {/* LEFT */}
+      <div style={{
+        background: '#093024',
+        padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.38 }}>
+          <LightPillar
+            topColor="#ffe082"
+            bottomColor="#c8870a"
+            intensity={0.65}
+            rotationSpeed={0.25}
+            glowAmount={0.008}
+            pillarWidth={2.4}
+            pillarHeight={0.35}
+            noiseIntensity={0.12}
+            pillarRotation={15}
+            interactive={false}
+            mixBlendMode="screen"
+          />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{ position: 'absolute', top: -60, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,135,10,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
+
+          {/* ✦ LIVE ANIMATED GRADIENT STEP NUMBER */}
+          <div
+            key={'num-' + active}
+            style={{
+              fontSize: 72, fontWeight: 800, lineHeight: 1,
+              fontFamily: HV, letterSpacing: '-0.04em',
+              animation: 'stepIn 0.4s ease both, gradMove 3s ease infinite',
+              background: 'linear-gradient(135deg, #ffe082 0%, #ffb300 50%, #ff8f00 100%)',
+              backgroundSize: '300% 300%',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >{cur.n}</div>
+
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative', zIndex: 2 }}>
           {steps.map((s, i) => (
             <button key={i} onClick={() => setActive(i)} style={{ all: 'unset', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? '#fff' : 'rgba(255,255,255,0.25)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.4)' : 'scale(1)' }} />
-              <span style={{ fontSize: 11, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.90)' : 'rgba(255,255,255,0.35)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 130 }}>{s.title}</span>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg,#ffd54f,#ffb300)' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(255,213,79,0.6)' : 'none' }} />
+              <span style={{ fontSize: 11, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 130 }}>{s.title}</span>
             </button>
           ))}
         </div>
       </div>
-      <div style={{ borderLeft: '1px solid rgba(0,0,0,0.08)', borderRight: '1px solid rgba(0,0,0,0.08)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto' }}>
+
+      {/* MIDDLE */}
+      <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
-          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', cursor: 'pointer', transition: 'opacity 0.3s', opacity: i === active ? 1 : 0.42 }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? GREEN : 'rgba(0,0,0,0.06)', border: i === active ? `2px solid ${GREEN}` : '2px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#aaa', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 12px rgba(9,48,36,0.22)' : 'none' }}>{s.n}</div>
+          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', transition: 'opacity 0.3s', opacity: i === active ? 1 : 0.38 }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)' : 'rgba(0,0,0,0.05)', border: i === active ? 'none' : '2px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#bbb', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 14px rgba(200,135,10,0.28)' : 'none' }}>{s.n}</div>
             <div style={{ paddingTop: 6 }}>
-              <div style={{ fontSize: 13.5, fontWeight: 700, color: i === active ? '#111' : '#888', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? GREEN : '#ccc', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#999', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? '#c8870a' : '#ddd', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
             </div>
           </div>
         ))}
       </div>
-      <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#fafafa' }}>
+
+      {/* RIGHT */}
+      <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'detail-' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: GREEN, fontFamily: HV, marginBottom: 14 }}>{cur.time}</div>
-          <h3 style={{ fontSize: 'clamp(16px,2vw,20px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
-          <p style={{ fontSize: 13.5, color: '#555', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
+          <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
+
+          <h3 style={{ fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
+
+          <p style={{ fontSize: 13.5, color: '#666', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
         </div>
         <div style={{ marginTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
             <span style={{ fontSize: 10.5, color: '#bbb', fontFamily: HV }}>Progress</span>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: GREEN, fontFamily: HV }}>{active + 1} / {steps.length}</span>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: '#c8870a', fontFamily: HV }}>{active + 1} / {steps.length}</span>
           </div>
-          <div style={{ height: 3, background: 'rgba(0,0,0,0.08)', borderRadius: 2, overflow: 'hidden' }}>
-            <div style={{ height: '100%', background: GREEN, width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
+          <div style={{ height: 3, background: 'rgba(0,0,0,0.07)', borderRadius: 2, overflow: 'hidden' }}>
+            <div style={{ height: '100%', background: 'linear-gradient(90deg, #c8870a 0%, #e09a10 100%)', width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
           </div>
         </div>
       </div>
@@ -244,9 +316,9 @@ const documents = [
 ];
 
 const structures = [
-  ['Private Limited', 'Startups, funded ventures, subsidiaries', '2 (1 resident)', 'Yes — Automatic Route'],
-  ['LLP', 'Consulting, professional services, small teams', '2 (1 resident)', 'Yes — with restrictions'],
-  ['WOS', 'Australian companies expanding to India', '2 (1 resident)', 'Yes — 100% ownership'],
+  ['Private Limited', 'Startups, funded ventures, subsidiaries', '2 (1 resident)', 'Yes — Automatic'],
+  ['LLP', 'Consulting, professional services', '2 (1 resident)', 'Yes — restricted'],
+  ['WOS', 'Australian companies expanding to India', '2 (1 resident)', 'Yes — 100%'],
 ];
 
 const faqs = [
@@ -273,57 +345,63 @@ export default function Page() {
     <>
       <style>{`
         @keyframes stepIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+        @keyframes gradMove {
+          0%   { background-position: 0%   50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0%   50%; }
+        }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:88px 56px; }
-        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#aaa; font-family:${HV}; display:block; }
-        .g-btn { display:inline-flex; align-items:center; gap:8px; background:${GREEN}; color:#fff; font-family:${HV}; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s, transform .15s; }
+        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#aaa; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
+        .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
         .sec-div { border-top:1px solid rgba(0,0,0,0.08); }
         .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid rgba(0,0,0,0.15); border-radius:18px; overflow:hidden; }
-        .why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); border-bottom:none; cursor:default; position:relative; }
-        .why-card.no-right { border-right:none; }
-        .why-row-divider { grid-column: 1 / -1; height: 1px; background: rgba(0,0,0,0.13); margin: 0; }
-        .stbl { width:100%; border-collapse:collapse; font-family:${HV}; }
+.why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); cursor:default; position:relative; overflow:hidden; background:#fff; }        .why-card.no-right { border-right:none; }
+        .why-row-divider { grid-column:1/-1; height:1px; background:rgba(0,0,0,0.13); }
+        .stbl { width:100%; border-collapse:collapse; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
         .stbl th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#aaa; padding:0 20px 12px; text-align:left; border-bottom:2px solid rgba(0,0,0,0.12); }
-        .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:${HV}; vertical-align:top; }
+        .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; }
         .stbl tr:last-child td { border-bottom:none; }
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }
         @media(max-width:860px){
-          .proc-3col { grid-template-columns: 1fr !important; }
-          .proc-3col > div:nth-child(1) { border-radius: 0; padding: 28px 24px; }
-          .proc-3col > div:nth-child(2) { border-left: none !important; border-right: none !important; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); }
-          .proc-3col > div:nth-child(3) { padding: 28px 24px; }
+          .proc-3col { grid-template-columns:1fr !important; }
+          .proc-3col > div:nth-child(1) { padding:28px 24px; }
+          .proc-3col > div:nth-child(2) { border-left:none !important; border-right:none !important; border-top:1px solid rgba(0,0,0,0.08); border-bottom:1px solid rgba(0,0,0,0.08); }
+          .proc-3col > div:nth-child(3) { padding:28px 24px; }
           .why-grid { grid-template-columns:1fr !important; border-radius:14px; }
           .why-card { border-right:none !important; padding:26px 22px; border-bottom:1px solid rgba(0,0,0,0.13); }
           .why-card:last-child { border-bottom:none !important; }
-          .why-row-divider { height:1px; }
-          .hero-g { grid-template-columns:1fr!important; gap:44px!important; }
-          .doc-tl-line { left: 32px !important; }
-          .doc-tl-cap { left: 32px !important; transform: translateX(-4px) !important; }
-          .doc-tl-row { grid-template-columns: 64px 1fr !important; min-height: auto !important; padding: 16px 0; }
-          .doc-tl-row > div:nth-child(2) { grid-column: 1; grid-row: 1; justify-content: flex-start !important; }
-          .doc-tl-row > div:nth-child(2) > div { width: 52px !important; height: 52px !important; }
-          .doc-tl-row > div:nth-child(2) > div > div { width: 40px !important; height: 40px !important; }
-          .doc-tl-content-l, .doc-tl-content-r { grid-column: 2 !important; grid-row: 1 !important; visibility: visible !important; text-align: left !important; padding: 0 0 0 20px !important; }
-          .doc-tl-content-l p { margin-left: 0 !important; }
-          .tl-left .doc-tl-content-r, .tl-right .doc-tl-content-l { display: none; }
+          .hero-g { grid-template-columns:1fr !important; gap:44px !important; }
+          .doc-tl-line { left:32px !important; }
+          .doc-tl-cap { left:32px !important; transform:translateX(-4px) !important; }
+          .doc-tl-row { grid-template-columns:64px 1fr !important; min-height:auto !important; padding:16px 0; }
+          .doc-tl-row > div:nth-child(2) { grid-column:1; grid-row:1; justify-content:flex-start !important; }
+          .doc-tl-row > div:nth-child(2) > div { width:52px !important; height:52px !important; }
+          .doc-tl-row > div:nth-child(2) > div > div { width:40px !important; height:40px !important; }
+          .doc-tl-content-l, .doc-tl-content-r { grid-column:2 !important; grid-row:1 !important; visibility:visible !important; text-align:left !important; padding:0 0 0 20px !important; }
+          .doc-tl-content-l p { margin-left:0 !important; }
+          .tl-left .doc-tl-content-r, .tl-right .doc-tl-content-l { display:none; }
         }
-        @media(max-width:580px){ .sec { padding:56px 20px!important; } }
+        @media(max-width:580px){
+          .sec { padding:56px 20px !important; }
+        }
       `}</style>
 
-      {/* ── HERO ── */}
+      {/* HERO */}
       <section className="sec" style={{ background: '#f5f5f0', padding: '100px 56px 92px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <span className="lbl" style={{ marginBottom: 20 }}>Company Registration · From Australia</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#111', marginBottom: 22, fontFamily: HV }}>
-                Register a Company<br />in India from{' '}
-                <span style={{ position: 'relative', display: 'inline-block' }}>
+              <span className="lbl">Company Registration · From Australia</span>
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV }}>
+                <span style={{ color: GREEN }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ position: 'relative', display: 'inline-block', color: '#c8870a' }}>
                   Australia
-                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: GREEN, borderRadius: 2 }} />
+                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#c8870a', borderRadius: 2 }} />
                 </span>
               </h1>
               <p style={{ fontSize: 16, color: '#555', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
@@ -361,31 +439,69 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── WHY INDIA ── */}
+      {/* WHY INDIA */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 14 }}>Why India</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 6, fontFamily: HV }}>
-              Why Australia-Based Founders Are Setting Up in India
-            </h2>
-            <p style={{ fontSize: 15, color: '#666', marginBottom: 36, fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <span className="lbl">Why India</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>Why Australia-Based Founders Are Setting Up in India</h2>
+              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
+            </div>
           </Fade>
           <Fade delay={60}>
             <div className="why-grid">
               {whyPoints.slice(0, 3).map(([heading, body], i) => (
-                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`}>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 1).padStart(2, '0')}</div>
-                  <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                  <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
+                    <ColorBends
+                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
+                      rotation={90}
+                      speed={0.4}
+                      scale={1.4}
+                      frequency={1}
+                      warpStrength={0.6}
+                      mouseInfluence={0.2}
+                      noise={0.06}
+                      parallax={0.25}
+                      iterations={1}
+                      intensity={1.1}
+                      bandWidth={5}
+                      transparent
+                    />
+                  </div>
+                  <div style={{ position: 'relative', zIndex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18 }}>{String(i + 1).padStart(2, '0')}</div>
+                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
+                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                  </div>
                 </div>
               ))}
               <div className="why-row-divider" />
               {whyPoints.slice(3).map(([heading, body], i) => (
-                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`}>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 4).padStart(2, '0')}</div>
-                  <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                  <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
+                    <ColorBends
+                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
+                      rotation={90}
+                      speed={0.4}
+                      scale={1.4}
+                      frequency={1}
+                      warpStrength={0.6}
+                      mouseInfluence={0.2}
+                      noise={0.06}
+                      parallax={0.25}
+                      iterations={1}
+                      intensity={1.1}
+                      bandWidth={5}
+                      transparent
+                    />
+                  </div>
+                  <div style={{ position: 'relative', zIndex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18 }}>{String(i + 4).padStart(2, '0')}</div>
+                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
+                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -393,31 +509,27 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── PROCESS ── */}
+      {/* PROCESS */}
       <section id="process" className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 12 }}>Step-by-Step Process</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>
-              From Australia to your Certificate of Incorporation.
-            </h2>
-            <p style={{ fontSize: 15, color: '#666', marginBottom: 36, fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <span className="lbl">Step-by-Step Process</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Australia to your Certificate of Incorporation.</h2>
+              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
+            </div>
           </Fade>
-          <Fade delay={80}>
-            <ProcessLayout steps={steps} />
-          </Fade>
+          <Fade delay={80}><ProcessLayout steps={steps} /></Fade>
         </div>
       </section>
 
-      {/* ── DOCUMENTS ── */}
+      {/* DOCUMENTS */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 56 }}>
-              <span className="lbl" style={{ marginBottom: 12 }}>Documents Required</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>
-                What you'll need from Australia
-              </h2>
+              <span className="lbl">Documents Required</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>What you'll need from Australia</h2>
               <p style={{ fontSize: 14.5, color: '#666', lineHeight: 1.75, fontFamily: HV, maxWidth: 560, margin: '0 auto' }}>
                 Australia is part of the Hague Apostille Convention. Documents apostilled through DFAT are accepted directly by Indian authorities — no Indian Embassy attestation required.
               </p>
@@ -427,33 +539,21 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── STRUCTURES ── */}
+      {/* STRUCTURES */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 12 }}>Entity Types</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 32, fontFamily: HV }}>
-              Which structure is right for you?
-            </h2>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+              <span className="lbl">Entity Types</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Which structure is right for you?</h2>
+            </div>
           </Fade>
           <Fade delay={60}>
             <table className="stbl">
-              <thead>
-                <tr>
-                  <th>Structure</th>
-                  <th>Best For</th>
-                  <th>Min. Directors</th>
-                  <th>FDI Route</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Structure</th><th>Best For</th><th>Min. Directors</th><th>FDI Route</th></tr></thead>
               <tbody>
                 {structures.map(([s, b, d, f], i) => (
-                  <tr key={i}>
-                    <td>{s}</td>
-                    <td style={{ color: '#555' }}>{b}</td>
-                    <td style={{ color: '#555' }}>{d}</td>
-                    <td style={{ color: '#555' }}>{f}</td>
-                  </tr>
+                  <tr key={i}><td>{s}</td><td style={{ color: '#555' }}>{b}</td><td style={{ color: '#555' }}>{d}</td><td style={{ color: '#555' }}>{f}</td></tr>
                 ))}
               </tbody>
             </table>
@@ -461,14 +561,14 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
+      {/* FAQ */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 12 }}>FAQs</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 32, fontFamily: HV }}>
-              Common questions answered
-            </h2>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+              <span className="lbl">FAQs</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Common questions answered</h2>
+            </div>
           </Fade>
           {faqs.map((f, i) => (
             <Fade key={i} delay={i * 40}>
@@ -478,22 +578,18 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* CTA */}
       <section className="sec" style={{ background: '#f5f5f0', padding: '48px 56px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <div style={{ background: GREEN, borderRadius: 18, padding: '44px 52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none' }} />
             <div style={{ flex: 1, minWidth: 260, position: 'relative' }}>
-              <h2 style={{ fontSize: 'clamp(20px,2.5vw,30px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 8, fontFamily: HV }}>
-                Ready to register your Indian company from Australia?
-              </h2>
-              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, margin: 0, fontFamily: HV }}>
-                DFAT apostille guidance to Certificate of Incorporation — we handle everything.
-              </p>
+              <h2 style={{ fontSize: 'clamp(20px,2.5vw,30px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 8, fontFamily: HV }}>Ready to register your Indian company from Australia?</h2>
+              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, margin: 0, fontFamily: HV }}>DFAT apostille guidance to Certificate of Incorporation — we handle everything.</p>
             </div>
             <div style={{ position: 'relative', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
               <Link href="/contact"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#c8870a', color: '#fff', fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: '14px 26px', borderRadius: 7, textDecoration: 'none', whiteSpace: 'nowrap', transition: 'background .2s, transform .15s' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#c8870a', color: '#fff', fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: '14px 26px', borderRadius: 7, textDecoration: 'none', whiteSpace: 'nowrap', transition: 'background .2s,transform .15s' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#e09a10'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = '#c8870a'; e.currentTarget.style.transform = 'none'; }}>
                 Book a Free Consultation →
@@ -504,7 +600,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── INTERNAL LINKS ── */}
+      {/* INTERNAL LINKS */}
       <section style={{ padding: '36px 56px', background: '#fff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 12.5, color: '#aaa', fontFamily: HV }}>Also available:</span>

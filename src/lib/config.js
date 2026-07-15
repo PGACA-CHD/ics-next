@@ -54,7 +54,7 @@ export const NAV_LINKS = [
   },
   { label: "Post Setup",    href: "/post-setup" },
   { label: "Int'l Tax",     href: "/international-tax" },
-  { label: "Knowledge Hub", href: "/knowledge-hub" },
+
   { label: "Tools",         href: "/tools" },
   { label: "About",         href: "/about" },
   { label: "Contact",       href: "/contact" },

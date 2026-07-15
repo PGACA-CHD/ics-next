@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
+import LightPillar from '@/components/shared/LightPillar';
+import ColorBends from '@/components/shared/ColorBends';
 
 function useReveal(t = 0.12) {
   const ref = useRef(null);
@@ -68,12 +70,12 @@ function FAQCard({ q, a, open, onToggle }) {
 }
 
 const docIcons = [
-  <svg key="i0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2" /><circle cx="12" cy="9.5" r="2.6" /><line x1="8.5" y1="16" x2="15.5" y2="16" /><line x1="9.5" y1="18.6" x2="14.5" y2="18.6" /></svg>,
-  <svg key="i1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V21h13V9.5" /><line x1="9" y1="14" x2="15" y2="14" /><line x1="9" y1="17" x2="13.5" y2="17" /></svg>,
-  <svg key="i2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><line x1="2.5" y1="10" x2="21.5" y2="10" /><line x1="6" y1="14.5" x2="11" y2="14.5" /></svg>,
-  <svg key="i3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7a2.1 2.1 0 0 0-3-3l-7 7-1.5 4.5L12 19z" /><path d="M3 21h18" /></svg>,
-  <svg key="i4" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" /></svg>,
-  <svg key="i5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="1.5" /><line x1="8.5" y1="7.5" x2="10.5" y2="7.5" /><line x1="13.5" y1="7.5" x2="15.5" y2="7.5" /><line x1="8.5" y1="11.5" x2="10.5" y2="11.5" /><line x1="13.5" y1="11.5" x2="15.5" y2="11.5" /><path d="M10 21v-4h4v4" /></svg>,
+  <svg key="i0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2" /><circle cx="12" cy="9.5" r="2.6" /><line x1="8.5" y1="16" x2="15.5" y2="16" /><line x1="9.5" y1="18.6" x2="14.5" y2="18.6" /></svg>,
+  <svg key="i1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V21h13V9.5" /><line x1="9" y1="14" x2="15" y2="14" /><line x1="9" y1="17" x2="13.5" y2="17" /></svg>,
+  <svg key="i2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><line x1="2.5" y1="10" x2="21.5" y2="10" /><line x1="6" y1="14.5" x2="11" y2="14.5" /></svg>,
+  <svg key="i3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7a2.1 2.1 0 0 0-3-3l-7 7-1.5 4.5L12 19z" /><path d="M3 21h18" /></svg>,
+  <svg key="i4" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" /></svg>,
+  <svg key="i5" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8870a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="1.5" /><line x1="8.5" y1="7.5" x2="10.5" y2="7.5" /><line x1="13.5" y1="7.5" x2="15.5" y2="7.5" /><line x1="8.5" y1="11.5" x2="10.5" y2="11.5" /><line x1="13.5" y1="11.5" x2="15.5" y2="11.5" /><path d="M10 21v-4h4v4" /></svg>,
 ];
 
 function useReducedMotion() {
@@ -106,20 +108,20 @@ function DocRow({ doc, i, isMobile, reduced }) {
   const slideFrom = isMobile ? -36 : (left ? -44 : 44);
   const contentStyle = { opacity: show ? 1 : 0, transform: show ? 'translateX(0)' : `translateX(${slideFrom}px)`, transition: reduced ? 'none' : 'opacity .6s ease .15s, transform .6s cubic-bezier(0.22,1,0.36,1) .15s', willChange: 'transform, opacity' };
   const nodeStyle = { opacity: show ? 1 : 0, transform: show ? 'scale(1)' : 'scale(0.4)', transition: reduced ? 'none' : 'opacity .45s ease, transform .55s cubic-bezier(0.34,1.56,0.64,1)', willChange: 'transform, opacity' };
-  const eyebrow = <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.6px', textTransform: 'uppercase', color: GREEN, fontFamily: HV, marginBottom: 6 }}>{String(i + 1).padStart(2, '0')}</div>;
-  const title = <h3 style={{ fontSize: 16.5, fontWeight: 800, color: '#111', margin: '0 0 6px', fontFamily: HV, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{doc.label}</h3>;
+  const eyebrow = <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.6px', textTransform: 'uppercase', color: '#c8870a', fontFamily: HV, marginBottom: 6 }}>{String(i + 1).padStart(2, '0')}</div>;
+  const title = <h3 style={{ fontSize: 20.5, fontWeight: 800, color: '#111', margin: '0 0 6px', fontFamily: HV, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{doc.label}</h3>;
   return (
     <div ref={ref} className={`doc-tl-row ${left ? 'tl-left' : 'tl-right'}`} style={{ display: 'grid', gridTemplateColumns: '1fr 88px 1fr', alignItems: 'center', minHeight: 118 }}>
       <div className="doc-tl-content-l" style={{ textAlign: 'right', paddingRight: 28, visibility: left ? 'visible' : 'hidden', ...(left ? contentStyle : {}) }}>
-        {left && <>{eyebrow}{title}<p style={{ fontSize: 13, color: '#777', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320, marginLeft: 'auto' }}>{doc.detail}</p></>}
+        {left && <>{eyebrow}{title}<p style={{ fontSize: 15.5, color: '#666', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320, marginLeft: 'auto' }}>{doc.detail}</p></>}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-        <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#fff', border: `1.5px solid ${show ? 'rgba(9,48,36,0.45)' : 'rgba(9,48,36,0.28)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: show ? '0 8px 22px rgba(9,48,36,0.16)' : '0 6px 18px rgba(9,48,36,0.10)', position: 'relative', zIndex: 1, ...nodeStyle }}>
-          <div style={{ width: 50, height: 50, borderRadius: '50%', background: 'rgba(9,48,36,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{docIcons[i % docIcons.length]}</div>
+        <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#fff', border: `1.5px solid ${show ? 'rgba(200,135,10,0.45)' : 'rgba(200,135,10,0.28)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: show ? '0 8px 22px rgba(200,135,10,0.16)' : '0 6px 18px rgba(200,135,10,0.10)', position: 'relative', zIndex: 1, ...nodeStyle }}>
+          <div style={{ width: 50, height: 50, borderRadius: '50%', background: 'rgba(200,135,10,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{docIcons[i % docIcons.length]}</div>
         </div>
       </div>
       <div className="doc-tl-content-r" style={{ textAlign: 'left', paddingLeft: 28, visibility: left ? 'hidden' : 'visible', ...(!left ? contentStyle : {}) }}>
-        {!left && <>{eyebrow}{title}<p style={{ fontSize: 13, color: '#777', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320 }}>{doc.detail}</p></>}
+        {!left && <>{eyebrow}{title}<p style={{ fontSize: 15.5, color: '#666', lineHeight: 1.65, margin: 0, fontFamily: HV, maxWidth: 320 }}>{doc.detail}</p></>}
       </div>
     </div>
   );
@@ -167,47 +169,90 @@ function ProcessLayout({ steps }) {
   }, [vis, steps.length]);
   const cur = steps[active];
   return (
-    <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.48)', borderRadius: 18, overflow: 'hidden' }} className="proc-3col">
-      <div style={{ background: GREEN, padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px)', backgroundSize: '28px 28px', pointerEvents: 'none' }} />
-        <div style={{ position: 'relative' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
-          <div key={'num-' + active} style={{ fontSize: 72, fontWeight: 800, color: '#fff', lineHeight: 1, fontFamily: HV, letterSpacing: '-0.04em', animation: 'stepIn 0.4s ease both' }}>{cur.n}</div>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.50)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
+    <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
+
+      {/* LEFT */}
+      <div style={{
+        background: '#093024',
+        padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.38 }}>
+          <LightPillar
+            topColor="#ffe082"
+            bottomColor="#c8870a"
+            intensity={0.65}
+            rotationSpeed={0.25}
+            glowAmount={0.008}
+            pillarWidth={2.4}
+            pillarHeight={0.35}
+            noiseIntensity={0.12}
+            pillarRotation={15}
+            interactive={false}
+            mixBlendMode="screen"
+          />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{ position: 'absolute', top: -60, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,135,10,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
+
+          {/* ✦ LIVE ANIMATED GRADIENT STEP NUMBER */}
+          <div
+            key={'num-' + active}
+            style={{
+              fontSize: 72, fontWeight: 800, lineHeight: 1,
+              fontFamily: HV, letterSpacing: '-0.04em',
+              animation: 'stepIn 0.4s ease both, gradMove 3s ease infinite',
+              background: 'linear-gradient(135deg, #ffe082 0%, #ffb300 50%, #ff8f00 100%)',
+              backgroundSize: '300% 300%',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >{cur.n}</div>
+
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative', zIndex: 2 }}>
           {steps.map((s, i) => (
             <button key={i} onClick={() => setActive(i)} style={{ all: 'unset', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? '#fff' : 'rgba(255,255,255,0.25)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.4)' : 'scale(1)' }} />
-              <span style={{ fontSize: 11, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.90)' : 'rgba(255,255,255,0.35)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 130 }}>{s.title}</span>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg,#ffd54f,#ffb300)' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(255,213,79,0.6)' : 'none' }} />
+              <span style={{ fontSize: 11, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 130 }}>{s.title}</span>
             </button>
           ))}
         </div>
       </div>
-      <div style={{ borderLeft: '1px solid rgba(0,0,0,0.08)', borderRight: '1px solid rgba(0,0,0,0.08)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto' }}>
+
+      {/* MIDDLE */}
+      <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
-          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', cursor: 'pointer', transition: 'opacity 0.3s', opacity: i === active ? 1 : 0.42 }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? GREEN : 'rgba(0,0,0,0.06)', border: i === active ? `2px solid ${GREEN}` : '2px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#aaa', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 12px rgba(9,48,36,0.22)' : 'none' }}>{s.n}</div>
+          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', transition: 'opacity 0.3s', opacity: i === active ? 1 : 0.38 }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)' : 'rgba(0,0,0,0.05)', border: i === active ? 'none' : '2px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#bbb', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 14px rgba(200,135,10,0.28)' : 'none' }}>{s.n}</div>
             <div style={{ paddingTop: 6 }}>
-              <div style={{ fontSize: 13.5, fontWeight: 700, color: i === active ? '#111' : '#888', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? GREEN : '#ccc', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#999', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? '#c8870a' : '#ddd', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
             </div>
           </div>
         ))}
       </div>
-      <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#fafafa' }}>
+
+      {/* RIGHT */}
+      <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'detail-' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: GREEN, fontFamily: HV, marginBottom: 14 }}>{cur.time}</div>
-          <h3 style={{ fontSize: 'clamp(16px,2vw,20px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
-          <p style={{ fontSize: 13.5, color: '#555', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
+          <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
+
+          {/* ✦ INCREASED TITLE SIZE */}
+          <h3 style={{ fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
+
+          <p style={{ fontSize: 13.5, color: '#666', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
         </div>
         <div style={{ marginTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
             <span style={{ fontSize: 10.5, color: '#bbb', fontFamily: HV }}>Progress</span>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: GREEN, fontFamily: HV }}>{active + 1} / {steps.length}</span>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: '#c8870a', fontFamily: HV }}>{active + 1} / {steps.length}</span>
           </div>
-          <div style={{ height: 3, background: 'rgba(0,0,0,0.08)', borderRadius: 2, overflow: 'hidden' }}>
-            <div style={{ height: '100%', background: GREEN, width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
+          <div style={{ height: 3, background: 'rgba(0,0,0,0.07)', borderRadius: 2, overflow: 'hidden' }}>
+            <div style={{ height: '100%', background: 'linear-gradient(90deg, #c8870a 0%, #e09a10 100%)', width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
           </div>
         </div>
       </div>
@@ -280,7 +325,7 @@ export default function Page() {
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
         .sec-div { border-top:1px solid rgba(0,0,0,0.08); }
         .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid rgba(0,0,0,0.15); border-radius:18px; overflow:hidden; }
-        .why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); border-bottom:none; cursor:default; position:relative; }
+        .why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); border-bottom:none; cursor:default; position:relative; overflow:hidden; background:#fff; }
         .why-card.no-right { border-right:none; }
         .why-row-divider { grid-column: 1 / -1; height: 1px; background: rgba(0,0,0,0.13); margin: 0; }
         .stbl { width:100%; border-collapse:collapse; font-family:${HV}; }
@@ -320,10 +365,10 @@ export default function Page() {
             <Fade>
               <span className="lbl" style={{ marginBottom: 20 }}>Company Registration · From Canada</span>
               <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#111', marginBottom: 22, fontFamily: HV }}>
-                Register a Company<br />in India from{' '}
-                <span style={{ position: 'relative', display: 'inline-block' }}>
+                <span style={{ color: GREEN }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ position: 'relative', display: 'inline-block', color: '#c8870a' }}>
                   Canada
-                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: GREEN, borderRadius: 2 }} />
+                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#c8870a', borderRadius: 2 }} />
                 </span>
               </h1>
               <p style={{ fontSize: 16, color: '#555', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
@@ -365,27 +410,67 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 14 }}>Why India</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 6, fontFamily: HV }}>
-              Why Canada-Based NRIs Are Setting Up in India
-            </h2>
-            <p style={{ fontSize: 15, color: '#666', marginBottom: 36, fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <span className="lbl">Why India</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>
+                Why Canada-Based NRIs Are Setting Up in India
+              </h2>
+              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
+            </div>
           </Fade>
           <Fade delay={60}>
             <div className="why-grid">
               {whyPoints.slice(0, 3).map(([heading, body], i) => (
-                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`}>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 1).padStart(2, '0')}</div>
-                  <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                  <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
+                    <ColorBends
+                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
+                      rotation={90}
+                      speed={0.4}
+                      scale={1.4}
+                      frequency={1}
+                      warpStrength={0.6}
+                      mouseInfluence={0.2}
+                      noise={0.06}
+                      parallax={0.25}
+                      iterations={1}
+                      intensity={1.1}
+                      bandWidth={5}
+                      transparent
+                    />
+                  </div>
+                  <div style={{ position: 'relative', zIndex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 1).padStart(2, '0')}</div>
+                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
+                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                  </div>
                 </div>
               ))}
               <div className="why-row-divider" />
               {whyPoints.slice(3).map(([heading, body], i) => (
-                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`}>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 4).padStart(2, '0')}</div>
-                  <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                  <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
+                    <ColorBends
+                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
+                      rotation={90}
+                      speed={0.4}
+                      scale={1.4}
+                      frequency={1}
+                      warpStrength={0.6}
+                      mouseInfluence={0.2}
+                      noise={0.06}
+                      parallax={0.25}
+                      iterations={1}
+                      intensity={1.1}
+                      bandWidth={5}
+                      transparent
+                    />
+                  </div>
+                  <div style={{ position: 'relative', zIndex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18, letterSpacing: '0.2px' }}>{String(i + 4).padStart(2, '0')}</div>
+                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
+                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -397,11 +482,13 @@ export default function Page() {
       <section id="process" className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 12 }}>Step-by-Step Process</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>
-              From Canada to your Certificate of Incorporation.
-            </h2>
-            <p style={{ fontSize: 15, color: '#666', marginBottom: 36, fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <span className="lbl">Step-by-Step Process</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>
+                From Canada to your Certificate of Incorporation.
+              </h2>
+              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
+            </div>
           </Fade>
           <Fade delay={80}>
             <ProcessLayout steps={steps} />
@@ -431,10 +518,12 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 12 }}>Entity Types</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 32, fontFamily: HV }}>
-              Which structure is right for you?
-            </h2>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+              <span className="lbl">Entity Types</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>
+                Which structure is right for you?
+              </h2>
+            </div>
           </Fade>
           <Fade delay={60}>
             <table className="stbl">
@@ -465,10 +554,12 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Fade>
-            <span className="lbl" style={{ marginBottom: 12 }}>FAQs</span>
-            <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 32, fontFamily: HV }}>
-              Common questions answered
-            </h2>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+              <span className="lbl">FAQs</span>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>
+                Common questions answered
+              </h2>
+            </div>
           </Fade>
           {faqs.map((f, i) => (
             <Fade key={i} delay={i * 40}>

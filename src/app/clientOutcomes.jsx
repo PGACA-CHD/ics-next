@@ -1,213 +1,235 @@
 'use client';
 
-/**
- * IMPORTANT — add these two fonts in your layout.jsx / _app.jsx:
- *
- * import { Cormorant_Garamond, Cardo } from 'next/font/google'
- *
- * const cormorant = Cormorant_Garamond({
- *   subsets: ['latin'],
- *   weight: ['400','500','600','700'],
- *   style: ['normal','italic'],
- *   variable: '--font-cormorant',
- * })
- * const cardo = Cardo({
- *   subsets: ['latin'],
- *   weight: ['400','700'],
- *   style: ['normal','italic'],
- *   variable: '--font-cardo',
- * })
- *
- * Then on your root <html> tag:
- * <html className={`${cormorant.variable} ${cardo.variable}`}>
- *
- * The CSS variables --font-cormorant and --font-cardo will then be
- * available everywhere including this component.
- */
+import { useEffect, useRef, useState } from 'react';
 
-const FH = "var(--font-cormorant,'Cormorant Garamond',Georgia,serif)";
-const FB = "var(--font-cardo,'Cardo',Georgia,serif)";
+const HV = "Helvetica, Arial, sans-serif";
+const G = "#0B3D2E";
+const GOLD = "#e69819";
+const HS = "clamp(28px, 3vw, 42px)";
+
+// Wave gradient themes per card (cycles through 4)
+const WAVE_THEMES = [
+    { from: "rgba(9,48,36,0.10)", to: "rgba(9,48,36,0.02)", acc: "#093024", bar: G },
+    { from: "rgba(245,168,40,0.12)", to: "rgba(245,168,40,0.02)", acc: "#7a4e00", bar: GOLD },
+    { from: "rgba(26,92,154,0.10)", to: "rgba(26,92,154,0.02)", acc: "#1a5c9a", bar: "#1a5c9a" },
+    { from: "rgba(74,58,138,0.10)", to: "rgba(74,58,138,0.02)", acc: "#3a2d72", bar: "#3a2d72" },
+];
 
 const OUTCOMES = [
     {
         metric: "19",
         metricSub: "days, entity to bank account",
         title: "SaaS company enters India",
-        description:
-            "Needed a fully India-compliant entity live before an engineering hire could start — incorporation, GST, and bank account opening ran in parallel rather than in sequence.",
+        description: "Needed a fully India-compliant entity live before an engineering hire could start — incorporation, GST, and bank account opening ran in parallel rather than in sequence.",
         tags: ["SaaS", "Europe HQ"],
-        accentGreen: false,
     },
     {
-        metric: "£340k",
+        metric: "$340k",
         metricSub: "saved through structure correction",
         title: "London fintech restructures a mistaken entry",
-        description:
-            "An FDI compliance gap was flagged before it triggered penalty exposure; the entry structure was corrected within a fiscal year rather than compounding across multiple audit cycles.",
+        description: "An FDI compliance gap was flagged before it triggered penalty exposure; the entry structure was corrected within a fiscal year rather than compounding across multiple audit cycles.",
         tags: ["Fintech", "UK HQ"],
-        accentGreen: true,
     },
     {
         metric: "12",
         metricSub: "weeks, entity to first payroll run",
         title: "Dubai group opens a 12-person GCC",
-        description:
-            "Registered office identification, entity structuring, and staged hiring compliance were sequenced together so the team could onboard before every filing had cleared.",
+        description: "Registered office identification, entity structuring, and staged hiring compliance were sequenced together so the team could onboard before every filing had cleared.",
         tags: ["GCC", "UAE HQ"],
-        accentGreen: false,
     },
     {
         metric: "Zero",
         metricSub: "transfer-pricing disputes in 5 years",
         title: "APAC SaaS scales to a 40-person India team",
-        description:
-            "A defensible transfer-pricing model, benchmarked and documented from incorporation, has cleared every annual audit cycle without a single adjustment.",
+        description: "A defensible transfer-pricing model, benchmarked and documented from incorporation, has cleared every annual audit cycle without a single adjustment.",
         tags: ["SaaS", "Singapore HQ"],
-        accentGreen: true,
     },
 ];
 
-export default function ClientOutcomes() {
-    return (
-        <section style={{ background: "#FAFAF5", padding: "80px 40px 96px", fontFamily: FB }}>
-            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+function OutcomeCard({ item, index }) {
+    const [vis, setVis] = useState(false);
+    const [hov, setHov] = useState(false);
+    const ref = useRef(null);
+    const theme = WAVE_THEMES[index % WAVE_THEMES.length];
 
-                {/* Eyebrow */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 16 }}>
-                    <div style={{ width: 26, height: 1.5, background: "#F5A828", flexShrink: 0 }} />
-                    <span style={{
-                        fontFamily: FB, fontSize: 11, fontWeight: 700,
-                        letterSpacing: "0.32em", textTransform: "uppercase", color: "#F5A828",
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const obs = new IntersectionObserver(
+            ([e]) => { if (e.isIntersecting) { setTimeout(() => setVis(true), index * 120); obs.disconnect(); } },
+            { threshold: 0.15 }
+        );
+        obs.observe(el);
+        return () => obs.disconnect();
+    }, [index]);
+
+    return (
+        <div
+            ref={ref}
+            onMouseEnter={() => setHov(true)}
+            onMouseLeave={() => setHov(false)}
+            style={{
+                /* wave gradient background */
+                background: `radial-gradient(ellipse at 20% 80%, ${theme.from} 0%, ${theme.to} 50%, #fff 72%)`,
+                backgroundSize: "300% 300%",
+                animation: vis ? `waveShift 10s ease infinite` : "none",
+                animationDelay: `${index * 0.8}s`,
+
+                borderRadius: 18,
+                border: "1px solid rgba(0,0,0,0.07)",
+                padding: "28px 26px 24px",
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+                overflow: "hidden",
+
+                /* entry animation */
+                opacity: vis ? 1 : 0,
+                transform: vis
+                    ? hov ? "translateY(-6px)" : "translateY(0)"
+                    : "translateY(28px)",
+                transition: vis
+                    ? "transform 0.28s ease, box-shadow 0.28s ease, opacity 0.5s ease"
+                    : `opacity 0.5s ease ${index * 120}ms, transform 0.55s ease ${index * 120}ms`,
+                boxShadow: hov
+                    ? "0 18px 48px rgba(0,0,0,0.10)"
+                    : "0 2px 12px rgba(0,0,0,0.04)",
+                cursor: "default",
+                fontFamily: HV,
+            }}
+        >
+            {/* Top accent bar */}
+            <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 3,
+                background: theme.bar,
+                borderRadius: "18px 18px 0 0",
+            }} />
+
+            {/* Metric + tags row */}
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 18 }}>
+                <div>
+                    {/* Metric number — reduced size */}
+                    <p style={{
+                        fontFamily: HV,
+                        fontSize: "clamp(32px, 4vw, 48px)",
+                        fontWeight: 700,
+                        color: G,
+                        lineHeight: 1,
+                        letterSpacing: "-0.03em",
+                        margin: 0,
                     }}>
-                        Track record
-                    </span>
+                        {item.metric}
+                    </p>
+                    <p style={{
+                        fontFamily: HV,
+                        fontSize: 12,
+                        color: "#666",
+                        lineHeight: 1.45,
+                        margin: "7px 0 0",
+                        letterSpacing: "0.01em",
+                    }}>
+                        {item.metricSub}
+                    </p>
                 </div>
 
-                {/* Heading */}
-                <h2 style={{
-                    fontFamily: FH,
-                    fontSize: "clamp(30px, 5vw, 52px)",
-                    fontWeight: 600,
-                    color: "#0B3D2E",
-                    lineHeight: 1.06,
-                    letterSpacing: "-0.02em",
-                    margin: "0 0 14px",
-                    textAlign: "center",
-                }}>
-                    What clients actually{" "}
-                    <em style={{ fontStyle: "italic", fontWeight: 400, color: "#5C5C54" }}>
-                        got done.
-                    </em>
-                </h2>
+                {/* Tags */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 5, alignItems: "flex-end", paddingTop: 2 }}>
+                    <span style={{
+                        fontFamily: HV, fontSize: 10, fontWeight: 700,
+                        letterSpacing: "0.14em", textTransform: "uppercase",
+                        padding: "3px 10px", borderRadius: 4,
+                        background: "rgba(245,168,40,0.12)", color: "#7a4e00",
+                        border: "1px solid rgba(245,168,40,0.30)", whiteSpace: "nowrap",
+                    }}>{item.tags[0]}</span>
+                    <span style={{
+                        fontFamily: HV, fontSize: 10, fontWeight: 700,
+                        letterSpacing: "0.14em", textTransform: "uppercase",
+                        padding: "3px 10px", borderRadius: 4,
+                        background: "rgba(11,61,46,0.07)", color: G,
+                        border: "1px solid rgba(11,61,46,0.18)", whiteSpace: "nowrap",
+                    }}>{item.tags[1]}</span>
+                </div>
+            </div>
 
-                <p style={{ fontFamily: FB, fontSize: 15, color: "#7a7060", margin: "0 auto 56px", lineHeight: 1.6, textAlign: "center", maxWidth: 520 }}>
-                    Anonymized at client request. All outcomes independently verifiable.
-                </p>
+            {/* Divider */}
+            <div style={{ height: 1, background: "rgba(0,0,0,0.07)", marginBottom: 16 }} />
 
-                {/* 2-col card grid — collapses to 1 col on mobile automatically */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
-                    gap: 20,
-                }}>
-                    {OUTCOMES.map((item) => (
-                        <div
-                            key={item.title}
-                            style={{
-                                background: "#ffffff",
-                                borderRadius: 18,
-                                padding: "32px 28px 28px",
-                                border: "1px solid rgba(11,61,46,0.10)",
-                                display: "flex",
-                                flexDirection: "column",
-                                position: "relative",
-                                overflow: "hidden",
-                            }}
-                        >
-                            {/* Top accent bar */}
-                            <div style={{
-                                position: "absolute", top: 0, left: 0, right: 0, height: 3,
-                                background: item.accentGreen ? "#0B3D2E" : "#F5A828",
-                            }} />
+            {/* Title */}
+            <h3 style={{
+                fontFamily: HV,
+                fontSize: "clamp(15px, 1.6vw, 18px)",
+                fontWeight: 700,
+                color: "#000",
+                margin: "0 0 10px",
+                lineHeight: 1.3,
+            }}>
+                {item.title}
+            </h3>
 
-                            {/* Metric + tags row */}
-                            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 20 }}>
-                                <div>
-                                    {/* BIG NUMBER — Cormorant Garamond */}
-                                    <p style={{
-                                        fontFamily: FH,
-                                        fontSize: "clamp(48px, 6vw, 72px)",
-                                        fontWeight: 600,
-                                        color: "#0B3D2E",
-                                        lineHeight: 0.9,
-                                        letterSpacing: "-0.03em",
-                                        margin: 0,
-                                    }}>
-                                        {item.metric}
-                                    </p>
-                                    {/* Sub label — Cardo */}
-                                    <p style={{
-                                        fontFamily: FB,
-                                        fontSize: 12,
-                                        color: "#5C5C54",
-                                        lineHeight: 1.4,
-                                        margin: "8px 0 0",
-                                        letterSpacing: "0.01em",
-                                    }}>
-                                        {item.metricSub}
-                                    </p>
-                                </div>
+            {/* Description */}
+            <p style={{
+                fontFamily: HV,
+                fontSize: 13.5,
+                color: "#555",
+                lineHeight: 1.75,
+                margin: 0,
+                fontWeight: 400,
+            }}>
+                {item.description}
+            </p>
+        </div>
+    );
+}
 
-                                {/* Tags */}
-                                <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end", paddingTop: 4 }}>
-                                    <span style={{
-                                        fontFamily: FB, fontSize: 10.5, fontWeight: 700,
-                                        letterSpacing: "0.14em", textTransform: "uppercase",
-                                        padding: "3px 10px", borderRadius: 4,
-                                        background: "rgba(245,168,40,0.12)", color: "#7a4e00",
-                                        border: "1px solid rgba(245,168,40,0.35)", whiteSpace: "nowrap",
-                                    }}>
-                                        {item.tags[0]}
-                                    </span>
-                                    <span style={{
-                                        fontFamily: FB, fontSize: 10.5, fontWeight: 700,
-                                        letterSpacing: "0.14em", textTransform: "uppercase",
-                                        padding: "3px 10px", borderRadius: 4,
-                                        background: "rgba(11,61,46,0.06)", color: "#0B3D2E",
-                                        border: "1px solid rgba(11,61,46,0.18)", whiteSpace: "nowrap",
-                                    }}>
-                                        {item.tags[1]}
-                                    </span>
-                                </div>
-                            </div>
+export default function ClientOutcomes() {
+    return (
+        <section style={{ background: "#fff", padding: "80px 56px 96px", fontFamily: HV }}>
+            <style>{`
+        @keyframes waveShift {
+          0%   { background-position: 0%   50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0%   50%; }
+        }
+        @media (max-width: 768px) {
+          .co-grid { grid-template-columns: 1fr !important; }
+          .co-section { padding: 60px 20px 72px !important; }
+        }
+      `}</style>
 
-                            {/* Divider */}
-                            <div style={{ height: 1, background: "rgba(11,61,46,0.10)", marginBottom: 18 }} />
+            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
 
-                            {/* Title — Cormorant Garamond */}
-                            <h3 style={{
-                                fontFamily: FH,
-                                fontSize: "clamp(18px, 2vw, 23px)",
-                                fontWeight: 600,
-                                color: "#0B3D2E",
-                                margin: "0 0 10px",
-                                lineHeight: 1.2,
-                                letterSpacing: "-0.01em",
-                            }}>
-                                {item.title}
-                            </h3>
+                {/* ── Heading — same pattern as every other section ── */}
+                <div style={{ textAlign: "center", marginBottom: 56 }}>
+                    <p style={{
+                        fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase",
+                        color: G, fontWeight: 700, marginBottom: 14,
+                        fontFamily: HV, margin: "0 0 14px",
+                    }}>
+                        Track Record
+                    </p>
+                    <h2 style={{ fontSize: HS, fontWeight: 700, lineHeight: 1.1, margin: 0, fontFamily: HV }}>
+                        <span style={{ color: G }}>What clients actually</span>{" "}
+                        <em style={{ color: GOLD, fontStyle: "italic" }}>got done.</em>
+                    </h2>
+                    <p style={{
+                        fontFamily: HV, fontSize: 14, color: "#666",
+                        margin: "16px auto 0", lineHeight: 1.65, maxWidth: 480,
+                    }}>
+                        Anonymized at client request. All outcomes independently verifiable.
+                    </p>
+                </div>
 
-                            {/* Description — Cardo */}
-                            <p style={{
-                                fontFamily: FB,
-                                fontSize: 15,
-                                color: "#5C5C54",
-                                lineHeight: 1.72,
-                                margin: 0,
-                            }}>
-                                {item.description}
-                            </p>
-                        </div>
+                {/* Card grid */}
+                <div
+                    className="co-grid"
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+                        gap: 20,
+                    }}
+                >
+                    {OUTCOMES.map((item, i) => (
+                        <OutcomeCard key={item.title} item={item} index={i} />
                     ))}
                 </div>
 
