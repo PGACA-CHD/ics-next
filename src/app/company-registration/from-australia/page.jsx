@@ -1,11 +1,11 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import LightPillar from '@/components/shared/LightPillar';
+import PricingSection from '@/app/PricingSection';
 
 const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
-import LightPillar from '@/components/shared/LightPillar';
-import ColorBends from '@/components/shared/ColorBends';
 
 function useReveal(t = 0.12) {
   const ref = useRef(null);
@@ -46,6 +46,30 @@ function CountUp({ end, suffix = '', prefix = '', delay = 0 }) {
     }, delay);
   }, [vis]);
   return <span ref={ref}>{prefix}{val}{suffix}</span>;
+}
+
+/* Half green, half gold — splits at word boundary, never mid-word */
+function SplitH2({ children, size = 'clamp(24px,3.2vw,40px)', splitAfter }) {
+  const text = typeof children === 'string' ? children : '';
+  let firstHalf, secondHalf;
+  if (splitAfter) {
+    // split after a specific word count
+    const words = text.split(' ');
+    firstHalf = words.slice(0, splitAfter).join(' ');
+    secondHalf = (splitAfter < words.length ? ' ' : '') + words.slice(splitAfter).join(' ');
+  } else {
+    // find the word boundary closest to the middle
+    const words = text.split(' ');
+    const mid = Math.ceil(words.length / 2);
+    firstHalf = words.slice(0, mid).join(' ');
+    secondHalf = ' ' + words.slice(mid).join(' ');
+  }
+  return (
+    <h2 style={{ fontSize: size, fontWeight: 800, letterSpacing: '-0.025em', margin: '0 0 10px', fontFamily: HV, lineHeight: 1.2 }}>
+      <span style={{ color: GREEN }}>{firstHalf}</span>
+      <span style={{ color: '#c8870a' }}>{secondHalf}</span>
+    </h2>
+  );
 }
 
 function FAQCard({ q, a, open, onToggle }) {
@@ -190,75 +214,71 @@ function DocTimeline({ items }) {
 function ProcessLayout({ steps }) {
   const [active, setActive] = useState(0);
   const [ref, vis] = useReveal(0.05);
+
+  // ── FIX 1: 5000ms auto-advance (was 2600) ──
   useEffect(() => {
     if (!vis) return;
-    const id = setInterval(() => setActive(c => (c + 1) % steps.length), 2600);
+    const id = setInterval(() => setActive(c => (c + 1) % steps.length), 5000);
     return () => clearInterval(id);
   }, [vis, steps.length]);
+
   const cur = steps[active];
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
 
       {/* LEFT */}
-      <div style={{
-        background: '#093024',
-        padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden'
-      }}>
+      <div style={{ background: '#093024', padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.38 }}>
-          <LightPillar
-            topColor="#ffe082"
-            bottomColor="#c8870a"
-            intensity={0.65}
-            rotationSpeed={0.25}
-            glowAmount={0.008}
-            pillarWidth={2.4}
-            pillarHeight={0.35}
-            noiseIntensity={0.12}
-            pillarRotation={15}
-            interactive={false}
-            mixBlendMode="screen"
-          />
+          <LightPillar topColor="#ffe082" bottomColor="#c8870a" intensity={0.65} rotationSpeed={0.25} glowAmount={0.008} pillarWidth={2.4} pillarHeight={0.35} noiseIntensity={0.12} pillarRotation={15} interactive={false} mixBlendMode="screen" />
         </div>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
         <div style={{ position: 'absolute', top: -60, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,135,10,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
         <div style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
-
-          {/* ✦ LIVE ANIMATED GRADIENT STEP NUMBER */}
-          <div
-            key={'num-' + active}
-            style={{
-              fontSize: 72, fontWeight: 800, lineHeight: 1,
-              fontFamily: HV, letterSpacing: '-0.04em',
-              animation: 'stepIn 0.4s ease both, gradMove 3s ease infinite',
-              background: 'linear-gradient(135deg, #ffe082 0%, #ffb300 50%, #ff8f00 100%)',
-              backgroundSize: '300% 300%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >{cur.n}</div>
-
+          <div key={'num-' + active} style={{ fontSize: 72, fontWeight: 800, lineHeight: 1, fontFamily: HV, letterSpacing: '-0.04em', animation: 'stepIn 0.4s ease both, gradMove 3s ease infinite', background: 'linear-gradient(135deg, #ffe082 0%, #ffb300 50%, #ff8f00 100%)', backgroundSize: '300% 300%', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{cur.n}</div>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative', zIndex: 2 }}>
           {steps.map((s, i) => (
             <button key={i} onClick={() => setActive(i)} style={{ all: 'unset', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg,#ffd54f,#ffb300)' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(255,213,79,0.6)' : 'none' }} />
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? '#ffd54f' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(255,213,79,0.6)' : 'none' }} />
               <span style={{ fontSize: 11, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 130 }}>{s.title}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* MIDDLE */}
+      {/* MIDDLE — FIX 2: all steps full opacity, active highlighted */}
       <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
-          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', transition: 'opacity 0.3s', opacity: i === active ? 1 : 0.38 }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)' : 'rgba(0,0,0,0.05)', border: i === active ? 'none' : '2px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#bbb', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 14px rgba(200,135,10,0.28)' : 'none' }}>{s.n}</div>
+          <div
+            key={i}
+            onClick={() => setActive(i)}
+            style={{
+              display: 'flex', gap: 16, alignItems: 'flex-start',
+              padding: '18px 0',
+              borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none',
+              cursor: 'pointer',
+              // ── FIX: no dim — all steps fully visible, active gets bg highlight
+              background: i === active ? 'rgba(9,48,36,0.04)' : 'transparent',
+              borderRadius: i === active ? 10 : 0,
+              margin: i === active ? '0 -8px' : '0',
+              padding: i === active ? '18px 8px' : '18px 0',
+              transition: 'background 0.3s',
+            }}
+          >
+            <div style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: i === active ? 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)' : 'rgba(0,0,0,0.07)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 11.5, fontWeight: 800,
+              color: i === active ? '#fff' : '#888',
+              flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV,
+              boxShadow: i === active ? '0 4px 14px rgba(200,135,10,0.28)' : 'none',
+            }}>{s.n}</div>
             <div style={{ paddingTop: 6 }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#999', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? '#c8870a' : '#ddd', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#555', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? '#c8870a' : '#bbb', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
             </div>
           </div>
         ))}
@@ -268,9 +288,7 @@ function ProcessLayout({ steps }) {
       <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'detail-' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
           <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
-
           <h3 style={{ fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
-
           <p style={{ fontSize: 13.5, color: '#666', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
         </div>
         <div style={{ marginTop: 32 }}>
@@ -287,7 +305,7 @@ function ProcessLayout({ steps }) {
   );
 }
 
-/* ── AUSTRALIA-SPECIFIC DATA ── */
+/* ── DATA ── */
 const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Australia-based founders typically register a Private Limited Company, LLP, or Wholly Owned Subsidiary in India. We advise on the right structure based on your goals, sector, and FDI requirements.' },
   { n: '02', title: 'Apostille Australian Documents', time: 'Week 1', desc: 'Australia is a member of the Hague Apostille Convention. Documents (passport, address proof) are apostilled through the Australian Department of Foreign Affairs and Trade (DFAT). We provide a complete guide.' },
@@ -298,12 +316,12 @@ const steps = [
 ];
 
 const whyPoints = [
-  ["Australia-India DTAA", "India and Australia have a Double Taxation Avoidance Agreement, preventing the same income from being taxed in both countries — key for Australian NRIs earning from Indian entities."],
-  ["AI-ECTA trade agreement", "The Australia-India Economic Cooperation and Trade Agreement (AI-ECTA) has strengthened bilateral trade, making an Indian entity increasingly valuable for Australian businesses."],
-  ["Deep tech talent at lower cost", "Access one of the world's largest pools of software engineers, CAs, and technical professionals at a fraction of Australian operational costs."],
-  ["100% FDI in most sectors", "Automatic Route FDI permitted in IT, consulting, manufacturing, e-commerce, and more. An Australian company can hold 100% of an Indian subsidiary."],
-  ["Apostille via DFAT", "Australia is a Hague Apostille Convention member. Documents apostilled through DFAT are accepted directly by Indian authorities — no Embassy attestation needed."],
-  ["Startup India benefits", "Qualify for DPIIT recognition, income tax exemption for 3 years, and fast-track IP registration through the Startup India programme."],
+  { n: '01', heading: 'Australia-India DTAA', body: 'India and Australia have a Double Taxation Avoidance Agreement, preventing the same income from being taxed in both countries — key for Australian NRIs earning from Indian entities.', accent: '#0b3d2e' },
+  { n: '02', heading: 'AI-ECTA trade agreement', body: 'The Australia-India Economic Cooperation and Trade Agreement (AI-ECTA) has strengthened bilateral trade, making an Indian entity increasingly valuable for Australian businesses.', accent: '#c8870a' },
+  { n: '03', heading: 'Deep tech talent at lower cost', body: 'Access one of the world\'s largest pools of software engineers, CAs, and technical professionals at a fraction of Australian operational costs.', accent: '#1a5c9a' },
+  { n: '04', heading: '100% FDI in most sectors', body: 'Automatic Route FDI permitted in IT, consulting, manufacturing, e-commerce, and more. An Australian company can hold 100% of an Indian subsidiary.', accent: '#0b3d2e' },
+  { n: '05', heading: 'Apostille via DFAT', body: 'Australia is a Hague Apostille Convention member. Documents apostilled through DFAT are accepted directly by Indian authorities — no Embassy attestation needed.', accent: '#c8870a' },
+  { n: '06', heading: 'Startup India benefits', body: 'Qualify for DPIIT recognition, income tax exemption for 3 years, and fast-track IP registration through the Startup India programme.', accent: '#1a5c9a' },
 ];
 
 const documents = [
@@ -338,6 +356,66 @@ const countries = [
   { label: 'From Canada', href: '/company-registration/from-canada' },
 ];
 
+// ── Why India card — location card layout, light gradient hover, no dot ──
+function WhyCard({ item, index }) {
+  const [ref, vis] = useReveal(0.1);
+  const [hov, setHov] = useState(false);
+
+  const hoverBgs = [
+    'linear-gradient(145deg,#eef6f1 0%,#f8fdf9 100%)',
+    'linear-gradient(145deg,#fdf6eb 0%,#fffcf5 100%)',
+    'linear-gradient(145deg,#eef3fb 0%,#f7f9fd 100%)',
+  ];
+  const accentColors = [GREEN, '#c8870a', '#1a5c9a'];
+  const bg = hoverBgs[index % 3];
+  const ac = accentColors[index % 3];
+
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        padding: '32px 28px 28px',
+        background: hov ? bg : '#fff',
+        borderRight: '1px solid rgba(0,0,0,0.09)',
+        borderBottom: '1px solid rgba(0,0,0,0.09)',
+        position: 'relative',
+        cursor: 'default',
+        opacity: vis ? 1 : 0,
+        transform: vis ? 'none' : 'translateY(14px)',
+        transition: `opacity 0.45s ease ${index * 70}ms, transform 0.45s ease ${index * 70}ms, background 0.28s ease, box-shadow 0.28s ease`,
+        boxShadow: hov ? `inset 0 0 0 1.5px ${ac}33` : 'none',
+      }}
+    >
+      {/* Heading */}
+      <h3 style={{
+        fontSize: 'clamp(16px,1.7vw,19px)',
+        fontWeight: 800,
+        color: hov ? ac : '#111',
+        margin: '0 0 10px',
+        fontFamily: HV,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.25,
+        transition: 'color 0.25s ease',
+      }}>
+        {item.heading}
+      </h3>
+
+      {/* Body */}
+      <p style={{
+        fontSize: 13.5,
+        color: '#666',
+        lineHeight: 1.75,
+        margin: 0,
+        fontFamily: HV,
+      }}>
+        {item.body}
+      </p>
+    </div>
+  );
+}
+
 export default function Page() {
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -345,35 +423,41 @@ export default function Page() {
     <>
       <style>{`
         @keyframes stepIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-
-        @keyframes gradMove {
-          0%   { background-position: 0%   50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0%   50%; }
-        }
+        @keyframes gradMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:88px 56px; }
         .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#aaa; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
         .sec-div { border-top:1px solid rgba(0,0,0,0.08); }
-        .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid rgba(0,0,0,0.15); border-radius:18px; overflow:hidden; }
-.why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); cursor:default; position:relative; overflow:hidden; background:#fff; }        .why-card.no-right { border-right:none; }
-        .why-row-divider { grid-column:1/-1; height:1px; background:rgba(0,0,0,0.13); }
+
+        /* Why grid — clean 3-col, no overflow issues */
+        .why-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          border: 1px solid rgba(0,0,0,0.10);
+          border-radius: 18px;
+          overflow: hidden;
+        }
+        .why-grid > div:nth-child(3n) { border-right: none !important; }
+        .why-grid > div:nth-last-child(-n+3) { border-bottom: none !important; }
+
         .stbl { width:100%; border-collapse:collapse; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
         .stbl th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#aaa; padding:0 20px 12px; text-align:left; border-bottom:2px solid rgba(0,0,0,0.12); }
         .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; }
         .stbl tr:last-child td { border-bottom:none; }
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }
+
         @media(max-width:860px){
           .proc-3col { grid-template-columns:1fr !important; }
           .proc-3col > div:nth-child(1) { padding:28px 24px; }
           .proc-3col > div:nth-child(2) { border-left:none !important; border-right:none !important; border-top:1px solid rgba(0,0,0,0.08); border-bottom:1px solid rgba(0,0,0,0.08); }
           .proc-3col > div:nth-child(3) { padding:28px 24px; }
           .why-grid { grid-template-columns:1fr !important; border-radius:14px; }
-          .why-card { border-right:none !important; padding:26px 22px; border-bottom:1px solid rgba(0,0,0,0.13); }
-          .why-card:last-child { border-bottom:none !important; }
+          .why-grid > div { border-right:none !important; }
+          .why-grid > div:nth-last-child(-n+3) { border-bottom: 1px solid rgba(0,0,0,0.10) !important; }
+          .why-grid > div:last-child { border-bottom: none !important; }
           .hero-g { grid-template-columns:1fr !important; gap:44px !important; }
           .doc-tl-line { left:32px !important; }
           .doc-tl-cap { left:32px !important; transform:translateX(-4px) !important; }
@@ -387,6 +471,7 @@ export default function Page() {
         }
         @media(max-width:580px){
           .sec { padding:56px 20px !important; }
+          .why-grid > div { padding:24px 18px !important; }
         }
       `}</style>
 
@@ -426,7 +511,7 @@ export default function Page() {
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 22px', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', gap: 16 }}>
                     <span style={{ fontSize: 13, color: '#777', fontFamily: HV }}>{row.label}</span>
                     <span style={{ fontSize: 16, fontWeight: 800, color: GREEN, fontFamily: HV, textAlign: 'right' }}>
-                      {row.text ?? <CountUp end={row.val} suffix={row.suffix} prefix={row.prefix || ''} delay={i * 150} />}
+                      {row.text ?? <CountUp end={row.val} suffix={row.suffix} delay={i * 150} />}
                     </span>
                   </div>
                 ))}
@@ -439,73 +524,21 @@ export default function Page() {
         </div>
       </section>
 
-      {/* WHY INDIA */}
+      {/* WHY INDIA — clean cards, no WebGL */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <span className="lbl">Why India</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>Why Australia-Based Founders Are Setting Up in India</h2>
+              <SplitH2 size="clamp(26px,3.5vw,44px)" splitAfter={3}>Why Australia-Based Founders Are Setting Up in India</SplitH2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
             </div>
           </Fade>
-          <Fade delay={60}>
-            <div className="why-grid">
-              {whyPoints.slice(0, 3).map(([heading, body], i) => (
-                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
-                    <ColorBends
-                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
-                      rotation={90}
-                      speed={0.4}
-                      scale={1.4}
-                      frequency={1}
-                      warpStrength={0.6}
-                      mouseInfluence={0.2}
-                      noise={0.06}
-                      parallax={0.25}
-                      iterations={1}
-                      intensity={1.1}
-                      bandWidth={5}
-                      transparent
-                    />
-                  </div>
-                  <div style={{ position: 'relative', zIndex: 1 }}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18 }}>{String(i + 1).padStart(2, '0')}</div>
-                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
-                  </div>
-                </div>
-              ))}
-              <div className="why-row-divider" />
-              {whyPoints.slice(3).map(([heading, body], i) => (
-                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
-                    <ColorBends
-                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
-                      rotation={90}
-                      speed={0.4}
-                      scale={1.4}
-                      frequency={1}
-                      warpStrength={0.6}
-                      mouseInfluence={0.2}
-                      noise={0.06}
-                      parallax={0.25}
-                      iterations={1}
-                      intensity={1.1}
-                      bandWidth={5}
-                      transparent
-                    />
-                  </div>
-                  <div style={{ position: 'relative', zIndex: 1 }}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18 }}>{String(i + 4).padStart(2, '0')}</div>
-                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Fade>
+          <div className="why-grid">
+            {whyPoints.map((item, i) => (
+              <WhyCard key={i} item={item} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -515,8 +548,8 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Australia to your Certificate of Incorporation.</h2>
-              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
+              <SplitH2>From Australia to your Certificate of Incorporation.</SplitH2>
+              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 5 seconds — click any step to jump.</p>
             </div>
           </Fade>
           <Fade delay={80}><ProcessLayout steps={steps} /></Fade>
@@ -529,7 +562,7 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 56 }}>
               <span className="lbl">Documents Required</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>What you'll need from Australia</h2>
+              <SplitH2>What you'll need from Australia</SplitH2>
               <p style={{ fontSize: 14.5, color: '#666', lineHeight: 1.75, fontFamily: HV, maxWidth: 560, margin: '0 auto' }}>
                 Australia is part of the Hague Apostille Convention. Documents apostilled through DFAT are accepted directly by Indian authorities — no Indian Embassy attestation required.
               </p>
@@ -545,7 +578,7 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <span className="lbl">Entity Types</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Which structure is right for you?</h2>
+              <SplitH2>Which structure is right for you?</SplitH2>
             </div>
           </Fade>
           <Fade delay={60}>
@@ -561,13 +594,16 @@ export default function Page() {
         </div>
       </section>
 
+      {/* PRICING */}
+      <PricingSection country="australia" ROUTES={{ contact: '/contact' }} />
+
       {/* FAQ */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <span className="lbl">FAQs</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Common questions answered</h2>
+              <SplitH2>Common questions answered</SplitH2>
             </div>
           </Fade>
           {faqs.map((f, i) => (
@@ -589,7 +625,7 @@ export default function Page() {
             </div>
             <div style={{ position: 'relative', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
               <Link href="/contact"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#c8870a', color: '#fff', fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: '14px 26px', borderRadius: 7, textDecoration: 'none', whiteSpace: 'nowrap', transition: 'background .2s,transform .15s' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#c8870a', color: '#fff', fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: '14px 26px', borderRadius: 7, textDecoration: 'none', whiteSpace: 'nowrap' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#e09a10'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = '#c8870a'; e.currentTarget.style.transform = 'none'; }}>
                 Book a Free Consultation →

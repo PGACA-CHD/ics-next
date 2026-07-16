@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
+import PricingSection from '@/app/PricingSection';
 import LightPillar from '@/components/shared/LightPillar';
 import ColorBends from '@/components/shared/ColorBends';
 
@@ -549,7 +550,7 @@ export default function Page() {
           </Fade>
         </div>
       </section>
-
+      <PricingSection country="canada" ROUTES={{ contact: '/contact' }} />
       {/* ── FAQ ── */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>

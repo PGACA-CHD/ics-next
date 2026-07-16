@@ -390,10 +390,6 @@ function StatsRibbon() {
               gradient: "linear-gradient(160deg,#FCF3E1 0%,#FEFAF0 100%)", border: "rgba(230,152,25,0.24)", valueColor: GOLD
             },
             {
-              target: 0, suffix: "", label: "TP AUDITS", subLabel: "Transfer pricing audits lost",
-              gradient: "#ffffff", border: "rgba(0,0,0,0.10)", valueColor: "#222"
-            },
-            {
               target: 90, suffix: "+", label: "TREATIES", subLabel: "Jurisdictions covered",
               gradient: "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)", border: "rgba(9,48,36,0.14)", valueColor: G
             },

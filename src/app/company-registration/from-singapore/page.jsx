@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
+import PricingSection from '@/app/PricingSection';
 import LightPillar from '@/components/shared/LightPillar';
 import ColorBends from '@/components/shared/ColorBends';
 
@@ -281,11 +282,11 @@ function ProcessLayout({ steps }) {
           </div>
           <div style={{ height: 3, background: 'rgba(0,0,0,0.07)', borderRadius: 2, overflow: 'hidden' }}>
             <div style={{ height: '100%', background: 'linear-gradient(90deg, #c8870a 0%, #e09a10 100%)', width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 /* ── SINGAPORE-SPECIFIC DATA ── */
@@ -561,7 +562,7 @@ export default function Page() {
           </Fade>
         </div>
       </section>
-
+      <PricingSection country="singapore" ROUTES={{ contact: '/contact' }} />
       {/* FAQ */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>

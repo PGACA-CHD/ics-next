@@ -1,280 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
-import { Renderer, Program, Triangle, Mesh } from 'ogl';
 import styles from './WhatWeDoSection.module.css';
 
-// ============================================================
-// FONT_HEADING / FONT_BODY — if already defined elsewhere in
-// your file, delete these lines to avoid duplicate-declaration.
-// ============================================================
 const FONT_HEADING = "var(--font-cormorant),'Cormorant Garamond',serif";
 const FONT_BODY = "var(--font-cardo),'Cardo',Georgia,serif";
-const FONT = "Helvetica, Arial, sans-serif"; // heading font — Helvetica only
+const FONT = "Helvetica, Arial, sans-serif";
 const BLACK = "#000000";
 const GOLD = "#e8900a";
+const G = "#0B3D2E";
 
-// ============================================================
-// SideRays — inlined directly (no separate file), from React Bits
-// ============================================================
-const hexToRgb = hex => {
-    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
-};
-
-const originToFlip = origin => {
-    switch (origin) {
-        case 'top-left': return [1, 0];
-        case 'bottom-right': return [0, 1];
-        case 'bottom-left': return [1, 1];
-        default: return [0, 0];
-    }
-};
-
-function SideRays({
-    speed = 2.5,
-    rayColor1 = '#EAB308',
-    rayColor2 = '#96c8ff',
-    intensity = 2,
-    spread = 2,
-    origin = 'top-right',
-    tilt = 0,
-    saturation = 1.5,
-    blend = 0.75,
-    falloff = 1.6,
-    opacity = 1.0,
-    className = ''
-}) {
-    const containerRef = useRef(null);
-    const uniformsRef = useRef(null);
-    const rendererRef = useRef(null);
-    const animationIdRef = useRef(null);
-    const meshRef = useRef(null);
-    const cleanupFunctionRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
-    const observerRef = useRef(null);
-
-    useEffect(() => {
-        if (!containerRef.current) return;
-
-        observerRef.current = new IntersectionObserver(
-            entries => {
-                const entry = entries[0];
-                setIsVisible(entry.isIntersecting);
-            },
-            { threshold: 0.1 }
-        );
-
-        observerRef.current.observe(containerRef.current);
-
-        return () => {
-            if (observerRef.current) {
-                observerRef.current.disconnect();
-                observerRef.current = null;
-            }
-        };
-    }, []);
-
-    useEffect(() => {
-        if (!isVisible || !containerRef.current) return;
-
-        if (cleanupFunctionRef.current) {
-            cleanupFunctionRef.current();
-            cleanupFunctionRef.current = null;
-        }
-
-        const initializeWebGL = async () => {
-            if (!containerRef.current) return;
-
-            await new Promise(resolve => setTimeout(resolve, 10));
-
-            if (!containerRef.current) return;
-
-            const renderer = new Renderer({
-                dpr: Math.min(window.devicePixelRatio, 2),
-                alpha: true
-            });
-            rendererRef.current = renderer;
-
-            const gl = renderer.gl;
-            gl.canvas.style.width = '100%';
-            gl.canvas.style.height = '100%';
-
-            while (containerRef.current.firstChild) {
-                containerRef.current.removeChild(containerRef.current.firstChild);
-            }
-            containerRef.current.appendChild(gl.canvas);
-
-            const vert = `
-attribute vec2 position;
-void main() {
-  gl_Position = vec4(position, 0.0, 1.0);
-}`;
-
-            const frag = `precision highp float;
-
-uniform float iTime;
-uniform vec2 iResolution;
-uniform float iSpeed;
-uniform vec3 iRayColor1;
-uniform vec3 iRayColor2;
-uniform float iIntensity;
-uniform float iSpread;
-uniform float iFlipX;
-uniform float iFlipY;
-uniform float iTilt;
-uniform float iSaturation;
-uniform float iBlend;
-uniform float iFalloff;
-uniform float iOpacity;
-
-float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {
-  vec2 sourceToCoord = coord - raySource;
-  float cosAngle = dot(normalize(sourceToCoord), rayRefDirection);
-  return clamp(
-    (0.45 + 0.15 * sin(cosAngle * seedA + iTime * speed)) +
-    (0.3 + 0.2 * cos(-cosAngle * seedB + iTime * speed)),
-    0.0, 1.0) *
-    clamp((iResolution.x - length(sourceToCoord)) / iResolution.x, 0.5, 1.0);
-}
-
-void main() {
-  vec2 fragCoord = gl_FragCoord.xy;
-  if (iFlipX > 0.5) fragCoord.x = iResolution.x - fragCoord.x;
-  if (iFlipY > 0.5) fragCoord.y = iResolution.y - fragCoord.y;
-
-  vec2 coord = vec2(fragCoord.x, iResolution.y - fragCoord.y);
-  vec2 rayPos = vec2(iResolution.x * 1.1, -0.5 * iResolution.y);
-
-  float tiltRad = iTilt * 3.14159265 / 180.0;
-  float cs = cos(tiltRad);
-  float sn = sin(tiltRad);
-  vec2 rel = coord - rayPos;
-  vec2 tiltedCoord = vec2(rel.x * cs - rel.y * sn, rel.x * sn + rel.y * cs) + rayPos;
-
-  float halfSpread = iSpread * 0.275;
-  vec2 rayRefDir1 = normalize(vec2(cos(0.785398 + halfSpread), sin(0.785398 + halfSpread)));
-  vec2 rayRefDir2 = normalize(vec2(cos(0.785398 - halfSpread), sin(0.785398 - halfSpread)));
-
-  vec4 rays1 = vec4(iRayColor1, 1.0) * rayStrength(rayPos, rayRefDir1, tiltedCoord, 36.2214, 21.11349, iSpeed);
-  vec4 rays2 = vec4(iRayColor2, 1.0) * rayStrength(rayPos, rayRefDir2, tiltedCoord, 22.3991, 18.0234, iSpeed * 0.2);
-
-  vec4 color = rays1 * (1.0 - iBlend) * 0.9 + rays2 * iBlend * 0.9;
-
-  float distanceToLight = length(fragCoord.xy - vec2(rayPos.x, iResolution.y - rayPos.y)) / iResolution.y;
-  float brightness = iIntensity * 0.4 / pow(max(distanceToLight, 0.001), iFalloff);
-  color.rgb *= brightness;
-
-  float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-  color.rgb = mix(vec3(gray), color.rgb, iSaturation);
-
-  color.a = max(color.r, max(color.g, color.b)) * iOpacity;
-  gl_FragColor = color;
-}`;
-
-            const [flipX, flipY] = originToFlip(origin);
-            const uniforms = {
-                iTime: { value: 0 },
-                iResolution: { value: [1, 1] },
-                iSpeed: { value: speed },
-                iRayColor1: { value: hexToRgb(rayColor1) },
-                iRayColor2: { value: hexToRgb(rayColor2) },
-                iIntensity: { value: intensity },
-                iSpread: { value: spread },
-                iFlipX: { value: flipX },
-                iFlipY: { value: flipY },
-                iTilt: { value: tilt },
-                iSaturation: { value: saturation },
-                iBlend: { value: blend },
-                iFalloff: { value: falloff },
-                iOpacity: { value: opacity }
-            };
-            uniformsRef.current = uniforms;
-
-            const geometry = new Triangle(gl);
-            const program = new Program(gl, { vertex: vert, fragment: frag, uniforms });
-            const mesh = new Mesh(gl, { geometry, program });
-            meshRef.current = mesh;
-
-            const updateSize = () => {
-                if (!containerRef.current || !renderer) return;
-                renderer.dpr = Math.min(window.devicePixelRatio, 2);
-                const { clientWidth: w, clientHeight: h } = containerRef.current;
-                renderer.setSize(w, h);
-                uniforms.iResolution.value = [w * renderer.dpr, h * renderer.dpr];
-            };
-
-            const loop = t => {
-                if (!rendererRef.current || !uniformsRef.current || !meshRef.current) return;
-                uniforms.iTime.value = t * 0.001;
-                try {
-                    renderer.render({ scene: mesh });
-                    animationIdRef.current = requestAnimationFrame(loop);
-                } catch (e) {
-                    return;
-                }
-            };
-
-            window.addEventListener('resize', updateSize);
-            updateSize();
-            animationIdRef.current = requestAnimationFrame(loop);
-
-            cleanupFunctionRef.current = () => {
-                if (animationIdRef.current) {
-                    cancelAnimationFrame(animationIdRef.current);
-                    animationIdRef.current = null;
-                }
-                window.removeEventListener('resize', updateSize);
-                if (renderer) {
-                    try {
-                        const loseCtx = renderer.gl.getExtension('WEBGL_lose_context');
-                        if (loseCtx) loseCtx.loseContext();
-                        const canvas = renderer.gl.canvas;
-                        if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
-                    } catch (e) { }
-                }
-                rendererRef.current = null;
-                uniformsRef.current = null;
-                meshRef.current = null;
-            };
-        };
-
-        initializeWebGL();
-
-        return () => {
-            if (cleanupFunctionRef.current) {
-                cleanupFunctionRef.current();
-                cleanupFunctionRef.current = null;
-            }
-        };
-    }, [isVisible, speed, rayColor1, rayColor2, intensity, spread, origin, tilt, saturation, blend, falloff, opacity]);
-
-    useEffect(() => {
-        if (!uniformsRef.current) return;
-        const u = uniformsRef.current;
-        u.iSpeed.value = speed;
-        u.iRayColor1.value = hexToRgb(rayColor1);
-        u.iRayColor2.value = hexToRgb(rayColor2);
-        u.iIntensity.value = intensity;
-        u.iSpread.value = spread;
-        const [flipX, flipY] = originToFlip(origin);
-        u.iFlipX.value = flipX;
-        u.iFlipY.value = flipY;
-        u.iTilt.value = tilt;
-        u.iSaturation.value = saturation;
-        u.iBlend.value = blend;
-        u.iFalloff.value = falloff;
-        u.iOpacity.value = opacity;
-    }, [speed, rayColor1, rayColor2, intensity, spread, origin, tilt, saturation, blend, falloff, opacity]);
-
-    return <div ref={containerRef} className={`side-rays-container ${className}`.trim()} />;
-}
-
-// ============================================================
-// Single card, animates in on scroll (same IntersectionObserver
-// pattern as your existing ProcessStep component)
-// ============================================================
+// Card — light gradient, matches the Stats "SPEED" card palette
 function WhatWeDoCard({ item, index, T, ROUTES }) {
     const ref = useRef(null);
     const [visible, setVisible] = useState(false);
+    const [hovered, setHovered] = useState(false);
 
     useEffect(() => {
         const el = ref.current;
@@ -290,99 +28,95 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
         <div
             ref={ref}
             className="wwd-card"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             style={{
-                background: "linear-gradient(145deg, #1a4d2e 0%, #0d3320 45%, #0a2a1a 100%)",
-                border: `1.5px solid rgba(255,255,255,0.08)`,
+                /* ── TARGET COLOUR ── light green→warm cream gradient */
+                background: "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)",
+                border: `1.5px solid rgba(9,48,36,0.14)`,
                 borderRadius: 22,
-                boxShadow: "0 10px 34px rgba(0,0,0,.18)",
+                boxShadow: hovered
+                    ? "0 16px 48px rgba(9,48,36,0.13)"
+                    : "0 4px 18px rgba(9,48,36,0.07)",
                 padding: "36px 32px",
                 display: "flex",
                 flexDirection: "column",
                 position: "relative",
                 overflow: "hidden",
                 opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(18px)",
-                transition: `opacity 0.55s ease ${index * 90}ms, transform 0.55s ease ${index * 90}ms`,
+                transform: visible
+                    ? (hovered ? "translateY(-5px)" : "translateY(0)")
+                    : "translateY(18px)",
+                transition: `opacity 0.55s ease ${index * 90}ms,
+                             transform 0.55s ease ${index * 90}ms,
+                             box-shadow 0.25s ease`,
             }}
         >
-            {/* SideRays WebGL background — replaces the old gradient blob effect */}
-            <div className="waveContainer" style={{
-                position: "absolute",
-                inset: 0,
-                overflow: "hidden",
-                zIndex: 0,
-                pointerEvents: "none",
-                opacity: 0.85,
-                transition: "opacity 0.5s ease",
-            }}>
-                <SideRays
-                    speed={1.6}
-                    rayColor1={"#ffffff"}
-                    rayColor2={"#34a87a"}
-                    intensity={1.0}
-                    spread={1.6}
-                    origin="top-right"
-                    tilt={0}
-                    saturation={1.3}
-                    blend={0.7}
-                    falloff={1.8}
-                    opacity={0.3}
-                />
-            </div>
-
-            <div className="wwd-accent" style={{
-                position: "absolute", top: 0, left: 22, right: 22, height: 2, width: 0,
-                background: "#ffffff", borderRadius: 2, transition: "width .35s ease",
-                zIndex: 1,
+            {/* Subtle top accent line — forest green */}
+            <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 3,
+                background: `linear-gradient(90deg, ${G}, ${GOLD})`,
+                borderRadius: "22px 22px 0 0",
+                opacity: hovered ? 1 : 0.5,
+                transition: "opacity 0.3s ease",
             }} />
 
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 14, position: "relative", zIndex: 1 }}>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{
-                        fontFamily: FONT_BODY, fontSize: 10.5, letterSpacing: "0.18em",
-                        textTransform: "uppercase", color: "rgba(255,255,255,0.8)", fontWeight: 600, marginBottom: 12
-                    }}>
-                        {item.label}
-                    </div>
-
-                    <h3 className="font-display" style={{
-                        fontFamily: FONT_HEADING, fontSize: 23.5,
-                        fontWeight: 600, color: "#fff", lineHeight: 1.3, margin: 0
-                    }}>
-                        {item.headline}
-                    </h3>
-                </div>
-
-                <div className="wwd-index" style={{
-                    fontFamily: FONT_HEADING, fontSize: 30, fontWeight: 300, color: "rgba(255,255,255,0.25)",
-                    opacity: .82, lineHeight: 1, flexShrink: 0,
-                    transition: "opacity .3s ease, transform .3s ease",
-                }}>
-                    {String(index + 1).padStart(2, "0")}
-                </div>
+            {/* Card number — top right, muted */}
+            <div style={{
+                position: "absolute", top: 20, right: 24,
+                fontFamily: FONT_HEADING, fontSize: 28, fontWeight: 300,
+                color: "rgba(9,48,36,0.15)", lineHeight: 1,
+            }}>
+                {String(index + 1).padStart(2, "0")}
             </div>
 
+            {/* Label */}
+            <div style={{
+                fontFamily: FONT_BODY, fontSize: 10.5, letterSpacing: "0.18em",
+                textTransform: "uppercase", color: G, fontWeight: 700,
+                marginBottom: 12,
+            }}>
+                {item.label}
+            </div>
+
+            {/* Headline */}
+            <h3 style={{
+                fontFamily: FONT_HEADING, fontSize: 23.5,
+                fontWeight: 600, color: BLACK, lineHeight: 1.3,
+                margin: "0 0 14px",
+            }}>
+                {item.headline}
+            </h3>
+
+            {/* Description */}
             <p style={{
-                fontFamily: FONT_BODY, fontSize: 13.5, color: "rgba(255,255,255,0.9)", lineHeight: 1.78,
-                fontWeight: 300, flex: 1, marginBottom: 24, position: "relative", zIndex: 1
+                fontFamily: FONT_BODY, fontSize: 13.5,
+                color: "#444", lineHeight: 1.78,
+                fontWeight: 300, flex: 1, marginBottom: 24,
             }}>
                 {item.desc}
             </p>
 
+            {/* CTA */}
             <button
                 className="wwd-cta"
                 onClick={() => { window.location.href = ROUTES[item.link] || "/"; }}
                 style={{
                     background: "none", border: "none", cursor: "pointer", padding: 0,
-                    fontFamily: FONT_BODY, fontSize: 13, fontWeight: 600, color: "#fff",
-                    display: "flex", alignItems: "center", gap: 6, alignSelf: "flex-start",
-                    position: "relative", zIndex: 1
+                    fontFamily: FONT_BODY, fontSize: 13, fontWeight: 700,
+                    color: G,
+                    display: "flex", alignItems: "center", gap: 6,
+                    alignSelf: "flex-start",
                 }}
             >
                 <span>{item.cta}</span>
-                <svg className="wwd-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                    style={{ transition: "transform .25s ease" }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{
+                        transform: hovered ? "translateX(3px)" : "translateX(0)",
+                        transition: "transform 0.25s ease",
+                    }}>
                     <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
             </button>
@@ -390,10 +124,8 @@ function WhatWeDoCard({ item, index, T, ROUTES }) {
     );
 }
 
-// ============================================================
-// Single feature pill — frosted glass, animates in on scroll
-// ============================================================
-function FeaturePill({ icon, label, desc, index, T }) {
+// Feature pill — unchanged
+function FeaturePill({ icon, label, desc, index }) {
     const ref = useRef(null);
     const [visible, setVisible] = useState(false);
 
@@ -418,18 +150,17 @@ function FeaturePill({ icon, label, desc, index, T }) {
                 background: "rgba(255,255,255,.55)",
                 backdropFilter: "blur(14px)",
                 WebkitBackdropFilter: "blur(14px)",
-                border: `1px solid rgba(255,255,255,.7)`,
+                border: "1px solid rgba(255,255,255,.7)",
                 boxShadow: "0 8px 28px rgba(0,0,0,.05)",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0) scale(1)" : "translateY(14px) scale(.96)",
-                transition: `opacity 0.5s ease ${index * 100}ms, transform 0.5s ease ${index * 100}ms, box-shadow .25s ease, background .25s ease`,
+                transition: `opacity 0.5s ease ${index * 100}ms, transform 0.5s ease ${index * 100}ms`,
             }}
         >
             <div style={{
                 width: 40, height: 40, borderRadius: "50%",
                 background: "#fff", border: "1px solid #000",
-                display: "flex", alignItems: "center",
-                justifyContent: "center", flexShrink: 0,
+                display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
             }}>
                 {icon}
             </div>
@@ -503,17 +234,6 @@ export default function WhatWeDoSection({ T, ROUTES }) {
 
     return (
         <section className={styles.section} style={{ background: "#fff" }}>
-
-            {/* Soft ambient glow behind the pill row, so the blur has something
-                to blur against — otherwise frosted glass on a flat background
-                barely reads as glass */}
-            <div style={{
-                position: "absolute", left: "50%", bottom: 40, transform: "translateX(-50%)",
-                width: "70%", maxWidth: 900, height: 160,
-                background: `radial-gradient(ellipse at center, ${T.f}14 0%, transparent 70%)`,
-                pointerEvents: "none", zIndex: 0,
-            }} />
-
             <div style={{ maxWidth: 1260, margin: "0 auto", position: "relative", zIndex: 1 }}>
 
                 <div
@@ -529,31 +249,23 @@ export default function WhatWeDoSection({ T, ROUTES }) {
                         alignItems: "center",
                         justifyContent: "center",
                         width: "100%",
-                        maxWidth: "100%",
                         margin: "0 auto 56px",
                     }}
                 >
-                    {/* Eyebrow */}
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 16 }}>
-                        <div style={{ width: 26, height: 1.5, background: T.sl, flexShrink: 0 }} />
+                        <div style={{ width: 26, height: 1.5, background: G, flexShrink: 0 }} />
                         <span style={{
                             fontFamily: FONT, fontSize: 11, fontWeight: 700,
                             letterSpacing: "0.32em", textTransform: "uppercase", color: BLACK,
-                        }}>
-                            What We Do
-                        </span>
+                        }}>What We Do</span>
                     </div>
 
-                    {/* Heading — Helvetica only, black, gold italic accent */}
                     <h2 style={{
                         fontFamily: FONT,
                         fontSize: "clamp(30px, 5vw, 52px)",
-                        fontWeight: 700,
-                        color: BLACK,
-                        lineHeight: 1.06,
-                        letterSpacing: "-0.02em",
-                        margin: "0 0 14px",
-                        textAlign: "center",
+                        fontWeight: 700, color: BLACK,
+                        lineHeight: 1.06, letterSpacing: "-0.02em",
+                        margin: "0 0 14px", textAlign: "center",
                     }}>
                         We help global companies{" "}
                         <span style={{ fontFamily: FONT, fontStyle: "italic", fontWeight: 700, color: GOLD }}>
@@ -562,15 +274,10 @@ export default function WhatWeDoSection({ T, ROUTES }) {
                         the right way.
                     </h2>
 
-                    {/* Subtitle */}
                     <p style={{
-                        fontFamily: FONT,
-                        fontSize: 15,
-                        color: BLACK,
-                        lineHeight: 1.6,
-                        textAlign: "center",
-                        maxWidth: 520,
-                        margin: "0 auto",
+                        fontFamily: FONT, fontSize: 15, color: BLACK,
+                        lineHeight: 1.6, textAlign: "center",
+                        maxWidth: 520, margin: "0 auto",
                     }}>
                         Not just paper-filing. Strategy first — the structure is designed
                         before a single document is touched.
@@ -588,7 +295,6 @@ export default function WhatWeDoSection({ T, ROUTES }) {
                         <FeaturePill key={f.label} icon={f.icon} label={f.label} desc={f.desc} index={i} T={T} />
                     ))}
                 </div>
-
             </div>
         </section>
     );
