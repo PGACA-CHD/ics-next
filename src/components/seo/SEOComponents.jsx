@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { T, CALENDLY_URL, WA_BASE, PHONE_RAW } from '@/lib/config';
 import { trackConsultationRequest, trackGuideDownload, trackWhatsApp } from '@/lib/utils';
+import PricingSection from '@/app/pricing';
 
 const ROUTES = {
   home: '/', services: '/setup', gcc: '/post-setup',
@@ -23,6 +24,11 @@ const ROUTES = {
   seo_startup: '/startup-foreign-investment-india',
 };
 
+/* ─── CONSTANTS ─── */
+const GREEN = '#0B3D2E';
+const GOLD = '#e69819';
+const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+
 function WASvg() {
   return (
     <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
@@ -32,9 +38,6 @@ function WASvg() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   HERO V2 — shared hook/animation helpers
-   ───────────────────────────────────────────── */
 function useReveal(t = 0.12) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
@@ -57,97 +60,23 @@ function Fade({ children, delay = 0 }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   INLINE ICONS — simple line-style SVGs (no emoji anywhere)
-   ───────────────────────────────────────────── */
 const Ic = {
-  building: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15" /><path d="M14 21V10a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v11" />
-      <path d="M2 21h20" /><path d="M7 9h.01M7 12h.01M7 15h.01M11 9h.01M11 12h.01M11 15h.01" />
-    </svg>
-  ),
-  coins: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <ellipse cx="9" cy="7" rx="6" ry="3" /><path d="M3 7v6c0 1.66 2.69 3 6 3s6-1.34 6-3V7" />
-      <path d="M3 13v3c0 1.66 2.69 3 6 3 .75 0 1.46-.09 2.1-.25" />
-      <path d="M15 8.5c3.31 0 6 1.12 6 2.5s-2.69 2.5-6 2.5" /><path d="M15 11v3c0 1.38 2.69 2.5 6 2.5" />
-    </svg>
-  ),
-  users: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  ),
-  list: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 6h11M9 12h11M9 18h11" /><path d="M4 6h.01M4 12h.01M4 18h.01" />
-    </svg>
-  ),
-  refresh: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 2v6h-6" /><path d="M3 12a9 9 0 0 1 15-6.7L21 8" /><path d="M3 22v-6h6" /><path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
-    </svg>
-  ),
-  chart: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 3v18h18" /><path d="M18 17V9M13 17V5M8 17v-4" />
-    </svg>
-  ),
-  shield: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-    </svg>
-  ),
-  route: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="6" cy="19" r="2" /><circle cx="18" cy="5" r="2" />
-      <path d="M6 17V9a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v6" />
-    </svg>
-  ),
-  scale: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 3v18" /><path d="M5 8l-3 6a4 4 0 0 0 8 0z" /><path d="M19 8l-3 6a4 4 0 0 0 8 0z" />
-      <path d="M5 8h14" /><path d="M12 3l3 2" /><path d="M12 3l-3 2" />
-    </svg>
-  ),
-  lock: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" />
-    </svg>
-  ),
-  clipboard: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="6" y="4" width="12" height="17" rx="2" /><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
-      <path d="M9 11h6M9 15h6" />
-    </svg>
-  ),
-  plane: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 16v-2l-8-5V4a1.5 1.5 0 0 0-3 0v5l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5Z" />
-    </svg>
-  ),
-  home: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 10.5 12 3l9 7.5" /><path d="M5 9v11a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9" />
-    </svg>
-  ),
-  file: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" />
-    </svg>
-  ),
-  check: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  ),
-  arrow: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 17 17 7" /><path d="M7 7h10v10" />
-    </svg>
-  ),
+  building: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M4 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15" /><path d="M14 21V10a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v11" /><path d="M2 21h20" /><path d="M7 9h.01M7 12h.01M7 15h.01M11 9h.01M11 12h.01M11 15h.01" /></svg>),
+  coins: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="9" cy="7" rx="6" ry="3" /><path d="M3 7v6c0 1.66 2.69 3 6 3s6-1.34 6-3V7" /><path d="M3 13v3c0 1.66 2.69 3 6 3 .75 0 1.46-.09 2.1-.25" /><path d="M15 8.5c3.31 0 6 1.12 6 2.5s-2.69 2.5-6 2.5" /><path d="M15 11v3c0 1.38 2.69 2.5 6 2.5" /></svg>),
+  users: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>),
+  list: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6h11M9 12h11M9 18h11" /><path d="M4 6h.01M4 12h.01M4 18h.01" /></svg>),
+  refresh: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2v6h-6" /><path d="M3 12a9 9 0 0 1 15-6.7L21 8" /><path d="M3 22v-6h6" /><path d="M21 12a9 9 0 0 1-15 6.7L3 16" /></svg>),
+  chart: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M18 17V9M13 17V5M8 17v-4" /></svg>),
+  shield: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /></svg>),
+  route: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="19" r="2" /><circle cx="18" cy="5" r="2" /><path d="M6 17V9a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v6" /></svg>),
+  scale: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18" /><path d="M5 8l-3 6a4 4 0 0 0 8 0z" /><path d="M19 8l-3 6a4 4 0 0 0 8 0z" /><path d="M5 8h14" /><path d="M12 3l3 2" /><path d="M12 3l-3 2" /></svg>),
+  lock: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>),
+  clipboard: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="12" height="17" rx="2" /><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" /><path d="M9 11h6M9 15h6" /></svg>),
+  plane: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16v-2l-8-5V4a1.5 1.5 0 0 0-3 0v5l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5Z" /></svg>),
+  home: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5" /><path d="M5 9v11a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9" /></svg>),
+  file: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /></svg>),
+  check: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>),
+  arrow: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>),
 };
 
 /* ─────────────────────────────────────────────
@@ -157,215 +86,54 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
   return (
     <div className="seo-page" style={{ background: '#ffffff' }}>
       <style>{`
-        /* ══════════════════════════════════════
-           GLOBAL — entire page uses Helvetica ONLY
-        ══════════════════════════════════════ */
         .seo-page, .seo-page * {
           font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         }
 
         /* ── Hero ── */
-        .seo-hero {
-          background: #0d1117;
-          padding: 120px 0 80px;
-          position: relative;
-          overflow: hidden;
-        }
-        .seo-hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-          background-size: 60px 60px;
-          pointer-events: none;
-        }
-        .seo-hero::after {
-          content: '';
-          position: absolute;
-          right: 0; top: 0; bottom: 0;
-          width: 55%;
-          background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(76,175,80,.09) 0%, transparent 65%);
-          pointer-events: none;
-        }
-        .seo-hero-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 48px;
-          position: relative;
-          z-index: 2;
-        }
-        .seo-btn-primary {
-          background: #2e7d32;
-          color: #fff;
-          padding: 13px 28px;
-          border-radius: 8px;
-          font-size: 14px;
-          font-weight: 600;
-          border: none;
-          cursor: pointer;
-          transition: background .2s, transform .15s;
-          letter-spacing: .01em;
-          text-decoration: none;
-          display: inline-block;
-        }
-        .seo-btn-primary:hover { background: #1b5e20; transform: translateY(-1px); }
-
-        /* ══════════════════════════════════════
-           HERO V2 — light beige, big Helvetica title
-        ══════════════════════════════════════ */
         .hv2-hero {
           background: #f5f5f0;
           padding: 100px 56px 92px;
           position: relative;
         }
-        .hv2-hero-inner {
-          max-width: 1160px;
-          margin: 0 auto;
-        }
-        .hv2-back {
-          font-size: 12.5px;
-          color: #888;
-          text-decoration: none;
-          display: inline-block;
-          margin-bottom: 24px;
-        }
-        .hv2-hero-grid {
-          display: grid;
-          grid-template-columns: 1fr 380px;
-          gap: 64px;
-          align-items: start;
-        }
-        .hv2-hero-grid.hv2-single {
-          grid-template-columns: 1fr;
-          max-width: 760px;
-        }
+        .hv2-hero-inner { max-width: 1160px; margin: 0 auto; }
+        .hv2-back { font-size: 12.5px; color: #888; text-decoration: none; display: inline-block; margin-bottom: 24px; }
+        .hv2-hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
+        .hv2-hero-grid.hv2-single { grid-template-columns: 1fr; max-width: 760px; }
         .hv2-lbl {
-          font-size: 10.5px;
-          letter-spacing: 2.5px;
-          text-transform: uppercase;
-          font-weight: 600;
-          color: #aaa;
-          display: block;
-          margin-bottom: 20px;
+          font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase;
+          font-weight: 700; color: ${GREEN}; display: block; margin-bottom: 20px;
         }
         .hv2-title {
-          font-size: clamp(36px, 5vw, 66px);
-          font-weight: 800;
-          line-height: 1.04;
-          letter-spacing: -0.033em;
-          color: #111;
-          margin-bottom: 22px;
+          font-size: clamp(36px, 5vw, 66px); font-weight: 800; line-height: 1.04;
+          letter-spacing: -0.033em; color: #111; margin-bottom: 22px;
         }
         .hv2-title em {
-          font-style: normal;
-          position: relative;
-          display: inline-block;
-          color: #111;
+          font-style: normal; position: relative; display: inline-block; color: ${GOLD};
         }
-        .hv2-title em::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -4px;
-          width: 100%;
-          height: 5px;
-          background: #093024;
-          border-radius: 2px;
-        }
-        .hv2-desc {
-          font-size: 16px;
-          color: #555;
-          line-height: 1.78;
-          max-width: 480px;
-          margin-bottom: 36px;
-          font-weight: 400;
-        }
-        .hv2-btns {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-          align-items: center;
-        }
+        .hv2-desc { font-size: 16px; color: #555; line-height: 1.78; max-width: 480px; margin-bottom: 36px; font-weight: 400; }
+        .hv2-btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
         .hv2-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: #093024;
-          color: #fff;
-          font-size: 14.5px;
-          font-weight: 700;
-          padding: 13px 26px;
-          border-radius: 6px;
-          border: none;
-          cursor: pointer;
-          text-decoration: none;
-          transition: background .2s, transform .15s;
+          display: inline-flex; align-items: center; gap: 8px; background: ${GREEN}; color: #fff;
+          font-size: 14.5px; font-weight: 700; padding: 13px 26px; border-radius: 6px;
+          border: none; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s;
         }
         .hv2-btn:hover { background: #0a3d2c; transform: translateY(-1px); }
         .hv2-btn-ghost {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: none;
-          border: none;
-          border-bottom: 2px solid #111;
-          padding: 13px 0;
-          font-size: 14px;
-          font-weight: 600;
-          color: #111;
-          cursor: pointer;
-          line-height: 1;
+          display: inline-flex; align-items: center; gap: 6px; background: none;
+          border: none; border-bottom: 2px solid #111; padding: 13px 0; font-size: 14px;
+          font-weight: 600; color: #111; cursor: pointer; line-height: 1;
         }
-        .hv2-card {
-          background: #fff;
-          border: 1px solid rgba(0,0,0,0.48);
-          border-radius: 16px;
-          overflow: hidden;
-        }
-        .hv2-card-head {
-          background: #093024;
-          padding: 14px 22px;
-        }
-        .hv2-card-head span {
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: rgba(255,255,255,.55);
-        }
-        .hv2-card-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px 22px;
-          gap: 16px;
-        }
-        .hv2-card-label {
-          font-size: 13px;
-          color: #777;
-        }
-        .hv2-card-val {
-          font-size: 16px;
-          font-weight: 800;
-          color: #093024;
-          text-align: right;
-        }
-        .hv2-card-note {
-          padding: 13px 22px;
-          background: rgba(9,48,36,0.05);
-          border-top: 1px solid rgba(9,48,36,0.10);
-        }
-        .hv2-card-note p {
-          font-size: 12px;
-          color: #444;
-          margin: 0;
-          line-height: 1.6;
-        }
-        @media (max-width: 860px) {
-          .hv2-hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
-        }
+        .hv2-card { background: #fff; border: 1px solid rgba(0,0,0,0.48); border-radius: 16px; overflow: hidden; }
+        .hv2-card-head { background: ${GREEN}; padding: 14px 22px; }
+        .hv2-card-head span { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.55); }
+        .hv2-card-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 22px; gap: 16px; }
+        .hv2-card-label { font-size: 13px; color: #777; }
+        .hv2-card-val { font-size: 16px; font-weight: 800; color: ${GREEN}; text-align: right; }
+        .hv2-card-note { padding: 13px 22px; background: rgba(9,48,36,0.05); border-top: 1px solid rgba(9,48,36,0.10); }
+        .hv2-card-note p { font-size: 12px; color: #444; margin: 0; line-height: 1.6; }
+
+        @media (max-width: 860px) { .hv2-hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; } }
         @media (max-width: 600px) {
           .hv2-hero { padding: 72px 20px 56px !important; }
           .hv2-btns { flex-direction: column; align-items: stretch; }
@@ -373,50 +141,31 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         }
 
         /* ── Content wrapper ── */
-        .seo-content-wrap {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 80px 48px 100px;
-          background: #ffffff;
-        }
+        .seo-content-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 48px 100px; background: #ffffff; }
 
         /* ── Section ── */
-        .seo-section {
-          margin-bottom: 72px;
-          background: #ffffff;
-        }
+        .seo-section { margin-bottom: 72px; background: #ffffff; }
         .seo-section-eyebrow {
-          font-size: 10px;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          color: #2e7d32;
-          font-weight: 700;
-          margin-bottom: 10px;
+          font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+          color: ${GREEN}; font-weight: 700; margin-bottom: 10px;
+          text-align: center;
         }
         .seo-section-title {
-          font-size: clamp(24px, 3vw, 38px);
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.15;
-          margin-bottom: 24px;
-          letter-spacing: -0.02em;
+          font-size: clamp(24px, 3vw, 38px); font-weight: 700; color: #111;
+          line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.02em;
+          text-align: center;
         }
-        .seo-prose {
-          font-size: 15px;
-          color: #4a5568;
-          line-height: 1.85;
-          font-weight: 300;
-          margin-bottom: 18px;
-        }
+        .seo-section-title em { font-style: normal; color: ${GOLD}; }
+        .seo-prose { font-size: 15px; color: #4a5568; line-height: 1.85; font-weight: 300; margin-bottom: 18px; }
+
 
         /* ══════════════════════════════════════
-           SPECIAL PICKS — auto-rotate + click reveal
-           • Right panel slides to align exactly with
-             the active row (translateY per row offset).
-           • Active row turns dark green (matches ref).
-           • Auto-advances every 5 s; click pauses 5 s
-             then resumes.
-           • No icons anywhere in this section.
+           SPECIAL PICKS — marginTop tracking
+           2-col grid. Left = list. Right col is
+           align-self:start. The detail card is a
+           normal block; JS sets its marginTop to
+           the active row's offsetTop so it sits
+           flush with that row. No absolute pos.
         ══════════════════════════════════════ */
         .seo-picks-wrap {
           display: grid;
@@ -425,304 +174,101 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           align-items: start;
         }
         .seo-picks-list {
-          background: #f5f5f0;
-          border-radius: 20px;
-          padding: 8px;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
+          background: #f5f5f0; border-radius: 20px; padding: 8px;
+          display: flex; flex-direction: column; gap: 4px;
         }
         .seo-pick-row {
-          display: grid;
-          grid-template-columns: 1fr auto;
-          align-items: center;
-          gap: 16px;
-          padding: 18px 22px;
-          border-radius: 14px;
-          cursor: pointer;
-          background: transparent;
-          border: none;
-          text-align: left;
-          width: 100%;
-          transition: background .25s ease;
+          display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+          padding: 18px 22px; border-radius: 14px; cursor: pointer; background: transparent;
+          border: none; text-align: left; width: 100%; transition: background .25s ease;
         }
         .seo-pick-row:hover:not(.is-active) { background: rgba(255,255,255,.55); }
-        /* Active row — dark green like screenshot */
-        .seo-pick-row.is-active {
-          background: #0f3320;
-        }
+        .seo-pick-row.is-active { background: ${GREEN}; }
         .seo-pick-main { min-width: 0; }
         .seo-pick-label {
-          font-size: 9.5px;
-          font-weight: 700;
-          letter-spacing: 1.6px;
-          text-transform: uppercase;
-          color: #2e7d32;
-          margin-bottom: 5px;
-          transition: color .25s;
+          font-size: 9.5px; font-weight: 700; letter-spacing: 1.6px;
+          text-transform: uppercase; color: ${GREEN}; margin-bottom: 5px; transition: color .25s;
         }
         .seo-pick-row.is-active .seo-pick-label { color: rgba(255,255,255,.55); }
-        .seo-pick-title {
-          font-size: 15px;
-          font-weight: 700;
-          color: #111;
-          line-height: 1.35;
-          transition: color .25s;
-        }
+        .seo-pick-title { font-size: 15px; font-weight: 700; color: #111; line-height: 1.35; transition: color .25s; }
         .seo-pick-row.is-active .seo-pick-title { color: #fff; }
-        /* Arrow circle */
         .seo-pick-arrow {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          background: rgba(0,0,0,0.06);
-          color: #2e7d32;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          transition: background .25s, color .25s, transform .25s;
+          width: 30px; height: 30px; border-radius: 50%; background: rgba(0,0,0,0.06);
+          color: ${GREEN}; display: flex; align-items: center; justify-content: center;
+          flex-shrink: 0; transition: background .25s, color .25s, transform .25s;
         }
         .seo-pick-arrow svg { width: 13px; height: 13px; }
-        .seo-pick-row.is-active .seo-pick-arrow {
-          background: rgba(255,255,255,.18);
-          color: #fff;
-          transform: rotate(45deg);
-        }
-        /* Detail column slides vertically to align with the active row */
-        .seo-picks-detail-col {
-          position: relative;
-          will-change: transform;
-        }
+        .seo-pick-row.is-active .seo-pick-arrow { background: rgba(255,255,255,.18); color: #fff; transform: rotate(45deg); }
+
+        /* Right column — normal flow, align-self: start */
+        .seo-picks-right { align-self: start; }
+
+        /* Detail card — normal block, marginTop drives vertical position */
         .seo-picks-detail {
-          background: #f0f7f0;
-          border: 1px solid #c8dfc8;
-          border-radius: 18px;
-          padding: 26px 26px 24px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          min-height: 140px;
+          background: #f0f7f0; border: 1px solid #c8dfc8; border-radius: 18px;
+          padding: 26px 26px 24px; display: flex; flex-direction: column; gap: 10px;
+          transition: margin-top 0.36s cubic-bezier(0.34, 1.18, 0.64, 1);
         }
-        .seo-picks-detail-content {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          animation: pickFadeIn .3s ease;
-        }
-        @keyframes pickFadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to   { opacity: 1; transform: translateY(0);   }
-        }
-        .seo-picks-detail-eyebrow {
-          font-size: 9.5px;
-          font-weight: 700;
-          letter-spacing: 1.8px;
-          text-transform: uppercase;
-          color: #2e7d32;
-        }
-        .seo-picks-detail-title {
-          font-size: 18px;
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.25;
-          letter-spacing: -0.01em;
-        }
-        .seo-picks-detail-desc {
-          font-size: 13.5px;
-          color: #4a5568;
-          line-height: 1.75;
-          font-weight: 400;
-        }
-        /* Progress bar auto-advance indicator */
-        .seo-picks-progress {
-          height: 2px;
-          background: rgba(0,0,0,0.08);
-          border-radius: 2px;
-          overflow: hidden;
-          margin-top: 6px;
-        }
-        .seo-picks-progress-bar {
-          height: 100%;
-          background: #2e7d32;
-          border-radius: 2px;
-          transform-origin: left;
-          animation: pickProgress 5s linear forwards;
-        }
-        @keyframes pickProgress {
-          from { width: 0%; }
-          to   { width: 100%; }
-        }
+        .seo-picks-detail-content { display: flex; flex-direction: column; gap: 10px; animation: pickFadeIn .3s ease; }
+        @keyframes pickFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .seo-picks-detail-eyebrow { font-size: 9.5px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: ${GREEN}; }
+        .seo-picks-detail-title { font-size: 18px; font-weight: 700; color: #111; line-height: 1.25; letter-spacing: -0.01em; }
+        .seo-picks-detail-desc { font-size: 13.5px; color: #4a5568; line-height: 1.75; font-weight: 400; }
+        .seo-picks-progress { height: 2px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+        .seo-picks-progress-bar { height: 100%; background: ${GREEN}; border-radius: 2px; animation: pickProgress 5s linear forwards; }
+        @keyframes pickProgress { from { width: 0%; } to { width: 100%; } }
+
         @media (max-width: 860px) {
-          .seo-picks-wrap {
-            grid-template-columns: 1fr;
-            gap: 0;
-          }
-          .seo-picks-detail-col { transform: none !important; margin-top: 12px; }
+          .seo-picks-wrap { grid-template-columns: 1fr; gap: 12px; }
+          .seo-picks-right { align-self: auto; }
+          .seo-picks-detail { margin-top: 0 !important; transition: none; }
         }
 
         /* ══════════════════════════════════════
-           COST & TIMELINE TABLE — table-style rows
-           with equal-width amount pills, animated
-           row reveal, hover underline on the item
-           title, and a dark-green total row at the
-           bottom. ONLY used for Cost & Timeline
-           sections — "What We Handle" keeps the
-           original seo-iconcards.
+           COST TABLE
         ══════════════════════════════════════ */
-        .seo-cost-table {
-          width: 100%;
-          border-radius: 18px;
-          overflow: hidden;
-          border: 1px solid rgba(0,0,0,0.10);
-          box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-        }
-        .seo-cost-table-head {
-          display: grid;
-          grid-template-columns: 1.4fr 1fr 190px;
-          background: #093024;
-          padding: 14px 28px;
-          gap: 16px;
-          align-items: center;
-        }
-        .seo-cost-table-head span {
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.55);
-        }
+        .seo-cost-table { width: 100%; border-radius: 18px; overflow: hidden; border: 1px solid rgba(0,0,0,0.10); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+        .seo-cost-table-head { display: grid; grid-template-columns: 1.4fr 1fr 190px; background: ${GREEN}; padding: 14px 28px; gap: 16px; align-items: center; }
+        .seo-cost-table-head span { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
         .seo-cost-table-head span:last-child { text-align: center; }
         .seo-cost-row {
-          display: grid;
-          grid-template-columns: 1.4fr 1fr 190px;
-          padding: 20px 28px;
-          gap: 16px;
-          align-items: center;
-          border-top: 1px solid rgba(0,0,0,0.06);
-          background: #fff;
-          transition: background 0.25s ease;
-          opacity: 0;
-          transform: translateX(-14px);
+          display: grid; grid-template-columns: 1.4fr 1fr 190px; padding: 20px 28px; gap: 16px;
+          align-items: center; border-top: 1px solid rgba(0,0,0,0.06); background: #fff;
+          transition: background 0.25s ease; opacity: 0; transform: translateX(-14px);
           animation: costRowIn .5s ease forwards;
         }
-        @keyframes costRowIn {
-          to { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes costRowIn { to { opacity: 1; transform: translateX(0); } }
         .seo-cost-row:hover { background: #f7fdf9; }
-        .seo-cost-row-num {
-          font-size: 10px;
-          font-weight: 700;
-          color: #2e7d32;
-          letter-spacing: 1px;
-          margin-bottom: 4px;
-          text-transform: uppercase;
-        }
-        .seo-cost-row-title {
-          font-size: 14.5px;
-          font-weight: 700;
-          color: #111;
-          line-height: 1.3;
-          margin-bottom: 3px;
-          display: inline-block;
-          position: relative;
-        }
-        /* animated underline on hover */
-        .seo-cost-row-title::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -2px;
-          width: 0%;
-          height: 2px;
-          background: #093024;
-          border-radius: 2px;
-          transition: width 0.3s ease;
-        }
+        .seo-cost-row-num { font-size: 10px; font-weight: 700; color: ${GREEN}; letter-spacing: 1px; margin-bottom: 4px; text-transform: uppercase; }
+        .seo-cost-row-title { font-size: 14.5px; font-weight: 700; color: #111; line-height: 1.3; margin-bottom: 3px; display: inline-block; position: relative; }
+        .seo-cost-row-title::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0%; height: 2px; background: ${GREEN}; border-radius: 2px; transition: width 0.3s ease; }
         .seo-cost-row:hover .seo-cost-row-title::after { width: 100%; }
-        .seo-cost-row-desc {
-          font-size: 12.5px;
-          color: #888;
-          line-height: 1.5;
-        }
-        .seo-cost-row-category {
-          font-size: 13px;
-          color: #555;
-          line-height: 1.5;
-        }
-        /* Amount pill — EQUAL WIDTH for all rows */
+        .seo-cost-row-desc { font-size: 12.5px; color: #888; line-height: 1.5; }
+        .seo-cost-row-category { font-size: 13px; color: #555; line-height: 1.5; }
         .seo-cost-pill {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          min-width: 160px;
-          background: #093024;
-          color: #fff;
-          font-size: 13px;
-          font-weight: 800;
-          padding: 10px 16px;
-          border-radius: 100px;
-          white-space: nowrap;
-          letter-spacing: -0.01em;
-          flex-shrink: 0;
+          display: inline-flex; align-items: center; justify-content: center; width: 100%; min-width: 160px;
+          background: ${GREEN}; color: #fff; font-size: 13px; font-weight: 800; padding: 10px 16px;
+          border-radius: 100px; white-space: nowrap; letter-spacing: -0.01em; flex-shrink: 0;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-        .seo-cost-row:hover .seo-cost-pill {
-          transform: scale(1.05);
-          box-shadow: 0 6px 16px rgba(9,48,36,0.28);
-        }
-        /* time pills — light variant, still same width */
-        .seo-cost-pill.is-time {
-          background: #f0f7f0;
-          color: #093024;
-          border: 1.5px solid #c8dfc8;
-        }
+        .seo-cost-row:hover .seo-cost-pill { transform: scale(1.05); box-shadow: 0 6px 16px rgba(9,48,36,0.28); }
+        .seo-cost-pill.is-time { background: #f0f7f0; color: ${GREEN}; border: 1.5px solid #c8dfc8; }
         .seo-cost-row:hover .seo-cost-pill.is-time { background: #e0f0e4; }
-        /* total row — dark green banner */
         .seo-cost-total-row {
-          display: grid;
-          grid-template-columns: 1fr 190px;
-          padding: 22px 28px;
-          gap: 16px;
-          align-items: center;
-          background: #093024;
-          border-top: 2px solid rgba(255,255,255,0.10);
-          opacity: 0;
-          transform: translateX(-14px);
-          animation: costRowIn .5s ease forwards;
+          display: grid; grid-template-columns: 1fr 190px; padding: 22px 28px; gap: 16px;
+          align-items: center; background: ${GREEN}; border-top: 2px solid rgba(255,255,255,0.10);
+          opacity: 0; transform: translateX(-14px); animation: costRowIn .5s ease forwards;
         }
-        .seo-cost-total-label {
-          font-size: 12px;
-          color: rgba(255,255,255,0.6);
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          font-weight: 700;
-          margin-bottom: 4px;
-        }
-        .seo-cost-total-title {
-          font-size: 16px;
-          font-weight: 800;
-          color: #fff;
-        }
+        .seo-cost-total-label { font-size: 12px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 4px; }
+        .seo-cost-total-title { font-size: 16px; font-weight: 800; color: #fff; }
         .seo-cost-total-pill {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          min-width: 160px;
-          background: #fff;
-          color: #093024;
-          font-size: 14px;
-          font-weight: 800;
-          padding: 12px 16px;
-          border-radius: 100px;
-          white-space: nowrap;
-          letter-spacing: -0.01em;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.20);
-          transition: transform 0.25s ease;
+          display: inline-flex; align-items: center; justify-content: center; width: 100%; min-width: 160px;
+          background: #fff; color: ${GREEN}; font-size: 14px; font-weight: 800; padding: 12px 16px;
+          border-radius: 100px; white-space: nowrap; letter-spacing: -0.01em;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.20); transition: transform 0.25s ease;
         }
         .seo-cost-total-row:hover .seo-cost-total-pill { transform: scale(1.05); }
+
         @media (max-width: 860px) {
           .seo-cost-table-head { grid-template-columns: 1fr 150px; padding: 12px 18px; }
           .seo-cost-table-head span:nth-child(2) { display: none; }
@@ -740,1215 +286,358 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           .seo-cost-total-pill { width: auto; justify-self: flex-start; }
         }
 
+        /* seo-pricing-wrap removed — using imported PricingSection instead */
+
         /* ══════════════════════════════════════
-           SECTOR CAPS LIST — row-list style (no arrow).
-           Rows stagger-reveal on scroll; first row is
-           highlighted dark green by default; hover/click
-           any row to make it the highlighted one. The cap
-           value sits as a pill on the right in place of
-           an arrow button.
+           SECTOR CAPS
         ══════════════════════════════════════ */
-        .seo-caplist {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          background: #f5f5f0;
-          border-radius: 20px;
-          padding: 8px;
-        }
+        .seo-caplist { display: flex; flex-direction: column; gap: 6px; background: #f5f5f0; border-radius: 20px; padding: 8px; }
         .seo-caprow {
-          display: grid;
-          grid-template-columns: 1fr auto;
-          align-items: center;
-          gap: 16px;
-          padding: 16px 20px;
-          border-radius: 14px;
-          background: transparent;
-          border: none;
-          text-align: left;
-          width: 100%;
-          cursor: pointer;
-          opacity: 0;
-          transform: translateY(10px);
-          animation: capRowIn .5s ease forwards;
-          transition: background .25s ease;
+          display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+          padding: 16px 20px; border-radius: 14px; background: transparent; border: none;
+          text-align: left; width: 100%; cursor: pointer; opacity: 0; transform: translateY(10px);
+          animation: capRowIn .5s ease forwards; transition: background .25s ease;
         }
         .seo-caprow:hover:not(.is-active) { background: rgba(255,255,255,.6); }
-        .seo-caprow.is-active {
-          background: #0f3320;
-          box-shadow: 0 10px 24px rgba(15,51,32,.18);
-        }
-        @keyframes capRowIn {
-          to { opacity: 1; transform: translateY(0); }
-        }
+        .seo-caprow.is-active { background: ${GREEN}; box-shadow: 0 10px 24px rgba(15,51,32,.18); }
+        @keyframes capRowIn { to { opacity: 1; transform: translateY(0); } }
         .seo-caprow-main { min-width: 0; }
-        .seo-caprow-name {
-          font-size: 15px;
-          font-weight: 700;
-          color: #111;
-          line-height: 1.35;
-          margin-bottom: 4px;
-          transition: color .25s;
-        }
+        .seo-caprow-name { font-size: 15px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 4px; transition: color .25s; }
         .seo-caprow.is-active .seo-caprow-name { color: #fff; }
-        .seo-caprow-route {
-          font-size: 12.5px;
-          color: #6b7280;
-          line-height: 1.5;
-          transition: color .25s;
-        }
+        .seo-caprow-route { font-size: 12.5px; color: #6b7280; line-height: 1.5; transition: color .25s; }
         .seo-caprow.is-active .seo-caprow-route { color: rgba(255,255,255,.62); }
-        .seo-caprow-cap {
-          display: inline-block;
-          font-size: 13px;
-          font-weight: 800;
-          padding: 7px 18px;
-          border-radius: 100px;
-          white-space: nowrap;
-          background: #e8f5e9;
-          color: #1b5e20;
-          transition: background .25s, color .25s, transform .25s;
-        }
+        .seo-caprow-cap { display: inline-block; font-size: 13px; font-weight: 800; padding: 7px 18px; border-radius: 100px; white-space: nowrap; background: #e8f5e9; color: #1b5e20; transition: background .25s, color .25s, transform .25s; }
         .seo-caprow-cap.is-zero { background: #fee2e2; color: #dc2626; }
-        .seo-caprow.is-active .seo-caprow-cap {
-          background: rgba(255,255,255,.16);
-          color: #fff;
-          transform: scale(1.04);
-        }
-        @media (max-width: 560px) {
-          .seo-caprow { grid-template-columns: 1fr; gap: 8px; padding: 14px 16px; }
-          .seo-caprow-cap { justify-self: flex-start; }
-        }
+        .seo-caprow.is-active .seo-caprow-cap { background: rgba(255,255,255,.16); color: #fff; transform: scale(1.04); }
+        @media (max-width: 560px) { .seo-caprow { grid-template-columns: 1fr; gap: 8px; padding: 14px 16px; } .seo-caprow-cap { justify-self: flex-start; } }
 
         /* ══════════════════════════════════════
-           PYRAMID PROCESS — deep indigo #3a2d72
+           STEP-BY-STEP PROCESS
+           Vertical timeline — same layout as setup page:
+           numbered node on left + card on right,
+           click to activate, green when active.
         ══════════════════════════════════════ */
-        .seo-pyramid {
+        .seo-timeline-wrap {
           display: flex;
           flex-direction: column;
           gap: 16px;
+          max-width: 860px;
+          margin: 0 auto;
+          position: relative;
         }
-        .seo-pyramid-row {
-          display: grid;
-          grid-template-columns: minmax(200px, 52%) 1fr;
-          align-items: center;
-          gap: 28px;
-          transition: opacity .5s ease, transform .5s ease;
+        .seo-timeline-line {
+          position: absolute;
+          left: 23px;
+          top: 24px;
+          bottom: 24px;
+          width: 2px;
+          background: rgba(11,61,46,0.15);
+          z-index: 0;
         }
-        .seo-pyramid-bar {
-          width: var(--bar-width, 100%);
-          min-width: 180px;
-          color: #fff;
-          padding: 16px 28px;
+        .seo-timeline-row {
           display: flex;
-          align-items: center;
-          gap: 14px;
-          clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-          box-shadow: 0 10px 24px rgba(58, 45, 114, 0.22);
-          transition: filter .2s ease;
+          gap: 16px;
+          align-items: flex-start;
+          position: relative;
+          cursor: pointer;
         }
-        .seo-pyramid-row:hover .seo-pyramid-bar { filter: brightness(1.08); }
-        .seo-pyramid-num {
-          width: 32px;
-          height: 32px;
+        .seo-timeline-node {
+          width: 48px;
+          height: 48px;
           border-radius: 50%;
-          background: rgba(255,255,255,.22);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 800;
-          font-size: 12.5px;
-          flex-shrink: 0;
-        }
-        .seo-pyramid-title {
-          font-weight: 700;
-          font-size: 14.5px;
-          letter-spacing: .01em;
-          line-height: 1.3;
-        }
-        .seo-pyramid-desc {
           font-size: 13px;
-          color: #6b7280;
-          line-height: 1.65;
-          font-weight: 300;
+          font-weight: 800;
+          z-index: 2;
+          flex-shrink: 0;
+          transition: background .35s ease, border-color .35s ease, color .35s ease, box-shadow .35s ease;
+          border: 2.5px solid rgba(0,0,0,0.15);
+          background: #fff;
+          color: ${GREEN};
         }
-        .seo-pyramid-desc p { margin: 0; }
-        .seo-pyramid-time {
-          display: inline-block;
-          font-size: 10px;
-          font-weight: 700;
-          color: #3a2d72;
-          background: #edeaf7;
-          padding: 3px 11px;
-          border-radius: 100px;
-          margin-bottom: 7px;
-        }
-        @media (max-width: 760px) {
-          .seo-pyramid-row {
-            grid-template-columns: 1fr;
-            gap: 8px;
-          }
-          .seo-pyramid-bar {
-            width: 100% !important;
-            clip-path: none;
-            border-radius: 14px;
-            padding: 15px 20px;
-          }
-          .seo-pyramid-desc {
-            padding: 0 4px 6px;
-          }
-        }
-
-        /* ══════════════════════════════════════
-           WHAT IT IS — minimal
-        ══════════════════════════════════════ */
-        .seo-whatitis {
-          padding: 4px 0;
-        }
-        .seo-whatitis-eyebrow {
-          font-size: 12px;
-          font-weight: 600;
-          color: #9ca3af;
-          margin-bottom: 14px;
-        }
-        .seo-whatitis-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.4fr;
-          gap: 40px;
-          align-items: start;
-        }
-        .seo-whatitis-title {
-          font-size: clamp(24px, 3vw, 34px);
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.2;
-          letter-spacing: -0.02em;
-        }
-        .seo-whatitis-body p {
-          font-size: 14.5px;
-          color: #6b7280;
-          line-height: 1.85;
-          font-weight: 300;
-          margin-bottom: 16px;
-        }
-        .seo-whatitis-body p:last-child { margin-bottom: 0; }
-        @media (max-width: 800px) {
-          .seo-whatitis-grid { grid-template-columns: 1fr; gap: 16px; }
-        }
-
-        /* ══════════════════════════════════════
-           INFO CARDS — "Why Choose Us" ref style.
-           No icons. First card dark green (featured),
-           remaining cards sage green. Value shown as
-           a pill button at the bottom of each card.
-           Clean, no-border (except subtle outline).
-           (Used by "What We Handle" and similar
-           sections — NOT for Cost & Timeline.)
-        ══════════════════════════════════════ */
-        .seo-iconcards-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-        }
-        .seo-iconcards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-
-        .seo-iconcard {
-          background: #dde8d8;
-          border: none;
-          border-radius: 20px;
-          padding: 28px 24px 22px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          opacity: 0;
-          transform: translateY(16px);
-          animation: stepCardIn .5s ease forwards;
-          transition: box-shadow .28s ease, transform .28s ease;
-          cursor: default;
-        }
-        .seo-iconcard:hover {
-          box-shadow: 0 14px 32px rgba(13,17,23,.09);
-          transform: translateY(-4px);
-        }
-        /* First card: dark forest green */
-        .seo-iconcard.is-featured {
-          background: #123524;
-        }
-        .seo-iconcard-title {
-          font-size: 16px;
-          font-weight: 700;
-          color: #0f2e18;
-          line-height: 1.3;
-          margin-bottom: 10px;
-          letter-spacing: -0.01em;
-        }
-        .seo-iconcard.is-featured .seo-iconcard-title { color: #ffffff; }
-
-        .seo-iconcard-desc {
-          font-size: 12.5px;
-          color: #4a5e44;
-          line-height: 1.7;
-          font-weight: 400;
-          flex: 1;
-          margin-bottom: 20px;
-        }
-        .seo-iconcard.is-featured .seo-iconcard-desc { color: rgba(255,255,255,.68); }
-
-        /* Value pill — dark pill on sage, white pill on dark */
-        .seo-iconcard-pill {
-          display: inline-block;
-          background: #0f2e18;
-          color: #ffffff;
-          padding: 9px 22px;
-          border-radius: 100px;
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: .03em;
-          white-space: nowrap;
-          margin-top: auto;
-        }
-        .seo-iconcard.is-featured .seo-iconcard-pill {
-          background: #ffffff;
-          color: #0f2e18;
-        }
-        .seo-iconcard-date {
-          display: inline-block;
-          background: #0f2e18;
-          color: #ffffff;
-          padding: 8px 18px;
-          border-radius: 100px;
-          font-size: 11.5px;
-          font-weight: 700;
-          margin-top: auto;
-        }
-        .seo-iconcard.is-featured .seo-iconcard-date {
-          background: rgba(255,255,255,.18);
+        .seo-timeline-row.is-active .seo-timeline-node {
+          background: ${GREEN};
+          border-color: ${GREEN};
           color: #fff;
+          box-shadow: 0 6px 18px rgba(11,61,46,0.22);
         }
-        @keyframes stepCardIn {
-          to { opacity: 1; transform: translateY(0); }
+        .seo-timeline-card {
+          flex: 1;
+          background: #fff;
+          border: 1px solid rgba(0,0,0,0.12);
+          border-radius: 14px;
+          padding: 16px 20px;
+          transition: border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
-        @media (max-width: 960px) {
-          .seo-iconcards-grid { grid-template-columns: repeat(2, 1fr); }
+        .seo-timeline-row.is-active .seo-timeline-card {
+          border-color: ${GREEN};
+          box-shadow: 0 8px 24px rgba(11,61,46,0.08);
+          transform: translateX(4px);
         }
-        @media (max-width: 560px) {
-          .seo-iconcards-grid,
-          .seo-iconcards-grid.cols-2 { grid-template-columns: 1fr; }
+        .seo-timeline-card-top {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 8px;
+          flex-wrap: wrap;
         }
+        .seo-timeline-card-title {
+          font-size: clamp(13px, 1.5vw, 15px);
+          font-weight: 800;
+          color: #111;
+        }
+        .seo-timeline-card-time {
+          margin-left: auto;
+          background: rgba(230,152,25,0.10);
+          border: 1px solid rgba(230,152,25,0.28);
+          color: ${GOLD};
+          padding: 3px 11px;
+          border-radius: 50px;
+          font-size: 10px;
+          font-weight: 800;
+          flex-shrink: 0;
+          white-space: nowrap;
+        }
+        .seo-timeline-card-desc {
+          font-size: clamp(12px, 1.3vw, 13.5px);
+          color: #555;
+          line-height: 1.7;
+          margin: 0;
+          font-weight: 400;
+        }
+
+        @media (max-width: 600px) {
+          .seo-timeline-line { left: 19px; }
+          .seo-timeline-node { width: 40px; height: 40px; font-size: 11px; }
+          .seo-timeline-row { gap: 10px; }
+          .seo-timeline-card { padding: 14px 16px; }
+        }
+        @media (max-width: 420px) {
+          .seo-timeline-node { width: 36px; height: 36px; font-size: 10px; }
+          .seo-timeline-row.is-active .seo-timeline-card { transform: translateX(2px); }
+        }
+
+        /* ══════════════════════════════════════
+           WHAT IT IS
+        ══════════════════════════════════════ */
+        .seo-whatitis { padding: 4px 0; }
+        .seo-whatitis-eyebrow { font-size: 12px; font-weight: 600; color: #9ca3af; margin-bottom: 14px; }
+        .seo-whatitis-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: start; }
+        .seo-whatitis-title { font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: #111; line-height: 1.2; letter-spacing: -0.02em; }
+        .seo-whatitis-body p { font-size: 14.5px; color: #6b7280; line-height: 1.85; font-weight: 300; margin-bottom: 16px; }
+        .seo-whatitis-body p:last-child { margin-bottom: 0; }
+        @media (max-width: 800px) { .seo-whatitis-grid { grid-template-columns: 1fr; gap: 16px; } }
+
+        /* ══════════════════════════════════════
+           INFO CARDS
+        ══════════════════════════════════════ */
+        .seo-iconcards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .seo-iconcards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .seo-iconcard {
+          background: #dde8d8; border: none; border-radius: 20px; padding: 28px 24px 22px;
+          display: flex; flex-direction: column; align-items: flex-start; opacity: 0;
+          transform: translateY(16px); animation: stepCardIn .5s ease forwards;
+          transition: box-shadow .28s ease, transform .28s ease; cursor: default;
+        }
+        .seo-iconcard:hover { box-shadow: 0 14px 32px rgba(13,17,23,.09); transform: translateY(-4px); }
+        .seo-iconcard.is-featured { background: #123524; }
+        .seo-iconcard-title { font-size: 16px; font-weight: 700; color: #0f2e18; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.01em; }
+        .seo-iconcard.is-featured .seo-iconcard-title { color: #ffffff; }
+        .seo-iconcard-desc { font-size: 12.5px; color: #4a5e44; line-height: 1.7; font-weight: 400; flex: 1; margin-bottom: 20px; }
+        .seo-iconcard.is-featured .seo-iconcard-desc { color: rgba(255,255,255,.68); }
+        .seo-iconcard-pill { display: inline-block; background: #0f2e18; color: #ffffff; padding: 9px 22px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: .03em; white-space: nowrap; margin-top: auto; }
+        .seo-iconcard.is-featured .seo-iconcard-pill { background: #ffffff; color: #0f2e18; }
+        .seo-iconcard-date { display: inline-block; background: #0f2e18; color: #ffffff; padding: 8px 18px; border-radius: 100px; font-size: 11.5px; font-weight: 700; margin-top: auto; }
+        .seo-iconcard.is-featured .seo-iconcard-date { background: rgba(255,255,255,.18); color: #fff; }
+        @keyframes stepCardIn { to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 960px) { .seo-iconcards-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .seo-iconcards-grid, .seo-iconcards-grid.cols-2 { grid-template-columns: 1fr; } }
 
         /* ── Small stat row ── */
-        .seo-stat-row {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-          margin-bottom: 8px;
-        }
-        .seo-stat-card {
-          background: #ffffff;
-          border: 1px solid #ececec;
-          border-radius: 14px;
-          padding: 18px 20px;
-          text-align: center;
-        }
-        .seo-stat-num {
-          font-size: 26px;
-          font-weight: 700;
-          color: #0d1117;
-          margin-bottom: 4px;
-        }
-        .seo-stat-label {
-          font-size: 11.5px;
-          color: #9ca3af;
-          font-weight: 500;
-        }
-        @media (max-width: 620px) {
-          .seo-stat-row { grid-template-columns: 1fr; }
-        }
+        .seo-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 8px; }
+        .seo-stat-card { background: #ffffff; border: 1px solid #ececec; border-radius: 14px; padding: 18px 20px; text-align: center; }
+        .seo-stat-num { font-size: 26px; font-weight: 700; color: #111; margin-bottom: 4px; }
+        .seo-stat-label { font-size: 11.5px; color: #9ca3af; font-weight: 500; }
+        @media (max-width: 620px) { .seo-stat-row { grid-template-columns: 1fr; } }
 
         /* ══════════════════════════════════════
-           FAQ — separate cards, single-open accordion
+           FAQ
         ══════════════════════════════════════ */
-        .seo-faqcards {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-        .seo-faqcard {
-          background: #ffffff;
-          border: 1px solid #ececec;
-          border-radius: 14px;
-          overflow: hidden;
-          transition: border-color .2s ease, box-shadow .2s ease;
-        }
-        .seo-faqcard.is-open {
-          border-color: #c8e6c9;
-          box-shadow: 0 6px 20px rgba(13,17,23,.05);
-        }
-        .seo-faqcard-btn {
-          width: 100%;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 20px 22px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 16px;
-          text-align: left;
-        }
-        .seo-faqcard-q {
-          font-size: 14.5px;
-          font-weight: 600;
-          color: #0d1117;
-          line-height: 1.45;
-        }
-        .seo-faqcard-icon {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          background: #f0f7f0;
-          color: #2e7d32;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform .25s ease, background .2s ease, color .2s ease;
-        }
+        .seo-faqcards { display: flex; flex-direction: column; gap: 12px; }
+        .seo-faqcard { background: #ffffff; border: 1px solid #ececec; border-radius: 14px; overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease; }
+        .seo-faqcard.is-open { border-color: #c8e6c9; box-shadow: 0 6px 20px rgba(13,17,23,.05); }
+        .seo-faqcard-btn { width: 100%; background: none; border: none; cursor: pointer; padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; gap: 16px; text-align: left; }
+        .seo-faqcard-q { font-size: 14.5px; font-weight: 600; color: #111; line-height: 1.45; }
+        .seo-faqcard-icon { width: 28px; height: 28px; border-radius: 50%; background: #f0f7f0; color: ${GREEN}; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: transform .25s ease, background .2s ease, color .2s ease; }
         .seo-faqcard-icon svg { width: 13px; height: 13px; }
-        .seo-faqcard.is-open .seo-faqcard-icon {
-          background: #2e7d32;
-          color: #fff;
-          transform: rotate(135deg);
-        }
-        .seo-faqcard-panel {
-          display: grid;
-          grid-template-rows: 0fr;
-          transition: grid-template-rows .28s ease;
-        }
-        .seo-faqcard.is-open .seo-faqcard-panel {
-          grid-template-rows: 1fr;
-        }
-        .seo-faqcard-panel-inner {
-          overflow: hidden;
-        }
-        .seo-faqcard-a {
-          font-size: 13.5px;
-          color: #6b7280;
-          line-height: 1.8;
-          font-weight: 300;
-          padding: 0 22px 20px;
-        }
+        .seo-faqcard.is-open .seo-faqcard-icon { background: ${GREEN}; color: #fff; transform: rotate(135deg); }
+        .seo-faqcard-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s ease; }
+        .seo-faqcard.is-open .seo-faqcard-panel { grid-template-rows: 1fr; }
+        .seo-faqcard-panel-inner { overflow: hidden; }
+        .seo-faqcard-a { font-size: 13.5px; color: #6b7280; line-height: 1.8; font-weight: 300; padding: 0 22px 20px; }
 
-        /* ── Common Mistakes — always red border, accordion ── */
-        .seo-mistakes-list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        .seo-mistake {
-          background: #fff;
-          border: 1.5px solid #fca5a5;   /* always thin red border */
-          border-radius: 14px;
-          overflow: hidden;
-          transition: border-color .25s, box-shadow .25s, background .25s;
-          cursor: pointer;
-        }
+        /* ── Common Mistakes ── */
+        .seo-mistakes-list { display: flex; flex-direction: column; gap: 10px; }
+        .seo-mistake { background: #fff; border: 1.5px solid #fca5a5; border-radius: 14px; overflow: hidden; transition: border-color .25s, box-shadow .25s, background .25s; cursor: pointer; }
         .seo-mistake:hover { border-color: #f87171; box-shadow: 0 4px 14px rgba(249,115,22,.08); }
-        .seo-mistake.is-open {
-          border-color: #ef4444;
-          background: #fff8f8;
-          box-shadow: 0 8px 24px rgba(239,68,68,.10);
-        }
-        .seo-mistake-header {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          padding: 18px 22px;
-        }
-        .seo-mistake-num {
-          width: 28px; height: 28px;
-          border-radius: 50%;
-          background: #fee2e2;
-          color: #ef4444;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 11px;
-          font-weight: 800;
-          flex-shrink: 0;
-          transition: background .25s, color .25s;
-        }
-        .seo-mistake.is-open .seo-mistake-num {
-          background: #ef4444;
-          color: #fff;
-        }
-        .seo-mistake-title {
-          font-size: 14px;
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.4;
-          flex: 1;
-          transition: color .25s;
-        }
+        .seo-mistake.is-open { border-color: #ef4444; background: #fff8f8; box-shadow: 0 8px 24px rgba(239,68,68,.10); }
+        .seo-mistake-header { display: flex; align-items: center; gap: 14px; padding: 18px 22px; }
+        .seo-mistake-num { width: 28px; height: 28px; border-radius: 50%; background: #fee2e2; color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; transition: background .25s, color .25s; }
+        .seo-mistake.is-open .seo-mistake-num { background: #ef4444; color: #fff; }
+        .seo-mistake-title { font-size: 14px; font-weight: 700; color: #111; line-height: 1.4; flex: 1; transition: color .25s; }
         .seo-mistake.is-open .seo-mistake-title { color: #dc2626; }
-        .seo-mistake-chevron {
-          width: 26px; height: 26px;
-          border-radius: 50%;
-          border: 1.5px solid #fca5a5;
-          display: flex; align-items: center; justify-content: center;
-          color: #f87171;
-          flex-shrink: 0;
-          transition: transform .28s, border-color .25s, background .25s, color .25s;
-        }
+        .seo-mistake-chevron { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #fca5a5; display: flex; align-items: center; justify-content: center; color: #f87171; flex-shrink: 0; transition: transform .28s, border-color .25s, background .25s, color .25s; }
         .seo-mistake-chevron svg { width: 12px; height: 12px; }
-        .seo-mistake.is-open .seo-mistake-chevron {
-          transform: rotate(180deg);
-          border-color: #ef4444;
-          background: #ef4444;
-          color: #fff;
-        }
-        .seo-mistake-body {
-          display: grid;
-          grid-template-rows: 0fr;
-          transition: grid-template-rows .32s ease;
-        }
-        .seo-mistake.is-open .seo-mistake-body {
-          grid-template-rows: 1fr;
-        }
+        .seo-mistake.is-open .seo-mistake-chevron { transform: rotate(180deg); border-color: #ef4444; background: #ef4444; color: #fff; }
+        .seo-mistake-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s ease; }
+        .seo-mistake.is-open .seo-mistake-body { grid-template-rows: 1fr; }
         .seo-mistake-body-inner { overflow: hidden; }
-        .seo-mistake-desc {
-          font-size: 13px;
-          color: #7f1d1d;
-          line-height: 1.75;
-          font-weight: 400;
-          padding: 0 22px 20px 64px;
-          background: #fff8f8;
-        }
-        @media (max-width: 560px) {
-          .seo-mistake-header { padding: 16px 16px; gap: 10px; }
-          .seo-mistake-desc { padding: 0 16px 16px 16px; }
-        }
+        .seo-mistake-desc { font-size: 13px; color: #7f1d1d; line-height: 1.75; font-weight: 400; padding: 0 22px 20px 64px; background: #fff8f8; }
+        @media (max-width: 560px) { .seo-mistake-header { padding: 16px 16px; gap: 10px; } .seo-mistake-desc { padding: 0 16px 16px 16px; } }
 
-        /* ── Client Story — modern card ── */
-        .seo-story {
-          background: #fff;
-          border-radius: 20px;
-          padding: 0;
-          border: 1px solid #e4e4e4;
-          margin-bottom: 32px;
-          overflow: hidden;
-          transition: box-shadow .3s;
-        }
-        .seo-story:hover {
-          box-shadow: 0 12px 36px rgba(13,17,23,.08);
-        }
-        .seo-story-top {
-          background: #0f3320;
-          padding: 20px 28px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .seo-story-flag {
-          width: 32px;
-          height: 32px;
-          border-radius: 9px;
-          background: rgba(255,255,255,.12);
-          color: rgba(255,255,255,.8);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
+        /* ── Client Story ── */
+        .seo-story { background: #fff; border-radius: 20px; padding: 0; border: 1px solid #e4e4e4; margin-bottom: 32px; overflow: hidden; transition: box-shadow .3s; }
+        .seo-story:hover { box-shadow: 0 12px 36px rgba(13,17,23,.08); }
+        .seo-story-top { background: ${GREEN}; padding: 20px 28px; display: flex; align-items: center; gap: 12px; }
+        .seo-story-flag { width: 32px; height: 32px; border-radius: 9px; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .seo-story-flag svg { width: 15px; height: 15px; }
-        .seo-story-region {
-          font-size: 11px;
-          font-weight: 600;
-          color: rgba(255,255,255,.65);
-          text-transform: uppercase;
-          letter-spacing: .1em;
-        }
+        .seo-story-region { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: .1em; }
         .seo-story-body { padding: 26px 28px; }
-        .seo-story-headline {
-          font-size: 18px;
-          font-weight: 700;
-          color: #0d1117;
-          margin-bottom: 20px;
-          letter-spacing: -0.01em;
-          line-height: 1.3;
-        }
-        .seo-story-cols {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-          margin-bottom: 18px;
-        }
-        .seo-story-block { }
-        .seo-story-label {
-          font-size: 9px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: #9ca3af;
-          font-weight: 700;
-          margin-bottom: 6px;
-        }
-        .seo-story-text {
-          font-size: 13px;
-          color: #4a5568;
-          line-height: 1.72;
-          font-weight: 400;
-        }
-        .seo-story-proof {
-          background: #e8f5e9;
-          border-radius: 10px;
-          padding: 14px 18px;
-          display: flex;
-          gap: 10px;
-          align-items: flex-start;
-          animation: storyProofIn .5s ease .1s both;
-        }
-        @keyframes storyProofIn {
-          from { opacity: 0; transform: translateY(6px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .seo-story-check { color: #2e7d32; flex-shrink: 0; margin-top: 2px; }
+        .seo-story-headline { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 20px; letter-spacing: -0.01em; line-height: 1.3; }
+        .seo-story-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 18px; }
+        .seo-story-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #9ca3af; font-weight: 700; margin-bottom: 6px; }
+        .seo-story-text { font-size: 13px; color: #4a5568; line-height: 1.72; font-weight: 400; }
+        .seo-story-proof { background: #e8f5e9; border-radius: 10px; padding: 14px 18px; display: flex; gap: 10px; align-items: flex-start; }
+        .seo-story-check { color: ${GREEN}; flex-shrink: 0; margin-top: 2px; }
         .seo-story-check svg { width: 13px; height: 13px; }
-        .seo-story-proof-text {
-          font-size: 12.5px;
-          color: #1b5e20;
-          line-height: 1.6;
-          font-weight: 600;
-        }
-        @media (max-width: 600px) {
-          .seo-story-top { padding: 16px 18px; }
-          .seo-story-body { padding: 20px 18px; }
-          .seo-story-cols { grid-template-columns: 1fr; gap: 14px; }
-        }
+        .seo-story-proof-text { font-size: 12.5px; color: #1b5e20; line-height: 1.6; font-weight: 600; }
+        @media (max-width: 600px) { .seo-story-top { padding: 16px 18px; } .seo-story-body { padding: 20px 18px; } .seo-story-cols { grid-template-columns: 1fr; gap: 14px; } }
 
-        /* ── Entity comparison cards — values as pills ── */
-        .seo-entity-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          margin-bottom: 8px;
-        }
-        .seo-entity-card {
-          background: #ffffff;
-          border: 1px solid #e0e0e0;
-          border-radius: 16px;
-          padding: 26px 24px;
-          transition: border-color .2s, box-shadow .2s, transform .25s;
-        }
-        .seo-entity-card:hover {
-          border-color: #b8d8b8;
-          box-shadow: 0 8px 24px rgba(0,0,0,.07);
-          transform: translateY(-3px);
-        }
-        .seo-entity-title {
-          font-size: 15px;
-          font-weight: 700;
-          color: #fff;
-          background: #0f3320;
-          display: inline-block;
-          padding: 6px 16px;
-          border-radius: 8px;
-          margin-bottom: 18px;
-          letter-spacing: -0.01em;
-        }
-        .seo-entity-kv {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 12.5px;
-          margin-bottom: 10px;
-          gap: 10px;
-        }
+        /* ── Entity comparison cards ── */
+        .seo-entity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
+        .seo-entity-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 26px 24px; transition: border-color .2s, box-shadow .2s, transform .25s; }
+        .seo-entity-card:hover { border-color: #b8d8b8; box-shadow: 0 8px 24px rgba(0,0,0,.07); transform: translateY(-3px); }
+        .seo-entity-title { font-size: 15px; font-weight: 700; color: #fff; background: ${GREEN}; display: inline-block; padding: 6px 16px; border-radius: 8px; margin-bottom: 18px; letter-spacing: -0.01em; }
+        .seo-entity-kv { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; margin-bottom: 10px; gap: 10px; }
         .seo-entity-k { color: #9ca3af; flex-shrink: 0; }
-        /* value rendered as a pill */
-        .seo-entity-v {
-          display: inline-block;
-          background: #f0f7f0;
-          color: #0f3320;
-          border: 1px solid #c8dfc8;
-          border-radius: 100px;
-          padding: 4px 14px;
-          font-size: 11.5px;
-          font-weight: 700;
-          text-align: center;
-          white-space: nowrap;
-        }
-        .seo-entity-best {
-          font-size: 12px;
-          color: #2e7d32;
-          font-weight: 600;
-          margin-top: 16px;
-          padding-top: 14px;
-          border-top: 1px solid #f0f0f0;
-          line-height: 1.5;
-        }
+        .seo-entity-v { display: inline-block; background: #f0f7f0; color: ${GREEN}; border: 1px solid #c8dfc8; border-radius: 100px; padding: 4px 14px; font-size: 11.5px; font-weight: 700; text-align: center; white-space: nowrap; }
+        .seo-entity-best { font-size: 12px; color: ${GREEN}; font-weight: 600; margin-top: 16px; padding-top: 14px; border-top: 1px solid #f0f0f0; line-height: 1.5; }
 
-        /* ══════════════════════════════════════
-           TWO ROUTES — icon-card grid (FDI Automatic
-           vs Government Route). Static cards: icon
-           badge, title, and all details rendered as
-           always-visible pill badges (no hover reveal,
-           no click-to-open state). Cards scroll-reveal
-           with stagger on first view only.
-        ══════════════════════════════════════ */
-        .seo-routes-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          margin-bottom: 24px;
-        }
-        .seo-route-card {
-          border-radius: 18px;
-          padding: 24px 22px;
-          opacity: 0;
-          transform: translateY(16px);
-          animation: routeCardIn .55s ease forwards;
-        }
-        @keyframes routeCardIn {
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .seo-route-card-top {
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          margin-bottom: 4px;
-        }
-        .seo-route-icon {
-          width: 42px;
-          height: 42px;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
+        /* ── FDI routes ── */
+        .seo-routes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+        .seo-route-card { border-radius: 18px; padding: 24px 22px; opacity: 0; transform: translateY(16px); animation: routeCardIn .55s ease forwards; }
+        @keyframes routeCardIn { to { opacity: 1; transform: translateY(0); } }
+        .seo-route-card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 4px; }
+        .seo-route-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .seo-route-icon svg { width: 19px; height: 19px; }
         .seo-route-card-headtext { min-width: 0; }
-        .seo-route-route-label {
-          font-size: 10px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          font-weight: 700;
-          margin-bottom: 6px;
-        }
-        .seo-route-title {
-          font-size: 15px;
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.35;
-        }
-        /* Static pill list — always visible, no reveal animation */
-        .seo-route-pills {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          margin-top: 14px;
-        }
-        .seo-route-pill {
-          display: inline-flex;
-          align-items: center;
-          font-size: 12px;
-          font-weight: 600;
-          line-height: 1.4;
-          padding: 7px 14px;
-          border-radius: 100px;
-          background: rgba(255,255,255,.7);
-          border: 1px solid rgba(0,0,0,0.08);
-          color: #374151;
-        }
-        .seo-fdi-warning {
-          margin-top: 14px;
-          background: #fef3c7;
-          border-radius: 7px;
-          padding: 8px 12px;
-          font-size: 12px;
-          color: #92400e;
-          font-weight: 600;
-        }
-        @media (max-width: 680px) {
-          .seo-routes-grid { grid-template-columns: 1fr; }
-        }
+        .seo-route-route-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+        .seo-route-title { font-size: 15px; font-weight: 700; color: #111; line-height: 1.35; }
+        .seo-route-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .seo-route-pill { display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; line-height: 1.4; padding: 7px 14px; border-radius: 100px; background: rgba(255,255,255,.7); border: 1px solid rgba(0,0,0,0.08); color: #374151; }
+        .seo-fdi-warning { margin-top: 14px; background: #fef3c7; border-radius: 7px; padding: 8px 12px; font-size: 12px; color: #92400e; font-weight: 600; }
+        @media (max-width: 680px) { .seo-routes-grid { grid-template-columns: 1fr; } }
 
-        /* ── Sector table (legacy, kept for other pages) ── */
-        .seo-sector-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .seo-sector-table {
-          background: #fff;
-          border: 1px solid #e8e8e8;
-          border-radius: 14px;
-          overflow: hidden;
-          margin-bottom: 8px;
-          min-width: 560px;
-        }
-        .seo-sector-header {
-          display: grid;
-          grid-template-columns: 1.6fr 1fr 1fr;
-          background: #0d1117;
-          padding: 12px 20px;
-        }
-        .seo-sector-header-text {
-          font-size: 10.5px;
-          font-weight: 700;
-          color: rgba(255,255,255,.55);
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-        .seo-sector-row {
-          display: grid;
-          grid-template-columns: 1.6fr 1fr 1fr;
-          padding: 12px 20px;
-          border-top: 1px solid #f0f0f0;
-          transition: background .18s;
-        }
-        .seo-sector-row:hover { background: #f9fafb; }
-        .seo-sector-name { font-size: 13px; color: #0d1117; font-weight: 500; }
-        .seo-sector-cap { font-size: 13px; font-weight: 700; }
-        .seo-sector-route { font-size: 12.5px; color: #6b7280; }
-
-        /* ══════════════════════════════════════
-           ADVISORY FLIP CARDS — 3-col grid.
-           Click any card to flip it and reveal
-           the full description on the back.
-        ══════════════════════════════════════ */
-        .seo-advisory-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-        }
-        .seo-advisory-flipper {
-          perspective: 1100px;
-          height: 220px;
-          cursor: pointer;
-        }
-        .seo-advisory-inner {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          transform-style: preserve-3d;
-          transition: transform .5s cubic-bezier(.4,0,.2,1);
-        }
-        .seo-advisory-flipper.is-flipped .seo-advisory-inner {
-          transform: rotateY(180deg);
-        }
-        .seo-advisory-front,
-        .seo-advisory-back {
-          position: absolute;
-          inset: 0;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-          border-radius: 18px;
-          padding: 24px 22px;
-          display: flex;
-          flex-direction: column;
-        }
-        .seo-advisory-front {
-          background: #f5f5f0;
-          border: 1.5px solid #e4e0d8;
-          justify-content: space-between;
-        }
-        .seo-advisory-flipper:hover .seo-advisory-front {
-          border-color: #2e7d32;
-          background: #f0f7f0;
-        }
-        .seo-advisory-back {
-          background: #0f3320;
-          border: 1.5px solid #0f3320;
-          transform: rotateY(180deg);
-          justify-content: space-between;
-        }
-        .seo-advisory-num {
-          font-size: 26px;
-          font-weight: 800;
-          color: #d0d9c8;
-          letter-spacing: -0.04em;
-          line-height: 1;
-          margin-bottom: auto;
-        }
-        .seo-advisory-front-title {
-          font-size: 15px;
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.3;
-          letter-spacing: -0.01em;
-        }
-        .seo-advisory-flip-hint {
-          font-size: 10.5px;
-          color: #9ca3af;
-          margin-top: 10px;
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
+        /* ── Advisory flip cards ── */
+        .seo-advisory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .seo-advisory-flipper { perspective: 1100px; height: 220px; cursor: pointer; }
+        .seo-advisory-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+        .seo-advisory-flipper.is-flipped .seo-advisory-inner { transform: rotateY(180deg); }
+        .seo-advisory-front, .seo-advisory-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; }
+        .seo-advisory-front { background: #f5f5f0; border: 1.5px solid #e4e0d8; justify-content: space-between; }
+        .seo-advisory-flipper:hover .seo-advisory-front { border-color: ${GREEN}; background: #f0f7f0; }
+        .seo-advisory-back { background: ${GREEN}; border: 1.5px solid ${GREEN}; transform: rotateY(180deg); justify-content: space-between; }
+        .seo-advisory-num { font-size: 26px; font-weight: 800; color: #d0d9c8; letter-spacing: -0.04em; line-height: 1; margin-bottom: auto; }
+        .seo-advisory-front-title { font-size: 15px; font-weight: 700; color: #111; line-height: 1.3; letter-spacing: -0.01em; }
+        .seo-advisory-flip-hint { font-size: 10.5px; color: #9ca3af; margin-top: 10px; display: flex; align-items: center; gap: 4px; }
         .seo-advisory-flip-hint svg { width: 11px; height: 11px; }
-        .seo-advisory-back-title {
-          font-size: 13px;
-          font-weight: 700;
-          color: rgba(255,255,255,.9);
-          margin-bottom: 10px;
-          line-height: 1.3;
-        }
-        .seo-advisory-back-desc {
-          font-size: 12px;
-          color: rgba(255,255,255,.72);
-          line-height: 1.72;
-          flex: 1;
-        }
-        .seo-advisory-back-hint {
-          font-size: 10.5px;
-          color: rgba(255,255,255,.35);
-          margin-top: 12px;
-        }
-        @media (max-width: 860px) {
-          .seo-advisory-grid { grid-template-columns: repeat(2, 1fr); }
-          .seo-advisory-flipper { height: 200px; }
-        }
-        @media (max-width: 560px) {
-          .seo-advisory-grid { grid-template-columns: 1fr; }
-          .seo-advisory-flipper { height: 180px; }
-        }
+        .seo-advisory-back-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.9); margin-bottom: 10px; line-height: 1.3; }
+        .seo-advisory-back-desc { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.72; flex: 1; }
+        .seo-advisory-back-hint { font-size: 10.5px; color: rgba(255,255,255,.35); margin-top: 12px; }
+        @media (max-width: 860px) { .seo-advisory-grid { grid-template-columns: repeat(2, 1fr); } .seo-advisory-flipper { height: 200px; } }
+        @media (max-width: 560px) { .seo-advisory-grid { grid-template-columns: 1fr; } .seo-advisory-flipper { height: 180px; } }
 
-        /* ── Who is it for list ── */
-        .seo-audience-item {
-          display: grid;
-          grid-template-columns: 280px 1fr;
-          gap: 28px;
-          padding: 22px 0;
-          border-bottom: 1px solid #f0f0f0;
-        }
+        /* ── Audience list ── */
+        .seo-audience-item { display: grid; grid-template-columns: 280px 1fr; gap: 28px; padding: 22px 0; border-bottom: 1px solid #f0f0f0; }
         .seo-audience-item:first-child { border-top: 1px solid #f0f0f0; }
-        .seo-audience-label { font-size: 14.5px; font-weight: 700; color: #0d1117; line-height: 1.4; }
+        .seo-audience-label { font-size: 14.5px; font-weight: 700; color: #111; line-height: 1.4; }
         .seo-audience-desc { font-size: 13.5px; color: #6b7280; line-height: 1.75; font-weight: 300; }
 
-        /* ══════════════════════════════════════
-           TWO TYPES OF CLIENTS (NRI) — animated:
-           scroll-reveal per column, hover lift, and
-           each point staggers in on reveal. Clicking a
-           column's tag toggles an "active" emphasis
-           state (subtle scale + border glow) so the
-           section feels interactive, not just static.
-        ══════════════════════════════════════ */
-        .seo-nri-compare {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          border-radius: 18px;
-          overflow: hidden;
-          border: 1px solid #e0e0e0;
-          box-shadow: 0 4px 20px rgba(13,17,23,.05);
-        }
-        .seo-nri-col {
-          padding: 32px 28px;
-          background: #fff;
-          opacity: 0;
-          transform: translateY(18px);
-          animation: nriColIn .6s ease forwards;
-          transition: background .25s ease, box-shadow .25s ease;
-          cursor: pointer;
-          position: relative;
-        }
-        @keyframes nriColIn {
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .seo-nri-col:first-child {
-          border-right: 1px solid #e8e8e8;
-          background: #f7faf7;
-        }
+        /* ── NRI compare ── */
+        .seo-nri-compare { display: grid; grid-template-columns: 1fr 1fr; border-radius: 18px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 4px 20px rgba(13,17,23,.05); }
+        .seo-nri-col { padding: 32px 28px; background: #fff; opacity: 0; transform: translateY(18px); animation: nriColIn .6s ease forwards; transition: background .25s ease, box-shadow .25s ease; cursor: pointer; position: relative; }
+        @keyframes nriColIn { to { opacity: 1; transform: translateY(0); } }
+        .seo-nri-col:first-child { border-right: 1px solid #e8e8e8; background: #f7faf7; }
         .seo-nri-col:hover { background: #eef6ee; }
-        .seo-nri-col.is-active {
-          box-shadow: inset 0 0 0 2px #2e7d32;
-          background: #eef6ee;
-        }
-        .seo-nri-col-tag {
-          display: inline-block;
-          font-size: 9.5px;
-          font-weight: 700;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: #2e7d32;
-          background: #e8f5e9;
-          padding: 5px 14px;
-          border-radius: 100px;
-          margin-bottom: 16px;
-          transition: background .25s, color .25s, transform .25s;
-        }
-        .seo-nri-col.is-active .seo-nri-col-tag {
-          background: #2e7d32;
-          color: #fff;
-          transform: scale(1.05);
-        }
-        .seo-nri-col-title {
-          font-size: 18px;
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.25;
-          margin-bottom: 10px;
-          letter-spacing: -0.01em;
-        }
-        .seo-nri-col-desc {
-          font-size: 13px;
-          color: #6b7280;
-          line-height: 1.7;
-          font-weight: 400;
-          margin-bottom: 20px;
-          padding-bottom: 20px;
-          border-bottom: 1px solid #eee;
-        }
-        .seo-nri-point {
-          display: flex;
-          gap: 10px;
-          align-items: flex-start;
-          margin-bottom: 10px;
-          opacity: 0;
-          transform: translateX(-8px);
-          animation: nriPointIn .45s ease forwards;
-        }
-        @keyframes nriPointIn {
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .seo-nri-check {
-          width: 18px; height: 18px;
-          border-radius: 50%;
-          background: #e8f5e9;
-          color: #2e7d32;
-          display: flex; align-items: center; justify-content: center;
-          flex-shrink: 0;
-          margin-top: 1px;
-          transition: background .25s, color .25s, transform .25s;
-        }
-        .seo-nri-col:hover .seo-nri-check {
-          background: #2e7d32;
-          color: #fff;
-          transform: scale(1.1);
-        }
+        .seo-nri-col.is-active { box-shadow: inset 0 0 0 2px ${GREEN}; background: #eef6ee; }
+        .seo-nri-col-tag { display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: ${GREEN}; background: #e8f5e9; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; transition: background .25s, color .25s, transform .25s; }
+        .seo-nri-col.is-active .seo-nri-col-tag { background: ${GREEN}; color: #fff; transform: scale(1.05); }
+        .seo-nri-col-title { font-size: 18px; font-weight: 700; color: #111; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.01em; }
+        .seo-nri-col-desc { font-size: 13px; color: #6b7280; line-height: 1.7; font-weight: 400; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .seo-nri-point { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; opacity: 0; transform: translateX(-8px); animation: nriPointIn .45s ease forwards; }
+        @keyframes nriPointIn { to { opacity: 1; transform: translateX(0); } }
+        .seo-nri-check { width: 18px; height: 18px; border-radius: 50%; background: #e8f5e9; color: ${GREEN}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: background .25s, color .25s, transform .25s; }
+        .seo-nri-col:hover .seo-nri-check { background: ${GREEN}; color: #fff; transform: scale(1.1); }
         .seo-nri-check svg { width: 10px; height: 10px; }
-        .seo-nri-point-text {
-          font-size: 13px;
-          color: #374151;
-          line-height: 1.55;
-          font-weight: 400;
-        }
-        @media (max-width: 680px) {
-          .seo-nri-compare { grid-template-columns: 1fr; }
-          .seo-nri-col:first-child { border-right: none; border-bottom: 1px solid #e8e8e8; }
-        }
+        .seo-nri-point-text { font-size: 13px; color: #374151; line-height: 1.55; font-weight: 400; }
+        @media (max-width: 680px) { .seo-nri-compare { grid-template-columns: 1fr; } .seo-nri-col:first-child { border-right: none; border-bottom: 1px solid #e8e8e8; } }
 
-        /* ══════════════════════════════════════
-           INSTRUMENT CARDS — 2-per-row flip cards.
-           Front: name + badge. Back: description +
-           FEMA/Tax meta. Click to flip.
-        ══════════════════════════════════════ */
-        .seo-instrument-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 18px;
-          margin-bottom: 8px;
-        }
-        .seo-instrument-flipper {
-          perspective: 1200px;
-          height: 260px;
-          cursor: pointer;
-        }
-        .seo-instrument-inner {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          transform-style: preserve-3d;
-          transition: transform .55s cubic-bezier(.4,0,.2,1);
-        }
-        .seo-instrument-flipper.is-flipped .seo-instrument-inner {
-          transform: rotateY(180deg);
-        }
-        .seo-instrument-front,
-        .seo-instrument-back {
-          position: absolute;
-          inset: 0;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-          border-radius: 18px;
-          padding: 26px 24px;
-          display: flex;
-          flex-direction: column;
-        }
-        .seo-instrument-front {
-          background: #fff;
-          border: 1.5px solid #e4e4e4;
-          justify-content: space-between;
-          transition: border-color .25s;
-        }
-        .seo-instrument-flipper:hover .seo-instrument-front {
-          border-color: #b8d4b8;
-        }
-        .seo-instrument-back {
-          background: #0f3320;
-          border: 1.5px solid #0f3320;
-          transform: rotateY(180deg);
-          justify-content: space-between;
-        }
-        .seo-instrument-badge {
-          display: inline-block;
-          padding: 5px 14px;
-          border-radius: 100px;
-          font-size: 10.5px;
-          font-weight: 700;
-          color: #fff;
-          margin-bottom: 14px;
-          align-self: flex-start;
-        }
-        .seo-instrument-name {
-          font-size: 15px;
-          font-weight: 700;
-          color: #0d1117;
-          line-height: 1.3;
-          letter-spacing: -0.01em;
-          flex: 1;
-        }
-        .seo-instrument-flip-hint {
-          font-size: 11px;
-          color: #9ca3af;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          margin-top: 16px;
-        }
+        /* ── Instrument cards ── */
+        .seo-instrument-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 8px; }
+        .seo-instrument-flipper { perspective: 1200px; height: 260px; cursor: pointer; }
+        .seo-instrument-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4,0,.2,1); }
+        .seo-instrument-flipper.is-flipped .seo-instrument-inner { transform: rotateY(180deg); }
+        .seo-instrument-front, .seo-instrument-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; }
+        .seo-instrument-front { background: #fff; border: 1.5px solid #e4e4e4; justify-content: space-between; transition: border-color .25s; }
+        .seo-instrument-flipper:hover .seo-instrument-front { border-color: #b8d4b8; }
+        .seo-instrument-back { background: ${GREEN}; border: 1.5px solid ${GREEN}; transform: rotateY(180deg); justify-content: space-between; }
+        .seo-instrument-badge { display: inline-block; padding: 5px 14px; border-radius: 100px; font-size: 10.5px; font-weight: 700; color: #fff; margin-bottom: 14px; align-self: flex-start; }
+        .seo-instrument-name { font-size: 15px; font-weight: 700; color: #111; line-height: 1.3; letter-spacing: -0.01em; flex: 1; }
+        .seo-instrument-flip-hint { font-size: 11px; color: #9ca3af; display: flex; align-items: center; gap: 5px; margin-top: 16px; }
         .seo-instrument-flip-hint svg { width: 12px; height: 12px; }
-        /* Back side */
-        .seo-instrument-back-desc {
-          font-size: 12.5px;
-          color: rgba(255,255,255,.82);
-          line-height: 1.7;
-          flex: 1;
-        }
-        .seo-instrument-back-meta {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
-          margin-top: 16px;
-        }
-        .seo-instrument-meta {
-          background: rgba(255,255,255,.1);
-          border-radius: 10px;
-          padding: 10px 12px;
-        }
-        .seo-instrument-meta-label {
-          font-size: 9px;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          color: rgba(255,255,255,.5);
-          font-weight: 700;
-          margin-bottom: 4px;
-        }
-        .seo-instrument-meta-val {
-          font-size: 11.5px;
-          color: rgba(255,255,255,.9);
-          line-height: 1.4;
-        }
-        .seo-instrument-back-hint {
-          font-size: 11px;
-          color: rgba(255,255,255,.4);
-          text-align: center;
-          margin-top: 12px;
-        }
-        @media (max-width: 680px) {
-          .seo-instrument-grid { grid-template-columns: 1fr; }
-          .seo-instrument-flipper { height: 280px; }
-        }
+        .seo-instrument-back-desc { font-size: 12.5px; color: rgba(255,255,255,.82); line-height: 1.7; flex: 1; }
+        .seo-instrument-back-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+        .seo-instrument-meta { background: rgba(255,255,255,.1); border-radius: 10px; padding: 10px 12px; }
+        .seo-instrument-meta-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 700; margin-bottom: 4px; }
+        .seo-instrument-meta-val { font-size: 11.5px; color: rgba(255,255,255,.9); line-height: 1.4; }
+        .seo-instrument-back-hint { font-size: 11px; color: rgba(255,255,255,.4); text-align: center; margin-top: 12px; }
+        @media (max-width: 680px) { .seo-instrument-grid { grid-template-columns: 1fr; } .seo-instrument-flipper { height: 280px; } }
 
-        /* ── Angel tax box ── */
-        .seo-angel-box {
-          background: #fffbf5;
-          border: 1px solid #fed7aa;
-          border-radius: 14px;
-          padding: 22px 24px;
-          margin-top: 18px;
-        }
+        /* ── Angel tax ── */
+        .seo-angel-box { background: #fffbf5; border: 1px solid #fed7aa; border-radius: 14px; padding: 22px 24px; margin-top: 18px; }
         .seo-angel-title { font-size: 13.5px; font-weight: 700; color: #92400e; margin-bottom: 12px; }
-        .seo-angel-point {
-          display: flex;
-          gap: 10px;
-          margin-bottom: 8px;
-          align-items: flex-start;
-        }
+        .seo-angel-point { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
         .seo-angel-check { color: #b45309; flex-shrink: 0; margin-top: 2px; }
         .seo-angel-check svg { width: 12px; height: 12px; }
         .seo-angel-text { font-size: 13px; color: #78350f; line-height: 1.65; }
 
         /* ── CTA Strip ── */
         .seo-cta-strip {
-          background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
-          border-radius: 20px;
-          padding: 44px 48px;
-          margin-top: 64px;
-          display: grid;
-          grid-template-columns: 1fr auto;
-          gap: 36px;
-          align-items: center;
-          position: relative;
-          overflow: hidden;
+          background: linear-gradient(135deg, ${GREEN} 0%, #2e7d32 100%);
+          border-radius: 20px; padding: 44px 48px; margin-top: 64px;
+          display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center;
+          position: relative; overflow: hidden;
         }
-        .seo-cta-strip::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-          background-size: 48px 48px;
-          pointer-events: none;
-        }
-        .seo-cta-title {
-          font-size: clamp(20px, 2.5vw, 32px);
-          font-weight: 700;
-          color: #fff;
-          margin-bottom: 10px;
-          line-height: 1.2;
-          letter-spacing: -0.01em;
-          position: relative;
-          z-index: 1;
-        }
-        .seo-cta-desc {
-          font-size: 14px;
-          color: rgba(255,255,255,.6);
-          line-height: 1.7;
-          position: relative;
-          z-index: 1;
-        }
-        .seo-cta-actions {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          flex-shrink: 0;
-          position: relative;
-          z-index: 1;
-        }
-        .seo-wa-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          background: #25D366;
-          color: #fff;
-          padding: 13px 22px;
-          border-radius: 9px;
-          font-size: 13.5px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: background .2s;
-        }
+        .seo-cta-strip::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+        .seo-cta-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.01em; position: relative; z-index: 1; }
+        .seo-cta-desc { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.7; position: relative; z-index: 1; }
+        .seo-cta-actions { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; position: relative; z-index: 1; }
+        .seo-btn-primary { background: ${GREEN}; color: #fff; padding: 13px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: background .2s, transform .15s; letter-spacing: .01em; text-decoration: none; display: inline-block; }
+        .seo-btn-primary:hover { background: #1b5e20; transform: translateY(-1px); }
+        .seo-wa-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: #fff; padding: 13px 22px; border-radius: 9px; font-size: 13.5px; font-weight: 600; text-decoration: none; transition: background .2s; }
         .seo-wa-btn:hover { background: #1da851; }
 
         /* ── Responsive ── */
         @media (max-width: 900px) {
-          .seo-hero { padding: 100px 0 64px; }
-          .seo-hero-inner { padding: 0 24px; }
           .seo-content-wrap { padding: 60px 24px 80px; }
           .seo-entity-grid { grid-template-columns: 1fr; }
           .seo-routes-grid { grid-template-columns: 1fr; }
           .seo-audience-item { grid-template-columns: 1fr; gap: 8px; }
-          .seo-nri-grid { grid-template-columns: 1fr; }
           .seo-cta-strip { grid-template-columns: 1fr; padding: 32px 28px; }
           .seo-cta-actions { flex-direction: row; flex-wrap: wrap; }
-          .seo-instrument-meta-grid { grid-template-columns: 1fr; }
-          .seo-whatitis-grid { grid-template-columns: 1fr; gap: 16px; }
         }
         @media (max-width: 600px) {
           .seo-content-wrap { padding: 40px 16px 56px; }
@@ -1957,15 +646,11 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           .seo-section-title { font-size: 22px; }
           .seo-iconcard { padding: 22px 18px 20px; }
           .seo-cta-strip { padding: 28px 20px; margin-top: 44px; }
-          .seo-story { padding: 20px 16px; }
           .seo-faqcard-btn { padding: 16px 16px; }
-          .seo-mistake { padding: 16px 16px; grid-template-columns: 24px 1fr; }
-          .hv2-hero { padding: 64px 16px 52px !important; }
-          .hv2-title { letter-spacing: -0.025em; }
         }
       `}</style>
 
-      {/* ── HERO (v2) ── */}
+      {/* ── HERO ── */}
       <section className="hv2-hero">
         <div className="hv2-hero-inner">
           {backHref && (
@@ -2017,7 +702,13 @@ function SEOSection({ label, title, children }) {
   return (
     <div className="seo-section reveal">
       {label && <div className="seo-section-eyebrow">{label}</div>}
-      {title && <h2 className="seo-section-title">{title}</h2>}
+      {title && (
+        <h2 className="seo-section-title">
+          {typeof title === 'string'
+            ? title
+            : title}
+        </h2>
+      )}
       {children}
     </div>
   );
@@ -2028,33 +719,40 @@ function SEOProseP({ children }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   Special-picks reveal list — vertical tracking
+   Special-picks reveal list
+   Layout: 2-col grid. Left = list. Right = position:relative
+   container that is sized to match the list height via JS.
+   The detail card sits position:absolute inside the right
+   column, with `top` = the active row's offsetTop so it
+   snaps flush with the selected item.
+   Mobile (≤860px): right col is static, card renders below.
 ══════════════════════════════════════════════════════ */
 function SEOPicksReveal({ items }) {
   const [active, setActive] = useState(0);
-  const [offset, setOffset] = useState(0);
+  const [cardTop, setCardTop] = useState(8);   /* 8px = list padding-top */
+  const [rightH, setRightH] = useState(200);  /* fallback height */
   const [progKey, setProgKey] = useState(0);
   const listRef = useRef(null);
   const rowRefs = useRef([]);
-  const detailRef = useRef(null);
   const timerRef = useRef(null);
 
   const n = items.length;
   const safeActive = Math.min(active, n - 1);
   const current = items[safeActive];
 
+  /* auto-advance */
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setActive(prev => (prev + 1) % n);
-      setProgKey(k => k + 1);
+      setActive(prev => {
+        const next = (prev + 1) % n;
+        setProgKey(k => k + 1);
+        return next;
+      });
     }, 5000);
   };
 
-  useEffect(() => {
-    startTimer();
-    return () => clearInterval(timerRef.current);
-  }, [n]);
+  useEffect(() => { startTimer(); return () => clearInterval(timerRef.current); }, [n]);
 
   const handleClick = (i) => {
     setActive(i);
@@ -2062,29 +760,25 @@ function SEOPicksReveal({ items }) {
     startTimer();
   };
 
-  /* ── Align detail card center to active row center ── */
+  /* recompute card top whenever active changes or on resize */
   useEffect(() => {
-    const align = () => {
-      if (window.innerWidth <= 860) { setOffset(0); return; }
+    const update = () => {
       const row = rowRefs.current[safeActive];
       const list = listRef.current;
-      const detail = detailRef.current;
-      if (!row || !list || !detail) return;
-      const rowTop = row.offsetTop;
-      const rowHeight = row.offsetHeight;
-      const detailHeight = detail.offsetHeight;
-      const targetOffset = rowTop + (rowHeight / 2) - (detailHeight / 2);
-      const maxOffset = Math.max(0, list.scrollHeight - detailHeight);
-      setOffset(Math.max(0, Math.min(targetOffset, maxOffset)));
+      if (!row || !list) return;
+      setCardTop(row.offsetTop);
+      setRightH(list.offsetHeight);
     };
-    const raf = requestAnimationFrame(() => requestAnimationFrame(align));
-    window.addEventListener('resize', align);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', align); };
+    /* double-raf so layout is painted */
+    const id = requestAnimationFrame(() => requestAnimationFrame(update));
+    window.addEventListener('resize', update);
+    return () => { cancelAnimationFrame(id); window.removeEventListener('resize', update); };
   }, [safeActive]);
 
   return (
     <div className="seo-picks-wrap">
-      {/* LEFT — list */}
+
+      {/* LEFT — clickable list */}
       <div className="seo-picks-list" ref={listRef}>
         {items.map((item, i) => (
           <button
@@ -2093,7 +787,7 @@ function SEOPicksReveal({ items }) {
             ref={el => { rowRefs.current[i] = el; }}
             className={`seo-pick-row${safeActive === i ? ' is-active' : ''}`}
             onClick={() => handleClick(i)}
-            aria-expanded={safeActive === i}
+            aria-pressed={safeActive === i}
           >
             <div className="seo-pick-main">
               <div className="seo-pick-label">{item.label}</div>
@@ -2104,33 +798,31 @@ function SEOPicksReveal({ items }) {
         ))}
       </div>
 
-      {/* RIGHT — detail card, smooth vertical tracking */}
-      <div
-        className="seo-picks-detail-col"
-        style={{
-          transform: `translateY(${offset}px)`,
-          transition: 'transform 0.45s cubic-bezier(0.34, 1.26, 0.64, 1)',
-          willChange: 'transform',
-          alignSelf: 'flex-start',
-        }}
-      >
-        <div className="seo-picks-detail" ref={detailRef}>
-          <div className="seo-picks-detail-content" key={safeActive}>
-            <div className="seo-picks-detail-eyebrow">{current.eyebrow || current.label}</div>
-            <h3 className="seo-picks-detail-title">{current.title}</h3>
-            <p className="seo-picks-detail-desc">{current.description}</p>
-          </div>
-          <div className="seo-picks-progress">
-            <div className="seo-picks-progress-bar" key={progKey} />
+      {/* RIGHT — relative container sized to list height; card floats at row top */}
+      <div className="seo-picks-right" style={{ minHeight: rightH }}>
+        <div
+          className="seo-picks-detail-col"
+          style={{ top: cardTop, transition: 'top 0.36s cubic-bezier(0.34,1.18,0.64,1)' }}
+        >
+          <div className="seo-picks-detail">
+            <div className="seo-picks-detail-content" key={safeActive}>
+              <div className="seo-picks-detail-eyebrow">{current.eyebrow || current.label}</div>
+              <h3 className="seo-picks-detail-title">{current.title}</h3>
+              <p className="seo-picks-detail-desc">{current.description}</p>
+            </div>
+            <div className="seo-picks-progress">
+              <div className="seo-picks-progress-bar" key={progKey} />
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   );
 }
 
 /* ══════════════════════════════════════════════════════
-   SECTOR CAPS — animated row list (no arrow).
+   SECTOR CAPS LIST
 ══════════════════════════════════════════════════════ */
 function SEOSectorCapsList({ items }) {
   const [active, setActive] = useState(0);
@@ -2178,9 +870,13 @@ function SEOSectorCapsList({ items }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   PYRAMID PROCESS — deep indigo shades based on #3a2d72
+   STEP-BY-STEP PROCESS — vertical timeline
+   Same layout as setup page second file:
+   numbered node + card, click to activate.
+   First step active by default.
 ══════════════════════════════════════════════════════ */
 function SEOSteps({ steps }) {
+  const [activeStep, setActiveStep] = useState(0);
   const wrapRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -2189,49 +885,39 @@ function SEOSteps({ steps }) {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  const n = steps.length;
-  /* gradient shades all derived from #3a2d72 — light to dark as bars widen */
-  const shades = [
-    'linear-gradient(135deg, #3a2d72 0%, #4e3ea0 100%)',
-    'linear-gradient(135deg, #342868 0%, #4a3898 100%)',
-    'linear-gradient(135deg, #2e2360 0%, #44328e 100%)',
-    'linear-gradient(135deg, #281e56 0%, #3e2c84 100%)',
-    'linear-gradient(135deg, #221a4c 0%, #382678 100%)',
-    'linear-gradient(135deg, #1c1640 0%, #32206c 100%)',
-  ];
-  const minWidth = 42;
-  const maxWidth = 100;
-
   return (
-    <div className="seo-pyramid" ref={wrapRef}>
-      {steps.map((s, i) => {
-        const width = n > 1 ? minWidth + ((maxWidth - minWidth) * i) / (n - 1) : maxWidth;
+    <div className="seo-timeline-wrap" ref={wrapRef}>
+      <div className="seo-timeline-line" />
+      {steps.map((step, i) => {
+        const isActive = activeStep === i;
         return (
           <div
             key={i}
-            className="seo-pyramid-row"
+            className={`seo-timeline-row${isActive ? ' is-active' : ''}`}
+            onClick={() => setActiveStep(i)}
             style={{
               opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(14px)',
-              transitionDelay: visible ? `${i * 0.09}s` : '0s',
+              transform: visible ? 'none' : 'translateY(14px)',
+              transition: `opacity .45s ease ${i * 0.07}s, transform .45s ease ${i * 0.07}s`,
             }}
           >
-            <div
-              className="seo-pyramid-bar"
-              style={{ '--bar-width': `${width}%`, background: shades[i % shades.length] }}
-            >
-              <span className="seo-pyramid-num">{String(i + 1).padStart(2, '0')}</span>
-              <span className="seo-pyramid-title">{s.title}</span>
+            <div className="seo-timeline-node">
+              {String(i + 1).padStart(2, '0')}
             </div>
-            <div className="seo-pyramid-desc">
-              {s.time && <span className="seo-pyramid-time">{s.time}</span>}
-              <p>{s.desc}</p>
+            <div className="seo-timeline-card">
+              <div className="seo-timeline-card-top">
+                <span className="seo-timeline-card-title">{step.title}</span>
+                {step.time && (
+                  <span className="seo-timeline-card-time">{step.time}</span>
+                )}
+              </div>
+              <p className="seo-timeline-card-desc">{step.desc}</p>
             </div>
           </div>
         );
@@ -2258,9 +944,7 @@ function SEOWhatItIs({ eyebrow, title, paragraphs }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   SEOInfoCards — original card grid style
-   Used for "What We Handle", "Complete Incorporation" etc.
-   NOT used for Cost & Timeline (that uses SEOCostTable).
+   INFO CARDS
 ══════════════════════════════════════════════════════ */
 function SEOInfoCards({ items, singleCol, cols }) {
   const wrapRef = useRef(null);
@@ -2309,11 +993,7 @@ function SEOInfoCards({ items, singleCol, cols }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   SEOCostTable — table-style cost & timeline layout
-   Equal-width animated pills, hover underline on title,
-   dedicated dark-green total row.
-   items: [{ title, desc, category?, value }]
-   Last item is always rendered as the "Total" row.
+   COST TABLE (kept for any page that uses it directly)
 ══════════════════════════════════════════════════════ */
 function SEOCostTable({ items }) {
   const wrapRef = useRef(null);
@@ -2337,14 +1017,11 @@ function SEOCostTable({ items }) {
 
   return (
     <div ref={wrapRef} className="seo-cost-table">
-      {/* header */}
       <div className="seo-cost-table-head">
         <span>Item</span>
         <span>Details</span>
         <span>Amount</span>
       </div>
-
-      {/* rows */}
       {rows.map((it, i) => {
         const isTime = isTimePill(it.value);
         return (
@@ -2368,8 +1045,6 @@ function SEOCostTable({ items }) {
           </div>
         );
       })}
-
-      {/* total row */}
       <div
         className="seo-cost-total-row"
         style={{
@@ -2388,6 +1063,8 @@ function SEOCostTable({ items }) {
   );
 }
 
+/* SEOPricingCards removed — PricingSection imported from @/app/pricing is used instead */
+
 /* Small stat strip */
 function SEOStatRow({ stats }) {
   return (
@@ -2403,7 +1080,7 @@ function SEOStatRow({ stats }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   INSTRUMENT FLIP CARDS — 2×2 grid.
+   INSTRUMENT FLIP CARDS
 ══════════════════════════════════════════════════════ */
 function SEOInstrumentCards({ items }) {
   const [flipped, setFlipped] = useState(null);
@@ -2457,8 +1134,7 @@ function SEOInstrumentCards({ items }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   ADVISORY FLIP CARDS — click to flip and see description.
-   3-col grid, beige front / dark green back.
+   ADVISORY FLIP CARDS
 ══════════════════════════════════════════════════════ */
 function SEOAdvisoryCarousel({ items }) {
   const [flipped, setFlipped] = useState(null);
@@ -2502,7 +1178,7 @@ function SEOAdvisoryCarousel({ items }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   MISTAKES — animated accordion, click to expand
+   MISTAKES
 ══════════════════════════════════════════════════════ */
 function SEOMistakes({ items }) {
   const [open, setOpen] = useState(null);
@@ -2535,7 +1211,7 @@ function SEOMistakes({ items }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   FAQ cards
+   FAQ
 ══════════════════════════════════════════════════════ */
 function SEOFAQs({ items }) {
   const [open, setOpen] = useState(null);
@@ -2561,6 +1237,9 @@ function SEOFAQs({ items }) {
   );
 }
 
+/* ══════════════════════════════════════════════════════
+   CLIENT STORY
+══════════════════════════════════════════════════════ */
 function SEOClientStory({ flag, region, headline, challenge, outcome, proof }) {
   const [vis, setVis] = useState(false);
   const ref = useRef(null);
@@ -2596,6 +1275,9 @@ function SEOClientStory({ flag, region, headline, challenge, outcome, proof }) {
   );
 }
 
+/* ══════════════════════════════════════════════════════
+   CTA STRIP
+══════════════════════════════════════════════════════ */
 function SEOCTAStrip({ setPage }) {
   return (
     <div className="seo-cta-strip reveal">
@@ -2604,7 +1286,7 @@ function SEOCTAStrip({ setPage }) {
         <p className="seo-cta-desc">Expert team reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.</p>
       </div>
       <div className="seo-cta-actions">
-        <button className="seo-btn-primary" style={{ background: '#fff', color: '#1b5e20' }}
+        <button className="seo-btn-primary" style={{ background: '#fff', color: GREEN }}
           onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
           Book Free Consultation →
         </button>
@@ -2681,7 +1363,7 @@ function SEOFDIRulesPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="The Two Routes" title="Automatic Route vs. Government Route – the critical distinction">
+      <SEOSection label="The Two Routes" title={<>Automatic Route vs. Government Route —<br /><em>the critical distinction</em></>}>
         <div className="seo-routes-grid" ref={routesWrapRef}>
           {ROUTES_DATA.map((r, i) => (
             <div
@@ -2716,12 +1398,12 @@ function SEOFDIRulesPage({ setPage }) {
         </div>
       </SEOSection>
 
-      <SEOSection label="Sector Caps" title="Key sector FDI limits at a glance">
+      <SEOSection label="Sector Caps" title={<>Key sector FDI limits <em>at a glance</em></>}>
         <SEOSectorCapsList items={SECTOR_CAPS} />
         <p style={{ fontSize: 12.5, color: '#9ca3af', marginTop: 14 }}>This is a simplified summary. FDI policy changes periodically – always verify current rules before proceeding.</p>
       </SEOSection>
 
-      <SEOSection label="FEMA Compliance" title="Mandatory FEMA filings after FDI">
+      <SEOSection label="FEMA Compliance" title={<>Mandatory FEMA filings <em>after FDI</em></>}>
         <SEOSteps steps={[
           { title: "FC-GPR filing", time: "Within 30 days", desc: "Filed with the RBI through the FIRMS portal after shares are allotted to the foreign investor. Declares the FDI amount, shares allotted, and valuation basis." },
           { title: "Valuation certificate", time: "Before allotment", desc: "Shares issued to foreign investors must be valued by a SEBI-registered merchant banker or a Chartered Accountant using accepted pricing methodology." },
@@ -2731,7 +1413,7 @@ function SEOFDIRulesPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="FDI compliance in practice">
+      <SEOSection label="Real Client Example" title={<>FDI compliance <em>in practice</em></>}>
         <SEOClientStory region="Europe · Manufacturing Group · Long-established India entity"
           headline="European manufacturer regularised 3 years of missed FLA Returns"
           challenge="The India subsidiary had been filing its tax returns correctly but had missed FLA Returns for three consecutive years – the finance team in Europe was unaware of this RBI requirement."
@@ -2739,7 +1421,7 @@ function SEOFDIRulesPage({ setPage }) {
           proof="RBI compounding accepted. Zero impact on ongoing operations. FLA now filed on time every year via our retainer." />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="FDI and FEMA mistakes foreign companies make">
+      <SEOSection label="Common Mistakes" title={<>FDI and FEMA mistakes <em>foreign companies make</em></>}>
         <SEOMistakes items={[
           { title: "Investing before confirming the FDI route", desc: "Sending funds to India and allotting shares before confirming the sector is under Automatic Route (or before Government approval for restricted sectors) is a FEMA violation. The penalty is up to 3x the amount of the violation – which can be the entire investment amount." },
           { title: "Using the wrong valuation methodology", desc: "Shares issued to foreign investors at below fair market value are treated as a deemed FDI violation. The valuation certificate must be from a qualified professional and must precede share allotment." },
@@ -2748,7 +1430,7 @@ function SEOFDIRulesPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="FDI and FEMA questions">
+      <SEOSection label="FAQ" title={<>FDI and FEMA <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "Can a foreign company own 100% of an Indian company?", a: "Yes – in most sectors. 100% FDI under the Automatic Route is permitted in manufacturing, IT, most services, and e-commerce (marketplace model). Restricted sectors such as insurance (74% cap), defence (74%), and multi-brand retail (51%) have lower limits." },
           { q: "What is the difference between FEMA and FDI policy?", a: "FDI policy (issued by DPIIT) determines what foreign investment is permitted in which sectors and at what ownership levels. FEMA (administered by RBI) governs how the investment is executed – the forms, timelines, and compliance obligations. Both apply simultaneously and must be complied with." },
@@ -2784,7 +1466,7 @@ function SEOForeignCompanyPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="Your Options" title="Four ways a foreign company can be registered in India">
+      <SEOSection label="Your Options" title={<>Four ways a foreign company <em>can be registered in India</em></>}>
         <div className="seo-entity-grid">
           {[
             { type: "Private Limited Company (WOS)", tax: "25.17%", fdi: "Automatic in most sectors", revenue: "Full commercial", best: "Most foreign companies – full operations, fundraising, hiring" },
@@ -2807,7 +1489,7 @@ function SEOForeignCompanyPage({ setPage }) {
         <p style={{ fontSize: 13, color: '#9ca3af', marginTop: 8 }}>* Most foreign companies choose a Private Limited Company (WOS). Branch and Liaison offices are rarely the right choice without a specific reason.</p>
       </SEOSection>
 
-      <SEOSection label="The Process" title="Step-by-step: how foreign company registration works in India">
+      <SEOSection label="The Process" title={<>Step-by-step: <em>how foreign company registration works</em></>}>
         <SEOSteps steps={[
           { title: "Structure & FDI analysis", time: "Day 1", desc: "We assess your business model, sector, and India objectives to recommend the right entity type and FDI route, including DTAA and PE risk analysis. Free as part of the initial consultation." },
           { title: "Digital Signatures (DSC)", time: "Days 2–3", desc: "All proposed directors require DSCs. For foreign nationals, this requires passport copy, address proof, and notarisation. We handle the filing." },
@@ -2819,7 +1501,7 @@ function SEOForeignCompanyPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="How it works in practice">
+      <SEOSection label="Real Client Example" title={<>How it works <em>in practice</em></>}>
         <SEOClientStory region="USA · SaaS Company · Series B"
           headline="Cloud analytics platform registered in India in 19 days"
           challenge="The company needed an India entity before their first engineering hire arrived in Bangalore. Time pressure was significant – payroll had to be live within the month."
@@ -2827,7 +1509,7 @@ function SEOForeignCompanyPage({ setPage }) {
           proof="TP documentation completed in week 2, before a single hire was made. No audit exposure from day one." />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="What foreign companies get wrong">
+      <SEOSection label="Common Mistakes" title={<>What foreign companies <em>get wrong</em></>}>
         <SEOMistakes items={[
           { title: "Choosing the wrong entity type", desc: "Many foreign companies default to a branch office because it sounds simpler. In practice, a branch pays 40% tax, has restricted revenue activities, and requires RBI approval. A Private Limited Company is almost always better." },
           { title: "Not setting up transfer pricing before the first intercompany transaction", desc: "Transfer pricing documentation is legally required from the first payment between the India entity and its foreign parent. Companies that get this wrong at incorporation face back-audits and penalties up to 2x the underpaid tax." },
@@ -2836,18 +1518,11 @@ function SEOForeignCompanyPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Cost & Timeline" title="What does foreign company registration in India cost?">
-        <SEOCostTable items={[
-          { title: "Government filing fees (MCA + RBI)", category: "Government fees", desc: "Depends on authorised share capital", value: "₹5,000 – ₹15,000" },
-          { title: "Professional fees – incorporation", category: "Professional fees", desc: "Varies by complexity, foreign director requirements", value: "₹50,000 – ₹1,50,000" },
-          { title: "FCGPR + FEMA filing", category: "FEMA compliance", desc: "Included in our engagement", value: "₹25,000 – ₹50,000" },
-          { title: "Transfer pricing policy", category: "Tax advisory", desc: "Strongly recommended at incorporation", value: "₹40,000 – ₹80,000" },
-          { title: "Timeline to completion", category: "Timeline", desc: "Government-approval sectors add 6–12 weeks", value: "19–30 days" },
-          { title: "Typical total – all-in, standard case", category: "Total", desc: "Including TP documentation", value: "₹1.5 – 3 lakhs" },
-        ]} />
+      <SEOSection label="Cost">
+        <PricingSection />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="Frequently asked questions">
+      <SEOSection label="FAQ" title={<>Frequently asked <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "Can a foreign company own 100% of an Indian company?", a: "Yes – in most sectors, 100% FDI is permitted under the Automatic Route. This means no prior Government approval is needed. Restricted sectors (defence, insurance, media) have lower caps. We check FDI eligibility as the first step of every engagement." },
           { q: "Does the company need an Indian director?", a: "Yes. At least one director of the Indian company must be a resident of India (present in India for at least 182 days in the previous calendar year). This can be a nominee director – we can help arrange one if needed." },
@@ -2884,7 +1559,7 @@ function SEOGCCSetupPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="What We Handle" title="Full GCC setup – what's included">
+      <SEOSection label="What We Handle" title={<>Full GCC setup — <em>what's included</em></>}>
         <SEOInfoCards items={[
           { icon: Ic.building, title: "Entity incorporation", desc: "Private Limited Company – SPICe+ filing, MOA/AOA, registered office, PAN, TAN, GSTIN.", value: "14–21 days" },
           { icon: Ic.coins, title: "Cost-plus pricing model", desc: "Intercompany service agreement, cost allocation methodology, benchmarked mark-up, and annual TP documentation.", value: "TP-safe from day one" },
@@ -2895,7 +1570,7 @@ function SEOGCCSetupPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="The Process" title="GCC setup timeline – week by week">
+      <SEOSection label="The Process" title={<>GCC setup timeline — <em>week by week</em></>}>
         <SEOSteps steps={[
           { title: "Structure & pricing design", time: "Week 1", desc: "Entity type, FDI route, cost-plus mark-up methodology, DTAA analysis. Intercompany service agreement drafted." },
           { title: "Incorporation", time: "Weeks 1–3", desc: "SPICe+ filing, Certificate of Incorporation, PAN, TAN, GSTIN. Registered office established. Bank account initiation." },
@@ -2906,7 +1581,7 @@ function SEOGCCSetupPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="GCC setup in practice">
+      <SEOSection label="Real Client Example" title={<>GCC setup <em>in practice</em></>}>
         <SEOClientStory region="Singapore · APAC SaaS · Series C"
           headline="APAC SaaS company scaled to a 40-person GCC in 8 weeks"
           challenge="Company needed to move from 0 to 40 engineers in Pune. Entity, payroll, ESOP trust, cost-plus pricing, and compliance all required simultaneously – with a hard deadline driven by an upcoming fundraising round."
@@ -2914,7 +1589,7 @@ function SEOGCCSetupPage({ setPage }) {
           proof="40-person team fully compliant from hire #1. ESOP plan approved. Zero payroll or FEMA gaps on first audit." />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="What GCC setups get wrong">
+      <SEOSection label="Common Mistakes" title={<>What GCC setups <em>get wrong</em></>}>
         <SEOMistakes items={[
           { title: "Cost-plus mark-up set without benchmarking", desc: "Setting a 10% mark-up without a formal benchmarking study exposes the GCC to transfer pricing adjustment. The mark-up must be comparable to what unrelated parties earn for equivalent services. TNMM benchmarking using CMIE Prowess data is required annually." },
           { title: "ESOP documentation gaps", desc: "Foreign parent ESOPs for Indian employees require FEMA compliance at every stage – grant, vesting, exercise, and remittance. Missing FEMA filings at exercise create compounding liability that can be costly to regularise." },
@@ -2923,7 +1598,7 @@ function SEOGCCSetupPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="GCC setup questions">
+      <SEOSection label="FAQ" title={<>GCC setup <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "What is the typical cost-plus mark-up for a GCC in India?", a: "For technology and analytics GCCs, the arm's length mark-up (operating profit / total costs) typically ranges from 8–15% based on benchmarking studies using CMIE Prowess or TP Catalyst databases. The appropriate mark-up depends on the functions performed, assets used, and risks borne by the India entity." },
           { q: "Can a GCC have employees on the payroll of the India entity and also receive secondees from the foreign parent?", a: "Yes. Many GCCs have a mix of direct India hires and secondees from the foreign parent. Secondees have different tax and FEMA treatment – their costs must be handled separately in the intercompany service agreement and TP documentation." },
@@ -2959,7 +1634,7 @@ function SEOMarketEntryPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="What We Advise On" title="The full scope of India market entry advisory">
+      <SEOSection label="What We Advise On" title={<>The full scope of <em>India market entry advisory</em></>}>
         <SEOAdvisoryCarousel items={[
           { title: "Entity structure selection", desc: "WOS, Branch, Liaison, LLP, JV – the right choice depends on your sector, FDI route, tax objective, and long-term India plans. We model all options before recommending one." },
           { title: "FDI route & FEMA compliance", desc: "Automatic vs Government Route, sector eligibility, investment caps, FEMA filing obligations. Getting the route wrong invalidates the entire investment." },
@@ -2970,7 +1645,7 @@ function SEOMarketEntryPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Who This Is For" title="The companies we work with">
+      <SEOSection label="Who This Is For" title={<>The companies <em>we work with</em></>}>
         <div>
           {[
             { audience: "Foreign companies entering India for the first time", desc: "You've decided to enter India. You need to know which entity to form, which FDI route applies to you, and what your transfer pricing obligations will be. We give you this picture in the first consultation – before any money is committed." },
@@ -2986,7 +1661,7 @@ function SEOMarketEntryPage({ setPage }) {
         </div>
       </SEOSection>
 
-      <SEOSection label="Our Approach" title="How we work – structure before filing">
+      <SEOSection label="Our Approach" title={<>How we work — <em>structure before filing</em></>}>
         <SEOSteps steps={[
           { title: "Free strategy call", time: "Day 1", desc: "We ask about your business model, sector, headcount plans, and intercompany flows. You receive a preliminary structure recommendation and key questions to resolve before incorporation." },
           { title: "Written structure memo", time: "After the call", desc: "A short written summary of our recommendations – entity type, FDI route, DTAA considerations, transfer pricing approach, and next steps. Costs nothing." },
@@ -2996,7 +1671,7 @@ function SEOMarketEntryPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="India market entry questions">
+      <SEOSection label="FAQ" title={<>India market entry <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "When should I start the India market entry advisory process?", a: "Ideally 3–6 months before you plan to have your first India employee or generate your first India revenue. The structural decisions take time to document and execute correctly. Starting late forces shortcuts that create compliance exposure." },
           { q: "What does India market entry advisory cost?", a: "The initial 30-minute consultation is free. A full India entry advisory report – structure, FDI route, DTAA analysis, TP framework, compliance calendar – typically costs ₹75,000–₹1,50,000 depending on complexity. Implementation (incorporation + FEMA + TP documentation) is additional and separately quoted." },
@@ -3050,7 +1725,7 @@ function SEONRIPage({ setPage }) {
       title={<>NRI Company Registration<br /><em>in India – Complete Guide</em></>}
       description="NRIs can incorporate a company in India or invest in an existing one. Two routes, different compliance. FEMA Schedule 4, repatriation rules, and residency transition – explained plainly.">
 
-      <SEOSection label="Two Types of NRI Clients" title="Which situation applies to you?">
+      <SEOSection label="Two Types of NRI Clients" title={<>Which situation <em>applies to you?</em></>}>
         <div className="seo-nri-compare" ref={compareRef}>
           {NRI_COLS.map((c, ci) => (
             <div
@@ -3087,7 +1762,7 @@ function SEONRIPage({ setPage }) {
         </div>
       </SEOSection>
 
-      <SEOSection label="NRI Investment Route" title="How NRI investment in India works – Schedule 4 FEMA">
+      <SEOSection label="NRI Investment Route" title={<>How NRI investment in India works — <em>Schedule 4 FEMA</em></>}>
         <SEOProseP>NRI investment in Indian companies is governed by Schedule 4 of the Foreign Exchange Management (Non-Debt Instruments) Rules, 2019 – not the FDI regulations that apply to foreign companies. This is a separate and simpler route: no RBI FCGPR filing, no valuation certificate requirement, and no sectoral cap complications in most cases.</SEOProseP>
         <SEOProseP>An NRI can invest in an Indian Private Limited Company by subscribing to shares at incorporation or purchasing shares from existing shareholders. The investment must be made from an NRE (Non-Resident External) or FCNR (Foreign Currency Non-Resident) account – not from an NRO account (unless specific conditions are met).</SEOProseP>
         <SEOSteps steps={[
@@ -3098,7 +1773,7 @@ function SEONRIPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="NRI Returning to India" title="FEMA transition – what changes when you return">
+      <SEOSection label="NRI Returning to India" title={<>FEMA transition — <em>what changes when you return</em></>}>
         <SEOInfoCards items={[
           { icon: Ic.building, title: "NRE and FCNR bank accounts", desc: "Must be re-designated as Resident Foreign Currency (RFC) accounts or converted to regular resident savings accounts within a reasonable period (typically within 3 months of becoming a resident)." },
           { icon: Ic.file, title: "Foreign assets declaration", desc: "Existing foreign assets (bank accounts, investments, property) held as an NRI can generally be retained as a resident. However, income from those assets becomes taxable in India from the year of return." },
@@ -3107,7 +1782,7 @@ function SEONRIPage({ setPage }) {
         ]} cols={2} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="NRI setup in practice">
+      <SEOSection label="Real Client Example" title={<>NRI setup <em>in practice</em></>}>
         <SEOClientStory region="USA · NRI Entrepreneur · Returning to India"
           headline="US-based NRI incorporated an India company while still residing abroad"
           challenge="NRI based in the US wanted to start a technology business in India, with 60% shareholding from his US savings (NRE account) and 40% held by his India-based co-founder. Needed correct FEMA route, proper share structure, and US FBAR/PFIC implications considered."
@@ -3115,7 +1790,7 @@ function SEONRIPage({ setPage }) {
           proof="Company operational within 3 weeks. Zero FEMA compliance issues. First angel round closed 6 months later with no structural complications." />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="What NRIs get wrong">
+      <SEOSection label="Common Mistakes" title={<>What NRIs <em>get wrong</em></>}>
         <SEOMistakes items={[
           { title: "Investing through an NRO account instead of NRE/FCNR", desc: "NRI investment in Indian companies must typically come from an NRE (repatriable) account or via inward remittance. Using an NRO account for share subscription requires specific conditions to be met. Getting the source of funds wrong creates a FEMA violation at the point of investment." },
           { title: "Not planning residency transition before returning", desc: "NRIs who return to India without planning the transition often convert NRE accounts too early, lose RNOR tax status benefit, or fail to properly declare foreign assets. The planning should happen 3–6 months before physical return." },
@@ -3124,7 +1799,7 @@ function SEONRIPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="NRI company registration questions">
+      <SEOSection label="FAQ" title={<>NRI company registration <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "Can an NRI be a director of an Indian company while living abroad?", a: "Yes. There is no residency requirement for being a director – only one director needs to be an Indian resident. An NRI can be a director of an Indian company while continuing to reside abroad. They will need a DIN (Director Identification Number) from MCA and a DSC." },
           { q: "What is the difference between NRI investment and FDI in an Indian company?", a: "NRI investment in India follows Schedule 4 of FEMA (Non-Debt Instruments) Rules. It is treated differently from FDI by foreign companies – no RBI FCGPR filing is required, different repatriation rules apply, and no valuation certificate is needed for new incorporations. The distinction matters significantly at future fundraising rounds." },
@@ -3160,7 +1835,7 @@ function SEOPvtLtdPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="Key Advantages" title="Why a Private Limited Company is the right choice">
+      <SEOSection label="Key Advantages" title={<>Why a Private Limited Company <em>is the right choice</em></>}>
         <SEOPicksReveal items={[
           { label: "Liability", title: "Limited liability", description: "Shareholders are liable only for the unpaid amount on their shares. Personal assets are protected from company debts." },
           { label: "Capital", title: "FDI and fundraising ready", description: "Accepts foreign investment under Automatic Route in most sectors. Can issue equity to angel investors and VCs without restriction." },
@@ -3171,7 +1846,7 @@ function SEOPvtLtdPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="The Process" title="How Private Limited Company registration works">
+      <SEOSection label="The Process" title={<>How Private Limited Company <em>registration works</em></>}>
         <SEOSteps steps={[
           { title: "Name reservation", time: "Days 1–2", desc: "We check trademark conflicts, MCA name availability, and regulatory restrictions. Name reserved through RUN. We advise on the MOA objects clause." },
           { title: "Digital Signatures (DSC)", time: "Days 2–3", desc: "All proposed directors require DSCs. For Indian nationals, this takes 1–2 working days. For foreign nationals, apostilled documents are required." },
@@ -3181,7 +1856,7 @@ function SEOPvtLtdPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="What We Handle" title="Complete incorporation – not just MCA filing">
+      <SEOSection label="What We Handle" title={<>Complete incorporation — <em>not just MCA filing</em></>}>
         <SEOInfoCards items={[
           { icon: Ic.clipboard, title: "MOA & AOA drafting", desc: "Objects clause, shareholding structure, governance rules", value: "Included" },
           { icon: Ic.lock, title: "DSC for all directors", desc: "Indian and foreign nationals – we handle apostille coordination", value: "Included" },
@@ -3194,18 +1869,11 @@ function SEOPvtLtdPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Cost & Timeline" title="What Private Limited Company registration costs">
-        <SEOCostTable items={[
-          { title: "Government fees (MCA + stamp duty)", category: "Government", desc: "Based on authorised share capital and state", value: "₹2,000 – ₹15,000" },
-          { title: "Professional fees – incorporation", category: "Professional fees", desc: "Name approval, DSC, SPICe+, MOA/AOA, bank account", value: "₹15,000 – ₹40,000" },
-          { title: "GST registration", category: "GST", desc: "If applicable – included in our standard package", value: "₹3,000 – ₹6,000" },
-          { title: "Auditor appointment (ADT-1)", category: "Compliance", desc: "Mandatory within 30 days of incorporation", value: "₹3,000 – ₹5,000" },
-          { title: "Timeline to completion", category: "Timeline", desc: "Foreign shareholders or restricted sectors take longer", value: "7–12 days" },
-          { title: "Total all-in (standard case)", category: "Total", desc: "Domestic founders, two directors, standard sector", value: "₹25,000 – ₹60,000" },
-        ]} />
+      <SEOSection label="Cost">
+        <PricingSection />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="What founders get wrong at incorporation">
+      <SEOSection label="Common Mistakes" title={<>What founders <em>get wrong at incorporation</em></>}>
         <SEOMistakes items={[
           { title: "Wrong objects clause in MOA", desc: "The MOA objects clause determines what your company can legally do. Founders often choose a generic clause and then find it doesn't cover their actual business activity – requiring a costly MGT-14 amendment. We advise on the objects clause before filing." },
           { title: "Under-capitalising at setup", desc: "Authorised share capital affects stamp duty – many founders minimise it to save ₹2,000 in stamp duty, then face problems when raising the first investor round because the authorised capital is too low to issue shares." },
@@ -3214,7 +1882,7 @@ function SEOPvtLtdPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="Private Limited Company registration – common questions">
+      <SEOSection label="FAQ" title={<>Private Limited Company registration — <em>common questions</em></>}>
         <SEOFAQs items={[
           { q: "What is the minimum number of directors and shareholders required?", a: "A minimum of 2 directors and 2 shareholders are required. The same person can be both a director and a shareholder. At least one director must be a resident of India (present in India for at least 182 days in the previous calendar year)." },
           { q: "Is there a minimum paid-up capital requirement?", a: "No. A Private Limited Company can be incorporated with any amount of paid-up capital – even ₹10,000. Authorised share capital of ₹1 lakh divided into 10,000 shares of ₹10 each is the standard starting point. Paid-up capital is the amount actually invested by shareholders." },
@@ -3251,7 +1919,7 @@ function SEOStartupFDIPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="Instruments Explained" title="Which instrument should your startup use?">
+      <SEOSection label="Instruments Explained" title={<>Which instrument should <em>your startup use?</em></>}>
         <SEOInstrumentCards items={[
           { name: "CCPS", fullName: "Compulsorily Convertible Preference Shares", badge: "Most Common", badgeColor: "#2e7d32", desc: "The standard instrument for foreign VC investment in Indian startups. Preference shares that mandatorily convert to equity at a future date. FEMA compliant – treated as FDI from day one. Allows for liquidation preference, anti-dilution, and investor rights.", fema: "FCGPR required within 30 days of allotment", tax: "Angel tax applicable if price exceeds fair market value" },
           { name: "CCD", fullName: "Compulsorily Convertible Debentures", badge: "Bridge Rounds", badgeColor: "#4a6fa5", desc: "Debt instrument that mandatorily converts to equity. Treated as FDI under FEMA. Useful for bridge financing where immediate equity dilution is to be avoided.", fema: "FCGPR on conversion. ECB compliance during debenture period", tax: "Interest income taxable; WHT applicable on interest paid abroad" },
@@ -3260,7 +1928,7 @@ function SEOStartupFDIPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Angel Tax" title="Angel tax – what startups must know in 2025–26">
+      <SEOSection label="Angel Tax" title={<>Angel tax — <em>what startups must know in 2025–26</em></>}>
         <SEOProseP>Angel tax (Section 56(2)(viib) of the Income Tax Act) applies when a private company issues shares to a resident investor at a price exceeding the fair market value (FMV) of those shares. The excess is treated as income of the company and taxed at 30%+. A 2023 amendment extended angel tax to foreign investors – creating compliance obligations for Indian startups raising from foreign angels.</SEOProseP>
         <SEOProseP>The Finance Act 2024 has provided significant relief – angel tax does not apply to investments from DPIIT-recognised startups, and certain foreign investor categories (SEBI-registered VCs, Category I/II AIFs, and certain specified entities) are exempt. For founders not covered by an exemption, valuation documentation is critical.</SEOProseP>
         <div className="seo-angel-box">
@@ -3280,7 +1948,7 @@ function SEOStartupFDIPage({ setPage }) {
         </div>
       </SEOSection>
 
-      <SEOSection label="The Process" title="From term sheet to share allotment – step by step">
+      <SEOSection label="The Process" title={<>From term sheet to share allotment — <em>step by step</em></>}>
         <SEOSteps steps={[
           { title: "Term sheet review", time: "Before signing", desc: "We review the term sheet for FEMA compliance, instrument selection, valuation methodology, and angel tax exposure — while structural changes are still easy." },
           { title: "DPIIT recognition", time: "2–4 weeks", desc: "DPIIT startup recognition provides complete angel tax exemption and simplifies future regulatory filings. We advise on eligibility and help with the application." },
@@ -3292,7 +1960,7 @@ function SEOStartupFDIPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="Startup foreign funding in practice">
+      <SEOSection label="Real Client Example" title={<>Startup foreign funding <em>in practice</em></>}>
         <SEOClientStory region="India · B2B SaaS Startup · Seed Round"
           headline="Indian SaaS startup structured a $500K seed round from US angels – FEMA compliant, angel tax nil"
           challenge="Two US-based angels wanted to invest $500K combined via SAFEs (standard YC structure). The founders were unaware that SAFEs have uncertain FEMA treatment in India and could not be reported as FDI. Angel tax was also a concern since the startup was not DPIIT-registered."
@@ -3300,7 +1968,7 @@ function SEOStartupFDIPage({ setPage }) {
           proof="Series A investor due diligence found zero FEMA or angel tax issues. Clean cap table from day one of foreign investment." />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="Foreign investment in startups – questions">
+      <SEOSection label="FAQ" title={<>Foreign investment in startups — <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "Does my startup need to be DPIIT registered to receive foreign investment?", a: "No – DPIIT registration is not required to receive foreign investment. However, DPIIT recognition provides complete exemption from angel tax under Section 56(2)(viib), which is a significant benefit. For startups raising from foreign angels or investors not covered by the angel tax exemption, DPIIT recognition is strongly recommended." },
           { q: "Can Indian startups use the US-standard SAFE agreement for foreign investment?", a: "SAFEs have uncertain FEMA treatment in India. A SAFE is neither debt nor equity, and RBI's framework does not clearly accommodate it. Most India-experienced counsel recommend using CCPS with equivalent economic terms instead of a SAFE. We convert YC SAFEs and similar instruments to CCPS-equivalent structures regularly." },
@@ -3336,7 +2004,7 @@ function SEOSubsidiaryPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="Why a Subsidiary" title="Why most foreign companies choose a subsidiary over other structures">
+      <SEOSection label="Why a Subsidiary" title={<>Why most foreign companies <em>choose a subsidiary</em></>}>
         <SEOPicksReveal items={[
           { label: "Operations", title: "Full commercial operations", description: "Can earn revenue, sign contracts, hire employees across all functions." },
           { label: "Tax", title: "Lower tax rate", description: "25.17% corporate tax vs 40% for a branch office. Significant savings at scale." },
@@ -3347,7 +2015,7 @@ function SEOSubsidiaryPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="The Process" title="How to set up a wholly owned subsidiary in India">
+      <SEOSection label="The Process" title={<>How to set up a <em>wholly owned subsidiary in India</em></>}>
         <SEOSteps steps={[
           { title: "FDI eligibility check", time: "Day 1", desc: "Confirm your sector permits 100% FDI under the Automatic Route. Restricted sectors require Government approval and have investment caps." },
           { title: "Share capital & structure", time: "Days 1–2", desc: "Determine authorised and paid-up share capital. For most subsidiaries, ₹1–10 lakh is sufficient to start." },
@@ -3359,7 +2027,7 @@ function SEOSubsidiaryPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="Subsidiary setup in practice">
+      <SEOSection label="Real Client Example" title={<>Subsidiary setup <em>in practice</em></>}>
         <SEOClientStory region="UK · Fintech Company · FCA Regulated"
           headline="London fintech set up a regulated India subsidiary in 24 days"
           challenge="FCA-regulated company needed India presence with zero risk of PE exposure or RBI non-compliance flagging their UK auditors. Any misstep would trigger a reporting obligation to the FCA."
@@ -3367,7 +2035,7 @@ function SEOSubsidiaryPage({ setPage }) {
           proof="Zero RBI or FEMA notices in 2 years of operation. Clean records for the FCA-regulated parent." />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="What goes wrong with subsidiary setups">
+      <SEOSection label="Common Mistakes" title={<>What goes wrong <em>with subsidiary setups</em></>}>
         <SEOMistakes items={[
           { title: "No transfer pricing policy at incorporation", desc: "Every intercompany transaction between the subsidiary and parent – management fees, royalties, service charges – requires transfer pricing documentation under Indian law. Most companies set this up a year later, after transactions have already occurred, creating back-audit exposure." },
           { title: "Wrong FDI route for the sector", desc: "Some sectors look unrestricted but have hidden caps or approval requirements. Fintech, pharma, e-commerce, and multi-brand retail all have sector-specific conditions. We check this before any filing." },
@@ -3376,18 +2044,11 @@ function SEOSubsidiaryPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Cost & Timeline" title="Cost of setting up a subsidiary in India">
-        <SEOCostTable items={[
-          { title: "MCA incorporation fees", category: "Government", desc: "Based on authorised capital", value: "₹2,000 – ₹10,000" },
-          { title: "Professional fees – incorporation", category: "Professional fees", desc: "Including MOA/AOA drafting, DSC, DIN, SPICe+", value: "₹50,000 – ₹1,20,000" },
-          { title: "FEMA/FCGPR filing", category: "FEMA compliance", desc: "Included in our standard engagement", value: "₹25,000 – ₹40,000" },
-          { title: "Transfer pricing policy", category: "Tax advisory", desc: "Highly recommended at incorporation stage", value: "₹40,000 – ₹75,000" },
-          { title: "Nominee director (first year)", category: "Director fees", desc: "If required – Indian resident director", value: "₹20,000 – ₹40,000" },
-          { title: "Total all-in (standard case)", category: "Total", desc: "Typical end-to-end including TP, 19–25 days", value: "₹1.5 – 2.5 lakhs" },
-        ]} />
+      <SEOSection label="Cost">
+        <PricingSection />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="Frequently asked questions about subsidiary setup">
+      <SEOSection label="FAQ" title={<>Frequently asked questions about <em>subsidiary setup</em></>}>
         <SEOFAQs items={[
           { q: "What is the difference between a subsidiary and a wholly owned subsidiary?", a: "A subsidiary is any company where the foreign parent holds more than 50% of shares. A wholly owned subsidiary (WOS) is where the foreign parent holds 100%. In India, most foreign companies set up a WOS to retain full control and simplify governance." },
           { q: "Can the subsidiary hire employees immediately after incorporation?", a: "Yes – once incorporation is complete and a bank account is opened, the subsidiary can hire employees and run payroll. GST registration and TDS registration should be in place before the first payment cycle." },
@@ -3423,7 +2084,7 @@ function SEOTransferPricingPage({ setPage }) {
         />
       </SEOSection>
 
-      <SEOSection label="Compliance Requirements" title="What transfer pricing compliance looks like in practice">
+      <SEOSection label="Compliance Requirements" title={<>What transfer pricing compliance <em>looks like in practice</em></>}>
         <SEOSteps steps={[
           { title: "Identify transactions", time: "Before year-end", desc: "Document every payment flowing between the India entity and related parties – management charges, royalties, IT services, cost recharges, loans." },
           { title: "Select methodology", time: "At setup", desc: "India recognises five OECD-accepted methods: CUP, RPM, CPM, TNMM, and PSM. For GCCs and service entities, TNMM is most common." },
@@ -3434,7 +2095,7 @@ function SEOTransferPricingPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="Transfer pricing done right – and wrong">
+      <SEOSection label="Real Client Example" title={<>Transfer pricing done right — <em>and wrong</em></>}>
         <SEOClientStory region="UAE · Manufacturing Group · 12-Year-Old India Entity"
           headline="Dubai group fixed 12 years of undocumented transfer pricing"
           challenge="The India branch office had been paying management fees to the UAE parent without any transfer pricing documentation for over a decade. When a TP audit was initiated, the company had no defensible position."
@@ -3442,7 +2103,7 @@ function SEOTransferPricingPage({ setPage }) {
           proof="Passed the TP scrutiny assessment with no adjustment made. Zero additional tax demand." />
       </SEOSection>
 
-      <SEOSection label="Common Mistakes" title="Transfer pricing mistakes Indian subsidiaries make">
+      <SEOSection label="Common Mistakes" title={<>Transfer pricing mistakes <em>Indian subsidiaries make</em></>}>
         <SEOMistakes items={[
           { title: "Setting up transfer pricing after transactions have already occurred", desc: "The most common and costly mistake. TP documentation must be in place before the first intercompany payment. Reconstructing it retroactively is possible but creates risk – auditors give less weight to documentation prepared after the fact." },
           { title: "Underpaying or overpaying on management fees without benchmarking", desc: "Management fees charged by the parent to the subsidiary must be benchmarked against what an unrelated party would pay for equivalent services. Rates that are too high (over-charging the India entity) reduce taxable income in India – exactly what TP auditors look for." },
@@ -3451,23 +2112,17 @@ function SEOTransferPricingPage({ setPage }) {
         ]} />
       </SEOSection>
 
-      <SEOSection label="Audit Risk" title="How India's transfer pricing audit system works">
+      <SEOSection label="Audit Risk" title={<>How India's transfer pricing <em>audit system works</em></>}>
         <SEOProseP>India has one of the most active transfer pricing audit regimes in Asia. Cases are selected for TP scrutiny based on risk parameters set by the Central Board of Direct Taxes (CBDT) – typically companies with large international transactions, significant adjustments in prior years, or sectors known for TP disputes (IT services, pharma, financial services).</SEOProseP>
         <SEOProseP>A TP adjustment – where the tax officer determines that your intercompany pricing was not at arm's length – attracts tax on the adjustment plus interest (12% per annum) plus penalty (up to 300% of the tax on adjustment in some cases). Advance Pricing Agreements (APAs) are available for companies wanting certainty – we have experience in both unilateral and bilateral APAs.</SEOProseP>
         <SEOProseP>Our track record: zero TP adjustments upheld across all client engagements where we prepared the documentation before the transactions occurred.</SEOProseP>
       </SEOSection>
 
-      <SEOSection label="Cost & Fees" title="What transfer pricing compliance costs in India">
-        <SEOCostTable items={[
-          { title: "TP study + Form 3CEB (simple)", category: "Simple engagement", desc: "Single transaction type, TNMM methodology", value: "₹40,000 – ₹75,000" },
-          { title: "TP study (multi-transaction)", category: "Complex engagement", desc: "Multiple transaction types, complex benchmarking", value: "₹75,000 – ₹1,50,000" },
-          { title: "Annual TP retainer", category: "Ongoing compliance", desc: "Study + 3CEB + ongoing monitoring", value: "₹60,000 – ₹1,20,000/yr" },
-          { title: "TP audit representation", category: "Dispute resolution", desc: "Responding to scrutiny notices, DRP filings", value: "₹1,00,000 – ₹3,00,000" },
-          { title: "APA application", category: "Advance pricing", desc: "Unilateral APA – 5-year pricing certainty", value: "₹3,00,000 – ₹8,00,000" },
-        ]} />
+      <SEOSection label="Cost">
+        <PricingSection />
       </SEOSection>
 
-      <SEOSection label="FAQ" title="Transfer pricing questions">
+      <SEOSection label="FAQ" title={<>Transfer pricing <em>questions</em></>}>
         <SEOFAQs items={[
           { q: "At what transaction value is transfer pricing documentation required?", a: "Transfer pricing documentation is required when the aggregate value of international transactions with related parties exceeds ₹1 crore in a financial year. Form 3CEB is additionally required. Below this threshold, documentation is still best practice but not legally mandated." },
           { q: "What is the penalty for non-compliance with transfer pricing rules?", a: "Penalties range from 2% of the transaction value (for failure to maintain documentation) to 100–300% of the tax on any adjustment. Form 3CEB non-filing attracts ₹1 lakh flat penalty. In practice, the larger risk is the adjustment itself – which then attracts tax + interest + penalty." },
@@ -3488,7 +2143,8 @@ function SEOTransferPricingPage({ setPage }) {
 export {
   SEOPageLayout, SEOSection, SEOProseP, SEOSteps, SEOMistakes, SEOFAQs,
   SEOClientStory, SEOCTAStrip, ROUTES, WASvg,
-  SEOPicksReveal, SEOWhatItIs, SEOInfoCards, SEOCostTable, SEOStatRow, SEOSectorCapsList,
+  SEOPicksReveal, SEOWhatItIs, SEOInfoCards, SEOCostTable,
+  SEOStatRow, SEOSectorCapsList,
   SEOFDIRulesPage, SEOForeignCompanyPage, SEOGCCSetupPage, SEOMarketEntryPage,
   SEONRIPage, SEOPvtLtdPage, SEOStartupFDIPage, SEOSubsidiaryPage, SEOTransferPricingPage
 };

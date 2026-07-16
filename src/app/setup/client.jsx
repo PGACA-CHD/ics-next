@@ -272,17 +272,17 @@ export default function Page() {
   const toggleFaq = (idx) => setOpenFaq(openFaq === idx ? null : idx);
 
   const [activeStep, setActiveStep] = useState(0);
-  // Auto-cycling timer disabled for static timeline on mobile/all screens as requested
 
   return (
-    <div style={{ fontFamily: HV, color: "#111", background: "#fff", overflowX: "hidden" }}>
+    <div style={{ fontFamily: HV, color: "#111", background: "#fff", overflowX: "hidden", maxWidth: "100vw" }}>
       <style>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
         *, *::before, *::after { box-sizing: border-box; }
 
         /* ── GLOBAL SECTION PADDING ── */
-        .sec { padding: clamp(48px,8vw,96px) clamp(16px,5vw,56px); }
+        .sec { padding: clamp(48px,8vw,96px) clamp(16px,5vw,56px); width: 100%; overflow-x: hidden; }
         .sec-sm { padding: clamp(40px,6vw,80px) clamp(16px,5vw,56px); }
-        .inner { max-width: 1200px; margin: 0 auto; }
+        .inner { max-width: 1200px; margin: 0 auto; width: 100%; }
 
         /* ── HERO GRID ── */
         .hero-grid {
@@ -385,6 +385,22 @@ export default function Page() {
           .metrics-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
         }
 
+        /* ── KEY FEATURES (plain tick list, no boxes) ── */
+        .feature-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+        .feature-row {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          padding: 4px 0;
+        }
+        .feature-tick {
+          width: 18px; height: 18px; border-radius: 50%;
+          flex-shrink: 0; margin-top: 1px;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 11px; font-weight: 800; color: #fff;
+        }
+        .feature-text { font-size: clamp(11px,1.2vw,13px); font-weight: 600; color: #111; font-family: ${HV}; line-height: 1.5; }
+
         /* ── PROCESS TIMELINE ── */
         .timeline-wrap {
           display: flex;
@@ -393,6 +409,7 @@ export default function Page() {
           max-width: 850px;
           margin: 0 auto;
           position: relative;
+          width: 100%;
         }
         .timeline-line {
           position: absolute;
@@ -408,6 +425,7 @@ export default function Page() {
           align-items: flex-start;
           position: relative;
           cursor: pointer;
+          width: 100%;
         }
         .timeline-node {
           width: 48px;
@@ -427,11 +445,12 @@ export default function Page() {
           .timeline-node { width: 40px; height: 40px; font-size: 11px; }
         }
 
-        /* ── COMPARISON TABLE ── */
-        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .cmp-table { width: 100%; border-collapse: collapse; border: 1.5px solid #111; font-family: ${HV}; }
-        @media(min-width: 480px) {
-          .cmp-table { min-width: 380px; }
+        /* ── COMPARISON TABLE (responsive, slightly larger type) ── */
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+        .cmp-table { width: 100%; min-width: 460px; border-collapse: collapse; border: 1.5px solid #111; font-family: ${HV}; table-layout: fixed; }
+        .cmp-table th, .cmp-table td { word-break: break-word; }
+        @media(max-width:480px){
+          .cmp-table { min-width: 420px; }
         }
 
         /* ── CARDS ── */
@@ -507,6 +526,16 @@ export default function Page() {
         .row-div { border-bottom: 1px solid #111; }
         .row-div:last-child { border-bottom: none; }
 
+        /* ── DOCUMENTS REQUIRED — plain pill, no animation/hover styling ── */
+        .doc-pill {
+          display: flex; align-items: center; gap: 10px;
+          font-size: clamp(11px,1.2vw,13px); color: #111;
+          padding: 10px 14px; background: #fafafa;
+          border: 1px solid rgba(0,0,0,0.12);
+          border-radius: 999px; font-family: ${HV};
+        }
+        .doc-pill span { font-weight: 600; }
+
         /* ── BTN ROW WRAP ── */
         .btn-row {
           display: flex;
@@ -539,16 +568,11 @@ export default function Page() {
           75%  { background-position: 80% 80%; }
           100% { background-position: 50% 50%; }
         }
-        @keyframes popIn {
-          0%   { opacity: 0; transform: scale(0.94) translateY(8px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
         @keyframes popTimelineNode {
           0%   { transform: scale(0.3); opacity: 0; }
           50%  { transform: scale(1.15); }
           100% { transform: scale(1); opacity: 1; }
         }
-        .doc-item-anim { animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
         .timeline-node-anim { animation: popTimelineNode 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
 
         /* ── COMPREHENSIVE MOBILE ── */
@@ -570,8 +594,9 @@ export default function Page() {
           .cta-btn-row { gap: 10px; }
           .gc-static { padding: 18px 14px !important; }
           .gc { padding: 18px 14px !important; }
-          .ent-feature { padding: 7px 10px !important; font-size: 12px !important; }
-          .doc-item { padding: 9px 10px !important; font-size: 12px !important; }
+          .doc-pill { padding: 9px 12px !important; }
+          .feature-row { padding: 3px 0; }
+          .cmp-table th, .cmp-table td { padding: 8px 5px !important; font-size: 11px !important; }
         }
         @media(max-width:420px){
           .sec { padding: clamp(28px,6vw,48px) 12px !important; }
@@ -588,12 +613,9 @@ export default function Page() {
           .gc-static { padding: 14px 10px !important; }
           .gc { padding: 14px 10px !important; }
           .metrics-grid { gap: 8px; padding: 10px 0; }
-          .ent-feature { padding: 6px 8px !important; font-size: 11px !important; }
-          .ent-feature span { font-size: 11px !important; }
-          .doc-item { padding: 8px 8px !important; font-size: 11px !important; }
-          .doc-item span { font-size: 11px !important; }
+          .doc-pill { padding: 8px 10px !important; font-size: 11px !important; }
           .stat-cell { padding: 12px 6px; }
-          .cmp-table th, .cmp-table td { padding: 6px 3px !important; font-size: 9px !important; }
+          .cmp-table th, .cmp-table td { padding: 7px 4px !important; font-size: 10px !important; }
           .timeline-node-item {
             background: #fff !important;
             border: 2.5px solid rgba(0,0,0,0.18) !important;
@@ -737,20 +759,18 @@ export default function Page() {
 
                 <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#111", lineHeight: 1.75, margin: "0 0 16px", fontFamily: HV, fontWeight: 500 }}>{ent.desc}</p>
 
+                {/* Key Features — plain tick + text, light border removed from box, no box */}
                 <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 12 }}>Key Features</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 7, marginBottom: 16 }}>
+                <div className="feature-list">
                   {ent.points.map((pt, i) => (
-                    <div key={i} className="ent-feature" style={{
-                      display: "flex", alignItems: "center",
-                      padding: "9px 12px", borderRadius: 8,
-                      background: ec.bg, border: "1px solid #111"
-                    }}>
-                      <span style={{ fontSize: "clamp(11px,1.2vw,13px)", fontWeight: 600, color: "#111", fontFamily: HV }}>{pt}</span>
+                    <div key={i} className="feature-row">
+                      <span className="feature-tick" style={{ background: ec.primary }}>✓</span>
+                      <span className="feature-text">{pt}</span>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ marginTop: "auto", background: "rgba(230,152,25,0.08)", border: "1px solid #111", borderRadius: 10, padding: "12px 14px" }}>
+                <div style={{ marginTop: "auto", background: "rgba(230,152,25,0.08)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 10, padding: "12px 14px" }}>
                   <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 5 }}>Best For</div>
                   <div style={{ fontSize: "clamp(11px,1.2vw,12.5px)", color: "#111", lineHeight: 1.6, fontFamily: HV, fontWeight: 600 }}>{ent.bestFor}</div>
                 </div>
@@ -760,21 +780,14 @@ export default function Page() {
             {/* RIGHT — docs + comparison + CTA */}
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
-              {/* Docs */}
+              {/* Docs — plain pills, no animation */}
               <Fade delay={80}>
                 <div className="gc-static" style={{ padding: "24px 20px" }}>
                   <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 16 }}>Documents Required</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                     {ent.docs.map((doc, i) => (
-                       <div key={doc} className="doc-item-anim doc-item" style={{
-                        display: "flex", alignItems: "center", gap: 10,
-                        fontSize: "clamp(11px,1.2vw,13px)", color: "#111",
-                        padding: "11px 14px", background: "#fff",
-                        border: "1px solid #111", borderLeft: `4px solid ${ec.primary}`,
-                        borderRadius: 8, fontFamily: HV,
-                        animationDelay: `${i * 60}ms`, opacity: 0,
-                      }}>
-                        <span style={{ fontWeight: 600 }}>{doc}</span>
+                      <div key={doc} className="doc-pill">
+                        <span>{doc}</span>
                       </div>
                     ))}
                   </div>
@@ -789,12 +802,12 @@ export default function Page() {
                     <table className="cmp-table">
                       <thead>
                         <tr>
-                          <th style={{ textAlign: "left", fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", color: "#111", padding: "9px 8px", borderBottom: "2.5px solid #111", borderRight: "1.5px solid #111" }}>Criteria</th>
+                          <th style={{ textAlign: "left", fontSize: 10.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", color: "#111", padding: "10px 8px", borderBottom: "2.5px solid #111", borderRight: "1.5px solid #111" }}>Criteria</th>
                           {["Pvt Ltd", "LLP", "WOS", "Branch", "Liaison"].map((h, i) => (
                             <th key={h} style={{
-                              fontSize: 9.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px",
+                              fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px",
                               color: i === activeIdx ? "#fff" : GREEN,
-                              padding: "9px 5px", textAlign: "center",
+                              padding: "10px 6px", textAlign: "center",
                               background: i === activeIdx ? GREEN : "rgba(11,61,46,0.04)",
                               borderBottom: "2.5px solid #111",
                               borderRight: i < 4 ? "1.5px solid #111" : "none",
@@ -806,12 +819,12 @@ export default function Page() {
                       <tbody>
                         {COMPARISON.map(([label, ...vals]) => (
                           <tr key={label}>
-                            <td style={{ fontSize: 10.5, fontWeight: 700, color: "#111", padding: "10px 8px", borderBottom: "1.5px solid #111", borderRight: "1.5px solid #111", whiteSpace: "nowrap" }}>{label}</td>
+                            <td style={{ fontSize: 11.5, fontWeight: 700, color: "#111", padding: "11px 8px", borderBottom: "1.5px solid #111", borderRight: "1.5px solid #111", whiteSpace: "nowrap" }}>{label}</td>
                             {vals.map((v, j) => (
                               <td key={j} style={{
-                                fontSize: 11, fontWeight: 800,
+                                fontSize: 12, fontWeight: 800,
                                 color: v === "✔" ? GREEN : (v === "✖" ? "#d32f2f" : "#111"),
-                                padding: "10px 4px", textAlign: "center",
+                                padding: "11px 5px", textAlign: "center",
                                 borderBottom: "1.5px solid #111",
                                 borderRight: j < 4 ? "1.5px solid #111" : "none",
                                 background: j === activeIdx ? "rgba(11,61,46,0.04)" : "transparent",
@@ -862,6 +875,7 @@ export default function Page() {
                   }}>{step.n}</div>
                   <div className="timeline-card-item" style={{
                     flex: 1,
+                    minWidth: 0,
                     background: "#fff",
                     border: `1px solid ${isActive ? GREEN : "rgba(0,0,0,0.15)"}`,
                     borderRadius: 14,
