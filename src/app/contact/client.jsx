@@ -74,13 +74,12 @@ export default function Page() {
     <div>
 
       {/* ── HERO ── */}
-      <section style={{ background:T.f, padding:"100px 56px 72px", position:"relative", overflow:"hidden" }}>
-        <div style={{ position:"absolute", inset:0,
-          backgroundImage:`linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`,
-          backgroundSize:"64px 64px", pointerEvents:"none" }}/>
-        <div style={{ position:"absolute", inset:0, pointerEvents:"none",
-          background:"radial-gradient(ellipse 50% 80% at 95% 50%,rgba(232,144,10,.07) 0%,transparent 55%)" }}/>
-        <div style={{ maxWidth:1400, margin:"0 auto", position:"relative", zIndex:2 }}>
+      <section style={{ backgroundImage: "url('/banners and logos/contact us.png')", backgroundSize: "cover", backgroundPosition: "center", padding: "100px 56px 72px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "rgba(11,61,46,0.7)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0,
+          backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`,
+          backgroundSize: "64px 64px", pointerEvents: "none", zIndex: 1 }} />
+        <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 2 }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:7,
             background:"rgba(232,144,10,.13)", border:"1px solid rgba(232,144,10,.28)",
             color:T.sl, padding:"5px 13px", borderRadius:50, fontSize:10.5,
