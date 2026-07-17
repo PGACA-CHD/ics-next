@@ -375,7 +375,7 @@ function StatsRibbon() {
           <SH green="Numbers that speak" gold="for themselves." mb={16} />
         </div>
 
-        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16 }}>
+        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
           {[
             {
               target: 100, suffix: "+", label: "ENTITIES", subLabel: "Companies incorporated",
@@ -627,8 +627,7 @@ export default function HomePage() {
           50%  { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        /* Stats responsive */
-        @media(max-width:900px){.stats-grid{grid-template-columns:repeat(3,1fr)!important;}}
+        @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;}}
         @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px!important;}}
         @media(max-width:420px){.stats-grid{grid-template-columns:1fr!important;}}
         /* KH grid responsive */
@@ -844,20 +843,34 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                {[{ dot: GOLD, label: "USA & Canada" }, { dot: G, label: "UK & Europe" }, { dot: "#F5A828", label: "UAE & Middle East" },
-                { dot: "#1B78CB", label: "Singapore & APAC" }, { dot: "#6B7280", label: "Australia & NZ" }, { dot: "#9A9A8E", label: "Other Markets" }
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 14px", marginTop: 8, marginBottom: 8 }}>
+                {[
+                  { code: "us", label: "USA" },
+                  { code: "ca", label: "Canada" },
+                  { code: "gb", label: "United Kingdom" },
+                  { code: "eu", label: "Europe" },
+                  { code: "ae", label: "UAE" },
+                  { code: "sg", label: "Singapore" },
+                  { code: "au", label: "Australia" },
+                  { code: "nz", label: "New Zealand" }
                 ].map(p => (
-                  <div key={p.label} style={{
-                    display: "inline-flex", alignItems: "center", gap: 5, border: "1px solid #ECE7E1",
-                    borderRadius: 50, padding: "4px 10px", fontSize: 10.5, color: "#444", cursor: "default", whiteSpace: "nowrap", fontFamily: HV,
-                    transition: "border-color .15s"
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = G}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = "#ECE7E1"}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: p.dot, flexShrink: 0 }} />
-                    {p.label}
-                  </div>
+                  <img
+                    key={p.code}
+                    src={`https://flagcdn.com/w40/${p.code}.png`}
+                    srcSet={`https://flagcdn.com/w80/${p.code}.png 2x`}
+                    alt={p.label}
+                    title={p.label}
+                    width={26}
+                    height={19}
+                    style={{
+                      borderRadius: 3,
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px rgba(0,0,0,0.08)",
+                      display: "block",
+                      flexShrink: 0,
+                    }}
+                    loading="lazy"
+                  />
                 ))}
               </div>
               <div className="gr-btns" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>

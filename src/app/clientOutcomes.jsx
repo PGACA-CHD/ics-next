@@ -7,9 +7,9 @@ const G = "#0B3D2E";
 const GOLD = "#e69819";
 const HS = "clamp(28px, 3vw, 42px)";
 
-const CARD_BG = "linear-gradient(160deg,#FCF3E1 0%,#FEFAF0 100%)";
-const CARD_BORDER = "rgba(230,152,25,0.24)";
-const CARD_SHADOW = "rgba(230,152,25,0.10)";
+const CARD_BG = "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)";
+const CARD_BORDER = "rgba(9,48,36,0.14)";
+const CARD_SHADOW = "rgba(9,48,36,0.07)";
 const ACCENT_BARS = [G, GOLD, G, GOLD];
 
 const OUTCOMES = [
@@ -45,6 +45,7 @@ const OUTCOMES = [
 
 function OutcomeCard({ item, index }) {
     const [vis, setVis] = useState(false);
+    const [hovered, setHovered] = useState(false);
     const ref = useRef(null);
     const bar = ACCENT_BARS[index % ACCENT_BARS.length];
 
@@ -67,20 +68,21 @@ function OutcomeCard({ item, index }) {
     return (
         <div
             ref={ref}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             style={{
                 background: CARD_BG,
-                borderRadius: 18,
+                borderRadius: 22,
                 border: `1.5px solid ${CARD_BORDER}`,
-                padding: "28px 26px 24px",
+                padding: "36px 32px",
                 display: "flex",
                 flexDirection: "column",
                 position: "relative",
                 overflow: "hidden",
-                /* entry animation only — no hover */
                 opacity: vis ? 1 : 0,
-                transform: vis ? "translateY(0)" : "translateY(28px)",
-                transition: `opacity 0.5s ease ${index * 120}ms, transform 0.55s ease ${index * 120}ms`,
-                boxShadow: `0 2px 12px ${CARD_SHADOW}`,
+                transform: vis ? (hovered ? "translateY(-5px)" : "translateY(0)") : "translateY(28px)",
+                transition: `opacity 0.5s ease ${index * 120}ms, transform 0.55s ease ${index * 120}ms, box-shadow 0.25s ease`,
+                boxShadow: hovered ? `0 16px 48px rgba(9,48,36,0.13)` : `0 4px 18px rgba(9,48,36,0.07)`,
                 cursor: "default",
                 fontFamily: HV,
             }}
@@ -88,7 +90,7 @@ function OutcomeCard({ item, index }) {
             {/* Top accent bar */}
             <div style={{
                 position: "absolute", top: 0, left: 0, right: 0, height: 3,
-                background: bar, borderRadius: "18px 18px 0 0",
+                background: bar, borderRadius: "22px 22px 0 0",
             }} />
 
             {/* Metric + tags */}

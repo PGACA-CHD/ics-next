@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { T } from '@/lib/config';
-import { submitToZoho } from '@/lib/utils';
+import PricingSection from '@/app/PricingSection';
 
 const ROUTES = {
   home: '/', services: '/setup', gcc: '/post-setup', tax: '/international-tax',
@@ -632,9 +632,7 @@ export default function Page() {
         .border-top { border-top: 1px solid #111; }
       `}</style>
 
-      {/* ════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════ */}
+
       <section className="sec" style={{ backgroundImage: "url('/banners and logos/private-limited-company-registration (main).png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="inner">
           <div className="hero-grid">
@@ -849,9 +847,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          PROCESS — auto-cycling vertical timeline
-      ════════════════════════════════════════ */}
+
       <section className="sec border-top" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -897,9 +893,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          WHAT'S INCLUDED
-      ════════════════════════════════════════ */}
       <section className="sec border-top" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -936,10 +929,8 @@ export default function Page() {
           </div>
         </div>
       </section>
+      <PricingSection />
 
-      {/* ════════════════════════════════════════
-          FAQ
-      ════════════════════════════════════════ */}
       <section className="sec border-top" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -985,9 +976,8 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          CTA
-      ════════════════════════════════════════ */}
+
+
       <section className="sec" style={{ backgroundImage: "url('/banners%20and%20logos/private-limited-company-registration%20CTA.png')", backgroundSize: 'cover', backgroundPosition: 'center', borderTop: "1.5px solid #111", textAlign: "center" }}>
         <div style={{ maxWidth: 540, margin: "0 auto" }}>
           <div className="lbl" style={{ color: "#111", letterSpacing: "0.3em", marginBottom: 14 }}>Get Started</div>
@@ -999,7 +989,7 @@ export default function Page() {
           </p>
           <div className="cta-btn-row">
             <button className="lime-btn" style={{ background: GOLD, border: "1px solid #111" }} onClick={() => router.push(ROUTES.contact)}>Book Free Structure Review →</button>
-            <a href="tel:+919915731447" className="ghost-dark" style={{ border: "1px solid #000000ff" }}>Call +91 99157 31447</a>
+            <a href="tel:+919915731447" className="ghost-dark" style={{ border: "1px solid #000000ff", color: "#000000" }}>Call +91 99157 31447</a>
           </div>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             {["Free 30-min consultation", "CA, CS & accountant team", "Response within 24 hours"].map(t => (
