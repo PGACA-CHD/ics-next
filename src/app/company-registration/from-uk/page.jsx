@@ -498,12 +498,6 @@ export default function Page() {
           </Fade>
 
           <style>{`
-            @keyframes whyGrad {
-              0%   { background-position: 0%   50%; }
-              50%  { background-position: 100% 50%; }
-              100% { background-position: 0%   50%; }
-            }
-            /* equal-height grid */
             .why-eq-grid {
               display: grid;
               grid-template-columns: repeat(3, 1fr);
@@ -513,53 +507,27 @@ export default function Page() {
             .why-eq-grid > div { display: flex; }
             .why-anim-card {
               flex: 1;
-              border-radius: 16px;
-              border: 1px solid rgba(9,48,36,0.18);
-              padding: 32px 28px;
+              border-radius: 22px;
+              border: 1.5px solid rgba(9,48,36,0.14);
+              padding: 36px 32px;
               position: relative;
               overflow: hidden;
               cursor: default;
-              /* ALWAYS VISIBLE: high-contrast green gradient, large size, slow loop */
-              background: linear-gradient(
-                135deg,
-                #e8f5ee 0%,
-                #c8ead8 18%,
-                #f0faf4 35%,
-                #a8dfc0 52%,
-                #ddf2e8 68%,
-                #b8e8cc 82%,
-                #e8f5ee 100%
-              );
-              background-size: 400% 400%;
-              animation: whyGrad 5s ease infinite;
-              transition: box-shadow 0.28s ease, transform 0.28s ease, border-color 0.28s ease;
+              background: linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%);
+              box-shadow: 0 4px 18px rgba(9,48,36,0.07);
+              transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
             }
-            .why-anim-card:nth-child(1) { animation-delay:  0s; }
-            .why-anim-card:nth-child(2) { animation-delay: -0.85s; }
-            .why-anim-card:nth-child(3) { animation-delay: -1.7s; }
-            .why-anim-card:nth-child(4) { animation-delay: -2.55s; }
-            .why-anim-card:nth-child(5) { animation-delay: -3.4s; }
-            .why-anim-card:nth-child(6) { animation-delay: -4.25s; }
             .why-anim-card:hover {
-              box-shadow: 0 14px 40px rgba(9,48,36,0.16);
-              transform: translateY(-3px);
-              border-color: rgba(9,48,36,0.32);
+              box-shadow: 0 16px 48px rgba(9,48,36,0.13);
+              transform: translateY(-5px);
+              border-color: rgba(9,48,36,0.25);
             }
-            /* animated top bar — deeper green, always moving */
             .why-anim-card::before {
               content: '';
               position: absolute;
               top: 0; left: 0; right: 0;
               height: 3px;
-              background: linear-gradient(90deg,
-                #093024 0%,
-                #1a6b42 25%,
-                #4caf82 50%,
-                #1a6b42 75%,
-                #093024 100%
-              );
-              background-size: 300% 100%;
-              animation: whyGrad 3s ease infinite;
+              background: linear-gradient(90deg, #093024 0%, #e69819 100%);
             }
             @media (max-width: 860px) {
               .why-eq-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: auto; }

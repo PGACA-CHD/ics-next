@@ -191,75 +191,44 @@ function DocTimeline({ items }) {
 function ProcessLayout({ steps }) {
   const [active, setActive] = useState(0);
   const [ref, vis] = useReveal(0.05);
+  /* 5 seconds auto-advance */
   useEffect(() => {
     if (!vis) return;
-    const id = setInterval(() => setActive(c => (c + 1) % steps.length), 2600);
+    const id = setInterval(() => setActive(c => (c + 1) % steps.length), 5000);
     return () => clearInterval(id);
   }, [vis, steps.length]);
   const cur = steps[active];
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
 
-      {/* LEFT */}
-      <div style={{
-        background: '#093024',
-        padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden'
-      }}>
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.38 }}>
-          <LightPillar
-            topColor="#ffe082"
-            bottomColor="#c8870a"
-            intensity={0.65}
-            rotationSpeed={0.25}
-            glowAmount={0.008}
-            pillarWidth={2.4}
-            pillarHeight={0.35}
-            noiseIntensity={0.12}
-            pillarRotation={15}
-            interactive={false}
-            mixBlendMode="screen"
-          />
-        </div>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
-        <div style={{ position: 'absolute', top: -60, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,135,10,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
+      {/* LEFT — deep green */}
+      <div style={{ background: 'linear-gradient(160deg, #0a3d2c 0%, #072b1f 60%, #041a12 100%)', padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{ position: 'absolute', top: -60, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,175,130,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{ position: 'absolute', bottom: -40, left: -30, width: 160, height: 160, borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,175,130,0.10) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
         <div style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
-
-          {/* ✦ LIVE ANIMATED GRADIENT STEP NUMBER */}
-          <div
-            key={'num-' + active}
-            style={{
-              fontSize: 72, fontWeight: 800, lineHeight: 1,
-              fontFamily: HV, letterSpacing: '-0.04em',
-              animation: 'stepIn 0.4s ease both, gradMove 3s ease infinite',
-              background: 'linear-gradient(135deg, #ffe082 0%, #ffb300 50%, #ff8f00 100%)',
-              backgroundSize: '300% 300%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >{cur.n}</div>
-
+          <div key={'num-' + active} style={{ fontSize: 56, fontWeight: 800, lineHeight: 1, fontFamily: HV, letterSpacing: '-0.04em', animation: 'stepIn 0.4s ease both', background: 'linear-gradient(135deg, #a8e6c0 0%, #4caf82 50%, #2e7d55 100%)', backgroundSize: '300% 300%', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{cur.n}</div>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative', zIndex: 2 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, position: 'relative', zIndex: 2 }}>
           {steps.map((s, i) => (
             <button key={i} onClick={() => setActive(i)} style={{ all: 'unset', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg,#ffd54f,#ffb300)' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(255,213,79,0.6)' : 'none' }} />
-              <span style={{ fontSize: 11, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 130 }}>{s.title}</span>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? '#4caf82' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(76,175,130,0.7)' : 'none' }} />
+              <span style={{ fontSize: i === active ? 12.5 : 12, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 140 }}>{s.title}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* MIDDLE */}
+      {/* MIDDLE — all steps fully visible, no opacity blur */}
       <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
-          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', transition: 'opacity 0.3s', opacity: i === active ? 1 : 0.38 }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)' : 'rgba(0,0,0,0.05)', border: i === active ? 'none' : '2px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#bbb', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 14px rgba(200,135,10,0.28)' : 'none' }}>{s.n}</div>
+          <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', opacity: 1 }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg, #093024 0%, #165c3a 100%)' : 'rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#bbb', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 14px rgba(9,48,36,0.28)' : 'none' }}>{s.n}</div>
             <div style={{ paddingTop: 6 }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#999', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? '#c8870a' : '#ddd', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#555', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? GREEN : '#bbb', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
             </div>
           </div>
         ))}
@@ -268,20 +237,17 @@ function ProcessLayout({ steps }) {
       {/* RIGHT */}
       <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'detail-' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
-          <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #c8870a 0%, #e09a10 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
-
-          {/* ✦ INCREASED TITLE SIZE */}
-          <h3 style={{ fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
-
+          <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #093024 0%, #165c3a 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
+          <h3 style={{ fontSize: 'clamp(22px,2.8vw,30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
           <p style={{ fontSize: 13.5, color: '#666', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
         </div>
         <div style={{ marginTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
             <span style={{ fontSize: 10.5, color: '#bbb', fontFamily: HV }}>Progress</span>
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: '#c8870a', fontFamily: HV }}>{active + 1} / {steps.length}</span>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: GREEN, fontFamily: HV }}>{active + 1} / {steps.length}</span>
           </div>
           <div style={{ height: 3, background: 'rgba(0,0,0,0.07)', borderRadius: 2, overflow: 'hidden' }}>
-            <div style={{ height: '100%', background: 'linear-gradient(90deg, #c8870a 0%, #e09a10 100%)', width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
+            <div style={{ height: '100%', background: 'linear-gradient(90deg, #093024 0%, #165c3a 100%)', width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
           </div>
         </div>
       </div>
@@ -357,11 +323,18 @@ export default function Page() {
         .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
-        .sec-div { border-top:1px solid rgba(0,0,0,0.08); }
-        .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid rgba(0,0,0,0.15); border-radius:18px; overflow:hidden; }
-        .why-card { padding:36px 32px; border-right:1px solid rgba(0,0,0,0.13); cursor:default; position:relative; overflow:hidden; background:#fff; }
-        .why-card.no-right { border-right:none; }
-        .why-row-divider { grid-column:1/-1; height:1px; background:rgba(0,0,0,0.13); }
+        .sec-div { border-top:none; }
+        .why-eq-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:18px; }
+        .why-eq-grid > div { display:flex; }
+        .why-anim-card {
+          flex:1; border-radius:22px; border:1.5px solid rgba(9,48,36,0.14);
+          padding:36px 32px; position:relative; overflow:hidden; cursor:default;
+          background: linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%);
+          box-shadow: 0 4px 18px rgba(9,48,36,0.07);
+          transition:box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+        }
+        .why-anim-card:hover { box-shadow:0 16px 48px rgba(9,48,36,0.13); transform:translateY(-5px); border-color:rgba(9,48,36,0.25); }
+        .why-anim-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#093024 0%,#e69819 100%); }
         .stbl { width:100%; border-collapse:collapse; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
         .stbl th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#aaa; padding:0 20px 12px; text-align:left; border-bottom:2px solid rgba(0,0,0,0.12); }
         .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; }
@@ -373,9 +346,7 @@ export default function Page() {
           .proc-3col > div:nth-child(1) { padding:28px 24px; }
           .proc-3col > div:nth-child(2) { border-left:none !important; border-right:none !important; border-top:1px solid rgba(0,0,0,0.08); border-bottom:1px solid rgba(0,0,0,0.08); }
           .proc-3col > div:nth-child(3) { padding:28px 24px; }
-          .why-grid { grid-template-columns:1fr !important; border-radius:14px; }
-          .why-card { border-right:none !important; padding:26px 22px; border-bottom:1px solid rgba(0,0,0,0.13); }
-          .why-card:last-child { border-bottom:none !important; }
+          .why-eq-grid { grid-template-columns:1fr 1fr !important; grid-auto-rows:auto; }
           .hero-g { grid-template-columns:1fr !important; gap:44px !important; }
           .doc-tl-line { left:32px !important; }
           .doc-tl-cap { left:32px !important; transform:translateX(-4px) !important; }
@@ -389,6 +360,7 @@ export default function Page() {
         }
         @media(max-width:580px){
           .sec { padding:56px 20px !important; }
+          .why-eq-grid { grid-template-columns:1fr !important; grid-auto-rows:auto !important; }
         }
       `}</style>
 
@@ -451,63 +423,17 @@ export default function Page() {
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
             </div>
           </Fade>
-          <Fade delay={60}>
-            <div className="why-grid">
-              {whyPoints.slice(0, 3).map(([heading, body], i) => (
-                <div key={i} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
-                    <ColorBends
-                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
-                      rotation={90}
-                      speed={0.4}
-                      scale={1.4}
-                      frequency={1}
-                      warpStrength={0.6}
-                      mouseInfluence={0.2}
-                      noise={0.06}
-                      parallax={0.25}
-                      iterations={1}
-                      intensity={1.1}
-                      bandWidth={5}
-                      transparent
-                    />
-                  </div>
-                  <div style={{ position: 'relative', zIndex: 1 }}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18 }}>{String(i + 1).padStart(2, '0')}</div>
-                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
-                  </div>
+          <div className="why-eq-grid">
+            {whyPoints.map(([heading, body], i) => (
+              <Fade key={i} delay={i * 55}>
+                <div className="why-anim-card">
+                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(9,48,36,0.35)', fontFamily: HV, marginBottom: 16 }}>{String(i + 1).padStart(2, '0')}</div>
+                  <h3 style={{ fontSize: 'clamp(17px,1.8vw,20px)', fontWeight: 800, color: '#111', margin: '0 0 12px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.25 }}>{heading}</h3>
+                  <p style={{ fontSize: 14, color: '#555', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
                 </div>
-              ))}
-              <div className="why-row-divider" />
-              {whyPoints.slice(3).map(([heading, body], i) => (
-                <div key={i + 3} className={`why-card${i === 2 ? ' no-right' : ''}`} style={{ position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.45 }}>
-                    <ColorBends
-                      colors={["#ffe082", "#c8870a", "#eefaf4"]}
-                      rotation={90}
-                      speed={0.4}
-                      scale={1.4}
-                      frequency={1}
-                      warpStrength={0.6}
-                      mouseInfluence={0.2}
-                      noise={0.06}
-                      parallax={0.25}
-                      iterations={1}
-                      intensity={1.1}
-                      bandWidth={5}
-                      transparent
-                    />
-                  </div>
-                  <div style={{ position: 'relative', zIndex: 1 }}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.28)', fontFamily: HV, marginBottom: 18 }}>{String(i + 4).padStart(2, '0')}</div>
-                    <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: '#111', margin: '0 0 14px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{heading}</h3>
-                    <p style={{ fontSize: 14, color: '#666', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Fade>
+              </Fade>
+            ))}
+          </div>
         </div>
       </section>
 
