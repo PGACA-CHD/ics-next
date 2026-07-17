@@ -60,7 +60,7 @@ export default function Page() {
           width: 100%;
           padding: 96px 56px 88px; text-align: center;
           border-bottom: 1px solid rgba(0,0,0,0.08);
-          background: url('/banners%20and%20logos/Tools%20page%20main%20.png') center/cover no-repeat;
+          background: url('/banners and logos/Tools page main -3.png') center/cover no-repeat;
           position: relative;
         }
         .lg-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
@@ -181,7 +181,7 @@ export default function Page() {
         .lg-cta-band { width: 100%; padding: 72px 24px 96px; background: #fff; }
         .lg-cta-card {
           max-width: 1180px; margin: 0 auto;
-          background: linear-gradient(rgba(11,61,46,0.75), rgba(11,61,46,0.75)), url('/banners%20and%20logos/Tools%20page%20cta%20.png') center/cover no-repeat;
+          background: url('/banners and logos/Tools page cta -2.png') center/cover no-repeat;
           border-radius: 24px; padding: 56px 60px;
           display: flex; align-items: center; justify-content: space-between; gap: 40px;
           box-shadow: 0 24px 60px rgba(9,48,36,0.22);

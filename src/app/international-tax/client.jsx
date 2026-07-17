@@ -152,9 +152,9 @@ const DTAA_RATES = [
 ];
 
 const GUIDES = [
-  { label: "Transfer pricing in India", sub: "Complete guide to TP compliance", page: "seo_tp" },
-  { label: "FDI rules & FEMA compliance", sub: "Sector limits, filings & penalties", page: "seo_fdi" },
-  { label: "Foreign company registration", sub: "Branch, LO, or subsidiary in India", page: "seo_fcri" },
+  { label: "Transfer pricing in India", sub: "Complete guide to TP compliance", page: "seo_tp", img: "/banners and logos/Transfer pricing in INDIA.png" },
+  { label: "FDI rules & FEMA compliance", sub: "Sector limits, filings & penalties", page: "seo_fdi", img: "/banners and logos/FDI rules & FEMA compliance.png" },
+  { label: "Foreign company registration", sub: "Branch, LO, or subsidiary in India", page: "seo_fcri", img: "/banners and logos/Foreign Company Registration.png" },
 ];
 
 const RATE_CATEGORIES = [
@@ -235,8 +235,9 @@ export default function Page() {
         .ghost-dark { display:inline-flex; align-items:center; gap:8px; background:transparent; color:#fff; font-family:${HV}; font-size:15px; font-weight:600; padding:14px 28px; border-radius:6px; border:1px solid rgba(255,255,255,0.25); cursor:pointer; transition:all 0.2s; text-decoration:none; }
         .ghost-dark:hover { background:rgba(255,255,255,0.08); }
 
-        .guide-card { border: ${BDR}; border-radius: 14px; background: #fff; padding: 22px 22px 18px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+        .guide-card { border: ${BDR}; border-radius: 14px; background: #fff; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; display: flex; flex-direction: column; overflow: hidden; }
         .guide-card:hover { transform: translateY(-3px); border-color: rgba(11,61,46,0.3); box-shadow: 0 8px 28px rgba(11,61,46,0.09); }
+        .guide-card:hover .guide-img { transform: scale(1.04); }
 
         .pill-cell { border: 1px solid #111; border-radius: 8px; background: #fff; text-align: center; padding: 10px 6px; font-size: 13px; font-weight: 500; color: #111; display: flex; align-items: center; justify-content: center; font-family: ${HV}; }
 
@@ -288,9 +289,10 @@ export default function Page() {
       <section className="hero-pad" style={{
         position: 'relative',
         padding: "96px 56px 88px",
-        backgroundImage: "url('/banners%20and%20logos/INTL%20TAX-2.png')",
+        backgroundImage: "url('/banners and logos/INTL TAX-2.png')",
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center 38%',
+        backgroundRepeat: 'no-repeat'
       }}>
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: "0 auto" }}>
@@ -408,10 +410,15 @@ export default function Page() {
             <div className="guide-grid">
               {GUIDES.map((g, gi) => (
                 <Fade key={g.label} delay={gi * 70}>
-                  <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')}>
-                    <div style={{ fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 6, fontFamily: HV, lineHeight: 1.25 }}>{g.label}</div>
-                    <div style={{ fontSize: 12.5, color: "#111", marginBottom: 18, fontFamily: HV, fontWeight: 500 }}>{g.sub}</div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: GREEN, fontFamily: HV }}>Read guide →</div>
+                  <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')} style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
+                    <div style={{ height: 180, width: "100%", overflow: "hidden", position: "relative" }}>
+                      <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.3s ease" }} className="guide-img" />
+                    </div>
+                    <div style={{ padding: "22px 22px 18px", display: "flex", flexDirection: "column", flex: 1 }}>
+                      <div style={{ fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 6, fontFamily: HV, lineHeight: 1.25 }}>{g.label}</div>
+                      <div style={{ fontSize: 12.5, color: "#555", marginBottom: 18, fontFamily: HV, fontWeight: 500 }}>{g.sub}</div>
+                      <div style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: GREEN, fontFamily: HV }}>Read guide →</div>
+                    </div>
                   </div>
                 </Fade>
               ))}

@@ -694,7 +694,6 @@ export default function Page() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <div style={{ backgroundImage: "url('/banners and logos/Post setup pg final CTA.png')", backgroundSize: "cover", backgroundPosition: "center", borderRadius: 20, overflow: "hidden", position: "relative" }}>
-              <div style={{ position: "absolute", inset: 0, background: "rgba(11,61,46,0.8)", pointerEvents: "none" }} />
               <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
               <div style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, padding: "44px 52px", flexWrap: "wrap" }}>
                 <div style={{ flex: 1, minWidth: 260 }}>

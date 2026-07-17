@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { T, CALENDLY_URL, WA_BASE, PHONE_RAW } from '@/lib/config';
 import { trackConsultationRequest, trackGuideDownload, trackWhatsApp } from '@/lib/utils';
 import PricingSection from '@/app/pricing';
@@ -83,6 +84,38 @@ const Ic = {
    SHARED PAGE LAYOUT
    ───────────────────────────────────────────── */
 function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVariant = 'dark', ctaLabel, stats, note, backHref, backLabel }) {
+  const pathname = usePathname();
+
+  let heroStyle = {};
+  let titleStyle = {};
+  let descStyle = {};
+  let lblStyle = {};
+  let backStyle = {};
+  let isCustomBg = false;
+
+  if (pathname === '/private-limited-company-registration-india') {
+    isCustomBg = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/private-limited-company-registration (main).png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/india-market-entry-advisory') {
+    isCustomBg = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/India Market entry main banner.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  }
+
+  if (isCustomBg) {
+    titleStyle = { color: '#ffffff' };
+    descStyle = { color: 'rgba(255,255,255,0.85)' };
+    lblStyle = { color: GOLD };
+    backStyle = { color: 'rgba(255,255,255,0.5)' };
+  }
+
   return (
     <div className="seo-page" style={{ background: '#ffffff' }}>
       <style>{`
@@ -437,6 +470,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         ══════════════════════════════════════ */
         .seo-iconcards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .seo-iconcards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .seo-iconcards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
         .seo-iconcard {
           background: #dde8d8; border: none; border-radius: 20px; padding: 28px 24px 22px;
           display: flex; flex-direction: column; align-items: flex-start; opacity: 0;
@@ -454,8 +488,11 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-iconcard-date { display: inline-block; background: #0f2e18; color: #ffffff; padding: 8px 18px; border-radius: 100px; font-size: 11.5px; font-weight: 700; margin-top: auto; }
         .seo-iconcard.is-featured .seo-iconcard-date { background: rgba(255,255,255,.18); color: #fff; }
         @keyframes stepCardIn { to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 1024px) {
+          .seo-iconcards-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 960px) { .seo-iconcards-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .seo-iconcards-grid, .seo-iconcards-grid.cols-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 560px) { .seo-iconcards-grid, .seo-iconcards-grid.cols-2, .seo-iconcards-grid.cols-4 { grid-template-columns: 1fr; } }
 
         /* ── Small stat row ── */
         .seo-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 8px; }
@@ -652,21 +689,22 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="hv2-hero">
-        <div className="hv2-hero-inner">
+      <section className="hv2-hero" style={heroStyle}>
+        {isCustomBg && <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />}
+        <div className="hv2-hero-inner" style={{ position: 'relative', zIndex: 2 }}>
           {backHref && (
-            <Link href={backHref} className="hv2-back">← {backLabel || 'All Services'}</Link>
+            <Link href={backHref} className="hv2-back" style={backStyle}>← {backLabel || 'All Services'}</Link>
           )}
           <div className={`hv2-hero-grid${stats ? '' : ' hv2-single'}`}>
             <Fade>
-              {eyebrow && <span className="hv2-lbl">{eyebrow}</span>}
-              <h1 className="hv2-title">{title}</h1>
-              <p className="hv2-desc">{description}</p>
+              {eyebrow && <span className="hv2-lbl" style={lblStyle}>{eyebrow}</span>}
+              <h1 className="hv2-title" style={titleStyle}>{title}</h1>
+              <p className="hv2-desc" style={descStyle}>{description}</p>
               <div className="hv2-btns">
                 <button className="hv2-btn" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
                   {ctaLabel || 'Book Free Consultation →'}
                 </button>
-                <button className="hv2-btn-ghost" onClick={() => { window.location.href = ROUTES["services"] || "/"; }}>
+                <button className="hv2-btn-ghost" style={isCustomBg ? { color: '#ffffff', borderColor: '#ffffff' } : {}} onClick={() => { window.location.href = ROUTES["services"] || "/"; }}>
                   View Entity Types →
                 </button>
               </div>
@@ -972,7 +1010,12 @@ function SEOInfoCards({ items, singleCol, cols }) {
     return () => obs.disconnect();
   }, []);
 
-  const gridClass = cols === 2 || singleCol ? 'cols-2' : '';
+  let gridClass = '';
+  if (cols === 4 || (items && items.length > 0 && items.length % 4 === 0)) {
+    gridClass = 'cols-4';
+  } else if (cols === 2 || singleCol) {
+    gridClass = 'cols-2';
+  }
 
   return (
     <div className={`seo-iconcards-grid ${gridClass}`} ref={wrapRef}>
@@ -1289,8 +1332,31 @@ function SEOClientStory({ flag, region, headline, challenge, outcome, proof }) {
    CTA STRIP
 ══════════════════════════════════════════════════════ */
 function SEOCTAStrip({ setPage }) {
+  const pathname = usePathname();
+
+  let ctaBgStyle = {};
+  if (pathname === '/private-limited-company-registration-india') {
+    ctaBgStyle = {
+      backgroundImage: "url('/banners and logos/private-limited-company-registration CTA.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundBlendMode: 'normal',
+      background: "url('/banners and logos/private-limited-company-registration CTA.png') center/cover no-repeat" // Force override linear-gradient
+    };
+  } else if (pathname === '/india-market-entry-advisory') {
+    ctaBgStyle = {
+      backgroundImage: "url('/banners and logos/India Market-  CTA.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundBlendMode: 'normal',
+      background: "url('/banners and logos/India Market-  CTA.png') center/cover no-repeat" // Force override linear-gradient
+    };
+  }
+
   return (
-    <div className="seo-cta-strip reveal">
+    <div className="seo-cta-strip reveal" style={ctaBgStyle}>
       <div>
         <h3 className="seo-cta-title">Ready to get started? Book a free 30-minute consultation.</h3>
         <p className="seo-cta-desc">Expert team reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.</p>
