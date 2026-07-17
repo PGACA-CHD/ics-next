@@ -968,7 +968,7 @@ export default function HomePage() {
       <KnowledgeHubSection />
 
       {/* ── PGA ── */}
-      <section style={{ padding: "70px 56px", background: "#06100D" }}>
+      <section style={{ padding: "70px 56px", backgroundImage: "url('/banners and logos/Knowledge partner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap" }}>

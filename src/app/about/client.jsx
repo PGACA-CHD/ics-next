@@ -410,17 +410,17 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       `}</style>
 
       {/* ══ HERO ══ */}
-      <section style={{ background: '#f5f5f0', padding: '96px 56px 88px', fontFamily: F }} className="sec">
+      <section style={{ backgroundImage: "url('/banners and logos/About us main banner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: '96px 56px 88px', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <Fade>
               <span className="lbl" style={{ marginBottom: 22 }}>About India Company Setup</span>
               <h1 style={{ fontSize: 'clamp(40px,5.5vw,72px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', margin: '0 0 22px', fontFamily: F }}>
-                <span style={{ color: GREEN }}>Big 4 expertise. Independent firm.</span>{' '}
+                <span style={{ color: 'white' }}>Big 4 expertise. Independent firm.</span>{' '}
                 <em style={{ color: GOLD, fontStyle: 'italic', fontWeight: 800 }}>Built for your scale.</em>
               </h1>
-              <p style={{ fontSize: 16, color: '#555', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
-                India Company Setup, a venture of <strong style={{ color: '#111', fontWeight: 700 }}>Divsam Consultants LLP</strong>, was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees.
+              <p style={{ fontSize: 16, color: '#ffffffff', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
+                India Company Setup, a venture of <strong style={{ color: '#de9504ff', fontWeight: 700 }}>Divsam Consultants LLP</strong>, was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <button className="lime-btn" onClick={() => window.location.href = (ROUTES.contact || '/contact')}>Talk to our team →</button>
@@ -570,13 +570,15 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <Fade>
             <div className="reg-strip">
               {[
-                { title: 'MCA / LLP Identification', desc: 'LLPIN [XXXXXXXXXXX], Ministry of Corporate Affairs, Government of India.' },
-                { title: 'Data Handling', desc: 'Client documents handled under a written confidentiality policy. Full statement available on request.' },
-                { title: 'Professional Indemnity', desc: 'Engagements covered under professional liability insurance. Details available on request.' },
+                { title: 'MCA / LLP Identification', desc: 'LLPIN [XXXXXXXXXXX], Ministry of Corporate Affairs, Government of India.', img: '/banners and logos/MCA_LLP.png' },
+                { title: 'Data Handling', desc: 'Client documents handled under a written confidentiality policy. Full statement available on request.', img: '/banners and logos/About Us page - security.png' },
+                { title: 'Professional Indemnity', desc: 'Engagements covered under professional liability insurance. Details available on request.', img: '/banners and logos/Indemnity - About Us.png' },
               ].map(item => (
                 <div key={item.title} className="reg-card">
                   <div className="reg-card-inner">
-                    <div className="reg-ico" />
+                    <div style={{ width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    </div>
                     <div><p className="reg-title">{item.title}</p><p className="reg-desc">{item.desc}</p></div>
                   </div>
                 </div>

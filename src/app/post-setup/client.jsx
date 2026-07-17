@@ -95,41 +95,11 @@ function RippleGrid({ enableRainbow = false, gridColor = '#ffffff', rippleIntens
    Mobile: always expanded (body always visible).
 ───────────────────────────────────────────── */
 function WhyCard({ index, title, body }) {
-  const GOLD_ACC = '#b8730e';   /* warm gold accent */
-  const GOLD_MID = '#e69819';
-  const GOLD_LITE = '#f5c842';
-  const GOLD_BG = 'rgba(184,115,14,0.07)';
-  const GOLD_BDR = 'rgba(184,115,14,0.28)';
-  const animName = `whyWave${index}`;
   const [hovered, setHovered] = useState(false);
 
   return (
     <>
       <style>{`
-        @keyframes ${animName} {
-          0%   { background-position: 0% 60%; }
-          33%  { background-position: 80% 30%; }
-          66%  { background-position: 20% 80%; }
-          100% { background-position: 0% 60%; }
-        }
-        .why-card-${index} {
-          background:
-            radial-gradient(ellipse 130% 80% at 5% 115%,  ${GOLD_ACC}1e 0%, transparent 55%),
-            radial-gradient(ellipse 100% 120% at 95% -10%, ${GOLD_MID}16 0%, transparent 50%),
-            radial-gradient(ellipse 170% 110% at 50% 50%,  ${GOLD_LITE}0c 0%, transparent 68%),
-            #ffffff;
-          background-size: 300% 300%, 300% 300%, 300% 300%, auto;
-          animation: ${animName} ${9 + index * 1.1}s ease infinite;
-          animation-delay: ${index * -1.6}s;
-        }
-        .why-card-${index}:hover {
-          background:
-            radial-gradient(ellipse 150% 95% at 10% 110%, ${GOLD_ACC}30 0%, transparent 55%),
-            radial-gradient(ellipse 110% 130% at 90% -15%, ${GOLD_MID}26 0%, transparent 50%),
-            radial-gradient(ellipse 190% 120% at 50% 50%,  ${GOLD_LITE}1a 0%, transparent 68%),
-            #ffffff;
-          background-size: 300% 300%, 300% 300%, 300% 300%, auto;
-        }
         /* body reveal — height 0 → auto on hover (desktop only) */
         @media(min-width: 961px) {
           .why-body-${index} {
@@ -163,30 +133,39 @@ function WhyCard({ index, title, body }) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          borderTop: `3px solid ${GOLD_ACC}`,
-          borderLeft: `1px solid ${GOLD_BDR}`,
-          borderRight: `1px solid ${GOLD_BDR}`,
-          borderBottom: `1px solid ${GOLD_BDR}`,
-          borderRadius: 16,
-          padding: '22px 22px 20px',
+          background: "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)",
+          border: `1.5px solid rgba(9,48,36,0.14)`,
+          borderRadius: 22,
+          padding: '36px 32px',
           position: 'relative',
           overflow: 'hidden',
-          /* no fixed height — content drives it */
-          transition: 'box-shadow 0.3s ease, transform 0.3s ease',
-          boxShadow: hovered ? `0 12px 36px rgba(184,115,14,0.16)` : '0 2px 8px rgba(0,0,0,0.05)',
-          transform: hovered ? 'translateY(-3px)' : 'none',
+          transition: 'box-shadow 0.25s ease, transform 0.25s ease',
+          boxShadow: hovered ? "0 16px 48px rgba(9,48,36,0.13)" : "0 4px 18px rgba(9,48,36,0.07)",
+          transform: hovered ? 'translateY(-5px)' : 'none',
           cursor: 'pointer',
         }}
       >
-        {/* decorative blobs */}
-        <div style={{ position: 'absolute', top: -32, right: -32, width: 110, height: 110, borderRadius: '50%', background: `radial-gradient(circle,${GOLD_MID}18 0%,transparent 70%)`, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -24, left: -16, width: 90, height: 90, borderRadius: '50%', background: `radial-gradient(circle,${GOLD_ACC}12 0%,transparent 70%)`, pointerEvents: 'none' }} />
+        {/* Subtle top accent line — forest green & gold */}
+        <div style={{
+            position: "absolute", top: 0, left: 0, right: 0, height: 3,
+            background: `linear-gradient(90deg, ${GREEN}, ${GOLD})`,
+            borderRadius: "22px 22px 0 0",
+            opacity: hovered ? 1 : 0.5,
+            transition: "opacity 0.3s ease",
+        }} />
 
-        {/* number badge */}
-        <div style={{ width: 28, height: 28, borderRadius: 7, background: GOLD_BG, border: `1.5px solid ${GOLD_BDR}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: GOLD_ACC, marginBottom: 12, fontFamily: HV, position: 'relative', zIndex: 1 }}>0{index + 1}</div>
+        {/* Card number — top right, muted */}
+        <div style={{
+            position: "absolute", top: 20, right: 24,
+            fontSize: 28, fontWeight: 300,
+            color: "rgba(9,48,36,0.15)", lineHeight: 1,
+            fontFamily: HV
+        }}>
+            {String(index + 1).padStart(2, "0")}
+        </div>
 
         {/* title — always visible */}
-        <div style={{ fontSize: 15, fontWeight: 800, color: '#111', lineHeight: 1.35, fontFamily: HV, marginBottom: 0, position: 'relative', zIndex: 1 }}>{title}</div>
+        <div style={{ fontSize: 16, fontWeight: 800, color: '#111', lineHeight: 1.35, fontFamily: HV, marginBottom: 0, position: 'relative', zIndex: 1, paddingRight: 32 }}>{title}</div>
 
         {/* body — hidden on desktop until hover */}
         <div className={`why-body-${index}`} style={{ position: 'relative', zIndex: 1 }}>
@@ -195,8 +174,8 @@ function WhyCard({ index, title, body }) {
 
         {/* hover hint — desktop only */}
         <div className={`why-hint-${index}`} style={{ alignItems: 'center', gap: 4, marginTop: 10, position: 'relative', zIndex: 1 }}>
-          <span style={{ fontSize: 11, color: GOLD_ACC, fontFamily: HV, fontWeight: 600 }}>Hover to read</span>
-          <span style={{ fontSize: 13, color: GOLD_ACC }}>→</span>
+          <span style={{ fontSize: 11, color: GOLD, fontFamily: HV, fontWeight: 600 }}>Hover to read</span>
+          <span style={{ fontSize: 13, color: GOLD }}>→</span>
         </div>
       </div>
     </>
@@ -544,19 +523,19 @@ export default function Page() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="sec" style={{ background: "#f5f5f0", padding: "96px 56px 88px", position: "relative", overflow: "hidden" }}>
+      <section className="sec" style={{ backgroundImage: "url('/banners and logos/Post setup pg main banner-2.png')", backgroundSize: "cover", backgroundPosition: "center", padding: "96px 56px 88px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <RippleGrid enableRainbow={false} gridColor="#093024" rippleIntensity={0} gridSize={15} gridThickness={28} mouseInteraction={true} mouseInteractionRadius={0.2} opacity={0.07} fadeDistance={0.8} vignetteStrength={1.4} glowIntensity={0} />
         </div>
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="hero-g" style={{ display: "grid", gridTemplateColumns: "1fr 460px", gap: 64, alignItems: "center" }}>
             <Fade>
-              <div className="lbl" style={{ marginBottom: 22 }}>Post Setup Services</div>
+              <div className="lbl" style={{ marginBottom: 22, color: GOLD }}>Post Setup Services</div>
               <h1 style={{ fontSize: "clamp(40px,5.5vw,68px)", fontWeight: 800, lineHeight: 1.04, letterSpacing: "-0.033em", margin: "0 0 22px", fontFamily: HV }}>
-                <span style={{ color: GREEN }}>Your company is set up. Now keep it</span>{" "}
+                <span style={{ color: "#fff" }}>Your company is set up. Now keep it</span>{" "}
                 <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>running compliantly.</em>
               </h1>
-              <p style={{ fontSize: 16, color: "#555", lineHeight: 1.78, maxWidth: 500, margin: "0 0 36px", fontFamily: HV }}>
+              <p style={{ fontSize: 16, color: "rgba(255,255,255,0.85)", lineHeight: 1.78, maxWidth: 500, margin: "0 0 36px", fontFamily: HV }}>
                 Incorporation is day one. Your India compliance calendar starts immediately — tax filings, payroll, FEMA returns, annual audit. We manage all of it so your team stays focused on the business.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 40 }}>
@@ -714,10 +693,8 @@ export default function Page() {
       <section style={{ padding: "56px 56px", background: "#f5f5f0" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
-            <div style={{ background: GREEN, borderRadius: 20, overflow: "hidden", position: "relative" }}>
-              <img src="/images/india-compliance-cta.jpg" alt="" aria-hidden="true"
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.18, pointerEvents: "none" }}
-                onError={e => e.currentTarget.style.display = "none"} />
+            <div style={{ backgroundImage: "url('/banners and logos/Post setup pg final CTA.png')", backgroundSize: "cover", backgroundPosition: "center", borderRadius: 20, overflow: "hidden", position: "relative" }}>
+              <div style={{ position: "absolute", inset: 0, background: "rgba(11,61,46,0.8)", pointerEvents: "none" }} />
               <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
               <div style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, padding: "44px 52px", flexWrap: "wrap" }}>
                 <div style={{ flex: 1, minWidth: 260 }}>
