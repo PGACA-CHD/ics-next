@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 
 const ROUTES = { home: '/', services: '/setup', gcc: '/post-setup', tax: '/international-tax', hub: '/knowledge-hub', about: '/about', contact: '/contact', industries: '/industries' };
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = '"Helvetica Neue", Helvetica, Arial, sans-serif';
 const BDR = "1px solid rgba(0,0,0,0.52)";
 const GLASS = "rgba(255,255,255,0.28)";
 const BLUR = "blur(16px)";
@@ -21,7 +21,6 @@ function Fade({ children, delay = 0 }) {
   const [ref, vis] = useReveal();
   return (<div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'translateY(0)' : 'translateY(22px)', transition: `opacity .55s ease ${delay}ms,transform .55s ease ${delay}ms` }}>{children}</div>);
 }
-
 function CountUp({ target, suffix = '', duration = 1400, delay = 0 }) {
   const [val, setVal] = useState(0);
   const [ref, vis] = useReveal(0.3);
@@ -30,71 +29,40 @@ function CountUp({ target, suffix = '', duration = 1400, delay = 0 }) {
     if (!vis || started.current) return;
     started.current = true;
     if (target === 0) { setTimeout(() => setVal(0), delay); return; }
-    const steps = 40;
-    const stepTime = duration / steps;
-    let step = 0;
-    setTimeout(() => {
-      const id = setInterval(() => { step++; setVal(Math.round(target * step / steps)); if (step >= steps) clearInterval(id); }, stepTime);
-    }, delay);
+    const steps = 40; const stepTime = duration / steps; let step = 0;
+    setTimeout(() => { const id = setInterval(() => { step++; setVal(Math.round(target * step / steps)); if (step >= steps) clearInterval(id); }, stepTime); }, delay);
   }, [vis]);
   return <span ref={ref}>{val}{suffix}</span>;
 }
-
 function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
   return (
     <div style={{ textAlign: center ? "center" : "left", marginBottom: mb, fontFamily: HV }}>
-      {eyebrow && (
-        <p style={{
-          fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase",
-          color: GREEN, fontWeight: 700, marginBottom: 14, fontFamily: HV, margin: "0 0 14px"
-        }}>{eyebrow}</p>
-      )}
+      {eyebrow && <p style={{ fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase", color: GREEN, fontWeight: 700, margin: "0 0 14px", fontFamily: HV }}>{eyebrow}</p>}
       <h2 style={{ fontSize: HS, fontWeight: 700, lineHeight: 1.1, margin: 0, fontFamily: HV }}>
         <span style={{ color: GREEN }}>{green}</span>
-        {gold && <>{" "}<em style={{ color: GOLD, fontStyle: "italic" }}>{gold}</em></>}
+        {gold && <> <em style={{ color: GOLD, fontStyle: "italic" }}>{gold}</em></>}
       </h2>
     </div>
   );
 }
 
-function RippleGrid({
-  enableRainbow = false,
-  gridColor = '#ffffff',
-  rippleIntensity = 0.05,
-  gridSize = 10.0,
-  gridThickness = 15.0,
-  fadeDistance = 1.5,
-  vignetteStrength = 2.0,
-  glowIntensity = 0.1,
-  opacity = 1.0,
-  gridRotation = 0,
-  mouseInteraction = true,
-  mouseInteractionRadius = 1
-}) {
+/* ── RippleGrid (unchanged) ── */
+function RippleGrid({ enableRainbow = false, gridColor = '#ffffff', rippleIntensity = 0.05, gridSize = 10.0, gridThickness = 15.0, fadeDistance = 1.5, vignetteStrength = 2.0, glowIntensity = 0.1, opacity = 1.0, gridRotation = 0, mouseInteraction = true, mouseInteractionRadius = 1 }) {
   const containerRef = useRef(null);
   const mousePositionRef = useRef({ x: 0.5, y: 0.5 });
   const targetMouseRef = useRef({ x: 0.5, y: 0.5 });
   const mouseInfluenceRef = useRef(0);
   const uniformsRef = useRef(null);
-
   useEffect(() => {
     if (!containerRef.current) return;
-    const hexToRgb = hex => {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255] : [1, 1, 1];
-    };
+    const hexToRgb = hex => { const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex); return r ? [parseInt(r[1], 16) / 255, parseInt(r[2], 16) / 255, parseInt(r[3], 16) / 255] : [1, 1, 1]; };
     const renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), alpha: true });
     const gl = renderer.gl;
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.width = '100%';
-    gl.canvas.style.height = '100%';
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.canvas.style.width = '100%'; gl.canvas.style.height = '100%';
     containerRef.current.appendChild(gl.canvas);
     const vert = `attribute vec2 position;varying vec2 vUv;void main(){vUv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
-    const frag = `precision highp float;
-uniform float iTime;uniform vec2 iResolution;uniform bool enableRainbow;uniform vec3 gridColor;uniform float rippleIntensity;uniform float gridSize;uniform float gridThickness;uniform float fadeDistance;uniform float vignetteStrength;uniform float glowIntensity;uniform float opacity;uniform float gridRotation;uniform bool mouseInteraction;uniform vec2 mousePosition;uniform float mouseInfluence;uniform float mouseInteractionRadius;varying vec2 vUv;
-float pi=3.141592;mat2 rotate(float a){float s=sin(a),c=cos(a);return mat2(c,-s,s,c);}
-void main(){vec2 uv=vUv*2.-1.;uv.x*=iResolution.x/iResolution.y;if(gridRotation!=0.)uv=rotate(gridRotation*pi/180.)*uv;float dist=length(uv);float func=sin(pi*(iTime-dist));vec2 rippleUv=uv+uv*func*rippleIntensity;if(mouseInteraction&&mouseInfluence>0.){vec2 mouseUv=(mousePosition*2.-1.);mouseUv.x*=iResolution.x/iResolution.y;float mouseDist=length(uv-mouseUv);float influence=mouseInfluence*exp(-mouseDist*mouseDist/(mouseInteractionRadius*mouseInteractionRadius));float mouseWave=sin(pi*(iTime*2.-mouseDist*3.))*influence;rippleUv+=normalize(uv-mouseUv)*mouseWave*rippleIntensity*.3;}vec2 a=sin(gridSize*.5*pi*rippleUv-pi/2.);vec2 b=abs(a);float aaWidth=.5;vec2 smoothB=vec2(smoothstep(0.,aaWidth,b.x),smoothstep(0.,aaWidth,b.y));vec3 color=vec3(0.);color+=exp(-gridThickness*smoothB.x*(.8+.5*sin(pi*iTime)));color+=exp(-gridThickness*smoothB.y);color+=.5*exp(-(gridThickness/4.)*sin(smoothB.x));color+=.5*exp(-(gridThickness/3.)*smoothB.y);if(glowIntensity>0.){color+=glowIntensity*exp(-gridThickness*.5*smoothB.x);color+=glowIntensity*exp(-gridThickness*.5*smoothB.y);}float ddd=exp(-2.*clamp(pow(dist,fadeDistance),0.,1.));vec2 vc=vUv-.5;float vd=length(vc);float vignette=clamp(1.-pow(vd*2.,vignetteStrength),0.,1.);vec3 t;if(enableRainbow){t=vec3(uv.x*.5+.5*sin(iTime),uv.y*.5+.5*cos(iTime),pow(cos(iTime),4.))+ .5;}else{t=gridColor;}float finalFade=ddd*vignette;float alpha=length(color)*finalFade*opacity;gl_FragColor=vec4(color*t*finalFade*opacity,alpha);}`;
+    const frag = `precision highp float;uniform float iTime;uniform vec2 iResolution;uniform bool enableRainbow;uniform vec3 gridColor;uniform float rippleIntensity;uniform float gridSize;uniform float gridThickness;uniform float fadeDistance;uniform float vignetteStrength;uniform float glowIntensity;uniform float opacity;uniform float gridRotation;uniform bool mouseInteraction;uniform vec2 mousePosition;uniform float mouseInfluence;uniform float mouseInteractionRadius;varying vec2 vUv;float pi=3.141592;mat2 rotate(float a){float s=sin(a),c=cos(a);return mat2(c,-s,s,c);}void main(){vec2 uv=vUv*2.-1.;uv.x*=iResolution.x/iResolution.y;if(gridRotation!=0.)uv=rotate(gridRotation*pi/180.)*uv;float dist=length(uv);float func=sin(pi*(iTime-dist));vec2 rippleUv=uv+uv*func*rippleIntensity;if(mouseInteraction&&mouseInfluence>0.){vec2 mouseUv=(mousePosition*2.-1.);mouseUv.x*=iResolution.x/iResolution.y;float mouseDist=length(uv-mouseUv);float influence=mouseInfluence*exp(-mouseDist*mouseDist/(mouseInteractionRadius*mouseInteractionRadius));float mouseWave=sin(pi*(iTime*2.-mouseDist*3.))*influence;rippleUv+=normalize(uv-mouseUv)*mouseWave*rippleIntensity*.3;}vec2 a=sin(gridSize*.5*pi*rippleUv-pi/2.);vec2 b=abs(a);float aaWidth=.5;vec2 smoothB=vec2(smoothstep(0.,aaWidth,b.x),smoothstep(0.,aaWidth,b.y));vec3 color=vec3(0.);color+=exp(-gridThickness*smoothB.x*(.8+.5*sin(pi*iTime)));color+=exp(-gridThickness*smoothB.y);color+=.5*exp(-(gridThickness/4.)*sin(smoothB.x));color+=.5*exp(-(gridThickness/3.)*smoothB.y);if(glowIntensity>0.){color+=glowIntensity*exp(-gridThickness*.5*smoothB.x);color+=glowIntensity*exp(-gridThickness*.5*smoothB.y);}float ddd=exp(-2.*clamp(pow(dist,fadeDistance),0.,1.));vec2 vc=vUv-.5;float vd=length(vc);float vignette=clamp(1.-pow(vd*2.,vignetteStrength),0.,1.);vec3 t;if(enableRainbow){t=vec3(uv.x*.5+.5*sin(iTime),uv.y*.5+.5*cos(iTime),pow(cos(iTime),4.))+ .5;}else{t=gridColor;}float finalFade=ddd*vignette;float alpha=length(color)*finalFade*opacity;gl_FragColor=vec4(color*t*finalFade*opacity,alpha);}`;
     const uniforms = { iTime: { value: 0 }, iResolution: { value: [1, 1] }, enableRainbow: { value: enableRainbow }, gridColor: { value: hexToRgb(gridColor) }, rippleIntensity: { value: rippleIntensity }, gridSize: { value: gridSize }, gridThickness: { value: gridThickness }, fadeDistance: { value: fadeDistance }, vignetteStrength: { value: vignetteStrength }, glowIntensity: { value: glowIntensity }, opacity: { value: opacity }, gridRotation: { value: gridRotation }, mouseInteraction: { value: mouseInteraction }, mousePosition: { value: [.5, .5] }, mouseInfluence: { value: 0 }, mouseInteractionRadius: { value: mouseInteractionRadius } };
     uniformsRef.current = uniforms;
     const geometry = new Triangle(gl);
@@ -112,14 +80,127 @@ void main(){vec2 uv=vUv*2.-1.;uv.x*=iResolution.x/iResolution.y;if(gridRotation!
     const container = containerRef.current;
     return () => { window.removeEventListener('resize', resize); if (mouseInteraction && container) { container.removeEventListener('mousemove', handleMouseMove); container.removeEventListener('mouseenter', handleMouseEnter); container.removeEventListener('mouseleave', handleMouseLeave); } renderer.gl.getExtension('WEBGL_lose_context')?.loseContext(); container?.removeChild(gl.canvas); };
   }, []);
-
   useEffect(() => {
     if (!uniformsRef.current) return;
     const hexToRgb = hex => { const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex); return r ? [parseInt(r[1], 16) / 255, parseInt(r[2], 16) / 255, parseInt(r[3], 16) / 255] : [1, 1, 1]; };
     uniformsRef.current.enableRainbow.value = enableRainbow; uniformsRef.current.gridColor.value = hexToRgb(gridColor); uniformsRef.current.rippleIntensity.value = rippleIntensity; uniformsRef.current.gridSize.value = gridSize; uniformsRef.current.gridThickness.value = gridThickness; uniformsRef.current.fadeDistance.value = fadeDistance; uniformsRef.current.vignetteStrength.value = vignetteStrength; uniformsRef.current.glowIntensity.value = glowIntensity; uniformsRef.current.opacity.value = opacity; uniformsRef.current.gridRotation.value = gridRotation; uniformsRef.current.mouseInteraction.value = mouseInteraction; uniformsRef.current.mouseInteractionRadius.value = mouseInteractionRadius;
   }, [enableRainbow, gridColor, rippleIntensity, gridSize, gridThickness, fadeDistance, vignetteStrength, glowIntensity, opacity, gridRotation, mouseInteraction, mouseInteractionRadius]);
-
   return <div ref={containerRef} className="ripple-grid-container" />;
+}
+
+/* ─────────────────────────────────────────────
+   WHY-RETAINER CARD — GOLD wave animation
+   Compact: natural content height, no fixed height.
+   Desktop hover: smooth reveal of body text below.
+   Mobile: always expanded (body always visible).
+───────────────────────────────────────────── */
+function WhyCard({ index, title, body }) {
+  const GOLD_ACC = '#b8730e';   /* warm gold accent */
+  const GOLD_MID = '#e69819';
+  const GOLD_LITE = '#f5c842';
+  const GOLD_BG = 'rgba(184,115,14,0.07)';
+  const GOLD_BDR = 'rgba(184,115,14,0.28)';
+  const animName = `whyWave${index}`;
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <>
+      <style>{`
+        @keyframes ${animName} {
+          0%   { background-position: 0% 60%; }
+          33%  { background-position: 80% 30%; }
+          66%  { background-position: 20% 80%; }
+          100% { background-position: 0% 60%; }
+        }
+        .why-card-${index} {
+          background:
+            radial-gradient(ellipse 130% 80% at 5% 115%,  ${GOLD_ACC}1e 0%, transparent 55%),
+            radial-gradient(ellipse 100% 120% at 95% -10%, ${GOLD_MID}16 0%, transparent 50%),
+            radial-gradient(ellipse 170% 110% at 50% 50%,  ${GOLD_LITE}0c 0%, transparent 68%),
+            #ffffff;
+          background-size: 300% 300%, 300% 300%, 300% 300%, auto;
+          animation: ${animName} ${9 + index * 1.1}s ease infinite;
+          animation-delay: ${index * -1.6}s;
+        }
+        .why-card-${index}:hover {
+          background:
+            radial-gradient(ellipse 150% 95% at 10% 110%, ${GOLD_ACC}30 0%, transparent 55%),
+            radial-gradient(ellipse 110% 130% at 90% -15%, ${GOLD_MID}26 0%, transparent 50%),
+            radial-gradient(ellipse 190% 120% at 50% 50%,  ${GOLD_LITE}1a 0%, transparent 68%),
+            #ffffff;
+          background-size: 300% 300%, 300% 300%, 300% 300%, auto;
+        }
+        /* body reveal — height 0 → auto on hover (desktop only) */
+        @media(min-width: 961px) {
+          .why-body-${index} {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1),
+                        opacity    0.35s ease 0.06s,
+                        padding    0.35s ease;
+            padding-top: 0;
+          }
+          .why-card-${index}:hover .why-body-${index} {
+            max-height: 160px;
+            opacity: 1;
+            padding-top: 12px;
+          }
+          .why-hint-${index} {
+            display: flex;
+            transition: opacity 0.25s ease;
+          }
+          .why-card-${index}:hover .why-hint-${index} { opacity: 0; }
+        }
+        @media(max-width: 960px) {
+          .why-body-${index}  { max-height: none !important; opacity: 1 !important; padding-top: 10px !important; }
+          .why-hint-${index}  { display: none !important; }
+        }
+      `}</style>
+
+      <div
+        className={`why-card-${index}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          borderTop: `3px solid ${GOLD_ACC}`,
+          borderLeft: `1px solid ${GOLD_BDR}`,
+          borderRight: `1px solid ${GOLD_BDR}`,
+          borderBottom: `1px solid ${GOLD_BDR}`,
+          borderRadius: 16,
+          padding: '22px 22px 20px',
+          position: 'relative',
+          overflow: 'hidden',
+          /* no fixed height — content drives it */
+          transition: 'box-shadow 0.3s ease, transform 0.3s ease',
+          boxShadow: hovered ? `0 12px 36px rgba(184,115,14,0.16)` : '0 2px 8px rgba(0,0,0,0.05)',
+          transform: hovered ? 'translateY(-3px)' : 'none',
+          cursor: 'pointer',
+        }}
+      >
+        {/* decorative blobs */}
+        <div style={{ position: 'absolute', top: -32, right: -32, width: 110, height: 110, borderRadius: '50%', background: `radial-gradient(circle,${GOLD_MID}18 0%,transparent 70%)`, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -24, left: -16, width: 90, height: 90, borderRadius: '50%', background: `radial-gradient(circle,${GOLD_ACC}12 0%,transparent 70%)`, pointerEvents: 'none' }} />
+
+        {/* number badge */}
+        <div style={{ width: 28, height: 28, borderRadius: 7, background: GOLD_BG, border: `1.5px solid ${GOLD_BDR}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: GOLD_ACC, marginBottom: 12, fontFamily: HV, position: 'relative', zIndex: 1 }}>0{index + 1}</div>
+
+        {/* title — always visible */}
+        <div style={{ fontSize: 15, fontWeight: 800, color: '#111', lineHeight: 1.35, fontFamily: HV, marginBottom: 0, position: 'relative', zIndex: 1 }}>{title}</div>
+
+        {/* body — hidden on desktop until hover */}
+        <div className={`why-body-${index}`} style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ fontSize: 13, color: '#555', lineHeight: 1.72, fontFamily: HV }}>{body}</div>
+        </div>
+
+        {/* hover hint — desktop only */}
+        <div className={`why-hint-${index}`} style={{ alignItems: 'center', gap: 4, marginTop: 10, position: 'relative', zIndex: 1 }}>
+          <span style={{ fontSize: 11, color: GOLD_ACC, fontFamily: HV, fontWeight: 600 }}>Hover to read</span>
+          <span style={{ fontSize: 13, color: GOLD_ACC }}>→</span>
+        </div>
+      </div>
+    </>
+  );
 }
 
 const SERVICES = {
@@ -156,86 +237,258 @@ const SVC_COLOR = {
   fema: { acc: "#093024", bg: "rgba(9,48,36,0.09)", bdr: "rgba(9,48,36,0.30)" },
   transfer_pricing: { acc: "#1a5c9a", bg: "rgba(26,92,154,0.09)", bdr: "rgba(26,92,154,0.30)" },
 };
+const ACCENTS = Object.values(SVC_COLOR);
 
-const ACCENTS = Object.values(SVC_COLOR).map(v => ({ acc: v.acc, bg: v.bg, bdr: v.bdr }));
+/* ─────────────────────────────────────────────
+   RETAINER PRICING — inline, no tab switching.
+   Shows only the 3 ongoing retainer plans.
+   Accent colour: deep navy #1a3a5c (not gold, not green).
+───────────────────────────────────────────── */
+const RET_ACC = '#1a3a5c';   /* deep navy — distinct from green & gold */
+const RET_MID = '#2a5a8c';   /* lighter navy for popular badge */
+const RET_LIGHT = 'rgba(26,58,92,0.08)';
+const RET_BDR = 'rgba(26,58,92,0.22)';
 
-/* ── Wave gradient derived from accent color ── */
-/* Each card gets a unique wave keyframe name so they animate independently */
-function WaveCard({ acc, bg, bdr, index, title, body }) {
-  const animName = `wave${index}`;
-  // Parse the accent color into an rgba for the wave layers
-  // We derive 3 tinted stops: solid → lighter mid → near-white base
+const RETAINER_PLANS = [
+  {
+    tier: 'Core',
+    price: '$300',
+    unit: '/ month',
+    minTerm: '6-month minimum term',
+    popular: false,
+    description: 'For lean entities with light monthly transaction volume.',
+    includedLabel: "What's included",
+    features: [
+      'Monthly bookkeeping — up to 50 invoices/month',
+      'GST/TDS for light volume — up to 50 invoices/month',
+      'Payroll support — up to 20 employees',
+      'ROC annual filing',
+      'Quarterly review call',
+    ],
+  },
+  {
+    tier: 'Plus',
+    price: '$600',
+    unit: '/ month',
+    minTerm: '6-month minimum term',
+    popular: true,
+    description: 'For growing entities that need monthly reporting and audit support.',
+    includedLabel: 'Everything in Core, plus',
+    features: [
+      'Monthly bookkeeping — up to 200 invoices/month',
+      'GST/TDS for volume — up to 200 invoices/month',
+      'Payroll support — up to 40 employees',
+      'Monthly MIS pack',
+      'Audit support',
+      'Monthly PF/ESI filing',
+    ],
+  },
+  {
+    tier: 'Controller Desk',
+    price: '$1,800',
+    unit: '/ month',
+    minTerm: '6-month minimum term',
+    popular: false,
+    description: 'Full controller-level coverage with board reporting and priority turnaround.',
+    includedLabel: 'Everything in Plus, plus',
+    features: [
+      'Complete monthly bookkeeping',
+      'GST/TDS filings',
+      'Payroll support — up to 100 employees',
+      'Board/HQ reporting support',
+      'Controller close checklist',
+      'Expanded process support',
+      'Priority SLA',
+    ],
+  },
+];
+
+function RetainerPricing() {
+  const router = useRouter();
   return (
     <>
       <style>{`
-        @keyframes ${animName} {
-          0%   { background-position: 0% 60%; }
-          25%  { background-position: 60% 40%; }
-          50%  { background-position: 100% 60%; }
-          75%  { background-position: 40% 80%; }
-          100% { background-position: 0% 60%; }
+        .ret-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          align-items: stretch;
         }
-        .wc-${index} {
-          background:
-            radial-gradient(ellipse 120% 80% at 10% 110%, ${acc}22 0%, transparent 55%),
-            radial-gradient(ellipse 90% 120% at 90% -10%, ${acc}18 0%, transparent 50%),
-            radial-gradient(ellipse 160% 100% at 50% 50%, ${acc}0d 0%, transparent 70%),
-            #ffffff;
-          background-size: 300% 300%, 300% 300%, 300% 300%, auto;
-          animation: ${animName} 8s ease infinite;
-          animation-delay: ${index * -1.4}s;
+        .ret-card {
+          border-radius: 20px;
+          padding: 34px 28px;
+          border: 1px solid ${RET_BDR};
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          overflow: visible;
+          background: #fff;
+          transition: box-shadow 0.28s ease, transform 0.28s ease;
         }
-        .wc-${index}:hover {
-          background:
-            radial-gradient(ellipse 140% 90% at 15% 105%, ${acc}33 0%, transparent 55%),
-            radial-gradient(ellipse 100% 130% at 85% -15%, ${acc}28 0%, transparent 50%),
-            radial-gradient(ellipse 180% 110% at 50% 50%, ${acc}18 0%, transparent 70%),
-            #ffffff;
-          background-size: 300% 300%, 300% 300%, 300% 300%, auto;
+        .ret-card:hover {
+          box-shadow: 0 14px 40px rgba(26,58,92,0.14);
+          transform: translateY(-3px);
+        }
+        .ret-card.is-pop {
+          background: ${RET_ACC};
+          border-color: ${RET_ACC};
+          box-shadow: 0 20px 56px rgba(26,58,92,0.28);
+        }
+        .ret-card.is-pop:hover {
+          box-shadow: 0 24px 64px rgba(26,58,92,0.36);
+          transform: translateY(-4px);
+        }
+        .ret-badge {
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: ${RET_MID};
+          color: #fff;
+          font-size: 11px;
+          font-weight: 700;
+          padding: 5px 18px;
+          border-radius: 50px;
+          white-space: nowrap;
+          letter-spacing: 0.5px;
+          font-family: ${HV};
+        }
+        .ret-tier {
+          font-size: 10.5px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin-bottom: 14px;
+          font-family: ${HV};
+        }
+        .ret-price-row {
+          display: flex;
+          align-items: flex-end;
+          gap: 6px;
+          margin-bottom: 4px;
+          flex-wrap: wrap;
+        }
+        .ret-price {
+          font-family: ${HV};
+          font-weight: 800;
+          line-height: 1;
+        }
+        .ret-unit { font-size: 13px; padding-bottom: 5px; font-family: ${HV}; }
+        .ret-minterm { font-size: 11.5px; margin-bottom: 14px; font-family: ${HV}; }
+        .ret-desc { font-size: 13.5px; line-height: 1.72; margin-bottom: 24px; font-family: ${HV}; }
+        .ret-cta {
+          width: 100%;
+          padding: 13px 20px;
+          font-size: 14px;
+          font-weight: 600;
+          border-radius: 10px;
+          margin-bottom: 28px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(0,0,0,0.18);
+          font-family: ${HV};
+          transition: opacity .2s ease, transform .15s ease;
+        }
+        .ret-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+        .ret-inc-label {
+          font-size: 10.5px;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin-bottom: 14px;
+          font-family: ${HV};
+        }
+        .ret-features {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          flex: 1;
+        }
+        .ret-features li {
+          display: flex;
+          gap: 10px;
+          font-size: 13.5px;
+          line-height: 1.5;
+          font-family: ${HV};
+        }
+        .ret-check { font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+        @media(max-width: 900px) {
+          .ret-grid { grid-template-columns: 1fr; }
         }
       `}</style>
-      <div
-        className={`flip-wrap wc-${index}`}
-        style={{ '--card-acc': acc, borderTop: `3px solid ${acc}`, borderLeft: `1px solid ${bdr}`, borderRight: `1px solid ${bdr}`, borderBottom: `1px solid ${bdr}`, borderRadius: 16, position: 'relative', overflow: 'hidden' }}
-      >
-        {/* floating blob — extra visual depth */}
-        <div style={{
-          position: 'absolute', top: -40, right: -40, width: 160, height: 160,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${acc}20 0%, transparent 70%)`,
-          pointerEvents: 'none',
-          animation: `${animName} ${10 + index * 1.2}s ease infinite reverse`,
-        }} />
-        <div style={{
-          position: 'absolute', bottom: -30, left: -20, width: 120, height: 120,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${acc}15 0%, transparent 70%)`,
-          pointerEvents: 'none',
-          animation: `${animName} ${12 + index * 0.8}s ease infinite`,
-          animationDelay: `${index * -2}s`,
-        }} />
 
-        <div className="flip-inner">
-          {/* FRONT */}
-          <div className="flip-front" style={{
-            background: 'transparent',
-            border: 'none',
-            borderRadius: 16,
-          }}>
-            <div style={{ width: 30, height: 30, borderRadius: 8, background: bg, border: `1.5px solid ${bdr}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: acc, marginBottom: 14, fontFamily: HV }}>0{index + 1}</div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: '#111', lineHeight: 1.3, fontFamily: HV, flex: 1 }}>{title}</div>
-            <div className="mob-hide" style={{ paddingTop: 16, fontSize: 11, color: acc, fontFamily: HV, alignItems: 'center', gap: 4, fontWeight: 600 }}>
-              <span>Hover to read</span><span style={{ fontSize: 13 }}>→</span>
+      <div className="ret-grid">
+        {RETAINER_PLANS.map(plan => {
+          const pop = plan.popular;
+          const tc = pop ? '#fff' : '#111';
+          return (
+            <div key={plan.tier} className={`ret-card${pop ? ' is-pop' : ''}`}>
+              {pop && <div className="ret-badge">Most Popular</div>}
+
+              {/* Tier label */}
+              <div className="ret-tier" style={{ color: pop ? 'rgba(255,255,255,0.55)' : RET_ACC }}>
+                {plan.tier}
+              </div>
+
+              {/* Price */}
+              <div style={{ fontSize: 11, color: tc, marginBottom: 6, fontFamily: HV }}>Starts at</div>
+              <div className="ret-price-row">
+                <span className="ret-price" style={{ fontSize: pop ? 50 : 40, color: pop ? '#7eb8f7' : RET_ACC }}>
+                  {plan.price}
+                </span>
+                <span className="ret-unit" style={{ color: tc }}>{plan.unit}</span>
+              </div>
+              <div className="ret-minterm" style={{ color: pop ? 'rgba(255,255,255,0.5)' : '#888' }}>
+                {plan.minTerm}
+              </div>
+
+              {/* Description */}
+              <p className="ret-desc" style={{ color: pop ? 'rgba(255,255,255,0.82)' : '#555' }}>
+                {plan.description}
+              </p>
+
+              {/* CTA */}
+              <button
+                className="ret-cta"
+                style={{
+                  background: pop ? '#7eb8f7' : RET_ACC,
+                  color: pop ? RET_ACC : '#fff',
+                  borderColor: pop ? '#7eb8f7' : RET_ACC,
+                }}
+                onClick={() => router.push(ROUTES.contact)}
+              >
+                Contact Us →
+              </button>
+
+              {/* Features */}
+              <div className="ret-inc-label" style={{ color: pop ? 'rgba(255,255,255,0.5)' : '#aaa' }}>
+                {plan.includedLabel}
+              </div>
+              <ul className="ret-features">
+                {plan.features.map(f => (
+                  <li key={f} style={{ color: tc }}>
+                    <span className="ret-check" style={{ color: pop ? '#7eb8f7' : RET_ACC }}>✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-          {/* BACK */}
-          <div className="flip-back" style={{ background: acc }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 12, fontFamily: HV }}>0{index + 1}</div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 12, fontFamily: HV }}>{title}</div>
-            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.75, fontFamily: HV, flex: 1 }}>{body}</div>
-          </div>
-        </div>
+          );
+        })}
       </div>
+
+      {/* bottom note */}
+      <p style={{ textAlign: 'center', marginTop: 32, fontSize: 13, color: '#888', fontFamily: HV }}>
+        All prices in USD and exclude applicable taxes.{' '}
+        <button
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontSize: 13, color: RET_ACC, fontWeight: 700, fontFamily: HV }}
+          onClick={() => router.push(ROUTES.contact)}
+        >Book a free call for a custom quote →</button>
+      </p>
     </>
   );
 }
@@ -266,33 +519,25 @@ export default function Page() {
         .ripple-grid-container{width:100%;height:100%;position:relative;}
         .ripple-grid-container canvas{display:block;}
 
-        /* ── flip card: mobile-first ── */
-        .flip-wrap{cursor:default;transition:box-shadow .3s;}
-        .flip-wrap:hover{box-shadow:0 12px 40px rgba(0,0,0,0.12);}
-        .flip-inner{position:relative;display:flex;flex-direction:column;}
-        .flip-front,.flip-back{position:relative;border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;}
-        .flip-front{border-radius:16px 16px 0 0;border-bottom:none;}
-        .flip-back{background:${GREEN};border-radius:0 0 16px 16px;border-top:1px solid rgba(255,255,255,0.15);}
-        .mob-hide{display:none;}
-
-        /* ── desktop: hover-to-flip ── */
-        @media(min-width:961px){
-          .flip-wrap{perspective:1000px;height:240px;cursor:pointer;}
-          .flip-inner{width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s ease;}
-          .flip-wrap:hover .flip-inner{transform:rotateY(180deg);}
-          .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:24px 22px;}
-          .flip-front{border-bottom:none;}
-          .flip-back{background:linear-gradient(135deg,var(--card-acc,#093024) 0%,rgba(255,255,255,0.15) 200%);transform:rotateY(180deg);border-top:none;}
-          .mob-hide{display:flex;}
+        /* ── Why-retainer grid — equal height rows via CSS grid ── */
+        .why-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          /* grid auto rows: all cells same height — min is content, max stretches */
+          grid-auto-rows: 1fr;
+          gap: 18px;
         }
+        /* Ensure Fade wrapper fills grid cell */
+        .why-grid > div { display: flex; flex-direction: column; }
+        .why-grid > div > div { flex: 1; display: flex; flex-direction: column; }
 
         @media(max-width:960px){
           .hero-g,.svc-g,.two-col{grid-template-columns:1fr!important;}
-          .three-col{grid-template-columns:1fr 1fr!important;}
+          .three-col,.why-grid{grid-template-columns:1fr 1fr!important;}
           .stat-grid{grid-template-columns:1fr 1fr!important;}
         }
         @media(max-width:540px){
-          .three-col{grid-template-columns:1fr!important;}
+          .three-col,.why-grid{grid-template-columns:1fr!important;}
           .sec{padding:56px 18px!important;}
           .stat-grid{grid-template-columns:1fr 1fr!important;}
         }
@@ -319,18 +564,11 @@ export default function Page() {
                 <button className="ghost-btn" onClick={() => router.push(ROUTES.tax)}>Int'l Tax Advisory →</button>
               </div>
               <div className="stat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
-                {[
-                  { target: 100, suffix: "+", label: "Companies on retainer" },
-                  { target: 0, suffix: "", label: "Penalties incurred" },
-                  { target: 18, suffix: "+", label: "Years experience" },
-                  { target: 6, suffix: "", label: "Service areas" },
-                ].map((s, i) => {
+                {[{ target: 100, suffix: "+", label: "Companies on retainer" }, { target: 0, suffix: "", label: "Penalties incurred" }, { target: 18, suffix: "+", label: "Years experience" }, { target: 6, suffix: "", label: "Service areas" }].map((s, i) => {
                   const c = ACCENTS[i];
                   return (
                     <div key={i} style={{ background: "#fff", border: `1px solid ${c.bdr}`, borderTop: `3px solid ${c.acc}`, borderRadius: 14, padding: "16px 12px", textAlign: "center", boxShadow: `0 4px 14px ${c.bg}` }}>
-                      <div style={{ fontSize: "clamp(22px,2.5vw,28px)", fontWeight: 800, color: c.acc, lineHeight: 1, fontFamily: HV }}>
-                        <CountUp target={s.target} suffix={s.suffix} delay={i * 220} />
-                      </div>
+                      <div style={{ fontSize: "clamp(22px,2.5vw,28px)", fontWeight: 800, color: c.acc, lineHeight: 1, fontFamily: HV }}><CountUp target={s.target} suffix={s.suffix} delay={i * 220} /></div>
                       <div style={{ fontSize: 10.5, color: "#777", marginTop: 5, fontFamily: HV, lineHeight: 1.3 }}>{s.label}</div>
                     </div>
                   );
@@ -344,9 +582,7 @@ export default function Page() {
                   <div key={c.period} style={{ marginBottom: 20 }}>
                     <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", color: c.hdr, marginBottom: 10, fontFamily: HV }}>{c.period}</div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                      {c.items.map(item => (
-                        <span key={item} className="cal-pill" style={{ background: c.bg, color: c.text, border: `1px solid ${c.bdr}` }}>{item}</span>
-                      ))}
+                      {c.items.map(item => <span key={item} className="cal-pill" style={{ background: c.bg, color: c.text, border: `1px solid ${c.bdr}` }}>{item}</span>)}
                     </div>
                   </div>
                 ))}
@@ -363,7 +599,7 @@ export default function Page() {
             <div style={{ textAlign: "center", marginBottom: 32 }}>
               <SH eyebrow="Our Post Setup Services" green="Everything your India entity needs" gold="to stay compliant." mb={12} />
               <p style={{ fontSize: 14.5, color: "#555", margin: "0 auto 28px", maxWidth: 640, fontFamily: HV, lineHeight: 1.6 }}>Select each service to see exactly what's covered — monthly and annual.</p>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center", marginBottom: 0 }}>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
                 {SVC_LIST.map(([key, label]) => (
                   <button key={key} className={active === key ? "tab-on" : "tab-off"} onClick={() => setActive(key)}>{label}</button>
                 ))}
@@ -386,12 +622,10 @@ export default function Page() {
                     <span key={i} style={{ display: "inline-block", fontSize: 12, fontWeight: 600, padding: "6px 13px", borderRadius: 50, background: sc.bg, color: sc.acc, border: `1px solid ${sc.bdr}`, fontFamily: HV, lineHeight: 1.3 }}>{item}</span>
                   ))}
                 </div>
-                <button
-                  onClick={() => router.push(ROUTES.contact)}
+                <button onClick={() => router.push(ROUTES.contact)}
                   style={{ marginTop: "auto", alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 8, background: sc.acc, color: "#fff", fontFamily: HV, fontSize: 13, fontWeight: 700, padding: "11px 20px", borderRadius: 7, border: "none", cursor: "pointer", transition: "opacity .2s,transform .15s" }}
                   onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}
-                >
+                  onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Get a Quote for {svc.title} →
                 </button>
               </div>
@@ -432,12 +666,9 @@ export default function Page() {
                   <div style={{ fontSize: 12.5, color: "#666", fontFamily: HV }}>15-minute call — we map your compliance obligations for free, no commitment.</div>
                 </div>
               </div>
-              <button
-                onClick={() => router.push(ROUTES.contact)}
+              <button onClick={() => router.push(ROUTES.contact)}
                 style={{ display: "inline-flex", alignItems: "center", gap: 8, background: sc.acc, color: "#fff", fontFamily: HV, fontSize: 13.5, fontWeight: 700, padding: "12px 24px", borderRadius: 7, border: "none", cursor: "pointer", whiteSpace: "nowrap", transition: "opacity .2s" }}
-                onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
-                onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-              >
+                onMouseEnter={e => e.currentTarget.style.opacity = "0.88"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
                 Book Free Call →
               </button>
             </div>
@@ -445,21 +676,36 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── WHY RETAINER — wave gradient front faces ── */}
-      <section className="sec" style={{ padding: "88px 56px", background: "#fff", borderTop: "1px solid rgba(0,0,0,.07)" }}>
+      {/* ══ RETAINER PRICING ══ */}
+      <section style={{ padding: "88px 56px", background: "#fff" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <Fade>
+            <SH eyebrow="Compliance Retainer Pricing" green="Transparent pricing for" gold="ongoing compliance." mb={16} />
+            <p style={{ fontSize: 14.5, color: "#555", margin: "0 auto 48px", maxWidth: 560, textAlign: "center", fontFamily: HV, lineHeight: 1.6 }}>
+              Fixed monthly fee. No surprises. 6-month minimum term. Cancel with 30 days notice.
+            </p>
+          </Fade>
+          <RetainerPricing />
+        </div>
+      </section>
+
+      {/* ── WHY RETAINER ── */}
+      <section className="sec" style={{ padding: "88px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Why a Retainer" green="Why foreign companies use a" gold="compliance retainer in India." mb={44} />
           </Fade>
-          <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18 }}>
-            {WHY.map(([title, body], i) => {
-              const c = ACCENTS[0];
-              return (
-                <Fade key={i} delay={i * 60}>
-                  <WaveCard acc={c.acc} bg={c.bg} bdr={c.bdr} index={i} title={title} body={body} />
-                </Fade>
-              );
-            })}
+          {/*
+            why-grid: CSS grid-auto-rows:1fr makes all cells in each row equal height.
+            WhyCard has no fixed height — content drives natural height.
+            On desktop hover: body text reveals via max-height transition.
+          */}
+          <div className="why-grid">
+            {WHY.map(([title, body], i) => (
+              <Fade key={i} delay={i * 55}>
+                <WhyCard index={i} title={title} body={body} />
+              </Fade>
+            ))}
           </div>
         </div>
       </section>
@@ -483,12 +729,10 @@ export default function Page() {
                   </div>
                 </div>
                 <div style={{ flexShrink: 0 }}>
-                  <button
-                    onClick={() => router.push(ROUTES.contact)}
+                  <button onClick={() => router.push(ROUTES.contact)}
                     style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#c8870a", color: "#fff", fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: "15px 28px", borderRadius: 8, border: "none", cursor: "pointer", whiteSpace: "nowrap", transition: "background .2s,transform .15s" }}
                     onMouseEnter={e => { e.currentTarget.style.background = "#e09a10"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "#c8870a"; e.currentTarget.style.transform = "translateY(0)"; }}
-                  >
+                    onMouseLeave={e => { e.currentTarget.style.background = "#c8870a"; e.currentTarget.style.transform = "translateY(0)"; }}>
                     Talk to Our Expert Team →
                   </button>
                 </div>

@@ -354,7 +354,7 @@ export default function Page() {
         }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:88px 56px; }
-        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#aaa; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
+        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
         .sec-div { border-top:1px solid rgba(0,0,0,0.08); }
@@ -393,9 +393,9 @@ export default function Page() {
       `}</style>
 
       {/* HERO */}
-      <section className="sec" style={{ background: '#f5f5f0', padding: '100px 56px 92px' }}>
+      <section className="sec" style={{ backgroundImage: 'url("/banners%20and%20logos/Singapore.png")', backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
-          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
+          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#000000ff', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
               <span className="lbl">Company Registration · From Singapore</span>

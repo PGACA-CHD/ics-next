@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ background: '#111108', padding: '72px 56px 40px', fontFamily: "'DM Sans', sans-serif" }}>
+    <footer style={{ background: '#111108', backgroundImage: "url('/banners/private-limited-company-registration CTA.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: '72px 56px 40px', fontFamily: "'DM Sans', sans-serif" }}>
       <div style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         {/* Main grid */}
@@ -21,7 +21,7 @@ export default function Footer() {
               Your end-to-end partner for India market entry — incorporation, transfer pricing, FEMA, and ongoing compliance. A team of CAs, CS & accountants. Ex-Big 4 led. 18+ years setting up foreign entities in India.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <a href={`tel:${PHONE.replace(/\s/g,'')}`} style={{ fontSize: 13, color: 'rgba(255,255,255,.45)', textDecoration: 'none' }}>{PHONE}</a>
+              <a href={`tel:${PHONE.replace(/\s/g, '')}`} style={{ fontSize: 13, color: 'rgba(255,255,255,.45)', textDecoration: 'none' }}>{PHONE}</a>
               <a href={`mailto:${EMAIL}`} style={{ fontSize: 13, color: 'rgba(255,255,255,.45)', textDecoration: 'none' }}>{EMAIL}</a>
               <span style={{ fontSize: 12, color: 'rgba(255,255,255,.25)', lineHeight: 1.5 }}>SCO 18, Top Floor, Sector 20-D<br />Chandigarh 160020</span>
             </div>

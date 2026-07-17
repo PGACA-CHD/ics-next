@@ -392,25 +392,25 @@ export default function Page() {
       `}</style>
 
       {/* HERO */}
-      <section className="sec" style={{ background: '#f5f5f0', padding: '100px 56px 92px' }}>
+      <section className="sec" style={{ backgroundImage: 'url("/banners%20and%20logos/USA.png")', backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
               <span className="lbl">Company Registration · From the United States</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV }}>
-                <span style={{ color: GREEN }}>Register a Company<br />in India from</span>{' '}
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#000000ff', marginBottom: 22, fontFamily: HV }}>
+                <span style={{ color: 'rgba(255, 255, 255, 0.79)' }}>Register a Company<br />in India from</span>{' '}
                 <span style={{ position: 'relative', display: 'inline-block', color: '#c8870a' }}>
                   the USA
                   <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#c8870a', borderRadius: 2 }} />
                 </span>
               </h1>
-              <p style={{ fontSize: 16, color: '#555', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
+              <p style={{ fontSize: 16, color: '#fff', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
                 100% online. No India visit required. Expert CA support for US-based NRIs, foreign nationals, and American businesses expanding into India.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link href="/contact" className="g-btn">Get a Free Consultation →</Link>
-                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#111', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid #111', lineHeight: 1 }}>See the Process</a>
+                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#ffffffff', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid #ffffffff', lineHeight: 1 }}>See the Process</a>
               </div>
             </Fade>
             <Fade delay={100}>

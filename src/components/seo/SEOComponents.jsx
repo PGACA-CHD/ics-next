@@ -162,10 +162,11 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         /* ══════════════════════════════════════
            SPECIAL PICKS — marginTop tracking
            2-col grid. Left = list. Right col is
-           align-self:start. The detail card is a
-           normal block; JS sets its marginTop to
-           the active row's offsetTop so it sits
-           flush with that row. No absolute pos.
+           align-self:start normal flow.
+           The detail card uses marginTop to slide
+           down to align with the active row.
+           marginTop = row.getBoundingClientRect().top
+                     - list.getBoundingClientRect().top
         ══════════════════════════════════════ */
         .seo-picks-wrap {
           display: grid;
@@ -203,11 +204,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         /* Right column — normal flow, align-self: start */
         .seo-picks-right { align-self: start; }
 
-        /* Detail card — normal block, marginTop drives vertical position */
+        /* Detail card — slides via marginTop, natural content height */
         .seo-picks-detail {
           background: #f0f7f0; border: 1px solid #c8dfc8; border-radius: 18px;
           padding: 26px 26px 24px; display: flex; flex-direction: column; gap: 10px;
-          transition: margin-top 0.36s cubic-bezier(0.34, 1.18, 0.64, 1);
+          transition: margin-top 0.38s cubic-bezier(0.34, 1.18, 0.64, 1);
+          margin-top: 0;
         }
         .seo-picks-detail-content { display: flex; flex-direction: column; gap: 10px; animation: pickFadeIn .3s ease; }
         @keyframes pickFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
@@ -220,7 +222,6 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
 
         @media (max-width: 860px) {
           .seo-picks-wrap { grid-template-columns: 1fr; gap: 12px; }
-          .seo-picks-right { align-self: auto; }
           .seo-picks-detail { margin-top: 0 !important; transition: none; }
         }
 
@@ -701,7 +702,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
 function SEOSection({ label, title, children }) {
   return (
     <div className="seo-section reveal">
-      {label && <div className="seo-section-eyebrow">{label}</div>}
+      {/* {label && <div className="seo-section-eyebrow">{label}</div>} */}
       {title && (
         <h2 className="seo-section-title">
           {typeof title === 'string'
@@ -719,39 +720,37 @@ function SEOProseP({ children }) {
 }
 
 /* ══════════════════════════════════════════════════════
-   Special-picks reveal list
-   Layout: 2-col grid. Left = list. Right = position:relative
-   container that is sized to match the list height via JS.
-   The detail card sits position:absolute inside the right
-   column, with `top` = the active row's offsetTop so it
-   snaps flush with the selected item.
-   Mobile (≤860px): right col is static, card renders below.
+   SEOPicksReveal
+   marginTop on the detail card = distance from top of
+   the list container to the top of the active row,
+   measured via getBoundingClientRect() so it is always
+   accurate regardless of scroll position or nesting.
 ══════════════════════════════════════════════════════ */
 function SEOPicksReveal({ items }) {
   const [active, setActive] = useState(0);
-  const [cardTop, setCardTop] = useState(8);   /* 8px = list padding-top */
-  const [rightH, setRightH] = useState(200);  /* fallback height */
+  const [cardMt, setCardMt] = useState(0);
   const [progKey, setProgKey] = useState(0);
+
   const listRef = useRef(null);
   const rowRefs = useRef([]);
+  const cardRef = useRef(null);
   const timerRef = useRef(null);
+  const activeRef = useRef(0);   /* always-current active index for the interval */
 
   const n = items.length;
-  const safeActive = Math.min(active, n - 1);
-  const current = items[safeActive];
 
-  /* auto-advance */
+  /* keep activeRef in sync */
+  useEffect(() => { activeRef.current = active; }, [active]);
+
+  /* auto-advance every 5 s */
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setActive(prev => {
-        const next = (prev + 1) % n;
-        setProgKey(k => k + 1);
-        return next;
-      });
+      const next = (activeRef.current + 1) % n;
+      setActive(next);
+      setProgKey(k => k + 1);
     }, 5000);
   };
-
   useEffect(() => { startTimer(); return () => clearInterval(timerRef.current); }, [n]);
 
   const handleClick = (i) => {
@@ -760,34 +759,46 @@ function SEOPicksReveal({ items }) {
     startTimer();
   };
 
-  /* recompute card top whenever active changes or on resize */
+  /* recompute marginTop = row.top - list.top, capped so card stays within list */
+  const computeMt = (idx) => {
+    if (window.innerWidth <= 860) { setCardMt(0); return; }
+    const row = rowRefs.current[idx];
+    const list = listRef.current;
+    const card = cardRef.current;
+    if (!row || !list) return;
+    const listRect = list.getBoundingClientRect();
+    const rowRect = row.getBoundingClientRect();
+    const cardH = card ? card.offsetHeight : 0;
+    const delta = rowRect.top - listRect.top;
+    const maxMt = Math.max(0, listRect.height - cardH);
+    setCardMt(Math.min(Math.max(0, delta), maxMt));
+  };
+
   useEffect(() => {
-    const update = () => {
-      const row = rowRefs.current[safeActive];
-      const list = listRef.current;
-      if (!row || !list) return;
-      setCardTop(row.offsetTop);
-      setRightH(list.offsetHeight);
-    };
-    /* double-raf so layout is painted */
-    const id = requestAnimationFrame(() => requestAnimationFrame(update));
-    window.addEventListener('resize', update);
-    return () => { cancelAnimationFrame(id); window.removeEventListener('resize', update); };
-  }, [safeActive]);
+    /* double-raf: wait for DOM paint after active change */
+    const id = requestAnimationFrame(() =>
+      requestAnimationFrame(() => computeMt(active))
+    );
+    const onResize = () => computeMt(active);
+    window.addEventListener('resize', onResize);
+    return () => { cancelAnimationFrame(id); window.removeEventListener('resize', onResize); };
+  }, [active]);
+
+  const current = items[Math.min(active, n - 1)];
 
   return (
     <div className="seo-picks-wrap">
 
-      {/* LEFT — clickable list */}
+      {/* LEFT — list */}
       <div className="seo-picks-list" ref={listRef}>
         {items.map((item, i) => (
           <button
             key={i}
             type="button"
             ref={el => { rowRefs.current[i] = el; }}
-            className={`seo-pick-row${safeActive === i ? ' is-active' : ''}`}
+            className={`seo-pick-row${active === i ? ' is-active' : ''}`}
             onClick={() => handleClick(i)}
-            aria-pressed={safeActive === i}
+            aria-pressed={active === i}
           >
             <div className="seo-pick-main">
               <div className="seo-pick-label">{item.label}</div>
@@ -798,21 +809,20 @@ function SEOPicksReveal({ items }) {
         ))}
       </div>
 
-      {/* RIGHT — relative container sized to list height; card floats at row top */}
-      <div className="seo-picks-right" style={{ minHeight: rightH }}>
+      {/* RIGHT — normal-flow column; card slides via marginTop */}
+      <div className="seo-picks-right">
         <div
-          className="seo-picks-detail-col"
-          style={{ top: cardTop, transition: 'top 0.36s cubic-bezier(0.34,1.18,0.64,1)' }}
+          className="seo-picks-detail"
+          style={{ marginTop: cardMt }}
+          ref={cardRef}
         >
-          <div className="seo-picks-detail">
-            <div className="seo-picks-detail-content" key={safeActive}>
-              <div className="seo-picks-detail-eyebrow">{current.eyebrow || current.label}</div>
-              <h3 className="seo-picks-detail-title">{current.title}</h3>
-              <p className="seo-picks-detail-desc">{current.description}</p>
-            </div>
-            <div className="seo-picks-progress">
-              <div className="seo-picks-progress-bar" key={progKey} />
-            </div>
+          <div className="seo-picks-detail-content" key={active}>
+            <div className="seo-picks-detail-eyebrow">{current.eyebrow || current.label}</div>
+            <h3 className="seo-picks-detail-title">{current.title}</h3>
+            <p className="seo-picks-detail-desc">{current.description}</p>
+          </div>
+          <div className="seo-picks-progress">
+            <div className="seo-picks-progress-bar" key={progKey} />
           </div>
         </div>
       </div>

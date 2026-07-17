@@ -5,36 +5,29 @@ const TOOLS = [
   { href: '/tools/income-tax-calculator', icon: 'fas fa-calculator', title: 'Income Tax Calculator', subtitle: 'FY 2025-26 / AY 2026-27', desc: 'Companies, LLP, and Individuals (resident & non-resident) under New & Old Regime. Slab-wise breakdown with surcharge, cess, and MAT/AMT warnings.', tags: ['Companies', 'LLP', 'Individuals', 'New & Old Regime'], cta: 'Open Calculator', color: 'blue', group: 'Tax Calculators' },
   { href: '/tools/advance-tax-calculator', icon: 'fas fa-calendar-alt', title: 'Advance Tax Calculator', subtitle: 'FY 2026-27 · Quarterly Instalments', desc: 'Calculate quarterly advance tax instalments. Due dates: 15 June, 15 September, 15 December, 15 March. Covers individuals, companies and LLPs.', tags: ['Advance Tax', 'Instalments', '234B / 234C', 'Quarterly'], cta: 'Calculate Instalments', color: 'blue', group: 'Tax Calculators' },
   { href: '/tools/capital-gains-calculator', icon: 'fas fa-chart-line', title: 'Capital Gains Calculator', subtitle: 'FY 2025-26 · Budget 2024 Rates', desc: 'LTCG and STCG on listed equity, property, debt funds and other assets. Updated for Budget 2024 rate changes — 12.5% LTCG on equity, property without indexation.', tags: ['LTCG', 'STCG', 'Equity', 'Property'], cta: 'Calculate Capital Gains', color: 'green', group: 'Tax Calculators' },
-  { href: '/tools/payroll-calculator', icon: 'fas fa-money-bill-wave', title: 'Payroll / CTC Calculator', subtitle: 'CTC to Take-Home Salary', desc: 'Convert CTC to monthly take-home. Computes PF, ESI, professional tax, and income tax under New or Old Regime. Includes employer PF and gratuity breakdown.', tags: ['CTC', 'Take-Home', 'PF & ESI', 'Income Tax'], cta: 'Calculate Take-Home', color: 'purple', group: 'Tax Calculators' },
+  { href: '/tools/payroll-calculator', icon: 'fas fa-money-bill-wave', title: 'Payroll / CTC Calculator', subtitle: 'CTC to Take-Home Salary', desc: 'Convert CTC to monthly take-home. Computes PF, ESI, professional tax, and income tax under New or Old Regime. Includes employer PF and gratuity breakdown.', tags: ['CTC', 'Take-Home', 'PF & ESI', 'Income Tax'], cta: 'Calculate Take-Home', color: 'green', group: 'Tax Calculators' },
   { href: '/tools/tds-rates', icon: 'fas fa-clipboard-list', title: 'TDS Rate Chart', subtitle: 'FY 2026-27 · Sections 192–196D', desc: 'Comprehensive TDS rate reference across all major sections — 192 to 196D. Searchable table with threshold limits, challan codes, IT Act 2025 table references, and individual/HUF vs company rates.', tags: ['Section 194', 'Section 195', 'Non-Residents', 'All Sections'], cta: 'View TDS Rates', color: 'blue', group: 'GST & Compliance' },
   { href: '/tools/tcs-rates', icon: 'fas fa-receipt', title: 'TCS Rate Chart', subtitle: 'FY 2026-27 · Section 206C', desc: 'All TCS sub-sections under Section 206C — scrap, timber, minerals, LRS remittances (20% / 5% / 0.5%), motor vehicles, and sale of goods. IT Act 2025 mapping and Form 27EQ codes.', tags: ['Section 206C', 'LRS / Remittance', 'Form 27EQ', 'IT Act 2025'], cta: 'View TCS Rates', color: 'blue', group: 'GST & Compliance' },
   { href: '/tools/hsn-sac-finder', icon: 'fas fa-search', title: 'GST HSN / SAC Finder', subtitle: 'Live CBIC Search · 4 & 6-digit codes', desc: 'Find HSN codes for goods or SAC codes for services. Browse 500+ 4-digit and 6-digit codes across all 99 chapters, or search live via CBIC.', tags: ['HSN Codes', 'SAC Codes', '6-digit', 'CBIC'], cta: 'Search HSN / SAC', color: 'green', group: 'GST & Compliance' },
-  { href: '/tools/gst-due-dates', icon: 'fas fa-calendar-check', title: 'GST Due Date Calendar', subtitle: 'FY 2026-27 · All Return Types', desc: 'GSTR-1, GSTR-3B, GSTR-9, GSTR-4, CMP-08 due dates for FY 2026-27. Covers monthly filers, QRMP quarterly filers, and composition dealers.', tags: ['GSTR-1', 'GSTR-3B', 'GSTR-9', 'QRMP'], cta: 'View Calendar', color: 'red', group: 'GST & Compliance' },
+  { href: '/tools/gst-due-dates', icon: 'fas fa-calendar-check', title: 'GST Due Date Calendar', subtitle: 'FY 2026-27 · All Return Types', desc: 'GSTR-1, GSTR-3B, GSTR-9, GSTR-4, CMP-08 due dates for FY 2026-27. Covers monthly filers, QRMP quarterly filers, and composition dealers.', tags: ['GSTR-1', 'GSTR-3B', 'GSTR-9', 'QRMP'], cta: 'View Calendar', color: 'blue', group: 'GST & Compliance' },
   { href: '/tools/dtaa-rate-finder', icon: 'fas fa-globe', title: 'DTAA Rate Finder', subtitle: "India · 90+ Treaty Countries", desc: "Find withholding tax rates under India's DTAA with 90+ countries — dividends, interest, royalties, and FTS. Covers TRC requirements and MLI impact.", tags: ['DTAA', 'Withholding Tax', 'Treaty', 'Form 10F'], cta: 'Find Treaty Rates', color: 'green', group: 'International Tax' },
   { href: '/tools/fdi-sector-checker', icon: 'fas fa-industry', title: 'FDI Sector Limit Checker', subtitle: 'DPIIT Consolidated FDI Policy', desc: "Check FDI limits for any sector — automatic route vs government approval route. 65+ sectors covered with conditions. Based on DPIIT's Consolidated FDI Policy.", tags: ['FDI Limits', 'Automatic Route', 'Government Route', 'DPIIT'], cta: 'Check FDI Limits', color: 'blue', group: 'International Tax' },
-  { href: '/tools/company-name-check', icon: 'fas fa-building', title: 'Company Name Check', subtitle: 'MCA RUN · Name Availability Guide', desc: 'Guide to checking company name availability in India. Name rules, prohibited words, MCA portal links, and tips for getting your name approved first time.', tags: ['MCA', 'RUN Service', 'Company Name', 'SPICe+'], cta: 'Check Name Rules', color: 'purple', group: 'Incorporation' },
+  { href: '/tools/company-name-check', icon: 'fas fa-building', title: 'Company Name Check', subtitle: 'MCA RUN · Name Availability Guide', desc: 'Guide to checking company name availability in India. Name rules, prohibited words, MCA portal links, and tips for getting your name approved first time.', tags: ['MCA', 'RUN Service', 'Company Name', 'SPICe+'], cta: 'Check Name Rules', color: 'green', group: 'Incorporation' },
 ];
 
 const PILL = {
   blue: { bg: 'rgba(0,113,227,0.10)', text: '#004ea8', bdr: 'rgba(0,113,227,0.40)' },
   green: { bg: 'rgba(36,138,61,0.10)', text: '#165c28', bdr: 'rgba(36,138,61,0.40)' },
-  red: { bg: 'rgba(215,0,21,0.10)', text: '#a30010', bdr: 'rgba(215,0,21,0.40)' },
-  purple: { bg: 'rgba(137,68,171,0.10)', text: '#5e1f80', bdr: 'rgba(137,68,171,0.40)' },
 };
 
 const SPOTLIGHT = {
   blue: 'rgba(0,113,227,0.20)',
   green: 'rgba(36,138,61,0.20)',
-  red: 'rgba(215,0,21,0.20)',
-  purple: 'rgba(137,68,171,0.20)',
 };
 
-// accent color per tool color key
 const ACCENT_TEXT = {
   blue: '#004ea8',
   green: '#165c28',
-  red: '#a30010',
-  purple: '#5e1f80',
 };
 
 const G = '#0B3D2E';
@@ -56,7 +49,7 @@ export default function Page() {
         *, *::before, *::after { box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important; }
 
         .lg-page {
-          --blue: #0071e3; --green: #248a3d; --red: #d70015; --purple: #8944ab;
+          --blue: #0071e3; --green: #248a3d;
           --brand: #0B3D2E; --brand-hover: #0f4a35;
           --dark: #000; --mid: #000;
           min-height: 100vh; background: #fff; color: #000;
@@ -78,7 +71,6 @@ export default function Page() {
           margin: 0 0 14px;
         }
 
-        /* heading — same HS as every other section */
         .lg-hero h1 {
           font-size: ${HS}; font-weight: 700; line-height: 1.1;
           letter-spacing: -0.01em; margin: 0 0 20px; color: #fff;
@@ -113,7 +105,6 @@ export default function Page() {
           --spotlight-color: rgba(0,0,0,0.06);
           background: #fff;
           border-radius: 14px;
-          /* BLACK border */
           border: 1.5px solid rgba(0,0,0,0.18);
           box-shadow: 0 2px 12px rgba(0,0,0,0.05);
           padding: 22px 20px; display: flex; flex-direction: column;
@@ -150,11 +141,8 @@ export default function Page() {
         .lg-card .sub {
           font-size: 11.5px; font-weight: 600; margin-top: 3px; color: #000;
         }
-        /* subtitle accent stays the tool color */
-        .c-blue   { color: var(--blue)   !important; }
-        .c-green  { color: var(--green)  !important; }
-        .c-red    { color: var(--red)    !important; }
-        .c-purple { color: var(--purple) !important; }
+        .c-blue  { color: var(--blue)  !important; }
+        .c-green { color: var(--green) !important; }
 
         .lg-card p {
           font-size: 13.5px; color: #000; line-height: 1.68;
@@ -218,18 +206,18 @@ export default function Page() {
 
         /* ── RESPONSIVE ── */
         @media (max-width: 960px) {
-          .lg-grid   { grid-template-columns: repeat(2,1fr); }
-          .lg-section{ padding: 40px 18px 64px; }
-          .lg-hero   { padding: 72px 28px 64px; }
+          .lg-grid    { grid-template-columns: repeat(2,1fr); }
+          .lg-section { padding: 40px 18px 64px; }
+          .lg-hero    { padding: 72px 28px 64px; }
         }
         @media (max-width: 760px) {
           .lg-cta-card { flex-direction: column; align-items: flex-start; padding: 40px 28px; }
           .lg-cta-btn  { width: 100%; justify-content: center; }
         }
         @media (max-width: 520px) {
-          .lg-grid   { grid-template-columns: 1fr; gap: 12px; }
-          .lg-hero   { padding: 56px 18px 52px; }
-          .lg-section{ padding: 32px 14px 56px; }
+          .lg-grid    { grid-template-columns: 1fr; gap: 12px; }
+          .lg-hero    { padding: 56px 18px 52px; }
+          .lg-section { padding: 32px 14px 56px; }
           .lg-cta-band{ padding: 56px 16px 72px; }
         }
       `}</style>
@@ -237,21 +225,15 @@ export default function Page() {
       {/* ── HERO ── */}
       <section className="lg-hero">
         <div className="lg-hero-inner">
-
-          {/* eyebrow — same style as every other section */}
           <p className="lg-hero-eyebrow">Free Tools</p>
-
-          {/* heading — green half + gold italic half, same HS size */}
           <h1>
             <span className="h-green">India Tax, GST &amp; Corporate</span>{' '}
             <span className="h-gold">Reference Tools.</span>
           </h1>
-
           <p>
             10 free calculators and reference tools built by our Ex-Big 4 CA team — income tax,
             capital gains, advance tax, payroll, TDS, GST, DTAA, FDI limits and more. No sign-up required.
           </p>
-
           <Link href="/contact" className="lg-hero-btn">
             Talk to our CA team &rarr;
           </Link>
@@ -273,40 +255,24 @@ export default function Page() {
                 style={{ '--spotlight-color': SPOTLIGHT[tool.color] }}
               >
                 <div className="lg-card-content">
-
-                  {/* Title only (Icon removed) */}
                   <div className="lg-card-head">
                     <div className="lg-title-block">
                       <h2>{tool.title}</h2>
-                      {/* subtitle keeps its accent color — only place color appears */}
                       <div className={`sub c-${tool.color}`}>{tool.subtitle}</div>
                     </div>
                   </div>
-
-                  {/* Description — black */}
                   <p>{tool.desc}</p>
-
-                  {/* Tags */}
                   <div className="lg-tags">
                     {tool.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="lg-tag"
-                        style={{ background: p.bg, color: p.text, border: `1px solid ${p.bdr}` }}
-                      >
+                      <span key={tag} className="lg-tag" style={{ background: p.bg, color: p.text, border: `1px solid ${p.bdr}` }}>
                         {tag}
                       </span>
                     ))}
                   </div>
-
-                  {/* Footer */}
                   <div className="lg-foot">
-                    <span className="lg-cta-label" style={{ color: accentText }}>
-                      {tool.cta} &rarr;
-                    </span>
+                    <span className="lg-cta-label" style={{ color: accentText }}>{tool.cta} &rarr;</span>
                     <span className="lg-group-label">{tool.group}</span>
                   </div>
-
                 </div>
               </Link>
             );

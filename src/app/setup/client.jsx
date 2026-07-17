@@ -635,7 +635,7 @@ export default function Page() {
       {/* ════════════════════════════════════════
           HERO
       ════════════════════════════════════════ */}
-      <section className="sec" style={{ background: "#f5f5f0" }}>
+      <section className="sec" style={{ backgroundImage: "url('/banners and logos/private-limited-company-registration (main).png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="inner">
           <div className="hero-grid">
 
@@ -988,22 +988,22 @@ export default function Page() {
       {/* ════════════════════════════════════════
           CTA
       ════════════════════════════════════════ */}
-      <section className="sec" style={{ background: GREEN, borderTop: "1.5px solid #111", textAlign: "center" }}>
+      <section className="sec" style={{ backgroundImage: "url('/banners%20and%20logos/private-limited-company-registration%20CTA.png')", backgroundSize: 'cover', backgroundPosition: 'center', borderTop: "1.5px solid #111", textAlign: "center" }}>
         <div style={{ maxWidth: 540, margin: "0 auto" }}>
-          <div className="lbl" style={{ color: "rgba(255,255,255,0.45)", letterSpacing: "0.3em", marginBottom: 14 }}>Get Started</div>
-          <h2 style={{ fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 800, color: "#fff", lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.03em", fontFamily: HV }}>
+          <div className="lbl" style={{ color: "#111", letterSpacing: "0.3em", marginBottom: 14 }}>Get Started</div>
+          <h2 style={{ fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 800, color: "#000000ff", lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.03em", fontFamily: HV }}>
             Ready to set up your India entity the right way?
           </h2>
-          <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "rgba(255,255,255,0.85)", lineHeight: 1.8, marginBottom: 28, fontFamily: HV, fontWeight: 500 }}>
+          <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "rgba(0, 0, 0, 0.85)", lineHeight: 1.8, marginBottom: 28, fontFamily: HV, fontWeight: 500 }}>
             Book a free 30-minute structure review. We'll assess your business, recommend the right entity type and FDI route, and give you a clear week-by-week plan.
           </p>
           <div className="cta-btn-row">
             <button className="lime-btn" style={{ background: GOLD, border: "1px solid #111" }} onClick={() => router.push(ROUTES.contact)}>Book Free Structure Review →</button>
-            <a href="tel:+919915731447" className="ghost-dark" style={{ border: "1px solid #fff" }}>Call +91 99157 31447</a>
+            <a href="tel:+919915731447" className="ghost-dark" style={{ border: "1px solid #000000ff" }}>Call +91 99157 31447</a>
           </div>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             {["Free 30-min consultation", "CA, CS & accountant team", "Response within 24 hours"].map(t => (
-              <span key={t} style={{ fontSize: "clamp(11px,1.1vw,12px)", color: "rgba(255,255,255,0.6)", display: "inline-flex", alignItems: "center", gap: 5, fontFamily: HV, fontWeight: 500 }}>✓ {t}</span>
+              <span key={t} style={{ fontSize: "clamp(11px,1.1vw,12px)", color: "rgba(0, 0, 0, 0.6)", display: "inline-flex", alignItems: "center", gap: 5, fontFamily: HV, fontWeight: 500 }}>✓ {t}</span>
             ))}
           </div>
         </div>
