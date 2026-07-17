@@ -827,18 +827,18 @@ export default function HomePage() {
               <SH eyebrow="Global Reach" green="Clients from every" gold="major market." center={false} mb={0} />
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid #ECE7E1", borderRadius: 10, overflow: "hidden" }}>
                 {[
-                  { Icon: ClientsIcon, num: "200+", label: "Clients Worldwide" },
-                  { Icon: GlobeIcon, num: "90+", label: "Countries Covered" },
-                  { Icon: MarketIcon, num: "10+", label: "Markets Operate" },
-                  { Icon: StarIcon, num: "98%", label: "Client Satisfaction" },
-                ].map(({ Icon, num, label }, i) => (
+                  { img: "/banners and logos/Clients WorldWide.png", num: "200+", label: "Clients Worldwide" },
+                  { img: "/banners and logos/Countries Covered.png", num: "90+", label: "Countries Covered" },
+                  { img: "/banners and logos/Markets operate.png", num: "10+", label: "Markets Operate" },
+                  { img: "/banners and logos/Client Satisfaction (2).png", num: "98%", label: "Client Satisfaction" },
+                ].map(({ img, num, label }, i) => (
                   <div key={label} style={{
                     padding: "16px 12px", textAlign: "center",
                     borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none",
                     borderTop: i >= 2 ? "1px solid #ECE7E1" : "none",
                     display: "flex", flexDirection: "column", alignItems: "center", gap: 5
                   }}>
-                    <Icon />
+                    <img src={img} alt={label} style={{ width: 38, height: 38, objectFit: "contain" }} />
                     <div style={{ fontSize: 26, color: "#000", lineHeight: 1, fontWeight: 700, fontFamily: HV }}>{num}</div>
                     <div style={{ fontSize: 11, color: "#555", lineHeight: 1.35, fontFamily: HV }}>{label}</div>
                   </div>
