@@ -362,7 +362,11 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
 
           {/* ── Row 2: CTA buttons ── */}
           <div className="nhero-cta-row">
-            <button className="nhero-btn-primary" onClick={() => go(ROUTES.contact)}>
+            <button className="nhero-btn-primary" onClick={() => {
+              const el = document.getElementById('final-cta');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              else go(ROUTES.contact);
+            }}>
               Book Free 30-min Strategy Call →
             </button>
 

@@ -985,7 +985,7 @@ export default function HomePage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
+      <section id="final-cta" style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(100deg, rgba(0,0,0,0.85) 4%, rgba(0,0,0,0.68) 42%, rgba(0,0,0,0.45) 78%)" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", display: "grid", gridTemplateColumns: "1fr 420px", gap: 64, alignItems: "center" }} className="final-cta-grid">
           <div>
