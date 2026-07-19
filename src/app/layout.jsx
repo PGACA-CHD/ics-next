@@ -22,6 +22,7 @@ const cardo = Cardo({
 import { SITE_NAME, SITE_URL } from '@/lib/config';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
+import CommonCTA from '@/components/common/CommonCTA';
 import WhatsAppFloat from '@/components/shared/WhatsAppFloat';
 import ChatWidget from '@/components/shared/ChatWidget';
 import Analytics from '@/components/shared/Analytics';
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
         </noscript>
         <Nav />
         <main>{children}</main>
+        <CommonCTA />
         <Footer />
         <WhatsAppFloat />
         <ChatWidget />

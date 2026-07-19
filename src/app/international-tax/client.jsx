@@ -35,7 +35,17 @@ function useReveal(t = 0.12) {
 }
 
 function Fade({ children, delay = 0, up = true }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   const [ref, vis] = useReveal();
+
+  if (isMobile) {
+    return <div>{children}</div>;
+  }
+
   return (
     <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : (up ? 'translateY(22px)' : 'translateY(0)'), transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms` }}>
       {children}
@@ -349,7 +359,7 @@ export default function Page() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="sec-pad" style={{ padding: "88px 56px", background: "#fff", borderTop: BDR }}>
+      <section className="sec-pad" style={{ padding: "88px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Our Services" green="International tax services for" gold="foreign companies in India." mb={44} />
@@ -400,7 +410,7 @@ export default function Page() {
       {/* ── DETAILED GUIDES ── */}
       <section className="sec-pad" style={{ padding: "0 56px 88px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ borderTop: BDR, paddingTop: 48 }}>
+          <div style={{ paddingTop: 48 }}>
             <Fade>
               <div className="lbl" style={{ marginBottom: 12 }}>Detailed Guides</div>
               <h2 style={{ fontSize: "clamp(20px,2.5vw,30px)", fontWeight: 800, letterSpacing: "-0.02em", color: "#111", margin: "0 0 32px", fontFamily: HV }}>
@@ -428,7 +438,7 @@ export default function Page() {
       </section>
 
       {/* ── DTAA TABLE ── */}
-      <section className="sec-pad" style={{ padding: "88px 56px 96px", background: "#fff", borderTop: BDR }}>
+      <section className="sec-pad" style={{ padding: "88px 56px 96px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Withholding Rates" green="India DTAA" gold="withholding rates." mb={16} />
@@ -485,27 +495,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ backgroundImage: "url('/banners and logos/International tax advisory final CTA.png')", backgroundSize: "cover", backgroundPosition: "center", borderTop: "1.5px solid #111", padding: "80px 56px", textAlign: "center" }}>
-        <div style={{ maxWidth: 540, margin: "0 auto" }}>
-          <div className="lbl" style={{ color: "rgba(0,0,0,0.55)", marginBottom: 16 }}>Get Started</div>
-          <h2 style={{ fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 800, color: "#111", lineHeight: 1.08, marginBottom: 16, letterSpacing: "-0.03em", fontFamily: HV }}>
-            Ready to get your India tax structure right?
-          </h2>
-          <p style={{ fontSize: 15, color: "rgba(0,0,0,0.75)", lineHeight: 1.8, marginBottom: 32, fontFamily: HV, fontWeight: 500 }}>
-            Book a free 30-minute consultation. We'll review your structure, identify key risks and savings, and give you a clear action plan.
-          </p>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 22 }}>
-            <button className="lime-btn" style={{ background: GOLD, border: "1px solid #111", color: "#111" }} onClick={() => router.push(ROUTES.contact)}>Book Tax Consultation →</button>
-            <a href="tel:+919915731447" className="ghost-dark" style={{ border: "1px solid #111", color: "#111" }}>Call +91 99157 31447</a>
-          </div>
-          <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
-            {["Free 30-min consultation", "CA, CS & tax team", "Response within 24 hours"].map(t => (
-              <span key={t} style={{ fontSize: 12, color: "rgba(0,0,0,0.55)", fontFamily: HV, fontWeight: 500 }}>{t}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
     </div>
   );

@@ -18,7 +18,17 @@ function useReveal(t = 0.12) {
   return [ref, vis];
 }
 function Fade({ children, delay = 0 }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   const [ref, vis] = useReveal();
+
+  if (isMobile) {
+    return <div>{children}</div>;
+  }
+
   return (<div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'translateY(0)' : 'translateY(22px)', transition: `opacity .55s ease ${delay}ms,transform .55s ease ${delay}ms` }}>{children}</div>);
 }
 function CountUp({ target, suffix = '', duration = 1400, delay = 0 }) {
@@ -572,7 +582,7 @@ export default function Page() {
       </section>
 
       {/* ── SERVICE SELECTOR ── */}
-      <section className="sec" style={{ padding: "88px 56px", background: "#fff" }}>
+      <section className="sec" style={{ background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <div style={{ textAlign: "center", marginBottom: 32 }}>
@@ -634,7 +644,7 @@ export default function Page() {
       </section>
 
       {/* ── MID-PAGE CTA ── */}
-      <section style={{ padding: "0 56px 88px", background: "#fff" }}>
+      <section style={{ padding: "0 56px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap", background: "#fff", border: `1.5px solid ${sc.bdr}`, borderRadius: 16, padding: "26px 30px", boxShadow: `0 6px 20px ${sc.bg}` }}>
@@ -656,7 +666,7 @@ export default function Page() {
       </section>
 
       {/* ══ RETAINER PRICING ══ */}
-      <section style={{ padding: "88px 56px", background: "#fff" }}>
+      <section className="sec" style={{ background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Compliance Retainer Pricing" green="Transparent pricing for" gold="ongoing compliance." mb={16} />
@@ -669,7 +679,7 @@ export default function Page() {
       </section>
 
       {/* ── WHY RETAINER ── */}
-      <section className="sec" style={{ padding: "88px 56px", background: "#fff" }}>
+      <section className="sec" style={{ background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Why a Retainer" green="Why foreign companies use a" gold="compliance retainer in India." mb={44} />
@@ -689,34 +699,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ padding: "56px 56px", background: "#f5f5f0" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Fade>
-            <div style={{ backgroundImage: "url('/banners and logos/Post setup pg final CTA.png')", backgroundSize: "cover", backgroundPosition: "center", borderRadius: 20, overflow: "hidden", position: "relative" }}>
-              <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
-              <div style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, padding: "44px 52px", flexWrap: "wrap" }}>
-                <div style={{ flex: 1, minWidth: 260 }}>
-                  <blockquote style={{ fontFamily: HV, fontSize: "clamp(15px,1.8vw,19px)", fontStyle: "italic", fontWeight: 400, color: "rgba(255,255,255,0.90)", lineHeight: 1.65, margin: "0 0 16px" }}>
-                    "Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."
-                  </blockquote>
-                  <div style={{ fontFamily: HV, fontSize: 12.5, color: "rgba(255,255,255,0.45)", letterSpacing: "0.02em" }}>
-                    — P.G., FCA · Diploma in International Taxation · 18 yrs Ex-Big 4
-                  </div>
-                </div>
-                <div style={{ flexShrink: 0 }}>
-                  <button onClick={() => router.push(ROUTES.contact)}
-                    style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#c8870a", color: "#fff", fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: "15px 28px", borderRadius: 8, border: "none", cursor: "pointer", whiteSpace: "nowrap", transition: "background .2s,transform .15s" }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "#e09a10"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "#c8870a"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                    Talk to Our Expert Team →
-                  </button>
-                </div>
-              </div>
-            </div>
-          </Fade>
-        </div>
-      </section>
     </div>
   );
 }

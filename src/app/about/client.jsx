@@ -24,7 +24,17 @@ function useReveal(t = 0.12) {
 }
 
 function Fade({ children, delay = 0, up = true }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   const [ref, vis] = useReveal();
+
+  if (isMobile) {
+    return <div>{children}</div>;
+  }
+
   return (
     <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'translateY(0)' : (up ? 'translateY(22px)' : 'translateY(0)'), transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms` }}>
       {children}
@@ -145,7 +155,7 @@ function WhyVisual() {
         ))}
       </div>
       <div style={{ display: 'flex', gap: 0, marginTop: 32, borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, position: 'relative', zIndex: 1 }}>
-        {[['100+', 'Companies'], ['5', 'Continents'], ['Zero', 'Audits lost']].map(([n, l], i) => (
+        {[['100+', 'Companies'], ['5', 'Continents'], ['15+', 'Team Members']].map(([n, l], i) => (
           <div key={n} style={{ flex: 1, textAlign: 'center', borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none', padding: '0 12px' }}>
             <p style={{ fontFamily: F, fontSize: 28, fontWeight: 800, color: '#111', lineHeight: 1, marginBottom: 4 }}>{n}</p>
             <p style={{ fontFamily: F, fontSize: 10.5, color: '#666', letterSpacing: '0.04em' }}>{l}</p>
@@ -570,9 +580,9 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <Fade>
             <div className="reg-strip">
               {[
-                { title: 'MCA / LLP Identification', desc: 'LLPIN [XXXXXXXXXXX], Ministry of Corporate Affairs, Government of India.', img: '/banners and logos/MCA_LLP.png' },
-                { title: 'Data Handling', desc: 'Client documents handled under a written confidentiality policy. Full statement available on request.', img: '/banners and logos/About Us page - security.png' },
-                { title: 'Professional Indemnity', desc: 'Engagements covered under professional liability insurance. Details available on request.', img: '/banners and logos/Indemnity - About Us.png' },
+                { title: 'MCA / LLP Identification', desc: 'Divsam Consultants LLP (LLPIN: AAF-8044), incorporated on 26th Feb 2016, Ministry of Corporate Affairs, Government of India.', img: '/banners and logos/MCA_LLP.png' },
+                { title: 'ICAI Registration', desc: 'Divsam Consultants LLP is a registered practice under the Institute of Chartered Accountants of India (ICAI).', img: '/banners and logos/Indemnity - About Us.png' },
+                { title: 'PGA & Co., CA', desc: 'Knowledge partner PGA & Co., Chartered Accountants, registered with ICAI since 13th August 2013.', img: '/banners and logos/MCA_LLP.png' },
               ].map(item => (
                 <div key={item.title} className="reg-card">
                   <div className="reg-card-inner">

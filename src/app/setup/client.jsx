@@ -40,7 +40,17 @@ function useReveal(t = 0.12) {
 }
 
 function Fade({ children, delay = 0, up = true }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   const [ref, vis] = useReveal();
+
+  if (isMobile) {
+    return <div>{children}</div>;
+  }
+
   return (
     <div ref={ref} style={{
       opacity: vis ? 1 : 0,
@@ -386,12 +396,13 @@ export default function Page() {
         }
 
         /* ── KEY FEATURES (plain tick list, no boxes) ── */
-        .feature-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+        .feature-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; min-width: 0; }
         .feature-row {
           display: flex;
           align-items: flex-start;
           gap: 10px;
           padding: 4px 0;
+          min-width: 0;
         }
         .feature-tick {
           width: 18px; height: 18px; border-radius: 50%;
@@ -399,7 +410,11 @@ export default function Page() {
           display: flex; align-items: center; justify-content: center;
           font-size: 11px; font-weight: 800; color: #fff;
         }
-        .feature-text { font-size: clamp(11px,1.2vw,13px); font-weight: 600; color: #111; font-family: ${HV}; line-height: 1.5; }
+        .feature-text {
+          font-size: clamp(11px,1.2vw,13px); font-weight: 600; color: #111;
+          font-family: ${HV}; line-height: 1.5;
+          min-width: 0; overflow-wrap: break-word; word-break: break-word;
+        }
 
         /* ── PROCESS TIMELINE ── */
         .timeline-wrap {
@@ -596,15 +611,20 @@ export default function Page() {
           .gc { padding: 18px 14px !important; }
           .doc-pill { padding: 9px 12px !important; }
           .feature-row { padding: 3px 0; }
+          .feature-text { font-size: 11px !important; line-height: 1.4 !important; }
+          .feature-tick { width: 15px !important; height: 15px !important; font-size: 9px !important; }
+          .metrics-grid { gap: 6px !important; padding: 10px 0 !important; }
           .cmp-table th, .cmp-table td { padding: 8px 5px !important; font-size: 11px !important; }
+          .entity-tabs { gap: 4px; }
+          .tab-on, .tab-off { padding: 7px 12px !important; font-size: 11px !important; }
         }
         @media(max-width:420px){
           .sec { padding: clamp(28px,6vw,48px) 12px !important; }
           .entity-tabs { gap: 4px; }
-          .tab-on, .tab-off { padding: 8px 10px; font-size: 11px; }
-          .lime-btn { font-size: 13px; padding: 12px 16px; }
-          .ghost-btn { font-size: 13px; padding: 12px 16px; }
-          .ghost-dark { font-size: 13px; padding: 12px 16px; }
+          .tab-on, .tab-off { padding: 7px 9px !important; font-size: 10px !important; }
+          .lime-btn { font-size: 12px; padding: 11px 14px; }
+          .ghost-btn { font-size: 12px; padding: 11px 14px; }
+          .ghost-dark { font-size: 12px; padding: 11px 14px; }
           .handle-panel { gap: 8px; }
           .handle-row { gap: 8px; }
           .timeline-wrap { gap: 8px; }
@@ -612,10 +632,18 @@ export default function Page() {
           .faq-wrap { gap: 6px; }
           .gc-static { padding: 14px 10px !important; }
           .gc { padding: 14px 10px !important; }
-          .metrics-grid { gap: 8px; padding: 10px 0; }
-          .doc-pill { padding: 8px 10px !important; font-size: 11px !important; }
-          .stat-cell { padding: 12px 6px; }
-          .cmp-table th, .cmp-table td { padding: 7px 4px !important; font-size: 10px !important; }
+          .metrics-grid { gap: 6px !important; padding: 8px 0 !important; }
+          .doc-pill { padding: 7px 9px !important; font-size: 10px !important; }
+          .stat-cell { padding: 10px 5px; }
+          .cmp-table th, .cmp-table td { padding: 6px 3px !important; font-size: 9.5px !important; }
+
+          /* Entity overview card — Key Features / labels / heading compaction */
+          .feature-text { font-size: 10.5px !important; line-height: 1.4 !important; }
+          .feature-tick { width: 14px !important; height: 14px !important; font-size: 8px !important; }
+          .feature-row { padding: 2px 0 !important; }
+          h3 { font-size: 16px !important; }
+          .lbl { font-size: 9px !important; letter-spacing: 0.2em !important; }
+
           .timeline-node-item {
             background: #fff !important;
             border: 2.5px solid rgba(0,0,0,0.18) !important;
@@ -848,7 +876,7 @@ export default function Page() {
       </section>
 
 
-      <section className="sec border-top" style={{ background: "#fff" }}>
+      <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
             <SH eyebrow="Step-by-Step Process" green="From decision to fully operational —" gold="exactly what happens." mb={10} />
@@ -893,7 +921,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="sec border-top" style={{ background: "#fff" }}>
+      <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
             <SH eyebrow="Scope of Work" green="Everything that's" gold="included." mb={10} />
@@ -915,9 +943,8 @@ export default function Page() {
                 }}>
                   <div className="spot-card-content">
                     <div className="lbl" style={{ letterSpacing: "0.25em", marginBottom: 14, color: cat.acc }}>{cat.cat}</div>
-                    <div style={{ borderTop: "1.5px solid #111" }} />
                     {cat.items.map((item, i) => (
-                      <div key={i} className="row-div" style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #111" }}>
+                      <div key={i} className="row-div" style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: i === cat.items.length - 1 ? "none" : "1px solid #111" }}>
                         <span style={{ width: 6, height: 6, borderRadius: "50%", background: cat.acc, marginRight: 10, flexShrink: 0 }} />
                         <span style={{ fontSize: "clamp(12px,1.3vw,13.5px)", fontWeight: 600, color: "#111", fontFamily: HV }}>{item}</span>
                       </div>
@@ -931,7 +958,7 @@ export default function Page() {
       </section>
       <PricingSection />
 
-      <section className="sec border-top" style={{ background: "#fff" }}>
+      <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
             <SH eyebrow="Common Questions" green="Questions we get" gold="every time." mb={36} />
@@ -977,27 +1004,6 @@ export default function Page() {
       </section>
 
 
-
-      <section className="sec" style={{ backgroundImage: "url('/banners%20and%20logos/private-limited-company-registration%20CTA.png')", backgroundSize: 'cover', backgroundPosition: 'center', borderTop: "1.5px solid #111", textAlign: "center" }}>
-        <div style={{ maxWidth: 540, margin: "0 auto" }}>
-          <div className="lbl" style={{ color: "rgba(255,255,255,0.45)", letterSpacing: "0.3em", marginBottom: 14 }}>Get Started</div>
-          <h2 style={{ fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 800, color: "#ffffff", lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.03em", fontFamily: HV }}>
-            Ready to set up your India entity the right way?
-          </h2>
-          <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "rgba(255,255,255,0.85)", lineHeight: 1.8, marginBottom: 28, fontFamily: HV, fontWeight: 500 }}>
-            Book a free 30-minute structure review. We'll assess your business, recommend the right entity type and FDI route, and give you a clear week-by-week plan.
-          </p>
-          <div className="cta-btn-row">
-            <button className="lime-btn" style={{ background: GOLD, border: "1px solid #111" }} onClick={() => router.push(ROUTES.contact)}>Book Free Structure Review →</button>
-            <a href="tel:+919915731447" className="ghost-dark" style={{ border: "1px solid rgba(255,255,255,0.25)", color: "#ffffff" }}>Call +91 99157 31447</a>
-          </div>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            {["Free 30-min consultation", "CA, CS & accountant team", "Response within 24 hours"].map(t => (
-              <span key={t} style={{ fontSize: "clamp(11px,1.1vw,12px)", color: "rgba(255,255,255,0.6)", display: "inline-flex", alignItems: "center", gap: 5, fontFamily: HV, fontWeight: 500 }}>✓ {t}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
     </div>
   );

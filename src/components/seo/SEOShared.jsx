@@ -180,24 +180,7 @@ function SEOClientStory({ flag, region, headline, challenge, outcome, proof }) {
 }
 
 function SEOCTAStrip({ setPage }) {
-  return (
-    <div className="reveal seo-cta-strip" style={{ background: `linear-gradient(135deg,${T.f} 0%,${T.f3} 100%)`, borderRadius: 18, padding: "40px 44px", marginTop: 56, display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center" }}>
-      <div>
-        <h3 className="font-display" style={{ fontSize: "clamp(22px,2.5vw,32px)", fontWeight: 600, color: "#fff", marginBottom: 10, lineHeight: 1.2 }}>
-          Ready to get started? Book a free 30-minute consultation.
-        </h3>
-        <p style={{ fontSize: 14, color: "rgba(255,255,255,.55)", lineHeight: 1.7 }}>
-          Expert team reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.
-        </p>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
-        <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => setPage("contact")}>Book Free Consultation →</button>
-        <a href="https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20discuss%20setting%20up%20my%20company%20in%20India." target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "#25D366", color: "#fff", padding: "12px 22px", borderRadius: 9, fontSize: 13.5, fontWeight: 600, textDecoration: "none" }}>
-          <WASvg/> WhatsApp us
-        </a>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 // ─── SEO PAGE 1: FOREIGN COMPANY REGISTRATION INDIA ──────────────────────────

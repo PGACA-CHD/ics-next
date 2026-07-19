@@ -1190,3 +1190,19 @@ a[href*="amcharts.com"],
     padding-right: 16px !important;
   }
 }
+
+/* Reduce standard section padding to make pages tighter and reduce vertical empty spaces */
+.sec, .sec-pad, section.sec, section.sec-pad, .ps-section, .pricing-section {
+  padding: 56px 56px !important;
+}
+
+@media (max-width: 900px) {
+  .sec, .sec-pad, section.sec, section.sec-pad, .ps-section, .pricing-section {
+    padding: 40px 24px !important;
+  }
+}
+@media (max-width: 600px) {
+  .sec, .sec-pad, section.sec, section.sec-pad, .ps-section, .pricing-section {
+    padding: 32px 16px !important;
+  }
+}

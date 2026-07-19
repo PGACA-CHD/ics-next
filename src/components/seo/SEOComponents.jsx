@@ -1332,47 +1332,7 @@ function SEOClientStory({ flag, region, headline, challenge, outcome, proof }) {
    CTA STRIP
 ══════════════════════════════════════════════════════ */
 function SEOCTAStrip({ setPage }) {
-  const pathname = usePathname();
-
-  let ctaBgStyle = {};
-  if (pathname === '/private-limited-company-registration-india') {
-    ctaBgStyle = {
-      backgroundImage: "url('/banners and logos/private-limited-company-registration CTA.png')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundBlendMode: 'normal',
-      background: "url('/banners and logos/private-limited-company-registration CTA.png') center/cover no-repeat" // Force override linear-gradient
-    };
-  } else if (pathname === '/india-market-entry-advisory') {
-    ctaBgStyle = {
-      backgroundImage: "url('/banners and logos/India Market-  CTA.png')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundBlendMode: 'normal',
-      background: "url('/banners and logos/India Market-  CTA.png') center/cover no-repeat" // Force override linear-gradient
-    };
-  }
-
-  return (
-    <div className="seo-cta-strip reveal" style={ctaBgStyle}>
-      <div>
-        <h3 className="seo-cta-title">Ready to get started? Book a free 30-minute consultation.</h3>
-        <p className="seo-cta-desc">Expert team reviews your situation and gives you a clear structure recommendation. No commitment. Written summary after the call.</p>
-      </div>
-      <div className="seo-cta-actions">
-        <button className="seo-btn-primary" style={{ background: '#fff', color: GREEN }}
-          onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
-          Book Free Consultation →
-        </button>
-        <a href="https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20discuss%20setting%20up%20my%20company%20in%20India."
-          target="_blank" rel="noopener noreferrer" className="seo-wa-btn">
-          <WASvg /> WhatsApp us
-        </a>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 /* ══════════════════════════════════════════════════════

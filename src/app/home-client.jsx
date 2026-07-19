@@ -693,7 +693,7 @@ export default function HomePage() {
             {[...Array(2)].map((_, di) => (
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
                 {["Protiviti India", "Mahindra Defence Systems", "Saregama India", "Ethos Limited",
-                  "Polyplex Corporation Limited (Listed)", "Kuantom Papers Limited", "Tube Investment of India",
+                  "Polyplex Corporation Limited (Listed)", "Tube Investment of India",
                   "Vibracoustic India Private Limited", "Newtech Filter (BOSCH group Company)",
                   "Godrej, UAE entities", "Ognibene power", "Cloud EQ"].map(name => (
                     <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>

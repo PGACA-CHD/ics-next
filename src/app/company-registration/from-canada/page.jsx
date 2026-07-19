@@ -16,7 +16,17 @@ function useReveal(t = 0.12) {
   return [ref, vis];
 }
 function Fade({ children, delay = 0 }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   const [ref, vis] = useReveal();
+
+  if (isMobile) {
+    return <div>{children}</div>;
+  }
+
   return <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: `opacity .55s ease ${delay}ms,transform .55s ease ${delay}ms` }}>{children}</div>;
 }
 function CountUp({ end, suffix = '', prefix = '', delay = 0 }) {
@@ -231,7 +241,7 @@ export default function Page() {
         @keyframes stepIn { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;} }
         @keyframes whyGrad { 0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;} }
         *{box-sizing:border-box;margin:0;}
-        .sec{padding:88px 56px;}
+        .sec{padding:56px 56px;}
         .lbl{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:#aaa;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;display:block;margin-bottom:12px;}
         .g-btn{display:inline-flex;align-items:center;gap:8px;background:#093024;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700;padding:13px 26px;border-radius:6px;border:none;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s;}
         .g-btn:hover{background:#0a3d2c;transform:translateY(-1px);}
@@ -319,7 +329,7 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <span className="lbl">Why India</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>Why Canadian Businesses Are Setting Up in India</h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>Why Canadian Businesses <span style={{ fontStyle: 'italic', color: '#e69819' }}>Are Setting Up in India.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
             </div>
           </Fade>
@@ -343,7 +353,7 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Canada to your Certificate of Incorporation.</h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Canada to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 5 s — click any step to jump.</p>
             </div>
           </Fade>
@@ -357,7 +367,7 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 56 }}>
               <span className="lbl">Documents Required</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>What you'll need from Canada</h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>What you'll need <span style={{ fontStyle: 'italic', color: '#e69819' }}>from Canada.</span></h2>
               <p style={{ fontSize: 14.5, color: '#666', lineHeight: 1.75, fontFamily: HV, maxWidth: 560, margin: '0 auto' }}>
                 Canadian documents must be apostilled through Global Affairs Canada (GAC). Both Canada and India are signatories to the Hague Apostille Convention.
               </p>
@@ -373,7 +383,7 @@ export default function Page() {
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <span className="lbl">Entity Types</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Which structure is right for you?</h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Which structure is <span style={{ fontStyle: 'italic', color: '#e69819' }}>right for you?</span></h2>
             </div>
           </Fade>
           <Fade delay={60}>
@@ -388,12 +398,12 @@ export default function Page() {
       <PricingSection country="canada" ROUTES={{ contact: '/contact' }} />
 
       {/* FAQ */}
-      <section className="sec sec-div" style={{ background: '#fff' }}>
+      <section className="sec sec-div" style={{ background: '#fff', paddingTop: 0 }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <span className="lbl">FAQs</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Common questions answered</h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Common questions <span style={{ fontStyle: 'italic', color: '#e69819' }}>answered.</span></h2>
             </div>
           </Fade>
           {faqs.map((f, i) => (
@@ -404,27 +414,11 @@ export default function Page() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="sec" style={{ background: '#f5f5f0', padding: '48px 56px' }}>
-        <div style={{ maxWidth: 1160, margin: '0 auto' }}>
-          <div style={{ background: GREEN, borderRadius: 18, padding: '44px 52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none' }} />
-            <div style={{ flex: 1, minWidth: 260, position: 'relative' }}>
-              <h2 style={{ fontSize: 'clamp(20px,2.5vw,30px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 8, fontFamily: HV }}>Ready to register your Indian company from Canada?</h2>
-              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, margin: 0, fontFamily: HV }}>GAC apostille guidance to Certificate of Incorporation — we handle everything.</p>
-            </div>
-            <Link href="/contact"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#c8870a', color: '#fff', fontFamily: HV, fontSize: 14.5, fontWeight: 700, padding: '14px 26px', borderRadius: 7, textDecoration: 'none', whiteSpace: 'nowrap', transition: 'background .2s,transform .15s', flexShrink: 0 }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#e09a10'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#c8870a'; e.currentTarget.style.transform = 'none'; }}>
-              Book a Free Consultation →
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       {/* INTERNAL LINKS */}
-      <section style={{ padding: '36px 56px', background: '#fff' }}>
+      {/* INTERNAL LINKS */}
+      <section style={{ padding: '24px 56px 48px', background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 12.5, color: '#aaa', fontFamily: HV }}>Also available:</span>
           {countries.map(l => (
