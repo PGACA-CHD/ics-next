@@ -164,7 +164,7 @@ function AudiencePathsSection() {
   const s = SITS[active];
 
   return (
-    <section style={{ padding: mob ? "48px 20px 40px" : tab ? "60px 32px 48px" : "80px 56px 48px", background: "#fff", fontFamily: HV }}>
+    <section style={{ padding: mob ? "32px 20px" : tab ? "40px 32px" : "48px 56px", background: "#fff", fontFamily: HV }}>
       <div style={{ maxWidth: 1320, margin: "0 auto" }}>
         <SH eyebrow="" green="Six situations." gold="One structured conversation." />
 
@@ -369,7 +369,7 @@ function StatCard({ target, suffix = "", label, subLabel, gradient, border, valu
 
 function StatsRibbon() {
   return (
-    <section style={{ background: "#fff", padding: "80px 20px", fontFamily: HV }}>
+    <section style={{ background: "#fff", padding: "48px 20px", fontFamily: HV }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 40 }}>
           <SH green="Numbers that speak" gold="for themselves." mb={16} />
@@ -532,7 +532,7 @@ function KnowledgeHubSection() {
   }, []);
 
   return (
-    <section style={{ padding: "80px 56px", background: "#fff", fontFamily: HV }}>
+    <section style={{ padding: "48px 56px", background: "#fff", fontFamily: HV }}>
       <div style={{ maxWidth: 1360, margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 48 }}>
           <SH eyebrow="Knowledge Hub" green="Insights for global companies" gold="entering India." center={false} mb={0} />
@@ -758,7 +758,7 @@ export default function HomePage() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section id="how-it-works" style={{ padding: "108px 56px", background: "#fff" }}>
+      <section id="how-it-works" style={{ padding: "48px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 72, alignItems: "start" }}>
             <div className="process-sticky" style={{ position: "sticky", top: 100 }}>
@@ -915,7 +915,7 @@ export default function HomePage() {
       </section>
 
       {/* ── WHY US ── */}
-      <section style={{ padding: "100px 56px", background: "#fff" }}>
+      <section style={{ padding: "48px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <SH eyebrow="Why Us" green="Compared honestly," gold="not just favourably." mb={52} />
           <div style={{ overflowX: "auto", paddingBottom: 20 }}>

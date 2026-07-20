@@ -161,7 +161,7 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
   const contactUrl = ROUTES?.contact || '/contact';
 
   return (
-    <section className="ps-section" style={{ padding: '108px 56px', background: WHITE, fontFamily: FONT }}>
+    <section className="ps-section" style={{ padding: '48px 56px', background: WHITE, fontFamily: FONT }}>
       <style>{`
         .ps-tabs {
           display: flex;
@@ -180,7 +180,7 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
           gap: 28px;
         }
         @media (max-width: 900px) {
-          .ps-section { padding: 64px 20px 72px !important; }
+          .ps-section { padding: 32px 20px !important; }
           .ps-grid    { grid-template-columns: 1fr; }
         }
       `}</style>

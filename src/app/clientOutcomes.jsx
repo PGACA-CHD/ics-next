@@ -143,11 +143,11 @@ function OutcomeCard({ item, index }) {
 
 export default function ClientOutcomes() {
     return (
-        <section style={{ background: "#fff", padding: "80px 56px 96px", fontFamily: HV }}>
+        <section className="co-section" style={{ background: "#fff", padding: "48px 56px", fontFamily: HV }}>
             <style>{`
                 @media (max-width: 768px) {
                     .co-grid { grid-template-columns: 1fr !important; }
-                    .co-section { padding: 60px 20px 72px !important; }
+                    .co-section { padding: 32px 20px !important; }
                 }
             `}</style>
             <div style={{ maxWidth: 1100, margin: "0 auto" }}>
