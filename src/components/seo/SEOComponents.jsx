@@ -92,6 +92,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
   let lblStyle = {};
   let backStyle = {};
   let isCustomBg = false;
+  let noOverlay = false;
 
   if (pathname === '/private-limited-company-registration-india') {
     isCustomBg = true;
@@ -107,13 +108,42 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
+  } else if (pathname === '/nri-company-registration-india') {
+    isCustomBg = true;
+    noOverlay = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/NRI COMPANY REGISTRATION MAIN BANNER (1).png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/subsidiary-company-india') {
+    isCustomBg = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/subsidiarycompany.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/foreign-company-registration-india') {
+    isCustomBg = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/FOREIGN COMPANY REG.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
   }
 
   if (isCustomBg) {
-    titleStyle = { color: '#ffffff' };
-    descStyle = { color: 'rgba(255,255,255,0.85)' };
-    lblStyle = { color: GOLD };
-    backStyle = { color: 'rgba(255,255,255,0.5)' };
+    if (noOverlay) {
+      titleStyle = { color: '#111111' };
+      descStyle = { color: '#555555' };
+      lblStyle = { color: GREEN };
+      backStyle = { color: '#888888' };
+    } else {
+      titleStyle = { color: '#ffffff' };
+      descStyle = { color: 'rgba(255,255,255,0.85)' };
+      lblStyle = { color: GOLD };
+      backStyle = { color: 'rgba(255,255,255,0.5)' };
+    }
   }
 
   return (
@@ -690,7 +720,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
 
       {/* ── HERO ── */}
       <section className="hv2-hero" style={heroStyle}>
-        {isCustomBg && <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />}
+        {isCustomBg && !noOverlay && <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />}
         <div className="hv2-hero-inner" style={{ position: 'relative', zIndex: 2 }}>
           {backHref && (
             <Link href={backHref} className="hv2-back" style={backStyle}>← {backLabel || 'All Services'}</Link>
@@ -704,7 +734,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
                 <button className="hv2-btn" onClick={() => { window.location.href = ROUTES["contact"] || "/"; }}>
                   {ctaLabel || 'Book Free Consultation →'}
                 </button>
-                <button className="hv2-btn-ghost" style={isCustomBg ? { color: '#ffffff', borderColor: '#ffffff' } : {}} onClick={() => { window.location.href = ROUTES["services"] || "/"; }}>
+                <button className="hv2-btn-ghost" style={isCustomBg && !noOverlay ? { color: '#ffffff', borderColor: '#ffffff' } : {}} onClick={() => { window.location.href = ROUTES["services"] || "/"; }}>
                   View Entity Types →
                 </button>
               </div>

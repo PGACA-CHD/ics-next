@@ -60,7 +60,7 @@ export default function Page() {
           width: 100%;
           padding: 96px 56px 88px; text-align: center;
           border-bottom: 1px solid rgba(0,0,0,0.08);
-          background: url('/banners and logos/Tools page main -3.png') center/cover no-repeat;
+          background: url('/banners and logos/Tools page main .png') center/cover no-repeat;
           position: relative;
         }
         .lg-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }

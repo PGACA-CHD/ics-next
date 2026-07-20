@@ -309,19 +309,19 @@ export default function Page() {
         .stats-strip {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          border: 1.5px solid #111;
+          border: 1.5px solid rgba(255, 255, 255, 0.5);
           border-radius: 10px;
           overflow: hidden;
         }
         .stat-cell {
           padding: 16px 12px;
           text-align: center;
-          border-right: 1px solid rgba(0,0,0,0.12);
+          border-right: 1px solid rgba(255, 255, 255, 0.25);
         }
         .stat-cell:last-child { border-right: none; }
         @media(max-width:600px){
           .stats-strip { grid-template-columns: 1fr 1fr; }
-          .stat-cell { padding: 14px 8px; border-right: 1px solid rgba(0,0,0,0.12); border-bottom: 1px solid rgba(0,0,0,0.12); }
+          .stat-cell { padding: 14px 8px; border-right: 1px solid rgba(255, 255, 255, 0.25); border-bottom: 1px solid rgba(255, 255, 255, 0.25); }
           .stat-cell:nth-child(2n) { border-right: none; }
           .stat-cell:nth-child(n+3) { border-bottom: none; }
         }
@@ -461,11 +461,16 @@ export default function Page() {
         }
 
         /* ── COMPARISON TABLE (responsive, slightly larger type) ── */
-        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; max-width: 100%; }
         .cmp-table { width: 100%; min-width: 460px; border-collapse: collapse; border: 1.5px solid #111; font-family: ${HV}; table-layout: fixed; }
         .cmp-table th, .cmp-table td { word-break: break-word; }
+        @media(max-width:600px){
+          .cmp-table { min-width: 100%; }
+          .cmp-table th, .cmp-table td { font-size: 9px !important; padding: 6px 3px !important; letter-spacing: 0px !important; white-space: normal !important; word-wrap: break-word !important; }
+        }
         @media(max-width:480px){
-          .cmp-table { min-width: 420px; }
+          .cmp-table { min-width: 100%; }
+          .cmp-table th, .cmp-table td { font-size: 8px !important; padding: 4px 1px !important; letter-spacing: 0px !important; white-space: normal !important; word-wrap: break-word !important; }
         }
 
         /* ── CARDS ── */
@@ -596,6 +601,18 @@ export default function Page() {
           .timeline-wrap { gap: 12px; }
           .two-col { gap: 16px; }
           .three-col { gap: 14px; }
+          .timeline-node-item {
+            background: #fff !important;
+            border: 2.5px solid rgba(0,0,0,0.18) !important;
+            color: #0B3D2E !important;
+            transition: none !important;
+          }
+          .timeline-card-item {
+            border: 1px solid rgba(0,0,0,0.15) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important;
+            transform: none !important;
+            transition: none !important;
+          }
         }
         @media(max-width:600px){
           .sec { padding: clamp(36px,7vw,72px) 16px !important; }
@@ -644,16 +661,6 @@ export default function Page() {
           h3 { font-size: 16px !important; }
           .lbl { font-size: 9px !important; letter-spacing: 0.2em !important; }
 
-          .timeline-node-item {
-            background: #fff !important;
-            border: 2.5px solid rgba(0,0,0,0.18) !important;
-            color: #0B3D2E !important;
-          }
-          .timeline-card-item {
-            border: 1px solid rgba(0,0,0,0.15) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important;
-            transform: none !important;
-          }
         }
 
         /* ── DIVIDER UTILS ── */
@@ -667,16 +674,16 @@ export default function Page() {
 
             {/* LEFT */}
             <div>
-              <div className="lbl" style={{ letterSpacing: "0.3em", marginBottom: 20 }}>Company Incorporation &amp; Setup</div>
+              <div className="lbl" style={{ color: 'WHITE', letterSpacing: "0.3em", marginBottom: 20 }}>Company Incorporation &amp; Setup</div>
               <h1 style={{
                 fontSize: "clamp(32px,5.5vw,72px)", fontWeight: 800,
                 lineHeight: 1.04, letterSpacing: "-0.033em",
                 margin: "0 0 20px", fontFamily: HV
               }}>
-                <span style={{ color: GREEN }}>Set up your India entity —</span>{" "}
+                <span style={{ color: 'WHITE' }}>Set up your India entity —</span>{" "}
                 <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>structured correctly from day one.</em>
               </h1>
-              <p style={{ fontSize: "clamp(14px,1.5vw,16px)", color: "#111", lineHeight: 1.78, maxWidth: 520, margin: "0 0 28px", fontFamily: HV }}>
+              <p style={{ fontSize: "clamp(14px,1.5vw,16px)", color: "#ffffffff", lineHeight: 1.78, maxWidth: 520, margin: "0 0 28px", fontFamily: HV }}>
                 India entry is not just an incorporation exercise. The legal structure, FDI route, transfer pricing model, and DTAA analysis must be decided <em>before</em> the first filing. We design the full picture first — then we file.
               </p>
 
@@ -694,10 +701,10 @@ export default function Page() {
                   { target: 4, suffix: " wks", label: "End-to-end setup" },
                 ].map((s, i) => (
                   <div key={i} className="stat-cell">
-                    <div style={{ fontSize: "clamp(18px,2.5vw,24px)", fontWeight: 800, color: GREEN, lineHeight: 1, fontFamily: HV }}>
+                    <div style={{ fontSize: "clamp(18px,2.5vw,24px)", fontWeight: 800, color: "#ffffff", lineHeight: 1, fontFamily: HV }}>
                       <CountUp target={s.target} suffix={s.suffix} prefix={s.prefix || ''} delay={i * 200} />
                     </div>
-                    <div style={{ fontSize: 11, color: "#111", marginTop: 6, fontFamily: HV, fontWeight: 600 }}>{s.label}</div>
+                    <div style={{ fontSize: 11, color: "#ffffffff", marginTop: 6, fontFamily: HV, fontWeight: 600 }}>{s.label}</div>
                   </div>
                 ))}
               </div>
