@@ -181,6 +181,22 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
+  } else if (pathname === '/fdi-rules-india') {
+    isCustomBg = true;
+    textIsWhite = false;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/FDI MAIN BANNER.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/transfer-pricing-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/transferpricing.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
   }
 
   if (isCustomBg) {

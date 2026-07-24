@@ -9,21 +9,21 @@ const CF_TOKEN = process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN || 'Me3wAoh5C8R-voHvn3
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 
 const ROUTES = {
-  home:'/',services:'/setup',gcc:'/post-setup',tax:'/international-tax',
-  hub:'/knowledge-hub',about:'/about',contact:'/contact',industries:'/industries',
-  seo_fcri:'/foreign-company-registration-india',seo_sub:'/subsidiary-company-india',
-  seo_tp:'/transfer-pricing-india',seo_fdi:'/fdi-rules-india',
-  seo_us:'/us-company-setting-up-india',seo_uk:'/uk-company-setting-up-india',
-  seo_uae:'/uae-company-setting-up-india',seo_sg:'/singapore-company-setting-up-india',
-  seo_gcc:'/gcc-setup-india',seo_entry:'/india-market-entry-advisory',
-  seo_pvtltd:'/private-limited-company-registration-india',
-  seo_nri:'/nri-company-registration-india',
-  seo_startup:'/startup-foreign-investment-india',
+  home: '/', services: '/setup', gcc: '/post-setup', tax: '/international-tax',
+  hub: '/knowledge-hub', about: '/about', contact: '/contact', industries: '/industries',
+  seo_fcri: '/foreign-company-registration-india', seo_sub: '/subsidiary-company-india',
+  seo_tp: '/transfer-pricing-india', seo_fdi: '/fdi-rules-india',
+  seo_us: '/us-company-setting-up-india', seo_uk: '/uk-company-setting-up-india',
+  seo_uae: '/uae-company-setting-up-india', seo_sg: '/singapore-company-setting-up-india',
+  seo_gcc: '/gcc-setup-india', seo_entry: '/india-market-entry-advisory',
+  seo_pvtltd: '/private-limited-company-registration-india',
+  seo_nri: '/nri-company-registration-india',
+  seo_startup: '/startup-foreign-investment-india',
 };
 
 export default function Page() {
   const router = useRouter();
-    
+
 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -74,7 +74,7 @@ export default function Page() {
       <div>
         {/* Article hero */}
         <section style={{ background: "#0B3D2E", padding: "96px 56px 52px", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`, backgroundSize: "64px 64px" }}/>
+          <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`, backgroundSize: "64px 64px" }} />
           <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
             <button onClick={() => setSelectedArticle(null)} style={{ background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)", color: "rgba(255,255,255,.7)", padding: "7px 16px", borderRadius: 50, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", marginBottom: 32, display: "inline-flex", alignItems: "center", gap: 6 }}>
               ← Back to Knowledge Hub
@@ -152,13 +152,13 @@ export default function Page() {
     <div>
       {/* Hero */}
       <section style={{ backgroundImage: "url('/banners and logos/Knowledge Hub.png')", backgroundSize: "cover", backgroundPosition: "center", padding: "100px 56px 72px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.4)", zIndex: 1 }}/>
+        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.4)", zIndex: 1 }} />
         <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 2 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(232,144,10,.13)", border: "1px solid rgba(232,144,10,.28)", color: "#F5A828", padding: "5px 13px", borderRadius: 50, fontSize: 10.5, fontWeight: 600, letterSpacing: ".6px", textTransform: "uppercase", marginBottom: 20 }}>
             Knowledge Hub
           </div>
           <h1 className="font-display" style={{ fontSize: "clamp(36px,4vw,56px)", fontWeight: 600, color: "#fff", lineHeight: 1.06, marginBottom: 16, maxWidth: 680 }}>
-            India entry — explained<br/><span style={{ fontStyle: "italic", color: "#F5A828", fontWeight: 400 }}>clearly and in depth.</span>
+            India entry — explained<br /><span style={{ fontStyle: "italic", color: "#F5A828", fontWeight: 400 }}>clearly and in depth.</span>
           </h1>
           <p style={{ fontSize: 15, color: "rgba(255,255,255,.5)", lineHeight: 1.82, fontWeight: 300, maxWidth: 520 }}>
             Practical guides on company incorporation, transfer pricing, FEMA, and international tax — written by CAs, for decision-makers.
@@ -173,7 +173,7 @@ export default function Page() {
           {/* Loading state */}
           {loading && (
             <div style={{ textAlign: "center", padding: "80px 0" }}>
-              <div style={{ width: 40, height: 40, border: "3px solid #E0DDD4", borderTop: "3px solid #0B3D2E", borderRadius: "50%", margin: "0 auto 16px", animation: "spin 1s linear infinite" }}/>
+              <div style={{ width: 40, height: 40, border: "3px solid #E0DDD4", borderTop: "3px solid #0B3D2E", borderRadius: "50%", margin: "0 auto 16px", animation: "spin 1s linear infinite" }} />
               <p style={{ color: "#9A9A8E", fontSize: 14 }}>Loading articles from Contentful...</p>
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
@@ -216,7 +216,7 @@ export default function Page() {
                 {filtered.map((a) => (
                   <div key={a.id} className="card-lift" onClick={() => router.push("/knowledge-hub/" + a.slug)}
                     style={{ background: "#fff", border: "1px solid #E0DDD4", borderRadius: 14, overflow: "hidden", display: "flex", flexDirection: "column", cursor: "pointer" }}>
-                    <div style={{ height: 4, background: `linear-gradient(90deg, #0B3D2E, #E8900A)` }}/>
+                    <div style={{ height: 4, background: `linear-gradient(90deg, #0B3D2E, #E8900A)` }} />
                     <div style={{ padding: "24px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
                         <span style={{ background: tagColors[a.tag] || "#0B3D2E", color: "#fff", padding: "3px 10px", borderRadius: 50, fontSize: 10, fontWeight: 700 }}>{a.tag}</span>
@@ -235,22 +235,7 @@ export default function Page() {
             </>
           )}
 
-          {/* Bottom CTA */}
-          <div style={{ marginTop: 64, background: "#17170F", borderRadius: 16, padding: "40px", display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center" }}>
-            <div>
-              <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase", color: "#F5A828", fontWeight: 600, marginBottom: 10 }}>Have a question?</div>
-              <h3 className="font-display" style={{ fontSize: 26, fontWeight: 600, color: "#fff", marginBottom: 8 }}>
-                Rather talk to a CA directly?
-              </h3>
-              <p style={{ fontSize: 13.5, color: "rgba(255,255,255,.42)", lineHeight: 1.7 }}>
-                Our team handles incorporation, transfer pricing, FEMA, GST, payroll, and international tax. Free 30-minute consultation.
-              </p>
-            </div>
-            <div style={{ textAlign: "center", flexShrink: 0 }}>
-              <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>Book Free Consultation →</button>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,.25)", marginTop: 8 }}>CA, CS & accountant team</div>
-            </div>
-          </div>
+
         </div>
       </section>
     </div>
