@@ -21,7 +21,7 @@ const HV = "Helvetica, Arial, sans-serif";
 const BDR = "1px solid #111";
 const GREEN = "#0B3D2E";
 const GOLD = "#e69819";
-const HS = "clamp(28px, 3vw, 42px)";
+const HS = "clamp(26px, 3vw, 42px)";
 
 /* ── Shared hooks / primitives ── */
 function useReveal(t = 0.12) {
@@ -199,6 +199,7 @@ export default function Page() {
     <div style={{ fontFamily: HV, color: "#111", background: "#fff" }}>
       <style>{`
         * { box-sizing: border-box; }
+        html, body { overflow-x: hidden; max-width: 100%; }
         @keyframes floatSpotlight {
           0%   { background-position: 50% 50%; }
           25%  { background-position: 80% 20%; }
@@ -236,18 +237,24 @@ export default function Page() {
 
         .lbl { font-size:10.5px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#111; font-family:${HV}; }
 
-        .lime-btn { display:inline-flex; align-items:center; gap:8px; background:${GREEN}; color:#fff; font-family:${HV}; font-size:15px; font-weight:700; padding:14px 28px; border-radius:6px; border:none; cursor:pointer; transition:background 0.2s ease,transform 0.15s ease; text-decoration:none; }
+        .lime-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:${GREEN}; color:#fff; font-family:${HV}; font-size:15px; font-weight:700; padding:14px 28px; border-radius:6px; border:none; cursor:pointer; transition:background 0.2s ease,transform 0.15s ease; text-decoration:none; width:100%; }
         .lime-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
 
-        .ghost-btn { display:inline-flex; align-items:center; gap:8px; background:#fff; color:#111; font-family:${HV}; font-size:15px; font-weight:600; padding:14px 28px; border-radius:6px; border:${BDR}; cursor:pointer; transition:all 0.2s; text-decoration:none; }
+        .ghost-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#fff; color:#111; font-family:${HV}; font-size:15px; font-weight:600; padding:14px 28px; border-radius:6px; border:${BDR}; cursor:pointer; transition:all 0.2s; text-decoration:none; width:100%; }
         .ghost-btn:hover { background:#111; color:#fff; }
 
         .ghost-dark { display:inline-flex; align-items:center; gap:8px; background:transparent; color:#fff; font-family:${HV}; font-size:15px; font-weight:600; padding:14px 28px; border-radius:6px; border:1px solid rgba(255,255,255,0.25); cursor:pointer; transition:all 0.2s; text-decoration:none; }
         .ghost-dark:hover { background:rgba(255,255,255,0.08); }
 
+        .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px; }
+        .cta-row > button { width: auto; }
+
         .guide-card { border: ${BDR}; border-radius: 14px; background: #fff; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; display: flex; flex-direction: column; overflow: hidden; }
         .guide-card:hover { transform: translateY(-3px); border-color: rgba(11,61,46,0.3); box-shadow: 0 8px 28px rgba(11,61,46,0.09); }
         .guide-card:hover .guide-img { transform: scale(1.04); }
+        .guide-card-inner { display: flex; flex-direction: row; height: 100%; align-items: center; }
+        .guide-img-wrap { height: 100%; min-height: 180px; width: 180px; overflow: hidden; position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .guide-copy { padding: 22px 22px 18px; display: flex; flex-direction: column; flex: 1; justify-content: center; min-width: 0; }
 
         .pill-cell { border: 1px solid #111; border-radius: 8px; background: #fff; text-align: center; padding: 10px 6px; font-size: 13px; font-weight: 500; color: #111; display: flex; align-items: center; justify-content: center; font-family: ${HV}; }
 
@@ -270,55 +277,80 @@ export default function Page() {
         }
         .stat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.06); }
 
+        .hero-section { padding: 88px 56px 80px; }
+        .hero-inner { max-width: 1200px; margin: 0 auto; }
         .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
         .hero-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 
         .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
-        @media(max-width:1024px){ .svc-grid { grid-template-columns: 1fr 1fr !important; } }
+        /* DTAA table: default (desktop/tablet) grid layout */
+        .dtaa-desktop-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 8px 12px; }
+        .dtaa-mobile-card { display: none; }
+
+        @media(max-width:1024px){
+          .svc-grid { grid-template-columns: 1fr 1fr; }
+          .hero-section { padding: 72px 40px 64px; }
+        }
         @media(max-width:900px){
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-stats-grid { grid-template-columns: 1fr 1fr !important; }
+          .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+          .hero-stats-grid { grid-template-columns: 1fr 1fr; }
         }
         @media(max-width:860px){
-          .guide-grid { grid-template-columns: 1fr !important; }
-          .dtaa-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr !important; }
+          .guide-grid { grid-template-columns: 1fr; }
+        }
+        @media(max-width:768px){
+          .svc-grid { grid-template-columns: 1fr; }
         }
         @media(max-width:640px){
-          .svc-grid { grid-template-columns: 1fr !important; }
-          .hero-pad { padding: 56px 20px 64px !important; }
-          .sec-pad  { padding: 56px 20px !important; }
-          .dtaa-wrap { padding: 20px 14px 16px !important; }
-          .dtaa-grid { grid-template-columns: 1fr !important; }
-          .dtaa-head { display: none !important; }
+          .hero-section { padding: 48px 20px 48px; }
+          .sec-pad  { padding: 48px 20px !important; }
+          .dtaa-wrap { padding: 20px 16px 18px !important; }
+
+          .cta-row { flex-direction: column; margin-bottom: 32px; }
+          .cta-row > button { width: 100%; }
+
+          .guide-card-inner { flex-direction: column; align-items: stretch; }
+          .guide-img-wrap { width: 100%; min-height: 140px; height: 140px; }
+          .guide-copy { padding: 16px 18px 20px; text-align: left; }
+
+          /* Hide the grid table header + rows, show stacked cards instead */
+          .dtaa-desktop-row { display: none; }
+          .dtaa-mobile-card { display: block; }
+        }
+        @media(max-width:420px){
+          .hero-section { padding: 40px 14px 40px; }
+          .sec-pad { padding: 40px 14px !important; }
         }
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="hero-pad" style={{
-        position: 'relative',
-        backgroundImage: "url('/banners and logos/INTL TAX-2.png')",
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        padding: '0',
-      }}>
-        {/* No overlay */}
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "96px 56px 88px" }}>
+      <section
+        className="hero-section"
+        style={{
+          position: 'relative',
+          backgroundColor: GREEN,
+          backgroundImage: "linear-gradient(160deg, rgba(11,61,46,0.92) 0%, rgba(11,61,46,0.78) 55%, rgba(11,61,46,0.92) 100%), url('/banners and logos/INTL TAX-2.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="hero-inner">
           <div className="hero-grid">
             {/* Left — headline, copy, CTAs, stats */}
             <div>
               <Fade>
                 <div className="lbl" style={{ marginBottom: 24, color: GOLD }}>Advisory Service</div>
-                <h1 style={{ fontSize: "clamp(38px,5.5vw,64px)", fontWeight: 800, lineHeight: 1.06, letterSpacing: "-0.03em", margin: "0 0 22px", fontFamily: HV }}>
-                  <span style={{ color: "#ffffffff" }}>Not a generic firm —</span>{" "}
+                <h1 style={{ fontSize: "clamp(32px,5.5vw,64px)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", margin: "0 0 22px", fontFamily: HV }}>
+                  <span style={{ color: "#ffffff" }}>Not a generic firm —</span>{" "}
                   <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>the full India tax stack.</em>
                 </h1>
-                <p style={{ fontSize: 16, color: "#ffffffff", lineHeight: 1.78, maxWidth: 520, margin: "0 0 36px", fontFamily: HV }}>
+                <p style={{ fontSize: 16, color: "#ffffff", lineHeight: 1.78, maxWidth: 520, margin: "0 0 32px", fontFamily: HV }}>
                   DTAA structuring, transfer pricing, withholding tax, FEMA compliance, and PE risk management — designed before your India entity opens its doors.
                 </p>
-                <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 44 }}>
+                <div className="cta-row">
                   <button className="lime-btn" onClick={() => router.push(ROUTES.contact)}>Book a Tax Consultation →</button>
                   <button className="ghost-btn" onClick={() => router.push(ROUTES.services)}>Company Setup →</button>
                 </div>
@@ -328,7 +360,7 @@ export default function Page() {
                 {HERO_STATS.map((s, i) => (
                   <Fade key={s.label} delay={i * 90}>
                     <div className="stat-card" style={{ borderTopColor: s.color }}>
-                      <div style={{ fontSize: 28, fontWeight: 800, color: s.color, lineHeight: 1, fontFamily: HV, marginBottom: 8 }}>
+                      <div style={{ fontSize: 26, fontWeight: 800, color: s.color, lineHeight: 1, fontFamily: HV, marginBottom: 8 }}>
                         <CountUp target={s.target} suffix={s.suffix} delay={i * 200} />
                       </div>
                       <div style={{ fontSize: 12, color: "#111", fontFamily: HV, fontWeight: 600 }}>{s.label}</div>
@@ -340,7 +372,7 @@ export default function Page() {
 
             {/* Right — rate reference card, categorized like a compliance calendar */}
             <Fade delay={100}>
-              <div className="gc-static" style={{ padding: "28px 28px 24px" }}>
+              <div className="gc-static" style={{ padding: "24px 22px 20px" }}>
                 <div className="lbl" style={{ marginBottom: 22 }}>Withholding Rates — What Applies</div>
                 {RATE_CATEGORIES.map((cat, ci) => (
                   <div key={cat.title} style={{ marginBottom: ci < RATE_CATEGORIES.length - 1 ? 26 : 0 }}>
@@ -359,10 +391,10 @@ export default function Page() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="sec-pad" style={{ padding: "88px 56px", background: "#fff" }}>
+      <section className="sec-pad" style={{ padding: "80px 56px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
-            <SH eyebrow="Our Services" green="International tax services for" gold="foreign companies in India." mb={44} />
+            <SH eyebrow="Our Services" green="International tax services for" gold="foreign companies in India." mb={40} />
           </Fade>
 
           <div className="svc-grid">
@@ -371,7 +403,7 @@ export default function Page() {
               return (
                 <Fade key={svc.title} delay={si * 60}>
                   <div className="gc spot-card" onMouseMove={handleSpotlight}
-                    style={{ padding: "26px 22px", display: "flex", flexDirection: "column", borderTop: `4px solid ${c.acc}`, height: "100%", '--spot-color': `${c.acc}15` }}>
+                    style={{ padding: "24px 20px", display: "flex", flexDirection: "column", borderTop: `4px solid ${c.acc}`, height: "100%", '--spot-color': `${c.acc}15` }}>
                     <div className="spot-card-content" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
                       <div style={{ marginBottom: 14 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6, flexWrap: "wrap" }}>
@@ -408,26 +440,28 @@ export default function Page() {
       </section>
 
       {/* ── DETAILED GUIDES ── */}
-      <section className="sec-pad" style={{ padding: "0 56px 88px", background: "#fff" }}>
+      <section className="sec-pad" style={{ padding: "0 56px 80px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ paddingTop: 20 }}>
             <Fade>
               <div className="lbl" style={{ marginBottom: 12 }}>Detailed Guides</div>
-              <h2 style={{ fontSize: "clamp(20px,2.5vw,30px)", fontWeight: 800, letterSpacing: "-0.02em", color: "#111", margin: "0 0 32px", fontFamily: HV }}>
+              <h2 style={{ fontSize: "clamp(20px,2.5vw,30px)", fontWeight: 800, letterSpacing: "-0.02em", color: "#111", margin: "0 0 28px", fontFamily: HV }}>
                 Go deeper on any topic
               </h2>
             </Fade>
             <div className="guide-grid">
               {GUIDES.map((g, gi) => (
                 <Fade key={g.label} delay={gi * 70}>
-                  <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')} style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "row", height: "100%", alignItems: "center" }}>
-                    <div style={{ height: "100%", minHeight: 180, width: 180, overflow: "hidden", position: "relative", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "12px", transition: "transform 0.3s ease" }} className="guide-img" />
-                    </div>
-                    <div style={{ padding: "22px 22px 18px", display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>
-                      <div style={{ fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 6, fontFamily: HV, lineHeight: 1.25 }}>{g.label}</div>
-                      <div style={{ fontSize: 12.5, color: "#555", marginBottom: 18, fontFamily: HV, fontWeight: 500 }}>{g.sub}</div>
-                      <div style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: GREEN, fontFamily: HV }}>Read guide →</div>
+                  <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')}>
+                    <div className="guide-card-inner">
+                      <div className="guide-img-wrap">
+                        <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "12px", transition: "transform 0.3s ease" }} className="guide-img" />
+                      </div>
+                      <div className="guide-copy">
+                        <div style={{ fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 6, fontFamily: HV, lineHeight: 1.25 }}>{g.label}</div>
+                        <div style={{ fontSize: 12.5, color: "#555", marginBottom: 18, fontFamily: HV, fontWeight: 500 }}>{g.sub}</div>
+                        <div style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: GREEN, fontFamily: HV }}>Read guide →</div>
+                      </div>
                     </div>
                   </div>
                 </Fade>
@@ -438,22 +472,23 @@ export default function Page() {
       </section>
 
       {/* ── DTAA TABLE ── */}
-      <section className="sec-pad" style={{ padding: "88px 56px 96px", background: "#fff" }}>
+      <section className="sec-pad" style={{ padding: "80px 56px 88px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Withholding Rates" green="India DTAA" gold="withholding rates." mb={16} />
-            <p style={{ fontSize: 15, color: "#111", lineHeight: 1.75, maxWidth: 620, margin: "0 auto 48px", fontFamily: HV, fontWeight: 600, textAlign: "center" }}>
+            <p style={{ fontSize: 15, color: "#111", lineHeight: 1.75, maxWidth: 620, margin: "0 auto 40px", fontFamily: HV, fontWeight: 600, textAlign: "center" }}>
               India's domestic rates: 20% dividends, 10% royalties, 10% FTS, 20% interest. DTAA rates are almost always lower — often significantly.
             </p>
           </Fade>
 
-          <div className="gc-static dtaa-wrap" style={{ padding: "36px 36px 28px" }}>
-            <div style={{ marginBottom: 28 }}>
-              <div style={{ fontSize: 20, fontWeight: 800, color: "#111", fontFamily: HV, marginBottom: 4 }}>DTAA Quick Reference</div>
+          <div className="gc-static dtaa-wrap" style={{ padding: "32px 32px 26px" }}>
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ fontSize: 19, fontWeight: 800, color: "#111", fontFamily: HV, marginBottom: 4 }}>DTAA Quick Reference</div>
               <div style={{ fontSize: 13.5, color: "#111", fontFamily: HV, fontWeight: 500 }}>Key treaty countries — indicative withholding rates</div>
             </div>
 
-            <div className="dtaa-grid dtaa-head" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", gap: "8px 12px", marginBottom: 10, padding: "0 2px 10px", borderBottom: "1.5px solid #111" }}>
+            {/* Desktop / tablet: grid table */}
+            <div className="dtaa-desktop-row" style={{ marginBottom: 10, padding: "0 2px 10px", borderBottom: "1.5px solid #111" }}>
               {["Country", "Dividends", "Royalties", "FTS", "Interest"].map((h, i) => (
                 <div key={h} className="lbl" style={{ fontSize: 10.5, letterSpacing: "1.5px", textAlign: i === 0 ? "left" : "center" }}>{h}</div>
               ))}
@@ -462,11 +497,8 @@ export default function Page() {
             {DTAA_RATES.map((row) => (
               <div
                 key={row.country}
-                className="dtaa-grid"
+                className="dtaa-desktop-row"
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr",
-                  gap: "8px 12px",
                   marginBottom: 8,
                   padding: row.domestic ? "10px 10px" : "4px 2px",
                   background: row.domestic ? "rgba(230,152,25,0.06)" : "transparent",
@@ -487,6 +519,43 @@ export default function Page() {
                 ))}
               </div>
             ))}
+
+            {/* Mobile: stacked labeled cards, one per country */}
+            {DTAA_RATES.map((row) => (
+              <div
+                key={`m-${row.country}`}
+                className="dtaa-mobile-card"
+                style={{
+                  marginBottom: 10,
+                  padding: "14px 14px",
+                  background: row.domestic ? "rgba(230,152,25,0.06)" : "#fff",
+                  border: row.domestic ? "1px solid #111" : "1px solid rgba(17,17,17,0.15)",
+                  borderRadius: 12,
+                }}
+              >
+                <div style={{ fontSize: 14.5, fontWeight: 800, color: "#111", fontFamily: HV, marginBottom: 10 }}>
+                  {row.country}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                  {[
+                    ["Dividends", row.div],
+                    ["Royalties", row.roy],
+                    ["FTS", row.fts],
+                    ["Interest", row.int],
+                  ].map(([label, v]) => (
+                    <div key={label} style={{
+                      border: "1px solid #111",
+                      borderRadius: 8,
+                      padding: "8px 8px",
+                      textAlign: "center",
+                    }}>
+                      <div style={{ fontSize: 9.5, letterSpacing: "1px", textTransform: "uppercase", color: "#666", fontFamily: HV, fontWeight: 700, marginBottom: 4 }}>{label}</div>
+                      <div style={{ fontSize: 13.5, fontWeight: row.domestic ? 800 : 700, color: row.domestic ? GOLD : "#111", fontFamily: HV }}>{v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
           <p style={{ marginTop: 14, fontSize: 12.5, color: "#111", lineHeight: 1.65, fontFamily: HV, fontWeight: 500 }}>
@@ -494,8 +563,6 @@ export default function Page() {
           </p>
         </div>
       </section>
-
-
 
     </div>
   );

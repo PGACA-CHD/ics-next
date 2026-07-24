@@ -744,10 +744,10 @@ export default function HomePage() {
           }}>
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", borderRadius: 18 }} />
             <div style={{ position: "relative", zIndex: 1 }}>
-              <p style={{ fontSize: 19, color: "rgba(255,255,255,.95)", lineHeight: 1.65, fontWeight: 400, fontFamily: HV, fontStyle: "italic", margin: 0 }}>
+              <p style={{ fontSize: 19, color: "#ffffffff", lineHeight: 1.65, fontWeight: 400, fontFamily: HV, fontStyle: "italic", margin: 0 }}>
                 "Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."
               </p>
-              <p style={{ fontSize: 12.5, color: "rgba(255,255,255,.4)", margin: "12px 0 0", fontFamily: HV }}>
+              <p style={{ fontSize: 12.5, color: "#fffbfbff", margin: "12px 0 0", fontFamily: HV }}>
                 — P.G., FCA · Diploma in International Taxation · 8 yrs Ex-Big 4
               </p>
             </div>
@@ -968,18 +968,19 @@ export default function HomePage() {
       <KnowledgeHubSection />
 
       {/* ── PGA ── */}
-      <section style={{ padding: "70px 56px", backgroundImage: "url('/banners and logos/Knowledge partner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap" }}>
-              <div style={{ width: 56, height: 56, background: "rgba(255,255,255,.06)", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, flexShrink: 0 }}>⚖️</div>
-              <div>
-                <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase", color: "rgba(255,255,255,.3)", marginBottom: 6, fontFamily: HV }}>Knowledge Partner</div>
-                <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", fontFamily: HV }}>PGA & Co. Chartered Accountants, Chandigarh</div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,.35)", marginTop: 4, fontFamily: HV }}>GST advisory · NRI/HNI tax · Domestic audit & assurance · Transfer pricing</div>
-              </div>
-            </div>
-            <a href="https://pgaca.in" target="_blank" rel="noopener noreferrer" style={{ background: "rgba(255,255,255,.07)", color: "rgba(255,255,255,.7)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 8, fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", padding: "12px 20px", textDecoration: "none", fontFamily: HV }}>Visit pgaca.in →</a>
+      <section style={{ padding: "70px 56px", position: "relative", backgroundImage: "url('/banners and logos/Knowledge partner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.72)" }} />
+        <div style={{ maxWidth: 1360, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 16 }}>
+            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase", color: "rgba(255,255,255,.55)", fontFamily: HV }}>Knowledge Partner</div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: HV }}>PGA &amp; Co. Chartered Accountants, Chandigarh</div>
+            <div style={{ fontSize: 14, color: "rgba(255,255,255,.8)", fontFamily: HV }}>GST advisory · NRI/HNI tax · Domestic audit &amp; assurance · Transfer pricing</div>
+            <a href="https://pgaca.in" target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-block", marginTop: 10, background: "transparent", color: GOLD, border: `1.5px solid ${GOLD}`, borderRadius: 8, fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", padding: "12px 28px", textDecoration: "none", fontFamily: HV }}
+              onMouseEnter={e => { e.currentTarget.style.background = GOLD; e.currentTarget.style.color = "#000"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = GOLD; }}>
+              Visit pgaca.in →
+            </a>
           </div>
         </div>
       </section>

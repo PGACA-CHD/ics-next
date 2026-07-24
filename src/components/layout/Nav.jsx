@@ -3,8 +3,20 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { T, NAV_LINKS, PHONE } from '@/lib/config';
+import { T, NAV_LINKS, PHONE, CALENDLY_URL } from '@/lib/config';
 import Logo from '@/components/shared/Logo';
+
+const HV = 'Helvetica, Arial, sans-serif';
+const GOLD = '#c8870a';
+
+function WhatsAppIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.524 5.847L.057 23.494a.5.5 0 0 0 .614.619l5.757-1.505A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.013-1.374l-.36-.214-3.724.974.994-3.63-.234-.373A9.818 9.818 0 1 1 12 21.818z"/>
+    </svg>
+  );
+}
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 
@@ -77,7 +89,7 @@ export default function Nav() {
                       letterSpacing: 0.9,
                       textTransform: 'uppercase',
                       paddingTop: 8,
-                      fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+                      fontFamily: HV,
                     }}
                   >
                     {child.groupLabel}
@@ -100,10 +112,10 @@ export default function Nav() {
                 padding: '9px 18px',
                 fontSize: 13.5,
                 fontWeight: childActive ? 600 : 400,
-                color: childActive ? T.f : T.mid,
+                color: childActive ? '#111' : '#111',
                 textDecoration: 'none',
                 transition: 'background .12s, color .12s',
-                fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+                fontFamily: HV,
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = T.stone;
@@ -142,7 +154,7 @@ export default function Nav() {
           backdropFilter: 'blur(12px)',
           borderBottom: `1px solid ${scrolled ? T.bdr : 'transparent'}`,
           transition: 'background .25s, border-color .25s',
-          fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+          fontFamily: HV,
         }}
       >
         {/* ── Logo ── */}
@@ -177,15 +189,15 @@ export default function Nav() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: 4,
-                      fontSize: 13.5,
-                      fontWeight: active ? 600 : 400,
-                      color: active ? T.f : T.mid,
+                      fontSize: 15,
+                      fontWeight: 400,
+                      color: active ? GOLD : '#111',
                       textDecoration: 'none',
                       padding: '6px 12px',
                       borderRadius: 6,
                       transition: 'color .18s',
-                      borderBottom: active ? `2px solid ${T.f}` : '2px solid transparent',
-                      fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+                      borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                      fontFamily: HV,
                     }}
                   >
                     {link.label}
@@ -219,15 +231,15 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize: 13.5,
-                  fontWeight: active ? 600 : 400,
-                  color: active ? T.f : T.mid,
+                  fontSize: 15,
+                  fontWeight: 400,
+                  color: active ? GOLD : '#111',
                   textDecoration: 'none',
                   padding: '6px 12px',
                   borderRadius: 6,
                   transition: 'color .18s',
-                  borderBottom: active ? `2px solid ${T.f}` : '2px solid transparent',
-                  fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+                  borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                  fontFamily: HV,
                 }}
               >
                 {link.label}
@@ -239,36 +251,52 @@ export default function Nav() {
         {/* ── Right side: phone + CTA + hamburger ── */}
         <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <a
-            href={`tel:${PHONE.replace(/\s/g, '')}`}
+            href={`https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20company%20setup%20in%20India.`}
             className="nav-phone"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               fontSize: 13,
-              fontWeight: 500,
-              color: T.mid,
+              fontWeight: 700,
+              color: GOLD,
               textDecoration: 'none',
-              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+              fontFamily: HV,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              background: 'rgba(200,135,10,0.08)',
+              border: '1px solid rgba(200,135,10,0.25)',
+              borderRadius: 6,
+              padding: '5px 10px',
             }}
           >
+            <WhatsAppIcon />
             {PHONE}
           </a>
 
-          <Link
-            href="/contact"
+          <a
+            href="https://calendly.com/indiacompanysetup"
+            target="_blank"
+            rel="noopener noreferrer"
             className="nav-cta-btn"
             style={{
-              background: T.s,
+              background: T.f,
               color: '#fff',
               padding: '9px 18px',
               borderRadius: 8,
               fontSize: 13.5,
               fontWeight: 600,
               textDecoration: 'none',
-              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+              fontFamily: HV,
               whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
             }}
           >
-            Free Consultation →
-          </Link>
+            Free Consultation
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
 
           <button
             className="nav-hamburger"
@@ -460,26 +488,30 @@ export default function Nav() {
             );
           })}
 
-          <Link
-            href="/contact"
+          <a
+            href="https://calendly.com/indiacompanysetup"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               marginTop: 24,
               display: 'inline-flex',
               alignItems: 'center',
-              background: T.s,
+              gap: 6,
+              background: T.f,
               color: '#fff',
               padding: '13px 26px',
               borderRadius: 8,
               fontSize: 15,
               fontWeight: 600,
               textDecoration: 'none',
-              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
+              fontFamily: HV,
               width: 'fit-content',
             }}
             onClick={() => setMenuOpen(false)}
           >
-            Free Consultation →
-          </Link>
+            Free Consultation
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
 
           <div
             style={{

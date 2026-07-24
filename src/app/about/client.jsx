@@ -109,11 +109,11 @@ function HeroStats() {
     <div ref={secRef} className="about-stats" style={{ background: GLASS, backdropFilter: BLUR, WebkitBackdropFilter: BLUR, border: BDR, borderRadius: 20, padding: '10px', fontFamily: F, display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
       {STATS.map((s, i) => (
         <div key={s.label} style={{ padding: '26px 22px', borderRight: i % 2 === 0 ? '1px solid rgba(0,0,0,0.09)' : 'none', borderBottom: i < 2 ? '1px solid rgba(0,0,0,0.09)' : 'none', opacity: secVis ? 1 : 0, transform: secVis ? 'translateY(0)' : 'translateY(10px)', transition: `opacity .5s ease ${i * 90}ms, transform .5s ease ${i * 90}ms` }}>
-          <div style={{ fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 800, color: GREEN, lineHeight: 1, letterSpacing: '-0.03em', marginBottom: 8, fontFamily: F }}>
+          <div style={{ fontSize: 'clamp(30px,3.4vw,42px)', fontWeight: 800, color: '#fff', lineHeight: 1, letterSpacing: '-0.03em', marginBottom: 8, fontFamily: F }}>
             {s.isText ? s.n : <CountUp end={s.n} suffix={s.suffix} delay={i * 150} />}
           </div>
-          <div style={{ fontSize: 13, fontWeight: 700, color: '#111', marginBottom: 3, fontFamily: F, lineHeight: 1.3 }}>{s.label}</div>
-          <div style={{ fontSize: 11.5, color: '#000000', fontFamily: F }}>{s.sub}</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 3, fontFamily: F, lineHeight: 1.3 }}>{s.label}</div>
+          <div style={{ fontSize: 11.5, color: '#fff', fontFamily: F }}>{s.sub}</div>
         </div>
       ))}
     </div>
@@ -190,26 +190,22 @@ function StructureAnimation() {
     <div ref={secRef} style={{ fontFamily: F, display: 'flex', flexDirection: 'column', gap: 14 }}>
 
       {/* MERGED: Divsam + India Company Setup */}
-      <div className="spot-card" onMouseMove={handleSpotlight} style={{ padding: '24px', ...cardStyle(0) }}>
+      <div className="spot-card" onMouseMove={handleSpotlight} style={{ padding: '18px', ...cardStyle(0) }}>
         <div className="spot-card-content">
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: 16 }}>
-            <div style={{ width: 48, height: 48, borderRadius: 12, background: '#fff', border: '1.5px solid rgba(11,61,46,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 800, color: GREEN, fontFamily: F, flexShrink: 0 }}>D</div>
-            <div>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: GREEN, marginBottom: 3, fontFamily: F }}>Primary contracting entity</div>
-              <div style={{ fontSize: 17, fontWeight: 800, color: '#111', fontFamily: F, lineHeight: 1.2, letterSpacing: '-0.01em' }}>Divsam Consultants LLP</div>
-            </div>
+          <div style={{ marginBottom: 14 }}>
+            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: GREEN, marginBottom: 3, fontFamily: F }}>Primary contracting entity</div>
+            <div style={{ fontSize: 17, fontWeight: 800, color: '#111', fontFamily: F, lineHeight: 1.2, letterSpacing: '-0.01em' }}>Divsam Consultants LLP</div>
           </div>
-          <div style={{ height: 1, background: 'rgba(11,61,46,0.10)', margin: '0 0 14px' }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, padding: '11px 14px', borderRadius: 10, background: 'rgba(11,61,46,0.07)', border: '1px solid rgba(11,61,46,0.12)' }}>
-            <div style={{ width: 34, height: 34, borderRadius: 8, background: GREEN, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: '#fff', fontFamily: F, flexShrink: 0 }}>I</div>
+          <div style={{ height: 1, background: 'rgba(11,61,46,0.10)', margin: '0 0 12px' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', borderRadius: 10, background: 'rgba(11,61,46,0.07)', border: '1px solid rgba(11,61,46,0.12)', marginBottom: 14 }}>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: GREEN, fontFamily: F, marginBottom: 2 }}>Market-facing brand</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: GREEN, fontFamily: F, lineHeight: 1.2 }}>India Company Setup</div>
+              <div style={{ fontSize: '8px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: GREEN, fontFamily: F, marginBottom: 1 }}>Market-facing brand</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: GREEN, fontFamily: F, lineHeight: 1.2 }}>India Company Setup</div>
             </div>
-            <div style={{ fontSize: 11, color: '#888', fontFamily: F, fontStyle: 'italic', lineHeight: 1.4, textAlign: 'right', maxWidth: 170 }}>Your single point of contact for all foreign-entry advisory</div>
+            <div style={{ fontSize: 10, color: '#888', fontFamily: F, fontStyle: 'italic', lineHeight: 1.3, textAlign: 'right', maxWidth: 150 }}>Your single point of contact for all foreign-entry advisory</div>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
-            {['Carries PI insurance', 'Signs all engagement letters', 'ICAI-registered practice'].map(d => (
+            {['Carries PI insurance', 'Signs all engagement letters'].map(d => (
               <span key={d} style={{ fontSize: 12, color: '#111', fontFamily: F, display: 'inline-block', padding: '5px 14px', borderRadius: 50, background: 'rgba(11,61,46,0.06)', border: '1px solid rgba(11,61,46,0.18)' }}>{d}</span>
             ))}
           </div>
@@ -219,12 +215,11 @@ function StructureAnimation() {
       {/* PGA */}
       <div className="spot-card" onMouseMove={handleSpotlight} style={{ display: 'flex', gap: 14, padding: '22px', ...cardStyle(120) }}>
         <div className="spot-card-content" style={{ display: 'flex', gap: 14 }}>
-          <div style={{ width: 48, height: 48, borderRadius: 12, background: '#fff', border: '1.5px solid rgba(11,61,46,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 800, color: GREEN, fontFamily: F, flexShrink: 0 }}>P</div>
           <div>
             <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: GREEN, marginBottom: 4, fontFamily: F }}>Knowledge partner</div>
             <div style={{ fontSize: 16, fontWeight: 800, color: '#111', fontFamily: F, lineHeight: 1.2, marginBottom: 10, letterSpacing: '-0.01em' }}>PGA & Co., CA</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
-              {['ICAI-registered', 'Chartered Accountants', 'Named on deliverables', 'Statutory audit', 'High-volume compliance'].map(d => (
+              {['Chartered Accountants', 'Named on deliverables', 'Statutory audit', 'High-volume compliance'].map(d => (
                 <span key={d} style={{ fontSize: 12, color: '#111', fontFamily: F, display: 'inline-block', padding: '5px 14px', borderRadius: 50, background: 'rgba(11,61,46,0.06)', border: '1px solid rgba(11,61,46,0.18)' }}>{d}</span>
               ))}
             </div>
@@ -426,10 +421,10 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
             <Fade>
               <span className="lbl" style={{ marginBottom: 22 }}>About India Company Setup</span>
               <h1 style={{ fontSize: 'clamp(40px,5.5vw,72px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', margin: '0 0 22px', fontFamily: F }}>
-                <span style={{ color: 'black' }}>Big 4 expertise. Independent firm.</span>{' '}
+                <span style={{ color: 'white' }}>Big 4 expertise. Independent firm.</span>{' '}
                 <em style={{ color: GOLD, fontStyle: 'italic', fontWeight: 800 }}>Built for your scale.</em>
               </h1>
-              <p style={{ fontSize: 16, color: '#000000ff', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
+              <p style={{ fontSize: 16, color: '#ffffffff', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
                 India Company Setup, a venture of <strong style={{ color: '#de9504ff', fontWeight: 700 }}>Divsam Consultants LLP</strong>, was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
