@@ -92,10 +92,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
   let lblStyle = {};
   let backStyle = {};
   let isCustomBg = false;
+  let textIsWhite = false;
   let noOverlay = false;
 
   if (pathname === '/private-limited-company-registration-india') {
     isCustomBg = true;
+    textIsWhite = true;
     heroStyle = {
       backgroundImage: "url('/banners and logos/private-limited-company-registration (main).png')",
       backgroundSize: 'cover',
@@ -103,6 +105,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     };
   } else if (pathname === '/india-market-entry-advisory') {
     isCustomBg = true;
+    textIsWhite = true;
     heroStyle = {
       backgroundImage: "url('/banners and logos/India Market entry main banner.png')",
       backgroundSize: 'cover',
@@ -130,14 +133,69 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
+  } else if (pathname === '/us-company-setting-up-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/USA.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/uk-company-setting-up-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/UK.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/singapore-company-setting-up-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/Singapore copy.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/uae-company-setting-up-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/UAE copy.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/gcc-setup-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/GCC Setup India .png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+  } else if (pathname === '/startup-foreign-investment-india') {
+    isCustomBg = true;
+    textIsWhite = true;
+    heroStyle = {
+      backgroundImage: "url('/banners and logos/Startup foreign funding.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
   }
 
   if (isCustomBg) {
     noOverlay = true;
-    titleStyle = { color: '#111111' };
-    descStyle = { color: '#555555' };
-    lblStyle = { color: GREEN };
-    backStyle = { color: '#888888' };
+    if (textIsWhite) {
+      titleStyle = { color: '#ffffff' };
+      descStyle = { color: 'rgba(255,255,255,0.9)' };
+      lblStyle = { color: GOLD };
+      backStyle = { color: 'rgba(255,255,255,0.8)' };
+    } else {
+      titleStyle = { color: '#111111' };
+      descStyle = { color: '#555555' };
+      lblStyle = { color: GREEN };
+      backStyle = { color: '#888888' };
+    }
   }
 
   return (
@@ -198,10 +256,10 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         }
 
         /* ── Content wrapper ── */
-        .seo-content-wrap { max-width: 1200px; margin: 0 auto; padding: 56px 48px 100px; background: #ffffff; }
+        .seo-content-wrap { max-width: 1200px; margin: 0 auto; padding: 56px 48px 16px; background: #ffffff; }
 
         /* ── Section ── */
-        .seo-section { margin-bottom: 56px; background: #ffffff; }
+        .seo-section { margin-bottom: 40px; background: #ffffff; }
         .seo-section-eyebrow {
           font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
           color: ${GREEN}; font-weight: 700; margin-bottom: 10px;
@@ -482,7 +540,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
            WHAT IT IS
         ══════════════════════════════════════ */
         .seo-whatitis { padding: 4px 0; }
-        .seo-whatitis-eyebrow { font-size: 12px; font-weight: 600; color: #9ca3af; margin-bottom: 14px; }
+        .seo-whatitis-eyebrow { font-size: 12px; font-weight: 600; color: #111; margin-bottom: 14px; }
         .seo-whatitis-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: start; }
         .seo-whatitis-title { font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: #111; line-height: 1.2; letter-spacing: -0.02em; }
         .seo-whatitis-body p { font-size: 14.5px; color: #000000; line-height: 1.85; font-weight: 300; margin-bottom: 16px; }
@@ -582,10 +640,10 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-entity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
         .seo-entity-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 26px 24px; transition: border-color .2s, box-shadow .2s, transform .25s; }
         .seo-entity-card:hover { border-color: #b8d8b8; box-shadow: 0 8px 24px rgba(0,0,0,.07); transform: translateY(-3px); }
-        .seo-entity-title { font-size: 15px; font-weight: 700; color: #fff; background: ${GREEN}; display: inline-block; padding: 6px 16px; border-radius: 8px; margin-bottom: 18px; letter-spacing: -0.01em; }
+        .seo-entity-title { font-size: 15px; font-weight: 700; color: #111; background: rgba(11,61,46,0.08); display: inline-block; padding: 6px 16px; border-radius: 8px; margin-bottom: 18px; letter-spacing: -0.01em; }
         .seo-entity-kv { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; margin-bottom: 10px; gap: 10px; }
-        .seo-entity-k { color: #9ca3af; flex-shrink: 0; }
-        .seo-entity-v { display: inline-block; background: #f0f7f0; color: ${GREEN}; border: 1px solid #c8dfc8; border-radius: 100px; padding: 4px 14px; font-size: 11.5px; font-weight: 700; text-align: center; white-space: nowrap; }
+        .seo-entity-k { color: #111; flex-shrink: 0; font-weight: 600; }
+        .seo-entity-v { display: inline-block; background: #f0f7f0; color: #111; border: 1px solid #c8dfc8; border-radius: 100px; padding: 4px 14px; font-size: 11.5px; font-weight: 700; text-align: center; white-space: nowrap; }
         .seo-entity-best { font-size: 12px; color: ${GREEN}; font-weight: 600; margin-top: 16px; padding-top: 14px; border-top: 1px solid #f0f0f0; line-height: 1.5; }
 
         /* ── FDI routes ── */
@@ -608,9 +666,9 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-advisory-flipper { perspective: 1100px; height: 220px; cursor: pointer; }
         .seo-advisory-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.4,0,.2,1); }
         .seo-advisory-flipper.is-flipped .seo-advisory-inner { transform: rotateY(180deg); }
-        .seo-advisory-front, .seo-advisory-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; }
-        .seo-advisory-front { background: #f5f5f0; border: 1.5px solid #e4e0d8; justify-content: space-between; }
-        .seo-advisory-flipper:hover .seo-advisory-front { border-color: ${GREEN}; background: #f0f7f0; }
+        .seo-advisory-front, .seo-advisory-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,.04); }
+        .seo-advisory-front { background: linear-gradient(160deg, #f0f7f4 0%, #fdf6e8 100%); border: 1.5px solid #e4e0d8; justify-content: space-between; transition: box-shadow 0.3s; }
+        .seo-advisory-flipper:hover .seo-advisory-front { border-color: ${GREEN}; background: linear-gradient(160deg, #f0f7f4 0%, #fdf6e8 100%); box-shadow: 0 14px 32px rgba(13,17,23,.09); }
         .seo-advisory-back { background: ${GREEN}; border: 1.5px solid ${GREEN}; transform: rotateY(180deg); justify-content: space-between; }
         .seo-advisory-num { font-size: 26px; font-weight: 800; color: #d0d9c8; letter-spacing: -0.04em; line-height: 1; margin-bottom: auto; }
         .seo-advisory-front-title { font-size: 15px; font-weight: 700; color: #111; line-height: 1.3; letter-spacing: -0.01em; }
@@ -1981,10 +2039,10 @@ function SEOStartupFDIPage({ setPage }) {
 
       <SEOSection label="Instruments Explained" title={<>Which instrument should <em>your startup use?</em></>}>
         <SEOInstrumentCards items={[
-          { name: "CCPS", fullName: "Compulsorily Convertible Preference Shares", badge: "Most Common", badgeColor: "#2e7d32", desc: "The standard instrument for foreign VC investment in Indian startups. Preference shares that mandatorily convert to equity at a future date. FEMA compliant – treated as FDI from day one. Allows for liquidation preference, anti-dilution, and investor rights.", fema: "FCGPR required within 30 days of allotment", tax: "Angel tax applicable if price exceeds fair market value" },
-          { name: "CCD", fullName: "Compulsorily Convertible Debentures", badge: "Bridge Rounds", badgeColor: "#4a6fa5", desc: "Debt instrument that mandatorily converts to equity. Treated as FDI under FEMA. Useful for bridge financing where immediate equity dilution is to be avoided.", fema: "FCGPR on conversion. ECB compliance during debenture period", tax: "Interest income taxable; WHT applicable on interest paid abroad" },
-          { name: "SAFE", fullName: "Simple Agreement for Future Equity", badge: "Complex FEMA", badgeColor: "#c17d2a", desc: "Popular in US ecosystem but has uncertain FEMA status in India. RBI has not issued clear guidance. Most advisors recommend converting SAFEs to CCPS before any FEMA reporting obligation arises.", fema: "Uncertain – typically treat as debt (ECB) until conversion", tax: "Angel tax risk on conversion – valuation must be documented" },
-          { name: "Equity", fullName: "Equity Shares (Straight)", badge: "Simplest", badgeColor: "#5c7a4a", desc: "Direct issue of equity shares to foreign investor. Simplest FEMA treatment. FCGPR required within 30 days. Valuation by CA required. No future conversion complexity.", fema: "FCGPR within 30 days of allotment. Valuation certificate required", tax: "Angel tax applicable on issue above fair market value" },
+          { name: "CCPS", fullName: "Compulsorily Convertible Preference Shares", badge: "Most Common", badgeColor: "#0B3D2E", desc: "The standard instrument for foreign VC investment in Indian startups. Preference shares that mandatorily convert to equity at a future date. FEMA compliant – treated as FDI from day one. Allows for liquidation preference, anti-dilution, and investor rights.", fema: "FCGPR required within 30 days of allotment", tax: "Angel tax applicable if price exceeds fair market value" },
+          { name: "CCD", fullName: "Compulsorily Convertible Debentures", badge: "Bridge Rounds", badgeColor: "#e69819", desc: "Debt instrument that mandatorily converts to equity. Treated as FDI under FEMA. Useful for bridge financing where immediate equity dilution is to be avoided.", fema: "FCGPR on conversion. ECB compliance during debenture period", tax: "Interest income taxable; WHT applicable on interest paid abroad" },
+          { name: "SAFE", fullName: "Simple Agreement for Future Equity", badge: "Complex FEMA", badgeColor: "#0B3D2E", desc: "Popular in US ecosystem but has uncertain FEMA status in India. RBI has not issued clear guidance. Most advisors recommend converting SAFEs to CCPS before any FEMA reporting obligation arises.", fema: "Uncertain – typically treat as debt (ECB) until conversion", tax: "Angel tax risk on conversion – valuation must be documented" },
+          { name: "Equity", fullName: "Equity Shares (Straight)", badge: "Simplest", badgeColor: "#e69819", desc: "Direct issue of equity shares to foreign investor. Simplest FEMA treatment. FCGPR required within 30 days. Valuation by CA required. No future conversion complexity.", fema: "FCGPR within 30 days of allotment. Valuation certificate required", tax: "Angel tax applicable on issue above fair market value" },
         ]} />
       </SEOSection>
 

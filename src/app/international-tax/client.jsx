@@ -226,13 +226,13 @@ export default function Page() {
         .spot-card-content { position:relative; z-index:1; }
 
         .gc {
-          background: #fff;
+          background: linear-gradient(160deg, #f0f7f4 0%, #fdf6e8 100%);
           border: ${BDR};
           border-radius: 16px;
           transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
         .gc:hover { transform: translateY(-4px); border-color: rgba(11,61,46,0.3); box-shadow: 0 12px 36px rgba(11,61,46,0.09); }
-        .gc-static { background: #fff; border: ${BDR}; border-radius: 16px; }
+        .gc-static { background: linear-gradient(160deg, #f0f7f4 0%, #fdf6e8 100%); border: ${BDR}; border-radius: 16px; }
 
         .lbl { font-size:10.5px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#111; font-family:${HV}; }
 
@@ -274,7 +274,7 @@ export default function Page() {
         .hero-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 
         .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
         @media(max-width:1024px){ .svc-grid { grid-template-columns: 1fr 1fr !important; } }
         @media(max-width:900px){
@@ -298,21 +298,21 @@ export default function Page() {
       {/* ── HERO ── */}
       <section className="hero-pad" style={{
         position: 'relative',
-        padding: "96px 56px 88px",
         backgroundImage: "url('/banners and logos/INTL TAX-2.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center 38%',
-        backgroundRepeat: 'no-repeat'
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        padding: '0',
       }}>
         {/* No overlay */}
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "96px 56px 88px" }}>
           <div className="hero-grid">
             {/* Left — headline, copy, CTAs, stats */}
             <div>
               <Fade>
                 <div className="lbl" style={{ marginBottom: 24, color: GOLD }}>Advisory Service</div>
                 <h1 style={{ fontSize: "clamp(38px,5.5vw,64px)", fontWeight: 800, lineHeight: 1.06, letterSpacing: "-0.03em", margin: "0 0 22px", fontFamily: HV }}>
-                  <span style={{ color: "#ffffffff" }}>Not a generic CA firm —</span>{" "}
+                  <span style={{ color: "#ffffffff" }}>Not a generic firm —</span>{" "}
                   <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>the full India tax stack.</em>
                 </h1>
                 <p style={{ fontSize: 16, color: "#ffffffff", lineHeight: 1.78, maxWidth: 520, margin: "0 0 36px", fontFamily: HV }}>
@@ -420,11 +420,11 @@ export default function Page() {
             <div className="guide-grid">
               {GUIDES.map((g, gi) => (
                 <Fade key={g.label} delay={gi * 70}>
-                  <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')} style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
-                    <div style={{ height: 180, width: "100%", overflow: "hidden", position: "relative" }}>
-                      <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.3s ease" }} className="guide-img" />
+                  <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')} style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "row", height: "100%", alignItems: "center" }}>
+                    <div style={{ height: "100%", minHeight: 180, width: 180, overflow: "hidden", position: "relative", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "12px", transition: "transform 0.3s ease" }} className="guide-img" />
                     </div>
-                    <div style={{ padding: "22px 22px 18px", display: "flex", flexDirection: "column", flex: 1 }}>
+                    <div style={{ padding: "22px 22px 18px", display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>
                       <div style={{ fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 6, fontFamily: HV, lineHeight: 1.25 }}>{g.label}</div>
                       <div style={{ fontSize: 12.5, color: "#555", marginBottom: 18, fontFamily: HV, fontWeight: 500 }}>{g.sub}</div>
                       <div style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: GREEN, fontFamily: HV }}>Read guide →</div>

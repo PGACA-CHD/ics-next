@@ -233,10 +233,10 @@ const ACCENTS = Object.values(SVC_COLOR);
    Shows only the 3 ongoing retainer plans.
    Accent colour: deep navy #1a3a5c (not gold, not green).
 ───────────────────────────────────────────── */
-const RET_ACC = '#1a3a5c';   /* deep navy — distinct from green & gold */
-const RET_MID = '#2a5a8c';   /* lighter navy for popular badge */
-const RET_LIGHT = 'rgba(26,58,92,0.08)';
-const RET_BDR = 'rgba(26,58,92,0.22)';
+const RET_ACC = '#0B3D2E';   /* deep green */
+const RET_MID = '#145c42';   /* lighter green for popular badge */
+const RET_LIGHT = 'rgba(11,61,46,0.08)';
+const RET_BDR = 'rgba(11,61,46,0.22)';
 
 const RETAINER_PLANS = [
   {
@@ -426,7 +426,7 @@ function RetainerPricing() {
               {/* Price */}
               <div style={{ fontSize: 11, color: tc, marginBottom: 6, fontFamily: HV }}>Starts at</div>
               <div className="ret-price-row">
-                <span className="ret-price" style={{ fontSize: pop ? 50 : 40, color: pop ? '#7eb8f7' : RET_ACC }}>
+                                <span className="ret-price" style={{ fontSize: pop ? 50 : 40, color: GOLD }}>
                   {plan.price}
                 </span>
                 <span className="ret-unit" style={{ color: tc }}>{plan.unit}</span>
@@ -444,9 +444,9 @@ function RetainerPricing() {
               <button
                 className="ret-cta"
                 style={{
-                  background: pop ? '#7eb8f7' : RET_ACC,
-                  color: pop ? RET_ACC : '#fff',
-                  borderColor: pop ? '#7eb8f7' : RET_ACC,
+                  background: pop ? '#e69819' : RET_ACC,
+                  color: pop ? '#111' : '#fff',
+                  borderColor: pop ? '#e69819' : RET_ACC,
                 }}
                 onClick={() => router.push(ROUTES.contact)}
               >
@@ -460,7 +460,7 @@ function RetainerPricing() {
               <ul className="ret-features">
                 {plan.features.map(f => (
                   <li key={f} style={{ color: tc }}>
-                    <span className="ret-check" style={{ color: pop ? '#7eb8f7' : RET_ACC }}>✓</span>
+                    <span className="ret-check" style={{ color: pop ? '#e69819' : RET_ACC }}>✓</span>
                     {f}
                   </li>
                 ))}

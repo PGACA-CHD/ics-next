@@ -278,7 +278,7 @@ export default function Page() {
 
       {/* HERO — image only, no gradient overlay */}
       <section style={{ position: 'relative', minHeight: 580, display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/banners and logos/Canada.png')", backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/banners and logos/Canada copy.png')", backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: 1160, margin: '0 auto', padding: '100px 56px 92px', width: '100%' }}>
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
