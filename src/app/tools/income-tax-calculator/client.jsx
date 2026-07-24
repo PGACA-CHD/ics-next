@@ -241,17 +241,16 @@ export default function Page() {
   return (
     <div>
       {/* HERO */}
-      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
+      <section style={{ backgroundImage: "url('/banners and logos/Income Tax Calculator (1).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
-          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: T.sl, fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(245,168,40,.25)', borderRadius: 20 }}>
+          <Link href="/tools" style={{ fontSize: 12.5, color: '#444', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
+          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#111', fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(0,0,0,.15)', borderRadius: 20 }}>
             Finance Act 2025 · FY 2025-26 / AY 2026-27
           </div>
-          <h1 className="font-display" style={{ fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
+          <h1 className="font-display" style={{ fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#111', lineHeight: 1.08, marginBottom: 14 }}>
             Income Tax Calculator
           </h1>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 620 }}>
+          <p style={{ fontSize: 15, color: '#333', lineHeight: 1.7, maxWidth: 620 }}>
             Companies · LLP · Individuals (resident &amp; non-resident) · New &amp; Old Regime
           </p>
         </div>

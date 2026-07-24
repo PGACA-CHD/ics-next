@@ -140,7 +140,7 @@ export default function ContactPage() {
         .contact-root { color: ${T.ch}; }
 
         /* ── HERO */
-        .hero { background-image: url('/banners and logos/Contact Us.png'); background-size: cover; background-position: center; padding: 72px 48px 56px; position: relative; }
+        .hero { background-image: url('/banners and logos/contact us.png'); background-size: cover; background-position: center; padding: 72px 48px 56px; position: relative; }
         .hero-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 2; }
         .hero-badge {
           display: inline-flex; align-items: center; gap: 7px;
