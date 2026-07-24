@@ -410,7 +410,7 @@ export default function Page() {
       {/* ── DETAILED GUIDES ── */}
       <section className="sec-pad" style={{ padding: "0 56px 88px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ paddingTop: 48 }}>
+          <div style={{ paddingTop: 20 }}>
             <Fade>
               <div className="lbl" style={{ marginBottom: 12 }}>Detailed Guides</div>
               <h2 style={{ fontSize: "clamp(20px,2.5vw,30px)", fontWeight: 800, letterSpacing: "-0.02em", color: "#111", margin: "0 0 32px", fontFamily: HV }}>

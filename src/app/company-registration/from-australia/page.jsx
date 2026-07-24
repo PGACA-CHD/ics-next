@@ -257,7 +257,7 @@ export default function Page() {
         @keyframes whyGrad { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:56px 56px; }
-        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#aaa; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
+        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000000; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
 
@@ -311,27 +311,26 @@ export default function Page() {
       {/* HERO — full-bleed banner */}
       <section style={{ position: 'relative', minHeight: 580, display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/banners and logos/Australia.png')", backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        {/* left-side overlay only so image stays visible on right */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(4,15,10,0.78) 0%, rgba(4,15,10,0.55) 50%, transparent 100%)', zIndex: 1 }} />
+        {/* left-side overlay removed as requested */}
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1160, margin: '0 auto', padding: '100px 56px 92px', width: '100%' }}>
-          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
+          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(0, 0, 0, 0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(255,255,255,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From Australia</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV, color: '#fff' }}>
+              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(0, 0, 0, 0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From Australia</span>
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV, color: '#010101ff' }}>
                 Register a Company<br />in India from{' '}
                 <em style={{ fontStyle: 'normal', color: '#e69819' }}>Australia.</em>
               </h1>
-              <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.80)', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
+              <p style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.8)', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
                 100% online. No India visit required. Expert CA support for Australian businesses, NRIs, and founders expanding into India under ECTA.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link href="/contact" className="g-btn">Get a Free Consultation →</Link>
-                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid rgba(255,255,255,0.55)', lineHeight: 1 }}>See the Process</a>
+                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#000000ff', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid rgba(255,255,255,0.55)', lineHeight: 1 }}>See the Process</a>
               </div>
             </Fade>
             <Fade delay={100}>
-              <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.48)', borderRadius: 16 }}>
+              <div style={{ background: '#efefefff', border: '1px solid rgba(0,0,0,0.48)', borderRadius: 16 }}>
                 <div style={{ background: GREEN, borderRadius: '15px 15px 0 0', padding: '14px 22px' }}>
                   <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', fontFamily: HV }}>At a Glance</span>
                 </div>
@@ -342,14 +341,14 @@ export default function Page() {
                   { label: 'ECTA in force', text: 'Since Dec 2022' },
                 ].map((row, i, arr) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 22px', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', gap: 16 }}>
-                    <span style={{ fontSize: 13, color: '#777', fontFamily: HV }}>{row.label}</span>
+                    <span style={{ fontSize: 13, color: '#000000ff', fontFamily: HV }}>{row.label}</span>
                     <span style={{ fontSize: 16, fontWeight: 800, color: GREEN, fontFamily: HV, textAlign: 'right' }}>
                       {row.text ?? <CountUp end={row.val} suffix={row.suffix} prefix={row.prefix || ''} delay={i * 150} />}
                     </span>
                   </div>
                 ))}
                 <div style={{ padding: '13px 22px', background: 'rgba(9,48,36,0.05)', borderRadius: '0 0 15px 15px', borderTop: '1px solid rgba(9,48,36,0.10)' }}>
-                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
+                  <p style={{ fontSize: 12, color: '#000000ff', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
                 </div>
               </div>
             </Fade>

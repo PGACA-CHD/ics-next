@@ -339,7 +339,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         /* ══ WWE grid — align-items:center so both cols fill equal height ══ */
         .wwe {
           max-width: 1200px; margin: 0 auto;
-          padding: 60px 56px 88px;
+          padding: 20px 56px 0;
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 80px;
@@ -391,7 +391,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         @media(max-width:960px) {
           .hero-g, .wwe, .team-g { grid-template-columns: 1fr !important; gap: 40px !important; }
           .wwe-sticky { position: static !important; }
-          .wwe { padding: 48px 28px 64px !important; }
+          .wwe { padding: 20px 28px 0 !important; }
           .disc-grid { grid-template-columns: 1fr !important; }
           .team-card-inner { grid-template-columns: 160px 1fr !important; }
         }
@@ -406,7 +406,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           .team-card-inner > .spot-card-content { padding: 24px 20px !important; }
         }
         @media(max-width:540px) {
-          .wwe { padding: 40px 18px 56px !important; }
+          .wwe { padding: 20px 18px 0 !important; }
           .sec { padding-left: 18px !important; padding-right: 18px !important; }
           .team-card-inner > .spot-card-content { padding: 20px 16px !important; }
           .wwe-p { max-width: 100%; }
@@ -420,7 +420,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       `}</style>
 
       {/* ══ HERO ══ */}
-      <section style={{ backgroundImage: "url('/banners and logos/About us main banner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: '96px 56px 88px', fontFamily: F }} className="sec">
+      <section style={{ backgroundImage: "url('/banners and logos/About us main banner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: '20px 56px 0', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <Fade>
@@ -442,7 +442,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       </section>
 
       {/* ══ TRUSTED BY — no border below ══ */}
-      <section style={{ padding: '56px 0 48px', background: '#fff', fontFamily: F }}>
+      <section style={{ padding: '20px 0 0', background: '#fff', fontFamily: F }}>
         <Fade>
           <SH green="Trusted by 100+" gold="companies worldwide." mb={36} />
         </Fade>
@@ -479,7 +479,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       </section>
 
       {/* ══ MEET THE TEAM — no border line above ══ */}
-      <section style={{ padding: '88px 56px', background: '#fff', fontFamily: F }} className="sec">
+      <section style={{ padding: '20px 56px 0', background: '#fff', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -503,7 +503,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       </section>
 
       {/* ══ WHY WE EXIST ══ */}
-      <div style={{ background: '#fff', padding: '88px 56px 0' }}>
+      <div style={{ background: '#fff', padding: '20px 56px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade><SH eyebrow="Why we exist" green="Built because the best advice" gold="was being wasted." mb={0} /></Fade>
         </div>
@@ -511,7 +511,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       <div style={{ background: '#fff' }}>
         {/*
         */}
-        <div className="wwe" style={{ paddingTop: 32 }}>
+        <div className="wwe">
           <div className="wwe-sticky">
             <Fade>
               <p className="wwe-p">For years, the people who now lead this practice sat inside Big Four advisory rooms, watching the same pattern repeat: a foreign company would arrive with real capital and a real deadline, and get routed to whichever associate had a free afternoon.</p>
@@ -523,12 +523,12 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         </div>
 
         {/* ══ OUR STRUCTURE ══ */}
-        <div style={{ background: '#fff', padding: '88px 56px 0' }}>
+        <div style={{ background: '#fff', padding: '48px 56px 0' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <Fade><SH eyebrow="Our structure" green="Who you're actually" gold="contracting with." mb={0} /></Fade>
           </div>
         </div>
-        <div className="wwe" style={{ paddingTop: 32 }}>
+        <div className="wwe">
           <Fade delay={80}><StructureAnimation /></Fade>
           <div className="wwe-sticky">
             <Fade>
@@ -541,7 +541,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       </div>
 
       {/* ══ FOUR DISCIPLINES — gold spotlight ══ */}
-      <section style={{ padding: '88px 56px', background: '#fff', fontFamily: F }} className="sec">
+      <section style={{ padding: '20px 56px 0', background: '#fff', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade><SH green="Four disciplines." gold="One integrated team." mb={48} /></Fade>
           <div className="disc-grid">
@@ -574,7 +574,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
       </section>
 
       {/* ══ REGISTRATIONS ══ */}
-      <section style={{ padding: '88px 56px', background: '#fff', fontFamily: F }} className="sec">
+      <section style={{ padding: '0px 56px 0', background: '#fff', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade><SH green="Registrations &amp;" gold="memberships." mb={48} /></Fade>
           <Fade>

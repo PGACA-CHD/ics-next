@@ -133,17 +133,11 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
   }
 
   if (isCustomBg) {
-    if (noOverlay) {
-      titleStyle = { color: '#111111' };
-      descStyle = { color: '#555555' };
-      lblStyle = { color: GREEN };
-      backStyle = { color: '#888888' };
-    } else {
-      titleStyle = { color: '#ffffff' };
-      descStyle = { color: 'rgba(255,255,255,0.85)' };
-      lblStyle = { color: GOLD };
-      backStyle = { color: 'rgba(255,255,255,0.5)' };
-    }
+    noOverlay = true;
+    titleStyle = { color: '#111111' };
+    descStyle = { color: '#555555' };
+    lblStyle = { color: GREEN };
+    backStyle = { color: '#888888' };
   }
 
   return (
@@ -204,10 +198,10 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         }
 
         /* ── Content wrapper ── */
-        .seo-content-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 48px 100px; background: #ffffff; }
+        .seo-content-wrap { max-width: 1200px; margin: 0 auto; padding: 56px 48px 100px; background: #ffffff; }
 
         /* ── Section ── */
-        .seo-section { margin-bottom: 72px; background: #ffffff; }
+        .seo-section { margin-bottom: 56px; background: #ffffff; }
         .seo-section-eyebrow {
           font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
           color: ${GREEN}; font-weight: 700; margin-bottom: 10px;
@@ -491,7 +485,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-whatitis-eyebrow { font-size: 12px; font-weight: 600; color: #9ca3af; margin-bottom: 14px; }
         .seo-whatitis-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: start; }
         .seo-whatitis-title { font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: #111; line-height: 1.2; letter-spacing: -0.02em; }
-        .seo-whatitis-body p { font-size: 14.5px; color: #6b7280; line-height: 1.85; font-weight: 300; margin-bottom: 16px; }
+        .seo-whatitis-body p { font-size: 14.5px; color: #000000; line-height: 1.85; font-weight: 300; margin-bottom: 16px; }
         .seo-whatitis-body p:last-child { margin-bottom: 0; }
         @media (max-width: 800px) { .seo-whatitis-grid { grid-template-columns: 1fr; gap: 16px; } }
 
@@ -685,7 +679,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         /* ── CTA Strip ── */
         .seo-cta-strip {
           background: linear-gradient(135deg, ${GREEN} 0%, #2e7d32 100%);
-          border-radius: 20px; padding: 44px 48px; margin-top: 64px;
+          border-radius: 20px; padding: 44px 48px; margin-top: 0;
           display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center;
           position: relative; overflow: hidden;
         }
@@ -700,7 +694,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
 
         /* ── Responsive ── */
         @media (max-width: 900px) {
-          .seo-content-wrap { padding: 60px 24px 80px; }
+          .seo-content-wrap { padding: 56px 24px 80px; }
           .seo-entity-grid { grid-template-columns: 1fr; }
           .seo-routes-grid { grid-template-columns: 1fr; }
           .seo-audience-item { grid-template-columns: 1fr; gap: 8px; }
@@ -708,12 +702,12 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
           .seo-cta-actions { flex-direction: row; flex-wrap: wrap; }
         }
         @media (max-width: 600px) {
-          .seo-content-wrap { padding: 40px 16px 56px; }
+          .seo-content-wrap { padding: 44px 16px 56px; }
           .seo-cta-actions { flex-direction: column; }
           .seo-section { margin-bottom: 44px; }
           .seo-section-title { font-size: 22px; }
           .seo-iconcard { padding: 22px 18px 20px; }
-          .seo-cta-strip { padding: 28px 20px; margin-top: 44px; }
+          .seo-cta-strip { padding: 28px 20px; margin-top: 0; }
           .seo-faqcard-btn { padding: 16px 16px; }
         }
       `}</style>

@@ -386,7 +386,7 @@ export default function Page() {
         @keyframes stepIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:56px 56px; }
-        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#aaa; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
+        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000000; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
 
