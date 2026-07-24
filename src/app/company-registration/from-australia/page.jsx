@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import PricingSection from '@/app/PricingSection';
 
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = "Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
 
 function useReveal(t = 0.12) {
@@ -257,8 +257,8 @@ export default function Page() {
         @keyframes whyGrad { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:56px 56px; }
-        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000000; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; display:block; margin-bottom:12px; }
-        .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
+        .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000000; font-family:Helvetica, Arial, sans-serif; display:block; margin-bottom:12px; }
+        .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:Helvetica, Arial, sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
 
         /* NO borders between sections */
@@ -277,9 +277,9 @@ export default function Page() {
         .why-anim-card:hover { box-shadow:0 16px 48px rgba(9,48,36,0.13); transform:translateY(-5px); border-color:rgba(9,48,36,0.25); }
         .why-anim-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#093024 0%,#e69819 100%); }
 
-        .stbl { width:100%; border-collapse:collapse; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
+        .stbl { width:100%; border-collapse:collapse; font-family:Helvetica, Arial, sans-serif; }
         .stbl th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#aaa; padding:0 20px 12px; text-align:left; border-bottom:2px solid rgba(0,0,0,0.12); }
-        .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; }
+        .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:Helvetica, Arial, sans-serif; vertical-align:top; }
         .stbl tr:last-child td { border-bottom:none; }
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }

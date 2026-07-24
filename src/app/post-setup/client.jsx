@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 
 const ROUTES = { home: '/', services: '/setup', gcc: '/post-setup', tax: '/international-tax', hub: '/knowledge-hub', about: '/about', contact: '/contact', industries: '/industries' };
-const HV = '"Helvetica Neue", Helvetica, Arial, sans-serif';
+const HV = 'Helvetica, Arial, sans-serif';
 const BDR = "1px solid rgba(0,0,0,0.52)";
 const GLASS = "rgba(255,255,255,0.28)";
 const BLUR = "blur(16px)";

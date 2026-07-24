@@ -7,7 +7,7 @@ import { T } from '@/lib/config';
 const GREEN = '#0B3D2E';
 const GOLD = '#c8870a';
 const GOLD_HOVER = '#e09a10';
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = "Helvetica, Arial, sans-serif";
 
 const CTA_MAP = {
   '/setup': {

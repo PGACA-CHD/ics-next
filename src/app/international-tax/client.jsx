@@ -17,7 +17,7 @@ const ROUTES = {
   seo_startup: '/startup-foreign-investment-india',
 };
 
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = "Helvetica, Arial, sans-serif";
 const BDR = "1px solid #111";
 const GREEN = "#0B3D2E";
 const GOLD = "#e69819";
@@ -304,7 +304,7 @@ export default function Page() {
         backgroundPosition: 'center 38%',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />
+        {/* No overlay */}
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: "0 auto" }}>
           <div className="hero-grid">
             {/* Left — headline, copy, CTAs, stats */}
@@ -312,15 +312,15 @@ export default function Page() {
               <Fade>
                 <div className="lbl" style={{ marginBottom: 24, color: GOLD }}>Advisory Service</div>
                 <h1 style={{ fontSize: "clamp(38px,5.5vw,64px)", fontWeight: 800, lineHeight: 1.06, letterSpacing: "-0.03em", margin: "0 0 22px", fontFamily: HV }}>
-                  <span style={{ color: "#fff" }}>Not a generic CA firm —</span>{" "}
+                  <span style={{ color: "#ffffffff" }}>Not a generic CA firm —</span>{" "}
                   <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>the full India tax stack.</em>
                 </h1>
-                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.9)", lineHeight: 1.78, maxWidth: 520, margin: "0 0 36px", fontFamily: HV }}>
+                <p style={{ fontSize: 16, color: "#ffffffff", lineHeight: 1.78, maxWidth: 520, margin: "0 0 36px", fontFamily: HV }}>
                   DTAA structuring, transfer pricing, withholding tax, FEMA compliance, and PE risk management — designed before your India entity opens its doors.
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 44 }}>
                   <button className="lime-btn" onClick={() => router.push(ROUTES.contact)}>Book a Tax Consultation →</button>
-                  <button className="ghost-dark" onClick={() => router.push(ROUTES.services)}>Company Setup →</button>
+                  <button className="ghost-btn" onClick={() => router.push(ROUTES.services)}>Company Setup →</button>
                 </div>
               </Fade>
 

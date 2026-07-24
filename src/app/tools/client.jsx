@@ -33,7 +33,7 @@ const ACCENT_TEXT = {
 const G = '#0B3D2E';
 const GOLD = '#e69819';
 const HS = 'clamp(28px, 3vw, 42px)';
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = "Helvetica, Arial, sans-serif";
 
 export default function Page() {
   const handleCardSpotlight = (e) => {
@@ -46,7 +46,7 @@ export default function Page() {
   return (
     <div className="lg-page">
       <style>{`
-        *, *::before, *::after { box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important; }
+        *, *::before, *::after { box-sizing: border-box; font-family: Helvetica, Arial, sans-serif !important; }
 
         .lg-page {
           --blue: #0071e3; --green: #248a3d;

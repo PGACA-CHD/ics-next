@@ -28,7 +28,7 @@ const ROUTES = {
 /* ─── CONSTANTS ─── */
 const GREEN = '#0B3D2E';
 const GOLD = '#e69819';
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = "Helvetica, Arial, sans-serif";
 
 function WASvg() {
   return (
@@ -144,7 +144,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     <div className="seo-page" style={{ background: '#ffffff' }}>
       <style>{`
         .seo-page, .seo-page * {
-          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+          font-family: Helvetica, Arial, sans-serif !important;
         }
 
         /* ── Hero ── */
@@ -714,7 +714,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
 
       {/* ── HERO ── */}
       <section className="hv2-hero" style={heroStyle}>
-        {isCustomBg && !noOverlay && <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />}
+        {/* No overlay */}
         <div className="hv2-hero-inner" style={{ position: 'relative', zIndex: 2 }}>
           {backHref && (
             <Link href={backHref} className="hv2-back" style={backStyle}>← {backLabel || 'All Services'}</Link>

@@ -11,7 +11,7 @@ const ROUTES = {
   seo_tp: '/transfer-pricing-india', seo_fdi: '/fdi-rules-india',
 };
 
-const HV = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const HV = "Helvetica, Arial, sans-serif";
 const BDR = "1px solid #111";
 const GREEN = "#0B3D2E";
 const GOLD = "#e69819";

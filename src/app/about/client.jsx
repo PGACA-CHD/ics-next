@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const F = "'Helvetica Neue','Helvetica',Arial,sans-serif";
+const F = "Helvetica, Arial, sans-serif";
 const BDR = "1px solid rgba(0,0,0,0.52)";
 const GLASS = "rgba(255,255,255,0.28)";
 const BLUR = "blur(16px)";
@@ -113,7 +113,7 @@ function HeroStats() {
             {s.isText ? s.n : <CountUp end={s.n} suffix={s.suffix} delay={i * 150} />}
           </div>
           <div style={{ fontSize: 13, fontWeight: 700, color: '#111', marginBottom: 3, fontFamily: F, lineHeight: 1.3 }}>{s.label}</div>
-          <div style={{ fontSize: 11.5, color: '#888', fontFamily: F }}>{s.sub}</div>
+          <div style={{ fontSize: 11.5, color: '#000000', fontFamily: F }}>{s.sub}</div>
         </div>
       ))}
     </div>
@@ -323,7 +323,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         .lbl {
           font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
           font-weight: 600; color: #aaa;
-          font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; display: block;
+          font-family: Helvetica, Arial, sans-serif; display: block;
         }
         .logo-l { display: flex; width: max-content; animation: scroll-left  38s linear infinite; }
         .logo-r { display: flex; width: max-content; animation: scroll-right 38s linear infinite; }
@@ -333,7 +333,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         .logo-fl { position: absolute; left: 0; top: 0; bottom: 0; width: 10%; background: linear-gradient(90deg,#fff,transparent); z-index: 2; pointer-events: none; }
         .logo-fr { position: absolute; right: 0; top: 0; bottom: 0; width: 10%; background: linear-gradient(270deg,#fff,transparent); z-index: 2; pointer-events: none; }
 
-        .lime-btn { display: inline-flex; align-items: center; gap: 8px; background: #093024; color: #fff; font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 14px 28px; border-radius: 6px; border: none; cursor: pointer; transition: background .2s, transform .15s; text-decoration: none; }
+        .lime-btn { display: inline-flex; align-items: center; gap: 8px; background: #093024; color: #fff; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; padding: 14px 28px; border-radius: 6px; border: none; cursor: pointer; transition: background .2s, transform .15s; text-decoration: none; }
         .lime-btn:hover { background: #0a3d2c; transform: translateY(-1px); }
 
         /* ══ WWE grid — align-items:center so both cols fill equal height ══ */
@@ -358,7 +358,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
 
         /* paragraphs — left aligned */
         .wwe-p {
-          font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif;
+          font-family: Helvetica, Arial, sans-serif;
           font-size: 14.5px; color: #555; line-height: 1.82;
           margin: 0 0 18px;
           text-align: left;
@@ -370,8 +370,8 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         .reg-card:last-child { border-right: none; padding-right: 0; margin-right: 0; }
         .reg-card-inner { display: flex; align-items: flex-start; gap: 11px; }
         .reg-ico   { width: 34px; height: 34px; border-radius: 9px; background: rgba(9,48,36,0.04); border: 1px dashed rgba(9,48,36,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .reg-title { font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-size: 12.5px; font-weight: 700; color: #111; margin: 0 0 3px; }
-        .reg-desc  { font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-size: 11.5px; color: #555; line-height: 1.55; margin: 0; }
+        .reg-title { font-family: Helvetica, Arial, sans-serif; font-size: 12.5px; font-weight: 700; color: #111; margin: 0 0 3px; }
+        .reg-desc  { font-family: Helvetica, Arial, sans-serif; font-size: 11.5px; color: #555; line-height: 1.55; margin: 0; }
 
         /* ══ DISC CARDS — GOLD spotlight ══ */
         .disc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -426,10 +426,10 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
             <Fade>
               <span className="lbl" style={{ marginBottom: 22 }}>About India Company Setup</span>
               <h1 style={{ fontSize: 'clamp(40px,5.5vw,72px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', margin: '0 0 22px', fontFamily: F }}>
-                <span style={{ color: 'white' }}>Big 4 expertise. Independent firm.</span>{' '}
+                <span style={{ color: 'black' }}>Big 4 expertise. Independent firm.</span>{' '}
                 <em style={{ color: GOLD, fontStyle: 'italic', fontWeight: 800 }}>Built for your scale.</em>
               </h1>
-              <p style={{ fontSize: 16, color: '#ffffffff', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
+              <p style={{ fontSize: 16, color: '#000000ff', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
                 India Company Setup, a venture of <strong style={{ color: '#de9504ff', fontWeight: 700 }}>Divsam Consultants LLP</strong>, was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
