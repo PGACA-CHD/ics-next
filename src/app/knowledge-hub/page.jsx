@@ -4,7 +4,10 @@
 import Link from 'next/link';
 
 const CF_SPACE_ID = 'qjo3cpray5h2';
-const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN;
+const CF_TOKEN =
+  process.env.CONTENTFUL_DELIVERY_TOKEN ||
+  process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN ||
+  'Me3wAoh5C8R-voHvn3buH1R3nWLM9f4QrT6jKVaWDtY';
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 
 export const metadata = {
@@ -42,7 +45,10 @@ async function getArticles() {
   try {
     const res = await fetch(
       `${CF_URL}?content_type=article&order=-fields.publishedDate&limit=50&access_token=${CF_TOKEN}`,
-      { next: { revalidate: 21600 } }
+      {
+        headers: { Authorization: `Bearer ${CF_TOKEN}` },
+        next: { revalidate: 21600 },
+      }
     );
     if (!res.ok) return [];
     const data = await res.json();

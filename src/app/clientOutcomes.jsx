@@ -18,7 +18,7 @@ const OUTCOMES = [
         metricSub: "days, entity to bank account",
         title: "SaaS company enters India",
         description: "Needed a fully India-compliant entity live before an engineering hire could start — incorporation, GST, and bank account opening ran in parallel rather than in sequence.",
-        tags: ["SaaS", "Europe HQ"],
+        tags: ["SaaS", "UK HQ"],
     },
     {
         metric: "$340k",
@@ -37,9 +37,9 @@ const OUTCOMES = [
     {
         metric: "Zero",
         metricSub: "transfer-pricing disputes in 5 years",
-        title: "APAC SaaS scales to a 40-person India team",
-        description: "A defensible transfer-pricing model, benchmarked and documented from incorporation, has cleared every annual audit cycle without a single adjustment.",
-        tags: ["SaaS", "Singapore HQ"],
+        title: "US SaaS scales to a 150-person India team",
+        description: "A defensible transfer-pricing model, benchmarked and documented from incorporation, has cleared every annual audit cycle without a single adjustment — across a 150-person India engineering team.",
+        tags: ["SaaS", "US HQ"],
     },
 ];
 

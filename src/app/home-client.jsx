@@ -118,34 +118,34 @@ function AudiencePathsSection() {
       stat: "2–3 Weeks", statLabel: "Typical time from structure sign-off to incorporation certificate.", cta: "Foreign company guide", page: "seo_fcri"
     },
     {
-      n: "02", tab: "Building from scratch", headline: "Building a team in India",
+      n: "02", tab: "Incorporating a Pvt Ltd", headline: "Incorporating a Pvt Ltd in India",
+      desc: "You're an Indian founder, entrepreneur, or promoter incorporating a Private Limited Company. You want it done right — right objects clause, right share structure, FDI-ready if investors come later.",
+      bullets: ["MOA objects clause advice", "Share capital structure", "FDI-ready from day one", "Post-incorporation compliance"],
+      stat: "7–10 days", statLabel: "Typical MCA incorporation after document submission.", cta: "Pvt Ltd registration guide", page: "seo_pvtltd"
+    },
+    {
+      n: "03", tab: "Building from scratch", headline: "Building a team in India",
       desc: "You're setting up a Global Capability Centre — 10 to 200+ people. You need entity setup, payroll, ESOP structuring, cost-plus pricing, and a compliance retainer that scales as you hire.",
       bullets: ["End-to-end GCC advisory", "Payroll & HR compliance", "ESOP & incentive structuring", "Ongoing compliance retainer"],
       stat: "6 Weeks", statLabel: "Typical time from engagement to first hire onboarded.", cta: "GCC advisory", page: "gcc"
     },
     {
-      n: "03", tab: "Something isn't right", headline: "Something isn't right",
+      n: "04", tab: "Something isn't right", headline: "Something isn't right",
       desc: "Your India entity is live but the structure was set up quickly, the transfer pricing is undocumented, or your compliance is behind. We assess, fix, and maintain — without starting over.",
       bullets: ["Structure & TP health check", "FEMA & RBI regularisation", "Back-filing & penalty mitigation", "Ongoing compliance takeover"],
       stat: "< 30 days", statLabel: "Typical time to full compliance from first review call.", cta: "Get a review", page: "contact"
     },
     {
-      n: "04", tab: "NRI investing in India", headline: "NRI investing or returning to India",
+      n: "05", tab: "NRI investing in India", headline: "NRI investing or returning to India",
       desc: "You live abroad and want to invest in or start a business in India — or you're returning to India and your FEMA and tax status is changing. Two situations, one advisory team.",
       bullets: ["Schedule 4 FEMA — NRI investment route", "Residency transition planning", "NRE/FCNR account handling", "RNOR tax optimisation"],
       stat: "1–2 Weeks", statLabel: "Typical time to structure advice and filing readiness.", cta: "NRI guide", page: "seo_nri"
     },
     {
-      n: "05", tab: "Raising an India round", headline: "Raising your first foreign round",
+      n: "06", tab: "Raising an India round", headline: "Raising your first foreign round",
       desc: "Your startup is raising from foreign angels or VCs. CCPS, CCD, SAFE — getting the instrument, valuation, and FCGPR right determines how clean your cap table looks at Series A.",
       bullets: ["CCPS / CCD structuring", "Angel tax — DPIIT recognition", "FEMA valuation compliance", "FC-GPR within 30 days"],
       stat: "30 days", statLabel: "FC-GPR must be filed within 30 days of share allotment.", cta: "Startup funding guide", page: "seo_startup"
-    },
-    {
-      n: "06", tab: "Incorporating a Pvt Ltd", headline: "Incorporating a Pvt Ltd in India",
-      desc: "You're an Indian founder, entrepreneur, or promoter incorporating a Private Limited Company. You want it done right — right objects clause, right share structure, FDI-ready if investors come later.",
-      bullets: ["MOA objects clause advice", "Share capital structure", "FDI-ready from day one", "Post-incorporation compliance"],
-      stat: "7–10 days", statLabel: "Typical MCA incorporation after document submission.", cta: "Pvt Ltd registration guide", page: "seo_pvtltd"
     },
   ];
 
@@ -875,7 +875,7 @@ export default function HomePage() {
               </div>
               <div className="gr-btns" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <button className="ics-btn ics-btn-primary" onClick={() => { window.location.href = ROUTES.contact; }}>Explore Global Presence →</button>
-                <button className="ics-btn ics-btn-outline" onClick={() => { window.location.href = ROUTES.hub; }}>View Success Stories</button>
+                {/* <button className="ics-btn ics-btn-outline" onClick={() => { window.location.href = ROUTES.hub; }}>View Success Stories</button> */}
               </div>
             </div>
             <div className="gr-map">

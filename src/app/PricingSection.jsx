@@ -171,6 +171,7 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
           padding-bottom: 2px;
+          justify-content: center;
         }
         .ps-tabs::-webkit-scrollbar { display: none; }
         .ps-tabs button { flex-shrink: 0; }
@@ -182,6 +183,7 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
         @media (max-width: 900px) {
           .ps-section { padding: 64px 20px 72px !important; }
           .ps-grid    { grid-template-columns: 1fr; }
+          .ps-tabs    { justify-content: flex-start; padding-bottom: 10px; }
         }
       `}</style>
 
@@ -208,7 +210,7 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
                 </div>
 
                 {/* Tabs */}
-                <div className="ps-tabs" style={{ justifyContent: 'center', marginBottom: 44 }}>
+                <div className="ps-tabs" style={{ marginBottom: 44 }}>
                     {TABS.map((t, i) => (
                         <button key={t.key} onClick={() => setActiveTab(i)} style={{
                             fontFamily: FONT, padding: '11px 22px', borderRadius: 50,
