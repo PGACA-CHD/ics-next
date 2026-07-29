@@ -93,9 +93,9 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
   let backStyle = {};
   let isCustomBg = false;
   let textIsWhite = false;
-if (typeof textIsWhite === 'undefined') {
-  textIsWhite = false;
-}
+  if (typeof textIsWhite === 'undefined') {
+    textIsWhite = false;
+  }
   let noOverlay = false;
 
   if (pathname === '/private-limited-company-registration-india') {
@@ -1082,13 +1082,46 @@ function SEOSteps({ steps }) {
 function SEOWhatItIs({ eyebrow, title, paragraphs }) {
   return (
     <div className="seo-whatitis">
-      {eyebrow && <div className="seo-whatitis-eyebrow">{eyebrow}</div>}
-      <div className="seo-whatitis-grid">
-        <h3 className="seo-whatitis-title">{title}</h3>
-        <div className="seo-whatitis-body">
-          {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
-        </div>
+
+      {/* Header: plain eyebrow text + centered title */}
+      <div style={{ textAlign: "center", marginBottom: 32 }}>
+        {eyebrow && (
+          <p style={{
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "3px",
+            textTransform: "uppercase",
+            color: GREEN,
+            margin: "0 0 14px",
+          }}>
+            {eyebrow}
+          </p>
+        )}
+        <h2 className="seo-section-title" style={{ textAlign: "center" }}>
+          {title.split(' ').map((word, idx) => (
+            <span key={idx} style={{ color: idx === 0 ? "#000000" : "#e69819" }}>
+              {word}{idx < title.split(' ').length - 1 ? " " : ""}
+            </span>
+          ))}
+        </h2>
       </div>
+
+      {/* Paragraphs — left aligned, same styling as other sections */}
+      <div className="seo-whatitis-paras seo-prose">
+        {paragraphs.map((p, i) => (
+          <p
+            key={i}
+            className={
+              "seo-whatitis-p" +
+              (paragraphs.length >= 3 && i === 0 ? " seo-whatitis-p-full" : "")
+            }
+            style={{ letterSpacing: "0.05em" }}
+          >
+            {p}
+          </p>
+        ))}
+      </div>
+
     </div>
   );
 }
@@ -1614,7 +1647,7 @@ function SEOForeignCompanyPage({ setPage }) {
             { type: "Liaison Office", tax: "Nil", fdi: "RBI approval required", revenue: "None – no commercial activity", best: "Market research, promoting parent company only" },
           ].map(e => (
             <div key={e.type} className="seo-entity-card">
-              <div className="seo-entity-title" style={textIsWhite ? {color: '#ffffff'} : {}}>{e.type}</div>
+              <div className="seo-entity-title" style={textIsWhite ? { color: '#ffffff' } : {}}>{e.type}</div>
               {[["Tax rate", e.tax], ["FDI route", e.fdi], ["Revenue", e.revenue]].map(([k, v]) => (
                 <div key={k} className="seo-entity-kv">
                   <span className="seo-entity-k">{k}</span>
