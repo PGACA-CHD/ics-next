@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { T } from '@/lib/config';
 import { DTAA_COUNTRIES } from './dtaa-data';
 
-const REGIONS = ['All','Asia-Pacific','Europe','Americas','Middle East & Africa'];
+const REGIONS = ['All', 'Asia-Pacific', 'Europe', 'Americas', 'Middle East & Africa'];
 
 export default function Page() {
   const [q, setQ] = useState('');
@@ -25,7 +25,7 @@ export default function Page() {
 
   return (
     <div>
-      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/DTAA RATE FINDER.png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
@@ -65,7 +65,7 @@ export default function Page() {
 
           {/* How to use */}
           <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '20px 24px', marginBottom: 28, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 16 }}>
-            {[['1. Get TRC','Obtain a Tax Residency Certificate from the treaty country\'s tax authority.'],['2. File Form 10F','Submit Form 10F with the Indian payer before payment is made.'],['3. Claim Lower Rate','Payer deducts TDS at the treaty rate instead of the domestic rate.']].map(([t,d])=>(
+            {[['1. Get TRC', 'Obtain a Tax Residency Certificate from the treaty country\'s tax authority.'], ['2. File Form 10F', 'Submit Form 10F with the Indian payer before payment is made.'], ['3. Claim Lower Rate', 'Payer deducts TDS at the treaty rate instead of the domestic rate.']].map(([t, d]) => (
               <div key={t} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                 <div style={{ width: 32, height: 32, background: T.f, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <span style={{ color: '#fff', fontSize: 11, fontWeight: 700 }}>{t[0]}</span>
@@ -155,7 +155,7 @@ export default function Page() {
                 <button onClick={() => setSel(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, color: T.lt }}>✕</button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 14 }}>
-                {[['Dividend',sel.div],['Interest',sel.int],['Royalties',sel.roy],['FTS',sel.fts]].map(([l,v])=>(
+                {[['Dividend', sel.div], ['Interest', sel.int], ['Royalties', sel.roy], ['FTS', sel.fts]].map(([l, v]) => (
                   <div key={l} style={{ background: T.stone, borderRadius: 10, padding: '12px 14px', textAlign: 'center' }}>
                     <div style={{ fontSize: 11, color: T.lt, marginBottom: 4 }}>{l}</div>
                     <div style={{ fontSize: 20, fontWeight: 700, color: v === 'N/A' ? T.lt : T.f }}>{v}</div>

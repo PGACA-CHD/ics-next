@@ -102,9 +102,9 @@ export default function Page() {
 
   const newSecCell = (newSec, tableRef) => (
     <div>
-      <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 8, background: '#E8F4EA', color: '#1B5E35', fontFamily: 'monospace', letterSpacing: 0.2, whiteSpace: 'nowrap', display: 'inline-block' }}>{newSec}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 8, background: '#E8F4EA', color: '#1B5E35', fontFamily: 'Helvetica, Arial, sans-serif', letterSpacing: 0.2, whiteSpace: 'nowrap', display: 'inline-block' }}>{newSec}</span>
       {tableRef && (
-        <div style={{ fontSize: 10.5, color: T.lt, marginTop: 5, fontFamily: 'monospace', lineHeight: 1.4 }}>{tableRef}</div>
+        <div style={{ fontSize: 10.5, color: T.lt, marginTop: 5, fontFamily: 'Helvetica, Arial, sans-serif', lineHeight: 1.4 }}>{tableRef}</div>
       )}
     </div>
   );
@@ -112,7 +112,7 @@ export default function Page() {
   const challanCell = (challan) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {challan.split(' / ').map(c => (
-        <span key={c} style={{ fontSize: 11, fontWeight: 600, padding: '2px 7px', borderRadius: 6, background: '#F5F0E8', color: T.mid, fontFamily: 'monospace', whiteSpace: 'nowrap', display: 'inline-block', width: 'fit-content' }}>{c.trim()}</span>
+        <span key={c} style={{ fontSize: 11, fontWeight: 600, padding: '2px 7px', borderRadius: 6, background: '#F5F0E8', color: T.mid, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'nowrap', display: 'inline-block', width: 'fit-content' }}>{c.trim()}</span>
       ))}
     </div>
   );
@@ -171,7 +171,7 @@ export default function Page() {
             <span style={{ fontSize: 12, fontWeight: 700, color: '#1B5E35' }}>IT Act 2025 Section Map:</span>
             {[['Sec. 392', 'Salary (old: 192)'], ['Sec. 393(1)', 'Domestic payments (old: 193–194T)'], ['Sec. 393(2)', 'Foreign / NR payments (old: 194E, 195–196D)'], ['Sec. 393(3)', 'Winnings, lottery, cash, partner (old: 194B–194T selected)'], ['Sec. 397(2)', 'Higher rate — no PAN (old: 206AA)']].map(([sec, desc]) => (
               <div key={sec} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: T.f, color: '#fff', fontFamily: 'monospace' }}>{sec}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: T.f, color: '#fff', fontFamily: 'Helvetica, Arial, sans-serif' }}>{sec}</span>
                 <span style={{ fontSize: 11.5, color: '#1B5E35' }}>{desc}</span>
               </div>
             ))}

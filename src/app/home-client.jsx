@@ -342,80 +342,7 @@ function StatsRibbon() {
   );
 }
 
-// ─── MAP LINES OVERLAY ───────────────────────────────────────────────────────
-// Nodes use correct equirectangular world-map % positions:
-//   x = (longitude + 180) / 360 * 100
-//   y = (90 - latitude)  / 180 * 100
-// Hub = India. All pulses travel OUTWARD from India to each spoke country.
-function MapLinesOverlay() {
-  const canvasRef = useRef(null);
-  const rafRef = useRef(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    const NODES = [
-      { x: 71.7, y: 37.8, label: "India", hub: true }, // 78°E, 22°N
-      { x: 22.8, y: 28.9, label: "USA", hub: false }, // 98°W, 38°N
-      { x: 49.7, y: 21.7, label: "UK", hub: false }, //  1°W, 51°N
-      { x: 65.3, y: 36.1, label: "UAE", hub: false }, // 55°E, 25°N
-      { x: 78.9, y: 49.4, label: "Singapore", hub: false }, // 104°E, 1°N
-      { x: 87.2, y: 63.9, label: "Australia", hub: false }, // 134°E, 25°S
-      { x: 19.2, y: 22.8, label: "Canada", hub: false }, //  95°W, 56°N
-    ];
-    // All edges radiate FROM India (index 0)
-    const EDGES = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6]];
-    // Pulses start staggered, all travel India → destination (t goes 0→1)
-    const pulses = EDGES.map(([a, b], i) => ({ a, b, t: i / EDGES.length, speed: 0.003 + i * 0.0004 }));
-
-    function resize() {
-      const r = canvas.parentElement.getBoundingClientRect();
-      if (!r.width || !r.height) return;
-      canvas.style.width = r.width + "px"; canvas.style.height = r.height + "px";
-      canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    function pt(xp, yp) { return [(xp / 100) * (canvas.width / dpr), (yp / 100) * (canvas.height / dpr)]; }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-      // Arcs
-      EDGES.forEach(([ai, bi]) => {
-        const [ax, ay] = pt(NODES[ai].x, NODES[ai].y), [bx, by] = pt(NODES[bi].x, NODES[bi].y);
-        const cpx = (ax + bx) / 2, cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.25;
-        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.quadraticCurveTo(cpx, cpy, bx, by);
-        ctx.strokeStyle = "rgba(11,61,46,0.45)"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 6]); ctx.stroke(); ctx.setLineDash([]);
-      });
-      // Nodes
-      NODES.forEach(n => {
-        const [nx, ny] = pt(n.x, n.y);
-        ctx.beginPath(); ctx.arc(nx, ny, n.hub ? 11 : 7, 0, Math.PI * 2);
-        ctx.strokeStyle = n.hub ? "rgba(11,61,46,0.75)" : "rgba(11,61,46,0.40)"; ctx.lineWidth = 1.5; ctx.stroke();
-        ctx.beginPath(); ctx.arc(nx, ny, n.hub ? 6 : 4, 0, Math.PI * 2); ctx.fillStyle = G; ctx.fill();
-        ctx.beginPath(); ctx.arc(nx, ny, n.hub ? 2.8 : 1.8, 0, Math.PI * 2); ctx.fillStyle = n.hub ? GOLD : "#fff"; ctx.fill();
-      });
-      // Animated pulses: India → destination
-      pulses.forEach(pulse => {
-        pulse.t = (pulse.t + pulse.speed) % 1;
-        const [ax, ay] = pt(NODES[pulse.a].x, NODES[pulse.a].y), [bx, by] = pt(NODES[pulse.b].x, NODES[pulse.b].y);
-        const cpx = (ax + bx) / 2, cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.25, t = pulse.t;
-        const qx = (1 - t) * (1 - t) * ax + 2 * (1 - t) * t * cpx + t * t * bx, qy = (1 - t) * (1 - t) * ay + 2 * (1 - t) * t * cpy + t * t * by;
-        const gr = ctx.createRadialGradient(qx, qy, 0, qx, qy, 11);
-        gr.addColorStop(0, "rgba(230,152,25,0.8)"); gr.addColorStop(1, "rgba(230,152,25,0)");
-        ctx.beginPath(); ctx.arc(qx, qy, 11, 0, Math.PI * 2); ctx.fillStyle = gr; ctx.fill();
-        ctx.beginPath(); ctx.arc(qx, qy, 4, 0, Math.PI * 2); ctx.fillStyle = G; ctx.fill();
-        ctx.beginPath(); ctx.arc(qx, qy, 1.8, 0, Math.PI * 2); ctx.fillStyle = GOLD; ctx.fill();
-      });
-      rafRef.current = requestAnimationFrame(draw);
-    }
-    resize(); draw();
-    const ro = new ResizeObserver(resize); ro.observe(canvas.parentElement);
-    return () => { cancelAnimationFrame(rafRef.current); ro.disconnect(); };
-  }, []);
-  return <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }} />;
-}
 
 // ─── PROCESS STEP ────────────────────────────────────────────────────────────
 function ProcessStep({ step, i, total }) {
@@ -556,12 +483,11 @@ export default function HomePage() {
         @media(max-width:600px){.ind-cards{grid-template-columns:repeat(2,1fr)!important;}}
         @media(max-width:380px){.ind-cards{grid-template-columns:1fr!important;}}
 
-        /* Global Reach map — canvas covers full container */
+        /* Global Reach map */
         .gr-wrap{background:#fff;border-radius:24px;box-shadow:0 2px 40px rgba(0,0,0,.06);border:1px solid #ECE7E1;display:grid;grid-template-columns:38% 62%;align-items:stretch;overflow:hidden;}
         .gr-left{padding:36px 32px;border-right:1px solid #ECE7E1;display:flex;flex-direction:column;gap:18px;}
         .gr-map{position:relative;overflow:hidden;min-height:420px;}
         .gr-map-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;filter:saturate(0.18) brightness(1.08) sepia(0.06);opacity:0.75;}
-        .gr-map canvas{position:absolute!important;top:0!important;left:0!important;width:100%!important;height:100%!important;pointer-events:none;}
         @media(max-width:1024px){.gr-wrap{grid-template-columns:1fr!important;}.gr-left{border-right:none!important;border-bottom:1px solid #ECE7E1;}.gr-map{min-height:340px;}}
         @media(max-width:640px){.gr-section{padding:0 16px 48px!important;}.gr-wrap{border-radius:16px;}.gr-left{padding:20px 16px!important;gap:14px!important;}.gr-map{min-height:240px;}.gr-btns{flex-direction:column!important;}}
         @media(max-width:420px){.gr-map{min-height:190px;}}
@@ -726,7 +652,6 @@ export default function HomePage() {
             </div>
             <div className="gr-map">
               <img src="/worldmap.png" alt="World map" className="gr-map-img" />
-              <MapLinesOverlay />
             </div>
           </div>
         </div>

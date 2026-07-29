@@ -20,10 +20,10 @@ function limitLabel(limit, route) {
 
 function routeBadge(route) {
   const map = {
-    Automatic:   { bg: '#D1FAE5', color: '#065F46' },
-    Government:  { bg: '#DBEAFE', color: '#1E40AF' },
-    Prohibited:  { bg: '#FEE2E2', color: '#991B1B' },
-    Mixed:       { bg: '#FEF3C7', color: '#92400E' },
+    Automatic: { bg: '#D1FAE5', color: '#065F46' },
+    Government: { bg: '#DBEAFE', color: '#1E40AF' },
+    Prohibited: { bg: '#FEE2E2', color: '#991B1B' },
+    Mixed: { bg: '#FEF3C7', color: '#92400E' },
   };
   const s = map[route] || { bg: T.stone, color: T.mid };
   return (
@@ -60,10 +60,10 @@ export default function FDISectorChecker() {
   }, [q, category, route]);
 
   const stats = useMemo(() => ({
-    auto:       FDI_SECTORS.filter(s => s.route === 'Automatic').length,
-    govt:       FDI_SECTORS.filter(s => s.route === 'Government').length,
+    auto: FDI_SECTORS.filter(s => s.route === 'Automatic').length,
+    govt: FDI_SECTORS.filter(s => s.route === 'Government').length,
     prohibited: FDI_SECTORS.filter(s => s.route === 'Prohibited').length,
-    mixed:      FDI_SECTORS.filter(s => s.route === 'Mixed').length,
+    mixed: FDI_SECTORS.filter(s => s.route === 'Mixed').length,
   }), []);
 
   const thStyle = {
@@ -79,7 +79,7 @@ export default function FDISectorChecker() {
   return (
     <div>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/FDI SECTOR LIMIT CHECKER (1).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: 'linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px)',
@@ -106,10 +106,10 @@ export default function FDISectorChecker() {
           {/* Stats bar */}
           <div style={{ display: 'flex', gap: 20, marginTop: 36, flexWrap: 'wrap' }}>
             {[
-              { label: 'Automatic', count: stats.auto,       bg: 'rgba(22,163,74,.18)',  color: '#6EE7B7' },
-              { label: 'Government', count: stats.govt,      bg: 'rgba(37,99,235,.18)',  color: '#93C5FD' },
+              { label: 'Automatic', count: stats.auto, bg: 'rgba(22,163,74,.18)', color: '#6EE7B7' },
+              { label: 'Government', count: stats.govt, bg: 'rgba(37,99,235,.18)', color: '#93C5FD' },
               { label: 'Prohibited', count: stats.prohibited, bg: 'rgba(220,38,38,.18)', color: '#FCA5A5' },
-              { label: 'Mixed',      count: stats.mixed,     bg: 'rgba(217,119,6,.18)',  color: '#FCD34D' },
+              { label: 'Mixed', count: stats.mixed, bg: 'rgba(217,119,6,.18)', color: '#FCD34D' },
             ].map(({ label, count, bg, color }) => (
               <div key={label} style={{ background: bg, borderRadius: 10, padding: '10px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 100 }}>
                 <span style={{ fontSize: 24, fontWeight: 700, color, lineHeight: 1 }}>{count}</span>

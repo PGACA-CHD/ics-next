@@ -27,8 +27,8 @@ const ROUTE_MAP = {
 function WASvg() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-      <path d="M9 0C4.03 0 0 4.03 0 9c0 1.58.43 3.07 1.18 4.34L0 18l4.77-1.25A8.96 8.96 0 009 18c4.97 0 9-4.03 9-9s-4.03-9-9-9z" fill="#25D366"/>
-      <path d="M13.5 11.25c-.27.75-1.35 1.38-2.1 1.5-.54.09-1.26.15-3.66-.78-3.06-1.2-5.04-4.29-5.19-4.5-.15-.21-1.2-1.59-1.2-3.03s.75-2.16 1.02-2.46c.27-.3.57-.36.78-.36h.54c.18 0 .42-.06.66.51.24.57.81 1.98.9 2.13.09.15.12.33.03.51-.09.18-.15.3-.3.48l-.42.51c-.15.15-.3.33-.12.63.18.3.75 1.23 1.62 1.98 1.11.99 2.04 1.29 2.34 1.44.3.15.48.12.66-.06.18-.18.75-.87.96-1.17.21-.3.42-.24.69-.15.27.09 1.71.81 2.01.96.3.15.51.21.57.33.09.12.09.69-.18 1.38z" fill="#fff"/>
+      <path d="M9 0C4.03 0 0 4.03 0 9c0 1.58.43 3.07 1.18 4.34L0 18l4.77-1.25A8.96 8.96 0 009 18c4.97 0 9-4.03 9-9s-4.03-9-9-9z" fill="#25D366" />
+      <path d="M13.5 11.25c-.27.75-1.35 1.38-2.1 1.5-.54.09-1.26.15-3.66-.78-3.06-1.2-5.04-4.29-5.19-4.5-.15-.21-1.2-1.59-1.2-3.03s.75-2.16 1.02-2.46c.27-.3.57-.36.78-.36h.54c.18 0 .42-.06.66.51.24.57.81 1.98.9 2.13.09.15.12.33.03.51-.09.18-.15.3-.3.48l-.42.51c-.15.15-.3.33-.12.63.18.3.75 1.23 1.62 1.98 1.11.99 2.04 1.29 2.34 1.44.3.15.48.12.66-.06.18-.18.75-.87.96-1.17.21-.3.42-.24.69-.15.27.09 1.71.81 2.01.96.3.15.51.21.57.33.09.12.09.69-.18 1.38z" fill="#fff" />
     </svg>
   );
 }
@@ -40,26 +40,26 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
   return (
     <div ref={pageRef}>
       {/* Hero */}
-      
+
       {/* ── SEO Resource Links ── */}
-      <section style={{ padding:"0 56px 56px", background:T.ivory }}>
-        <div style={{ maxWidth:1400, margin:"0 auto" }}>
-          <div style={{ background:T.stone, borderRadius:14, padding:"24px 28px", border:`1px solid ${T.bdr}` }}>
-            <div style={{ fontSize:10, letterSpacing:2.5, textTransform:"uppercase", color:T.s, fontWeight:600, marginBottom:12 }}>Detailed Guides</div>
-            <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
+      <section style={{ padding: "0 56px 56px", background: T.ivory }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div style={{ background: T.stone, borderRadius: 14, padding: "24px 28px", border: `1px solid ${T.bdr}` }}>
+            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase", color: T.s, fontWeight: 600, marginBottom: 12 }}>Detailed Guides</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
               {[
-                { label:"Foreign company registration in India →", page:"seo_fcri" },
-                { label:"Wholly owned subsidiary setup →", page:"seo_sub" },
-                { label:"FDI rules & automatic route →", page:"seo_fdi" },
-                { label:"Transfer pricing requirements →", page:"seo_tp" },
+                { label: "Foreign company registration in India →", page: "seo_fcri" },
+                { label: "Wholly owned subsidiary setup →", page: "seo_sub" },
+                { label: "FDI rules & automatic route →", page: "seo_fdi" },
+                { label: "Transfer pricing requirements →", page: "seo_tp" },
               ].map(l => (
                 <button key={l.label} onClick={() => setPage(l.page)} style={{
-                  background:"#fff", border:`1px solid ${T.bdr}`, color:T.f,
-                  padding:"8px 14px", borderRadius:50, fontSize:12.5, fontWeight:600,
-                  cursor:"pointer", fontFamily:"'DM Sans',sans-serif", transition:"all .2s",
+                  background: "#fff", border: `1px solid ${T.bdr}`, color: T.f,
+                  padding: "8px 14px", borderRadius: 50, fontSize: 12.5, fontWeight: 600,
+                  cursor: "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all .2s",
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background=T.f; e.currentTarget.style.color="#fff"; }}
-                onMouseLeave={e => { e.currentTarget.style.background="#fff"; e.currentTarget.style.color=T.f; }}>
+                  onMouseEnter={e => { e.currentTarget.style.background = T.f; e.currentTarget.style.color = "#fff"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = T.f; }}>
                   {l.label}
                 </button>
               ))}
@@ -67,25 +67,73 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage }) {
           </div>
         </div>
       </section>
-<section style={{ background: T.f, padding: "110px 56px 72px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`, backgroundSize: "64px 64px" }}/>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 80% at 95% 50%,rgba(232,144,10,.07) 0%,transparent 55%)" }}/>
+
+      <section style={{ background: T.f, padding: "110px 56px 72px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`, backgroundSize: "64px 64px" }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 80% at 95% 50%,rgba(232,144,10,.07) 0%,transparent 55%)" }} />
         <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(232,144,10,.13)", border: "1px solid rgba(232,144,10,.28)", color: T.sl, padding: "5px 13px", borderRadius: 50, fontSize: 10.5, fontWeight: 600, letterSpacing: ".6px", textTransform: "uppercase", marginBottom: 20 }}>
+
+          {/* Eyebrow — FIX: explicit white text color */}
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 7,
+            background: "rgba(255,255,255,0.13)",
+            border: "1px solid rgba(232,144,10,.28)",
+            color: "#ffffff",                        // ← was T.sl, now white
+            padding: "5px 13px", borderRadius: 50,
+            fontSize: 10.5, fontWeight: 600, letterSpacing: ".6px",
+            textTransform: "uppercase", marginBottom: 20,
+          }}>
             {eyebrow}
           </div>
+
           <h1 className="font-display" style={{ fontSize: "clamp(36px,4.5vw,60px)", fontWeight: 600, color: "#fff", lineHeight: 1.06, marginBottom: 18 }}>
             {title}
           </h1>
           <p style={{ fontSize: 17, color: "rgba(255,255,255,.55)", lineHeight: 1.78, fontWeight: 300, maxWidth: 620, marginBottom: 36 }}>
             {description}
           </p>
+
+          {/* CTAs — FIX: white text on primary, white border+text on ghost */}
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => setPage("contact")}>Book Free Consultation →</button>
-            <button className="ics-btn ics-btn-ghost ics-btn-lg" onClick={() => setPage("services")}>View Entity Types →</button>
+            <button
+              onClick={() => setPage("contact")}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "#e69819",               // gold primary
+                color: "#ffffff",                    // white text
+                border: "none",
+                padding: "14px 28px", borderRadius: 8,
+                fontSize: 15, fontWeight: 700,
+                cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
+                transition: "background 0.2s, transform 0.15s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#cf8614"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#e69819"; e.currentTarget.style.transform = "translateY(0)"; }}
+            >
+              Book Free Consultation →
+            </button>
+
+            <button
+              onClick={() => setPage("services")}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "transparent",
+                color: "#ffffff",                    // white text
+                border: "1.5px solid rgba(255,255,255,0.5)", // white border
+                padding: "14px 28px", borderRadius: 8,
+                fontSize: 15, fontWeight: 600,
+                cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
+                transition: "background 0.2s, border-color 0.2s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.8)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)"; }}
+            >
+              View Entity Types →
+            </button>
           </div>
         </div>
       </section>
+
       {/* Content */}
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "72px 56px 80px" }} className="seo-content">
         {children}
@@ -191,10 +239,10 @@ const COUNTRY_DATA = {
     stats: [["30+", "US companies advised"], ["$0", "FEMA penalties"], ["22 days", "Avg. incorporation"], ["100%", "FDI permitted (most sectors)"]],
     whySection: "Why US companies choose India",
     whyPoints: [
-      { icon:"💰", title:"Cost arbitrage without quality compromise", desc:"Senior engineering and finance talent at 20–30% of US equivalent cost. India's talent pool for SaaS, fintech, and analytics is among the deepest globally." },
-      { icon:"🕐", title:"Time zone advantage for global operations", desc:"IST (UTC+5:30) gives US companies a near-24-hour development cycle when combined with US East and West Coast teams." },
-      { icon:"📈", title:"India as a growth market, not just a cost centre", desc:"India is the world's fastest-growing major economy. Many US companies start with a GCC and expand into full commercial operations serving the Indian market." },
-      { icon:"⚖️", title:"DTAA reduces double taxation", desc:"The India-US DTAA reduces withholding tax on dividends, royalties, and fees. Properly structured, most US companies pay 10–15% WHT instead of 20%." },
+      { icon: "💰", title: "Cost arbitrage without quality compromise", desc: "Senior engineering and finance talent at 20–30% of US equivalent cost. India's talent pool for SaaS, fintech, and analytics is among the deepest globally." },
+      { icon: "🕐", title: "Time zone advantage for global operations", desc: "IST (UTC+5:30) gives US companies a near-24-hour development cycle when combined with US East and West Coast teams." },
+      { icon: "📈", title: "India as a growth market, not just a cost centre", desc: "India is the world's fastest-growing major economy. Many US companies start with a GCC and expand into full commercial operations serving the Indian market." },
+      { icon: "⚖️", title: "DTAA reduces double taxation", desc: "The India-US DTAA reduces withholding tax on dividends, royalties, and fees. Properly structured, most US companies pay 10–15% WHT instead of 20%." },
     ],
     taxPoints: [
       "India-US DTAA: dividends taxed at 15–25% (vs 20% domestic), royalties at 10–15%",
@@ -210,11 +258,11 @@ const COUNTRY_DATA = {
       proof: "Clean TP documentation from day one. No FEMA notices. Passed first India transfer pricing scrutiny with zero adjustment.",
     },
     faqs: [
-      { q:"Can a US Delaware company own 100% of an Indian subsidiary?", a:"Yes. 100% FDI is permitted under the Automatic Route in most sectors. A Delaware C-Corp can hold 100% of an Indian Private Limited Company. RBI FCGPR must be filed within 30 days of share allotment." },
-      { q:"Does the India-US DTAA reduce the tax burden?", a:"Yes. The India-US DTAA reduces withholding tax on dividends from 20% to 15–25%, royalties from 10% to 10–15%, and technical services from 10% to 10–15% depending on the structure. Proper DTAA planning should be done before the first intercompany payment." },
-      { q:"Is transfer pricing between a US parent and India subsidiary required?", a:"Yes. Any intercompany transaction — management fees, IP licences, service charges, cost recharges — must be at arm's length and documented in a formal transfer pricing study. India follows OECD guidelines, similar to US Section 482." },
-      { q:"How long does it take for a US company to set up in India?", a:"Standard incorporation takes 14–22 working days. If the sector requires Government Route FDI approval, add 8–12 weeks. Full operational setup (bank account, GST, payroll) takes 4–6 weeks total." },
-      { q:"Does the Indian subsidiary need to file US tax forms?", a:"The US parent will need to file Form 5471 (Information Return for US Persons with Respect to Certain Foreign Corporations) annually for the India subsidiary. We coordinate with your US CPA on the Indian side of the disclosure." },
+      { q: "Can a US Delaware company own 100% of an Indian subsidiary?", a: "Yes. 100% FDI is permitted under the Automatic Route in most sectors. A Delaware C-Corp can hold 100% of an Indian Private Limited Company. RBI FCGPR must be filed within 30 days of share allotment." },
+      { q: "Does the India-US DTAA reduce the tax burden?", a: "Yes. The India-US DTAA reduces withholding tax on dividends from 20% to 15–25%, royalties from 10% to 10–15%, and technical services from 10% to 10–15% depending on the structure. Proper DTAA planning should be done before the first intercompany payment." },
+      { q: "Is transfer pricing between a US parent and India subsidiary required?", a: "Yes. Any intercompany transaction — management fees, IP licences, service charges, cost recharges — must be at arm's length and documented in a formal transfer pricing study. India follows OECD guidelines, similar to US Section 482." },
+      { q: "How long does it take for a US company to set up in India?", a: "Standard incorporation takes 14–22 working days. If the sector requires Government Route FDI approval, add 8–12 weeks. Full operational setup (bank account, GST, payroll) takes 4–6 weeks total." },
+      { q: "Does the Indian subsidiary need to file US tax forms?", a: "The US parent will need to file Form 5471 (Information Return for US Persons with Respect to Certain Foreign Corporations) annually for the India subsidiary. We coordinate with your US CPA on the Indian side of the disclosure." },
     ],
   },
   uk: {
@@ -226,10 +274,10 @@ const COUNTRY_DATA = {
     stats: [["20+", "UK companies advised"], ["24 days", "Avg. incorporation"], ["£0", "FEMA penalties"], ["Strong", "UK-India DTAA"]],
     whySection: "Why UK companies choose India",
     whyPoints: [
-      { icon:"⚖️", title:"Common law legal system", desc:"India and the UK share a common law heritage. Indian corporate law, contract law, and courts are broadly familiar to UK-trained legal teams — lower adaptation curve than other jurisdictions." },
-      { icon:"🗣️", title:"English as the business language", desc:"India's professional class operates entirely in English. UK companies face no language barrier in legal, financial, or technical communication." },
-      { icon:"🏦", title:"Strong UK-India DTAA", desc:"The India-UK DTAA provides favourable withholding tax rates on dividends (10–15%), interest (10–15%), and royalties (10–15%). Well-structured, UK companies pay significantly less than the 20% domestic WHT rate." },
-      { icon:"📊", title:"UK GAAP/IFRS alignment", desc:"Indian accounting standards (Ind AS) are substantially converged with IFRS. UK group reporting is straightforward — minimal reconciliation required." },
+      { icon: "⚖️", title: "Common law legal system", desc: "India and the UK share a common law heritage. Indian corporate law, contract law, and courts are broadly familiar to UK-trained legal teams — lower adaptation curve than other jurisdictions." },
+      { icon: "🗣️", title: "English as the business language", desc: "India's professional class operates entirely in English. UK companies face no language barrier in legal, financial, or technical communication." },
+      { icon: "🏦", title: "Strong UK-India DTAA", desc: "The India-UK DTAA provides favourable withholding tax rates on dividends (10–15%), interest (10–15%), and royalties (10–15%). Well-structured, UK companies pay significantly less than the 20% domestic WHT rate." },
+      { icon: "📊", title: "UK GAAP/IFRS alignment", desc: "Indian accounting standards (Ind AS) are substantially converged with IFRS. UK group reporting is straightforward — minimal reconciliation required." },
     ],
     taxPoints: [
       "India-UK DTAA: dividends at 10–15%, interest at 10–15%, royalties at 10–15%",
@@ -245,11 +293,11 @@ const COUNTRY_DATA = {
       proof: "Zero RBI or FEMA notices in 2 years of operation. Clean records for the FCA-regulated parent.",
     },
     faqs: [
-      { q:"Can a UK company own 100% of an Indian subsidiary?", a:"Yes. 100% FDI under the Automatic Route is permitted for most sectors. A UK company (private limited or plc) can hold 100% of an Indian Private Limited Company. FCGPR filing with RBI is required within 30 days of share allotment." },
-      { q:"Does the India-UK DTAA apply after Brexit?", a:"Yes. The India-UK DTAA is a bilateral treaty between India and the UK — it is completely unaffected by Brexit. It provides reduced withholding tax rates on dividends, interest, royalties, and fees from India to the UK." },
-      { q:"What are the PE risks for UK companies with Indian operations?", a:"If the Indian entity performs activities that constitute a permanent establishment under the India-UK DTAA, the profits attributable to those activities become taxable in India. FCA-regulated firms face particular scrutiny — advisory activities, client-facing staff, and contract signing authority in India can all trigger PE." },
-      { q:"How does UK group reporting work with an Indian subsidiary?", a:"Indian subsidiaries prepare accounts under Ind AS (IFRS-converged). For UK group consolidation, minor reconciliation to IFRS is typically required. We prepare Ind AS accounts with IFRS bridge notes where needed." },
-      { q:"Is Indian transfer pricing documentation different from the UK's?", a:"The principles are the same — OECD arm's length standard. In India, Form 3CEB (certified by a Chartered Accountant) must be filed by 31 October each year. The Indian TP study is a separate document from HMRC's UK TP documentation requirements — both are needed." },
+      { q: "Can a UK company own 100% of an Indian subsidiary?", a: "Yes. 100% FDI under the Automatic Route is permitted for most sectors. A UK company (private limited or plc) can hold 100% of an Indian Private Limited Company. FCGPR filing with RBI is required within 30 days of share allotment." },
+      { q: "Does the India-UK DTAA apply after Brexit?", a: "Yes. The India-UK DTAA is a bilateral treaty between India and the UK — it is completely unaffected by Brexit. It provides reduced withholding tax rates on dividends, interest, royalties, and fees from India to the UK." },
+      { q: "What are the PE risks for UK companies with Indian operations?", a: "If the Indian entity performs activities that constitute a permanent establishment under the India-UK DTAA, the profits attributable to those activities become taxable in India. FCA-regulated firms face particular scrutiny — advisory activities, client-facing staff, and contract signing authority in India can all trigger PE." },
+      { q: "How does UK group reporting work with an Indian subsidiary?", a: "Indian subsidiaries prepare accounts under Ind AS (IFRS-converged). For UK group consolidation, minor reconciliation to IFRS is typically required. We prepare Ind AS accounts with IFRS bridge notes where needed." },
+      { q: "Is Indian transfer pricing documentation different from the UK's?", a: "The principles are the same — OECD arm's length standard. In India, Form 3CEB (certified by a Chartered Accountant) must be filed by 31 October each year. The Indian TP study is a separate document from HMRC's UK TP documentation requirements — both are needed." },
     ],
   },
   uae: {
@@ -261,10 +309,10 @@ const COUNTRY_DATA = {
     stats: [["15+", "UAE companies advised"], ["Strong", "India-UAE DTAA"], ["6 weeks", "Complex restructures"], ["NRI", "Specialist advisory"]],
     whySection: "Why UAE-based companies enter India",
     whyPoints: [
-      { icon:"🏗️", title:"Manufacturing & infrastructure", desc:"UAE trading and manufacturing groups frequently expand to India for domestic manufacturing, reducing import dependency and accessing India's growing middle-class market." },
-      { icon:"👥", title:"NRI promoter structures", desc:"Many UAE businesses are promoted by Non-Resident Indians. India entry requires careful structuring — NRI vs foreign company investment routes have different compliance paths." },
-      { icon:"💱", title:"India-UAE DTAA benefits", desc:"The India-UAE DTAA provides 10% WHT on dividends, 12.5% on interest, and 10% on royalties — significantly below the 20% domestic rate. The treaty was comprehensively revised in 2014." },
-      { icon:"📦", title:"Supply chain integration", desc:"Dubai's port infrastructure and India's manufacturing base are deeply complementary. UAE holding companies often serve as the regional hub for India + GCC operations." },
+      { icon: "🏗️", title: "Manufacturing & infrastructure", desc: "UAE trading and manufacturing groups frequently expand to India for domestic manufacturing, reducing import dependency and accessing India's growing middle-class market." },
+      { icon: "👥", title: "NRI promoter structures", desc: "Many UAE businesses are promoted by Non-Resident Indians. India entry requires careful structuring — NRI vs foreign company investment routes have different compliance paths." },
+      { icon: "💱", title: "India-UAE DTAA benefits", desc: "The India-UAE DTAA provides 10% WHT on dividends, 12.5% on interest, and 10% on royalties — significantly below the 20% domestic rate. The treaty was comprehensively revised in 2014." },
+      { icon: "📦", title: "Supply chain integration", desc: "Dubai's port infrastructure and India's manufacturing base are deeply complementary. UAE holding companies often serve as the regional hub for India + GCC operations." },
     ],
     taxPoints: [
       "India-UAE DTAA (revised 2014): dividends at 10%, interest at 12.5%, royalties at 10%",
@@ -280,11 +328,11 @@ const COUNTRY_DATA = {
       proof: "Passed TP scrutiny with zero adjustment. RBI regularisation completed. Entity fully compliant going forward.",
     },
     faqs: [
-      { q:"Can a UAE company invest in India under the Automatic Route?", a:"Yes — for most sectors. A UAE mainland company or a DIFC entity can invest in India under the Automatic Route in sectors that permit 100% FDI. However, DIFC entity treaty eligibility for the India-UAE DTAA requires analysis — DIFC is a separate jurisdiction and may not qualify for full treaty benefits." },
-      { q:"Is an NRI's UAE investment treated differently from a foreign company's investment?", a:"Yes. NRI investment in India is governed by Schedule 4 of FEMA (Foreign Exchange Management (Non-Debt Instruments) Rules) — different from the FDI route used by foreign companies. NRI investment does not require FCGPR filing, but does require form FC-GPR in certain cases. The tax treatment also differs." },
-      { q:"Does the India-UAE DTAA still apply after UAE introduced corporate tax?", a:"Yes. The UAE-India DTAA is not affected by UAE's introduction of 9% corporate tax in 2023. However, UAE CT may apply to the UAE entity's India-sourced income. The DTAA prevents double taxation — credit is available in UAE for Indian taxes paid." },
-      { q:"What is BEPS substance and why does it matter for UAE holding companies?", a:"Post-BEPS, UAE holding companies claiming India DTAA benefits must demonstrate genuine economic substance in the UAE — employees, decision-making, assets. Shell companies with no substance face DTAA denial by Indian tax authorities under the Principal Purpose Test (PPT) under MLI." },
-      { q:"How long does India incorporation take for a UAE company?", a:"For straightforward cases, 3–4 weeks. UAE company documents require apostilling (or equivalent authentication) — allow an additional 1–2 weeks for document authentication if needed." },
+      { q: "Can a UAE company invest in India under the Automatic Route?", a: "Yes — for most sectors. A UAE mainland company or a DIFC entity can invest in India under the Automatic Route in sectors that permit 100% FDI. However, DIFC entity treaty eligibility for the India-UAE DTAA requires analysis — DIFC is a separate jurisdiction and may not qualify for full treaty benefits." },
+      { q: "Is an NRI's UAE investment treated differently from a foreign company's investment?", a: "Yes. NRI investment in India is governed by Schedule 4 of FEMA (Foreign Exchange Management (Non-Debt Instruments) Rules) — different from the FDI route used by foreign companies. NRI investment does not require FCGPR filing, but does require form FC-GPR in certain cases. The tax treatment also differs." },
+      { q: "Does the India-UAE DTAA still apply after UAE introduced corporate tax?", a: "Yes. The UAE-India DTAA is not affected by UAE's introduction of 9% corporate tax in 2023. However, UAE CT may apply to the UAE entity's India-sourced income. The DTAA prevents double taxation — credit is available in UAE for Indian taxes paid." },
+      { q: "What is BEPS substance and why does it matter for UAE holding companies?", a: "Post-BEPS, UAE holding companies claiming India DTAA benefits must demonstrate genuine economic substance in the UAE — employees, decision-making, assets. Shell companies with no substance face DTAA denial by Indian tax authorities under the Principal Purpose Test (PPT) under MLI." },
+      { q: "How long does India incorporation take for a UAE company?", a: "For straightforward cases, 3–4 weeks. UAE company documents require apostilling (or equivalent authentication) — allow an additional 1–2 weeks for document authentication if needed." },
     ],
   },
   sg: {
@@ -296,10 +344,10 @@ const COUNTRY_DATA = {
     stats: [["20+", "APAC companies advised"], ["#1", "Singapore → India FDI source"], ["8 weeks", "Full GCC setup"], ["Strong", "India-Singapore DTAA"]],
     whySection: "Why Singapore companies enter India",
     whyPoints: [
-      { icon:"🔧", title:"GCC & technology hub", desc:"India is the preferred GCC destination for Singapore and APAC technology companies. Engineering, analytics, and shared services teams of 10–500+ people are routinely set up through our platform." },
-      { icon:"💡", title:"IP holding and royalty flows", desc:"Singapore is a preferred IP holding location for APAC companies. India-Singapore DTAA provides clear treatment for royalty flows and technology service fees." },
-      { icon:"🤝", title:"Strong DTAA — especially post-2017 revision", desc:"The India-Singapore DTAA was revised in 2017 (grandfathering pre-2017 capital gains positions). For new investments, the treaty still provides significant benefits on dividends, interest, and fees." },
-      { icon:"🌏", title:"APAC regional hub + India depth", desc:"Singapore-India structures allow APAC-wide operations with India providing the engineering depth. Cost-plus service agreements between the Singapore parent and India GCC are standard." },
+      { icon: "🔧", title: "GCC & technology hub", desc: "India is the preferred GCC destination for Singapore and APAC technology companies. Engineering, analytics, and shared services teams of 10–500+ people are routinely set up through our platform." },
+      { icon: "💡", title: "IP holding and royalty flows", desc: "Singapore is a preferred IP holding location for APAC companies. India-Singapore DTAA provides clear treatment for royalty flows and technology service fees." },
+      { icon: "🤝", title: "Strong DTAA — especially post-2017 revision", desc: "The India-Singapore DTAA was revised in 2017 (grandfathering pre-2017 capital gains positions). For new investments, the treaty still provides significant benefits on dividends, interest, and fees." },
+      { icon: "🌏", title: "APAC regional hub + India depth", desc: "Singapore-India structures allow APAC-wide operations with India providing the engineering depth. Cost-plus service agreements between the Singapore parent and India GCC are standard." },
     ],
     taxPoints: [
       "India-Singapore DTAA (revised 2017): dividends at 10–15%, interest at 10–15%, royalties at 10%",
@@ -315,11 +363,11 @@ const COUNTRY_DATA = {
       proof: "40-person team fully compliant from hire #1. Zero payroll or FEMA gaps. ESOP plan approved by India board.",
     },
     faqs: [
-      { q:"Is Singapore still a good holding structure for India investment post-2017 DTAA revision?", a:"Yes — for new investments, Singapore remains advantageous for dividends, interest, royalties, and fees. Capital gains benefits were grandfathered only for pre-April 2017 investments. For new investments, India domestic capital gains tax applies. For income-based flows (dividends, fees, royalties), the treaty still provides material benefits." },
-      { q:"How is a GCC's intercompany pricing structured?", a:"A GCC providing services to its Singapore parent typically uses a cost-plus methodology — the India GCC charges the parent its total costs plus a mark-up (8–15%, benchmarked). This must be documented annually in a transfer pricing study and certified via Form 3CEB." },
-      { q:"Can Singapore employees receive ESOPs from the Indian subsidiary?", a:"Yes, but it requires careful structuring. Indian subsidiary ESOPs require Companies Act compliance (share option plan board approval, FEMA compliance for exercise and remittance). Singapore parent ESOPs for Indian employees require FEMA compliance on the remittance of exercise proceeds." },
-      { q:"What is the Principal Purpose Test and does it affect Singapore holding structures?", a:"The MLI's Principal Purpose Test (PPT) denies treaty benefits if one of the principal purposes of an arrangement is to obtain those benefits. Singapore holding structures with genuine business operations (employees, management, decision-making) in Singapore are generally safe. Pure conduit structures with no Singapore substance face risk." },
-      { q:"How long does it take to set up a GCC in India from Singapore?", a:"Full GCC setup — entity incorporated, bank account, payroll, ESOP structure, cost-plus agreement — typically takes 6–8 weeks. The first hire can be onboarded in week 4 after incorporation." },
+      { q: "Is Singapore still a good holding structure for India investment post-2017 DTAA revision?", a: "Yes — for new investments, Singapore remains advantageous for dividends, interest, royalties, and fees. Capital gains benefits were grandfathered only for pre-April 2017 investments. For new investments, India domestic capital gains tax applies. For income-based flows (dividends, fees, royalties), the treaty still provides material benefits." },
+      { q: "How is a GCC's intercompany pricing structured?", a: "A GCC providing services to its Singapore parent typically uses a cost-plus methodology — the India GCC charges the parent its total costs plus a mark-up (8–15%, benchmarked). This must be documented annually in a transfer pricing study and certified via Form 3CEB." },
+      { q: "Can Singapore employees receive ESOPs from the Indian subsidiary?", a: "Yes, but it requires careful structuring. Indian subsidiary ESOPs require Companies Act compliance (share option plan board approval, FEMA compliance for exercise and remittance). Singapore parent ESOPs for Indian employees require FEMA compliance on the remittance of exercise proceeds." },
+      { q: "What is the Principal Purpose Test and does it affect Singapore holding structures?", a: "The MLI's Principal Purpose Test (PPT) denies treaty benefits if one of the principal purposes of an arrangement is to obtain those benefits. Singapore holding structures with genuine business operations (employees, management, decision-making) in Singapore are generally safe. Pure conduit structures with no Singapore substance face risk." },
+      { q: "How long does it take to set up a GCC in India from Singapore?", a: "Full GCC setup — entity incorporated, bank account, payroll, ESOP structure, cost-plus agreement — typically takes 6–8 weeks. The first hire can be onboarded in week 4 after incorporation." },
     ],
   },
 };
@@ -333,28 +381,28 @@ export function CountryPageComponent({ country, setPage }) {
 
   return (
     <SEOPageLayout eyebrow={d.eyebrow} setPage={setPage}
-      title={<>{d.flag} {d.title.split(' Setting')[0]}<br/><span style={{ fontStyle:"italic", color:T.sl }}>Setting Up in India</span></>}
+      title={<>{d.flag} {d.title.split(' Setting')[0]}<br /><span style={{ fontStyle: "italic", color: T.sl }}>Setting Up in India</span></>}
       description={d.description}>
 
       <SEOSection label="Quick Facts" title={`India entry snapshot for ${d.name}s`}>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:8 }} className="seo-2col">
-          {d.stats.map(([n,l]) => (
-            <div key={l} style={{ background:"#fff", border:`1px solid ${T.bdr}`, borderRadius:12, padding:"20px 16px", textAlign:"center" }}>
-              <div className="font-display" style={{ fontSize:28, fontWeight:700, color:T.f, lineHeight:1, marginBottom:6 }}>{n}</div>
-              <div style={{ fontSize:12, color:T.lt, lineHeight:1.4 }}>{l}</div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 8 }} className="seo-2col">
+          {d.stats.map(([n, l]) => (
+            <div key={l} style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
+              <div className="font-display" style={{ fontSize: 28, fontWeight: 700, color: T.f, lineHeight: 1, marginBottom: 6 }}>{n}</div>
+              <div style={{ fontSize: 12, color: T.lt, lineHeight: 1.4 }}>{l}</div>
             </div>
           ))}
         </div>
       </SEOSection>
 
       <SEOSection label={d.whySection} title={d.whySection}>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:8 }} className="seo-2col">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 8 }} className="seo-2col">
           {d.whyPoints.map(p => (
-            <div key={p.title} style={{ background:"#fff", border:`1px solid ${T.bdr}`, borderRadius:12, padding:"20px 18px", display:"flex", gap:14 }}>
-              <span style={{ fontSize:24, flexShrink:0 }}>{p.icon}</span>
+            <div key={p.title} style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 12, padding: "20px 18px", display: "flex", gap: 14 }}>
+              <span style={{ fontSize: 24, flexShrink: 0 }}>{p.icon}</span>
               <div>
-                <div style={{ fontSize:14, fontWeight:600, color:T.ch, marginBottom:6 }}>{p.title}</div>
-                <p style={{ fontSize:13, color:T.mid, lineHeight:1.7, fontWeight:300 }}>{p.desc}</p>
+                <div style={{ fontSize: 14, fontWeight: 600, color: T.ch, marginBottom: 6 }}>{p.title}</div>
+                <p style={{ fontSize: 13, color: T.mid, lineHeight: 1.7, fontWeight: 300 }}>{p.desc}</p>
               </div>
             </div>
           ))}
@@ -363,20 +411,20 @@ export function CountryPageComponent({ country, setPage }) {
 
       <SEOSection label="The Process" title={`How ${d.name}s incorporate in India`}>
         <SEOSteps steps={[
-          { title:"Structure decision & DTAA analysis", time:"Day 1", desc:"We assess your sector, FDI route, and applicable DTAA to recommend the right entity type. For " + d.region + " companies, this includes reviewing intercompany pricing implications from day one." },
-          { title:"Document preparation", time:"Days 2–5", desc:"Parent company documents need apostilling or equivalent authentication in " + d.region + ". For foreign director KYC, this adds 3–5 days. We advise on exactly which documents are needed." },
-          { title:"MCA incorporation", time:"Days 6–19", desc:"SPICe+ filing — company name, directors, registered office, PAN, TAN, GSTIN. Certificate of Incorporation typically in 7–12 working days after document submission." },
-          { title:"RBI FCGPR filing", time:"Within 30 days", desc:"Foreign Currency Gross Provisional Return — mandatory FEMA filing after share allotment. For " + d.region + " companies, the valuation methodology and exchange rate documentation must align with your home jurisdiction requirements." },
-          { title:"Post-incorporation setup", time:"Weeks 4–6", desc:"Bank account, GST registration, TDS, payroll, transfer pricing policy, and compliance calendar. Full operational readiness." },
-        ]}/>
+          { title: "Structure decision & DTAA analysis", time: "Day 1", desc: "We assess your sector, FDI route, and applicable DTAA to recommend the right entity type. For " + d.region + " companies, this includes reviewing intercompany pricing implications from day one." },
+          { title: "Document preparation", time: "Days 2–5", desc: "Parent company documents need apostilling or equivalent authentication in " + d.region + ". For foreign director KYC, this adds 3–5 days. We advise on exactly which documents are needed." },
+          { title: "MCA incorporation", time: "Days 6–19", desc: "SPICe+ filing — company name, directors, registered office, PAN, TAN, GSTIN. Certificate of Incorporation typically in 7–12 working days after document submission." },
+          { title: "RBI FCGPR filing", time: "Within 30 days", desc: "Foreign Currency Gross Provisional Return — mandatory FEMA filing after share allotment. For " + d.region + " companies, the valuation methodology and exchange rate documentation must align with your home jurisdiction requirements." },
+          { title: "Post-incorporation setup", time: "Weeks 4–6", desc: "Bank account, GST registration, TDS, payroll, transfer pricing policy, and compliance calendar. Full operational readiness." },
+        ]} />
       </SEOSection>
 
       <SEOSection label="Tax Considerations" title={`Key tax points for ${d.name}s in India`}>
-        <div style={{ background:T.stone, borderRadius:14, padding:"24px 28px", border:`1px solid ${T.bdr}`, marginBottom:8 }}>
+        <div style={{ background: T.stone, borderRadius: 14, padding: "24px 28px", border: `1px solid ${T.bdr}`, marginBottom: 8 }}>
           {d.taxPoints.map((pt, i) => (
-            <div key={i} style={{ display:"flex", gap:12, paddingBottom:12, marginBottom:12, borderBottom: i < d.taxPoints.length-1 ? `1px solid ${T.bdr}` : "none" }}>
-              <span style={{ color:T.s, fontWeight:700, flexShrink:0, fontSize:14 }}>✓</span>
-              <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.7, fontWeight:300 }}>{pt}</p>
+            <div key={i} style={{ display: "flex", gap: 12, paddingBottom: 12, marginBottom: 12, borderBottom: i < d.taxPoints.length - 1 ? `1px solid ${T.bdr}` : "none" }}>
+              <span style={{ color: T.s, fontWeight: 700, flexShrink: 0, fontSize: 14 }}>✓</span>
+              <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.7, fontWeight: 300 }}>{pt}</p>
             </div>
           ))}
         </div>
@@ -387,14 +435,14 @@ export function CountryPageComponent({ country, setPage }) {
           headline={d.caseStudy.headline}
           challenge={d.caseStudy.challenge}
           outcome={d.caseStudy.outcome}
-          proof={d.caseStudy.proof}/>
+          proof={d.caseStudy.proof} />
       </SEOSection>
 
       <SEOSection label="FAQ" title={`Common questions from ${d.name}s`}>
-        <SEOFAQs items={d.faqs}/>
+        <SEOFAQs items={d.faqs} />
       </SEOSection>
 
-      <SEOCTAStrip setPage={setPage}/>
+      <SEOCTAStrip setPage={setPage} />
     </SEOPageLayout>
   );
 }

@@ -13,7 +13,7 @@ const WHITE = '#ffffff';
 // Prices are hardcoded at mid-2025 rates, rounded to clean numbers.
 // ─────────────────────────────────────────────
 const CURRENCY = {
-  usa: { code: 'USD', prefix: '$', note: 'Prices in US dollars.' },
+  usa: { code: 'USD', prefix: '$', },
   australia: { code: 'AUD', prefix: 'AUD ', note: 'Indicative AUD prices at approx. 1 USD = 1.54 AUD. Final invoice in USD.' },
   singapore: { code: 'SGD', prefix: 'SGD ', note: 'Indicative SGD prices at approx. 1 USD = 1.34 SGD. Final invoice in USD.' },
   dubai: { code: 'AED', prefix: 'AED ', note: 'Indicative AED prices at approx. 1 USD = 3.67 AED. Final invoice in USD.' },

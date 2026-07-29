@@ -267,7 +267,7 @@ function ProcessLayout({ steps }) {
 
 const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'US-based founders typically register a Private Limited Company (most common), LLP, or a Wholly Owned Subsidiary. We recommend the right structure based on your goals, sector, and FDI requirements.' },
-  { n: '02', title: 'Prepare & Apostille Documents', time: 'Week 1', desc: 'US documents (passport, address proof) must be apostilled via your State Secretary of State before submission to Indian authorities. We provide a precise checklist so nothing is missed.' },
+  { n: '02', title: 'Prepare & Apostille Documents', time: 'Week 1', desc: 'US documents (passport, address proof) must be apostilled before submission to Indian authorities. We provide a precise checklist so nothing is missed.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. We coordinate the application remotely — no India visit required.' },
   { n: '04', title: 'Name Reservation — MCA RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
   { n: '05', title: 'File SPICe+ Incorporation Form', time: 'Week 2–3', desc: 'The SPICe+ (INC-32) form bundles company incorporation, DIN allotment, PAN, TAN, and GSTIN applications in one submission. We handle the complete filing.' },
@@ -284,7 +284,7 @@ const whyPoints = [
 ];
 
 const documents = [
-  { label: 'Passport', detail: 'Notarized + Apostilled by your State Secretary of State' },
+  { label: 'Passport', detail: 'Notarized + Apostilled' },
   { label: 'US Address Proof', detail: 'Utility bill or bank statement, apostilled, within 2 months' },
   { label: 'PAN Card (Form 49AA)', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
@@ -381,7 +381,7 @@ export default function Page() {
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
               <span className="lbl">Company Registration · From the United States</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#000000ff', marginBottom: 22, fontFamily: HV }}>
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#fff', marginBottom: 22, fontFamily: HV }}>
                 <span style={{ color: 'rgba(255, 255, 255, 0.79)' }}>Register a Company<br />in India from</span>{' '}
                 <span style={{ position: 'relative', display: 'inline-block', color: '#c8870a' }}>
                   the USA

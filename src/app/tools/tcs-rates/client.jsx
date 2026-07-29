@@ -71,9 +71,9 @@ export default function TCSPage() {
 
   const newSecCell = (newSec, tableRef) => (
     <div>
-      <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 8, background: '#E8F4EA', color: '#1B5E35', fontFamily: 'monospace', letterSpacing: 0.2, whiteSpace: 'nowrap', display: 'inline-block' }}>{newSec}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 8, background: '#E8F4EA', color: '#1B5E35', fontFamily: 'Helvetica, Arial, sans-serif', letterSpacing: 0.2, whiteSpace: 'nowrap', display: 'inline-block' }}>{newSec}</span>
       {tableRef && (
-        <div style={{ fontSize: 10, color: T.lt, fontFamily: 'monospace', marginTop: 4, lineHeight: 1.4 }}>{tableRef}</div>
+        <div style={{ fontSize: 10, color: T.lt, fontFamily: 'Helvetica, Arial, sans-serif', marginTop: 4, lineHeight: 1.4 }}>{tableRef}</div>
       )}
     </div>
   );
@@ -81,7 +81,7 @@ export default function TCSPage() {
   const f27eqCell = (code) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {code.split(' / ').map(c => (
-        <span key={c} style={{ fontSize: 11, fontWeight: 600, padding: '2px 7px', borderRadius: 6, background: '#F5F0E8', color: T.mid, fontFamily: 'monospace', whiteSpace: 'nowrap', display: 'inline-block', width: 'fit-content' }}>{c.trim()}</span>
+        <span key={c} style={{ fontSize: 11, fontWeight: 600, padding: '2px 7px', borderRadius: 6, background: '#F5F0E8', color: T.mid, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'nowrap', display: 'inline-block', width: 'fit-content' }}>{c.trim()}</span>
       ))}
     </div>
   );
@@ -145,7 +145,7 @@ export default function TCSPage() {
               ['Removed',     'TCS on education via loan (206C(1G)(ii)) and sale of goods (206C(1H)) no longer apply'],
             ].map(([sec, desc]) => (
               <div key={sec} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: T.f, color: '#fff', fontFamily: 'monospace' }}>{sec}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: T.f, color: '#fff', fontFamily: 'Helvetica, Arial, sans-serif' }}>{sec}</span>
                 <span style={{ fontSize: 11.5, color: '#1B5E35' }}>{desc}</span>
               </div>
             ))}
@@ -194,7 +194,7 @@ export default function TCSPage() {
                     <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 13.5 }}>{row.sec}</td>
                     <td style={tdStyle}>{newSecCell(row.newSec, row.tableRef)}</td>
                     <td style={tdStyle}>{f27eqCell(row.f27eq)}</td>
-                    <td style={{ ...tdStyle, fontSize: 12, fontFamily: 'monospace', color: T.mid, whiteSpace: 'nowrap' }}>{row.challan}</td>
+                    <td style={{ ...tdStyle, fontSize: 12, fontFamily: 'Helvetica, Arial, sans-serif', color: T.mid, whiteSpace: 'nowrap' }}>{row.challan}</td>
                     <td style={tdStyle}>{collectorBadge(row.collector)}</td>
                     <td style={{ ...tdStyle, maxWidth: 240 }}>{row.desc}</td>
                     <td style={{ ...tdStyle, fontSize: 12.5, color: T.mid }}>{row.threshold}</td>

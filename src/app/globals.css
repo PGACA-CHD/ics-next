@@ -9,6 +9,9 @@
 html {
   scroll-behavior: smooth;
 }
+:root {
+  --font-primary: "Helvetica Neue, Helvetica, Arial, sans-serif";
+}
 
 html,
 body {
@@ -20,7 +23,7 @@ body {
 }
 
 body {
-  font-family: var(--font-cardo), 'Cardo', Georgia, serif;
+  font-family: var(--font-primary) !important;
   background: #fafaf5;
   color: #17170f;
   overflow-x: hidden;
@@ -42,7 +45,7 @@ a {
 }
 
 .font-display {
-  font-family: Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-primary) !important;
 }
 
 /* Headings use Helvetica */
@@ -52,7 +55,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-primary) !important;
+}
+@media (max-width: 1200px) {
+  h1, h2, h3, h4, h5, h6 {
+    text-align: left;
+  }
 }
 
 /* Removed unused font-number class */
@@ -553,10 +561,8 @@ textarea:focus {
     display: none !important;
   }
 
-  .hero-h1 {
-    font-size: 40px !important;
-    line-height: 1.05 !important;
-  }
+  .seo-prose { font-size: 15px; color: #4a5568; line-height: 1.85; font-weight: 300; margin-bottom: 18px; }
+.seo-whatitis-body { color: #555555; }
 
   input,
   select,

@@ -6,9 +6,9 @@ import { T } from '@/lib/config';
 // ─── TAX DATA ─ Finance Act 2025 (FY 2025-26 / AY 2026-27) ──────────────────
 
 const NEW_SLABS = [
-  { from: 0,       to: 400000,  rate: 0    },
-  { from: 400000,  to: 800000,  rate: 0.05 },
-  { from: 800000,  to: 1200000, rate: 0.10 },
+  { from: 0, to: 400000, rate: 0 },
+  { from: 400000, to: 800000, rate: 0.05 },
+  { from: 800000, to: 1200000, rate: 0.10 },
   { from: 1200000, to: 1600000, rate: 0.15 },
   { from: 1600000, to: 2000000, rate: 0.20 },
   { from: 2000000, to: 2400000, rate: 0.25 },
@@ -16,55 +16,55 @@ const NEW_SLABS = [
 ];
 
 const OLD_BELOW60 = [
-  { from: 0,       to: 250000,  rate: 0    },
-  { from: 250000,  to: 500000,  rate: 0.05 },
-  { from: 500000,  to: 1000000, rate: 0.20 },
+  { from: 0, to: 250000, rate: 0 },
+  { from: 250000, to: 500000, rate: 0.05 },
+  { from: 500000, to: 1000000, rate: 0.20 },
   { from: 1000000, to: Infinity, rate: 0.30 },
 ];
 
 const OLD_SR = [ // 60-80 years
-  { from: 0,       to: 300000,  rate: 0    },
-  { from: 300000,  to: 500000,  rate: 0.05 },
-  { from: 500000,  to: 1000000, rate: 0.20 },
+  { from: 0, to: 300000, rate: 0 },
+  { from: 300000, to: 500000, rate: 0.05 },
+  { from: 500000, to: 1000000, rate: 0.20 },
   { from: 1000000, to: Infinity, rate: 0.30 },
 ];
 
 const OLD_SSR = [ // above 80
-  { from: 0,       to: 500000,  rate: 0    },
-  { from: 500000,  to: 1000000, rate: 0.20 },
+  { from: 0, to: 500000, rate: 0 },
+  { from: 500000, to: 1000000, rate: 0.20 },
   { from: 1000000, to: Infinity, rate: 0.30 },
 ];
 
 const IND_SRCH_NEW = [
-  { from: 0,         rate: 0    },
-  { from: 5000000,   rate: 0.10 },
-  { from: 10000000,  rate: 0.15 },
-  { from: 20000000,  rate: 0.25 }, // capped at 25% in new regime
+  { from: 0, rate: 0 },
+  { from: 5000000, rate: 0.10 },
+  { from: 10000000, rate: 0.15 },
+  { from: 20000000, rate: 0.25 }, // capped at 25% in new regime
 ];
 
 const IND_SRCH_OLD = [
-  { from: 0,         rate: 0    },
-  { from: 5000000,   rate: 0.10 },
-  { from: 10000000,  rate: 0.15 },
-  { from: 20000000,  rate: 0.25 },
-  { from: 50000000,  rate: 0.37 },
+  { from: 0, rate: 0 },
+  { from: 5000000, rate: 0.10 },
+  { from: 10000000, rate: 0.15 },
+  { from: 20000000, rate: 0.25 },
+  { from: 50000000, rate: 0.37 },
 ];
 
 const DOM_SRCH = [
-  { from: 0,          rate: 0    },
-  { from: 10000000,   rate: 0.07 },
-  { from: 100000000,  rate: 0.12 },
+  { from: 0, rate: 0 },
+  { from: 10000000, rate: 0.07 },
+  { from: 100000000, rate: 0.12 },
 ];
 
 const FGN_SRCH = [
-  { from: 0,          rate: 0    },
-  { from: 10000000,   rate: 0.02 },
-  { from: 100000000,  rate: 0.05 },
+  { from: 0, rate: 0 },
+  { from: 10000000, rate: 0.02 },
+  { from: 100000000, rate: 0.05 },
 ];
 
 const LLP_SRCH = [
-  { from: 0,         rate: 0    },
-  { from: 10000000,  rate: 0.12 },
+  { from: 0, rate: 0 },
+  { from: 10000000, rate: 0.12 },
 ];
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -231,9 +231,11 @@ export default function Page() {
   const labelStyle = { fontSize: 12.5, fontWeight: 600, color: T.mid, marginBottom: 6, display: 'block' };
   const tabBtn = (id, label) => (
     <button key={id} onClick={() => { setTab(id); setResult(null); }}
-      style={{ padding: '9px 20px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, border: 'none',
+      style={{
+        padding: '9px 20px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, border: 'none',
         cursor: 'pointer', background: tab === id ? T.f : T.stone, color: tab === id ? '#fff' : T.mid,
-        transition: 'all .18s' }}>
+        transition: 'all .18s'
+      }}>
       {label}
     </button>
   );
@@ -311,9 +313,11 @@ export default function Page() {
                     <div style={{ display: 'flex', gap: 8 }}>
                       {[['new', 'New Regime (Default)'], ['old', 'Old Regime']].map(([v, l]) => (
                         <button key={v} onClick={() => { setRegime(v); setResult(null); }}
-                          style={{ flex: 1, padding: '9px 12px', fontSize: 13, fontWeight: 600, borderRadius: 8,
+                          style={{
+                            flex: 1, padding: '9px 12px', fontSize: 13, fontWeight: 600, borderRadius: 8,
                             border: `1.5px solid ${regime === v ? T.f : T.bdr}`, cursor: 'pointer',
-                            background: regime === v ? '#E4F0EB' : '#fff', color: regime === v ? T.f : T.mid }}>
+                            background: regime === v ? '#E4F0EB' : '#fff', color: regime === v ? T.f : T.mid
+                          }}>
                           {l}
                         </button>
                       ))}
@@ -327,10 +331,12 @@ export default function Page() {
                       <div style={{ display: 'flex', gap: 8 }}>
                         {[['true', 'Resident'], ['false', 'Non-Resident']].map(([v, l]) => (
                           <button key={v} onClick={() => { setResident(v === 'true'); setResult(null); }}
-                            style={{ flex: 1, padding: '8px 10px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
+                            style={{
+                              flex: 1, padding: '8px 10px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
                               border: `1.5px solid ${(resident ? 'true' : 'false') === v ? T.f : T.bdr}`,
                               cursor: 'pointer', background: (resident ? 'true' : 'false') === v ? '#E4F0EB' : '#fff',
-                              color: (resident ? 'true' : 'false') === v ? T.f : T.mid }}>
+                              color: (resident ? 'true' : 'false') === v ? T.f : T.mid
+                            }}>
                             {l}
                           </button>
                         ))}

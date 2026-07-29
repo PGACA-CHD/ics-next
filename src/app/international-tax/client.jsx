@@ -283,7 +283,7 @@ export default function Page() {
         .hero-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 
         .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+       .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
         /* DTAA table: default (desktop/tablet) grid layout */
         .dtaa-desktop-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 8px 12px; }
@@ -297,9 +297,12 @@ export default function Page() {
           .hero-grid { grid-template-columns: 1fr; gap: 40px; }
           .hero-stats-grid { grid-template-columns: 1fr 1fr; }
         }
-        @media(max-width:860px){
-          .guide-grid { grid-template-columns: 1fr; }
-        }
+      @media(max-width:900px){
+  .guide-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:640px){
+  .guide-grid { grid-template-columns: 1fr; }
+}
         @media(max-width:768px){
           .svc-grid { grid-template-columns: 1fr; }
         }

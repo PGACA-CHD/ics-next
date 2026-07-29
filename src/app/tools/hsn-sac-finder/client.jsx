@@ -258,8 +258,10 @@ export default function Page() {
           <div style={{ display: 'flex', gap: 0, marginBottom: 24, background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: 6, width: 'fit-content' }}>
             {[['hsn', '📦 HSN Codes (Goods)'], ['sac', '🛠️ SAC Codes (Services)']].map(([v, l]) => (
               <button key={v} onClick={() => { setMode(v); setResults(null); setQ(''); }}
-                style={{ padding: '9px 22px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
-                  background: mode === v ? T.f : 'transparent', color: mode === v ? '#fff' : T.mid, transition: 'all .18s' }}>
+                style={{
+                  padding: '9px 22px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
+                  background: mode === v ? T.f : 'transparent', color: mode === v ? '#fff' : T.mid, transition: 'all .18s'
+                }}>
                 {l}
               </button>
             ))}
@@ -269,8 +271,10 @@ export default function Page() {
           <div style={{ display: 'flex', gap: 8, marginBottom: 24 }}>
             {[['search', '🔍 Live Search'], ['browse', '📂 Browse All']].map(([v, l]) => (
               <button key={v} onClick={() => { setView(v); setResults(null); }}
-                style={{ padding: '7px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8, border: `1.5px solid ${view === v ? T.f : T.bdr}`, cursor: 'pointer',
-                  background: view === v ? '#E4F0EB' : '#fff', color: view === v ? T.f : T.mid }}>
+                style={{
+                  padding: '7px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8, border: `1.5px solid ${view === v ? T.f : T.bdr}`, cursor: 'pointer',
+                  background: view === v ? '#E4F0EB' : '#fff', color: view === v ? T.f : T.mid
+                }}>
                 {l}
               </button>
             ))}
@@ -329,7 +333,7 @@ export default function Page() {
                     <tbody>
                       {results.map((r, i) => (
                         <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                          <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace' }}>{r.code}</td>
+                          <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif' }}>{r.code}</td>
                           <td style={tdStyle}>{r.desc || r.description}</td>
                           {mode === 'hsn' && <td style={{ ...tdStyle, color: T.mid, fontSize: 12.5 }}>{r.chapter || r.code?.slice(0, 2)}</td>}
                           {r.gst && <td style={{ ...tdStyle, fontWeight: 600, color: T.f }}>{r.gst}</td>}
@@ -363,7 +367,7 @@ export default function Page() {
                         {HSN_CHAPTERS.map((c, i) => (
                           <tr key={c.ch} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5', cursor: 'pointer' }}
                             onClick={() => setQ(c.ch)}>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif' }}>
                               {c.ch}
                               {codeLevelBadge(c.ch)}
                             </td>
@@ -395,7 +399,7 @@ export default function Page() {
                       <tbody>
                         {hsnHeadingFilter.slice(0, 200).map((c, i) => (
                           <tr key={`${c.code}-${i}`} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace', whiteSpace: 'nowrap' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'nowrap' }}>
                               {c.code}
                               {codeLevelBadge(c.code)}
                             </td>
@@ -436,7 +440,7 @@ export default function Page() {
                   <tbody>
                     {sacFilter.map((c, i) => (
                       <tr key={c.code} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                        <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'monospace' }}>{c.code}</td>
+                        <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif' }}>{c.code}</td>
                         <td style={tdStyle}>{c.desc}</td>
                         <td style={{ ...tdStyle, fontSize: 12.5, color: T.f, fontWeight: 600 }}>{c.gst}</td>
                       </tr>

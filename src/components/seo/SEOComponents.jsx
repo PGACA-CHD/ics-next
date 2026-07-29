@@ -128,6 +128,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     };
   } else if (pathname === '/foreign-company-registration-india') {
     isCustomBg = true;
+    textIsWhite = true;
     heroStyle = {
       backgroundImage: "url('/banners and logos/FOREIGN COMPANY REG.png')",
       backgroundSize: 'cover',
@@ -1584,7 +1585,7 @@ function SEOFDIRulesPage({ setPage }) {
 ══════════════════════════════════════════════════════ */
 function SEOForeignCompanyPage({ setPage }) {
   return (
-    <SEOPageLayout eyebrow="India Market Entry · Ex-Big 4" setPage={setPage}
+    <SEOPageLayout eyebrow="India Market Entry · Ex-Big 4" setPage={setPage} style={{ color: '#ffffff' }}
       title={<>Foreign Company Registration<br /><em>in India – Complete Guide</em></>}
       description="How to register a foreign company in India – entity types, FDI routes, RBI filings, and compliance timelines. Ex-Big 4 CA team. 100+ foreign companies registered.">
 
@@ -1609,7 +1610,7 @@ function SEOForeignCompanyPage({ setPage }) {
             { type: "Liaison Office", tax: "Nil", fdi: "RBI approval required", revenue: "None – no commercial activity", best: "Market research, promoting parent company only" },
           ].map(e => (
             <div key={e.type} className="seo-entity-card">
-              <div className="seo-entity-title">{e.type}</div>
+              <div className="seo-entity-title" style={textIsWhite ? {color: '#ffffff'} : {}}>{e.type}</div>
               {[["Tax rate", e.tax], ["FDI route", e.fdi], ["Revenue", e.revenue]].map(([k, v]) => (
                 <div key={k} className="seo-entity-kv">
                   <span className="seo-entity-k">{k}</span>
@@ -1660,7 +1661,7 @@ function SEOForeignCompanyPage({ setPage }) {
         <SEOFAQs items={[
           { q: "Can a foreign company own 100% of an Indian company?", a: "Yes – in most sectors, 100% FDI is permitted under the Automatic Route. This means no prior Government approval is needed. Restricted sectors (defence, insurance, media) have lower caps. We check FDI eligibility as the first step of every engagement." },
           { q: "Does the company need an Indian director?", a: "Yes. At least one director of the Indian company must be a resident of India (present in India for at least 182 days in the previous calendar year). This can be a nominee director – we can help arrange one if needed." },
-          { q: "What is the minimum paid-up capital required?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e is Rs. 100,000 (USD – 1100 approximately)" },
+          { q: "What is the minimum paid-up capital required?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e  Rs. 100,000 (USD – 1100 approximately)" },
           { q: "How long does registration take?", a: "For a straightforward Private Limited Company with Indian directors and no restricted sector issues, incorporation typically takes 14–21 working days from document submission. The Certificate of Incorporation from MCA issues in 7–12 working days once the SPICe+ is filed." },
           { q: "What documents does the foreign parent company need to provide?", a: "Certificate of Incorporation of the parent, Memorandum & Articles of Association, Board Resolution authorising India incorporation, KYC documents (passport, address proof) for all proposed directors, and apostilled copies where required by MCA." },
           { q: "Do we need a physical office in India?", a: "Yes – a registered office address in India is mandatory for incorporation. This can be a virtual/registered address initially. Many clients start with a virtual office and upgrade to physical space once the team grows." },
@@ -2019,11 +2020,11 @@ function SEOPvtLtdPage({ setPage }) {
       <SEOSection label="FAQ" title={<>Private Limited Company registration — <em>common questions</em></>}>
         <SEOFAQs items={[
           { q: "What is the minimum number of directors and shareholders required?", a: "A minimum of 2 directors and 2 shareholders are required. The same person can be both a director and a shareholder. At least one director must be a resident of India (present in India for at least 182 days in the previous calendar year)." },
-          { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e is Rs. 100,000 (USD – 1100 approximately)" },
+          { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e  Rs. 100,000 (USD – 1100 approximately)" },
           { q: "Can a foreign national be a director or shareholder?", a: "Yes. Foreign nationals can be directors and shareholders. At least one director must be an Indian resident. Foreign shareholders investing in the company must comply with FEMA's FDI regulations – share allotment triggers an RBI FCGPR filing requirement." },
           { q: "How long does registration take?", a: "7–12 working days from the date of document submission with MCA. Name approval takes 2–3 working days. DSC procurement for foreign nationals can add 5–7 days if apostille is required." },
           { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum shares the company can issue, as declared in the MOA. Paid-up capital is the amount actually received from shareholders for shares already issued. You can always issue shares up to the authorised limit without amending the MOA." },
-          { q: "Do I need a physical office address at the time of incorporation?", a: "Yes – a registered office address is mandatory. It can be a residential address with a No-Objection Certificate from the property owner. Many founders use a virtual office or co-working address initially and upgrade to a commercial space later." },
+          { q: "Do I need a physical office address at the time of incorporation?", a: "Yes, a registered office is mandatory. Many founders use a virtual office or co-working address initially and upgrade to a commercial space later." },
         ]} />
       </SEOSection>
 

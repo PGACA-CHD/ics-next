@@ -255,7 +255,7 @@ const INCLUDED = [
 
 const FAQS = [
   { q: "What is the minimum number of directors and shareholders required?", a: "For a Private Limited Company, a minimum of 2 directors and 2 shareholders are required. The directors and shareholders can be the same individuals." },
-  { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e is Rs. 100,000 (USD – 1100 approximately)" },
+  { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e Rs. 100,000 (USD – 1100 approximately)" },
   { q: "Can a foreign national be a director or shareholder?", a: "Yes, foreign nationals and foreign corporate bodies can be directors and shareholders. However, at least one director must be a resident of India." },
   { q: "How long does registration take?", a: "Once all documents are submitted and DSC is generated, it typically takes 7 to 12 working days to get the Certificate of Incorporation from the MCA." },
   { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum value of shares a company can issue to shareholders, while paid-up capital is the actual amount paid by shareholders to the company." },

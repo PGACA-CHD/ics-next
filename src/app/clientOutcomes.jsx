@@ -18,7 +18,7 @@ const OUTCOMES = [
         metricSub: "days, entity to bank account",
         title: "SaaS company enters India",
         description: "Needed a fully India-compliant entity live before an engineering hire could start — incorporation, GST, and bank account opening ran in parallel rather than in sequence.",
-        tags: ["SaaS", "UK HQ"],
+        tags: ["Europe HQ", "UK HQ"],
     },
     {
         metric: "$340k",
