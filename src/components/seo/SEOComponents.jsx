@@ -93,6 +93,9 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
   let backStyle = {};
   let isCustomBg = false;
   let textIsWhite = false;
+if (typeof textIsWhite === 'undefined') {
+  textIsWhite = false;
+}
   let noOverlay = false;
 
   if (pathname === '/private-limited-company-registration-india') {
@@ -1584,6 +1587,7 @@ function SEOFDIRulesPage({ setPage }) {
    FOREIGN COMPANY REGISTRATION PAGE
 ══════════════════════════════════════════════════════ */
 function SEOForeignCompanyPage({ setPage }) {
+  const textIsWhite = true; // ensure defined for this page
   return (
     <SEOPageLayout eyebrow="India Market Entry · Ex-Big 4" setPage={setPage} style={{ color: '#ffffff' }}
       title={<>Foreign Company Registration<br /><em>in India – Complete Guide</em></>}
