@@ -100,6 +100,7 @@ export const FOOTER_COLS = [
       { label: "Singapore in India",          href: "/singapore-company-setting-up-india" },
     ],
   },
+
   {
     title: "Free Tools",
     links: [

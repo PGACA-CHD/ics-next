@@ -748,7 +748,7 @@ export default function HomePage() {
                 "Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."
               </p>
               <p style={{ fontSize: 12.5, color: "#fffbfbff", margin: "12px 0 0", fontFamily: HV }}>
-                — P.G., FCA · Diploma in International Taxation · 8 yrs Ex-Big 4
+                Pankaj Gupta – FCA, LLB and Diploma in International Taxation
               </p>
             </div>
             <button className="ics-btn ics-btn-primary ics-btn-lg" style={{ flexShrink: 0, position: "relative", zIndex: 1 }}

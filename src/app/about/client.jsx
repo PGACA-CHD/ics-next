@@ -272,7 +272,7 @@ function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
           onMouseLeave={e => e.currentTarget.style.color = '#111'}
         >{name} <LI /></a>
         <p style={{ fontFamily: F, fontSize: 12, fontWeight: 600, color: accent, textTransform: 'uppercase', letterSpacing: '1.5px', margin: '0 0 16px' }}>{role}</p>
-        <p style={{ fontFamily: F, fontSize: 14, color: '#555', lineHeight: 1.78, margin: 0 }}>{bio}</p>
+        <div style={{ fontFamily: F, fontSize: 14, color: '#555', lineHeight: 1.78, margin: 0 }}>{bio}</div>
       </div>
     </div>
   );
@@ -425,7 +425,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
                 <em style={{ color: GOLD, fontStyle: 'italic', fontWeight: 800 }}>Built for your scale.</em>
               </h1>
               <p style={{ fontSize: 16, color: '#ffffffff', lineHeight: 1.78, maxWidth: 520, margin: '0 0 36px', fontFamily: F }}>
-                India Company Setup, a venture of <strong style={{ color: '#de9504ff', fontWeight: 700 }}>Divsam Consultants LLP</strong>, was built on a simple premise: the best international tax advisory should not be reserved for companies that can afford Big 4 fees.
+                India Company Setup is the market-facing brand for foreign-entry advisory work, operating under <strong style={{ color: '#de9504ff', fontWeight: 700 }}>Divsam Consultants LLP</strong> — the practice that carries professional liability insurance and signs every engagement letter.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <button className="lime-btn" onClick={() => window.location.href = (ROUTES.contact || '/contact')}>Talk to our team →</button>
@@ -487,12 +487,26 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <TeamCard photo="/pankajgupta.jpeg" name="Pankaj Gupta"
               liUrl="https://www.linkedin.com/in/pankaj-gupta-7199282a/"
-              role="Senior Advisor · FCA" accent={GREEN} delay={0}
-              bio="Over 8 years at a Big-4 practice and more than 18 years of working experience. Specialises in cross-border tax structuring, transfer pricing, FEMA, and NRI/HNI advisory. Leads a multi-disciplinary team of CAs, CS, and legal professionals." />
-            <TeamCard photo="/anuradha_gupta.png" name="Anuradha R."
+              role="Senior Advisor · FCA, LLB, Dip. In Int. Tax" accent={GREEN} delay={0}
+              bio={
+                <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <li>18+ years of working experience</li>
+                  <li>8+ years of Big 4 experience</li>
+                  <li>Specialises in cross-border tax structuring, transfer pricing, FEMA, and NRI/HNI advisory</li>
+                  <li>Leads a multi-disciplinary team of CAs, CS, and legal professionals</li>
+                </ul>
+              } />
+            <TeamCard photo="/anuradha_gupta.png" name="Anuradha Gupta"
               liUrl="https://www.linkedin.com/in/anuradha-gupta-6673a3142/"
-              role="Senior Advisor · CA" accent="#c8870a" delay={120}
-              bio="Placeholder bio — experienced advisor specialising in compliance, GST, and financial reporting. Add Anuradha's details here." />
+              role="Partner · FCA, LLB" accent="#c8870a" delay={120}
+              bio={
+                <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <li>17+ years of working experience</li>
+                  <li>Worked in US Companies like – Xerox, Emerson, Oceaneering</li>
+                  <li>Specialises in Accounting, Payroll, Financial Statement, ERP Expertise, Process development and improvements</li>
+                  <li>Vast experience working in global companies</li>
+                </ul>
+              } />
           </div>
         </div>
       </section>
@@ -527,7 +541,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <Fade delay={80}><StructureAnimation /></Fade>
           <div className="wwe-sticky">
             <Fade>
-              <p className="wwe-p">India Company Setup is the market-facing brand for foreign-entry advisory work, operating under <strong style={{ color: '#111' }}>Divsam Consultants LLP</strong> — the ICAI-registered practice that carries professional liability insurance and signs every engagement letter.</p>
+              <p className="wwe-p">India Company Setup is the market-facing brand for foreign-entry advisory work, operating under <strong style={{ color: '#111' }}>Divsam Consultants LLP</strong> — the practice that carries professional liability insurance and signs every engagement letter.</p>
               <p className="wwe-p">For statutory audit and select high-volume compliance work, we engage PGA & Co., Chartered Accountants as a formal knowledge partner — named on the relevant deliverables, never a silent subcontractor.</p>
               <p className="wwe-p">One point of contact, one engagement letter, full transparency on who signs what.</p>
             </Fade>
@@ -576,7 +590,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
             <div className="reg-strip">
               {[
                 { title: 'MCA / LLP Identification', desc: 'Divsam Consultants LLP (LLPIN: AAF-8044), incorporated on 26th Feb 2016, Ministry of Corporate Affairs, Government of India.', img: '/banners and logos/MCA_LLP.png' },
-                { title: 'ICAI Registration', desc: 'Divsam Consultants LLP is a registered practice under the Institute of Chartered Accountants of India (ICAI).', img: '/banners and logos/Indemnity - About Us.png' },
+                { title: 'Professional Liability', desc: 'Divsam Consultants LLP carries professional liability insurance, providing security and peace of mind for all client engagements.', img: '/banners and logos/Indemnity - About Us.png' },
                 { title: 'PGA & Co., CA', desc: 'Knowledge partner PGA & Co., Chartered Accountants, registered with ICAI since 13th August 2013.', img: '/banners and logos/MCA_LLP.png' },
               ].map(item => (
                 <div key={item.title} className="reg-card">

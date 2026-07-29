@@ -478,7 +478,7 @@ export default function Page() {
                   { label: 'Avg. registration time', val: 20, suffix: ' days' },
                   { label: 'Process', text: '100% online — no India visit' },
                   { label: 'FDI — most sectors', val: 100, suffix: '% permitted' },
-                  { label: 'Max govt. fee', val: 20, suffix: 'K', prefix: '₹' },
+                  { label: 'Max govt. fee', val: 185, prefix: '£' },
                 ].map((row, i, arr) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 22px', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', gap: 16 }}>
                     <span style={{ fontSize: 13, color: '#777', fontFamily: HV }}>{row.label}</span>

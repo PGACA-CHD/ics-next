@@ -303,7 +303,7 @@ const faqs = [
   { q: 'Does my company need an Indian director?', a: 'Yes. At least one director must have stayed in India for 182+ days in the previous calendar year. We help you identify a nominee resident director if required.' },
   { q: 'Can a US citizen own 100% of an Indian company?', a: 'Yes, in most sectors under the Automatic Route. 100% FDI is permitted in IT, consulting, manufacturing, and e-commerce marketplace models.' },
   { q: 'How long does registration take?', a: 'Typically 15–25 working days once apostilled documents are ready. The apostille process in the US takes 3–7 business days depending on your state.' },
-  { q: 'What does it cost?', a: 'Government fees range from ₹8,000–₹20,000 depending on authorised capital and state stamp duty. Our professional fee is quoted upfront — contact us for an estimate.' },
+  { q: 'What does it cost?', a: 'Government fees range from ₹8,000–₹20,000 (~$90–$220 USD) depending on authorised capital and state stamp duty. Our professional fee is quoted upfront — contact us for an estimate.' },
   { q: 'Do I need a physical office address in India?', a: 'Yes — a registered office address is mandatory. We offer a virtual registered office service if you do not yet have a physical premises in India.' },
 ];
 
@@ -405,7 +405,7 @@ export default function Page() {
                   { label: 'Avg. registration time', val: 20, suffix: ' days' },
                   { label: 'Process', text: '100% online — no India visit' },
                   { label: 'FDI — most sectors', val: 100, suffix: '% permitted' },
-                  { label: 'Max govt. fee', val: 20, suffix: 'K', prefix: '₹' },
+                  { label: 'Max govt. fee', val: 220, prefix: '$' },
                 ].map((row, i, arr) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 22px', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', gap: 16 }}>
                     <span style={{ fontSize: 13, color: '#777', fontFamily: HV }}>{row.label}</span>

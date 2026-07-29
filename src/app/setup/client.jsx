@@ -255,11 +255,11 @@ const INCLUDED = [
 
 const FAQS = [
   { q: "What is the minimum number of directors and shareholders required?", a: "For a Private Limited Company, a minimum of 2 directors and 2 shareholders are required. The directors and shareholders can be the same individuals." },
-  { q: "Is there a minimum paid-up capital requirement?", a: "There is no statutory minimum paid-up capital required to start a company in India. You can start with as little as ₹10,000 capital." },
+  { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e is Rs. 100,000 (USD – 1100 approximately)" },
   { q: "Can a foreign national be a director or shareholder?", a: "Yes, foreign nationals and foreign corporate bodies can be directors and shareholders. However, at least one director must be a resident of India." },
   { q: "How long does registration take?", a: "Once all documents are submitted and DSC is generated, it typically takes 7 to 12 working days to get the Certificate of Incorporation from the MCA." },
   { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum value of shares a company can issue to shareholders, while paid-up capital is the actual amount paid by shareholders to the company." },
-  { q: "Do I need a physical office address at the time of incorporation?", a: "Yes, you must have a physical office address in India to act as the registered office. A utility bill and proof of authorization are required during filing." },
+  { q: "Do I need a physical office address at the time of incorporation?", a: "Yes – a registered office address is mandatory. Many founders use a virtual office or co-working address initially and upgrade to a commercial space later." },
 ];
 
 const HANDLE = [
@@ -1000,7 +1000,7 @@ export default function Page() {
                       borderTop: isOpen ? "1px solid #111" : "none",
                       paddingTop: isOpen ? 14 : 0,
                     }}>
-                      <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#111", lineHeight: 1.72, margin: 0, fontFamily: HV, fontWeight: 500 }}>{faq.a}</p>
+                      <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#000", lineHeight: 1.72, margin: 0, fontFamily: HV, fontWeight: 600 }}>{faq.a}</p>
                     </div>
                   </div>
                 </Fade>

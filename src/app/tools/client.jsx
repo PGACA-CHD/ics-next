@@ -235,7 +235,7 @@ export default function Page() {
             capital gains, advance tax, payroll, TDS, GST, DTAA, FDI limits and more. No sign-up required.
           </p>
           <Link href="/contact" className="lg-hero-btn">
-            Talk to our CA team &rarr;
+            Talk to our team &rarr;
           </Link>
         </div>
       </section>

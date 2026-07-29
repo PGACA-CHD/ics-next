@@ -145,7 +145,7 @@ function SEOFAQs({ items }) {
             <span style={{ fontSize: 15, fontWeight: 600, color: T.ch, lineHeight: 1.4 }}>{faq.q}</span>
             <span style={{ fontSize: 18, color: T.s, flexShrink: 0, transition: "transform .2s", transform: open === i ? "rotate(45deg)" : "none" }}>+</span>
           </button>
-          {open === i && <p style={{ fontSize: 14, color: T.mid, lineHeight: 1.78, fontWeight: 300, paddingBottom: 18, marginTop: -4 }}>{faq.a}</p>}
+          {open === i && <p style={{ fontSize: 14, color: "#000", lineHeight: 1.78, fontWeight: 600, paddingBottom: 18, marginTop: -4 }}>{faq.a}</p>}
         </div>
       ))}
     </div>

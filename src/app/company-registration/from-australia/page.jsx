@@ -339,6 +339,7 @@ export default function Page() {
                   { label: 'Process', text: '100% online — no India visit' },
                   { label: 'FDI — most sectors', val: 100, suffix: '% permitted' },
                   { label: 'ECTA in force', text: 'Since Dec 2022' },
+                  { label: 'Max govt. fee', val: 360, prefix: 'A$' },
                 ].map((row, i, arr) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 22px', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', gap: 16 }}>
                     <span style={{ fontSize: 13, color: '#000000ff', fontFamily: HV }}>{row.label}</span>

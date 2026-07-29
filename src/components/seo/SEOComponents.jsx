@@ -613,7 +613,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
         .seo-faqcard-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s ease; }
         .seo-faqcard.is-open .seo-faqcard-panel { grid-template-rows: 1fr; }
         .seo-faqcard-panel-inner { overflow: hidden; }
-        .seo-faqcard-a { font-size: 13.5px; color: #6b7280; line-height: 1.8; font-weight: 300; padding: 0 22px 20px; }
+        .seo-faqcard-a { font-size: 13.5px; color: #000; line-height: 1.8; font-weight: 400; padding: 0 22px 20px; }
 
         /* ── Common Mistakes ── */
         .seo-mistakes-list { display: flex; flex-direction: column; gap: 10px; }
@@ -1660,7 +1660,7 @@ function SEOForeignCompanyPage({ setPage }) {
         <SEOFAQs items={[
           { q: "Can a foreign company own 100% of an Indian company?", a: "Yes – in most sectors, 100% FDI is permitted under the Automatic Route. This means no prior Government approval is needed. Restricted sectors (defence, insurance, media) have lower caps. We check FDI eligibility as the first step of every engagement." },
           { q: "Does the company need an Indian director?", a: "Yes. At least one director of the Indian company must be a resident of India (present in India for at least 182 days in the previous calendar year). This can be a nominee director – we can help arrange one if needed." },
-          { q: "What is the minimum paid-up capital required?", a: "There is no minimum paid-up capital requirement for a Private Limited Company in India. In practice, most foreign companies subscribe between ₹1 lakh and ₹10 lakhs to demonstrate commitment to the Indian subsidiary." },
+          { q: "What is the minimum paid-up capital required?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e is Rs. 100,000 (USD – 1100 approximately)" },
           { q: "How long does registration take?", a: "For a straightforward Private Limited Company with Indian directors and no restricted sector issues, incorporation typically takes 14–21 working days from document submission. The Certificate of Incorporation from MCA issues in 7–12 working days once the SPICe+ is filed." },
           { q: "What documents does the foreign parent company need to provide?", a: "Certificate of Incorporation of the parent, Memorandum & Articles of Association, Board Resolution authorising India incorporation, KYC documents (passport, address proof) for all proposed directors, and apostilled copies where required by MCA." },
           { q: "Do we need a physical office in India?", a: "Yes – a registered office address in India is mandatory for incorporation. This can be a virtual/registered address initially. Many clients start with a virtual office and upgrade to physical space once the team grows." },
@@ -2019,7 +2019,7 @@ function SEOPvtLtdPage({ setPage }) {
       <SEOSection label="FAQ" title={<>Private Limited Company registration — <em>common questions</em></>}>
         <SEOFAQs items={[
           { q: "What is the minimum number of directors and shareholders required?", a: "A minimum of 2 directors and 2 shareholders are required. The same person can be both a director and a shareholder. At least one director must be a resident of India (present in India for at least 182 days in the previous calendar year)." },
-          { q: "Is there a minimum paid-up capital requirement?", a: "No. A Private Limited Company can be incorporated with any amount of paid-up capital – even ₹10,000. Authorised share capital of ₹1 lakh divided into 10,000 shares of ₹10 each is the standard starting point. Paid-up capital is the amount actually invested by shareholders." },
+          { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e is Rs. 100,000 (USD – 1100 approximately)" },
           { q: "Can a foreign national be a director or shareholder?", a: "Yes. Foreign nationals can be directors and shareholders. At least one director must be an Indian resident. Foreign shareholders investing in the company must comply with FEMA's FDI regulations – share allotment triggers an RBI FCGPR filing requirement." },
           { q: "How long does registration take?", a: "7–12 working days from the date of document submission with MCA. Name approval takes 2–3 working days. DSC procurement for foreign nationals can add 5–7 days if apostille is required." },
           { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum shares the company can issue, as declared in the MOA. Paid-up capital is the amount actually received from shareholders for shares already issued. You can always issue shares up to the authorised limit without amending the MOA." },
