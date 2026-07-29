@@ -11,21 +11,21 @@ import { T } from '@/lib/config';
 
 const TCS = [
   // ── GOODS u/s 206C(1) → Sec 394(1) Table ────────────────────────────────
-  { sec: '206C(1)(i)',    newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 4',            f27eq: '6CA', challan: '1073', collector: 'Seller',              desc: 'Scrap',                                                           threshold: 'Nil',                            rate: '2%',     notes: 'TCS on every sale of scrap. No minimum threshold — applies to all transactions.' },
-  { sec: '206C(1)(ii)',   newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 1',            f27eq: '6CE', challan: '1068', collector: 'Seller',              desc: 'Alcoholic liquor for human consumption',                          threshold: 'Nil',                            rate: '2%',     notes: 'Collected by licensed seller of alcoholic liquor from the buyer.' },
-  { sec: '206C(1)(iii)',  newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 5',            f27eq: '6CM', challan: '1074', collector: 'Seller',              desc: 'Minerals — coal, lignite, iron ore',                              threshold: 'Nil',                            rate: '2%',     notes: 'Applies to sale of coal, lignite, and iron ore. No threshold.' },
-  { sec: '206C(1)(iv)',   newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 2',            f27eq: '6CI', challan: '1069', collector: 'Seller',              desc: 'Tendu leaves',                                                    threshold: 'Nil',                            rate: '2%',     notes: 'Collected by seller of tendu leaves from each buyer. No threshold.' },
-  { sec: '206C(1)(v)',    newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 3',            f27eq: '6CB', challan: '1070', collector: 'Seller / Lessee',     desc: 'Timber obtained under a forest lease',                            threshold: 'Nil',                            rate: '2%',     notes: 'Collected by lessee at the time of debiting the buyer\'s account or receiving payment, whichever is earlier.' },
-  { sec: '206C(1)(vi)',   newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 3',            f27eq: '6CC', challan: '1071', collector: 'Seller',              desc: 'Timber obtained by any mode other than a forest lease',           threshold: 'Nil',                            rate: '2%',     notes: 'Applies to all other modes of timber acquisition — auction, private sale, etc.' },
-  { sec: '206C(1)(vii)',  newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 3',            f27eq: '6CD', challan: '1072', collector: 'Seller',              desc: 'Any other forest produce (not timber or tendu leaves)',           threshold: 'Nil',                            rate: '2%',     notes: 'Covers all forest produce not already covered under other sub-clauses. No threshold.' },
+  { sec: '206C(1)(i)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 4', f27eq: '6CA', challan: '1073', collector: 'Seller', desc: 'Scrap', threshold: 'Nil', rate: '2%', notes: 'TCS on every sale of scrap. No minimum threshold — applies to all transactions.' },
+  { sec: '206C(1)(ii)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 1', f27eq: '6CE', challan: '1068', collector: 'Seller', desc: 'Alcoholic liquor for human consumption', threshold: 'Nil', rate: '2%', notes: 'Collected by licensed seller of alcoholic liquor from the buyer.' },
+  { sec: '206C(1)(iii)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 5', f27eq: '6CM', challan: '1074', collector: 'Seller', desc: 'Minerals — coal, lignite, iron ore', threshold: 'Nil', rate: '2%', notes: 'Applies to sale of coal, lignite, and iron ore. No threshold.' },
+  { sec: '206C(1)(iv)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 2', f27eq: '6CI', challan: '1069', collector: 'Seller', desc: 'Tendu leaves', threshold: 'Nil', rate: '2%', notes: 'Collected by seller of tendu leaves from each buyer. No threshold.' },
+  { sec: '206C(1)(v)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 3', f27eq: '6CB', challan: '1070', collector: 'Seller / Lessee', desc: 'Timber obtained under a forest lease', threshold: 'Nil', rate: '2%', notes: 'Collected by lessee at the time of debiting the buyer\'s account or receiving payment, whichever is earlier.' },
+  { sec: '206C(1)(vi)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 3', f27eq: '6CC', challan: '1071', collector: 'Seller', desc: 'Timber obtained by any mode other than a forest lease', threshold: 'Nil', rate: '2%', notes: 'Applies to all other modes of timber acquisition — auction, private sale, etc.' },
+  { sec: '206C(1)(vii)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 3', f27eq: '6CD', challan: '1072', collector: 'Seller', desc: 'Any other forest produce (not timber or tendu leaves)', threshold: 'Nil', rate: '2%', notes: 'Covers all forest produce not already covered under other sub-clauses. No threshold.' },
   // ── LEASE / LICENCE u/s 206C(1C) ─────────────────────────────────────────
-  { sec: '206C(1C)',      newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 9',            f27eq: '6CF / 6CG / 6CH', challan: '1090-1092', collector: 'Grantor', desc: 'Lease / sub-lease / licence for parking lot, toll plaza, mine or quarry', threshold: 'Nil',                    rate: '2%',     notes: 'TCS at 2% on the amount received or debited. Separate Form 27EQ codes: 6CF = parking lot, 6CG = toll plaza, 6CH = mine / quarry.' },
+  { sec: '206C(1C)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 9', f27eq: '6CF / 6CG / 6CH', challan: '1090-1092', collector: 'Grantor', desc: 'Lease / sub-lease / licence for parking lot, toll plaza, mine or quarry', threshold: 'Nil', rate: '2%', notes: 'TCS at 2% on the amount received or debited. Separate Form 27EQ codes: 6CF = parking lot, 6CG = toll plaza, 6CH = mine / quarry.' },
   // ── MOTOR VEHICLE u/s 206C(1F) ────────────────────────────────────────────
-  { sec: '206C(1F)',      newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 6.B(a) & (b)', f27eq: '6CJ', challan: '1075 / 1076-1085', collector: 'Seller',  desc: 'Sale of motor vehicle',                                           threshold: '₹10,00,000 per vehicle',         rate: '1%',     notes: 'Applies to every sale of a motor vehicle exceeding ₹10 lakh. Collected by dealer at time of receipt of sale consideration.' },
+  { sec: '206C(1F)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 6.B(a) & (b)', f27eq: '6CJ', challan: '1075 / 1076-1085', collector: 'Seller', desc: 'Sale of motor vehicle', threshold: '₹10,00,000 per vehicle', rate: '1%', notes: 'Applies to every sale of a motor vehicle exceeding ₹10 lakh. Collected by dealer at time of receipt of sale consideration.' },
   // ── FOREIGN REMITTANCE / LRS u/s 206C(1G) ────────────────────────────────
-  { sec: '206C(1G)(i)',   newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 8',            f27eq: '6CK', challan: '1088 / 1089', collector: 'Authorised Dealer', desc: 'LRS remittance — overseas tour programme package',           threshold: 'Nil (full amount)',               rate: '20%',    notes: 'TCS at 20% on full amount — no threshold exemption for tour packages. Collected by authorised forex dealer.' },
-  { sec: '206C(1G)(iii)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 7.D(a)',       f27eq: '6CK', challan: '1086', collector: 'Authorised Dealer',   desc: 'LRS remittance — medical treatment or education (including self-funded education)', threshold: '₹10,00,000 per FY (on excess)', rate: '2%', notes: 'Rate 2% on LRS amount exceeding ₹10 lakh per FY for medical treatment or self-funded education abroad. TCS on education remittances financed by a loan from an approved financial institution stands removed.' },
-  { sec: '206C(1G)(iv)',  newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 7.D(b)',       f27eq: '6CK', challan: '1087', collector: 'Authorised Dealer',   desc: 'LRS remittance — all other purposes (investments, gifts, maintenance, travel, etc.)', threshold: '₹10,00,000 per FY (on excess)', rate: '20%', notes: 'Rate 20% on aggregate LRS remittance in excess of ₹10 lakh per FY. Does not apply to education / medical / tour packages (covered above).' },
+  { sec: '206C(1G)(i)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 8', f27eq: '6CK', challan: '1088 / 1089', collector: 'Authorised Dealer', desc: 'LRS remittance — overseas tour programme package', threshold: 'Nil (full amount)', rate: '20%', notes: 'TCS at 20% on full amount — no threshold exemption for tour packages. Collected by authorised forex dealer.' },
+  { sec: '206C(1G)(iii)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 7.D(a)', f27eq: '6CK', challan: '1086', collector: 'Authorised Dealer', desc: 'LRS remittance — medical treatment or education (including self-funded education)', threshold: '₹10,00,000 per FY (on excess)', rate: '2%', notes: 'Rate 2% on LRS amount exceeding ₹10 lakh per FY for medical treatment or self-funded education abroad. TCS on education remittances financed by a loan from an approved financial institution stands removed.' },
+  { sec: '206C(1G)(iv)', newSec: 'Sec. 394(1)', tableRef: 'Table: Sl. No. 7.D(b)', f27eq: '6CK', challan: '1087', collector: 'Authorised Dealer', desc: 'LRS remittance — all other purposes (investments, gifts, maintenance, travel, etc.)', threshold: '₹10,00,000 per FY (on excess)', rate: '20%', notes: 'Rate 20% on aggregate LRS remittance in excess of ₹10 lakh per FY. Does not apply to education / medical / tour packages (covered above).' },
 ];
 
 const COLLECTORS = ['All', 'Seller', 'Authorised Dealer', 'Grantor'];
@@ -60,9 +60,9 @@ export default function TCSPage() {
 
   const collectorBadge = (c) => {
     const map = {
-      'Seller':            { bg: '#E4F0EB', color: T.f },
+      'Seller': { bg: '#E4F0EB', color: T.f },
       'Authorised Dealer': { bg: '#FDE8CC', color: '#8B4F00' },
-      'Grantor':           { bg: '#E8EAF0', color: '#3A4066' },
+      'Grantor': { bg: '#E8EAF0', color: '#3A4066' },
     };
     const base = Object.keys(map).find(k => c.includes(k)) || 'Seller';
     const { bg, color } = map[base] || { bg: T.stone, color: T.mid };
@@ -89,7 +89,7 @@ export default function TCSPage() {
   return (
     <div>
       {/* HERO */}
-      <section style={{ background: heroColor, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/TCS Rate Chart.png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
@@ -142,7 +142,7 @@ export default function TCSPage() {
             {[
               ['Sec. 394(1)', 'All TCS collections — goods, lease, motor vehicle, LRS (old: Section 206C), each at its Table Sl. No.'],
               ['Sec. 397(2)', 'Higher rate — no PAN (old: 206CC)'],
-              ['Removed',     'TCS on education via loan (206C(1G)(ii)) and sale of goods (206C(1H)) no longer apply'],
+              ['Removed', 'TCS on education via loan (206C(1G)(ii)) and sale of goods (206C(1H)) no longer apply'],
             ].map(([sec, desc]) => (
               <div key={sec} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, background: T.f, color: '#fff', fontFamily: 'Helvetica, Arial, sans-serif' }}>{sec}</span>
@@ -161,8 +161,10 @@ export default function TCSPage() {
             <div style={{ display: 'flex', gap: 8 }}>
               {COLLECTORS.map(c => (
                 <button key={c} onClick={() => setCollector(c)}
-                  style={{ padding: '8px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
-                    background: collector === c ? T.f : T.stone, color: collector === c ? '#fff' : T.mid, transition: 'all .15s' }}>
+                  style={{
+                    padding: '8px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
+                    background: collector === c ? T.f : T.stone, color: collector === c ? '#fff' : T.mid, transition: 'all .15s'
+                  }}>
                   {c}
                 </button>
               ))}

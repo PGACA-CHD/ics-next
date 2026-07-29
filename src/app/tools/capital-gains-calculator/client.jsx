@@ -156,7 +156,7 @@ export default function CapitalGainsCalc() {
   return (
     <div>
       {/* ── HERO ── */}
-      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/Capital Gain .png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>← Back to Tools</Link>
@@ -214,8 +214,10 @@ export default function CapitalGainsCalc() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {Object.entries(ASSET_CONFIG).map(([key, val]) => (
                     <button key={key} onClick={() => { setAssetType(key); setResult(null); }}
-                      style={{ padding: '10px 14px', fontSize: 13, fontWeight: 600, borderRadius: 8, border: `1.5px solid ${assetType === key ? T.f : T.bdr}`, cursor: 'pointer',
-                        background: assetType === key ? '#E4F0EB' : '#fff', color: assetType === key ? T.f : T.mid, textAlign: 'left', transition: 'all .15s' }}>
+                      style={{
+                        padding: '10px 14px', fontSize: 13, fontWeight: 600, borderRadius: 8, border: `1.5px solid ${assetType === key ? T.f : T.bdr}`, cursor: 'pointer',
+                        background: assetType === key ? '#E4F0EB' : '#fff', color: assetType === key ? T.f : T.mid, textAlign: 'left', transition: 'all .15s'
+                      }}>
                       {val.label}
                     </button>
                   ))}
@@ -228,9 +230,11 @@ export default function CapitalGainsCalc() {
                 <div style={{ display: 'flex', gap: 8 }}>
                   {[['resident', 'Resident'], ['nri', 'Non-Resident (NRI)']].map(([v, l]) => (
                     <button key={v} onClick={() => { setResident(v); setResult(null); }}
-                      style={{ flex: 1, padding: '9px 12px', fontSize: 13, fontWeight: 600, borderRadius: 8,
+                      style={{
+                        flex: 1, padding: '9px 12px', fontSize: 13, fontWeight: 600, borderRadius: 8,
                         border: `1.5px solid ${resident === v ? T.f : T.bdr}`, cursor: 'pointer',
-                        background: resident === v ? '#E4F0EB' : '#fff', color: resident === v ? T.f : T.mid }}>
+                        background: resident === v ? '#E4F0EB' : '#fff', color: resident === v ? T.f : T.mid
+                      }}>
                       {l}
                     </button>
                   ))}
@@ -331,7 +335,7 @@ function CGResult({ result, cfg }) {
 
   const typeLabel = taxType === 'ltcg' ? 'Long-Term Capital Gain (LTCG)'
     : taxType === 'stcg' ? 'Short-Term Capital Gain (STCG)'
-    : 'Taxable as per Slab Rate';
+      : 'Taxable as per Slab Rate';
 
   const thresholdText = cfg.threshold ? `Threshold: ${cfg.threshold} months` : 'No threshold — always slab rate';
 
@@ -351,9 +355,11 @@ function CGResult({ result, cfg }) {
             <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2 }}>{thresholdText}</div>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 700,
+            <div style={{
+              padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 700,
               background: taxType === 'ltcg' ? '#E4F0EB' : taxType === 'stcg' ? '#FFF0E0' : '#F0F0F0',
-              color: taxType === 'ltcg' ? T.f : taxType === 'stcg' ? '#8A5500' : T.mid }}>
+              color: taxType === 'ltcg' ? T.f : taxType === 'stcg' ? '#8A5500' : T.mid
+            }}>
               {typeLabel}
             </div>
           </div>

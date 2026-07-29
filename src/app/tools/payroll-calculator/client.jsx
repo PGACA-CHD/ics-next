@@ -15,20 +15,20 @@ function parseNum(str) {
 }
 
 const NEW_SLABS = [
-  { from: 0,        to: 400000,   rate: 0    },
-  { from: 400000,   to: 800000,   rate: 0.05 },
-  { from: 800000,   to: 1200000,  rate: 0.10 },
-  { from: 1200000,  to: 1600000,  rate: 0.15 },
-  { from: 1600000,  to: 2000000,  rate: 0.20 },
-  { from: 2000000,  to: 2400000,  rate: 0.25 },
-  { from: 2400000,  to: Infinity, rate: 0.30 },
+  { from: 0, to: 400000, rate: 0 },
+  { from: 400000, to: 800000, rate: 0.05 },
+  { from: 800000, to: 1200000, rate: 0.10 },
+  { from: 1200000, to: 1600000, rate: 0.15 },
+  { from: 1600000, to: 2000000, rate: 0.20 },
+  { from: 2000000, to: 2400000, rate: 0.25 },
+  { from: 2400000, to: Infinity, rate: 0.30 },
 ];
 
 const OLD_SLABS = [
-  { from: 0,        to: 250000,   rate: 0    },
-  { from: 250000,   to: 500000,   rate: 0.05 },
-  { from: 500000,   to: 1000000,  rate: 0.20 },
-  { from: 1000000,  to: Infinity, rate: 0.30 },
+  { from: 0, to: 250000, rate: 0 },
+  { from: 250000, to: 500000, rate: 0.05 },
+  { from: 500000, to: 1000000, rate: 0.20 },
+  { from: 1000000, to: Infinity, rate: 0.30 },
 ];
 
 function slabTax(income, slabs) {
@@ -74,11 +74,11 @@ function computeIncomeTax(taxableIncome, regime, resident, employeePF) {
 
 const PT_MAP = {
   none: { label: 'None', annual: 0 },
-  mh:   { label: 'Maharashtra — ₹2,400/yr', annual: 2400 },
-  ka:   { label: 'Karnataka — ₹2,400/yr', annual: 2400 },
-  wb:   { label: 'West Bengal — ₹2,400/yr', annual: 2400 },
-  ts:   { label: 'Telangana — ₹2,400/yr', annual: 2400 },
-  ap:   { label: 'Andhra Pradesh — ₹2,400/yr', annual: 2400 },
+  mh: { label: 'Maharashtra — ₹2,400/yr', annual: 2400 },
+  ka: { label: 'Karnataka — ₹2,400/yr', annual: 2400 },
+  wb: { label: 'West Bengal — ₹2,400/yr', annual: 2400 },
+  ts: { label: 'Telangana — ₹2,400/yr', annual: 2400 },
+  ap: { label: 'Andhra Pradesh — ₹2,400/yr', annual: 2400 },
   other: { label: 'Other State — ₹2,400/yr', annual: 2400 },
 };
 
@@ -165,7 +165,7 @@ export default function PayrollCalculator() {
   return (
     <div>
       {/* ── HERO ── */}
-      <section style={{ background: T.f, padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/Payroll.png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>← Back to Tools</Link>
@@ -252,9 +252,11 @@ export default function PayrollCalculator() {
                 <div style={{ display: 'flex', gap: 8 }}>
                   {[['metro', 'Metro (Delhi/Mumbai/Chennai/Kolkata)'], ['nonmetro', 'Non-Metro']].map(([v, l]) => (
                     <button key={v} onClick={() => { setCityType(v); setResult(null); }}
-                      style={{ flex: 1, padding: '9px 10px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
+                      style={{
+                        flex: 1, padding: '9px 10px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
                         border: `1.5px solid ${cityType === v ? T.f : T.bdr}`, cursor: 'pointer',
-                        background: cityType === v ? '#E4F0EB' : '#fff', color: cityType === v ? T.f : T.mid, textAlign: 'center' }}>
+                        background: cityType === v ? '#E4F0EB' : '#fff', color: cityType === v ? T.f : T.mid, textAlign: 'center'
+                      }}>
                       {l}
                     </button>
                   ))}
@@ -274,9 +276,11 @@ export default function PayrollCalculator() {
                 <div style={{ display: 'flex', gap: 8 }}>
                   {[['new', 'New Regime (Default FY 2025-26)'], ['old', 'Old Regime']].map(([v, l]) => (
                     <button key={v} onClick={() => { setRegime(v); setResult(null); }}
-                      style={{ flex: 1, padding: '9px 10px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
+                      style={{
+                        flex: 1, padding: '9px 10px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
                         border: `1.5px solid ${regime === v ? T.f : T.bdr}`, cursor: 'pointer',
-                        background: regime === v ? '#E4F0EB' : '#fff', color: regime === v ? T.f : T.mid, textAlign: 'center' }}>
+                        background: regime === v ? '#E4F0EB' : '#fff', color: regime === v ? T.f : T.mid, textAlign: 'center'
+                      }}>
                       {l}
                     </button>
                   ))}
@@ -426,10 +430,10 @@ function PayrollResult({ result, regime }) {
             {esiApplicable
               ? tableRow('ESI (Employee)', esiEmployee, '0.75% of Gross — applicable (gross ≤ ₹21,000/month)')
               : <tr style={{ borderBottom: `1px solid ${T.bdr}` }}>
-                  <td style={{ padding: '9px 14px', fontSize: 13, color: T.lt }}>ESI (Employee)<div style={{ fontSize: 11, marginTop: 2 }}>Not applicable — gross monthly &gt; ₹21,000</div></td>
-                  <td style={{ padding: '9px 14px', fontSize: 13, color: T.lt, textAlign: 'right' }}>N/A</td>
-                  <td style={{ padding: '9px 14px', fontSize: 13, color: T.lt, textAlign: 'right' }}>N/A</td>
-                </tr>
+                <td style={{ padding: '9px 14px', fontSize: 13, color: T.lt }}>ESI (Employee)<div style={{ fontSize: 11, marginTop: 2 }}>Not applicable — gross monthly &gt; ₹21,000</div></td>
+                <td style={{ padding: '9px 14px', fontSize: 13, color: T.lt, textAlign: 'right' }}>N/A</td>
+                <td style={{ padding: '9px 14px', fontSize: 13, color: T.lt, textAlign: 'right' }}>N/A</td>
+              </tr>
             }
             {tableRow('Professional Tax', ptAnnual)}
             {regime === 'old' && hraExempt > 0 && (
