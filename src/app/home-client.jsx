@@ -7,24 +7,18 @@ import WhatWeDoSection from './WhatWeDoSection';
 import NewHeroSection from './NewHeroSection';
 import ClientOutcomes from './clientOutcomes';
 
-// ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
-const HV = "Helvetica, Arial, sans-serif";   // single font everywhere
-const G = "#0B3D2E";   // brand green
-const GOLD = "#e69819";   // brand gold
-const HS = "clamp(28px, 3vw, 42px)"; // ALL section headings same size
+const HV = "Helvetica, Arial, sans-serif";
+const G = "#0B3D2E";
+const GOLD = "#e69819";
+const HS = "clamp(26px, 3vw, 42px)";
 
-// ─── UNIVERSAL SECTION HEADING ────────────────────────────────────────────────
-// green = first half   |   gold = second half (italic)
 function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
   return (
     <div style={{ textAlign: center ? "center" : "left", marginBottom: mb, fontFamily: HV }}>
       {eyebrow && (
-        <p style={{
-          fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase",
-          color: G, fontWeight: 700, marginBottom: 14, fontFamily: HV, margin: "0 0 14px"
-        }}>{eyebrow}</p>
+        <p style={{ fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase", color: G, fontWeight: 700, margin: "0 0 14px", fontFamily: HV }}>{eyebrow}</p>
       )}
-      <h2 style={{ fontSize: HS, fontWeight: 700, lineHeight: 1.1, margin: 0, fontFamily: HV }}>
+      <h2 style={{ fontSize: HS, fontWeight: 700, lineHeight: 1.15, margin: 0, fontFamily: HV }}>
         <span style={{ color: G }}>{green}</span>
         {gold && <>{" "}<em style={{ color: GOLD, fontStyle: "italic" }}>{gold}</em></>}
       </h2>
@@ -32,7 +26,6 @@ function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
   );
 }
 
-// ─── ROUTES ──────────────────────────────────────────────────────────────────
 const ROUTES = {
   home: '/', services: '/setup', gcc: '/post-setup', tax: '/international-tax',
   hub: '/knowledge-hub', about: '/about', contact: '/contact', industries: '/industries',
@@ -46,7 +39,6 @@ const ROUTES = {
   seo_startup: '/startup-foreign-investment-india',
 };
 
-// ─── PILL COLOR THEMES ───────────────────────────────────────────────────────
 const PILL_THEMES = [
   { acc: "#093024", bg: "rgba(9,48,36,0.09)", bdr: "rgba(9,48,36,0.30)" },
   { acc: "#1a5c9a", bg: "rgba(26,92,154,0.09)", bdr: "rgba(26,92,154,0.30)" },
@@ -54,34 +46,12 @@ const PILL_THEMES = [
   { acc: "#3a2d72", bg: "rgba(74,58,138,0.09)", bdr: "rgba(74,58,138,0.30)" },
 ];
 
-// ─── ICON HELPERS ────────────────────────────────────────────────────────────
-const iconWrap = (path, bg) => (
-  <div style={{ width: 56, height: 56, borderRadius: "50%", background: bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={G} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{path}</svg>
-  </div>
-);
-const LaptopIcon = () => iconWrap(<><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M0 21h24" /></>, "#E8F3EE");
-const BuildingIcon = () => iconWrap(<><path d="M3 21V7l9-4 9 4v14" /><path d="M9 21V11h6v10" /></>, "#FBF0DD");
-const BankIcon = () => iconWrap(<><path d="M3 9l9-7 9 7v11H3z" /><path d="M9 22V12h6v10" /></>, "#EDE8F6");
-const FactoryIcon = () => iconWrap(<><path d="M2 20V10l6-4v4l6-4v4l6-4v14H2z" /></>, "#E8F0F5");
-const MedicalIcon = () => iconWrap(<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M12 8v8M8 12h8" /></>, "#F0EBE8");
-const CartIcon = () => iconWrap(<><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></>, "#E8F3EE");
-
-const svgIcon = (d, stroke = T.mid) => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">{d}</svg>
-);
-const ClientsIcon = () => svgIcon(<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>);
-const GlobeIcon = () => svgIcon(<><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></>);
-const MarketIcon = () => svgIcon(<><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10" /></>);
-const StarIcon = () => svgIcon(<><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>);
-
-// ─── SPEED ICON ──────────────────────────────────────────────────────────────
 function SpeedIcon({ size = 64 }) {
   const [pulse, setPulse] = useState(false);
   useEffect(() => { const id = setInterval(() => setPulse(p => !p), 1500); return () => clearInterval(id); }, []);
   const r = size / 2;
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transition: "transform 0.3s", transform: pulse ? "scale(1.06)" : "scale(1)" }}>
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transition: "transform 0.3s", transform: pulse ? "scale(1.06)" : "scale(1)", flexShrink: 0 }}>
       <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor={G} /><stop offset="100%" stopColor={GOLD} /></linearGradient></defs>
       <circle cx={r} cy={r} r={r - 3} fill="none" stroke="url(#sg)" strokeWidth="2.5" />
       <line x1={r} y1={r} x2={r + (r * 0.55)} y2={r - (r * 0.25)} stroke={GOLD} strokeWidth="2.2" strokeLinecap="round" />
@@ -93,22 +63,30 @@ function SpeedIcon({ size = 64 }) {
   );
 }
 
-// ─── WINDOW WIDTH HOOK ───────────────────────────────────────────────────────
 function useWindowWidth() {
   const [w, setW] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
-  useEffect(() => { const fn = () => setW(window.innerWidth); window.addEventListener("resize", fn); return () => window.removeEventListener("resize", fn); }, []);
+  useEffect(() => {
+    const fn = () => setW(window.innerWidth);
+    window.addEventListener("resize", fn);
+    return () => window.removeEventListener("resize", fn);
+  }, []);
   return w;
 }
 
 // ─── AUDIENCE PATHS ──────────────────────────────────────────────────────────
+// FIX: On mobile/tablet tabs render as 2 rows of 3 with full text visible (no clipping).
+// FIX: Panel is always single-column on small screens so all content is readable.
 const AUTO_DUR = 5000;
+
 function AudiencePathsSection() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const frameRef = useRef(null);
   const startRef = useRef(null);
   const w = useWindowWidth();
-  const mob = w < 640, tab = w >= 640 && w < 1024;
+  const mob = w < 640;
+  const tab = w >= 640 && w < 1024;
+  const small = mob || tab;
 
   const SITS = [
     {
@@ -162,145 +140,133 @@ function AudiencePathsSection() {
   }, [active]);
 
   const s = SITS[active];
+  const row1 = SITS.slice(0, 3);
+  const row2 = SITS.slice(3, 6);
 
   return (
-    <section style={{ padding: mob ? "32px 20px" : tab ? "40px 32px" : "48px 56px", background: "#fff", fontFamily: HV }}>
+    <section style={{ padding: mob ? "32px 16px" : tab ? "40px 24px" : "48px 56px", background: "#fff", fontFamily: HV }}>
       <div style={{ maxWidth: 1320, margin: "0 auto" }}>
         <SH eyebrow="" green="Six situations." gold="One structured conversation." />
 
-        {/* Tab pills */}
-        <div style={{ display: mob ? "grid" : "flex", gridTemplateColumns: mob ? "1fr 1fr" : undefined, gap: 8, marginBottom: 14, flexWrap: "nowrap" }}>
-          {SITS.map((sit, i) => (
-            <button key={sit.n} onClick={() => { setActive(i); setProgress(0); }} style={{
-              flex: mob ? undefined : "1 1 0", background: "#fff",
-              border: `1.5px solid ${i === active ? G : T.bdr}`, borderRadius: 50,
-              padding: mob ? "9px 10px" : "10px 16px", cursor: "pointer", fontFamily: HV,
-              position: "relative", overflow: "hidden", textAlign: "center", whiteSpace: "nowrap",
-            }}>
-              <span style={{ fontSize: mob ? 10 : 11, fontWeight: 700, color: i === active ? GOLD : T.lt, marginRight: 4, fontFamily: HV }}>{sit.n}</span>
-              <span style={{ fontSize: mob ? 13 : 15.5, fontWeight: 600, color: "#000", fontFamily: HV }}>{sit.tab}</span>
-              {i === active && (
-                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: T.bdr }}>
-                  <div style={{ height: "100%", background: G, width: `${progress}%`, transition: "none", borderRadius: "0 2px 2px 0" }} />
-                </div>
-              )}
-            </button>
-          ))}
-        </div>
+        {small ? (
+          // Mobile & tablet: 2 rows of 3 — each pill shows full label text
+          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
+            {[row1, row2].map((row, ri) => (
+              <div key={ri} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+                {row.map((sit, idx) => {
+                  const i = ri * 3 + idx;
+                  return (
+                    <button key={sit.n} onClick={() => { setActive(i); setProgress(0); }}
+                      style={{
+                        background: "#fff", border: `1.5px solid ${i === active ? G : T.bdr}`, borderRadius: 10,
+                        padding: mob ? "10px 8px" : "12px 12px", cursor: "pointer", fontFamily: HV,
+                        position: "relative", overflow: "hidden", textAlign: "center",
+                        display: "flex", flexDirection: "column", alignItems: "center", gap: 4
+                      }}>
+                      <span style={{ fontSize: mob ? 10 : 11, fontWeight: 700, color: i === active ? GOLD : T.lt }}>{sit.n}</span>
+                      <span style={{
+                        fontSize: mob ? 11.5 : 13, fontWeight: 600, color: i === active ? G : "#222",
+                        lineHeight: 1.3, whiteSpace: "normal", wordBreak: "keep-all", display: "block"
+                      }}>{sit.tab}</span>
+                      {i === active && (
+                        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: T.bdr }}>
+                          <div style={{ height: "100%", background: G, width: `${progress}%`, borderRadius: "0 2px 2px 0" }} />
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ) : (
+          // Desktop: single pill row
+          <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "nowrap" }}>
+            {SITS.map((sit, i) => (
+              <button key={sit.n} onClick={() => { setActive(i); setProgress(0); }}
+                style={{
+                  flex: "1 1 0", background: "#fff", border: `1.5px solid ${i === active ? G : T.bdr}`,
+                  borderRadius: 50, padding: "10px 16px", cursor: "pointer", fontFamily: HV,
+                  position: "relative", overflow: "hidden", textAlign: "center", whiteSpace: "nowrap"
+                }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: i === active ? GOLD : T.lt, marginRight: 4 }}>{sit.n}</span>
+                <span style={{ fontSize: 15.5, fontWeight: 600, color: "#000" }}>{sit.tab}</span>
+                {i === active && (
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: T.bdr }}>
+                    <div style={{ height: "100%", background: G, width: `${progress}%`, borderRadius: "0 2px 2px 0" }} />
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Panel */}
         <div style={{
           background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 14, overflow: "hidden",
-          display: "grid", gridTemplateColumns: mob ? "1fr" : tab ? "1fr 220px" : "1fr 280px", alignItems: "stretch"
+          display: "grid", gridTemplateColumns: small ? "1fr" : "1fr 280px", alignItems: "stretch"
         }}>
 
           {/* Left */}
           <div style={{
-            padding: mob ? "20px" : tab ? "20px 28px" : "24px 40px",
-            borderBottom: mob ? `1px solid ${T.bdr}` : "none",
-            borderRight: mob ? "none" : `1px solid ${T.bdr}`,
-            display: "flex", flexDirection: "column", justifyContent: "center"
+            padding: mob ? "20px 16px" : tab ? "24px 28px" : "28px 40px",
+            borderRight: small ? "none" : `1px solid ${T.bdr}`,
+            borderBottom: small ? `1px solid ${T.bdr}` : "none",
+            display: "flex", flexDirection: "column", gap: 16
           }}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: mob ? "1fr" : "1fr auto",
-              gridTemplateRows: mob ? "auto" : "auto 1fr",
-              gap: mob ? 12 : `10px 28px`, alignItems: "start"
-            }}>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 10, gridColumn: 1, gridRow: 1 }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: GOLD, flexShrink: 0, fontFamily: HV }}>{s.n}</span>
-                <div style={{ width: 20, height: 1, background: T.bdr, flexShrink: 0 }} />
-                <h3 style={{ fontSize: "clamp(16px,1.7vw,22px)", fontWeight: 700, color: "#000", margin: 0, lineHeight: 1.3, fontFamily: HV }}>{s.headline}</h3>
-              </div>
-
-              <p style={{
-                fontSize: 14, color: "#444", lineHeight: 1.75, fontWeight: 400, margin: 0, fontFamily: HV,
-                gridColumn: 1, gridRow: mob ? "auto" : 2
-              }}>{s.desc}</p>
-
-              {/* Colored pills */}
-              {!mob && (
-                <div style={{ gridColumn: 2, gridRow: "1 / 3", display: "flex", flexDirection: "column", justifyContent: "center", gap: 7, alignSelf: "stretch" }}>
-                  {s.bullets.map((b, bi) => {
-                    const th = PILL_THEMES[bi % 4]; return (
-                      <span key={b} style={{
-                        display: "inline-flex", alignItems: "center",
-                        background: th.bg, border: `1px solid ${th.bdr}`, borderRadius: 50,
-                        padding: "7px 16px", fontSize: 13.5, color: th.acc, whiteSpace: "nowrap",
-                        fontWeight: 600, fontFamily: HV
-                      }}>{b}</span>
-                    );
-                  })}
-                </div>
-              )}
-              {mob && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  {s.bullets.map((b, bi) => {
-                    const th = PILL_THEMES[bi % 4]; return (
-                      <span key={b} style={{
-                        display: "inline-flex", alignItems: "center",
-                        background: th.bg, border: `1px solid ${th.bdr}`, borderRadius: 50,
-                        padding: "6px 13px", fontSize: 13, color: th.acc, whiteSpace: "nowrap",
-                        fontWeight: 600, fontFamily: HV
-                      }}>{b}</span>
-                    );
-                  })}
-                </div>
-              )}
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 13, fontWeight: 700, color: GOLD, flexShrink: 0 }}>{s.n}</span>
+              <div style={{ width: 20, height: 1, background: T.bdr, flexShrink: 0 }} />
+              <h3 style={{ fontSize: mob ? "clamp(16px,4.5vw,22px)" : "clamp(16px,2vw,22px)", fontWeight: 700, color: "#000", margin: 0, lineHeight: 1.25, fontFamily: HV }}>{s.headline}</h3>
+            </div>
+            <p style={{ fontSize: mob ? 14 : 14.5, color: "#444", lineHeight: 1.78, fontWeight: 400, margin: 0, fontFamily: HV }}>{s.desc}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+              {s.bullets.map((b, bi) => {
+                const th = PILL_THEMES[bi % 4];
+                return (
+                  <span key={b} style={{
+                    display: "inline-flex", alignItems: "center", background: th.bg,
+                    border: `1px solid ${th.bdr}`, borderRadius: 50, padding: mob ? "6px 13px" : "7px 16px",
+                    fontSize: mob ? 12.5 : 13.5, color: th.acc, fontWeight: 600, fontFamily: HV,
+                    lineHeight: 1.3, whiteSpace: "normal"
+                  }}>{b}</span>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right */}
-          {!mob && (
-            <div style={{
-              padding: "28px", background: "linear-gradient(160deg,#f0f7f4 0%,#fdf6e8 100%)",
-              display: "flex", flexDirection: "column", justifyContent: "center", gap: 14,
-              borderLeft: "3px solid #e69819"
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <SpeedIcon size={tab ? 52 : 64} />
-                <div style={{ fontSize: "clamp(22px,2.4vw,34px)", color: GOLD, lineHeight: 1, fontWeight: 700, fontFamily: HV }}>{s.stat}</div>
-              </div>
-              <p style={{ fontSize: 13, color: "#5C5C54", lineHeight: 1.65, margin: 0, fontFamily: HV }}>{s.statLabel}</p>
-              <button onClick={() => { window.location.href = ROUTES[s.page] || "/"; }} style={{
+          {/* Right stat */}
+          <div style={{
+            padding: mob ? "18px 16px" : "28px",
+            background: "linear-gradient(160deg,#f0f7f4 0%,#fdf6e8 100%)",
+            display: "flex", flexDirection: "column", justifyContent: "center", gap: mob ? 12 : 14,
+            borderLeft: small ? "none" : "3px solid #e69819",
+            borderTop: small ? "3px solid #e69819" : "none"
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <SpeedIcon size={mob ? 44 : tab ? 52 : 64} />
+              <div style={{ fontSize: mob ? "clamp(22px,6vw,32px)" : "clamp(22px,2.4vw,34px)", color: GOLD, lineHeight: 1, fontWeight: 700, fontFamily: HV }}>{s.stat}</div>
+            </div>
+            <p style={{ fontSize: mob ? 12.5 : 13, color: "#5C5C54", lineHeight: 1.65, margin: 0, fontFamily: HV }}>{s.statLabel}</p>
+            <button onClick={() => { window.location.href = ROUTES[s.page] || "/"; }}
+              style={{
                 background: `linear-gradient(135deg,${G},#145c42)`, color: "#fff", border: "none",
-                borderRadius: 7, padding: "12px 18px", fontSize: 13, fontWeight: 600,
-                cursor: "pointer", fontFamily: HV, transition: "transform 0.2s,box-shadow 0.2s",
-                boxShadow: "0 2px 8px rgba(11,61,46,0.2)"
+                borderRadius: 7, padding: "12px 18px", fontSize: 13, fontWeight: 600, cursor: "pointer",
+                fontFamily: HV, width: small ? "100%" : "auto", textAlign: "center",
+                transition: "transform 0.2s,box-shadow 0.2s", boxShadow: "0 2px 8px rgba(11,61,46,0.2)"
               }}
-                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(11,61,46,0.3)"; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(11,61,46,0.2)"; }}>
-                {s.cta} →
-              </button>
-            </div>
-          )}
-          {mob && (
-            <div style={{
-              padding: "20px", background: "linear-gradient(160deg,#f0f7f4 0%,#fdf6e8 100%)",
-              display: "flex", alignItems: "center", gap: 16, borderTop: "3px solid #e69819"
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
-                <SpeedIcon size={44} />
-                <div>
-                  <div style={{ fontSize: 22, color: GOLD, lineHeight: 1, fontWeight: 700, fontFamily: HV }}>{s.stat}</div>
-                  <p style={{ fontSize: 12, color: "#5C5C54", lineHeight: 1.5, margin: "4px 0 0", fontFamily: HV }}>{s.statLabel}</p>
-                </div>
-              </div>
-              <button onClick={() => { window.location.href = ROUTES[s.page] || "/"; }} style={{
-                background: `linear-gradient(135deg,${G},#145c42)`, color: "#fff", border: "none",
-                borderRadius: 7, padding: "10px 14px", fontSize: 12.5, fontWeight: 600,
-                cursor: "pointer", fontFamily: HV, flexShrink: 0
-              }}>{s.cta} →</button>
-            </div>
-          )}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(11,61,46,0.3)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(11,61,46,0.2)"; }}>
+              {s.cta} →
+            </button>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── STATS RIBBON ────────────────────────────────────────────────────────────
+// ─── STATS ───────────────────────────────────────────────────────────────────
 function useCountUp(target, dur = 1600, suffix = "") {
   const [val, setVal] = useState("0" + suffix);
   const ref = useRef(null);
@@ -312,8 +278,7 @@ function useCountUp(target, dur = 1600, suffix = "") {
       const t0 = performance.now();
       const tick = (now) => {
         const p = Math.min((now - t0) / dur, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        setVal(Math.round(ease * target) + suffix);
+        setVal(Math.round((1 - Math.pow(1 - p, 3)) * target) + suffix);
         if (p < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
@@ -329,39 +294,23 @@ function StatCard({ target, suffix = "", label, subLabel, gradient, border, valu
   const [vis, setVis] = useState(false);
   const [hov, setHov] = useState(false);
   const cardRef = useRef(null);
-
   useEffect(() => {
     const el = cardRef.current; if (!el) return;
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setTimeout(() => setVis(true), idx * 100); obs.disconnect(); }
-    }, { threshold: 0.2 });
-    obs.observe(el);
-    return () => obs.disconnect();
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setTimeout(() => setVis(true), idx * 100); obs.disconnect(); } }, { threshold: 0.2 });
+    obs.observe(el); return () => obs.disconnect();
   }, [idx]);
-
   return (
     <div ref={el => { cardRef.current = el; numRef.current = el; }}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{
-        background: gradient, borderRadius: 16, padding: "32px 28px",
-        display: "flex", flexDirection: "column", minWidth: 0,
-        border: `1px solid ${border || "rgba(0,0,0,0.06)"}`,
-        opacity: vis ? 1 : 0,
+        background: gradient, borderRadius: 16, padding: "28px 22px", display: "flex", flexDirection: "column", minWidth: 0,
+        border: `1px solid ${border || "rgba(0,0,0,0.06)"}`, opacity: vis ? 1 : 0,
         transform: vis ? (hov ? "translateY(-6px)" : "translateY(0)") : "translateY(24px)",
-        transition: vis
-          ? "transform 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease"
-          : `opacity 0.5s ease ${idx * 100}ms, transform 0.5s ease ${idx * 100}ms`,
-        boxShadow: hov ? "0 12px 32px rgba(0,0,0,0.10)" : "0 2px 8px rgba(0,0,0,0.04)",
-        cursor: "default",
+        transition: vis ? "transform 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease" : `opacity 0.5s ease ${idx * 100}ms, transform 0.5s ease ${idx * 100}ms`,
+        boxShadow: hov ? "0 12px 32px rgba(0,0,0,0.10)" : "0 2px 8px rgba(0,0,0,0.04)", cursor: "default"
       }}>
-      <span style={{
-        fontSize: 10.5, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase",
-        color: "#777", display: "block", marginBottom: 24, fontFamily: HV
-      }}>{label}</span>
-      <div style={{
-        fontSize: "clamp(32px,3.2vw,52px)", fontWeight: 700, color: valueColor || GOLD, lineHeight: 1,
-        letterSpacing: "-.02em", marginBottom: 8, whiteSpace: "nowrap", fontFamily: HV
-      }}>{val}</div>
+      <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#777", display: "block", marginBottom: 20, fontFamily: HV }}>{label}</span>
+      <div style={{ fontSize: "clamp(28px,3.2vw,52px)", fontWeight: 700, color: valueColor || GOLD, lineHeight: 1, letterSpacing: "-.02em", marginBottom: 8, whiteSpace: "nowrap", fontFamily: HV }}>{val}</div>
       <span style={{ fontSize: 12.5, color: "#555", display: "block", marginTop: 4, fontFamily: HV }}>{subLabel}</span>
     </div>
   );
@@ -374,37 +323,17 @@ function StatsRibbon() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 40 }}>
           <SH green="Numbers that speak" gold="for themselves." mb={16} />
         </div>
-
         <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
           {[
-            {
-              target: 100, suffix: "+", label: "ENTITIES", subLabel: "Companies incorporated",
-              gradient: "linear-gradient(160deg,#EAF4EF 0%,#F5FAF7 100%)", border: "rgba(9,48,36,0.16)", valueColor: G
-            },
-            {
-              target: 18, suffix: " yrs", label: "EXPERIENCE", subLabel: "In continuous practice",
-              gradient: "linear-gradient(160deg,#EAF1F8 0%,#F5F9FC 100%)", border: "rgba(26,92,154,0.18)", valueColor: "#1a5c9a"
-            },
-            {
-              target: 22, suffix: " days", label: "SPEED", subLabel: "Median time to operational entity",
-              gradient: "linear-gradient(160deg,#FCF3E1 0%,#FEFAF0 100%)", border: "rgba(230,152,25,0.24)", valueColor: GOLD
-            },
-            {
-              target: 90, suffix: "+", label: "TREATIES", subLabel: "Jurisdictions covered",
-              gradient: "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)", border: "rgba(9,48,36,0.14)", valueColor: G
-            },
-          ].map((s, i) => (
-            <StatCard key={s.label} {...s} idx={i} />
-          ))}
+            { target: 100, suffix: "+", label: "ENTITIES", subLabel: "Companies incorporated", gradient: "linear-gradient(160deg,#EAF4EF 0%,#F5FAF7 100%)", border: "rgba(9,48,36,0.16)", valueColor: G },
+            { target: 18, suffix: " yrs", label: "EXPERIENCE", subLabel: "In continuous practice", gradient: "linear-gradient(160deg,#EAF1F8 0%,#F5F9FC 100%)", border: "rgba(26,92,154,0.18)", valueColor: "#1a5c9a" },
+            { target: 22, suffix: " days", label: "SPEED", subLabel: "Median time to operational entity", gradient: "linear-gradient(160deg,#FCF3E1 0%,#FEFAF0 100%)", border: "rgba(230,152,25,0.24)", valueColor: GOLD },
+            { target: 90, suffix: "+", label: "TREATIES", subLabel: "Jurisdictions covered", gradient: "linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%)", border: "rgba(9,48,36,0.14)", valueColor: G },
+          ].map((s, i) => <StatCard key={s.label} {...s} idx={i} />)}
         </div>
-
         <div style={{ display: "flex", justifyContent: "center", marginTop: 36 }}>
           <button onClick={() => { window.location.href = "/contact"; }}
-            style={{
-              background: G, color: "#fff", border: "none", borderRadius: 8,
-              padding: "14px 32px", fontSize: 14.5, fontWeight: 600, cursor: "pointer",
-              fontFamily: HV, boxShadow: "0 4px 16px rgba(11,61,46,0.18)"
-            }}>
+            style={{ background: G, color: "#fff", border: "none", borderRadius: 8, padding: "14px 32px", fontSize: 14.5, fontWeight: 600, cursor: "pointer", fontFamily: HV, boxShadow: "0 4px 16px rgba(11,61,46,0.18)" }}>
             Get in touch now! →
           </button>
         </div>
@@ -414,45 +343,68 @@ function StatsRibbon() {
 }
 
 // ─── MAP LINES OVERLAY ───────────────────────────────────────────────────────
+// Nodes use correct equirectangular world-map % positions:
+//   x = (longitude + 180) / 360 * 100
+//   y = (90 - latitude)  / 180 * 100
+// Hub = India. All pulses travel OUTWARD from India to each spoke country.
 function MapLinesOverlay() {
   const canvasRef = useRef(null);
   const rafRef = useRef(null);
   useEffect(() => {
-    const canvas = canvasRef.current; if (!canvas) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const NODES = [{ x: 71, y: 51 }, { x: 49.5, y: 22 }, { x: 63.5, y: 37 }, { x: 22, y: 31 }, { x: 79.5, y: 51 }, { x: 86.5, y: 70 }];
-    const EDGES = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5]];
-    const pulses = EDGES.map(([a, b], i) => ({ a, b, t: i / EDGES.length, speed: 0.004 + Math.random() * 0.002 }));
+
+    const NODES = [
+      { x: 71.7, y: 37.8, label: "India", hub: true }, // 78°E, 22°N
+      { x: 22.8, y: 28.9, label: "USA", hub: false }, // 98°W, 38°N
+      { x: 49.7, y: 21.7, label: "UK", hub: false }, //  1°W, 51°N
+      { x: 65.3, y: 36.1, label: "UAE", hub: false }, // 55°E, 25°N
+      { x: 78.9, y: 49.4, label: "Singapore", hub: false }, // 104°E, 1°N
+      { x: 87.2, y: 63.9, label: "Australia", hub: false }, // 134°E, 25°S
+      { x: 19.2, y: 22.8, label: "Canada", hub: false }, //  95°W, 56°N
+    ];
+    // All edges radiate FROM India (index 0)
+    const EDGES = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6]];
+    // Pulses start staggered, all travel India → destination (t goes 0→1)
+    const pulses = EDGES.map(([a, b], i) => ({ a, b, t: i / EDGES.length, speed: 0.003 + i * 0.0004 }));
+
     function resize() {
       const r = canvas.parentElement.getBoundingClientRect();
+      if (!r.width || !r.height) return;
       canvas.style.width = r.width + "px"; canvas.style.height = r.height + "px";
       canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    function pt(x, y) { return [x / 100 * (canvas.width / dpr), y / 100 * (canvas.height / dpr)]; }
+    function pt(xp, yp) { return [(xp / 100) * (canvas.width / dpr), (yp / 100) * (canvas.height / dpr)]; }
+
     function draw() {
       ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      // Arcs
       EDGES.forEach(([ai, bi]) => {
         const [ax, ay] = pt(NODES[ai].x, NODES[ai].y), [bx, by] = pt(NODES[bi].x, NODES[bi].y);
-        const cpx = (ax + bx) / 2, cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.32;
+        const cpx = (ax + bx) / 2, cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.25;
         ctx.beginPath(); ctx.moveTo(ax, ay); ctx.quadraticCurveTo(cpx, cpy, bx, by);
-        ctx.strokeStyle = "rgba(11,61,46,0.65)"; ctx.lineWidth = 1.8; ctx.setLineDash([5, 5]); ctx.stroke(); ctx.setLineDash([]);
+        ctx.strokeStyle = "rgba(11,61,46,0.45)"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 6]); ctx.stroke(); ctx.setLineDash([]);
       });
-      NODES.forEach((n, i) => {
-        const [nx, ny] = pt(n.x, n.y), hub = i === 0;
-        ctx.beginPath(); ctx.arc(nx, ny, hub ? 10 : 7, 0, Math.PI * 2); ctx.strokeStyle = hub ? "rgba(11,61,46,0.6)" : "rgba(11,61,46,0.5)"; ctx.lineWidth = 1.5; ctx.stroke();
-        ctx.beginPath(); ctx.arc(nx, ny, hub ? 5.5 : 4, 0, Math.PI * 2); ctx.fillStyle = G; ctx.fill();
-        ctx.beginPath(); ctx.arc(nx, ny, hub ? 2.5 : 1.8, 0, Math.PI * 2); ctx.fillStyle = hub ? GOLD : "#fff"; ctx.fill();
+      // Nodes
+      NODES.forEach(n => {
+        const [nx, ny] = pt(n.x, n.y);
+        ctx.beginPath(); ctx.arc(nx, ny, n.hub ? 11 : 7, 0, Math.PI * 2);
+        ctx.strokeStyle = n.hub ? "rgba(11,61,46,0.75)" : "rgba(11,61,46,0.40)"; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.beginPath(); ctx.arc(nx, ny, n.hub ? 6 : 4, 0, Math.PI * 2); ctx.fillStyle = G; ctx.fill();
+        ctx.beginPath(); ctx.arc(nx, ny, n.hub ? 2.8 : 1.8, 0, Math.PI * 2); ctx.fillStyle = n.hub ? GOLD : "#fff"; ctx.fill();
       });
+      // Animated pulses: India → destination
       pulses.forEach(pulse => {
         pulse.t = (pulse.t + pulse.speed) % 1;
         const [ax, ay] = pt(NODES[pulse.a].x, NODES[pulse.a].y), [bx, by] = pt(NODES[pulse.b].x, NODES[pulse.b].y);
-        const cpx = (ax + bx) / 2, cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.32, t = pulse.t;
+        const cpx = (ax + bx) / 2, cpy = Math.min(ay, by) - Math.abs(bx - ax) * 0.25, t = pulse.t;
         const qx = (1 - t) * (1 - t) * ax + 2 * (1 - t) * t * cpx + t * t * bx, qy = (1 - t) * (1 - t) * ay + 2 * (1 - t) * t * cpy + t * t * by;
-        const gr = ctx.createRadialGradient(qx, qy, 0, qx, qy, 10);
-        gr.addColorStop(0, "rgba(11,61,46,0.8)"); gr.addColorStop(1, "rgba(11,61,46,0)");
-        ctx.beginPath(); ctx.arc(qx, qy, 10, 0, Math.PI * 2); ctx.fillStyle = gr; ctx.fill();
+        const gr = ctx.createRadialGradient(qx, qy, 0, qx, qy, 11);
+        gr.addColorStop(0, "rgba(230,152,25,0.8)"); gr.addColorStop(1, "rgba(230,152,25,0)");
+        ctx.beginPath(); ctx.arc(qx, qy, 11, 0, Math.PI * 2); ctx.fillStyle = gr; ctx.fill();
         ctx.beginPath(); ctx.arc(qx, qy, 4, 0, Math.PI * 2); ctx.fillStyle = G; ctx.fill();
         ctx.beginPath(); ctx.arc(qx, qy, 1.8, 0, Math.PI * 2); ctx.fillStyle = GOLD; ctx.fill();
       });
@@ -491,19 +443,13 @@ function ProcessStep({ step, i, total }) {
           flexShrink: 0, boxShadow: vis ? `0 0 0 5px #f5f5f0,0 0 0 7px ${G}33` : "none",
           transition: `background 0.35s ease ${i * 120 + 150}ms,border-color 0.35s ease ${i * 120 + 150}ms,box-shadow 0.35s ease ${i * 120 + 150}ms`
         }}>
-          <span style={{
-            fontSize: 14, color: vis ? "#fff" : T.lt, fontWeight: 700,
-            transition: `color 0.3s ease ${i * 120 + 200}ms`, fontFamily: HV
-          }}>{step.n}</span>
+          <span style={{ fontSize: 14, color: vis ? "#fff" : T.lt, fontWeight: 700, transition: `color 0.3s ease ${i * 120 + 200}ms`, fontFamily: HV }}>{step.n}</span>
         </div>
       </div>
       <div style={{ paddingBottom: i < total - 1 ? 40 : 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-          <h3 style={{ fontSize: 16.5, fontWeight: 700, color: "#000", fontFamily: HV }}>{step.title}</h3>
-          <span style={{
-            fontSize: 11, background: G, color: "#fff", padding: "2px 10px", borderRadius: 50,
-            fontWeight: 600, letterSpacing: .3, flexShrink: 0, fontFamily: HV
-          }}>{step.time}</span>
+          <h3 style={{ fontSize: 16.5, fontWeight: 700, color: "#000", fontFamily: HV, margin: 0 }}>{step.title}</h3>
+          <span style={{ fontSize: 11, background: G, color: "#fff", padding: "2px 10px", borderRadius: 50, fontWeight: 600, letterSpacing: .3, flexShrink: 0, fontFamily: HV }}>{step.time}</span>
         </div>
         <p style={{ fontSize: 14, color: "#444", lineHeight: 1.78, fontWeight: 400, margin: 0, fontFamily: HV }}>{step.desc}</p>
       </div>
@@ -532,9 +478,9 @@ function KnowledgeHubSection() {
   }, []);
 
   return (
-    <section style={{ padding: "48px 56px", background: "#fff", fontFamily: HV }}>
+    <section style={{ padding: "48px 20px", background: "#fff", fontFamily: HV }}>
       <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 48 }}>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginBottom: 40 }}>
           <SH eyebrow="Knowledge Hub" green="Insights for global companies" gold="entering India." center={false} mb={0} />
           <button className="ics-btn ics-btn-outline" onClick={() => { window.location.href = ROUTES.hub; }}>View All Articles →</button>
         </div>
@@ -542,26 +488,15 @@ function KnowledgeHubSection() {
           {(posts.length ? posts : [1, 2, 3, 4].map(i => ({ slug: i, title: "", summary: "", date: "", tag: "Guide", readTime: "" }))).map((post, pi) => (
             post.title ? (
               <a key={post.slug} href={`/knowledge-hub/${post.slug}`}
-                style={{
-                  textDecoration: "none", display: "flex", flexDirection: "column",
-                  background: "#fff", borderRadius: 16, padding: "28px 24px", border: `1px solid ${T.bdr}`,
-                  transition: "transform .2s,box-shadow .2s", cursor: "pointer", fontFamily: HV
-                }}
+                style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#fff", borderRadius: 16, padding: "28px 24px", border: `1px solid ${T.bdr}`, transition: "transform .2s,box-shadow .2s", cursor: "pointer", fontFamily: HV }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,.09)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
-                  <span style={{
-                    fontSize: 10, fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase",
-                    color: TAG_COL[post.tag] || "#888", background: (TAG_COL[post.tag] || "#888") + "18",
-                    padding: "3px 10px", borderRadius: 50, fontFamily: HV
-                  }}>{post.tag}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", color: TAG_COL[post.tag] || "#888", background: (TAG_COL[post.tag] || "#888") + "18", padding: "3px 10px", borderRadius: 50, fontFamily: HV }}>{post.tag}</span>
                   <span style={{ fontSize: 11, color: "#888", fontFamily: HV }}>{post.date}</span>
                 </div>
                 <h3 style={{ fontSize: 17, fontWeight: 700, color: "#000", lineHeight: 1.35, marginBottom: 10, flex: 1, fontFamily: HV }}>{post.title}</h3>
-                {post.summary && <p style={{
-                  fontSize: 13, color: "#555", lineHeight: 1.7, fontWeight: 400, marginBottom: 18,
-                  display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", fontFamily: HV
-                }}>{post.summary}</p>}
+                {post.summary && <p style={{ fontSize: 13, color: "#555", lineHeight: 1.7, fontWeight: 400, marginBottom: 18, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", fontFamily: HV }}>{post.summary}</p>}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: `1px solid ${T.bdr}`, paddingTop: 14, marginTop: "auto" }}>
                   <span style={{ fontSize: 11.5, color: "#888", fontFamily: HV }}>{post.readTime}</span>
                   <span style={{ fontSize: 12.5, fontWeight: 700, color: G, fontFamily: HV }}>Read →</span>
@@ -591,13 +526,8 @@ export default function HomePage() {
     if (!hf.nameTitle.trim() || !hf.email.trim()) { setHStatus("error"); return; }
     setHStatus("submitting");
     try {
-      const parts = hf.nameTitle.trim().split(" ");
-      const ccParts = hf.companyCountry.split(",");
-      await submitToZoho({
-        firstName: parts[0], lastName: parts.slice(1).join(" ") || "-",
-        email: hf.email, mobile: "", company: ccParts[0]?.trim() || hf.companyCountry,
-        country: ccParts.slice(1).join(",").trim() || "", service: hf.service, description: "", source: "Website Hero Form"
-      });
+      const parts = hf.nameTitle.trim().split(" "), ccParts = hf.companyCountry.split(",");
+      await submitToZoho({ firstName: parts[0], lastName: parts.slice(1).join(" ") || "-", email: hf.email, mobile: "", company: ccParts[0]?.trim() || hf.companyCountry, country: ccParts.slice(1).join(",").trim() || "", service: hf.service, description: "", source: "Website Hero Form" });
       setHStatus("success"); trackConsultationRequest("Hero Form");
     } catch { setHStatus("error"); }
   };
@@ -610,74 +540,55 @@ export default function HomePage() {
     { n: "05", title: "Ongoing Compliance", time: "Month 2+", desc: "Monthly retainer: GST, TDS, payroll, MCA filings, annual audit, corporate tax return. One firm, full coverage, fixed fee." },
   ];
 
-  const inp = (extra = {}) => ({
-    width: "100%", padding: "12px 15px", border: `1.5px solid ${T.bdr}`, borderRadius: 7,
-    fontFamily: HV, fontSize: 13.5, color: "#000", background: "#fff", outline: "none",
-    marginBottom: 10, boxSizing: "border-box", transition: "border-color .18s", ...extra,
-  });
+  const inp = (extra = {}) => ({ width: "100%", padding: "12px 15px", border: `1.5px solid ${T.bdr}`, borderRadius: 7, fontFamily: HV, fontSize: 13.5, color: "#000", background: "#fff", outline: "none", marginBottom: 10, boxSizing: "border-box", transition: "border-color .18s", ...extra });
 
   return (
     <div style={{ overflowX: "hidden", width: "100%", fontFamily: HV }}>
-
-      {/* ── GLOBAL STYLES ── */}
       <style>{`
-        *,*::before,*::after { font-family: Helvetica, Arial, sans-serif !important; }
-        @keyframes waveShift {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
+        *,*::before,*::after{font-family:Helvetica,Arial,sans-serif!important;}
+        @keyframes waveShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
         @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;}}
-        @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px!important;}}
-        @media(max-width:420px){.stats-grid{grid-template-columns:1fr!important;}}
-        /* KH grid responsive */
+        @media(max-width:480px){.stats-grid{gap:10px!important;}}
         @media(max-width:900px){.kh-grid{grid-template-columns:repeat(2,1fr)!important;}}
         @media(max-width:600px){.kh-grid{grid-template-columns:1fr!important;}}
-        /* Ind cards responsive */
         @media(max-width:900px){.ind-cards{grid-template-columns:repeat(3,1fr)!important;}}
         @media(max-width:600px){.ind-cards{grid-template-columns:repeat(2,1fr)!important;}}
-        /* Global reach */
+        @media(max-width:380px){.ind-cards{grid-template-columns:1fr!important;}}
+
+        /* Global Reach map — canvas covers full container */
         .gr-wrap{background:#fff;border-radius:24px;box-shadow:0 2px 40px rgba(0,0,0,.06);border:1px solid #ECE7E1;display:grid;grid-template-columns:38% 62%;align-items:stretch;overflow:hidden;}
-        .gr-left{padding:36px 32px;border-right:1px solid #ECE7E1;display:flex;flex-direction:column;gap:18px;height:fit-content;}
-        .gr-map{position:relative;overflow:hidden;padding:20px;}
-        .gr-map-img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;filter:saturate(0.18) brightness(1.08) sepia(0.06);opacity:0.75;}
-        .gr-map canvas{position:absolute!important;inset:20px!important;width:calc(100% - 40px)!important;height:calc(100% - 40px)!important;pointer-events:none;}
-        @media(max-width:1024px){.gr-wrap{grid-template-columns:1fr;}.gr-left{border-right:none!important;border-bottom:1px solid #ECE7E1;}.gr-map{height:320px;}}
-        @media(max-width:640px){.gr-section{padding:0 16px 48px!important;}.gr-wrap{border-radius:16px;}.gr-left{padding:24px 18px!important;}.gr-map{height:240px;}.gr-btns{flex-direction:column!important;}}
-        @media(max-width:480px){.gr-map{height:200px;padding:12px;}.gr-map-img{inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);}.gr-map canvas{inset:12px!important;width:calc(100% - 24px)!important;height:calc(100% - 24px)!important;}.gr-left{gap:14px!important;}}
-        /* Pricing — non-featured buttons green */
+        .gr-left{padding:36px 32px;border-right:1px solid #ECE7E1;display:flex;flex-direction:column;gap:18px;}
+        .gr-map{position:relative;overflow:hidden;min-height:420px;}
+        .gr-map-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;filter:saturate(0.18) brightness(1.08) sepia(0.06);opacity:0.75;}
+        .gr-map canvas{position:absolute!important;top:0!important;left:0!important;width:100%!important;height:100%!important;pointer-events:none;}
+        @media(max-width:1024px){.gr-wrap{grid-template-columns:1fr!important;}.gr-left{border-right:none!important;border-bottom:1px solid #ECE7E1;}.gr-map{min-height:340px;}}
+        @media(max-width:640px){.gr-section{padding:0 16px 48px!important;}.gr-wrap{border-radius:16px;}.gr-left{padding:20px 16px!important;gap:14px!important;}.gr-map{min-height:240px;}.gr-btns{flex-direction:column!important;}}
+        @media(max-width:420px){.gr-map{min-height:190px;}}
+
         .pricing-card:not(.pricing-featured) .pricing-cta-btn{background:#0B3D2E!important;color:#fff!important;border-color:#0B3D2E!important;}
         .pricing-card:not(.pricing-featured) .pricing-cta-btn:hover{background:#145c42!important;border-color:#145c42!important;}
-        /* Process grid responsive */
+
         @media(max-width:900px){.process-grid{grid-template-columns:1fr!important;}.process-sticky{position:relative!important;top:0!important;margin-bottom:32px;}}
-        /* Final CTA grid responsive */
-        @media(max-width:900px){.final-cta-grid{grid-template-columns:1fr!important;}}
-        /* Quote callout ("Talk to Our Expert Team") responsive */
-        @media(max-width:768px){
-          .quote-callout-sec{padding:0 16px 48px!important;}
-          .quote-callout-grid{grid-template-columns:1fr!important;padding:28px 24px!important;gap:20px!important;text-align:center;}
-          .quote-callout-grid button{width:100%;justify-content:center;}
-        }
-        /* DTAA / Tax Advantage section responsive */
-        @media(max-width:768px){
-          .dtaa-sec{padding:0 16px 48px!important;}
-          .dtaa-grid{grid-template-columns:1fr!important;padding:28px 24px!important;gap:20px!important;}
-          .dtaa-grid > div:last-child{flex-direction:row!important;flex-wrap:wrap;}
-          .dtaa-grid > div:last-child button{flex:1 1 auto;}
-        }
-        @media(max-width:480px){
-          .dtaa-grid > div:last-child{flex-direction:column!important;}
-          .dtaa-grid > div:last-child button{width:100%;}
-        }
+        @media(max-width:768px){.process-section{padding:40px 20px!important;}}
+
+        @media(max-width:900px){.final-cta-grid{grid-template-columns:1fr!important;gap:40px!important;}}
+        @media(max-width:768px){.final-cta-section{padding:48px 16px!important;}}
+
+        @media(max-width:768px){.quote-callout-sec{padding:0 16px 48px!important;}.quote-callout-grid{grid-template-columns:1fr!important;padding:28px 24px!important;gap:20px!important;text-align:center;}.quote-callout-grid button{width:100%;justify-content:center;}}
+
+        @media(max-width:768px){.dtaa-sec{padding:0 16px 48px!important;}.dtaa-grid{grid-template-columns:1fr!important;padding:28px 24px!important;gap:20px!important;}.dtaa-grid>div:last-child{flex-direction:row!important;flex-wrap:wrap;}.dtaa-grid>div:last-child button{flex:1 1 auto;}}
+        @media(max-width:480px){.dtaa-grid>div:last-child{flex-direction:column!important;}.dtaa-grid>div:last-child button{width:100%;}}
+
+        @media(max-width:768px){.ind-section{padding:32px 16px 60px!important;}}
+        @media(max-width:768px){.why-section{padding:40px 16px!important;}}
       `}</style>
 
-      {/* ── HERO ── */}
       <NewHeroSection T={T} ROUTES={ROUTES} />
 
-      {/* ── LOGO MARQUEE ── */}
+      {/* LOGO MARQUEE */}
       <section style={{ padding: "44px 0", background: "#fff" }}>
-        <div style={{ textAlign: "center", marginBottom: 28 }}>
-          {/* Same heading style — green + gold */}
+        <div style={{ textAlign: "center", marginBottom: 28, padding: "0 16px" }}>
           <h2 style={{ fontSize: HS, fontWeight: 700, fontFamily: HV, margin: 0 }}>
             <span style={{ color: G }}>Trusted by</span>{" "}
             <em style={{ color: GOLD, fontStyle: "italic" }}>100+ companies worldwide</em>
@@ -687,85 +598,57 @@ export default function HomePage() {
         <div style={{ position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "8%", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,#fff,transparent)" }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "8%", zIndex: 2, pointerEvents: "none", background: "linear-gradient(270deg,#fff,transparent)" }} />
-
-          {/* Row 1: Scrolls Left */}
           <div className="logo-row-left" style={{ display: "flex", width: "max-content", alignItems: "center" }}>
             {[...Array(2)].map((_, di) => (
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                {["Protiviti India", "Mahindra Defence Systems", "Saregama India", "Ethos Limited",
-                  "Polyplex Corporation Limited (Listed)", "Tube Investment of India",
-                  "Vibracoustic India Private Limited", "Newtech Filter (BOSCH group Company)",
-                  "Godrej, UAE entities", "Ognibene power", "Cloud EQ"].map(name => (
-                    <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
-                      <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name}
-                        style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} />
-                    </div>
-                  ))}
+                {["Protiviti India", "Mahindra Defence Systems", "Saregama India", "Ethos Limited", "Polyplex Corporation Limited (Listed)", "Tube Investment of India", "Vibracoustic India Private Limited", "Newtech Filter (BOSCH group Company)", "Godrej, UAE entities", "Ognibene power", "Cloud EQ"].map(name => (
+                  <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
+                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-
-          {/* Row 2: Scrolls Right */}
           <div className="logo-row-right" style={{ display: "flex", width: "max-content", alignItems: "center", marginTop: 8 }}>
             {[...Array(2)].map((_, di) => (
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                {["Defacto Infotech India, AU, US", "CrimsonInsights", "Alleshealth", "Foodjam",
-                  "Grid advertising", "Talink", "Mcube capital", "SML Mahindra Limited",
-                  "Cheema Boilers Limited", "AWFIS India Private Limited", "Skin elements",
-                  "Vyra Life (Modebencura)"].map(name => (
-                    <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
-                      <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name}
-                        style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} />
-                    </div>
-                  ))}
+                {["Defacto Infotech India, AU, US", "CrimsonInsights", "Alleshealth", "Foodjam", "Grid advertising", "Talink", "Mcube capital", "SML Mahindra Limited", "Cheema Boilers Limited", "AWFIS India Private Limited", "Skin elements", "Vyra Life (Modebencura)"].map(name => (
+                  <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
+                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── STATS ── */}
       <StatsRibbon />
-
-      {/* ── AUDIENCE PATHS ── */}
       <AudiencePathsSection />
-      {/* WhatWeDoSection — bg white, card numbers black, wave gradient cards */}
       <WhatWeDoSection T={T} ROUTES={ROUTES} />
       <ClientOutcomes />
 
+      {/* QUOTE CALLOUT */}
       <section className="quote-callout-sec" style={{ padding: "0 56px 60px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <div className="quote-callout-grid" style={{
-            position: "relative", overflow: "hidden",
-            backgroundImage: "url('/banners and logos/2.png')",
-            backgroundSize: "cover", backgroundPosition: "center",
-            borderRadius: 18, padding: "38px 44px",
-            display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center"
-          }}>
+          <div className="quote-callout-grid" style={{ position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center", borderRadius: 18, padding: "38px 44px", display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center" }}>
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", borderRadius: 18 }} />
             <div style={{ position: "relative", zIndex: 1 }}>
-              <p style={{ fontSize: 19, color: "#ffffffff", lineHeight: 1.65, fontWeight: 400, fontFamily: HV, fontStyle: "italic", margin: 0 }}>
-                "Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."
-              </p>
-              <p style={{ fontSize: 12.5, color: "#fffbfbff", margin: "12px 0 0", fontFamily: HV }}>
-                Pankaj Gupta – FCA, LLB and Diploma in International Taxation
-              </p>
+              <p style={{ fontSize: 19, color: "#fff", lineHeight: 1.65, fontWeight: 400, fontFamily: HV, fontStyle: "italic", margin: 0 }}>"Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."</p>
+              <p style={{ fontSize: 12.5, color: "rgba(255,251,251,0.9)", margin: "12px 0 0", fontFamily: HV }}>Pankaj Gupta – FCA, LLB and Diploma in International Taxation</p>
             </div>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" style={{ flexShrink: 0, position: "relative", zIndex: 1 }}
-              onClick={() => { window.location.href = ROUTES.contact; }}>Talk to Our Expert Team →</button>
+            <button className="ics-btn ics-btn-primary ics-btn-lg" style={{ flexShrink: 0, position: "relative", zIndex: 1 }} onClick={() => { window.location.href = ROUTES.contact; }}>Talk to Our Expert Team →</button>
           </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section id="how-it-works" style={{ padding: "48px 56px", background: "#fff" }}>
+      {/* HOW IT WORKS */}
+      <section className="process-section" id="how-it-works" style={{ padding: "48px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 72, alignItems: "start" }}>
             <div className="process-sticky" style={{ position: "sticky", top: 100 }}>
               <SH eyebrow="The Process" green="What happens after" gold="you contact us." center={false} mb={18} />
-              <p style={{ fontSize: 15, color: "#444", lineHeight: 1.82, fontWeight: 400, marginBottom: 28, fontFamily: HV }}>
-                No black box. You know exactly what we're doing, when, and why. Most companies are operational within 30 days of first contact.
-              </p>
+              <p style={{ fontSize: 15, color: "#444", lineHeight: 1.82, fontWeight: 400, marginBottom: 28, fontFamily: HV }}>No black box. You know exactly what we're doing, when, and why. Most companies are operational within 30 days of first contact.</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Free 30-min strategy call", "No retainer to start", "One point of contact", "Fixed, transparent fees"].map(item => (
                   <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -782,11 +665,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── PRICING ── note: bg white enforced via global styles below */}
       <PricingTabsSection T={T} ROUTES={ROUTES} />
 
-      {/* ── INDUSTRIES ── */}
-      <section style={{ padding: "40px 64px 80px", background: "#fff" }}>
+      {/* INDUSTRIES */}
+      <section className="ind-section" style={{ padding: "40px 40px 80px", background: "#fff" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <SH eyebrow="Industries We Serve" green="Sectors we know" gold="deeply." mb={40} />
           <div className="ind-cards" style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16 }}>
@@ -798,27 +680,22 @@ export default function HomePage() {
               { img: "/banners and logos/Health and Pharma.png", name: "Healthcare\n& Pharma", proof: "10+ companies", detail: "Research, devices" },
               { img: "/banners and logos/E commerce.png", name: "E-commerce\n& Retail", proof: "10+ companies", detail: "D2C, marketplace" },
             ].map(({ img, name, proof, detail }) => (
-              <div key={name} style={{
-                background: "#fff", borderRadius: 22, padding: "36px 24px 32px", border: "1px solid #ECE7E1",
-                textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center",
-                boxShadow: "0 12px 35px rgba(0,0,0,.05)", transition: "transform .22s ease,box-shadow .22s ease",
-                cursor: "default", minHeight: 260
-              }}
+              <div key={name} style={{ background: "#fff", borderRadius: 22, padding: "32px 20px 28px", border: "1px solid #ECE7E1", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", boxShadow: "0 12px 35px rgba(0,0,0,.05)", transition: "transform .22s ease,box-shadow .22s ease", cursor: "default", minHeight: 240 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 24px 56px rgba(0,0,0,.10)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 12px 35px rgba(0,0,0,.05)"; }}>
-                <div style={{ marginBottom: 24, height: 56, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img src={img} alt={name} style={{ maxHeight: "100%", maxWidth: 80, objectFit: "contain" }} />
+                <div style={{ marginBottom: 20, height: 52, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img src={img} alt={name} style={{ maxHeight: "100%", maxWidth: 72, objectFit: "contain" }} />
                 </div>
-                <div style={{ fontSize: 13.5, fontWeight: 700, color: "#000", lineHeight: 1.4, marginBottom: 8, whiteSpace: "pre-line", fontFamily: HV }}>{name}</div>
-                <div style={{ fontSize: 12, color: G, fontWeight: 700, marginBottom: 6, fontFamily: HV }}>{proof}</div>
-                <div style={{ fontSize: 11.5, color: "#555", lineHeight: 1.6, fontFamily: HV }}>{detail}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#000", lineHeight: 1.4, marginBottom: 6, whiteSpace: "pre-line", fontFamily: HV }}>{name}</div>
+                <div style={{ fontSize: 12, color: G, fontWeight: 700, marginBottom: 4, fontFamily: HV }}>{proof}</div>
+                <div style={{ fontSize: 11, color: "#555", lineHeight: 1.5, fontFamily: HV }}>{detail}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── GLOBAL REACH ── */}
+      {/* GLOBAL REACH */}
       <section className="gr-section" style={{ padding: "0 40px 72px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <div className="gr-wrap">
@@ -831,51 +708,20 @@ export default function HomePage() {
                   { img: "/banners and logos/Markets operate.png", num: "10+", label: "Markets Operate" },
                   { img: "/banners and logos/Client Satisfaction (2).png", num: "98%", label: "Client Satisfaction" },
                 ].map(({ img, num, label }, i) => (
-                  <div key={label} style={{
-                    padding: "16px 12px", textAlign: "center",
-                    borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none",
-                    borderTop: i >= 2 ? "1px solid #ECE7E1" : "none",
-                    display: "flex", flexDirection: "column", alignItems: "center", gap: 5
-                  }}>
+                  <div key={label} style={{ padding: "16px 12px", textAlign: "center", borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none", borderTop: i >= 2 ? "1px solid #ECE7E1" : "none", display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
                     <img src={img} alt={label} style={{ width: 38, height: 38, objectFit: "contain" }} />
                     <div style={{ fontSize: 26, color: "#000", lineHeight: 1, fontWeight: 700, fontFamily: HV }}>{num}</div>
                     <div style={{ fontSize: 11, color: "#555", lineHeight: 1.35, fontFamily: HV }}>{label}</div>
                   </div>
                 ))}
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 14px", marginTop: 8, marginBottom: 8 }}>
-                {[
-                  { code: "us", label: "USA" },
-                  { code: "ca", label: "Canada" },
-                  { code: "gb", label: "United Kingdom" },
-                  { code: "eu", label: "Europe" },
-                  { code: "ae", label: "UAE" },
-                  { code: "sg", label: "Singapore" },
-                  { code: "au", label: "Australia" },
-                  { code: "nz", label: "New Zealand" }
-                ].map(p => (
-                  <img
-                    key={p.code}
-                    src={`https://flagcdn.com/w40/${p.code}.png`}
-                    srcSet={`https://flagcdn.com/w80/${p.code}.png 2x`}
-                    alt={p.label}
-                    title={p.label}
-                    width={26}
-                    height={19}
-                    style={{
-                      borderRadius: 3,
-                      objectFit: "cover",
-                      boxShadow: "0 0 0 1px rgba(0,0,0,0.08)",
-                      display: "block",
-                      flexShrink: 0,
-                    }}
-                    loading="lazy"
-                  />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 14px" }}>
+                {[{ code: "us", label: "USA" }, { code: "ca", label: "Canada" }, { code: "gb", label: "United Kingdom" }, { code: "eu", label: "Europe" }, { code: "ae", label: "UAE" }, { code: "sg", label: "Singapore" }, { code: "au", label: "Australia" }, { code: "nz", label: "New Zealand" }].map(p => (
+                  <img key={p.code} src={`https://flagcdn.com/w40/${p.code}.png`} srcSet={`https://flagcdn.com/w80/${p.code}.png 2x`} alt={p.label} title={p.label} width={26} height={19} style={{ borderRadius: 3, objectFit: "cover", boxShadow: "0 0 0 1px rgba(0,0,0,0.08)", display: "block", flexShrink: 0 }} loading="lazy" />
                 ))}
               </div>
               <div className="gr-btns" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <button className="ics-btn ics-btn-primary" onClick={() => { window.location.href = ROUTES.contact; }}>Explore Global Presence →</button>
-                {/* <button className="ics-btn ics-btn-outline" onClick={() => { window.location.href = ROUTES.hub; }}>View Success Stories</button> */}
               </div>
             </div>
             <div className="gr-map">
@@ -886,24 +732,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── DTAA ── */}
+      {/* DTAA */}
       <section className="dtaa-sec" style={{ padding: "0 56px 60px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <div style={{
-            position: "relative", borderRadius: 20, overflow: "hidden",
-            backgroundImage: "url('/banners and logos/Home pg medium size banner.png')",
-            backgroundSize: "cover", backgroundPosition: "center"
-          }}>
+          <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", backgroundImage: "url('/banners and logos/Home pg medium size banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
             <div className="dtaa-grid" style={{ position: "relative", zIndex: 1, padding: "40px 48px", display: "grid", gridTemplateColumns: "1fr auto", gap: 28, alignItems: "center" }}>
               <div>
                 <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: GOLD, fontWeight: 600, marginBottom: 10, fontFamily: HV }}>Tax Advantage</div>
-                <div style={{ fontSize: "clamp(18px,2vw,22px)", fontWeight: 700, color: "#fff", lineHeight: 1.3, fontFamily: HV }}>
-                  India's DTAA network covers 90+ countries — most companies we onboard are overpaying.
-                </div>
-                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.78)", marginTop: 10, lineHeight: 1.65, fontFamily: HV }}>
-                  Proper treaty planning reduces withholding tax on dividends, royalties, and fees. We identify the savings before you commit to a structure.
-                </p>
+                <div style={{ fontSize: "clamp(18px,2vw,22px)", fontWeight: 700, color: "#fff", lineHeight: 1.3, fontFamily: HV }}>India's DTAA network covers 90+ countries — most companies we onboard are overpaying.</div>
+                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.78)", marginTop: 10, lineHeight: 1.65, fontFamily: HV }}>Proper treaty planning reduces withholding tax on dividends, royalties, and fees. We identify the savings before you commit to a structure.</p>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
                 <button className="ics-btn ics-btn-primary" onClick={() => { window.location.href = ROUTES.tax; }}>International Tax →</button>
@@ -914,8 +752,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHY US ── */}
-      <section style={{ padding: "48px 56px", background: "#fff" }}>
+      {/* WHY US */}
+      <section className="why-section" style={{ padding: "48px 56px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
           <SH eyebrow="Why Us" green="Compared honestly," gold="not just favourably." mb={52} />
           <div style={{ overflowX: "auto", paddingBottom: 20 }}>
@@ -964,16 +802,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── KNOWLEDGE HUB ── */}
       <KnowledgeHubSection />
 
-      {/* ── PGA ── */}
-      <section style={{ padding: "70px 56px", position: "relative", backgroundImage: "url('/banners and logos/Knowledge partner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* PGA */}
+      <section style={{ padding: "70px 20px", position: "relative", backgroundImage: "url('/banners and logos/Knowledge partner-2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.72)" }} />
         <div style={{ maxWidth: 1360, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 16 }}>
             <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase", color: "rgba(255,255,255,.55)", fontFamily: HV }}>Knowledge Partner</div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: HV }}>PGA &amp; Co. Chartered Accountants, Chandigarh</div>
+            <div style={{ fontSize: "clamp(18px,3vw,22px)", fontWeight: 700, color: "#fff", fontFamily: HV }}>PGA &amp; Co. Chartered Accountants, Chandigarh</div>
             <div style={{ fontSize: 14, color: "rgba(255,255,255,.8)", fontFamily: HV }}>GST advisory · NRI/HNI tax · Domestic audit &amp; assurance · Transfer pricing</div>
             <a href="https://pgaca.in" target="_blank" rel="noopener noreferrer"
               style={{ display: "inline-block", marginTop: 10, background: "transparent", color: GOLD, border: `1.5px solid ${GOLD}`, borderRadius: 8, fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", padding: "12px 28px", textDecoration: "none", fontFamily: HV }}
@@ -985,15 +822,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
-      <section id="final-cta" style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(100deg, rgba(0,0,0,0.85) 4%, rgba(0,0,0,0.68) 42%, rgba(0,0,0,0.45) 78%)" }} />
+      {/* FINAL CTA */}
+      <section className="final-cta-section" id="final-cta" style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(100deg,rgba(0,0,0,0.85) 4%,rgba(0,0,0,0.68) 42%,rgba(0,0,0,0.45) 78%)" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", display: "grid", gridTemplateColumns: "1fr 420px", gap: 64, alignItems: "center" }} className="final-cta-grid">
           <div>
             <div style={{ fontSize: 11, letterSpacing: 2.5, textTransform: "uppercase", color: GOLD, fontWeight: 700, marginBottom: 18, fontFamily: HV }}>Get Started</div>
-            <h2 style={{ fontSize: "clamp(36px,4.5vw,56px)", fontWeight: 700, color: "#fff", lineHeight: 1.05, marginBottom: 22, fontFamily: HV }}>
-              Ready to enter India<br />
-              <em style={{ fontStyle: "italic", color: GOLD, fontWeight: 500 }}>the right way?</em>
+            <h2 style={{ fontSize: "clamp(30px,4.5vw,56px)", fontWeight: 700, color: "#fff", lineHeight: 1.05, marginBottom: 22, fontFamily: HV }}>
+              Ready to enter India<br /><em style={{ fontStyle: "italic", color: GOLD, fontWeight: 500 }}>the right way?</em>
             </h2>
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.78)", lineHeight: 1.75, fontWeight: 400, marginBottom: 36, maxWidth: 460, fontFamily: HV }}>
               Book a free 30-minute consultation. We'll review your India objectives and give you a clear structure recommendation — no commitment, no jargon.
@@ -1011,8 +847,7 @@ export default function HomePage() {
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
               {["No retainer to start", "Expert team responds within 24 hrs", "Fixed transparent fees"].map(t => (
                 <span key={t} style={{ fontSize: 13, color: "rgba(255,255,255,0.85)", fontWeight: 500, display: "flex", alignItems: "center", gap: 8, fontFamily: HV }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                  {t}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>{t}
                 </span>
               ))}
             </div>
@@ -1115,7 +950,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
