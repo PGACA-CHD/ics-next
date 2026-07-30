@@ -152,7 +152,7 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
           font-family: ${FONT_UI};
           font-size: 13px;
           font-weight: 500;
-          color: #000000;
+          color: #fff;
           text-decoration: underline;
           text-underline-offset: 3px;
           transition: color 0.2s ease;
@@ -207,10 +207,10 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         .nhero-trust-item:first-child { padding-left:0; }
         .nhero-trust-item:last-child { border-right:none; padding-right:0; }
         .nhero-trust-label {
-           font-family:${FONT_UI}; font-size:9px; color:#000000;
+           font-family:${FONT_UI}; font-size:9px; color:rgba(255,255,255,.6);
            letter-spacing:1.2px; text-transform:uppercase; margin-bottom:4px;
          }
-        .nhero-trust-value { font-family:${FONT_UI}; font-size:14px; color:#000000; font-weight:600; }
+        .nhero-trust-value { font-family:${FONT_UI}; font-size:14px; color:#fff; font-weight:600; }
 
         /* ── Live Status tracker ── */
         .nhero-track {
@@ -292,6 +292,9 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
           .nhero-trust { display:grid; grid-template-columns:1fr 1fr; gap:10px 0; padding:14px; }
           .nhero-trust-item { border-right:none; padding:0; }
           .nhero-avatars img { width:32px; height:32px; }
+          .nhero-review-link { color: #000 !important; }
+          .nhero-trust-label { color: #000 !important; }
+          .nhero-trust-value { color: #000 !important; }
         }
       `}} />
 
