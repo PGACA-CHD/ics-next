@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { T } from '@/lib/config';
 import { HSN_HEADINGS } from './hsn-data';
 
+const helvetica = { fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" };
+
 // ─── STATIC DATA ─────────────────────────────────────────────────────────────
 
 const HSN_CHAPTERS = [
@@ -145,23 +147,20 @@ const SAC_CODES = [
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export default function Page() {
-  const [mode, setMode] = useState('hsn');      // hsn | sac
-  const [view, setView] = useState('search');   // search | browse
+  const [mode, setMode] = useState('hsn');
+  const [view, setView] = useState('search');
   const [q, setQ] = useState('');
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(false);
   const debounceRef = useRef(null);
 
-  // Browse mode filters
   const lq = q.trim().toLowerCase();
 
-  // HSN: search through 4/6-digit headings; fall back to chapters if no match
   const hsnHeadingFilter = lq
     ? HSN_HEADINGS.filter(c => c.code.startsWith(q.trim()) || c.desc.toLowerCase().includes(lq))
     : HSN_HEADINGS;
 
-  // Chapter-level (2-digit) browse used as an overview/index when no filter
   const chapterFilter = lq
     ? HSN_CHAPTERS.filter(c => c.ch.startsWith(q.trim()) || c.desc.toLowerCase().includes(lq))
     : HSN_CHAPTERS;
@@ -170,13 +169,12 @@ export default function Page() {
     ? SAC_CODES.filter(c => c.code.startsWith(q.trim()) || c.desc.toLowerCase().includes(lq))
     : SAC_CODES;
 
-  // Code level badge helper
   const codeLevelBadge = (code) => {
     const len = code.replace(/\s/g, '').length;
     const label = len <= 2 ? 'Chapter' : len <= 4 ? 'Heading' : 'Subheading';
     const bg = len <= 2 ? '#E8EAF0' : len <= 4 ? '#E4F0EB' : '#FDE8CC';
     const color = len <= 2 ? '#3A4066' : len <= 4 ? T.f : '#8B4F00';
-    return <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 10, background: bg, color, marginLeft: 6, whiteSpace: 'nowrap' }}>{label}</span>;
+    return <span style={{ ...helvetica, fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 10, background: bg, color, marginLeft: 6, whiteSpace: 'nowrap' }}>{label}</span>;
   };
 
   async function doSearch(query, type) {
@@ -205,44 +203,45 @@ export default function Page() {
     return () => clearTimeout(debounceRef.current);
   }, [q, mode, view]);
 
-  const inputStyle = { width: '100%', padding: '12px 14px 12px 42px', fontSize: 15, border: `1.5px solid ${T.bdr}`, borderRadius: 10, background: '#fff', color: T.ch, fontFamily: 'inherit' };
-  const thStyle = { padding: '11px 16px', fontSize: 11.5, fontWeight: 700, color: T.lt, textAlign: 'left', letterSpacing: 0.8, textTransform: 'uppercase', borderBottom: `2px solid ${T.bdr}`, background: T.stone };
-  const tdStyle = { padding: '11px 16px', fontSize: 13, color: T.ink, verticalAlign: 'top', borderBottom: `1px solid ${T.bdr}` };
+  const inputStyle = { ...helvetica, width: '100%', padding: '12px 14px 12px 42px', fontSize: 15, border: `1.5px solid ${T.bdr}`, borderRadius: 10, background: '#fff', color: T.ch };
+  const thStyle = { ...helvetica, padding: '11px 16px', fontSize: 11.5, fontWeight: 700, color: T.lt, textAlign: 'left', letterSpacing: 0.8, textTransform: 'uppercase', borderBottom: `2px solid ${T.bdr}`, background: '#fff' };
+  const tdStyle = { ...helvetica, padding: '11px 16px', fontSize: 13, color: T.ink, verticalAlign: 'top', borderBottom: `1px solid ${T.bdr}` };
 
   return (
-    <div>
-      {/* HERO */}
+    <div style={helvetica}>
+      {/* HERO — unchanged */}
       <section style={{ backgroundImage: "url('/banners and logos/GST (1).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <Link href="/tools" style={{ fontSize: 12.5, color: '#444', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
-          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#111', fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(0,0,0,.15)', borderRadius: 20 }}>
+          <Link href="/tools" style={{ ...helvetica, fontSize: 12.5, color: '#444', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
+          <div style={{ ...helvetica, display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#111', fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(0,0,0,.15)', borderRadius: 20 }}>
             GST · CBIC Data
           </div>
-          <h1 className="font-display" style={{ fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#111', lineHeight: 1.08, marginBottom: 14 }}>
+          <h1 className="font-display" style={{ ...helvetica, fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#111', lineHeight: 1.08, marginBottom: 14 }}>
             HSN / SAC Code Finder
           </h1>
-          <p style={{ fontSize: 15, color: '#333', lineHeight: 1.7, maxWidth: 680 }}>
+          <p style={{ ...helvetica, fontSize: 15, color: '#333', lineHeight: 1.7, maxWidth: 680 }}>
             Find the correct HSN code for goods or SAC code for services. Search by description or code — results include <strong style={{ color: '#111' }}>4-digit headings and 6-digit subheadings</strong> across all 99 chapters. For 8-digit codes, live CBIC search is available.
           </p>
         </div>
       </section>
 
+      {/* INTRO — white bg */}
       <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
             <div>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
                 Every GST invoice in India must carry either an HSN (Harmonised System of Nomenclature) code for goods or a SAC (Services Accounting Code) for services. The CBIC mandates HSN code usage based on annual turnover: businesses with turnover above ₹5 crore must use 8-digit HSN codes, those with ₹1.5–5 crore turnover must use 6-digit codes, and those below ₹1.5 crore must use 4-digit codes. Using an incorrect HSN or SAC code on an invoice can lead to mismatches in GST returns, disputes during audits, and denial of input tax credit to the recipient.
               </p>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
                 The HSN system is an internationally standardised commodity classification framework developed by the World Customs Organisation, adopted by over 200 countries. In India, the GST Council has mapped all goods to their respective HSN codes and assigned applicable GST rates — 0%, 5%, 12%, 18%, or 28% — at the 4-digit, 6-digit, and 8-digit levels. The same good may carry different GST rates depending on its specific 8-digit classification, so selecting the most precise code available for your product is important for correct tax computation.
               </p>
             </div>
             <div>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
                 SAC codes, by contrast, are India-specific and always begin with "99". They classify services into categories such as IT services (998), legal services (9982), construction (9954), health (9993), and education (9992), among others. Unlike HSN codes, SAC codes use a 6-digit structure. Every service supplied under GST must be classified under an SAC code, and the applicable GST rate depends on the specific SAC category — for example, most IT and software services attract 18% GST, while certain health and education services may be exempt.
               </p>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
                 This HSN/SAC finder lets you search by description or code number across all 99 HSN chapters (4-digit headings and 6-digit subheadings) and major SAC categories. Results include the applicable GST rate where standardised. For 8-digit HSN codes with product-specific rates, the tool links directly to the official CBIC search portal. Switch between HSN and SAC modes using the tab selector above the search. Built using CBIC classification data by our Ex-Big 4 CA team.
               </p>
             </div>
@@ -250,16 +249,16 @@ export default function Page() {
         </div>
       </section>
 
-      {/* MAIN */}
-      <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
+      {/* MAIN — white bg */}
+      <section style={{ background: '#fff', padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
 
           {/* Type selector */}
-          <div style={{ display: 'flex', gap: 0, marginBottom: 24, background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: 6, width: 'fit-content' }}>
+          <div style={{ display: 'flex', gap: 0, marginBottom: 24, background: '#f5f5f5', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: 6, width: 'fit-content' }}>
             {[['hsn', '📦 HSN Codes (Goods)'], ['sac', '🛠️ SAC Codes (Services)']].map(([v, l]) => (
               <button key={v} onClick={() => { setMode(v); setResults(null); setQ(''); }}
                 style={{
-                  padding: '9px 22px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
+                  ...helvetica, padding: '9px 22px', fontSize: 13.5, fontWeight: 600, borderRadius: 8, border: 'none', cursor: 'pointer',
                   background: mode === v ? T.f : 'transparent', color: mode === v ? '#fff' : T.mid, transition: 'all .18s'
                 }}>
                 {l}
@@ -272,7 +271,8 @@ export default function Page() {
             {[['search', '🔍 Live Search'], ['browse', '📂 Browse All']].map(([v, l]) => (
               <button key={v} onClick={() => { setView(v); setResults(null); }}
                 style={{
-                  padding: '7px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8, border: `1.5px solid ${view === v ? T.f : T.bdr}`, cursor: 'pointer',
+                  ...helvetica, padding: '7px 16px', fontSize: 12.5, fontWeight: 600, borderRadius: 8,
+                  border: `1.5px solid ${view === v ? T.f : T.bdr}`, cursor: 'pointer',
                   background: view === v ? '#E4F0EB' : '#fff', color: view === v ? T.f : T.mid
                 }}>
                 {l}
@@ -286,7 +286,7 @@ export default function Page() {
             <input value={q} onChange={e => setQ(e.target.value)}
               placeholder={view === 'search' ? `Search ${mode === 'hsn' ? 'HSN by code or description (e.g. "cotton" or "5201")' : 'SAC by service or code (e.g. "legal" or "9982")'}…` : `Filter ${mode === 'hsn' ? 'chapters' : 'SAC categories'}…`}
               style={inputStyle} />
-            {loading && <span style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 13, color: T.lt }}>Searching…</span>}
+            {loading && <span style={{ ...helvetica, position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', fontSize: 13, color: T.lt }}>Searching…</span>}
           </div>
 
           {/* ── SEARCH MODE ── */}
@@ -294,9 +294,9 @@ export default function Page() {
             <div>
               {apiError && (
                 <div style={{ background: '#FFF3E0', border: '1px solid #FFB74D', borderRadius: 12, padding: '16px 20px', marginBottom: 20 }}>
-                  <div style={{ fontSize: 13.5, fontWeight: 600, color: '#7A4100', marginBottom: 6 }}>⚠️ Live search unavailable</div>
-                  <p style={{ fontSize: 13, color: '#7A4100', margin: 0, lineHeight: 1.6 }}>
-                    Could not connect to the CBIC search API. Please use the <button onClick={() => setView('browse')} style={{ background: 'none', border: 'none', color: '#C84B00', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline', padding: 0, fontSize: 13 }}>Browse All</button> view, or visit the official <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: '#C84B00', fontWeight: 600 }}>GSTN HSN/SAC search portal ↗</a>.
+                  <div style={{ ...helvetica, fontSize: 13.5, fontWeight: 600, color: '#7A4100', marginBottom: 6 }}>⚠️ Live search unavailable</div>
+                  <p style={{ ...helvetica, fontSize: 13, color: '#7A4100', margin: 0, lineHeight: 1.6 }}>
+                    Could not connect to the CBIC search API. Please use the <button onClick={() => setView('browse')} style={{ ...helvetica, background: 'none', border: 'none', color: '#C84B00', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline', padding: 0, fontSize: 13 }}>Browse All</button> view, or visit the official <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: '#C84B00', fontWeight: 600 }}>GSTN HSN/SAC search portal ↗</a>.
                   </p>
                 </div>
               )}
@@ -304,18 +304,18 @@ export default function Page() {
               {!q || q.length < 2 ? (
                 <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '48px 28px', textAlign: 'center' }}>
                   <div style={{ fontSize: 40, marginBottom: 14 }}>🔍</div>
-                  <div style={{ fontSize: 15, color: T.mid }}>Type at least 2 characters to search</div>
-                  <div style={{ fontSize: 13, color: T.lt, marginTop: 8 }}>E.g. "cotton fabric", "0601", "legal services", "9982"</div>
+                  <div style={{ ...helvetica, fontSize: 15, color: T.mid }}>Type at least 2 characters to search</div>
+                  <div style={{ ...helvetica, fontSize: 13, color: T.lt, marginTop: 8 }}>E.g. "cotton fabric", "0601", "legal services", "9982"</div>
                   <div style={{ marginTop: 24 }}>
-                    <button onClick={() => setView('browse')} style={{ padding: '10px 22px', fontSize: 13.5, fontWeight: 600, background: T.stone, color: T.ink, border: `1px solid ${T.bdr}`, borderRadius: 8, cursor: 'pointer' }}>
+                    <button onClick={() => setView('browse')} style={{ ...helvetica, padding: '10px 22px', fontSize: 13.5, fontWeight: 600, background: '#f0f0f0', color: T.ink, border: `1px solid ${T.bdr}`, borderRadius: 8, cursor: 'pointer' }}>
                       Browse all {mode === 'hsn' ? 'HSN chapters' : 'SAC categories'} →
                     </button>
                   </div>
                 </div>
               ) : results && results.length === 0 ? (
                 <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '40px 28px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 15, color: T.mid, marginBottom: 12 }}>No results found for <strong>"{q}"</strong></div>
-                  <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13.5, color: T.f, fontWeight: 600 }}>
+                  <div style={{ ...helvetica, fontSize: 15, color: T.mid, marginBottom: 12 }}>No results found for <strong>"{q}"</strong></div>
+                  <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ ...helvetica, fontSize: 13.5, color: T.f, fontWeight: 600 }}>
                     Try the official CBIC search portal ↗
                   </a>
                 </div>
@@ -332,8 +332,8 @@ export default function Page() {
                     </thead>
                     <tbody>
                       {results.map((r, i) => (
-                        <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                          <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif' }}>{r.code}</td>
+                        <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAFA' }}>
+                          <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14 }}>{r.code}</td>
                           <td style={tdStyle}>{r.desc || r.description}</td>
                           {mode === 'hsn' && <td style={{ ...tdStyle, color: T.mid, fontSize: 12.5 }}>{r.chapter || r.code?.slice(0, 2)}</td>}
                           {r.gst && <td style={{ ...tdStyle, fontWeight: 600, color: T.f }}>{r.gst}</td>}
@@ -346,13 +346,12 @@ export default function Page() {
             </div>
           )}
 
-          {/* ── BROWSE MODE ── */}
+          {/* ── BROWSE MODE — HSN ── */}
           {view === 'browse' && mode === 'hsn' && (
             <div>
               {!lq ? (
-                // No filter — show chapter index as navigation
                 <div>
-                  <div style={{ fontSize: 13, color: T.mid, marginBottom: 16 }}>
+                  <div style={{ ...helvetica, fontSize: 13, color: T.mid, marginBottom: 16 }}>
                     Showing all <strong>99 chapters</strong> (2-digit). Type a keyword, description, or code prefix above to browse <strong>4-digit headings</strong> and <strong>6-digit subheadings</strong> (500+ codes available).
                   </div>
                   <div className="comparison-table-wrap" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, overflow: 'hidden' }}>
@@ -365,14 +364,14 @@ export default function Page() {
                       </thead>
                       <tbody>
                         {HSN_CHAPTERS.map((c, i) => (
-                          <tr key={c.ch} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5', cursor: 'pointer' }}
+                          <tr key={c.ch} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAFA', cursor: 'pointer' }}
                             onClick={() => setQ(c.ch)}>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, whiteSpace: 'nowrap' }}>
                               {c.ch}
                               {codeLevelBadge(c.ch)}
                             </td>
                             <td style={{ ...tdStyle, color: T.mid }}>{c.desc}
-                              <span style={{ fontSize: 11.5, color: T.f, marginLeft: 8 }}>→ click to expand</span>
+                              <span style={{ ...helvetica, fontSize: 11.5, color: T.f, marginLeft: 8 }}>→ click to expand</span>
                             </td>
                           </tr>
                         ))}
@@ -381,9 +380,8 @@ export default function Page() {
                   </div>
                 </div>
               ) : hsnHeadingFilter.length > 0 ? (
-                // Filtered — show 4/6-digit headings
                 <div>
-                  <div style={{ fontSize: 13, color: T.mid, marginBottom: 16 }}>
+                  <div style={{ ...helvetica, fontSize: 13, color: T.mid, marginBottom: 16 }}>
                     <strong>{hsnHeadingFilter.length}</strong> code{hsnHeadingFilter.length !== 1 ? 's' : ''} matching <em>"{q}"</em> — showing 4-digit headings and 6-digit subheadings.
                     {hsnHeadingFilter.length === 0 && <> No matches. Try the <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: T.f, fontWeight: 600 }}>CBIC portal ↗</a> for full 8-digit codes.</>}
                   </div>
@@ -398,8 +396,8 @@ export default function Page() {
                       </thead>
                       <tbody>
                         {hsnHeadingFilter.slice(0, 200).map((c, i) => (
-                          <tr key={`${c.code}-${i}`} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'nowrap' }}>
+                          <tr key={`${c.code}-${i}`} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAFA' }}>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, whiteSpace: 'nowrap' }}>
                               {c.code}
                               {codeLevelBadge(c.code)}
                             </td>
@@ -418,16 +416,17 @@ export default function Page() {
                 </div>
               ) : (
                 <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '36px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 14, color: T.mid, marginBottom: 10 }}>No codes found for <strong>"{q}"</strong></div>
-                  <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13.5, color: T.f, fontWeight: 600 }}>Search the CBIC portal for 8-digit codes ↗</a>
+                  <div style={{ ...helvetica, fontSize: 14, color: T.mid, marginBottom: 10 }}>No codes found for <strong>"{q}"</strong></div>
+                  <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ ...helvetica, fontSize: 13.5, color: T.f, fontWeight: 600 }}>Search the CBIC portal for 8-digit codes ↗</a>
                 </div>
               )}
             </div>
           )}
 
+          {/* ── BROWSE MODE — SAC ── */}
           {view === 'browse' && mode === 'sac' && (
             <div>
-              <div style={{ fontSize: 13, color: T.mid, marginBottom: 16 }}>Showing {sacFilter.length} major SAC categories. For detailed 6-digit SAC codes, use the Search tab or visit the <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: T.f, fontWeight: 600 }}>official CBIC portal ↗</a>.</div>
+              <div style={{ ...helvetica, fontSize: 13, color: T.mid, marginBottom: 16 }}>Showing {sacFilter.length} major SAC categories. For detailed 6-digit SAC codes, use the Search tab or visit the <a href="https://services.gst.gov.in/services/searchhsnsac" target="_blank" rel="noopener noreferrer" style={{ color: T.f, fontWeight: 600 }}>official CBIC portal ↗</a>.</div>
               <div className="comparison-table-wrap" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, overflow: 'hidden' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 560 }}>
                   <thead>
@@ -439,8 +438,8 @@ export default function Page() {
                   </thead>
                   <tbody>
                     {sacFilter.map((c, i) => (
-                      <tr key={c.code} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF5' }}>
-                        <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14, fontFamily: 'Helvetica, Arial, sans-serif' }}>{c.code}</td>
+                      <tr key={c.code} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAFA' }}>
+                        <td style={{ ...tdStyle, fontWeight: 700, color: T.f, fontSize: 14 }}>{c.code}</td>
                         <td style={tdStyle}>{c.desc}</td>
                         <td style={{ ...tdStyle, fontSize: 12.5, color: T.f, fontWeight: 600 }}>{c.gst}</td>
                       </tr>
@@ -459,8 +458,8 @@ export default function Page() {
               ['Official Source', 'For authoritative and up-to-date HSN/SAC codes including GST rates, visit the CBIC GST portal at services.gst.gov.in. This tool uses CBIC data and a static reference for common codes.'],
             ].map(([title, text]) => (
               <div key={title} style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 20px' }}>
-                <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 7 }}>{title}</div>
-                <p style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.65, margin: 0 }}>{text}</p>
+                <div style={{ ...helvetica, fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 7 }}>{title}</div>
+                <p style={{ ...helvetica, fontSize: 12.5, color: T.mid, lineHeight: 1.65, margin: 0 }}>{text}</p>
               </div>
             ))}
           </div>

@@ -7,6 +7,8 @@ import { FDI_SECTORS } from './fdi-data';
 const CATEGORIES = ['All', 'Manufacturing', 'Services', 'Financial', 'Infrastructure', 'Media & Entertainment', 'Retail & Commerce', 'Agriculture', 'Defence & Space', 'Technology'];
 const ROUTES = ['All', 'Automatic', 'Government', 'Prohibited', 'Mixed'];
 
+const helvetica = { fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" };
+
 function limitColor(limit) {
   if (limit === 0) return '#DC2626';
   if (limit === 100) return '#16A34A';
@@ -25,9 +27,9 @@ function routeBadge(route) {
     Prohibited: { bg: '#FEE2E2', color: '#991B1B' },
     Mixed: { bg: '#FEF3C7', color: '#92400E' },
   };
-  const s = map[route] || { bg: T.stone, color: T.mid };
+  const s = map[route] || { bg: '#f0f0f0', color: T.mid };
   return (
-    <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 12, background: s.bg, color: s.color, whiteSpace: 'nowrap' }}>
+    <span style={{ ...helvetica, fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 12, background: s.bg, color: s.color, whiteSpace: 'nowrap' }}>
       {route}
     </span>
   );
@@ -35,7 +37,7 @@ function routeBadge(route) {
 
 function categoryBadge(cat) {
   return (
-    <span style={{ fontSize: 10.5, fontWeight: 600, padding: '2px 8px', borderRadius: 10, background: '#E9F0ED', color: T.f, whiteSpace: 'nowrap' }}>
+    <span style={{ ...helvetica, fontSize: 10.5, fontWeight: 600, padding: '2px 8px', borderRadius: 10, background: '#E9F0ED', color: T.f, whiteSpace: 'nowrap' }}>
       {cat}
     </span>
   );
@@ -67,18 +69,20 @@ export default function FDISectorChecker() {
   }), []);
 
   const thStyle = {
+    ...helvetica,
     padding: '11px 14px', fontSize: 12, fontWeight: 600, color: T.mid,
     textAlign: 'left', letterSpacing: 0.2, whiteSpace: 'nowrap',
-    borderBottom: `2px solid ${T.bdr}`, background: T.stone,
+    borderBottom: `2px solid ${T.bdr}`, background: '#fff',
   };
   const tdStyle = {
+    ...helvetica,
     padding: '11px 14px', fontSize: 13, color: T.ink,
     verticalAlign: 'top', borderBottom: `1px solid ${T.bdr}`,
   };
 
   return (
-    <div>
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+    <div style={helvetica}>
+      {/* ── HERO — unchanged ─────────────────────────────────────────────── */}
       <section style={{ backgroundImage: "url('/banners and logos/FDI SECTOR LIMIT CHECKER (1).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
@@ -86,20 +90,20 @@ export default function FDISectorChecker() {
           backgroundSize: '64px 64px',
         }} />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>
+          <Link href="/tools" style={{ ...helvetica, fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>
             ← Back to Tools
           </Link>
           <div style={{
-            display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase',
+            ...helvetica, display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase',
             color: T.sl, fontWeight: 600, marginBottom: 16, padding: '4px 12px',
             border: `1px solid rgba(245,168,40,.25)`, borderRadius: 20,
           }}>
             DPIIT Consolidated FDI Policy
           </div>
-          <h1 className="font-display" style={{ fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
+          <h1 className="font-display" style={{ ...helvetica, fontSize: 'clamp(30px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
             FDI Sector Limit Checker
           </h1>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 680 }}>
+          <p style={{ ...helvetica, fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 680 }}>
             Browse all sectors, FDI caps, and route classifications under the DPIIT Consolidated FDI Policy. Filter by category, route, or keyword to find the rules applicable to your investment.
           </p>
 
@@ -112,30 +116,31 @@ export default function FDISectorChecker() {
               { label: 'Mixed', count: stats.mixed, bg: 'rgba(217,119,6,.18)', color: '#FCD34D' },
             ].map(({ label, count, bg, color }) => (
               <div key={label} style={{ background: bg, borderRadius: 10, padding: '10px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 100 }}>
-                <span style={{ fontSize: 24, fontWeight: 700, color, lineHeight: 1 }}>{count}</span>
-                <span style={{ fontSize: 11.5, color: 'rgba(255,255,255,.6)', marginTop: 4 }}>{label} sectors</span>
+                <span style={{ ...helvetica, fontSize: 24, fontWeight: 700, color, lineHeight: 1 }}>{count}</span>
+                <span style={{ ...helvetica, fontSize: 11.5, color: 'rgba(255,255,255,.6)', marginTop: 4 }}>{label} sectors</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ── INTRO — white bg ─────────────────────────────────────────────── */}
       <section style={{ background: '#fff', padding: '48px 40px 56px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
             <div>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
                 Foreign Direct Investment (FDI) in India is governed by the DPIIT Consolidated FDI Policy and the Foreign Exchange Management Act (FEMA). Before investing, foreign entities must determine whether their target sector is open to FDI, the maximum permissible equity limit, and which approval route applies. Getting this wrong can result in regulatory violations, compounding penalties under FEMA, and delays in receiving RBI approval for downstream operations.
               </p>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
                 Most sectors in India are open to 100% FDI under the Automatic Route — meaning no prior government approval is needed, and the investment only needs to be reported to the RBI within 30 days of receipt of funds through the FC-GPR form. However, certain strategically sensitive sectors — including defence, broadcasting, print media, banking (private), and multi-brand retail — require prior approval from the Government of India through the relevant administrative ministry, processed via the Foreign Investment Facilitation Portal (FIFP). A handful of sectors, such as lottery services, gambling, and manufacturing of cigars, are fully prohibited for FDI.
               </p>
             </div>
             <div>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
                 FDI limits are often sector-specific and come with conditions that go beyond just the equity percentage. Defence manufacturing, for instance, permits 74% FDI under the Automatic Route but requires 100% government approval above that threshold. Similarly, single-brand retail allows 100% FDI with conditions on local sourcing. For certain financial services, the applicable limit depends on whether the entity is regulated by SEBI, RBI, IRDAI, or PFRDA. These conditions must be satisfied continuously — not just at the time of initial investment.
               </p>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+              <p style={{ ...helvetica, fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
                 This FDI Sector Limit Checker covers all major sectors from the DPIIT Consolidated FDI Policy, displaying FDI limits, applicable route (Automatic, Government, Prohibited, or Mixed), and key conditions. You can filter by sector category or approval route, and search by keyword. Use this as a first-pass reference before engaging legal counsel for structuring — sector classifications can be nuanced, and specific conditions often require professional interpretation. Built by our Ex-Big 4 CA team.
               </p>
             </div>
@@ -143,8 +148,8 @@ export default function FDISectorChecker() {
         </div>
       </section>
 
-      {/* ── TABLE SECTION ────────────────────────────────────────────────── */}
-      <section style={{ background: T.ivory, padding: '48px 40px 80px' }}>
+      {/* ── TABLE SECTION — white bg ──────────────────────────────────────── */}
+      <section style={{ background: '#fff', padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1300, margin: '0 auto' }}>
 
           {/* Search */}
@@ -155,21 +160,21 @@ export default function FDISectorChecker() {
               onChange={e => setQ(e.target.value)}
               placeholder="Search sector name or keywords…"
               style={{
-                width: '100%', padding: '11px 14px 11px 40px', fontSize: 14,
+                ...helvetica, width: '100%', padding: '11px 14px 11px 40px', fontSize: 14,
                 border: `1.5px solid ${T.bdr}`, borderRadius: 8,
-                background: '#fff', color: T.ch, fontFamily: 'inherit', boxSizing: 'border-box',
+                background: '#fff', color: T.ch, boxSizing: 'border-box',
               }}
             />
           </div>
 
           {/* Category filter */}
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
-            <span style={{ fontSize: 12, color: T.lt, alignSelf: 'center', marginRight: 4, fontWeight: 600 }}>Category:</span>
+            <span style={{ ...helvetica, fontSize: 12, color: T.lt, alignSelf: 'center', marginRight: 4, fontWeight: 600 }}>Category:</span>
             {CATEGORIES.map(c => (
               <button key={c} onClick={() => setCategory(c)} style={{
-                padding: '6px 13px', fontSize: 12, fontWeight: 600, borderRadius: 8,
+                ...helvetica, padding: '6px 13px', fontSize: 12, fontWeight: 600, borderRadius: 8,
                 border: 'none', cursor: 'pointer',
-                background: category === c ? T.f : T.stone,
+                background: category === c ? T.f : '#f0f0f0',
                 color: category === c ? '#fff' : T.mid,
                 transition: 'all .15s',
               }}>{c}</button>
@@ -178,17 +183,17 @@ export default function FDISectorChecker() {
 
           {/* Route filter */}
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 28 }}>
-            <span style={{ fontSize: 12, color: T.lt, alignSelf: 'center', marginRight: 4, fontWeight: 600 }}>Route:</span>
+            <span style={{ ...helvetica, fontSize: 12, color: T.lt, alignSelf: 'center', marginRight: 4, fontWeight: 600 }}>Route:</span>
             {ROUTES.map(r => (
               <button key={r} onClick={() => setRoute(r)} style={{
-                padding: '6px 13px', fontSize: 12, fontWeight: 600, borderRadius: 8,
+                ...helvetica, padding: '6px 13px', fontSize: 12, fontWeight: 600, borderRadius: 8,
                 border: 'none', cursor: 'pointer',
-                background: route === r ? T.s : T.stone,
+                background: route === r ? T.s : '#f0f0f0',
                 color: route === r ? '#fff' : T.mid,
                 transition: 'all .15s',
               }}>{r}</button>
             ))}
-            <span style={{ fontSize: 12, color: T.lt, alignSelf: 'center', marginLeft: 8 }}>
+            <span style={{ ...helvetica, fontSize: 12, color: T.lt, alignSelf: 'center', marginLeft: 8 }}>
               {filtered.length} result{filtered.length !== 1 ? 's' : ''}
             </span>
           </div>
@@ -214,11 +219,11 @@ export default function FDISectorChecker() {
                       </td>
                     </tr>
                   ) : filtered.map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAF8' }}>
+                    <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#FAFAFA' }}>
                       <td style={{ ...tdStyle, fontWeight: 600, color: T.ch }}>
                         {row.sector}
                         {row.subsectors && row.subsectors.length > 0 && (
-                          <div style={{ fontSize: 11, color: T.lt, marginTop: 4, lineHeight: 1.5 }}>
+                          <div style={{ ...helvetica, fontSize: 11, color: T.lt, marginTop: 4, lineHeight: 1.5 }}>
                             {row.subsectors.slice(0, 3).join(' · ')}{row.subsectors.length > 3 ? ` +${row.subsectors.length - 3} more` : ''}
                           </div>
                         )}
@@ -239,7 +244,7 @@ export default function FDISectorChecker() {
           </div>
 
           {/* Disclaimer */}
-          <div style={{ marginTop: 32, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '16px 22px', fontSize: 12.5, color: T.mid, lineHeight: 1.65 }}>
+          <div style={{ ...helvetica, marginTop: 32, background: '#f9f9f9', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '16px 22px', fontSize: 12.5, color: T.mid, lineHeight: 1.65 }}>
             <strong style={{ color: T.ch }}>Disclaimer:</strong> FDI limits and routes shown are based on the DPIIT Consolidated FDI Policy and are subject to change via press notes, circulars, and Finance Act amendments. This table is for general reference only. Always consult the latest DPIIT press notes, RBI Master Directions on Foreign Investment in India, and a qualified legal/CA professional before making any investment decisions.
           </div>
         </div>

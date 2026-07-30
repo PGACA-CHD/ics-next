@@ -312,6 +312,8 @@ export default function Page() {
           border: 1.5px solid rgba(255, 255, 255, 0.5);
           border-radius: 10px;
           overflow: hidden;
+          background: rgba(255, 255, 255, 0.04);
+          backdrop-filter: blur(8px);
         }
         .stat-cell {
           padding: 16px 12px;
@@ -320,8 +322,17 @@ export default function Page() {
         }
         .stat-cell:last-child { border-right: none; }
         @media(max-width:600px){
-          .stats-strip { grid-template-columns: 1fr 1fr; }
-          .stat-cell { padding: 14px 8px; border-right: 1px solid rgba(255, 255, 255, 0.25); border-bottom: 1px solid rgba(255, 255, 255, 0.25); }
+          .stats-strip { 
+            grid-template-columns: 1fr 1fr; 
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+          }
+          .stat-cell { 
+            padding: 16px 10px; 
+            border-right: 1px solid rgba(255, 255, 255, 0.2); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+          }
           .stat-cell:nth-child(2n) { border-right: none; }
           .stat-cell:nth-child(n+3) { border-bottom: none; }
         }
@@ -651,7 +662,7 @@ export default function Page() {
           .gc { padding: 14px 10px !important; }
           .metrics-grid { gap: 6px !important; padding: 8px 0 !important; }
           .doc-pill { padding: 7px 9px !important; font-size: 10px !important; }
-          .stat-cell { padding: 10px 5px; }
+          .stat-cell { padding: 12px 10px !important; }
           .cmp-table th, .cmp-table td { padding: 6px 3px !important; font-size: 9.5px !important; }
 
           /* Entity overview card — Key Features / labels / heading compaction */

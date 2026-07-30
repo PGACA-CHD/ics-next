@@ -329,7 +329,7 @@ function ProcessLayout({ steps }) {
 /* ── UK-SPECIFIC DATA ── */
 const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'UK-based founders commonly register a Private Limited Company, LLP, or a Wholly Owned Subsidiary. We help you choose based on your sector, FDI requirements, and long-term plans.' },
-  { n: '02', title: 'Apostille Documents via FCDO', time: 'Week 1', desc: 'UK documents (passport, address proof) must be apostilled through the UK Foreign, Commonwealth & Development Office (FCDO) Legalisation Office in Milton Keynes. We provide a step-by-step guide.' },
+  { n: '02', title: 'Apostille Documents', time: 'Week 1', desc: 'UK documents (passport, address proof) must be apostilled . We provide a step-by-step guide.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. The application is handled remotely — no travel to India required.' },
   { n: '04', title: 'Name Reservation — MCA RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and verify availability before proceeding to incorporation.' },
   { n: '05', title: 'File SPICe+ Incorporation Form', time: 'Week 2–3', desc: 'The SPICe+ (INC-32) form combines company incorporation, DIN, PAN, TAN, and GSTIN applications in a single online submission to the Ministry of Corporate Affairs.' },
@@ -346,9 +346,9 @@ const whyPoints = [
 ];
 
 const documents = [
-  { label: 'Passport', detail: 'Apostilled by FCDO Legalisation Office, Milton Keynes' },
+  { label: 'Passport', detail: 'Apostilled' },
   { label: 'UK Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA)', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'DIN', detail: 'Director Identification Number — allotted through the SPICe+ filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
@@ -425,23 +425,37 @@ export default function Page() {
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }
 
+        
+        /* NO borders between sections */
+        .sec-div { border-top: none; }
+
+        /* Headings: always centered, at every screen size, regardless of parent flex/grid context */
+        .sec-heading-wrap { text-align:center !important; width:100%; margin-left:auto; margin-right:auto; }
+        .sec-heading-wrap > * { margin-left:auto !important; margin-right:auto !important; text-align:center !important; }
+
+        /* 861px – 1200px: collapse the straddling two-column doc timeline into the same
+           clean single-side layout used on mobile, just with more breathing room, so
+           nothing drifts off-centre or overlaps the middle line in this in-between range */
+        @media(max-width:1200px){
+          .doc-tl { max-width:640px !important; padding:10px 24px !important; }
+          .doc-tl-line, .doc-tl-line-fill, .doc-tl-cap { left:32px !important; }
+          .doc-tl-cap { transform:translateX(-4px) !important; }
+          .doc-tl-row { grid-template-columns:64px 1fr !important; min-height:auto !important; padding:18px 0; }
+          .doc-tl-row > div:nth-child(2) { grid-column:1; grid-row:1; justify-content:flex-start !important; }
+          .doc-tl-row > div:nth-child(2) > div { width:52px !important; height:52px !important; }
+          .doc-tl-row > div:nth-child(2) > div > div { width:40px !important; height:40px !important; }
+          .doc-tl-content-l,.doc-tl-content-r { grid-column:2 !important; grid-row:1 !important; visibility:visible !important; text-align:left !important; padding:0 0 0 24px !important; }
+          .doc-tl-content-l p { margin-left:0 !important; }
+          .tl-left .doc-tl-content-r,.tl-right .doc-tl-content-l { display:none; }
+        }
         @media(max-width:860px){
           .proc-3col { grid-template-columns:1fr !important; }
           .proc-3col > div:nth-child(1) { padding:28px 24px; }
           .proc-3col > div:nth-child(2) { border-left:none !important; border-right:none !important; border-top:1px solid rgba(0,0,0,0.08); border-bottom:1px solid rgba(0,0,0,0.08); }
           .proc-3col > div:nth-child(3) { padding:28px 24px; }
-          .why-eq-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: auto !important; }
+          .why-eq-grid { grid-template-columns:1fr 1fr !important; grid-auto-rows:auto; }
           .hero-g { grid-template-columns:1fr !important; gap:36px !important; }
-          .hero-g > div:last-child { display: none; }
-          .doc-tl-line { left:32px !important; }
-          .doc-tl-cap { left:32px !important; transform:translateX(-4px) !important; }
-          .doc-tl-row { grid-template-columns:64px 1fr !important; min-height:auto !important; padding:16px 0; }
-          .doc-tl-row > div:nth-child(2) { grid-column:1; grid-row:1; justify-content:flex-start !important; }
-          .doc-tl-row > div:nth-child(2) > div { width:52px !important; height:52px !important; }
-          .doc-tl-row > div:nth-child(2) > div > div { width:40px !important; height:40px !important; }
-          .doc-tl-content-l, .doc-tl-content-r { grid-column:2 !important; grid-row:1 !important; visibility:visible !important; text-align:left !important; padding:0 0 0 20px !important; }
-          .doc-tl-content-l p { margin-left:0 !important; }
-          .tl-left .doc-tl-content-r, .tl-right .doc-tl-content-l { display:none; }
+          .hero-g > div:last-child { display:none; }
         }
         @media(max-width:580px){
           .sec { padding:56px 20px !important; }
@@ -500,7 +514,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Why India</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>Why UK Founders <span style={{ fontStyle: 'italic', color: '#e69819' }}>Are Setting Up in India.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
@@ -574,7 +588,7 @@ export default function Page() {
       <section id="process" className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the UK to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
@@ -588,7 +602,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 56 }}>
               <span className="lbl">Documents Required</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>What you'll need <span style={{ fontStyle: 'italic', color: '#e69819' }}>from the UK.</span></h2>
               <p style={{ fontSize: 14.5, color: '#666', lineHeight: 1.75, fontFamily: HV, maxWidth: 560, margin: '0 auto' }}>
@@ -604,7 +618,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 32 }}>
               <span className="lbl">Entity Types</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Which structure is <span style={{ fontStyle: 'italic', color: '#e69819' }}>right for you?</span></h2>
             </div>
@@ -628,7 +642,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff', paddingTop: 0 }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 32 }}>
               <span className="lbl">FAQs</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Common questions <span style={{ fontStyle: 'italic', color: '#e69819' }}>answered.</span></h2>
             </div>

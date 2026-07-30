@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { T } from '@/lib/config';
 
+const HV = "Helvetica, Arial, sans-serif";
+
 // ─── HELPERS ────────────────────────────────────────────────────────────────
 
 function fmt(n) {
@@ -32,57 +34,31 @@ function holdingLabel(months) {
   return `${y} yr ${m} mo`;
 }
 
-// Asset type config: { threshold months, stcgRate (null = slab), ltcgRate, ltcgExemption, noIndexation }
 const ASSET_CONFIG = {
   equity: {
     label: 'Listed Equity / Equity MF (STT paid)',
-    threshold: 12,
-    stcgRate: 0.20,
-    ltcgRate: 0.125,
-    ltcgExemption: 125000,
-    indexation: false,
-    stcgLabel: '20% (STCG, ≤12 months)',
-    ltcgLabel: '12.5% (LTCG, >12 months)',
+    threshold: 12, stcgRate: 0.20, ltcgRate: 0.125, ltcgExemption: 125000, indexation: false,
+    stcgLabel: '20% (STCG, ≤12 months)', ltcgLabel: '12.5% (LTCG, >12 months)',
   },
   property: {
     label: 'Immovable Property (Land / House / Building)',
-    threshold: 24,
-    stcgRate: null, // slab
-    ltcgRate: 0.125,
-    ltcgExemption: 0,
-    indexation: false,
-    stcgLabel: 'Slab Rate (STCG, ≤24 months)',
-    ltcgLabel: '12.5% (LTCG, >24 months) — no indexation post-Budget 2025',
+    threshold: 24, stcgRate: null, ltcgRate: 0.125, ltcgExemption: 0, indexation: false,
+    stcgLabel: 'Slab Rate (STCG, ≤24 months)', ltcgLabel: '12.5% (LTCG, >24 months) — no indexation post-Budget 2025',
   },
   debt: {
     label: 'Debt Mutual Funds (bought after 1 Apr 2023)',
-    threshold: null, // always slab
-    stcgRate: null,
-    ltcgRate: null,
-    ltcgExemption: 0,
-    indexation: false,
-    stcgLabel: 'Slab Rate (no LTCG benefit)',
-    ltcgLabel: 'Slab Rate (no LTCG benefit)',
+    threshold: null, stcgRate: null, ltcgRate: null, ltcgExemption: 0, indexation: false,
+    stcgLabel: 'Slab Rate (no LTCG benefit)', ltcgLabel: 'Slab Rate (no LTCG benefit)',
   },
   unlisted: {
     label: 'Unlisted Shares',
-    threshold: 24,
-    stcgRate: null,
-    ltcgRate: 0.125,
-    ltcgExemption: 0,
-    indexation: false,
-    stcgLabel: 'Slab Rate (STCG, ≤24 months)',
-    ltcgLabel: '12.5% (LTCG, >24 months)',
+    threshold: 24, stcgRate: null, ltcgRate: 0.125, ltcgExemption: 0, indexation: false,
+    stcgLabel: 'Slab Rate (STCG, ≤24 months)', ltcgLabel: '12.5% (LTCG, >24 months)',
   },
   other: {
     label: 'Other Assets (Gold, Bonds, etc.)',
-    threshold: 36,
-    stcgRate: null,
-    ltcgRate: 0.125,
-    ltcgExemption: 0,
-    indexation: false,
-    stcgLabel: 'Slab Rate (STCG, ≤36 months)',
-    ltcgLabel: '12.5% (LTCG, >36 months) — indexation removed post-Budget 2025',
+    threshold: 36, stcgRate: null, ltcgRate: 0.125, ltcgExemption: 0, indexation: false,
+    stcgLabel: 'Slab Rate (STCG, ≤36 months)', ltcgLabel: '12.5% (LTCG, >36 months) — indexation removed post-Budget 2025',
   },
 };
 
@@ -104,23 +80,12 @@ export default function CapitalGainsCalc() {
     const pp = parseNum(purchasePrice);
     const sp = parseNum(salePrice);
     const cc = parseNum(costs);
-
     if (pp <= 0 || sp <= 0) return;
-
     const months = holdingMonths(purchaseDate, saleDate);
     const netGain = sp - pp - cc;
-
-    let isLTCG = false;
-    let taxType = 'slab';
-    let taxRate = null;
-    let taxAmt = null;
-    let exemption = 0;
-    let taxableGain = netGain;
-
+    let isLTCG = false, taxType = 'slab', taxRate = null, taxAmt = null, exemption = 0, taxableGain = netGain;
     if (assetType === 'debt') {
-      // always slab
-      isLTCG = false;
-      taxType = 'slab';
+      isLTCG = false; taxType = 'slab';
     } else if (months !== null && cfg.threshold !== null) {
       isLTCG = months > cfg.threshold;
       if (isLTCG) {
@@ -130,68 +95,67 @@ export default function CapitalGainsCalc() {
           taxableGain = Math.max(netGain - exemption, 0);
           taxAmt = taxableGain * taxRate;
           taxType = 'ltcg';
-        } else {
-          taxType = 'slab';
-        }
+        } else { taxType = 'slab'; }
       } else {
         taxRate = cfg.stcgRate;
-        if (taxRate !== null) {
-          taxAmt = Math.max(netGain, 0) * taxRate;
-          taxType = 'stcg';
-        } else {
-          taxType = 'slab';
-        }
+        if (taxRate !== null) { taxAmt = Math.max(netGain, 0) * taxRate; taxType = 'stcg'; }
+        else { taxType = 'slab'; }
       }
     }
-
     setResult({ months, netGain, isLTCG, taxType, taxRate, taxAmt, exemption, taxableGain, pp, sp, cc, assetType });
   }
 
   const inputStyle = {
-    width: '100%', padding: '10px 14px', fontSize: 14, border: `1.5px solid ${T.bdr}`,
-    borderRadius: 8, background: '#fff', color: T.ch, fontFamily: 'inherit', boxSizing: 'border-box',
+    width: '100%', padding: '10px 14px', fontSize: 14,
+    border: `1.5px solid ${T.bdr}`, borderRadius: 8,
+    background: '#fff', color: T.ch,
+    fontFamily: HV, boxSizing: 'border-box',
   };
-  const labelStyle = { fontSize: 12.5, fontWeight: 600, color: T.mid, marginBottom: 6, display: 'block' };
+  const labelStyle = { fontSize: 12.5, fontWeight: 600, color: T.mid, marginBottom: 6, display: 'block', fontFamily: HV };
 
   return (
-    <div>
+    <div style={{ fontFamily: HV }}>
+      <style>{`
+        .cg-page, .cg-page * { font-family: Helvetica, Arial, sans-serif !important; }
+      `}</style>
+
       {/* ── HERO ── */}
-      <section style={{ backgroundImage: "url('/banners and logos/Capital Gain .png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section className="cg-page" style={{ backgroundImage: "url('/banners and logos/Capital Gain .png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>← Back to Tools</Link>
-          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: T.sl, fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(245,168,40,.25)', borderRadius: 20 }}>
+          <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none', fontFamily: HV }}>← Back to Tools</Link>
+          <div style={{ display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: T.sl, fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(245,168,40,.25)', borderRadius: 20, fontFamily: HV }}>
             Budget 2025 Rates · FY 2025-26 / AY 2026-27
           </div>
-          <h1 className="font-display" style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 600, color: '#fff', lineHeight: 1.08, marginBottom: 14 }}>
+          <h1 style={{ fontSize: 'clamp(28px,4vw,52px)', fontWeight: 700, color: '#fff', lineHeight: 1.08, marginBottom: 14, fontFamily: HV }}>
             Capital Gains Tax Calculator
           </h1>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 620 }}>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,.55)', lineHeight: 1.7, maxWidth: 620, fontFamily: HV }}>
             Equity, property, debt MF, unlisted shares &amp; other assets · STCG / LTCG · Budget 2025 rates
           </p>
         </div>
       </section>
 
-      {/* ── SEO INTRO ─────────────────────────────────────────────────────── */}
-      <section style={{ background: '#fff', padding: '52px 40px 0' }}>
+      {/* ── SEO INTRO ── */}
+      <section className="cg-page" style={{ background: '#fff', padding: '52px 40px 0' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 className="font-display" style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 600, color: T.ch, marginBottom: 20, lineHeight: 1.2 }}>
+          <h2 style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 700, color: T.ch, marginBottom: 20, lineHeight: 1.2, fontFamily: HV }}>
             India Capital Gains Tax Calculator — LTCG &amp; STCG (Budget 2025 Rates)
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="seo-2col">
             <div>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18, fontFamily: HV }}>
                 Capital gains tax in India was significantly overhauled in Budget 2024 and those revised rates have been retained unchanged in Budget 2025 (Union Budget 2025-26). Whether you have sold listed equity shares, equity mutual fund units, immovable property, or unlisted shares, the applicable tax rate, holding period threshold, and exemption limit depend on both the asset type and the date of sale. Errors in classification can lead to material tax underpayment and penalty exposure.
               </p>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, fontFamily: HV }}>
                 For listed equity shares and equity mutual funds (where STT is paid), Short-Term Capital Gains (STCG) are taxed at 20% and Long-Term Capital Gains (LTCG, held more than 12 months) are taxed at 12.5% with an annual exemption of ₹1.25 lakh — rates introduced in Budget 2024 and confirmed unchanged in Budget 2025. Capital losses on equity can be set off against capital gains and carried forward for eight assessment years.
               </p>
             </div>
             <div>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18 }}>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, marginBottom: 18, fontFamily: HV }}>
                 For immovable property — land, residential houses, commercial buildings — LTCG (held more than 24 months) is taxed at 12.5% without indexation benefit for property acquired on or after 23 July 2024. For property acquired before 23 July 2024, taxpayers may choose the more favourable option: 20% with indexation (old regime) or 12.5% without indexation. STCG on property is taxed at slab rate. Budget 2025 made no changes to these property rules.
               </p>
-              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300 }}>
+              <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.85, fontWeight: 300, fontFamily: HV }}>
                 This capital gains tax calculator supports five asset classes: listed equity and equity mutual funds, immovable property, debt mutual funds (always slab-taxed if bought after 1 April 2023), unlisted shares, and other assets (gold, bonds, foreign securities). It computes the holding period automatically from purchase and sale dates, classifies the gain as STCG or LTCG, applies the ₹1.25 lakh LTCG exemption where applicable, and shows the estimated tax. Built using Budget 2025 / Finance Act 2025 rates by our Ex-Big 4 CA team.
               </p>
             </div>
@@ -199,14 +163,15 @@ export default function CapitalGainsCalc() {
         </div>
       </section>
 
-      {/* ── MAIN ── */}
-      <section style={{ background: T.stone, padding: '48px 40px 80px' }}>
+      {/* ── MAIN CALC ── */}
+      {/* FIX: background changed from T.stone to '#fff' */}
+      <section className="cg-page" style={{ background: '#fff', padding: '48px 40px 80px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div className="tools-calc-grid">
 
             {/* ── INPUTS ── */}
             <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 16, padding: '32px 28px' }}>
-              <h2 style={{ fontSize: 16, fontWeight: 700, color: T.ch, marginBottom: 24 }}>Asset Details</h2>
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: T.ch, marginBottom: 24, fontFamily: HV }}>Asset Details</h2>
 
               {/* Asset type */}
               <div style={{ marginBottom: 22 }}>
@@ -215,8 +180,11 @@ export default function CapitalGainsCalc() {
                   {Object.entries(ASSET_CONFIG).map(([key, val]) => (
                     <button key={key} onClick={() => { setAssetType(key); setResult(null); }}
                       style={{
-                        padding: '10px 14px', fontSize: 13, fontWeight: 600, borderRadius: 8, border: `1.5px solid ${assetType === key ? T.f : T.bdr}`, cursor: 'pointer',
-                        background: assetType === key ? '#E4F0EB' : '#fff', color: assetType === key ? T.f : T.mid, textAlign: 'left', transition: 'all .15s'
+                        padding: '10px 14px', fontSize: 13, fontWeight: 600, borderRadius: 8,
+                        border: `1.5px solid ${assetType === key ? T.f : T.bdr}`, cursor: 'pointer',
+                        background: assetType === key ? '#E4F0EB' : '#fff',
+                        color: assetType === key ? T.f : T.mid,
+                        textAlign: 'left', transition: 'all .15s', fontFamily: HV,
                       }}>
                       {val.label}
                     </button>
@@ -233,7 +201,8 @@ export default function CapitalGainsCalc() {
                       style={{
                         flex: 1, padding: '9px 12px', fontSize: 13, fontWeight: 600, borderRadius: 8,
                         border: `1.5px solid ${resident === v ? T.f : T.bdr}`, cursor: 'pointer',
-                        background: resident === v ? '#E4F0EB' : '#fff', color: resident === v ? T.f : T.mid
+                        background: resident === v ? '#E4F0EB' : '#fff',
+                        color: resident === v ? T.f : T.mid, fontFamily: HV,
                       }}>
                       {l}
                     </button>
@@ -266,24 +235,23 @@ export default function CapitalGainsCalc() {
               </div>
 
               <div style={{ marginBottom: 22 }}>
-                <label style={labelStyle}>Brokerage / Transfer Costs (₹) <span style={{ fontWeight: 400, color: T.lt }}>optional</span></label>
+                <label style={labelStyle}>Brokerage / Transfer Costs (₹) <span style={{ fontWeight: 400, color: T.lt, fontFamily: HV }}>optional</span></label>
                 <input type="text" placeholder="e.g. 5000" value={costs} onChange={e => { setCosts(e.target.value); setResult(null); }} style={inputStyle} />
               </div>
 
-              {/* Property note */}
               {assetType === 'property' && (
-                <div style={{ marginBottom: 18, background: '#FFF8ED', border: '1px solid #F5E2B8', borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: '#7A5C1E' }}>
+                <div style={{ marginBottom: 18, background: '#FFF8ED', border: '1px solid #F5E2B8', borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: '#7A5C1E', fontFamily: HV }}>
                   <strong>Budget 2024/2025 Rules:</strong> For property acquired on/after 23 July 2024 — LTCG @ 12.5% without indexation. For property acquired before 23 July 2024 — you may choose the more favourable option: 20% with indexation OR 12.5% without. Consult a CA for your specific case.
                 </div>
               )}
               {assetType === 'debt' && (
-                <div style={{ marginBottom: 18, background: '#FFF8ED', border: '1px solid #F5E2B8', borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: '#7A5C1E' }}>
+                <div style={{ marginBottom: 18, background: '#FFF8ED', border: '1px solid #F5E2B8', borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: '#7A5C1E', fontFamily: HV }}>
                   <strong>Post 1 Apr 2023:</strong> Debt MF purchased on/after 1 April 2023 are taxed at slab rate regardless of holding period. No LTCG benefit available.
                 </div>
               )}
 
               <button onClick={calculate}
-                style={{ width: '100%', padding: '13px', fontSize: 14, fontWeight: 700, background: T.f, color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer' }}>
+                style={{ width: '100%', padding: '13px', fontSize: 14, fontWeight: 700, background: T.f, color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontFamily: HV }}>
                 Calculate Capital Gains →
               </button>
             </div>
@@ -293,7 +261,7 @@ export default function CapitalGainsCalc() {
               {!result ? (
                 <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 16, padding: '48px 28px', textAlign: 'center' }}>
                   <div style={{ fontSize: 40, marginBottom: 16 }}>📊</div>
-                  <div style={{ fontSize: 15, color: T.mid }}>Fill in asset details and click<br /><strong style={{ color: T.ch }}>"Calculate Capital Gains"</strong></div>
+                  <div style={{ fontSize: 15, color: T.mid, fontFamily: HV }}>Fill in asset details and click<br /><strong style={{ color: T.ch }}>Calculate Capital Gains</strong></div>
                 </div>
               ) : (
                 <CGResult result={result} cfg={ASSET_CONFIG[result.assetType]} />
@@ -301,19 +269,19 @@ export default function CapitalGainsCalc() {
 
               {/* Quick rates reference */}
               <div style={{ marginTop: 20, background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 14, padding: '20px 22px' }}>
-                <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 12 }}>Budget 2025 Capital Gains Rates</div>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ch, marginBottom: 12, fontFamily: HV }}>Budget 2025 Capital Gains Rates</div>
                 {Object.values(ASSET_CONFIG).map(c => (
                   <div key={c.label} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: `1px solid ${T.bdr}` }}>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: T.ink }}>{c.label}</div>
-                    <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2 }}>STCG: {c.stcgLabel}</div>
-                    <div style={{ fontSize: 11.5, color: T.mid }}>LTCG: {c.ltcgLabel}</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: T.ink, fontFamily: HV }}>{c.label}</div>
+                    <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2, fontFamily: HV }}>STCG: {c.stcgLabel}</div>
+                    <div style={{ fontSize: 11.5, color: T.mid, fontFamily: HV }}>LTCG: {c.ltcgLabel}</div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div style={{ marginTop: 40, background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 24px', fontSize: 12.5, color: T.mid, lineHeight: 1.65 }}>
+          <div style={{ marginTop: 40, background: '#f5f5f0', border: `1px solid ${T.bdr}`, borderRadius: 12, padding: '18px 24px', fontSize: 12.5, color: T.mid, lineHeight: 1.65, fontFamily: HV }}>
             <strong style={{ color: T.ch }}>Disclaimer:</strong> This calculator uses Budget 2025 / Finance Act 2025 rates for FY 2025-26. Surcharge (10%–25% for individuals) and Health &amp; Education Cess @ 4% are additional. For property acquired before 23 July 2024, a choice of 20% with indexation or 12.5% without is available — consult a CA for transitional provisions. NRI rates may differ. Section 54/54EC/54F exemptions for property reinvestment are not reflected. Always consult a qualified CA.
           </div>
         </div>
@@ -326,8 +294,9 @@ export default function CapitalGainsCalc() {
 
 function CGResult({ result, cfg }) {
   const { months, netGain, isLTCG, taxType, taxRate, taxAmt, exemption, taxableGain, pp, sp, cc } = result;
+
   const row = (label, val, highlight) => (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderBottom: `1px solid ${T.bdr}`, fontSize: 13.5 }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderBottom: `1px solid ${T.bdr}`, fontSize: 13.5, fontFamily: "Helvetica, Arial, sans-serif" }}>
       <span style={{ color: highlight ? T.ch : T.mid, fontWeight: highlight ? 600 : 400 }}>{label}</span>
       <span style={{ color: highlight ? T.f : T.ch, fontWeight: highlight ? 700 : 500 }}>{val}</span>
     </div>
@@ -342,36 +311,35 @@ function CGResult({ result, cfg }) {
   return (
     <div style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 16, overflow: 'hidden' }}>
       <div style={{ background: T.f, padding: '16px 22px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ color: '#fff', fontSize: 14, fontWeight: 600 }}>Capital Gains Computation</div>
-        <div style={{ color: 'rgba(255,255,255,.55)', fontSize: 12 }}>FY 2025-26</div>
+        <div style={{ color: '#fff', fontSize: 14, fontWeight: 600, fontFamily: "Helvetica, Arial, sans-serif" }}>Capital Gains Computation</div>
+        <div style={{ color: 'rgba(255,255,255,.55)', fontSize: 12, fontFamily: "Helvetica, Arial, sans-serif" }}>FY 2025-26</div>
       </div>
       <div style={{ padding: '20px 22px' }}>
 
         {/* Holding period */}
-        <div style={{ background: T.stone, borderRadius: 10, padding: '14px 16px', marginBottom: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ background: '#f5f5f0', borderRadius: 10, padding: '14px 16px', marginBottom: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: T.lt, textTransform: 'uppercase', letterSpacing: 1.2, marginBottom: 4 }}>Holding Period</div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: T.ch }}>{holdingLabel(months)}</div>
-            <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2 }}>{thresholdText}</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: T.lt, textTransform: 'uppercase', letterSpacing: 1.2, marginBottom: 4, fontFamily: "Helvetica, Arial, sans-serif" }}>Holding Period</div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: T.ch, fontFamily: "Helvetica, Arial, sans-serif" }}>{holdingLabel(months)}</div>
+            <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2, fontFamily: "Helvetica, Arial, sans-serif" }}>{thresholdText}</div>
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{
               padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 700,
               background: taxType === 'ltcg' ? '#E4F0EB' : taxType === 'stcg' ? '#FFF0E0' : '#F0F0F0',
-              color: taxType === 'ltcg' ? T.f : taxType === 'stcg' ? '#8A5500' : T.mid
+              color: taxType === 'ltcg' ? T.f : taxType === 'stcg' ? '#8A5500' : T.mid,
+              fontFamily: "Helvetica, Arial, sans-serif",
             }}>
               {typeLabel}
             </div>
           </div>
         </div>
 
-        {/* Gain computation */}
         {row('Sale Price', fmt(sp))}
         {row('Less: Purchase Price', `(${fmt(pp)})`)}
         {cc > 0 && row('Less: Transfer Costs', `(${fmt(cc)})`)}
         {row('Net Capital Gain / (Loss)', fmt(netGain), true)}
 
-        {/* Exemption */}
         {exemption > 0 && (
           <>
             {row('Less: LTCG Exemption u/s 112A (up to ₹1.25 lakh/yr)', `(${fmt(exemption)})`)}
@@ -379,27 +347,26 @@ function CGResult({ result, cfg }) {
           </>
         )}
 
-        {/* Tax */}
         <div style={{ marginTop: 16 }}>
           {taxAmt !== null && taxAmt !== undefined ? (
             <>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: '#E4F0EB', borderRadius: 10, marginBottom: 10 }}>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: T.ch }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: T.ch, fontFamily: "Helvetica, Arial, sans-serif" }}>
                     Tax @ {taxRate ? (taxRate * 100).toFixed(1) + '%' : 'Slab'}
                   </div>
-                  <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2 }}>Before surcharge &amp; cess</div>
+                  <div style={{ fontSize: 11.5, color: T.mid, marginTop: 2, fontFamily: "Helvetica, Arial, sans-serif" }}>Before surcharge &amp; cess</div>
                 </div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: T.f }}>{fmt(taxAmt)}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: T.f, fontFamily: "Helvetica, Arial, sans-serif" }}>{fmt(taxAmt)}</div>
               </div>
-              <div style={{ fontSize: 12, color: T.mid, padding: '8px 0', lineHeight: 1.6 }}>
+              <div style={{ fontSize: 12, color: T.mid, padding: '8px 0', lineHeight: 1.6, fontFamily: "Helvetica, Arial, sans-serif" }}>
                 + Surcharge (10%–25% based on total income) + Health &amp; Education Cess @ 4% on (tax + surcharge) — not included above.
               </div>
             </>
           ) : (
             <div style={{ padding: '16px', background: '#FFF8ED', border: '1px solid #F5E2B8', borderRadius: 10 }}>
-              <div style={{ fontSize: 13.5, fontWeight: 700, color: '#7A5C1E', marginBottom: 4 }}>Taxable at Slab Rate</div>
-              <div style={{ fontSize: 12.5, color: '#7A5C1E', lineHeight: 1.6 }}>
+              <div style={{ fontSize: 13.5, fontWeight: 700, color: '#7A5C1E', marginBottom: 4, fontFamily: "Helvetica, Arial, sans-serif" }}>Taxable at Slab Rate</div>
+              <div style={{ fontSize: 12.5, color: '#7A5C1E', lineHeight: 1.6, fontFamily: "Helvetica, Arial, sans-serif" }}>
                 This gain ({fmt(netGain)}) is added to your total income and taxed as per your applicable income tax slab rate. New regime: up to 30%; Old regime: up to 30%. Plus surcharge and 4% cess.
               </div>
             </div>
@@ -407,7 +374,7 @@ function CGResult({ result, cfg }) {
         </div>
 
         {netGain < 0 && (
-          <div style={{ marginTop: 14, background: '#F0F8F3', border: `1px solid #C3DFD0`, borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: T.f }}>
+          <div style={{ marginTop: 14, background: '#F0F8F3', border: `1px solid #C3DFD0`, borderRadius: 8, padding: '12px 14px', fontSize: 12.5, color: T.f, fontFamily: "Helvetica, Arial, sans-serif" }}>
             <strong>Capital Loss:</strong> {fmt(Math.abs(netGain))} — Long-term losses can be set off against LTCG only. Short-term losses can be set off against both STCG and LTCG. Unabsorbed losses can be carried forward for 8 years. File ITR to carry forward losses.
           </div>
         )}

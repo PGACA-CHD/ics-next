@@ -153,7 +153,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Apostilled by DFAT — Australian Department of Foreign Affairs and Trade' },
   { label: 'Australian Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA)', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'PAN Card (Form 49AA) or non PAN Declaration ', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'DIN', detail: 'Director Identification Number — allotted through the SPICe+ filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
@@ -239,10 +239,10 @@ function DocTimeline({ items }) {
   }, [reduced]);
   return (
     <div ref={wrapRef} className="doc-tl" style={{ position: 'relative', maxWidth: 860, margin: '0 auto', padding: '10px 0' }}>
-      <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 2, background: 'rgba(9,48,36,0.12)', transform: 'translateX(-1px)' }} />
-      <div style={{ position: 'absolute', top: 0, left: '50%', width: 2, height: `${progress * 100}%`, background: GREEN, transform: 'translateX(-1px)', transition: 'height 0.15s linear', borderRadius: 2 }} />
-      <div style={{ position: 'absolute', top: -4, left: '50%', width: 10, height: 10, borderRadius: '50%', background: GREEN, transform: 'translateX(-5px)' }} />
-      <div style={{ position: 'absolute', bottom: -4, left: '50%', width: 10, height: 10, borderRadius: '50%', background: progress > 0.98 ? GREEN : 'rgba(9,48,36,0.18)', transform: 'translateX(-5px)', transition: 'background 0.3s ease' }} />
+      <div className="doc-tl-line" style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 2, background: 'rgba(9,48,36,0.12)', transform: 'translateX(-1px)' }} />
+      <div className="doc-tl-line-fill" style={{ position: 'absolute', top: 0, left: '50%', width: 2, height: `${progress * 100}%`, background: GREEN, transform: 'translateX(-1px)', transition: 'height 0.15s linear', borderRadius: 2 }} />
+      <div className="doc-tl-cap" style={{ position: 'absolute', top: -4, left: '50%', width: 10, height: 10, borderRadius: '50%', background: GREEN, transform: 'translateX(-5px)' }} />
+      <div className="doc-tl-cap" style={{ position: 'absolute', bottom: -4, left: '50%', width: 10, height: 10, borderRadius: '50%', background: progress > 0.98 ? GREEN : 'rgba(9,48,36,0.18)', transform: 'translateX(-5px)', transition: 'background 0.3s ease' }} />
       {items.map((doc, i) => <DocRow key={i} doc={doc} i={i} isMobile={isMobile} reduced={reduced} />)}
     </div>
   );
@@ -264,6 +264,10 @@ export default function Page() {
         /* NO borders between sections */
         .sec-div { border-top: none; }
 
+        /* Headings: always centered, at every screen size, regardless of parent flex/grid context */
+        .sec-heading-wrap { text-align:center !important; width:100%; margin-left:auto; margin-right:auto; }
+        .sec-heading-wrap > * { margin-left:auto !important; margin-right:auto !important; text-align:center !important; }
+
         /* WHY CARDS — animated gradient, equal height */
         .why-eq-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:18px; }
         .why-eq-grid > div { display:flex; }
@@ -284,6 +288,21 @@ export default function Page() {
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }
 
+        /* 861px – 1200px: collapse the straddling two-column doc timeline into the same
+           clean single-side layout used on mobile, just with more breathing room, so
+           nothing drifts off-centre or overlaps the middle line in this in-between range */
+        @media(max-width:1200px){
+          .doc-tl { max-width:640px !important; padding:10px 24px !important; }
+          .doc-tl-line, .doc-tl-line-fill, .doc-tl-cap { left:32px !important; }
+          .doc-tl-cap { transform:translateX(-4px) !important; }
+          .doc-tl-row { grid-template-columns:64px 1fr !important; min-height:auto !important; padding:18px 0; }
+          .doc-tl-row > div:nth-child(2) { grid-column:1; grid-row:1; justify-content:flex-start !important; }
+          .doc-tl-row > div:nth-child(2) > div { width:52px !important; height:52px !important; }
+          .doc-tl-row > div:nth-child(2) > div > div { width:40px !important; height:40px !important; }
+          .doc-tl-content-l,.doc-tl-content-r { grid-column:2 !important; grid-row:1 !important; visibility:visible !important; text-align:left !important; padding:0 0 0 24px !important; }
+          .doc-tl-content-l p { margin-left:0 !important; }
+          .tl-left .doc-tl-content-r,.tl-right .doc-tl-content-l { display:none; }
+        }
         @media(max-width:860px){
           .proc-3col { grid-template-columns:1fr !important; }
           .proc-3col > div:nth-child(1) { padding:28px 24px; }
@@ -292,15 +311,6 @@ export default function Page() {
           .why-eq-grid { grid-template-columns:1fr 1fr !important; grid-auto-rows:auto; }
           .hero-g { grid-template-columns:1fr !important; gap:36px !important; }
           .hero-g > div:last-child { display:none; }
-          .doc-tl-line, .doc-tl-cap { left:32px !important; }
-          .doc-tl-cap { transform:translateX(-4px) !important; }
-          .doc-tl-row { grid-template-columns:64px 1fr !important; min-height:auto !important; padding:16px 0; }
-          .doc-tl-row > div:nth-child(2) { grid-column:1; grid-row:1; justify-content:flex-start !important; }
-          .doc-tl-row > div:nth-child(2) > div { width:52px !important; height:52px !important; }
-          .doc-tl-row > div:nth-child(2) > div > div { width:40px !important; height:40px !important; }
-          .doc-tl-content-l,.doc-tl-content-r { grid-column:2 !important; grid-row:1 !important; visibility:visible !important; text-align:left !important; padding:0 0 0 20px !important; }
-          .doc-tl-content-l p { margin-left:0 !important; }
-          .tl-left .doc-tl-content-r,.tl-right .doc-tl-content-l { display:none; }
         }
         @media(max-width:580px){
           .sec { padding:56px 20px !important; }
@@ -361,7 +371,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Why India</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>Why Australian Businesses <span style={{ fontStyle: 'italic', color: '#e69819' }}>Are Setting Up in India.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
@@ -385,7 +395,7 @@ export default function Page() {
       <section id="process" className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Australia to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 5 s — click any step to jump.</p>
@@ -399,7 +409,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 56 }}>
               <span className="lbl">Documents Required</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 14, fontFamily: HV }}>What you'll need <span style={{ fontStyle: 'italic', color: '#e69819' }}>from Australia.</span></h2>
               <p style={{ fontSize: 14.5, color: '#666', lineHeight: 1.75, fontFamily: HV, maxWidth: 560, margin: '0 auto' }}>
@@ -415,7 +425,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 32 }}>
               <span className="lbl">Entity Types</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Which structure is <span style={{ fontStyle: 'italic', color: '#e69819' }}>right for you?</span></h2>
             </div>
@@ -435,7 +445,7 @@ export default function Page() {
       <section className="sec sec-div" style={{ background: '#fff', paddingTop: 0 }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Fade>
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <div className="sec-heading-wrap" style={{ marginBottom: 32 }}>
               <span className="lbl">FAQs</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', fontFamily: HV }}>Common questions <span style={{ fontStyle: 'italic', color: '#e69819' }}>answered.</span></h2>
             </div>

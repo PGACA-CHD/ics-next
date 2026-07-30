@@ -237,8 +237,8 @@ export default function Page() {
 
         .lbl { font-size:10.5px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#111; font-family:${HV}; }
 
-        .lime-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:${GREEN}; color:#fff; font-family:${HV}; font-size:15px; font-weight:700; padding:14px 28px; border-radius:6px; border:none; cursor:pointer; transition:background 0.2s ease,transform 0.15s ease; text-decoration:none; width:100%; }
-        .lime-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
+      .lime-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#ffffff; color:#111111; font-family:${HV}; font-size:15px; font-weight:700; padding:14px 28px; border-radius:6px; border:2px solid #111111; cursor:pointer; transition:background 0.2s ease,color 0.2s ease,transform 0.15s ease; text-decoration:none; width:100%; }
+.lime-btn:hover { background:#111111; color:#ffffff; transform:translateY(-1px); }
 
         .ghost-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#fff; color:#111; font-family:${HV}; font-size:15px; font-weight:600; padding:14px 28px; border-radius:6px; border:${BDR}; cursor:pointer; transition:all 0.2s; text-decoration:none; width:100%; }
         .ghost-btn:hover { background:#111; color:#fff; }

@@ -1,20 +1,20 @@
 'use client';
 import { useState } from 'react';
 
-// ── Design tokens (matching brand from source)
+const helvetica = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+
 const T = {
-  f: '#0B3D2E',       // deep forest green - primary
-  f3: '#155740',      // mid green
-  s: '#1a6648',       // secondary green
-  sl: '#E8900A',      // saffron accent
-  ch: '#17170F',      // near-black charcoal
-  mid: '#5C5C52',     // mid grey-brown
-  lt: '#8C8C82',      // light text
-  bdr: '#E0DDD4',     // border
-  stone: '#F7F6F2',   // light stone (hero only)
+  f: '#0B3D2E',
+  f3: '#155740',
+  s: '#1a6648',
+  sl: '#E8900A',
+  ch: '#111111',
+  mid: '#111111',
+  lt: '#444444',
+  bdr: '#D0CEC6',
+  stone: '#F7F6F2',
 };
 
-// ── SVG Icons (no emoji)
 const IconClock = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
@@ -42,6 +42,11 @@ const IconPhone = () => (
 );
 const IconMail = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.f} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+  </svg>
+);
+const IconMailTab = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
   </svg>
 );
@@ -85,7 +90,7 @@ const inp = (extra = {}) => ({
   padding: "11px 14px",
   border: `1.5px solid ${T.bdr}`,
   borderRadius: 8,
-  fontFamily: "inherit",
+  fontFamily: helvetica,
   fontSize: 14,
   color: T.ch,
   background: "#fff",
@@ -109,7 +114,7 @@ export default function ContactPage() {
   const handleSubmit = async () => {
     if (!f.firstName.trim() || !f.email.trim()) { setStatus("error"); return; }
     setStatus("submitting");
-    setTimeout(() => setStatus("success"), 1200); // simulate
+    setTimeout(() => setStatus("success"), 1200);
   };
 
   const trustBadges = [
@@ -135,9 +140,9 @@ export default function ContactPage() {
   return (
     <>
       <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-        .contact-root { color: ${T.ch}; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: ${helvetica} !important; }
+
+        .contact-root { color: #111; }
 
         /* ── HERO */
         .hero { background-image: url('/banners and logos/contact us.png'); background-size: cover; background-position: center; padding: 72px 48px 56px; position: relative; }
@@ -149,12 +154,12 @@ export default function ContactPage() {
           font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 22px;
         }
         .hero h1 {
-          font-size: clamp(34px, 4.5vw, 56px); font-weight: 600; color: ${T.ch};
+          font-size: clamp(34px, 4.5vw, 56px); font-weight: 600; color: #111;
           line-height: 1.08; margin-bottom: 18px; max-width: 600px;
         }
         .hero h1 em { font-style: italic; color: ${T.f}; }
         .hero-sub {
-          font-size: 15px; color: ${T.mid}; line-height: 1.8; font-weight: 300;
+          font-size: 15px; color: #111; line-height: 1.8; font-weight: 400;
           max-width: 480px; margin-bottom: 36px;
         }
         .trust-strip { display: flex; flex-wrap: wrap; gap: 0; }
@@ -162,7 +167,7 @@ export default function ContactPage() {
           display: flex; align-items: center; gap: 8px;
           padding: 0 24px 0 0; margin-right: 8px; margin-bottom: 10px;
           border-right: 1px solid ${T.bdr};
-          color: ${T.mid}; font-size: 13px;
+          color: #111; font-size: 13px; font-weight: 500;
         }
         .trust-item:last-child { border-right: none; }
         .trust-item svg { color: ${T.f}; flex-shrink: 0; }
@@ -192,8 +197,8 @@ export default function ContactPage() {
           display: flex; align-items: center; justify-content: center;
           color: #fff; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
         }
-        .step-title { font-size: 14px; font-weight: 600; color: ${T.ch}; margin-bottom: 5px; }
-        .step-desc { font-size: 13px; color: ${T.mid}; line-height: 1.7; font-weight: 300; }
+        .step-title { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 5px; }
+        .step-desc { font-size: 13px; color: #111; line-height: 1.7; font-weight: 400; }
 
         /* Guide download card */
         .guide-card {
@@ -207,9 +212,9 @@ export default function ContactPage() {
           display: flex; align-items: center; justify-content: center;
           color: ${T.f}; flex-shrink: 0;
         }
-        .guide-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: ${T.lt}; font-weight: 700; margin-bottom: 4px; }
-        .guide-title { font-size: 15px; font-weight: 600; color: ${T.ch}; margin-bottom: 4px; line-height: 1.3; }
-        .guide-desc { font-size: 12px; color: ${T.lt}; line-height: 1.5; }
+        .guide-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #444; font-weight: 700; margin-bottom: 4px; }
+        .guide-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 4px; line-height: 1.3; }
+        .guide-desc { font-size: 12px; color: #444; line-height: 1.5; }
         .guide-btn {
           display: inline-flex; align-items: center; gap: 7px;
           background: ${T.f}; color: #fff; padding: 10px 18px;
@@ -227,14 +232,14 @@ export default function ContactPage() {
           width: 38px; height: 38px; background: #EDF3F0; border-radius: 9px;
           display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
-        .contact-card a { font-size: 13.5px; font-weight: 600; color: ${T.ch}; text-decoration: none; display: block; margin-bottom: 2px; }
-        .contact-card-sub { font-size: 11.5px; color: ${T.lt}; }
+        .contact-card a { font-size: 13.5px; font-weight: 600; color: #111; text-decoration: none; display: block; margin-bottom: 2px; }
+        .contact-card-sub { font-size: 11.5px; color: #444; font-weight: 500; }
 
         /* PGA card */
         .pga-card { background: ${T.ch}; border-radius: 12px; padding: 20px 22px; }
         .pga-kicker { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: ${T.sl}; font-weight: 600; margin-bottom: 6px; }
         .pga-name { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 5px; }
-        .pga-sub { font-size: 12px; color: rgba(255,255,255,.38); margin-bottom: 12px; line-height: 1.5; }
+        .pga-sub { font-size: 12px; color: rgba(255,255,255,.55); margin-bottom: 12px; line-height: 1.5; }
         .pga-link { font-size: 13px; color: ${T.sl}; font-weight: 600; text-decoration: none; }
 
         /* ── RIGHT — tabs */
@@ -247,16 +252,16 @@ export default function ContactPage() {
         .tab-btn {
           border: none; border-radius: 10px; padding: 12px 10px;
           cursor: pointer; transition: background .2s; text-align: center;
-          font-family: inherit;
+          font-family: ${helvetica} !important;
         }
         .tab-btn.active { background: ${T.f}; }
         .tab-btn:not(.active) { background: transparent; }
-        .tab-label { font-size: 13px; font-weight: 600; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 2px; }
+        .tab-label { font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 2px; }
         .tab-btn.active .tab-label { color: #fff; }
-        .tab-btn:not(.active) .tab-label { color: ${T.mid}; }
-        .tab-sub { font-size: 11px; font-family: inherit; }
-        .tab-btn.active .tab-sub { color: rgba(255,255,255,.5); }
-        .tab-btn:not(.active) .tab-sub { color: ${T.lt}; }
+        .tab-btn:not(.active) .tab-label { color: #111; }
+        .tab-sub { font-size: 11px; }
+        .tab-btn.active .tab-sub { color: rgba(255,255,255,.55); }
+        .tab-btn:not(.active) .tab-sub { color: #444; }
 
         /* Panel */
         .panel {
@@ -265,17 +270,18 @@ export default function ContactPage() {
         }
         .panel-head { background: ${T.f}; padding: 24px 28px; }
         .panel-head h2 { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-        .panel-head p { font-size: 12.5px; color: rgba(255,255,255,.45); line-height: 1.5; margin-bottom: 14px; }
+        .panel-head p { font-size: 12.5px; color: rgba(255,255,255,.55); line-height: 1.5; margin-bottom: 14px; }
         .panel-checklist { background: rgba(255,255,255,.08); border-radius: 9px; padding: 14px 16px; }
-        .panel-checklist-kicker { font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 700; margin-bottom: 10px; }
-        .panel-checklist-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px; font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
-        .panel-checklist-item strong { color: rgba(255,255,255,.9); }
+        .panel-checklist-kicker { font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 700; margin-bottom: 10px; }
+        .panel-checklist-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px; font-size: 11.5px; color: rgba(255,255,255,.75); line-height: 1.5; }
+        .panel-checklist-item strong { color: #fff; }
         .panel-body { padding: 24px 28px; }
 
         /* Calendar panel */
         .cal-prompt {
-          background: ${T.stone}; border-radius: 12px; padding: 28px 24px;
+          background: #F7F6F2; border-radius: 12px; padding: 28px 24px;
           text-align: center; margin-bottom: 20px;
+          border: 1px solid ${T.bdr};
         }
         .cal-icon-wrap { margin-bottom: 14px; display: flex; align-items: center; justify-content: center; }
         .cal-icon-circle {
@@ -283,8 +289,8 @@ export default function ContactPage() {
           border: 1px solid ${T.bdr}; display: flex; align-items: center; justify-content: center;
           color: ${T.f};
         }
-        .cal-title { font-size: 20px; font-weight: 600; color: ${T.ch}; margin-bottom: 10px; }
-        .cal-desc { font-size: 13px; color: ${T.mid}; line-height: 1.65; margin: 0 auto 20px; max-width: 280px; }
+        .cal-title { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 10px; }
+        .cal-desc { font-size: 13px; color: #111; line-height: 1.65; margin: 0 auto 20px; max-width: 280px; }
         .cal-main-btn {
           display: inline-flex; align-items: center; gap: 8px;
           background: ${T.f}; color: #fff; padding: 13px 28px;
@@ -293,28 +299,30 @@ export default function ContactPage() {
         }
 
         /* Divider */
-        .or-divider { display: flex; align-items: center; gap: 10px; margin: 18px 0; color: ${T.lt}; }
+        .or-divider { display: flex; align-items: center; gap: 10px; margin: 18px 0; color: #444; }
         .or-divider div { flex: 1; height: 1px; background: ${T.bdr}; }
-        .or-divider span { font-size: 12px; font-weight: 500; }
+        .or-divider span { font-size: 12px; font-weight: 600; color: #111; }
 
-        /* WA button */
+        /* WA button — dark forest green instead of green */
         .wa-btn {
           display: flex; align-items: center; justify-content: center; gap: 10px;
-          width: 100%; padding: 13px 0; background: #25D366; color: #fff;
+          width: 100%; padding: 13px 0; background: ${T.f}; color: #fff;
           border-radius: 9px; font-size: 14px; font-weight: 600; text-decoration: none;
+          border: none; cursor: pointer;
         }
+        .wa-btn:hover { background: #0a3424; }
 
         /* Form */
         .field-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
         .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .field-section { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: ${T.lt}; margin-bottom: 10px; margin-top: 4px; }
+        .field-section { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: #444; margin-bottom: 10px; margin-top: 4px; }
         .select-wrap { position: relative; }
-        .select-arrow { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: ${T.lt}; pointer-events: none; }
+        .select-arrow { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #444; pointer-events: none; }
 
         .submit-btn {
           width: 100%; padding: 14px 0; background: ${T.f}; color: #fff;
           border: none; border-radius: 9px; font-size: 14.5px; font-weight: 600;
-          cursor: pointer; font-family: inherit; display: flex; align-items: center;
+          cursor: pointer; font-family: ${helvetica} !important; display: flex; align-items: center;
           justify-content: center; gap: 8px; transition: opacity .18s;
         }
         .submit-btn:disabled { opacity: .6; cursor: wait; }
@@ -324,13 +332,13 @@ export default function ContactPage() {
           font-size: 13px; color: #C0392B;
         }
         .trust-footer { display: flex; justify-content: center; gap: 18px; margin-top: 14px; flex-wrap: wrap; }
-        .trust-footer span { font-size: 11.5px; color: ${T.lt}; display: flex; align-items: center; gap: 5px; }
+        .trust-footer span { font-size: 11.5px; color: #444; display: flex; align-items: center; gap: 5px; font-weight: 500; }
 
         /* Success */
         .success-wrap { text-align: center; padding: 28px 8px 20px; }
         .success-icon { width: 56px; height: 56px; background: #EDF3F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: ${T.f}; }
         .success-title { font-size: 24px; font-weight: 600; color: ${T.f}; margin-bottom: 10px; }
-        .success-sub { font-size: 13.5px; color: ${T.mid}; line-height: 1.7; max-width: 300px; margin: 0 auto 24px; }
+        .success-sub { font-size: 13.5px; color: #111; line-height: 1.7; max-width: 300px; margin: 0 auto 24px; }
         .success-actions { display: flex; flex-direction: column; gap: 10px; }
         .cal-action-btn {
           display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -360,7 +368,7 @@ export default function ContactPage() {
 
       <div className="contact-root">
 
-        {/* ── HERO */}
+        {/* HERO */}
         <section className="hero">
           <div className="hero-inner">
             <div className="hero-badge">Free 30-Min Consultation</div>
@@ -383,13 +391,12 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* ── MAIN */}
+        {/* MAIN */}
         <section className="main-section">
           <div className="main-inner">
 
             {/* LEFT */}
             <div>
-              {/* What happens next */}
               <div className="section-label">What Happens Next</div>
               <div className="steps" style={{ marginBottom: 40 }}>
                 {steps.map(s => (
@@ -443,12 +450,10 @@ export default function ContactPage() {
 
             {/* RIGHT */}
             <div className="tabs-sticky">
-
-              {/* Tab switcher */}
               <div className="tab-switcher">
                 {[
                   { id: "calendar", label: "Book a Slot", icon: <IconCalendar />, sub: "Pick a time instantly" },
-                  { id: "form", label: "Send a Request", icon: <IconMail />, sub: "We reply within 24hrs" },
+                  { id: "form", label: "Send a Request", icon: <IconMailTab />, sub: "We reply within 24hrs" },
                 ].map(tab => (
                   <button
                     key={tab.id}
@@ -491,9 +496,9 @@ export default function ContactPage() {
                       <WAIcon /> WhatsApp to book a time
                     </a>
 
-                    <p style={{ fontSize: 11.5, color: T.lt, textAlign: "center", marginTop: 14, lineHeight: 1.6 }}>
+                    <p style={{ fontSize: 11.5, color: '#444', textAlign: "center", marginTop: 14, lineHeight: 1.6, fontWeight: 500 }}>
                       Prefer email?{" "}
-                      <a href="mailto:info@indiacompanysetup.com" style={{ color: T.f, fontWeight: 600, textDecoration: "none" }}>
+                      <a href="mailto:info@indiacompanysetup.com" style={{ color: T.f, fontWeight: 700, textDecoration: "none" }}>
                         info@indiacompanysetup.com
                       </a>
                     </p>

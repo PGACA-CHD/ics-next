@@ -448,6 +448,8 @@ export default function HomePage() {
   const [hf, setHf] = useState({ nameTitle: "", email: "", companyCountry: "", service: "" });
   const [hStatus, setHStatus] = useState("idle");
   const setH = k => e => setHf(p => ({ ...p, [k]: e.target.value }));
+  const winW = useWindowWidth();
+  const isMobileMap = winW < 640;
 
   const handleSubmit = async () => {
     if (!hf.nameTitle.trim() || !hf.email.trim()) { setHStatus("error"); return; }
@@ -485,12 +487,12 @@ export default function HomePage() {
 
         /* Global Reach map */
         .gr-wrap{background:#fff;border-radius:24px;box-shadow:0 2px 40px rgba(0,0,0,.06);border:1px solid #ECE7E1;display:grid;grid-template-columns:38% 62%;align-items:stretch;overflow:hidden;}
-        .gr-left{padding:36px 32px;border-right:1px solid #ECE7E1;display:flex;flex-direction:column;gap:18px;}
-        .gr-map{position:relative;overflow:hidden;min-height:420px;}
-        .gr-map-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;filter:saturate(0.18) brightness(1.08) sepia(0.06);opacity:0.75;}
-        @media(max-width:1024px){.gr-wrap{grid-template-columns:1fr!important;}.gr-left{border-right:none!important;border-bottom:1px solid #ECE7E1;}.gr-map{min-height:340px;}}
-        @media(max-width:640px){.gr-section{padding:0 16px 48px!important;}.gr-wrap{border-radius:16px;}.gr-left{padding:20px 16px!important;gap:14px!important;}.gr-map{min-height:240px;}.gr-btns{flex-direction:column!important;}}
-        @media(max-width:420px){.gr-map{min-height:190px;}}
+        .gr-left{padding:36px 32px;border-right:1px solid #ECE7E1;display:flex;flex-direction:column;gap:18px;justify-content:space-between;}
+        .gr-map{position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:#fff;}
+        .gr-map-img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;}
+        @media(max-width:1024px){.gr-wrap{grid-template-columns:1fr!important;}.gr-left{border-right:none!important;border-bottom:1px solid #ECE7E1;}.gr-map{min-height:380px;padding:20px;}}
+        @media(max-width:640px){.gr-section{padding:0 16px 48px!important;}.gr-wrap{border-radius:16px;}.gr-left{padding:20px 16px!important;gap:14px!important;}.gr-map{min-height:320px;padding:14px;}.gr-btns{flex-direction:column!important;align-items:center!important;}}
+        @media(max-width:420px){.gr-map{min-height:280px;padding:10px;}}
 
         .pricing-card:not(.pricing-featured) .pricing-cta-btn{background:#0B3D2E!important;color:#fff!important;border-color:#0B3D2E!important;}
         .pricing-card:not(.pricing-featured) .pricing-cta-btn:hover{background:#145c42!important;border-color:#145c42!important;}
@@ -646,12 +648,18 @@ export default function HomePage() {
                   <img key={p.code} src={`https://flagcdn.com/w40/${p.code}.png`} srcSet={`https://flagcdn.com/w80/${p.code}.png 2x`} alt={p.label} title={p.label} width={26} height={19} style={{ borderRadius: 3, objectFit: "cover", boxShadow: "0 0 0 1px rgba(0,0,0,0.08)", display: "block", flexShrink: 0 }} loading="lazy" />
                 ))}
               </div>
-              <div className="gr-btns" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <div className="gr-btns" style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
                 <button className="ics-btn ics-btn-primary" onClick={() => { window.location.href = ROUTES.contact; }}>Explore Global Presence →</button>
               </div>
             </div>
             <div className="gr-map">
-              <img src="/worldmap.png" alt="World map" className="gr-map-img" />
+              <img
+                key={isMobileMap ? "mobile-map" : "desktop-map"}
+                src={isMobileMap ? "/worldmap-mobile.png" : "/worldmap.png"}
+                onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = "/worldmap.png"; }}
+                alt="World map"
+                className="gr-map-img"
+              />
             </div>
           </div>
         </div>
