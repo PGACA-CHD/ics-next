@@ -428,7 +428,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
                 India Company Setup is the market-facing brand for foreign-entry advisory work, operating under <strong style={{ color: '#de9504ff', fontWeight: 700 }}>Divsam Consultants LLP</strong> — the practice that carries professional liability insurance and signs every engagement letter.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <button className="lime-btn" onClick={() => window.location.href = (ROUTES.contact || '/contact')}>Talk to our team →</button>
+                <button className="lime-btn" onClick={() => window.open('https://wa.me/919915731447', '_blank')}>Talk to our team →</button>
               </div>
             </Fade>
             <Fade delay={120}><HeroStats /></Fade>

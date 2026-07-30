@@ -405,8 +405,8 @@ export default function ContactPage() {
 
               {/* Guide */}
               <div className="guide-card">
-                <div className="guide-icon">
-                  <IconDownload />
+                <div className="guide-icon" style={{ background: 'transparent', width: 64, height: 64 }}>
+                  <img src="/banners and logos/freefownload.png" alt="Free Download Guide" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 <div style={{ flex: 1 }}>
                   <div className="guide-kicker">Free Download</div>

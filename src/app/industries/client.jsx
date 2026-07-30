@@ -25,8 +25,21 @@ export default function IndustriesPage() {
       }}>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: T.s, fontWeight: 700, marginBottom: 16 }}>INDUSTRIES WE SERVE</div>
-          <h1 className="font-display" style={{ fontSize: 'clamp(32px,4vw,56px)', fontWeight: 600, color: '#111111', lineHeight: 1.08, marginBottom: 20 }}>
-            Sector-specific India entry — <span style={{ fontStyle: 'italic', color: T.sl }}>built for your business model.</span>
+          <h1
+            className="font-display"
+            style={{
+              fontSize: 'clamp(32px,4vw,56px)',
+              fontWeight: 600,
+              color: '#111111',
+              lineHeight: 1.08,
+              marginBottom: 20,
+            }}
+          >
+            Sector-specific India entry —
+            <br className="desktop-break" />
+            <span style={{ fontStyle: 'italic', color: T.sl }}>
+              built for your business model.
+            </span>
           </h1>
           <p style={{ fontSize: 16, color: '#000000', lineHeight: 1.8, maxWidth: 640 }}>
             Every industry has a different India entry profile — different FDI rules, different compliance obligations, different structuring priorities. We advise on all of them.

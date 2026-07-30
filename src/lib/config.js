@@ -98,6 +98,8 @@ export const FOOTER_COLS = [
       { label: "UK Company in India",         href: "/uk-company-setting-up-india" },
       { label: "UAE Company in India",        href: "/uae-company-setting-up-india" },
       { label: "Singapore in India",          href: "/singapore-company-setting-up-india" },
+      { label: "Canada in India",             href: "/company-registration/from-canada" },
+      { label: "Australia in India",          href: "/company-registration/from-australia" },
     ],
   },
 

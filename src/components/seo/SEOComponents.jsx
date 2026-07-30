@@ -1115,7 +1115,7 @@ function SEOWhatItIs({ eyebrow, title, paragraphs }) {
               "seo-whatitis-p" +
               (paragraphs.length >= 3 && i === 0 ? " seo-whatitis-p-full" : "")
             }
-            style={{ letterSpacing: "0.05em" }}
+            style={{ letterSpacing: "0.05em", fontWeight: 400, color: "#000000" }}
           >
             {p}
           </p>
@@ -1520,7 +1520,7 @@ function SEOFDIRulesPage({ setPage }) {
     <SEOPageLayout eyebrow="FDI & FEMA Compliance · India Entry" setPage={setPage}
       ctaLabel="Talk to our CA team →"
       title={<>FDI Rules in India —<br /><em>What Foreign Investors</em><br />Must Know</>}
-      description="India's FDI policy governs how foreign companies can invest in India. Here is a plain-English guide to FDI routes, sector caps, prohibited sectors, and FEMA compliance – with what actually matters in practice.">
+      description={<span style={{ fontWeight: 600, color: '#000000' }}>India's FDI policy governs how foreign companies can invest in India. Here is a plain-English guide to FDI routes, sector caps, prohibited sectors, and FEMA compliance – with what actually matters in practice.</span>}>
 
       <SEOSection label="Overview">
         <SEOWhatItIs
