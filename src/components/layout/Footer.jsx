@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { T, FOOTER_COLS, PHONE, EMAIL, SITE_NAME } from '@/lib/config';
 import Logo from '@/components/shared/Logo';
@@ -7,6 +8,11 @@ const GOLD = '#c8870a';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const [openCols, setOpenCols] = useState({});
+
+  const toggleCol = (title) => {
+    setOpenCols(prev => ({ ...prev, [title]: !prev[title] }));
+  };
 
   return (
     <footer className="footer-container">
@@ -25,6 +31,27 @@ export default function Footer() {
           gap: 32px;
           margin-bottom: 44px;
           align-items: start;
+        }
+        .footer-col-header {
+          font-size: 9.5px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: ${GOLD};
+          font-weight: 700;
+          margin-bottom: 14px;
+          white-space: nowrap;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: default;
+        }
+        .footer-col-links {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .footer-col-toggle-icon {
+          display: none;
         }
         .footer-bottom-row {
           border-top: 1px solid rgba(0,0,0,0.10);
@@ -46,25 +73,54 @@ export default function Footer() {
             padding: 48px 24px 32px;
           }
           .footer-grid-layout {
-            grid-template-columns: 1fr 1fr;
-            gap: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
           }
           .footer-brand {
-            grid-column: 1 / -1;
-            max-width: 400px;
+            margin-bottom: 24px;
+            max-width: 100%;
+          }
+          .footer-col {
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+          }
+          .footer-col:last-child {
+            border-bottom: none;
+          }
+          .footer-col-header {
+            font-size: 11.5px !important;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            padding: 18px 0;
+            margin-bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .footer-col-links {
+            display: none;
+            padding: 4px 0 16px;
+          }
+          .footer-col-links.open {
+            display: flex;
+          }
+          .footer-col-toggle-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: ${GOLD};
+            transition: transform 0.3s ease;
           }
           .footer-bottom-row {
             flex-direction: column;
             justify-content: center;
+            margin-top: 24px;
           }
         }
         @media (max-width: 480px) {
           .footer-container {
             padding: 40px 16px 24px;
-          }
-          .footer-grid-layout {
-            grid-template-columns: 1fr 1fr;
-            gap: 32px 16px;
           }
         }
       `}</style>
@@ -89,28 +145,36 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          {FOOTER_COLS.map(col => (
-            <div key={col.title}>
-              <h5 style={{ fontSize: 9.5, letterSpacing: 2, textTransform: 'uppercase', color: GOLD, fontWeight: 700, marginBottom: 14, whiteSpace: 'nowrap' }}>
-                {col.title}
-              </h5>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {col.links.map(link => (
-                  link.external ? (
-                    <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
-                      className="footer-link" style={{ fontSize: 13 }}>
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link key={link.label} href={link.href}
-                      className="footer-link" style={{ fontSize: 13 }}>
-                      {link.label}
-                    </Link>
-                  )
-                ))}
+          {FOOTER_COLS.map(col => {
+            const isOpen = openCols[col.title];
+            return (
+              <div key={col.title} className="footer-col">
+                <h5 className="footer-col-header" onClick={() => toggleCol(col.title)}>
+                  {col.title}
+                  <span className="footer-col-toggle-icon" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
+                </h5>
+                <div className={`footer-col-links ${isOpen ? 'open' : ''}`}>
+                  {col.links.map(link => (
+                    link.external ? (
+                      <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
+                        className="footer-link" style={{ fontSize: 13 }}>
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link key={link.label} href={link.href}
+                        className="footer-link" style={{ fontSize: 13 }}>
+                        {link.label}
+                      </Link>
+                    )
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Divider */}
@@ -127,3 +191,4 @@ export default function Footer() {
     </footer>
   );
 }
+

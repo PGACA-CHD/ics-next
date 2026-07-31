@@ -387,10 +387,15 @@ export default function Page() {
           .sec { padding:56px 20px !important; }
           .why-eq-grid { grid-template-columns:1fr !important; grid-auto-rows:auto !important; }
         }
-      `}</style>
+                @media (max-width: 768px) {
+            .usa-hero {
+              background-image: url("/mobile-banners/usa.png") !important;
+            }
+          }
+        `}</style>
 
       {/* HERO */}
-      <section className="sec" style={{ backgroundImage: 'url("/banners%20and%20logos/USA.png")', backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
+      <section className="usa-hero sec" style={{ backgroundImage: 'url("/banners%20and%20logos/USA.png")', backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
