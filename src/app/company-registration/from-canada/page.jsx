@@ -17,16 +17,9 @@ function useReveal(t = 0.12) {
 }
 function Fade({ children, delay = 0 }) {
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-  }, []);
-
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
   const [ref, vis] = useReveal();
-
-  if (isMobile) {
-    return <div>{children}</div>;
-  }
-
+  if (isMobile) return <div>{children}</div>;
   return <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: `opacity .55s ease ${delay}ms,transform .55s ease ${delay}ms` }}>{children}</div>;
 }
 function CountUp({ end, suffix = '', prefix = '', delay = 0 }) {
@@ -55,7 +48,6 @@ function FAQCard({ q, a, open, onToggle }) {
   );
 }
 
-/* ── PROCESS — 5s auto-advance, all steps fully visible, no blur ── */
 function ProcessLayout({ steps }) {
   const [active, setActive] = useState(0);
   const [ref, vis] = useReveal(0.05);
@@ -67,8 +59,6 @@ function ProcessLayout({ steps }) {
   const cur = steps[active];
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
-
-      {/* LEFT */}
       <div style={{ background: 'linear-gradient(160deg,#0a3d2c 0%,#072b1f 60%,#041a12 100%)', padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.055) 1px,transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
         <div style={{ position: 'absolute', top: -60, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle,rgba(76,175,130,0.18) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
@@ -87,8 +77,6 @@ function ProcessLayout({ steps }) {
           ))}
         </div>
       </div>
-
-      {/* MIDDLE — all fully visible, opacity 1 */}
       <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
           <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', opacity: 1 }}>
@@ -100,8 +88,6 @@ function ProcessLayout({ steps }) {
           </div>
         ))}
       </div>
-
-      {/* RIGHT */}
       <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'d' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
           <div style={{ display: 'inline-block', background: 'linear-gradient(135deg,#093024 0%,#165c3a 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
@@ -122,7 +108,6 @@ function ProcessLayout({ steps }) {
   );
 }
 
-/* ── CANADA DATA ── */
 const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Canadian founders most commonly register a Private Limited Company (WOS) in India. We advise on the right structure based on your sector, FIPA treaty benefits, and long-term India plans.' },
   { n: '02', title: 'Apostille Documents via GAC', time: 'Week 1', desc: 'Canadian documents must be apostilled through Global Affairs Canada (GAC). We provide a complete step-by-step guide to the authentication process.' },
@@ -239,13 +224,14 @@ export default function Page() {
     <>
       <style>{`
         @keyframes stepIn { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;} }
-        @keyframes whyGrad { 0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;} }
         *{box-sizing:border-box;margin:0;}
         .sec{padding:56px 56px;}
         .lbl{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:#000000;font-family:Helvetica, Arial, sans-serif;display:block;margin-bottom:12px;}
         .g-btn{display:inline-flex;align-items:center;gap:8px;background:#093024;color:#fff;font-family:Helvetica, Arial, sans-serif;font-size:14.5px;font-weight:700;padding:13px 26px;border-radius:6px;border:none;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s;}
         .g-btn:hover{background:#0a3d2c;transform:translateY(-1px);}
-        
+        .sec-div{border-top:none;}
+        .sec-heading-wrap{text-align:center !important;width:100%;margin-left:auto;margin-right:auto;}
+        .sec-heading-wrap>*{margin-left:auto !important;margin-right:auto !important;text-align:center !important;}
         .why-eq-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:18px;}
         .why-eq-grid>div{display:flex;}
         .why-anim-card{flex:1;border-radius:22px;border:1.5px solid rgba(9,48,36,0.14);padding:36px 32px;position:relative;overflow:hidden;cursor:default;background:linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%);box-shadow:0 4px 18px rgba(9,48,36,0.07);transition:box-shadow 0.25s ease,transform 0.25s ease,border-color 0.25s ease;}
@@ -257,37 +243,39 @@ export default function Page() {
         .stbl tr:last-child td{border-bottom:none;}
         .stbl td:first-child{font-weight:700;color:#111;}
         .stbl tr:hover td{background:rgba(9,48,36,0.03);}
-        
-        /* NO borders between sections */
-        .sec-div { border-top: none; }
 
-        /* Headings: always centered, at every screen size, regardless of parent flex/grid context */
-        .sec-heading-wrap { text-align:center !important; width:100%; margin-left:auto; margin-right:auto; }
-        .sec-heading-wrap > * { margin-left:auto !important; margin-right:auto !important; text-align:center !important; }
+        /* ── HERO mobile override — same pattern as USA/UK/AU pages ── */
+        .ca-hero {
+          background-image: url('/banners and logos/Canada copy.png');
+          background-size: cover;
+          background-position: center;
+        }
+        @media (max-width: 768px) {
+          .ca-hero {
+            background-image: url('/mobile-banners/Canada.webp') !important;
+          }
+        }
 
-        /* 861px – 1200px: collapse the straddling two-column doc timeline into the same
-           clean single-side layout used on mobile, just with more breathing room, so
-           nothing drifts off-centre or overlaps the middle line in this in-between range */
         @media(max-width:1200px){
-          .doc-tl { max-width:640px !important; padding:10px 24px !important; }
-          .doc-tl-line, .doc-tl-line-fill, .doc-tl-cap { left:32px !important; }
-          .doc-tl-cap { transform:translateX(-4px) !important; }
-          .doc-tl-row { grid-template-columns:64px 1fr !important; min-height:auto !important; padding:18px 0; }
-          .doc-tl-row > div:nth-child(2) { grid-column:1; grid-row:1; justify-content:flex-start !important; }
-          .doc-tl-row > div:nth-child(2) > div { width:52px !important; height:52px !important; }
-          .doc-tl-row > div:nth-child(2) > div > div { width:40px !important; height:40px !important; }
-          .doc-tl-content-l,.doc-tl-content-r { grid-column:2 !important; grid-row:1 !important; visibility:visible !important; text-align:left !important; padding:0 0 0 24px !important; }
-          .doc-tl-content-l p { margin-left:0 !important; }
-          .tl-left .doc-tl-content-r,.tl-right .doc-tl-content-l { display:none; }
+          .doc-tl{max-width:640px !important;padding:10px 24px !important;}
+          .doc-tl-line,.doc-tl-line-fill,.doc-tl-cap{left:32px !important;}
+          .doc-tl-cap{transform:translateX(-4px) !important;}
+          .doc-tl-row{grid-template-columns:64px 1fr !important;min-height:auto !important;padding:18px 0;}
+          .doc-tl-row>div:nth-child(2){grid-column:1;grid-row:1;justify-content:flex-start !important;}
+          .doc-tl-row>div:nth-child(2)>div{width:52px !important;height:52px !important;}
+          .doc-tl-row>div:nth-child(2)>div>div{width:40px !important;height:40px !important;}
+          .doc-tl-content-l,.doc-tl-content-r{grid-column:2 !important;grid-row:1 !important;visibility:visible !important;text-align:left !important;padding:0 0 0 24px !important;}
+          .doc-tl-content-l p{margin-left:0 !important;}
+          .tl-left .doc-tl-content-r,.tl-right .doc-tl-content-l{display:none;}
         }
         @media(max-width:860px){
-          .proc-3col { grid-template-columns:1fr !important; }
-          .proc-3col > div:nth-child(1) { padding:28px 24px; }
-          .proc-3col > div:nth-child(2) { border-left:none !important; border-right:none !important; border-top:1px solid rgba(0,0,0,0.08); border-bottom:1px solid rgba(0,0,0,0.08); }
-          .proc-3col > div:nth-child(3) { padding:28px 24px; }
-          .why-eq-grid { grid-template-columns:1fr 1fr !important; grid-auto-rows:auto; }
-          .hero-g { grid-template-columns:1fr !important; gap:36px !important; }
-          .hero-g > div:last-child { display:none; }
+          .proc-3col{grid-template-columns:1fr !important;}
+          .proc-3col>div:nth-child(1){padding:28px 24px;}
+          .proc-3col>div:nth-child(2){border-left:none !important;border-right:none !important;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);}
+          .proc-3col>div:nth-child(3){padding:28px 24px;}
+          .why-eq-grid{grid-template-columns:1fr 1fr !important;grid-auto-rows:auto;}
+          .hero-g{grid-template-columns:1fr !important;gap:36px !important;}
+          .hero-g>div:last-child{display:none;}
         }
         @media(max-width:580px){
           .sec{padding:56px 20px!important;}
@@ -295,17 +283,19 @@ export default function Page() {
         }
       `}</style>
 
-      {/* HERO — image only, no gradient overlay */}
-      <section style={{ position: 'relative', minHeight: 580, display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/banners and logos/Canada copy.png')", backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1160, margin: '0 auto', padding: '100px 56px 92px', width: '100%' }}>
+      {/* HERO — same pattern as USA/UK/AU pages, .ca-hero handles mobile bg swap */}
+      <section className="ca-hero sec" style={{ backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
+        <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
               <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(255,255,255,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From Canada</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV, color: '#fff' }}>
-                Register a Company<br />in India from{' '}
-                <em style={{ fontStyle: 'normal', color: '#e69819' }}>Canada.</em>
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#fff', marginBottom: 22, fontFamily: HV }}>
+                <span style={{ color: 'rgba(255,255,255,0.79)' }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ position: 'relative', display: 'inline-block', color: '#e69819' }}>
+                  Canada
+                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#e69819', borderRadius: 2 }} />
+                </span>
               </h1>
               <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.80)', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
                 100% online. No India visit required. Expert CA support for Canadian businesses, NRIs, and founders expanding into India under FIPA.
@@ -434,9 +424,6 @@ export default function Page() {
         </div>
       </section>
 
-
-
-      {/* INTERNAL LINKS */}
       {/* INTERNAL LINKS */}
       <section style={{ padding: '24px 56px 48px', background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>

@@ -41,24 +41,15 @@ function useReveal(t = 0.12) {
 
 function Fade({ children, delay = 0, up = true }) {
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-  }, []);
-
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
   const [ref, vis] = useReveal();
-
-  if (isMobile) {
-    return <div>{children}</div>;
-  }
-
+  if (isMobile) return <div>{children}</div>;
   return (
     <div ref={ref} style={{
       opacity: vis ? 1 : 0,
       transform: vis ? 'none' : (up ? 'translateY(22px)' : 'translateY(0)'),
       transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms`
-    }}>
-      {children}
-    </div>
+    }}>{children}</div>
   );
 }
 
@@ -289,12 +280,10 @@ export default function Page() {
         html, body { overflow-x: hidden; max-width: 100%; }
         *, *::before, *::after { box-sizing: border-box; }
 
-        /* ── GLOBAL SECTION PADDING ── */
         .sec { padding: clamp(48px,8vw,96px) clamp(16px,5vw,56px); width: 100%; overflow-x: hidden; }
         .sec-sm { padding: clamp(40px,6vw,80px) clamp(16px,5vw,56px); }
         .inner { max-width: 1200px; margin: 0 auto; width: 100%; }
 
-        /* ── HERO GRID ── */
         .hero-grid {
           display: grid;
           grid-template-columns: 1fr 400px;
@@ -305,7 +294,6 @@ export default function Page() {
           .hero-grid { grid-template-columns: 1fr; gap: 36px; }
         }
 
-        /* ── STATS STRIP ── */
         .stats-strip {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -337,7 +325,6 @@ export default function Page() {
           .stat-cell:nth-child(n+3) { border-bottom: none; }
         }
 
-        /* ── ENTITY TABS ── */
         .entity-tabs {
           display: flex;
           gap: 8px;
@@ -360,7 +347,6 @@ export default function Page() {
           }
         }
 
-        /* ── TWO COL / THREE COL ── */
         .two-col {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -380,19 +366,9 @@ export default function Page() {
           .three-col { grid-template-columns: 1fr; }
         }
 
-        /* ── HANDLE GRID (hero right panel) ── */
-        .handle-panel {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-        .handle-row {
-          display: flex;
-          gap: 12px;
-          align-items: flex-start;
-        }
+        .handle-panel { display: flex; flex-direction: column; gap: 14px; }
+        .handle-row { display: flex; gap: 12px; align-items: flex-start; }
 
-        /* ── ENTITY METRICS GRID ── */
         .metrics-grid {
           display: grid;
           grid-template-columns: repeat(4,1fr);
@@ -406,72 +382,20 @@ export default function Page() {
           .metrics-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
         }
 
-        /* ── KEY FEATURES (plain tick list, no boxes) ── */
         .feature-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; min-width: 0; }
-        .feature-row {
-          display: flex;
-          align-items: flex-start;
-          gap: 10px;
-          padding: 4px 0;
-          min-width: 0;
-        }
-        .feature-tick {
-          width: 18px; height: 18px; border-radius: 50%;
-          flex-shrink: 0; margin-top: 1px;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 11px; font-weight: 800; color: #fff;
-        }
-        .feature-text {
-          font-size: clamp(11px,1.2vw,13px); font-weight: 600; color: #111;
-          font-family: ${HV}; line-height: 1.5;
-          min-width: 0; overflow-wrap: break-word; word-break: break-word;
-        }
+        .feature-row { display: flex; align-items: flex-start; gap: 10px; padding: 4px 0; min-width: 0; }
+        .feature-tick { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; }
+        .feature-text { font-size: clamp(11px,1.2vw,13px); font-weight: 600; color: #111; font-family: ${HV}; line-height: 1.5; min-width: 0; overflow-wrap: break-word; word-break: break-word; }
 
-        /* ── PROCESS TIMELINE ── */
-        .timeline-wrap {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          max-width: 850px;
-          margin: 0 auto;
-          position: relative;
-          width: 100%;
-        }
-        .timeline-line {
-          position: absolute;
-          left: 23px;
-          top: 24px;
-          bottom: 24px;
-          width: 2px;
-          background: rgba(11,61,46,0.18);
-        }
-        .timeline-row {
-          display: flex;
-          gap: 16px;
-          align-items: flex-start;
-          position: relative;
-          cursor: pointer;
-          width: 100%;
-        }
-        .timeline-node {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 13px;
-          font-weight: 800;
-          z-index: 2;
-          flex-shrink: 0;
-          transition: all 0.4s ease;
-        }
+        .timeline-wrap { display: flex; flex-direction: column; gap: 16px; max-width: 850px; margin: 0 auto; position: relative; width: 100%; }
+        .timeline-line { position: absolute; left: 23px; top: 24px; bottom: 24px; width: 2px; background: rgba(11,61,46,0.18); }
+        .timeline-row { display: flex; gap: 16px; align-items: flex-start; position: relative; cursor: pointer; width: 100%; }
+        .timeline-node { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; z-index: 2; flex-shrink: 0; transition: all 0.4s ease; }
         @media(max-width:480px){
           .timeline-line { left: 19px; }
           .timeline-node { width: 40px; height: 40px; font-size: 11px; }
         }
 
-        /* ── COMPARISON TABLE (responsive, slightly larger type) ── */
         .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; max-width: 100%; }
         .cmp-table { width: 100%; min-width: 460px; border-collapse: collapse; border: 1.5px solid #111; font-family: ${HV}; table-layout: fixed; }
         .cmp-table th, .cmp-table td { word-break: break-word; }
@@ -484,114 +408,39 @@ export default function Page() {
           .cmp-table th, .cmp-table td { font-size: 8px !important; padding: 4px 1px !important; letter-spacing: 0px !important; white-space: normal !important; word-wrap: break-word !important; }
         }
 
-        /* ── CARDS ── */
-        .gc {
-          background: #fff;
-          border: ${BDR};
-          border-radius: 16px;
-          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-        }
+        .gc { background: #fff; border: ${BDR}; border-radius: 16px; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
         .gc:hover { transform: translateY(-4px); border-color: rgba(11,61,46,0.3); box-shadow: 0 12px 36px rgba(11,61,46,0.09); }
         .gc-static { background: #fff; border: ${BDR}; border-radius: 16px; }
         .lbl { font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 700; color: #111; font-family: ${HV}; }
 
-        /* ── BUTTONS ── */
-        .lime-btn {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: ${GREEN}; color: #fff;
-          font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 700;
-          padding: 13px 24px; border-radius: 6px; border: none; cursor: pointer;
-          transition: background 0.2s ease, transform 0.15s ease; text-decoration: none;
-          white-space: nowrap;
-        }
+        .lime-btn { display: inline-flex; align-items: center; gap: 8px; background: ${GREEN}; color: #fff; font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 700; padding: 13px 24px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.2s ease, transform 0.15s ease; text-decoration: none; white-space: nowrap; }
         .lime-btn:hover { background: #0a3d2c; transform: translateY(-1px); }
-        .ghost-btn {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: #fff; color: #111;
-          font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 600;
-          padding: 13px 24px; border-radius: 6px; border: ${BDR}; cursor: pointer;
-          transition: all 0.2s; text-decoration: none; white-space: nowrap;
-        }
+        .ghost-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #111; font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 600; padding: 13px 24px; border-radius: 6px; border: ${BDR}; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
         .ghost-btn:hover { background: #111; color: #fff; }
-        .ghost-dark {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: transparent; color: #fff;
-          font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 600;
-          padding: 13px 24px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.25);
-          cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap;
-        }
+        .ghost-dark { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 600; padding: 13px 24px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
         .ghost-dark:hover { background: rgba(255,255,255,0.08); }
 
-        /* ── TAB BUTTONS ── */
-        .tab-off {
-          background: #fff; border: ${BDR}; color: #111;
-          padding: 9px 16px; border-radius: 8px; cursor: pointer;
-          font-family: ${HV}; font-size: 12px; font-weight: 700;
-          display: inline-flex; align-items: center; gap: 6px;
-          transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
-        }
+        .tab-off { background: #fff; border: ${BDR}; color: #111; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-family: ${HV}; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
         .tab-off:hover { background: #f5f5f5; }
-        .tab-on {
-          background: ${GREEN}; border: 1px solid ${GREEN}; color: #fff;
-          padding: 9px 16px; border-radius: 8px; cursor: pointer;
-          font-family: ${HV}; font-size: 12px; font-weight: 700;
-          display: inline-flex; align-items: center; gap: 6px;
-          white-space: nowrap; flex-shrink: 0;
-        }
+        .tab-on { background: ${GREEN}; border: 1px solid ${GREEN}; color: #fff; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-family: ${HV}; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0; }
 
-        /* ── SPOT CARD ── */
         .spot-card { position: relative; overflow: hidden; --mouse-x: 50%; --mouse-y: 50%; }
-        .spot-card::before {
-          content: ''; position: absolute; inset: 0; pointer-events: none;
-          background: radial-gradient(circle at center, var(--spot-color, rgba(11,61,46,0.08)) 0%, transparent 70%);
-          background-size: 200% 200%; background-position: 50% 50%;
-          opacity: 0.85; animation: floatSpotlight 15s ease-in-out infinite;
-          animation-delay: inherit; transition: opacity .5s ease;
-        }
-        .spot-card:hover::before, .spot-card:focus-within::before {
-          background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spot-color, rgba(11,61,46,0.08)), transparent 70%);
-          background-size: 100% 100%; background-position: 0 0;
-          animation: none; opacity: 1;
-        }
+        .spot-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at center, var(--spot-color, rgba(11,61,46,0.08)) 0%, transparent 70%); background-size: 200% 200%; background-position: 50% 50%; opacity: 0.85; animation: floatSpotlight 15s ease-in-out infinite; animation-delay: inherit; transition: opacity .5s ease; }
+        .spot-card:hover::before, .spot-card:focus-within::before { background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spot-color, rgba(11,61,46,0.08)), transparent 70%); background-size: 100% 100%; background-position: 0 0; animation: none; opacity: 1; }
         .spot-card-content { position: relative; z-index: 1; }
         .row-div { border-bottom: 1px solid #111; }
         .row-div:last-child { border-bottom: none; }
 
-        /* ── DOCUMENTS REQUIRED — plain pill, no animation/hover styling ── */
-        .doc-pill {
-          display: flex; align-items: center; gap: 10px;
-          font-size: clamp(11px,1.2vw,13px); color: #111;
-          padding: 10px 14px; background: #fafafa;
-          border: 1px solid rgba(0,0,0,0.12);
-          border-radius: 999px; font-family: ${HV};
-        }
+        .doc-pill { display: flex; align-items: center; gap: 10px; font-size: clamp(11px,1.2vw,13px); color: #111; padding: 10px 14px; background: #fafafa; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; font-family: ${HV}; }
         .doc-pill span { font-weight: 600; }
 
-        /* ── BTN ROW WRAP ── */
-        .btn-row {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-          margin-bottom: 36px;
-        }
-        @media(max-width:480px){
-          .btn-row > * { width: 100%; justify-content: center; }
-        }
-        .cta-btn-row {
-          display: flex;
-          gap: 12px;
-          justify-content: center;
-          flex-wrap: wrap;
-          margin-bottom: 22px;
-        }
-        @media(max-width:480px){
-          .cta-btn-row > * { width: 100%; justify-content: center; }
-        }
+        .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+        @media(max-width:480px){ .btn-row > * { width: 100%; justify-content: center; } }
+        .cta-btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+        @media(max-width:480px){ .cta-btn-row > * { width: 100%; justify-content: center; } }
 
-        /* ── FAQ ── */
         .faq-wrap { display: flex; flex-direction: column; gap: 12px; max-width: 1000px; margin: 0 auto; }
 
-        /* ── ANIMATIONS ── */
         @keyframes floatSpotlight {
           0%   { background-position: 50% 50%; }
           25%  { background-position: 80% 20%; }
@@ -606,24 +455,46 @@ export default function Page() {
         }
         .timeline-node-anim { animation: popTimelineNode 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
 
-        /* ── COMPREHENSIVE MOBILE ── */
+        /* ── SETUP HERO — desktop & mobile bg swap ── */
+        .setup-hero {
+          background-image: url('/banners and logos/private-limited-company-registration (main).png');
+          background-size: cover;
+          background-position: center;
+        }
+        @media(max-width:768px){
+          .setup-hero {
+            background-image: url('/mobile-banners/COMPANYSETUPFINALMOBILE.webp') !important;
+          }
+        }
+
+        /* ── STATS STRIP — mobile breathing room ── */
+        @media(max-width:768px){
+          .stats-strip {
+            margin-top: 16px;
+            border-radius: 14px;
+          }
+          .stat-cell {
+            padding: 18px 14px !important;
+          }
+        }
+        @media(max-width:600px){
+          .stat-cell {
+            padding: 16px 12px !important;
+          }
+        }
+        @media(max-width:420px){
+          .stat-cell {
+            padding: 14px 10px !important;
+          }
+        }
+
         @media(max-width:768px){
           .hero-grid { gap: 28px !important; }
           .timeline-wrap { gap: 12px; }
           .two-col { gap: 16px; }
           .three-col { gap: 14px; }
-          .timeline-node-item {
-            background: #fff !important;
-            border: 2.5px solid rgba(0,0,0,0.18) !important;
-            color: #0B3D2E !important;
-            transition: none !important;
-          }
-          .timeline-card-item {
-            border: 1px solid rgba(0,0,0,0.15) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important;
-            transform: none !important;
-            transition: none !important;
-          }
+          .timeline-node-item { background: #fff !important; border: 2.5px solid rgba(0,0,0,0.18) !important; color: #0B3D2E !important; transition: none !important; }
+          .timeline-card-item { border: 1px solid rgba(0,0,0,0.15) !important; box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important; transform: none !important; transition: none !important; }
         }
         @media(max-width:600px){
           .sec { padding: clamp(36px,7vw,72px) 16px !important; }
@@ -664,33 +535,25 @@ export default function Page() {
           .doc-pill { padding: 7px 9px !important; font-size: 10px !important; }
           .stat-cell { padding: 12px 10px !important; }
           .cmp-table th, .cmp-table td { padding: 6px 3px !important; font-size: 9.5px !important; }
-
-          /* Entity overview card — Key Features / labels / heading compaction */
           .feature-text { font-size: 10.5px !important; line-height: 1.4 !important; }
           .feature-tick { width: 14px !important; height: 14px !important; font-size: 8px !important; }
           .feature-row { padding: 2px 0 !important; }
           h3 { font-size: 16px !important; }
           .lbl { font-size: 9px !important; letter-spacing: 0.2em !important; }
-
         }
 
-        /* ── DIVIDER UTILS ── */
         .border-top { border-top: 1px solid #111; }
       `}</style>
 
-
-      <section className="sec" style={{ backgroundImage: "url('/banners and logos/private-limited-company-registration (main).png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* HERO — .setup-hero class handles desktop + mobile bg swap */}
+      <section className="sec setup-hero">
         <div className="inner">
           <div className="hero-grid">
 
             {/* LEFT */}
             <div>
               <div className="lbl" style={{ color: 'WHITE', letterSpacing: "0.3em", marginBottom: 20 }}>Company Incorporation &amp; Setup</div>
-              <h1 style={{
-                fontSize: "clamp(32px,5.5vw,72px)", fontWeight: 800,
-                lineHeight: 1.04, letterSpacing: "-0.033em",
-                margin: "0 0 20px", fontFamily: HV
-              }}>
+              <h1 style={{ fontSize: "clamp(32px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.04, letterSpacing: "-0.033em", margin: "0 0 20px", fontFamily: HV }}>
                 <span style={{ color: 'WHITE' }}>Set up your India entity —</span>{" "}
                 <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>structured correctly from day one.</em>
               </h1>
@@ -728,12 +591,7 @@ export default function Page() {
                 {HANDLE.map(([val, title, sub], i) => (
                   <Fade key={title} delay={i * 80}>
                     <div className="handle-row">
-                      <div style={{
-                        width: 34, height: 34, borderRadius: 8,
-                        background: "rgba(11,61,46,0.06)", border: "1.5px solid #111",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 11, fontWeight: 800, color: GREEN, flexShrink: 0
-                      }}>{val}</div>
+                      <div style={{ width: 34, height: 34, borderRadius: 8, background: "rgba(11,61,46,0.06)", border: "1.5px solid #111", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, color: GREEN, flexShrink: 0 }}>{val}</div>
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 800, color: "#111", marginBottom: 2, fontFamily: HV }}>{title}</div>
                         <div style={{ fontSize: 12, color: "#333", lineHeight: 1.5, fontFamily: HV }}>{sub}</div>
@@ -748,9 +606,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          ENTITY SELECTOR
-      ════════════════════════════════════════ */}
+      {/* ENTITY SELECTOR */}
       <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -758,28 +614,17 @@ export default function Page() {
             <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "#111", margin: "0 auto 28px", maxWidth: 680, textAlign: "center", fontFamily: HV, lineHeight: 1.6, fontWeight: 600 }}>
               Your entity choice determines tax rate, activity scope, compliance burden, and FDI route. Select each to explore in detail.
             </p>
-
-            {/* Tabs — horizontally scrollable on mobile */}
             <div className="entity-tabs" style={{ marginBottom: 24 }}>
               {ENTITY_TABS.map(([key, label]) => (
                 <button key={key} className={active === key ? "tab-on" : "tab-off"} onClick={() => setActive(key)}>
-                  <span style={{
-                    width: 6, height: 6, borderRadius: "50%",
-                    background: active === key ? GOLD : "#111",
-                    transition: "all 0.25s ease",
-                    transform: active === key ? "scale(1.5)" : "scale(1)",
-                    flexShrink: 0,
-                  }} />
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: active === key ? GOLD : "#111", transition: "all 0.25s ease", transform: active === key ? "scale(1.5)" : "scale(1)", flexShrink: 0 }} />
                   {label}
                 </button>
               ))}
             </div>
           </Fade>
 
-          {/* 2-col detail */}
           <div className="two-col">
-
-            {/* LEFT — overview */}
             <Fade>
               <div className="gc-static" style={{ padding: "24px 20px", display: "flex", flexDirection: "column" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
@@ -790,8 +635,6 @@ export default function Page() {
                     )}
                   </div>
                 </div>
-
-                {/* Metrics */}
                 <div className="metrics-grid">
                   {[["Tax Rate", ent.tax], ["FDI Route", ent.fdi], ["RBI Approval", ent.rbi], ["Timeline", ent.timeline]].map(([l, v]) => (
                     <div key={l} style={{ textAlign: "center" }}>
@@ -800,10 +643,7 @@ export default function Page() {
                     </div>
                   ))}
                 </div>
-
                 <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#111", lineHeight: 1.75, margin: "0 0 16px", fontFamily: HV, fontWeight: 500 }}>{ent.desc}</p>
-
-                {/* Key Features — plain tick + text, light border removed from box, no box */}
                 <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 12 }}>Key Features</div>
                 <div className="feature-list">
                   {ent.points.map((pt, i) => (
@@ -813,7 +653,6 @@ export default function Page() {
                     </div>
                   ))}
                 </div>
-
                 <div style={{ marginTop: "auto", background: "rgba(230,152,25,0.08)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 10, padding: "12px 14px" }}>
                   <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 5 }}>Best For</div>
                   <div style={{ fontSize: "clamp(11px,1.2vw,12.5px)", color: "#111", lineHeight: 1.6, fontFamily: HV, fontWeight: 600 }}>{ent.bestFor}</div>
@@ -821,24 +660,18 @@ export default function Page() {
               </div>
             </Fade>
 
-            {/* RIGHT — docs + comparison + CTA */}
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-
-              {/* Docs — plain pills, no animation */}
               <Fade delay={80}>
                 <div className="gc-static" style={{ padding: "24px 20px" }}>
                   <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 16 }}>Documents Required</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                     {ent.docs.map((doc, i) => (
-                      <div key={doc} className="doc-pill">
-                        <span>{doc}</span>
-                      </div>
+                      <div key={doc} className="doc-pill"><span>{doc}</span></div>
                     ))}
                   </div>
                 </div>
               </Fade>
 
-              {/* Comparison table */}
               <Fade delay={120}>
                 <div className="gc-static" style={{ padding: "24px 20px" }}>
                   <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 16 }}>Quick Comparison</div>
@@ -848,15 +681,7 @@ export default function Page() {
                         <tr>
                           <th style={{ textAlign: "left", fontSize: 10.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", color: "#111", padding: "10px 8px", borderBottom: "2.5px solid #111", borderRight: "1.5px solid #111" }}>Criteria</th>
                           {["Pvt Ltd", "LLP", "WOS", "Branch", "Liaison"].map((h, i) => (
-                            <th key={h} style={{
-                              fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px",
-                              color: i === activeIdx ? "#fff" : GREEN,
-                              padding: "10px 6px", textAlign: "center",
-                              background: i === activeIdx ? GREEN : "rgba(11,61,46,0.04)",
-                              borderBottom: "2.5px solid #111",
-                              borderRight: i < 4 ? "1.5px solid #111" : "none",
-                              transition: "all 0.3s ease"
-                            }}>{h}</th>
+                            <th key={h} style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px", color: i === activeIdx ? "#fff" : GREEN, padding: "10px 6px", textAlign: "center", background: i === activeIdx ? GREEN : "rgba(11,61,46,0.04)", borderBottom: "2.5px solid #111", borderRight: i < 4 ? "1.5px solid #111" : "none", transition: "all 0.3s ease" }}>{h}</th>
                           ))}
                         </tr>
                       </thead>
@@ -865,15 +690,7 @@ export default function Page() {
                           <tr key={label}>
                             <td style={{ fontSize: 11.5, fontWeight: 700, color: "#111", padding: "11px 8px", borderBottom: "1.5px solid #111", borderRight: "1.5px solid #111", whiteSpace: "nowrap" }}>{label}</td>
                             {vals.map((v, j) => (
-                              <td key={j} style={{
-                                fontSize: 12, fontWeight: 800,
-                                color: v === "✔" ? GREEN : (v === "✖" ? "#d32f2f" : "#111"),
-                                padding: "11px 5px", textAlign: "center",
-                                borderBottom: "1.5px solid #111",
-                                borderRight: j < 4 ? "1.5px solid #111" : "none",
-                                background: j === activeIdx ? "rgba(11,61,46,0.04)" : "transparent",
-                                transition: "all 0.3s ease"
-                              }}>{v}</td>
+                              <td key={j} style={{ fontSize: 12, fontWeight: 800, color: v === "✔" ? GREEN : (v === "✖" ? "#d32f2f" : "#111"), padding: "11px 5px", textAlign: "center", borderBottom: "1.5px solid #111", borderRight: j < 4 ? "1.5px solid #111" : "none", background: j === activeIdx ? "rgba(11,61,46,0.04)" : "transparent", transition: "all 0.3s ease" }}>{v}</td>
                             ))}
                           </tr>
                         ))}
@@ -884,7 +701,6 @@ export default function Page() {
                 </div>
               </Fade>
 
-              {/* CTA */}
               <button className="lime-btn" style={{ width: "100%", justifyContent: "center", padding: "14px", border: "1px solid #111", borderRadius: 10 }} onClick={() => router.push(ROUTES.contact)}>
                 Discuss {ent.title} Setup →
               </button>
@@ -893,7 +709,7 @@ export default function Page() {
         </div>
       </section>
 
-
+      {/* PROCESS */}
       <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -902,30 +718,14 @@ export default function Page() {
               No surprises, no hidden steps. Here is the complete journey, week by week.
             </p>
           </Fade>
-
           <div className="timeline-wrap">
             <div className="timeline-line" />
             {PROCESS.map((step, i) => {
               const isActive = activeStep === i;
               return (
                 <div key={step.n} className="timeline-row" onClick={() => setActiveStep(i)}>
-                  <div className="timeline-node timeline-node-item" style={{
-                    background: isActive ? GREEN : "#fff",
-                    border: `2.5px solid ${isActive ? GREEN : "rgba(0,0,0,0.18)"}`,
-                    color: isActive ? "#fff" : GREEN,
-                    fontFamily: HV,
-                  }}>{step.n}</div>
-                  <div className="timeline-card-item" style={{
-                    flex: 1,
-                    minWidth: 0,
-                    background: "#fff",
-                    border: `1px solid ${isActive ? GREEN : "rgba(0,0,0,0.15)"}`,
-                    borderRadius: 14,
-                    padding: "16px 18px",
-                    boxShadow: isActive ? "0 8px 24px rgba(11,61,46,0.06)" : "0 2px 10px rgba(0,0,0,0.02)",
-                    transform: isActive ? "translateX(4px)" : "none",
-                    transition: "all 0.4s ease"
-                  }}>
+                  <div className="timeline-node timeline-node-item" style={{ background: isActive ? GREEN : "#fff", border: `2.5px solid ${isActive ? GREEN : "rgba(0,0,0,0.18)"}`, color: isActive ? "#fff" : GREEN, fontFamily: HV }}>{step.n}</div>
+                  <div className="timeline-card-item" style={{ flex: 1, minWidth: 0, background: "#fff", border: `1px solid ${isActive ? GREEN : "rgba(0,0,0,0.15)"}`, borderRadius: 14, padding: "16px 18px", boxShadow: isActive ? "0 8px 24px rgba(11,61,46,0.06)" : "0 2px 10px rgba(0,0,0,0.02)", transform: isActive ? "translateX(4px)" : "none", transition: "all 0.4s ease" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
                       <span style={{ fontSize: "clamp(13px,1.5vw,15px)", fontWeight: 800, color: "#111", fontFamily: HV }}>{step.title}</span>
                       <span style={{ marginLeft: "auto", background: "rgba(230,152,25,0.08)", border: "1px solid rgba(230,152,25,0.3)", color: GOLD, padding: "2px 10px", borderRadius: 50, fontSize: 10, fontWeight: 800, fontFamily: HV, flexShrink: 0 }}>{step.time}</span>
@@ -939,6 +739,7 @@ export default function Page() {
         </div>
       </section>
 
+      {/* INCLUDED */}
       <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -950,15 +751,7 @@ export default function Page() {
           <div className="three-col">
             {INCLUDED.map((cat, ci) => (
               <Fade key={cat.cat} delay={ci * 80}>
-                <div className="gc spot-card" onMouseMove={handleSpotlight} style={{
-                  padding: "22px 18px",
-                  animationDelay: `${ci * -3.5}s`,
-                  borderTop: `4px solid ${cat.acc}`,
-                  borderLeft: "1px solid #111",
-                  borderRight: "1px solid #111",
-                  borderBottom: "1px solid #111",
-                  '--spot-color': `${cat.acc}15`
-                }}>
+                <div className="gc spot-card" onMouseMove={handleSpotlight} style={{ padding: "22px 18px", animationDelay: `${ci * -3.5}s`, borderTop: `4px solid ${cat.acc}`, borderLeft: "1px solid #111", borderRight: "1px solid #111", borderBottom: "1px solid #111", '--spot-color': `${cat.acc}15` }}>
                   <div className="spot-card-content">
                     <div className="lbl" style={{ letterSpacing: "0.25em", marginBottom: 14, color: cat.acc }}>{cat.cat}</div>
                     {cat.items.map((item, i) => (
@@ -974,8 +767,10 @@ export default function Page() {
           </div>
         </div>
       </section>
+
       <PricingSection />
 
+      {/* FAQ */}
       <section className="sec" style={{ background: "#fff" }}>
         <div className="inner">
           <Fade>
@@ -986,31 +781,12 @@ export default function Page() {
               const isOpen = openFaq === i;
               return (
                 <Fade key={i} delay={i * 40}>
-                  <div onClick={() => toggleFaq(i)} style={{
-                    background: "#fff", border: "1.5px solid #111", borderRadius: 12,
-                    padding: "18px 20px", cursor: "pointer", transition: "all 0.3s ease",
-                    boxShadow: isOpen ? "0 8px 24px rgba(0,0,0,0.04)" : "none",
-                  }}>
+                  <div onClick={() => toggleFaq(i)} style={{ background: "#fff", border: "1.5px solid #111", borderRadius: 12, padding: "18px 20px", cursor: "pointer", transition: "all 0.3s ease", boxShadow: isOpen ? "0 8px 24px rgba(0,0,0,0.04)" : "none" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14 }}>
                       <span style={{ fontSize: "clamp(13px,1.4vw,14.5px)", fontWeight: 800, color: "#111", fontFamily: HV, lineHeight: 1.4 }}>{faq.q}</span>
-                      <div style={{
-                        width: 32, height: 32, borderRadius: "50%", flexShrink: 0,
-                        background: isOpen ? GREEN : "rgba(0,0,0,0.03)",
-                        border: "1px solid #111",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 16, fontWeight: 800, color: isOpen ? "#fff" : GREEN,
-                        transition: "all 0.3s ease"
-                      }}>{isOpen ? "−" : "+"}</div>
+                      <div style={{ width: 32, height: 32, borderRadius: "50%", flexShrink: 0, background: isOpen ? GREEN : "rgba(0,0,0,0.03)", border: "1px solid #111", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 800, color: isOpen ? "#fff" : GREEN, transition: "all 0.3s ease" }}>{isOpen ? "−" : "+"}</div>
                     </div>
-                    <div style={{
-                      maxHeight: isOpen ? "200px" : "0px",
-                      opacity: isOpen ? 1 : 0,
-                      overflow: "hidden",
-                      transition: "max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease",
-                      marginTop: isOpen ? 14 : 0,
-                      borderTop: isOpen ? "1px solid #111" : "none",
-                      paddingTop: isOpen ? 14 : 0,
-                    }}>
+                    <div style={{ maxHeight: isOpen ? "200px" : "0px", opacity: isOpen ? 1 : 0, overflow: "hidden", transition: "max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease", marginTop: isOpen ? 14 : 0, borderTop: isOpen ? "1px solid #111" : "none", paddingTop: isOpen ? 14 : 0 }}>
                       <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#000", lineHeight: 1.72, margin: 0, fontFamily: HV, fontWeight: 600 }}>{faq.a}</p>
                     </div>
                   </div>
@@ -1020,8 +796,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-
 
     </div>
   );

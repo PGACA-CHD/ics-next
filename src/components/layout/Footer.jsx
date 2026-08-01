@@ -8,19 +8,20 @@ const GOLD = '#c8870a';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const [openCols, setOpenCols] = useState({});
+  const [openCol, setOpenCol] = useState(null);
 
   const toggleCol = (title) => {
-    setOpenCols(prev => ({ ...prev, [title]: !prev[title] }));
+    setOpenCol(prev => (prev === title ? null : title));
   };
 
   return (
     <footer className="footer-container">
       <style>{`
+        /* ── DESKTOP ── */
         .footer-container {
           background: #ffffff;
           padding: 72px 56px 40px;
-          font-family: 'DM Sans', sans-serif;
+          font-family: Helvetica, Arial, sans-serif;
           border-top: 1px solid rgba(0,0,0,0.10);
         }
         .footer-link { color: #222 !important; text-decoration: none; transition: color .18s; }
@@ -62,74 +63,195 @@ export default function Footer() {
           flex-wrap: wrap;
           gap: 12px;
         }
-        
+
         @media (max-width: 1024px) {
           .footer-grid-layout {
             grid-template-columns: 280px repeat(3, 1fr);
           }
         }
+
+        /* ── MOBILE — accordion style ── */
         @media (max-width: 768px) {
+          /* Full-width dark accordion section for link columns only */
           .footer-container {
-            padding: 48px 24px 32px;
+            padding: 0;
+            border-top: none;
           }
+
+          /* Brand block stays white, normal padding */
+          .footer-brand-wrap {
+            background: #ffffff;
+            padding: 40px 20px 32px;
+            border-bottom: 1px solid rgba(0,0,0,0.10);
+          }
+
+          /* Grid becomes a full-width column stack */
           .footer-grid-layout {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 0;
+            margin-bottom: 0;
+            width: 100%;
+            padding: 0 !important;
           }
+
+          /* Hide brand inside grid — shown in separate wrap above */
           .footer-brand {
-            margin-bottom: 24px;
-            max-width: 100%;
+            display: none;
           }
+
+          /* Each link column = accordion row — full width, white bg */
           .footer-col {
-            border-bottom: 1px solid rgba(0,0,0,0.06);
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0,0,0,0.10);
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
           }
           .footer-col:last-child {
             border-bottom: none;
           }
+
+          /* Header row — full-width tap target */
           .footer-col-header {
-            font-size: 11.5px !important;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            padding: 18px 0;
+            font-size: 11px !important;
+            letter-spacing: 1.8px !important;
+            color: #111111 !important;
+            font-weight: 700;
+            font-family: Helvetica, Arial, sans-serif !important;
             margin-bottom: 0;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: 20px 20px;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            border: none;
+            background: none;
+            text-align: left;
           }
+
+          /* Links panel — smooth slide + fade */
           .footer-col-links {
-            display: none;
-            padding: 4px 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            padding: 0 20px;
+            background: #ffffff;
+            font-family: Helvetica, Arial, sans-serif;
+            transition: max-height 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.28s ease,
+                        padding-bottom 0.42s ease;
+            padding-bottom: 0;
           }
           .footer-col-links.open {
-            display: flex;
+            max-height: 600px;
+            opacity: 1;
+            padding-bottom: 18px;
           }
+
+          /* Each link in the open panel */
+          .footer-col-links a,
+          .footer-col-links .footer-link {
+            font-size: 13.5px !important;
+            color: #333333 !important;
+            font-family: Helvetica, Arial, sans-serif !important;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            text-decoration: none !important;
+            transition: color 0.18s;
+          }
+          .footer-col-links a:last-child,
+          .footer-col-links .footer-link:last-child {
+            border-bottom: none;
+          }
+          .footer-col-links a:hover,
+          .footer-col-links .footer-link:hover {
+            color: ${GOLD} !important;
+            text-decoration: none !important;
+          }
+
+          /* Chevron icon */
           .footer-col-toggle-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: ${GOLD};
-            transition: transform 0.3s ease;
+            color: #111111;
+            transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+            flex-shrink: 0;
           }
+
+          /* Bottom copyright row */
           .footer-bottom-row {
+            background: #ffffff;
+            border-top: 1px solid rgba(0,0,0,0.10);
+            padding: 20px 20px;
             flex-direction: column;
             justify-content: center;
-            margin-top: 24px;
+            align-items: center;
+            gap: 6px;
+            margin-top: 0;
+          }
+          .footer-bottom-row span {
+            text-align: center;
+          }
+
+          /* Inner wrapper — full bleed on mobile */
+          .footer-inner {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
           }
         }
+
         @media (max-width: 480px) {
-          .footer-container {
-            padding: 40px 16px 24px;
+          .footer-brand-wrap {
+            padding: 32px 16px 28px;
+          }
+          .footer-col-header {
+            padding: 18px 16px !important;
+          }
+          .footer-col-links {
+            padding: 0 16px 14px !important;
+          }
+          .footer-bottom-row {
+            padding: 18px 16px !important;
           }
         }
       `}</style>
-      <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+
+      {/* ── MOBILE: brand shown outside the grid ── */}
+      <div className="footer-brand-wrap" style={{ display: 'none' }}>
+        <style>{`
+          @media(max-width:768px) { .footer-brand-wrap { display: block !important; } }
+        `}</style>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 14 }}>
+          <Logo size="sm" dark={true} />
+        </div>
+        <p style={{ fontSize: 13, color: '#444', lineHeight: 1.75, maxWidth: '100%', marginBottom: 18 }}>
+          Your end-to-end partner for India market entry — incorporation, transfer pricing, FEMA, and ongoing compliance. A team of CAs, CS &amp; accountants. Ex-Big 4 led. 18+ years setting up foreign entities in India.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <a href={`tel:${PHONE.replace(/\s/g, '')}`} style={{ fontSize: 13, color: GOLD, textDecoration: 'none', fontWeight: 600 }}>{PHONE}</a>
+          <a href={`mailto:${EMAIL}`} style={{ fontSize: 13, color: GOLD, textDecoration: 'none', fontWeight: 600 }}>{EMAIL}</a>
+          <span style={{ fontSize: 12, color: GOLD, lineHeight: 1.5, fontWeight: 600 }}>SCO 18, Top Floor, Sector 20-D<br />Chandigarh 160020</span>
+        </div>
+      </div>
+
+      <div className="footer-inner" style={{ maxWidth: 1400, margin: '0 auto' }}>
 
         {/* Main grid */}
         <div className="footer-grid-layout">
 
-          {/* Brand column */}
+          {/* Brand column — desktop only (hidden on mobile via CSS) */}
           <div className="footer-brand">
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
               <Logo size="sm" dark={true} />
@@ -146,14 +268,17 @@ export default function Footer() {
 
           {/* Link columns */}
           {FOOTER_COLS.map(col => {
-            const isOpen = openCols[col.title];
+            const isOpen = openCol === col.title;
             return (
               <div key={col.title} className="footer-col">
                 <h5 className="footer-col-header" onClick={() => toggleCol(col.title)}>
                   {col.title}
-                  <span className="footer-col-toggle-icon" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="6 9 12 15 18 9"></polyline>
+                  <span
+                    className="footer-col-toggle-icon"
+                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </span>
                 </h5>
@@ -177,9 +302,9 @@ export default function Footer() {
           })}
         </div>
 
-        {/* Divider */}
+        {/* Bottom bar */}
         <div className="footer-bottom-row">
-          <span style={{ fontSize: 12, color: '#555', textAlign: 'center' }}>
+          <span style={{ fontSize: 12, color: '#555' }}>
             © {year} {SITE_NAME} · A Venture of Divsam Consultants LLP · Chandigarh, India
           </span>
           <span style={{ fontSize: 12, color: '#555' }}>
@@ -191,4 +316,3 @@ export default function Footer() {
     </footer>
   );
 }
-

@@ -18,16 +18,9 @@ function useReveal(t = 0.12) {
 
 function Fade({ children, delay = 0 }) {
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-  }, []);
-
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
   const [ref, vis] = useReveal();
-
-  if (isMobile) {
-    return <div>{children}</div>;
-  }
-
+  if (isMobile) return <div>{children}</div>;
   return (
     <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms` }}>
       {children}
@@ -63,11 +56,9 @@ function FAQCard({ q, a, open, onToggle }) {
   );
 }
 
-/* ── PROCESS — 5s auto-advance, all steps fully visible ── */
 function ProcessLayout({ steps }) {
   const [active, setActive] = useState(0);
   const [ref, vis] = useReveal(0.05);
-  /* 5 seconds auto-advance */
   useEffect(() => {
     if (!vis) return;
     const id = setInterval(() => setActive(c => (c + 1) % steps.length), 5000);
@@ -76,8 +67,6 @@ function ProcessLayout({ steps }) {
   const cur = steps[active];
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
-
-      {/* LEFT — deep green */}
       <div style={{ background: 'linear-gradient(160deg, #0a3d2c 0%, #072b1f 60%, #041a12 100%)', padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
         <div style={{ position: 'absolute', top: -60, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,175,130,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
@@ -96,8 +85,6 @@ function ProcessLayout({ steps }) {
           ))}
         </div>
       </div>
-
-      {/* MIDDLE — all steps fully visible, no opacity blur */}
       <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
           <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', opacity: 1 }}>
@@ -109,8 +96,6 @@ function ProcessLayout({ steps }) {
           </div>
         ))}
       </div>
-
-      {/* RIGHT */}
       <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'detail-' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
           <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #093024 0%, #165c3a 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
@@ -131,7 +116,6 @@ function ProcessLayout({ steps }) {
   );
 }
 
-/* ── AU DATA ── */
 const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Australian companies most commonly register a Private Limited Company (WOS) in India. We help you choose based on your sector, ASIC structure, and India FDI requirements.' },
   { n: '02', title: 'Apostille Documents via DFAT', time: 'Week 1', desc: 'Australian documents must be apostilled by the Australian Department of Foreign Affairs and Trade (DFAT). We provide a complete guide to the process.' },
@@ -153,7 +137,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Apostilled by DFAT — Australian Department of Foreign Affairs and Trade' },
   { label: 'Australian Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA) or non PAN Declaration ', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'DIN', detail: 'Director Identification Number — allotted through the SPICe+ filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
@@ -254,33 +238,19 @@ export default function Page() {
     <>
       <style>{`
         @keyframes stepIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-        @keyframes whyGrad { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         * { box-sizing:border-box; margin:0; }
         .sec { padding:56px 56px; }
         .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000000; font-family:Helvetica, Arial, sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:Helvetica, Arial, sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
-
-        /* NO borders between sections */
         .sec-div { border-top: none; }
-
-        /* Headings: always centered, at every screen size, regardless of parent flex/grid context */
         .sec-heading-wrap { text-align:center !important; width:100%; margin-left:auto; margin-right:auto; }
         .sec-heading-wrap > * { margin-left:auto !important; margin-right:auto !important; text-align:center !important; }
-
-        /* WHY CARDS — animated gradient, equal height */
         .why-eq-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:18px; }
         .why-eq-grid > div { display:flex; }
-        .why-anim-card {
-          flex:1; border-radius:22px; border:1.5px solid rgba(9,48,36,0.14);
-          padding:36px 32px; position:relative; overflow:hidden; cursor:default;
-          background: linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%);
-          box-shadow: 0 4px 18px rgba(9,48,36,0.07);
-          transition:box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
-        }
+        .why-anim-card { flex:1; border-radius:22px; border:1.5px solid rgba(9,48,36,0.14); padding:36px 32px; position:relative; overflow:hidden; cursor:default; background:linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%); box-shadow:0 4px 18px rgba(9,48,36,0.07); transition:box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease; }
         .why-anim-card:hover { box-shadow:0 16px 48px rgba(9,48,36,0.13); transform:translateY(-5px); border-color:rgba(9,48,36,0.25); }
         .why-anim-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#093024 0%,#e69819 100%); }
-
         .stbl { width:100%; border-collapse:collapse; font-family:Helvetica, Arial, sans-serif; }
         .stbl th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#aaa; padding:0 20px 12px; text-align:left; border-bottom:2px solid rgba(0,0,0,0.12); }
         .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:Helvetica, Arial, sans-serif; vertical-align:top; }
@@ -288,9 +258,18 @@ export default function Page() {
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }
 
-        /* 861px – 1200px: collapse the straddling two-column doc timeline into the same
-           clean single-side layout used on mobile, just with more breathing room, so
-           nothing drifts off-centre or overlaps the middle line in this in-between range */
+        /* ── HERO mobile override — same pattern as USA page ── */
+        .au-hero {
+          background-image: url('/banners and logos/Australia.png');
+          background-size: cover;
+          background-position: center;
+        }
+        @media (max-width: 768px) {
+          .au-hero {
+            background-image: url('/mobile-banners/Australia.webp') !important;
+          }
+        }
+
         @media(max-width:1200px){
           .doc-tl { max-width:640px !important; padding:10px 24px !important; }
           .doc-tl-line, .doc-tl-line-fill, .doc-tl-cap { left:32px !important; }
@@ -318,25 +297,26 @@ export default function Page() {
         }
       `}</style>
 
-      {/* HERO — full-bleed banner */}
-      <section style={{ position: 'relative', minHeight: 580, display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/banners and logos/Australia.png')", backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        {/* left-side overlay removed as requested */}
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1160, margin: '0 auto', padding: '100px 56px 92px', width: '100%' }}>
-          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(0, 0, 0, 0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
+      {/* HERO — same pattern as USA/UK pages, .au-hero handles mobile bg swap */}
+      <section className="au-hero sec" style={{ backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
+        <div style={{ maxWidth: 1160, margin: '0 auto' }}>
+          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(0,0,0,0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(0, 0, 0, 0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From Australia</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV, color: '#010101ff' }}>
-                Register a Company<br />in India from{' '}
-                <em style={{ fontStyle: 'normal', color: '#e69819' }}>Australia.</em>
+              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(0,0,0,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From Australia</span>
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#010101', marginBottom: 22, fontFamily: HV }}>
+                <span style={{ color: 'rgba(1,1,1,0.79)' }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ position: 'relative', display: 'inline-block', color: '#e69819' }}>
+                  Australia
+                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#e69819', borderRadius: 2 }} />
+                </span>
               </h1>
-              <p style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.8)', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
+              <p style={{ fontSize: 16, color: 'rgba(0,0,0,0.8)', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
                 100% online. No India visit required. Expert CA support for Australian businesses, NRIs, and founders expanding into India under ECTA.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link href="/contact" className="g-btn">Get a Free Consultation →</Link>
-                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#000000ff', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid rgba(255,255,255,0.55)', lineHeight: 1 }}>See the Process</a>
+                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#000000', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid rgba(0,0,0,0.4)', lineHeight: 1 }}>See the Process</a>
               </div>
             </Fade>
             <Fade delay={100}>
@@ -352,14 +332,14 @@ export default function Page() {
                   { label: 'Max govt. fee', val: 360, prefix: 'A$' },
                 ].map((row, i, arr) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 22px', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none', gap: 16 }}>
-                    <span style={{ fontSize: 13, color: '#000000ff', fontFamily: HV }}>{row.label}</span>
+                    <span style={{ fontSize: 13, color: '#000', fontFamily: HV }}>{row.label}</span>
                     <span style={{ fontSize: 16, fontWeight: 800, color: GREEN, fontFamily: HV, textAlign: 'right' }}>
                       {row.text ?? <CountUp end={row.val} suffix={row.suffix} prefix={row.prefix || ''} delay={i * 150} />}
                     </span>
                   </div>
                 ))}
                 <div style={{ padding: '13px 22px', background: 'rgba(9,48,36,0.05)', borderRadius: '0 0 15px 15px', borderTop: '1px solid rgba(9,48,36,0.10)' }}>
-                  <p style={{ fontSize: 12, color: '#000000ff', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
+                  <p style={{ fontSize: 12, color: '#000', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
                 </div>
               </div>
             </Fade>
@@ -457,8 +437,6 @@ export default function Page() {
           ))}
         </div>
       </section>
-
-
 
       {/* INTERNAL LINKS */}
       <section style={{ padding: '24px 56px 48px', background: '#fff' }}>

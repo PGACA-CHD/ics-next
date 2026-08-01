@@ -23,20 +23,34 @@ function useReveal(t = 0.12) {
   return [ref, vis];
 }
 
+/* ── FIXED Fade: no layout shift on mobile ──
+   The scroll jump was caused by this component rendering opacity:0 / translateY
+   on first paint, then the isMobile state updating after mount, causing a reflow.
+   Fix: always render children visible on first paint. The animation only applies
+   once IntersectionObserver fires AND we've confirmed desktop via useEffect.
+   On mobile, children render at full opacity from the start — no jump. */
 function Fade({ children, delay = 0, up = true }) {
+  const [ref, vis] = useReveal();
+  const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
+    const mobile = window.innerWidth <= 768;
+    setIsMobile(mobile);
+    setMounted(true);
   }, []);
 
-  const [ref, vis] = useReveal();
-
-  if (isMobile) {
+  /* Before mount (SSR / first paint): always show children, no transform */
+  if (!mounted || isMobile) {
     return <div>{children}</div>;
   }
 
   return (
-    <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'translateY(0)' : (up ? 'translateY(22px)' : 'translateY(0)'), transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms` }}>
+    <div ref={ref} style={{
+      opacity: vis ? 1 : 0,
+      transform: vis ? 'translateY(0)' : (up ? 'translateY(22px)' : 'translateY(0)'),
+      transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms`
+    }}>
       {children}
     </div>
   );
@@ -66,7 +80,7 @@ function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
   return (
     <div style={{ textAlign: center ? "center" : "left", marginBottom: mb, fontFamily: F }}>
       {eyebrow && (
-        <p style={{ fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase", color: GREEN, fontWeight: 700, marginBottom: 14, fontFamily: F, margin: "0 0 14px" }}>{eyebrow}</p>
+        <p style={{ fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase", color: GREEN, fontWeight: 700, margin: "0 0 14px", fontFamily: F }}>{eyebrow}</p>
       )}
       <h2 style={{ fontSize: HS, fontWeight: 700, lineHeight: 1.1, margin: 0, fontFamily: F }}>
         <span style={{ color: GREEN }}>{green}</span>
@@ -82,7 +96,6 @@ const LI = () => (
   </svg>
 );
 
-/* ── spotlight follow mouse ── */
 const handleSpotlight = (e) => {
   const el = e.currentTarget;
   const rect = el.getBoundingClientRect();
@@ -135,7 +148,6 @@ function WhyVisual() {
   };
   useEffect(() => { runLoop(); return () => timers.current.forEach(clearTimeout); }, []);
   return (
-    /* GOLD spotlight colour */
     <div className="spot-card" onMouseMove={handleSpotlight}
       style={{ background: '#f9f9f6', borderRadius: 24, padding: '40px 36px', position: 'relative', overflow: 'hidden', fontFamily: F, '--spot-color': 'rgba(230,152,25,0.18)', border: '1px solid rgba(0,0,0,0.06)' }}>
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '24px 24px', opacity: 0.05, maskImage: 'linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 80%)', WebkitMaskImage: 'linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 80%)' }} />
@@ -166,7 +178,6 @@ function WhyVisual() {
   );
 }
 
-/* ── Structure: merged Divsam+India card, PGA separate, GOLD spotlight ── */
 function StructureAnimation() {
   const secRef = useRef(null);
   const [secVis, setSecVis] = useState(false);
@@ -188,8 +199,6 @@ function StructureAnimation() {
 
   return (
     <div ref={secRef} style={{ fontFamily: F, display: 'flex', flexDirection: 'column', gap: 14 }}>
-
-      {/* MERGED: Divsam + India Company Setup */}
       <div className="spot-card" onMouseMove={handleSpotlight} style={{ padding: '18px', ...cardStyle(0) }}>
         <div className="spot-card-content">
           <div style={{ marginBottom: 14 }}>
@@ -212,7 +221,6 @@ function StructureAnimation() {
         </div>
       </div>
 
-      {/* PGA */}
       <div className="spot-card" onMouseMove={handleSpotlight} style={{ display: 'flex', gap: 14, padding: '22px', ...cardStyle(120) }}>
         <div className="spot-card-content" style={{ display: 'flex', gap: 14 }}>
           <div>
@@ -226,12 +234,10 @@ function StructureAnimation() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
 
-/* ── TeamCard: static dark-green bg + GOLD spotlight on hover ── */
 function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
   const [ref, vis] = useReveal(0.15);
   const [hovered, setHovered] = useState(false);
@@ -241,7 +247,6 @@ function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
       onMouseMove={handleSpotlight}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      /* GOLD spotlight colour on team card */
       className="spot-card team-card-inner"
       style={{
         display: 'grid', gridTemplateColumns: '200px 1fr', gap: 0,
@@ -286,9 +291,6 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         @keyframes scroll-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
         @keyframes scroll-right { from { transform: translateX(-50%) } to { transform: translateX(0) }    }
 
-        /* ══ GOLD spotlight follow-mouse ══
-           Same mechanism as original — radial follows --mouse-x/y.
-           Only colour changed from green to gold. */
         @keyframes floatSpotlight {
           0%   { background-position: 50% 50%; }
           25%  { background-position: 80% 20%; }
@@ -300,26 +302,18 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         .spot-card::before {
           content: ''; position: absolute; inset: 0; pointer-events: none;
           background: radial-gradient(circle at center, var(--spot-color, rgba(230,152,25,0.15)) 0%, transparent 70%);
-          background-size: 200% 200%;
-          background-position: 50% 50%;
-          opacity: 0.7;
-          animation: floatSpotlight 15s ease-in-out infinite;
+          background-size: 200% 200%; background-position: 50% 50%;
+          opacity: 0.7; animation: floatSpotlight 15s ease-in-out infinite;
           transition: opacity .4s ease;
         }
         .spot-card:hover::before, .spot-card:focus-within::before {
           background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spot-color, rgba(230,152,25,0.15)), transparent 65%);
-          background-size: 100% 100%;
-          background-position: 0 0;
-          animation: none;
-          opacity: 1;
+          background-size: 100% 100%; background-position: 0 0;
+          animation: none; opacity: 1;
         }
         .spot-card-content { position: relative; z-index: 1; }
 
-        .lbl {
-          font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
-          font-weight: 600; color: #aaa;
-          font-family: Helvetica, Arial, sans-serif; display: block;
-        }
+        .lbl { font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; color: #aaa; font-family: Helvetica, Arial, sans-serif; display: block; }
         .logo-l { display: flex; width: max-content; animation: scroll-left  38s linear infinite; }
         .logo-r { display: flex; width: max-content; animation: scroll-right 38s linear infinite; }
         .logo-l:hover, .logo-r:hover { animation-play-state: paused; }
@@ -331,33 +325,26 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         .lime-btn { display: inline-flex; align-items: center; gap: 8px; background: #093024; color: #fff; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; padding: 14px 28px; border-radius: 6px; border: none; cursor: pointer; transition: background .2s, transform .15s; text-decoration: none; }
         .lime-btn:hover { background: #0a3d2c; transform: translateY(-1px); }
 
-        /* ══ WWE grid — align-items:center so both cols fill equal height ══ */
+        /* ── ABOUT HERO — desktop + mobile bg swap ── */
+        .about-hero {
+          background-image: url('/banners and logos/About us main banner-2.png');
+          background-size: cover;
+          background-position: center;
+        }
+        @media(max-width: 768px) {
+          .about-hero {
+            background-image: url('/mobile-banners/ABOUTUSFINALMOBILE.webp') !important;
+          }
+        }
+
         .wwe {
           max-width: 1200px; margin: 0 auto;
           padding: 20px 56px 0;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
-          /* KEY: stretch both columns to same height, content centred inside */
-          align-items: center;
+          display: grid; grid-template-columns: 1fr 1fr;
+          gap: 80px; align-items: center;
         }
-        /* sticky col — left aligned */
-        .wwe-sticky {
-          position: sticky;
-          top: 100px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
-        }
-
-        /* paragraphs — left aligned */
-        .wwe-p {
-          font-family: Helvetica, Arial, sans-serif;
-          font-size: 14.5px; color: #555; line-height: 1.82;
-          margin: 0 0 18px;
-          text-align: left;
-        }
+        .wwe-sticky { position: sticky; top: 100px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+        .wwe-p { font-family: Helvetica, Arial, sans-serif; font-size: 14.5px; color: #555; line-height: 1.82; margin: 0 0 18px; text-align: left; }
         .wwe-p:last-child { margin-bottom: 0; }
 
         .reg-strip { border-radius: 16px; border: 1px solid rgba(0,0,0,0.52); padding: 22px 26px; display: flex; gap: 0; align-items: stretch; margin-bottom: 14px; }
@@ -368,19 +355,14 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         .reg-title { font-family: Helvetica, Arial, sans-serif; font-size: 12.5px; font-weight: 700; color: #111; margin: 0 0 3px; }
         .reg-desc  { font-family: Helvetica, Arial, sans-serif; font-size: 11.5px; color: #555; line-height: 1.55; margin: 0; }
 
-        /* ══ DISC CARDS — GOLD spotlight ══ */
         .disc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .disc-card {
-          background: #fff; border-radius: 16px; padding: 26px;
-          border: 1px solid rgba(0,0,0,0.12);
-          transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
-          /* gold spotlight colour */
-          --spot-color: rgba(230,152,25,0.18);
-        }
-        .disc-card:hover {
-          box-shadow: 0 10px 32px rgba(230,152,25,0.16);
-          transform: translateY(-3px);
-          border-color: rgba(230,152,25,0.45);
+        .disc-card { background: #fff; border-radius: 16px; padding: 26px; border: 1px solid rgba(0,0,0,0.12); transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s; --spot-color: rgba(230,152,25,0.18); }
+        .disc-card:hover { box-shadow: 0 10px 32px rgba(230,152,25,0.16); transform: translateY(-3px); border-color: rgba(230,152,25,0.45); }
+
+        /* ── MOBILE: no scroll jump — all content visible on mobile ── */
+        @media(max-width: 768px) {
+          /* Prevent any opacity:0 / transform flicker on mobile */
+          * { -webkit-transform: translateZ(0); }
         }
 
         @media(max-width:960px) {
@@ -414,8 +396,8 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         }
       `}</style>
 
-      {/* ══ HERO ══ */}
-      <section style={{ backgroundImage: "url('/banners and logos/About us main banner-2.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: '20px 56px 0', fontFamily: F }} className="sec">
+      {/* ── HERO — .about-hero handles desktop + mobile bg swap ── */}
+      <section className="sec about-hero" style={{ backgroundSize: 'cover', backgroundPosition: 'center', padding: '20px 56px 0', fontFamily: F }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <Fade>
@@ -436,7 +418,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         </div>
       </section>
 
-      {/* ══ TRUSTED BY — no border below ══ */}
+      {/* ── TRUSTED BY ── */}
       <section style={{ padding: '20px 0 0', background: '#fff', fontFamily: F }}>
         <Fade>
           <SH green="Trusted by 100+" gold="companies worldwide." mb={36} />
@@ -473,7 +455,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         </div>
       </section>
 
-      {/* ══ MEET THE TEAM — no border line above ══ */}
+      {/* ── MEET THE TEAM ── */}
       <section style={{ padding: '20px 56px 0', background: '#fff', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade>
@@ -511,15 +493,13 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         </div>
       </section>
 
-      {/* ══ WHY WE EXIST ══ */}
+      {/* ── WHY WE EXIST ── */}
       <div style={{ background: '#fff', padding: '20px 56px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade><SH eyebrow="Why we exist" green="Built because the best advice" gold="was being wasted." mb={0} /></Fade>
         </div>
       </div>
       <div style={{ background: '#fff' }}>
-        {/*
-        */}
         <div className="wwe">
           <div className="wwe-sticky">
             <Fade>
@@ -531,7 +511,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <Fade delay={80}><WhyVisual /></Fade>
         </div>
 
-        {/* ══ OUR STRUCTURE ══ */}
+        {/* ── OUR STRUCTURE ── */}
         <div style={{ background: '#fff', padding: '48px 56px 0' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <Fade><SH eyebrow="Our structure" green="Who you're actually" gold="contracting with." mb={0} /></Fade>
@@ -549,7 +529,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         </div>
       </div>
 
-      {/* ══ FOUR DISCIPLINES — gold spotlight ══ */}
+      {/* ── FOUR DISCIPLINES ── */}
       <section style={{ padding: '20px 56px 0', background: '#fff', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade><SH green="Four disciplines." gold="One integrated team." mb={48} /></Fade>
@@ -561,7 +541,6 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
               { num: '04', title: 'Legal & Contracts', items: ['Shareholder & subscription agreements', 'Intercompany service agreements (MSA)', 'Employment contracts & ESOP plans', 'Regulatory advisory — SEBI, RBI, DPIIT'] },
             ].map((p, ci) => (
               <Fade key={p.num} delay={ci * 80}>
-                {/* disc-card has spot-card class so gold spotlight applies */}
                 <div className="disc-card spot-card" onMouseMove={handleSpotlight} style={{ animationDelay: `${ci * -3.5}s` }}>
                   <div className="spot-card-content">
                     <span style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: '.24em', textTransform: 'uppercase', color: GOLD, display: 'block', marginBottom: 8 }}>{p.num}</span>
@@ -582,7 +561,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
         </div>
       </section>
 
-      {/* ══ REGISTRATIONS ══ */}
+      {/* ── REGISTRATIONS ── */}
       <section style={{ padding: '0px 56px 0', background: '#fff', fontFamily: F }} className="sec">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Fade><SH green="Registrations &amp;" gold="memberships." mb={48} /></Fade>

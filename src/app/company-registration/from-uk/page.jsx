@@ -21,16 +21,9 @@ function useReveal(t = 0.12) {
 
 function Fade({ children, delay = 0 }) {
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-  }, []);
-
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
   const [ref, vis] = useReveal();
-
-  if (isMobile) {
-    return <div>{children}</div>;
-  }
-
+  if (isMobile) return <div>{children}</div>;
   return (
     <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'none' : 'translateY(20px)', transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms` }}>
       {children}
@@ -62,19 +55,7 @@ function FAQCard({ q, a, open, onToggle }) {
   const [h, setH] = useState(0);
   useEffect(() => { if (body.current) setH(body.current.scrollHeight); }, [open]);
   return (
-    <div
-      onClick={onToggle}
-      style={{
-        border: open ? `1.5px solid ${GREEN}` : '1px solid rgba(0,0,0,0.12)',
-        borderRadius: 14,
-        background: open ? 'rgba(9,48,36,0.03)' : '#fff',
-        cursor: 'pointer',
-        marginBottom: 14,
-        padding: '0 24px',
-        transition: 'border-color 0.3s, background 0.3s, box-shadow 0.3s',
-        boxShadow: open ? '0 8px 24px rgba(9,48,36,0.08)' : '0 1px 3px rgba(0,0,0,0.03)',
-      }}
-    >
+    <div onClick={onToggle} style={{ border: open ? `1.5px solid ${GREEN}` : '1px solid rgba(0,0,0,0.12)', borderRadius: 14, background: open ? 'rgba(9,48,36,0.03)' : '#fff', cursor: 'pointer', marginBottom: 14, padding: '0 24px', transition: 'border-color 0.3s, background 0.3s, box-shadow 0.3s', boxShadow: open ? '0 8px 24px rgba(9,48,36,0.08)' : '0 1px 3px rgba(0,0,0,0.03)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0', gap: 20 }}>
         <span style={{ fontSize: 15, fontWeight: 600, color: open ? GREEN : '#111', fontFamily: HV, lineHeight: 1.35, transition: 'color 0.3s' }}>{q}</span>
         <div style={{ width: 26, height: 26, borderRadius: '50%', border: `1.5px solid ${open ? GREEN : 'rgba(0,0,0,0.25)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.3s', transform: open ? 'rotate(45deg)' : 'none', background: open ? GREEN : 'transparent' }}>
@@ -82,9 +63,7 @@ function FAQCard({ q, a, open, onToggle }) {
         </div>
       </div>
       <div style={{ maxHeight: open ? h + 'px' : 0, overflow: 'hidden', transition: 'max-height 0.42s cubic-bezier(0.4,0,0.2,1)' }}>
-        <div ref={body}>
-          <p style={{ margin: '0 0 22px', fontSize: 14, color: '#555', lineHeight: 1.8, fontFamily: HV, maxWidth: 640 }}>{a}</p>
-        </div>
+        <div ref={body}><p style={{ margin: '0 0 22px', fontSize: 14, color: '#555', lineHeight: 1.8, fontFamily: HV, maxWidth: 640 }}>{a}</p></div>
       </div>
     </div>
   );
@@ -127,18 +106,8 @@ function DocRow({ doc, i, isMobile, reduced }) {
   const left = i % 2 === 0;
   const show = reduced ? true : vis;
   const slideFrom = isMobile ? -36 : (left ? -44 : 44);
-  const contentStyle = {
-    opacity: show ? 1 : 0,
-    transform: show ? 'translateX(0)' : `translateX(${slideFrom}px)`,
-    transition: reduced ? 'none' : 'opacity .6s ease .15s, transform .6s cubic-bezier(0.22,1,0.36,1) .15s',
-    willChange: 'transform, opacity',
-  };
-  const nodeStyle = {
-    opacity: show ? 1 : 0,
-    transform: show ? 'scale(1)' : 'scale(0.4)',
-    transition: reduced ? 'none' : 'opacity .45s ease, transform .55s cubic-bezier(0.34,1.56,0.64,1)',
-    willChange: 'transform, opacity',
-  };
+  const contentStyle = { opacity: show ? 1 : 0, transform: show ? 'translateX(0)' : `translateX(${slideFrom}px)`, transition: reduced ? 'none' : 'opacity .6s ease .15s, transform .6s cubic-bezier(0.22,1,0.36,1) .15s', willChange: 'transform, opacity' };
+  const nodeStyle = { opacity: show ? 1 : 0, transform: show ? 'scale(1)' : 'scale(0.4)', transition: reduced ? 'none' : 'opacity .45s ease, transform .55s cubic-bezier(0.34,1.56,0.64,1)', willChange: 'transform, opacity' };
   const eyebrow = <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.6px', textTransform: 'uppercase', color: '#c8870a', fontFamily: HV, marginBottom: 6 }}>{String(i + 1).padStart(2, '0')}</div>;
   const title = <h3 style={{ fontSize: 20.5, fontWeight: 800, color: '#111', margin: '0 0 6px', fontFamily: HV, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{doc.label}</h3>;
   return (
@@ -179,11 +148,7 @@ function DocTimeline({ items }) {
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) cancelAnimationFrame(raf); };
   }, [reduced]);
   return (
     <div ref={wrapRef} className="doc-tl" style={{ position: 'relative', maxWidth: 860, margin: '0 auto', padding: '10px 0' }}>
@@ -196,7 +161,6 @@ function DocTimeline({ items }) {
   );
 }
 
-/* ── PROCESS LAYOUT — green accents throughout ── */
 function ProcessLayout({ steps }) {
   const [active, setActive] = useState(0);
   const [ref, vis] = useReveal(0.05);
@@ -208,116 +172,47 @@ function ProcessLayout({ steps }) {
   const cur = steps[active];
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '220px 1fr 300px', gap: 0, alignItems: 'stretch', border: '1px solid rgba(0,0,0,0.14)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 4px 32px rgba(9,48,36,0.10)' }} className="proc-3col">
-
-      {/* LEFT — pure deep green, no gold */}
-      <div style={{
-        background: 'linear-gradient(160deg, #0a3d2c 0%, #072b1f 60%, #041a12 100%)',
-        padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden'
-      }}>
-        {/* subtle dot grid */}
+      <div style={{ background: 'linear-gradient(160deg, #0a3d2c 0%, #072b1f 60%, #041a12 100%)', padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 1 }} />
-        {/* soft green radial glow top-right */}
         <div style={{ position: 'absolute', top: -60, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,175,130,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
-        {/* soft green radial glow bottom-left */}
         <div style={{ position: 'absolute', bottom: -40, left: -30, width: 160, height: 160, borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,175,130,0.10) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
-
         <div style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.40)', fontFamily: HV, marginBottom: 20 }}>Step-by-Step</div>
-
-          {/* CHANGE: green gradient number, reduced font size 72→56 */}
-          <div
-            key={'num-' + active}
-            style={{
-              fontSize: 56,
-              fontWeight: 800,
-              lineHeight: 1,
-              fontFamily: HV,
-              letterSpacing: '-0.04em',
-              animation: 'stepIn 0.4s ease both',
-              background: 'linear-gradient(135deg, #a8e6c0 0%, #4caf82 50%, #2e7d55 100%)',
-              backgroundSize: '300% 300%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >{cur.n}</div>
-
+          <div key={'num-' + active} style={{ fontSize: 56, fontWeight: 800, lineHeight: 1, fontFamily: HV, letterSpacing: '-0.04em', animation: 'stepIn 0.4s ease both', background: 'linear-gradient(135deg, #a8e6c0 0%, #4caf82 50%, #2e7d55 100%)', backgroundSize: '300% 300%', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{cur.n}</div>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', fontFamily: HV, marginTop: 8 }}>{cur.time}</div>
         </div>
-
-        {/* CHANGE: nav labels increased to 12.5px, active slightly larger */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, position: 'relative', zIndex: 2 }}>
           {steps.map((s, i) => (
             <button key={i} onClick={() => setActive(i)} style={{ all: 'unset', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-              {/* CHANGE: dot color green when active */}
-              <div style={{
-                width: 6, height: 6, borderRadius: '50%',
-                background: i === active ? '#4caf82' : 'rgba(255,255,255,0.22)',
-                flexShrink: 0,
-                transition: 'all 0.3s',
-                transform: i === active ? 'scale(1.5)' : 'scale(1)',
-                boxShadow: i === active ? '0 0 6px rgba(76,175,130,0.7)' : 'none',
-              }} />
-              <span style={{
-                fontSize: i === active ? 12.5 : 12,
-                fontFamily: HV,
-                color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)',
-                fontWeight: i === active ? 700 : 400,
-                transition: 'all 0.3s',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                maxWidth: 140,
-              }}>{s.title}</span>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: i === active ? '#4caf82' : 'rgba(255,255,255,0.22)', flexShrink: 0, transition: 'all 0.3s', transform: i === active ? 'scale(1.5)' : 'scale(1)', boxShadow: i === active ? '0 0 6px rgba(76,175,130,0.7)' : 'none' }} />
+              <span style={{ fontSize: i === active ? 12.5 : 12, fontFamily: HV, color: i === active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.32)', fontWeight: i === active ? 700 : 400, transition: 'all 0.3s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 140 }}>{s.title}</span>
             </button>
           ))}
         </div>
       </div>
-
-      {/* MIDDLE — green active circle */}
       <div style={{ borderLeft: '1px solid rgba(0,0,0,0.07)', borderRight: '1px solid rgba(0,0,0,0.07)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 0, overflowY: 'auto', background: '#fff' }}>
         {steps.map((s, i) => (
           <div key={i} onClick={() => setActive(i)} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', padding: '18px 0', borderBottom: i < steps.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor: 'pointer', opacity: 1 }}>
-            {/* CHANGE: active circle — green */}
-            <div style={{
-              width: 36, height: 36, borderRadius: '50%',
-              background: i === active ? 'linear-gradient(135deg, #093024 0%, #165c3a 100%)' : 'rgba(0,0,0,0.05)',
-              border: i === active ? 'none' : '2px solid transparent',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 11.5, fontWeight: 800,
-              color: i === active ? '#fff' : '#bbb',
-              flexShrink: 0,
-              transition: 'all 0.35s ease',
-              fontFamily: HV,
-              boxShadow: i === active ? '0 4px 14px rgba(9,48,36,0.28)' : 'none',
-            }}>{s.n}</div>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: i === active ? 'linear-gradient(135deg, #093024 0%, #165c3a 100%)' : 'rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 800, color: i === active ? '#fff' : '#bbb', flexShrink: 0, transition: 'all 0.35s ease', fontFamily: HV, boxShadow: i === active ? '0 4px 14px rgba(9,48,36,0.28)' : 'none' }}>{s.n}</div>
             <div style={{ paddingTop: 6 }}>
               <div style={{ fontSize: 16, fontWeight: 700, color: i === active ? '#111' : '#999', fontFamily: HV, lineHeight: 1.25, marginBottom: 3, transition: 'color 0.3s' }}>{s.title}</div>
-              {/* CHANGE: time label — green when active */}
               <div style={{ fontSize: 11, fontWeight: 600, color: i === active ? GREEN : '#ddd', fontFamily: HV, textTransform: 'uppercase', letterSpacing: '0.8px', transition: 'color 0.3s' }}>{s.time}</div>
             </div>
           </div>
         ))}
       </div>
-
-      {/* RIGHT — green progress bar */}
       <div style={{ padding: '40px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#f7f8f7', borderLeft: '1px solid rgba(0,0,0,0.06)' }}>
         <div key={'detail-' + active} style={{ animation: 'stepIn 0.4s ease both', flex: 1 }}>
-          {/* CHANGE: time badge — green */}
           <div style={{ display: 'inline-block', background: 'linear-gradient(135deg, #093024 0%, #165c3a 100%)', color: '#fff', fontSize: 9.5, fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', fontFamily: HV, padding: '4px 10px', borderRadius: 4, marginBottom: 16 }}>{cur.time}</div>
-
-          <h3 style={{ fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
+          <h3 style={{ fontSize: 'clamp(22px,2.8vw,30px)', fontWeight: 800, color: '#111', margin: '0 0 14px', letterSpacing: '-0.02em', fontFamily: HV, lineHeight: 1.2 }}>{cur.title}</h3>
           <p style={{ fontSize: 13.5, color: '#666', lineHeight: 1.78, margin: 0, fontFamily: HV }}>{cur.desc}</p>
         </div>
-
         <div style={{ marginTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
             <span style={{ fontSize: 10.5, color: '#bbb', fontFamily: HV }}>Progress</span>
-            {/* CHANGE: counter — green */}
             <span style={{ fontSize: 10.5, fontWeight: 700, color: GREEN, fontFamily: HV }}>{active + 1} / {steps.length}</span>
           </div>
           <div style={{ height: 3, background: 'rgba(0,0,0,0.07)', borderRadius: 2, overflow: 'hidden' }}>
-            {/* CHANGE: progress bar — green */}
             <div style={{ height: '100%', background: 'linear-gradient(90deg, #093024 0%, #165c3a 100%)', width: `${((active + 1) / steps.length) * 100}%`, transition: 'width 0.5s ease', borderRadius: 2 }} />
           </div>
         </div>
@@ -326,10 +221,9 @@ function ProcessLayout({ steps }) {
   );
 }
 
-/* ── UK-SPECIFIC DATA ── */
 const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'UK-based founders commonly register a Private Limited Company, LLP, or a Wholly Owned Subsidiary. We help you choose based on your sector, FDI requirements, and long-term plans.' },
-  { n: '02', title: 'Apostille Documents', time: 'Week 1', desc: 'UK documents (passport, address proof) must be apostilled . We provide a step-by-step guide.' },
+  { n: '02', title: 'Apostille Documents', time: 'Week 1', desc: 'UK documents (passport, address proof) must be apostilled. We provide a step-by-step guide.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. The application is handled remotely — no travel to India required.' },
   { n: '04', title: 'Name Reservation — MCA RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and verify availability before proceeding to incorporation.' },
   { n: '05', title: 'File SPICe+ Incorporation Form', time: 'Week 2–3', desc: 'The SPICe+ (INC-32) form combines company incorporation, DIN, PAN, TAN, and GSTIN applications in a single online submission to the Ministry of Corporate Affairs.' },
@@ -389,53 +283,33 @@ export default function Page() {
         .lbl { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; font-weight:600; color:#000000; font-family:Helvetica, Arial, sans-serif; display:block; margin-bottom:12px; }
         .g-btn { display:inline-flex; align-items:center; gap:8px; background:#093024; color:#fff; font-family:Helvetica, Arial, sans-serif; font-size:14.5px; font-weight:700; padding:13px 26px; border-radius:6px; border:none; cursor:pointer; text-decoration:none; transition:background .2s,transform .15s; }
         .g-btn:hover { background:#0a3d2c; transform:translateY(-1px); }
-
-        /* CHANGE: no border between sections */
-        .sec-div { border-top: none; }
-
-        /* CHANGE: why-grid — separate cards, gap between them */
-        .why-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 18px;
-        }
-        /* CHANGE: each why-card is an independent card with its own border & radius */
-        .why-card {
-          padding: 32px 28px;
-          border: 1px solid rgba(0,0,0,0.12);
-          border-radius: 16px;
-          cursor: default;
-          position: relative;
-          overflow: hidden;
-          background: #fff;
-          transition: box-shadow 0.28s ease, transform 0.28s ease, border-color 0.28s ease;
-        }
-        .why-card:hover {
-          box-shadow: 0 12px 36px rgba(9,48,36,0.10);
-          transform: translateY(-3px);
-          border-color: rgba(9,48,36,0.22);
-        }
-        /* remove the row-divider concept — not needed with gap */
-        .why-row-divider { display: none; }
-
+        .sec-div { border-top:none; }
+        .why-eq-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:18px; }
+        .why-eq-grid > div { display:flex; }
+        .why-anim-card { flex:1; border-radius:22px; border:1.5px solid rgba(9,48,36,0.14); padding:36px 32px; position:relative; overflow:hidden; cursor:default; background:linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%); box-shadow:0 4px 18px rgba(9,48,36,0.07); transition:box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease; }
+        .why-anim-card:hover { box-shadow:0 16px 48px rgba(9,48,36,0.13); transform:translateY(-5px); border-color:rgba(9,48,36,0.25); }
+        .why-anim-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#093024 0%,#e69819 100%); }
         .stbl { width:100%; border-collapse:collapse; font-family:Helvetica, Arial, sans-serif; }
         .stbl th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:#aaa; padding:0 20px 12px; text-align:left; border-bottom:2px solid rgba(0,0,0,0.12); }
         .stbl td { font-size:14px; color:#444; padding:18px 20px; border-bottom:1px solid rgba(0,0,0,0.07); font-family:Helvetica, Arial, sans-serif; vertical-align:top; }
         .stbl tr:last-child td { border-bottom:none; }
         .stbl td:first-child { font-weight:700; color:#111; }
         .stbl tr:hover td { background:rgba(9,48,36,0.03); }
-
-        
-        /* NO borders between sections */
-        .sec-div { border-top: none; }
-
-        /* Headings: always centered, at every screen size, regardless of parent flex/grid context */
         .sec-heading-wrap { text-align:center !important; width:100%; margin-left:auto; margin-right:auto; }
         .sec-heading-wrap > * { margin-left:auto !important; margin-right:auto !important; text-align:center !important; }
 
-        /* 861px – 1200px: collapse the straddling two-column doc timeline into the same
-           clean single-side layout used on mobile, just with more breathing room, so
-           nothing drifts off-centre or overlaps the middle line in this in-between range */
+        /* ── HERO mobile override — same pattern as USA page ── */
+        .uk-hero {
+          background-image: url('/banners and logos/UK.png');
+          background-size: cover;
+          background-position: center;
+        }
+        @media (max-width: 768px) {
+          .uk-hero {
+            background-image: url('/mobile-banners/UK.webp') !important;
+          }
+        }
+
         @media(max-width:1200px){
           .doc-tl { max-width:640px !important; padding:10px 24px !important; }
           .doc-tl-line, .doc-tl-line-fill, .doc-tl-cap { left:32px !important; }
@@ -459,28 +333,30 @@ export default function Page() {
         }
         @media(max-width:580px){
           .sec { padding:56px 20px !important; }
-          .why-eq-grid { grid-template-columns: 1fr !important; grid-auto-rows: auto !important; }
+          .why-eq-grid { grid-template-columns:1fr !important; grid-auto-rows:auto !important; }
         }
       `}</style>
 
-      {/* HERO — full-bleed banner, image only */}
-      <section style={{ position: 'relative', minHeight: 580, display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/banners and logos/UK.png')", backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1160, margin: '0 auto', padding: '100px 56px 92px', width: '100%' }}>
-          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(255,255,255,0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
+      {/* HERO — identical pattern to USA page, .uk-hero class handles mobile bg swap */}
+      <section className="uk-hero sec" style={{ backgroundSize: 'cover', backgroundPosition: 'center', padding: '100px 56px 92px' }}>
+        <div style={{ maxWidth: 1160, margin: '0 auto' }}>
+          <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(255,255,255,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From the United Kingdom</span>
-              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', marginBottom: 22, fontFamily: HV, color: '#fff' }}>
-                Register a Company<br />in India from{' '}
-                <em style={{ fontStyle: 'normal', color: '#e69819' }}>the UK.</em>
+              <span className="lbl">Company Registration · From the United Kingdom</span>
+              <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#fff', marginBottom: 22, fontFamily: HV }}>
+                <span style={{ color: 'rgba(255, 255, 255, 0.79)' }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ position: 'relative', display: 'inline-block', color: '#e69819' }}>
+                  the UK
+                  <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#e69819', borderRadius: 2 }} />
+                </span>
               </h1>
-              <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.80)', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
+              <p style={{ fontSize: 16, color: '#fff', lineHeight: 1.78, maxWidth: 480, marginBottom: 36, fontFamily: HV }}>
                 100% online. No India visit required. Expert CA support for UK-based NRIs, British nationals, and UK businesses expanding into India.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link href="/contact" className="g-btn">Get a Free Consultation →</Link>
-                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid rgba(255,255,255,0.55)', lineHeight: 1 }}>See the Process</a>
+                <a href="#process" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: HV, fontSize: 14, fontWeight: 600, color: '#ffffffff', textDecoration: 'none', padding: '13px 0', borderBottom: '2px solid #ffffffff', lineHeight: 1 }}>See the Process</a>
               </div>
             </Fade>
             <Fade delay={100}>
@@ -510,7 +386,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* WHY INDIA — equal-height animated gradient cards */}
+      {/* WHY INDIA */}
       <section className="sec sec-div" style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <Fade>
@@ -520,63 +396,13 @@ export default function Page() {
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Six real commercial advantages — not marketing copy.</p>
             </div>
           </Fade>
-
-          <style>{`
-            .why-eq-grid {
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              grid-auto-rows: 1fr;
-              gap: 18px;
-            }
-            .why-eq-grid > div { display: flex; }
-            .why-anim-card {
-              flex: 1;
-              border-radius: 22px;
-              border: 1.5px solid rgba(9,48,36,0.14);
-              padding: 36px 32px;
-              position: relative;
-              overflow: hidden;
-              cursor: default;
-              background: linear-gradient(160deg,#EAF4EF 0%,#FCF3E1 100%);
-              box-shadow: 0 4px 18px rgba(9,48,36,0.07);
-              transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
-            }
-            .why-anim-card:hover {
-              box-shadow: 0 16px 48px rgba(9,48,36,0.13);
-              transform: translateY(-5px);
-              border-color: rgba(9,48,36,0.25);
-            }
-            .why-anim-card::before {
-              content: '';
-              position: absolute;
-              top: 0; left: 0; right: 0;
-              height: 3px;
-              background: linear-gradient(90deg, #093024 0%, #e69819 100%);
-            }
-            @media (max-width: 860px) {
-              .why-eq-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: auto; }
-            }
-            @media (max-width: 540px) {
-              .why-eq-grid { grid-template-columns: 1fr !important; }
-            }
-          `}</style>
-
           <div className="why-eq-grid">
             {whyPoints.map(([heading, body], i) => (
               <Fade key={i} delay={i * 55}>
                 <div className="why-anim-card">
-                  {/* number */}
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(9,48,36,0.35)', fontFamily: HV, marginBottom: 16 }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </div>
-                  {/* title */}
-                  <h3 style={{ fontSize: 'clamp(17px,1.8vw,20px)', fontWeight: 800, color: '#111', margin: '0 0 12px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.25 }}>
-                    {heading}
-                  </h3>
-                  {/* body */}
-                  <p style={{ fontSize: 14, color: '#555', lineHeight: 1.72, margin: 0, fontFamily: HV }}>
-                    {body}
-                  </p>
+                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(9,48,36,0.35)', fontFamily: HV, marginBottom: 16 }}>{String(i + 1).padStart(2, '0')}</div>
+                  <h3 style={{ fontSize: 'clamp(17px,1.8vw,20px)', fontWeight: 800, color: '#111', margin: '0 0 12px', fontFamily: HV, letterSpacing: '-0.02em', lineHeight: 1.25 }}>{heading}</h3>
+                  <p style={{ fontSize: 14, color: '#555', lineHeight: 1.72, margin: 0, fontFamily: HV }}>{body}</p>
                 </div>
               </Fade>
             ))}
@@ -591,7 +417,7 @@ export default function Page() {
             <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
               <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the UK to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
-              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
+              <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 5 s — click any step to jump.</p>
             </div>
           </Fade>
           <Fade delay={80}><ProcessLayout steps={steps} /></Fade>
@@ -654,8 +480,6 @@ export default function Page() {
           ))}
         </div>
       </section>
-
-
 
       {/* INTERNAL LINKS */}
       <section style={{ padding: '24px 56px 48px', background: '#fff' }}>

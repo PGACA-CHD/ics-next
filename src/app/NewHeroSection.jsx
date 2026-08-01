@@ -66,12 +66,6 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
           background-image: url('/banners and logos/1.png');
           background-size: cover; background-position: center 38%;
         }
-        @media(max-width: 768px) {
-          .nhero-bg {
-            background-image: url('/mobile-banners/mobile-banner.png');
-            background-position: center top;
-          }
-        }
         .nhero-bg-tint {
           position: absolute; inset: 0;
           background: none;
