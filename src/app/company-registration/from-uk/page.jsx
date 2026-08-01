@@ -306,7 +306,7 @@ export default function Page() {
         }
         @media (max-width: 768px) {
           .uk-hero {
-            background-image: url('/mobile-banners/UK.webp') !important;
+            background-image: url('/mobile-banners/UK_FINAL_MOBILE(1).webp') !important;
           }
         }
 

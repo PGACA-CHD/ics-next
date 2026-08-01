@@ -63,6 +63,12 @@ export default function Page() {
           background: url('/banners and logos/Tools page main .png') center/cover no-repeat;
           position: relative;
         }
+
+        @media (max-width: 520px) {
+          .lg-hero {
+            background-image: url('/mobile-banners/TOOLSSFINALMOBILE.webp') !important;
+          }
+        }
         .lg-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
 
         .lg-hero-eyebrow {

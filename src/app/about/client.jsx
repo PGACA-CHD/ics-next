@@ -23,33 +23,23 @@ function useReveal(t = 0.12) {
   return [ref, vis];
 }
 
-/* ── FIXED Fade: no layout shift on mobile ──
-   The scroll jump was caused by this component rendering opacity:0 / translateY
-   on first paint, then the isMobile state updating after mount, causing a reflow.
-   Fix: always render children visible on first paint. The animation only applies
-   once IntersectionObserver fires AND we've confirmed desktop via useEffect.
-   On mobile, children render at full opacity from the start — no jump. */
 function Fade({ children, delay = 0, up = true }) {
   const [ref, vis] = useReveal();
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mobile = window.innerWidth <= 768;
-    setIsMobile(mobile);
+    setIsMobile(window.innerWidth <= 768);
     setMounted(true);
   }, []);
 
-  /* Before mount (SSR / first paint): always show children, no transform */
-  if (!mounted || isMobile) {
-    return <div>{children}</div>;
-  }
+  const animate = mounted && !isMobile;
 
   return (
     <div ref={ref} style={{
-      opacity: vis ? 1 : 0,
-      transform: vis ? 'translateY(0)' : (up ? 'translateY(22px)' : 'translateY(0)'),
-      transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms`
+      opacity: animate ? (vis ? 1 : 0) : 1,
+      transform: animate ? (vis ? 'translateY(0)' : (up ? 'translateY(22px)' : 'translateY(0)')) : 'none',
+      transition: animate ? `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms` : 'none'
     }}>
       {children}
     </div>
@@ -78,7 +68,7 @@ function CountUp({ end, suffix = '', prefix = '', delay = 0, isText = false }) {
 
 function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
   return (
-    <div style={{ textAlign: center ? "center" : "left", marginBottom: mb, fontFamily: F }}>
+    <div className="sh-heading" style={{ textAlign: center ? "center" : "left", marginBottom: mb, fontFamily: F }}>
       {eyebrow && (
         <p style={{ fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase", color: GREEN, fontWeight: 700, margin: "0 0 14px", fontFamily: F }}>{eyebrow}</p>
       )}
@@ -89,7 +79,6 @@ function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
     </div>
   );
 }
-
 const LI = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="#0077b5" style={{ flexShrink: 0, marginTop: 1 }}>
     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -394,6 +383,12 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           .about-stats { padding: 6px !important; border-radius: 14px !important; }
           .about-stats > div { padding: 18px 14px !important; }
         }
+          /* Force section headings to stay centered on every device, no matter what
+   parent alignment (grid/flex text-align) tries to leak in. */
+.sh-heading,
+.sh-heading * {
+  text-align: center !important;
+}
       `}</style>
 
       {/* ── HERO — .about-hero handles desktop + mobile bg swap ── */}
