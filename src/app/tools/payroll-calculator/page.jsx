@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Calculate take-home salary from CTC. PF, ESI, professional tax, income tax deductions. New and old regime.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/payroll-calculator' },
   openGraph: {
-    title: 'India Payroll Calculator | CTC to Take-Home Salary | India Company Setup',
+    title: 'India Payroll Calculator | CTC to Take-Home Salary',
     description: 'Calculate take-home salary from CTC. PF, ESI, professional tax, income tax deductions. New and old regime.',
     url: 'https://www.indiacompanysetup.com/tools/payroll-calculator',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Payroll Calculator CTC to Take-Home' }],

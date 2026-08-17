@@ -458,7 +458,7 @@ export default function Page() {
                   <div className="guide-card" onClick={() => router.push(ROUTES[g.page] || '/')}>
                     <div className="guide-card-inner">
                       <div className="guide-img-wrap">
-                        <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "12px", transition: "transform 0.3s ease" }} className="guide-img" />
+                        <img src={g.img} alt={g.label} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "12px", transition: "transform 0.3s ease" }} className="guide-img" loading="lazy" />
                       </div>
                       <div className="guide-copy">
                         <div style={{ fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 6, fontFamily: HV, lineHeight: 1.25 }}>{g.label}</div>

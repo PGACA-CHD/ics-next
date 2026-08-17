@@ -1,11 +1,11 @@
 import ClientPage from './client';
 
 export const metadata = {
-  title: 'GST HSN Code & SAC Code Finder | India Company Setup',
+  title: 'GST HSN Code & SAC Code Finder',
   description: 'Find the correct HSN code for goods or SAC code for services under India GST. Search by description or code number. Browse all 99 HSN chapters and major SAC categories. Data from CBIC.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/hsn-sac-finder' },
   openGraph: {
-    title: 'GST HSN Code & SAC Code Finder | India Company Setup',
+    title: 'GST HSN Code & SAC Code Finder',
     description: 'Search HSN codes for goods and SAC codes for services under India GST. Browse all 99 HSN chapters and major service categories.',
     url: 'https://www.indiacompanysetup.com/tools/hsn-sac-finder',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'GST HSN SAC Finder' }],

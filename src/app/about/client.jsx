@@ -253,7 +253,7 @@ function TeamCard({ photo, name, liUrl, role, bio, accent, delay = 0 }) {
     >
       <div className="team-card-photo" style={{ width: 200, height: '100%', minHeight: 280, background: 'rgba(11,61,46,0.10)', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
         {photo
-          ? <img src={photo} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }} />
+          ? <img src={photo} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }} loading="lazy" />
           : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(11,61,46,0.18)', fontFamily: F, fontSize: 48, fontWeight: 800, color: GREEN }}>{name.charAt(0)}</div>
         }
         <div className="team-card-overlay" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 60, background: 'linear-gradient(to top,rgba(0,0,0,0.18),transparent)', pointerEvents: 'none' }} />
@@ -426,6 +426,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
                 {LOGOS_ROW1.map(name => (
                   <div key={`${di}-${name}`} className="logo-item">
                     <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name}
+                      loading="lazy"
                       onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.innerHTML = `<span style="font-size:11px;font-weight:600;color:#ccc;font-family:${F}">${name}</span>`; }} />
                   </div>
                 ))}
@@ -441,6 +442,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
                 {LOGOS_ROW2.map(name => (
                   <div key={`${di}-${name}`} className="logo-item">
                     <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name}
+                      loading="lazy"
                       onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.innerHTML = `<span style="font-size:11px;font-weight:600;color:#ccc;font-family:${F}">${name}</span>`; }} />
                   </div>
                 ))}
@@ -570,7 +572,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
                 <div key={item.title} className="reg-card">
                   <div className="reg-card-inner">
                     <div style={{ width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                      <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} loading="lazy" />
                     </div>
                     <div><p className="reg-title">{item.title}</p><p className="reg-desc">{item.desc}</p></div>
                   </div>

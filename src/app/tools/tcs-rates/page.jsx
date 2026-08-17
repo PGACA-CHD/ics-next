@@ -1,7 +1,7 @@
 import ClientPage from './client';
 
 export const metadata = {
-  title: 'TCS Rate Chart FY 2026-27 | Section 206C All Sub-Sections | India Company Setup',
+  title: 'TCS Rate Chart FY 2026-27 | Section 206C All Sub-Sections',
   description: 'Complete TCS rate chart for FY 2026-27 — all Section 206C sub-sections including scrap, timber, minerals, LRS remittances and motor vehicles. IT Act 2025 Section 394(1) table references, challan codes and Form 27EQ codes.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/tcs-rates' },
   openGraph: {

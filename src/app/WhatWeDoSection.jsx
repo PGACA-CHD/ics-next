@@ -226,10 +226,10 @@ export default function WhatWeDoSection({ T, ROUTES }) {
     ];
 
     const features = [
-        { icon: <img src="/banners and logos/Strategy First.png" alt="Strategy first" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Strategy first", desc: "Structure designed before you file." },
-        { icon: <img src="/banners and logos/Complaince always.png" alt="Compliance always" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Compliance always", desc: "Every detail handled, every time." },
-        { icon: <img src="/banners and logos/Time Zone alligned.png" alt="Time zone aligned" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Time zone aligned", desc: "Responsive support across the globe." },
-        { icon: <img src="/banners and logos/Senior Led.png" alt="Senior led" style={{ width: 22, height: 22, objectFit: 'contain' }} />, label: "Senior led", desc: "Direct access to experienced advisors." },
+        { icon: <img src="/banners and logos/Strategy First.png" alt="Strategy first" style={{ width: 22, height: 22, objectFit: 'contain' }} loading="lazy" />, label: "Strategy first", desc: "Structure designed before you file." },
+        { icon: <img src="/banners and logos/Complaince always.png" alt="Compliance always" style={{ width: 22, height: 22, objectFit: 'contain' }} loading="lazy" />, label: "Compliance always", desc: "Every detail handled, every time." },
+        { icon: <img src="/banners and logos/Time Zone alligned.png" alt="Time zone aligned" style={{ width: 22, height: 22, objectFit: 'contain' }} loading="lazy" />, label: "Time zone aligned", desc: "Responsive support across the globe." },
+        { icon: <img src="/banners and logos/Senior Led.png" alt="Senior led" style={{ width: 22, height: 22, objectFit: 'contain' }} loading="lazy" />, label: "Senior led", desc: "Direct access to experienced advisors." },
     ];
 
     return (

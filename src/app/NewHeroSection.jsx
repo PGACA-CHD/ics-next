@@ -23,11 +23,17 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
   const router = useRouter();
   const go = (path) => router.push(path || '/');
 
+  const [mounted, setMounted] = useState(false);
   const [index, setIndex] = useState(0);
   const [pct, setPct] = useState(0);
   const startRef = useRef(null);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     let raf;
     startRef.current = performance.now();
 
@@ -47,7 +53,7 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
     }
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [index]);
+  }, [index, mounted]);
 
   const done = Math.min(index, MILESTONES.length);
   const overallPct = index >= MILESTONES.length ? 100 : ((index + pct / 100) / MILESTONES.length) * 100;
@@ -198,12 +204,12 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
 
         /* ── Trust bar ── */
         .nhero-trust {
-          display:flex; flex-wrap:wrap; gap:0;
+          display:flex; flex-wrap:wrap; gap:12px 18px;
           background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
           backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
           border-radius:14px; padding:16px 22px; width:fit-content; max-width:100%;
         }
-        .nhero-trust-item { padding:0 24px; border-right:1px solid rgba(255,255,255,.13); }
+        .nhero-trust-item { padding:0 18px; border-right:1px solid rgba(255,255,255,.13); }
         .nhero-trust-item:first-child { padding-left:0; }
         .nhero-trust-item:last-child { border-right:none; padding-right:0; }
         .nhero-trust-label {
@@ -259,11 +265,11 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         .nhero-track-item-label {
           flex:1; font-family:${FONT_UI}; font-size:13px; line-height:1.4; transition:color .2s ease;
         }
-        .nhero-track-item-label.is-done    { color:rgba(255,255,255,.5); }
+        .nhero-track-item-label.is-done    { color:rgba(255,255,255,.75); }
         .nhero-track-item-label.is-active  { color:#fff; font-weight:600; }
-        .nhero-track-item-label.is-pending { color:rgba(255,255,255,.38); }
+        .nhero-track-item-label.is-pending { color:rgba(255,255,255,.75); }
         .nhero-track-item-tag {
-          flex-shrink:0; font-family:${FONT_UI}; font-size:10.5px; color:rgba(255,255,255,.35);
+          flex-shrink:0; font-family:${FONT_UI}; font-size:10.5px; color:rgba(255,255,255,.75);
         }
 
         @media (prefers-reduced-motion: no-preference) {
@@ -281,15 +287,15 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
           .nhero-cta-row { gap: 12px; }
           .nhero-btn-primary, .nhero-btn-ghost { flex: 1 1 auto; justify-content: center; }
           .nhero-btn-divider { display: none; }
-          .nhero-trust { padding: 14px 16px; }
-          .nhero-trust-item { padding: 0 14px; }
+          .nhero-trust { padding: 14px 16px; gap: 10px 14px; }
+          .nhero-trust-item { padding: 0 10px; }
           .nhero-track { max-width: 100%; padding: 22px 18px 18px; }
           .nhero-track-ring { width: 56px; height: 56px; }
           .nhero-track-ring-inner { font-size: 14px; }
           .nhero-track-status { font-size: 15px; }
         }
         @media (max-width: 420px) {
-          .nhero-trust { display:grid; grid-template-columns:1fr 1fr; gap:10px 0; padding:14px; }
+          .nhero-trust { display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; padding:14px; }
           .nhero-trust-item { border-right:none; padding:0; }
           .nhero-avatars img { width:32px; height:32px; }
         }

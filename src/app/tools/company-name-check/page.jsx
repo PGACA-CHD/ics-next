@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Check company name availability in India. Rules for company names, prohibited words, MCA RUN service guide.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/company-name-check' },
   openGraph: {
-    title: 'Company Name Availability Check India | MCA Name Search | India Company Setup',
+    title: 'Company Name Availability Check India | MCA Name Search',
     description: 'Check company name availability in India. Rules for company names, prohibited words, MCA RUN service guide.',
     url: 'https://www.indiacompanysetup.com/tools/company-name-check',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'Company Name Availability Check India' }],

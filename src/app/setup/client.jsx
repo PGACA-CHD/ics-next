@@ -71,7 +71,7 @@ function CountUp({ target, suffix = '', prefix = '', duration = 1400, delay = 0 
       }, stepTime);
     }, delay);
   }, [vis]);
-  return <span ref={ref}>{prefix}{val}{suffix}</span>;
+  return <span ref={ref} style={{ opacity: vis ? 1 : 0, transition: 'opacity 0.3s ease' }}>{prefix}{val}{suffix}</span>;
 }
 
 function SH({ eyebrow, green, gold, center = true, mb = 40 }) {

@@ -42,7 +42,7 @@ function CountUp({ target, suffix = '', duration = 1400, delay = 0 }) {
     const steps = 40; const stepTime = duration / steps; let step = 0;
     setTimeout(() => { const id = setInterval(() => { step++; setVal(Math.round(target * step / steps)); if (step >= steps) clearInterval(id); }, stepTime); }, delay);
   }, [vis]);
-  return <span ref={ref}>{val}{suffix}</span>;
+  return <span ref={ref} style={{ opacity: vis ? 1 : 0, transition: 'opacity 0.3s ease' }}>{val}{suffix}</span>;
 }
 function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
   return (

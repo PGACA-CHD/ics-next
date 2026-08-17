@@ -54,6 +54,27 @@ export default function Footer() {
         .footer-col-toggle-icon {
           display: none;
         }
+        .footer-disclaimer {
+          border-top: 1px solid rgba(0,0,0,0.10);
+          padding: 16px 0;
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .footer-disclaimer-bar {
+          width: 3px;
+          min-height: 100%;
+          flex-shrink: 0;
+          background: ${GOLD};
+          border-radius: 2px;
+          align-self: stretch;
+        }
+        .footer-disclaimer-text {
+          font-size: 11.5px;
+          color: #666;
+          line-height: 1.7;
+          font-style: italic;
+        }
         .footer-bottom-row {
           border-top: 1px solid rgba(0,0,0,0.10);
           padding-top: 24px;
@@ -188,6 +209,20 @@ export default function Footer() {
             flex-shrink: 0;
           }
 
+          /* Disclaimer strip */
+          .footer-disclaimer {
+            background: #ffffff;
+            border-top: 1px solid rgba(0,0,0,0.10);
+            padding: 16px 20px;
+          }
+          .footer-disclaimer-text {
+            font-size: 11px;
+            text-align: center;
+          }
+          .footer-disclaimer-bar {
+            display: none;
+          }
+
           /* Bottom copyright row */
           .footer-bottom-row {
             background: #ffffff;
@@ -300,6 +335,14 @@ export default function Footer() {
               </div>
             );
           })}
+        </div>
+
+        {/* Disclaimer bar */}
+        <div className="footer-disclaimer">
+          <span className="footer-disclaimer-bar" aria-hidden="true" />
+          <p className="footer-disclaimer-text">
+            India Company Setup is a private firm and is not affiliated with the Ministry of Corporate Affairs (MCA) or any government entity. We provide professional consultancy services for a fee.
+          </p>
         </div>
 
         {/* Bottom bar */}

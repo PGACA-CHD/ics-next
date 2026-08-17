@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Check FDI limits for any sector in India — automatic route vs government approval route. Based on DPIIT Consolidated FDI Policy.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/fdi-sector-checker' },
   openGraph: {
-    title: 'India FDI Sector Limit Checker | India Company Setup',
+    title: 'India FDI Sector Limit Checker',
     description: 'Check FDI limits for any sector in India — automatic route vs government approval route. Based on DPIIT Consolidated FDI Policy.',
     url: 'https://www.indiacompanysetup.com/tools/fdi-sector-checker',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India FDI Sector Limit Checker' }],

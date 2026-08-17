@@ -531,7 +531,7 @@ export default function HomePage() {
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
                 {["Protiviti India", "Mahindra Defence Systems", "Saregama India", "Ethos Limited", "Polyplex Corporation Limited (Listed)", "Tube Investment of India", "Vibracoustic India Private Limited", "Newtech Filter (BOSCH group Company)", "Godrej, UAE entities", "Ognibene power", "Cloud EQ"].map(name => (
                   <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
-                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} />
+                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -542,7 +542,7 @@ export default function HomePage() {
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
                 {["Defacto Infotech India, AU, US", "CrimsonInsights", "Alleshealth", "Foodjam", "Grid advertising", "Talink", "Mcube capital", "SML Mahindra Limited", "Cheema Boilers Limited", "AWFIS India Private Limited", "Skin elements", "Vyra Life (Modebencura)"].map(name => (
                   <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
-                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} />
+                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -612,7 +612,7 @@ export default function HomePage() {
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 24px 56px rgba(0,0,0,.10)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 12px 35px rgba(0,0,0,.05)"; }}>
                 <div style={{ marginBottom: 20, height: 52, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img src={img} alt={name} style={{ maxHeight: "100%", maxWidth: 72, objectFit: "contain" }} />
+                  <img src={img} alt={name} style={{ maxHeight: "100%", maxWidth: 72, objectFit: "contain" }} loading="lazy" />
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#000", lineHeight: 1.4, marginBottom: 6, whiteSpace: "pre-line", fontFamily: HV }}>{name}</div>
                 <div style={{ fontSize: 12, color: G, fontWeight: 700, marginBottom: 4, fontFamily: HV }}>{proof}</div>
@@ -637,7 +637,7 @@ export default function HomePage() {
                   { img: "/banners and logos/Client Satisfaction (2).png", num: "98%", label: "Client Satisfaction" },
                 ].map(({ img, num, label }, i) => (
                   <div key={label} style={{ padding: "16px 12px", textAlign: "center", borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none", borderTop: i >= 2 ? "1px solid #ECE7E1" : "none", display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
-                    <img src={img} alt={label} style={{ width: 38, height: 38, objectFit: "contain" }} />
+                    <img src={img} alt={label} style={{ width: 38, height: 38, objectFit: "contain" }} loading="lazy" />
                     <div style={{ fontSize: 26, color: "#000", lineHeight: 1, fontWeight: 700, fontFamily: HV }}>{num}</div>
                     <div style={{ fontSize: 11, color: "#555", lineHeight: 1.35, fontFamily: HV }}>{label}</div>
                   </div>
@@ -659,6 +659,7 @@ export default function HomePage() {
                 onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = "/worldmap.png"; }}
                 alt="World map"
                 className="gr-map-img"
+                loading="lazy"
               />
             </div>
           </div>

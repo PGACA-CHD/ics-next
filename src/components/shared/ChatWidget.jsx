@@ -26,6 +26,7 @@ function getQuickReplies(userText) {
 }
 
 export default function ChatWidget() {
+  const [mounted, setMounted]             = useState(false);
   const [isOpen, setIsOpen]             = useState(false);
   const [messages, setMessages]         = useState([]);
   const [input, setInput]               = useState('');
@@ -40,6 +41,10 @@ export default function ChatWidget() {
   const messagesEndRef = useRef(null);
   const inputRef       = useRef(null);
   const historyRef     = useRef([]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -227,6 +232,8 @@ export default function ChatWidget() {
     <svg width="13" height="18" viewBox="0 0 32 44" fill="none"><rect x="2" y="4" width="28" height="4" rx="2" fill="rgba(255,255,255,.9)"/><rect x="2" y="36" width="28" height="4" rx="2" fill="rgba(255,255,255,.9)"/><rect x="13" y="4" width="6" height="36" rx="2" fill="rgba(255,255,255,.9)"/><polygon points="16,4 9,18 16,14 23,18" fill="#E8900A"/><rect x="13.5" y="14" width="5" height="14" rx="1.5" fill="#E8900A"/></svg>
   );
 
+  if (!mounted) return null;
+
   return (
     <>
       <div style={s.window} role="dialog" aria-label="India Entry AI Assistant">
@@ -234,7 +241,7 @@ export default function ChatWidget() {
           <div style={s.avatar}><svg width="20" height="28" viewBox="0 0 32 44" fill="none"><rect x="2" y="4" width="28" height="4" rx="2" fill="rgba(255,255,255,.92)"/><rect x="2" y="36" width="28" height="4" rx="2" fill="rgba(255,255,255,.92)"/><rect x="13" y="4" width="6" height="36" rx="2" fill="rgba(255,255,255,.92)"/><polygon points="16,4 9,18 16,14 23,18" fill="#E8900A"/><rect x="13.5" y="14" width="5" height="14" rx="1.5" fill="#E8900A"/></svg></div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', fontFamily: "'Cormorant Garamond', serif", letterSpacing: '.01em' }}>Arya — India Entry Advisor</div>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,.6)', display: 'flex', alignItems: 'center', gap: 5, marginTop: 1 }}>
+            <div style={{ fontSize: 11, color: 'rgba(255,255,255,.85)', display: 'flex', alignItems: 'center', gap: 5, marginTop: 1 }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
               AI-powered · Backed by Ex-Big 4 team
             </div>
@@ -265,10 +272,10 @@ export default function ChatWidget() {
         {showLeadForm && !leadCaptured && (
           <div style={s.leadForm}>
             <div style={{ fontWeight: 600, color: '#0B3D2E', marginBottom: 9, fontSize: 12.5 }}>Get your free India Entry Starter Guide</div>
-            <input style={s.leadInput} placeholder="Your name" value={leadData.name} onChange={e => setLeadData(p => ({ ...p, name: e.target.value }))} />
-            <input style={s.leadInput} placeholder="Company & country" value={leadData.company} onChange={e => setLeadData(p => ({ ...p, company: e.target.value }))} />
-            <input style={s.leadInput} type="email" placeholder="Work email" value={leadData.email} onChange={e => setLeadData(p => ({ ...p, email: e.target.value }))} />
-            <select style={s.leadInput} value={leadData.timeline} onChange={e => setLeadData(p => ({ ...p, timeline: e.target.value }))}>
+            <input style={s.leadInput} aria-label="Your name" placeholder="Your name" value={leadData.name} onChange={e => setLeadData(p => ({ ...p, name: e.target.value }))} />
+            <input style={s.leadInput} aria-label="Company & country" placeholder="Company & country" value={leadData.company} onChange={e => setLeadData(p => ({ ...p, company: e.target.value }))} />
+            <input style={s.leadInput} aria-label="Work email" type="email" placeholder="Work email" value={leadData.email} onChange={e => setLeadData(p => ({ ...p, email: e.target.value }))} />
+            <select style={s.leadInput} aria-label="When are you planning India entry?" value={leadData.timeline} onChange={e => setLeadData(p => ({ ...p, timeline: e.target.value }))}>
               <option value="">When are you planning India entry?</option>
               <option>Within 3 months</option>
               <option>3-6 months</option>
@@ -276,7 +283,7 @@ export default function ChatWidget() {
             </select>
             <button style={s.leadBtn} onClick={submitLead}>Send me the guide</button>
             <div style={{ textAlign: 'center', marginTop: 6 }}>
-              <button onClick={() => setShowLeadForm(false)} style={{ background: 'none', border: 'none', fontSize: 11, color: '#888', cursor: 'pointer', fontFamily: 'inherit' }}>No thanks, continue chatting</button>
+              <button onClick={() => setShowLeadForm(false)} style={{ background: 'none', border: 'none', fontSize: 11, color: '#545454', cursor: 'pointer', fontFamily: 'inherit' }}>No thanks, continue chatting</button>
             </div>
           </div>
         )}
@@ -296,6 +303,7 @@ export default function ChatWidget() {
 
         <div style={s.inputArea}>
           <textarea ref={inputRef} style={s.inputEl} rows={1}
+            aria-label="Ask about setting up in India"
             placeholder="Ask about setting up in India..."
             value={input}
             onChange={e => {
@@ -306,6 +314,7 @@ export default function ChatWidget() {
             onKeyDown={handleKey}
           />
           <button style={{ ...s.sendBtn, opacity: isLoading ? 0.5 : 1 }}
+            aria-label="Send message"
             onClick={() => sendMessage()} disabled={isLoading}
             onMouseEnter={e => e.currentTarget.style.background = '#155c44'}
             onMouseLeave={e => e.currentTarget.style.background = '#0B3D2E'}>
