@@ -49,6 +49,7 @@ export const metadata = {
 
 const GA4_ID = 'G-VFH7W7VQ44';
 const GTM_ID = 'GT-WKRW9GQZ';
+const GAD_ID = 'AW-16749732375';
 
 export default function RootLayout({ children }) {
   return (
