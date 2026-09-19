@@ -93,6 +93,7 @@ export default function RootLayout({ children }) {
         <Script id="ga4-config" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
           gtag('js', new Date());
           gtag('config', '${GA4_ID}', { send_page_view: false, transport_type: 'beacon' });
+          gtag('config', '${GAD_ID}');
         ` }} />
       </body>
     </html>
