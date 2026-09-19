@@ -1,7 +1,7 @@
 import ClientPage from './client';
 
 export const metadata = {
-  title: 'TDS Rate Chart FY 2026-27 | All Sections 192 to 196D | India Company Setup',
+  title: 'TDS Rate Chart FY 2026-27 | All Sections 192 to 196D',
   description: 'Complete TDS rate chart for FY 2026-27 covering all sections — 192 to 196D. Search by section, payment type or keyword. Threshold limits, individual/HUF vs company rates. Built by Ex-Big 4 CAs.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/tds-rates' },
   openGraph: {

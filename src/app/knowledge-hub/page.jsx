@@ -4,7 +4,10 @@
 import Link from 'next/link';
 
 const CF_SPACE_ID = 'qjo3cpray5h2';
-const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN;
+const CF_TOKEN =
+  process.env.CONTENTFUL_DELIVERY_TOKEN ||
+  process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN ||
+  'Me3wAoh5C8R-voHvn3buH1R3nWLM9f4QrT6jKVaWDtY';
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 
 export const metadata = {
@@ -42,7 +45,10 @@ async function getArticles() {
   try {
     const res = await fetch(
       `${CF_URL}?content_type=article&order=-fields.publishedDate&limit=50&access_token=${CF_TOKEN}`,
-      { next: { revalidate: 21600 } }
+      {
+        headers: { Authorization: `Bearer ${CF_TOKEN}` },
+        next: { revalidate: 21600 },
+      }
     );
     if (!res.ok) return [];
     const data = await res.json();
@@ -59,8 +65,8 @@ async function getArticles() {
         : '',
       author:
         item.fields.author &&
-        item.fields.author !== 'PGA & Co.' &&
-        item.fields.author !== 'PGA & Co'
+          item.fields.author !== 'PGA & Co.' &&
+          item.fields.author !== 'PGA & Co'
           ? item.fields.author
           : 'Pankaj Gupta, FCA',
     }));
@@ -86,8 +92,8 @@ export default async function KnowledgeHubPage() {
       `}</style>
 
       {/* Hero */}
-      <section style={{ background: '#0B3D2E', padding: 'clamp(72px,8vw,100px) clamp(20px,4vw,56px) clamp(52px,6vw,72px)', position: 'relative', overflow: 'hidden' }}>
-        <div className="kh-hero-grid" />
+      <section style={{ backgroundImage: "url('/banners and logos/Knowledge Hub.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: 'clamp(72px,8vw,100px) clamp(20px,4vw,56px) clamp(52px,6vw,72px)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 1 }} />
         <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(232,144,10,.13)', border: '1px solid rgba(232,144,10,.28)', color: '#F5A828', padding: '5px 13px', borderRadius: 50, fontSize: 10.5, fontWeight: 600, letterSpacing: '.6px', textTransform: 'uppercase', marginBottom: 20 }}>
             Knowledge Hub
@@ -145,24 +151,7 @@ export default async function KnowledgeHubPage() {
             </>
           )}
 
-          {/* Bottom CTA */}
-          <div style={{ marginTop: 64, background: '#17170F', borderRadius: 16, padding: '40px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 40, alignItems: 'center' }}>
-            <div>
-              <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: 'uppercase', color: '#F5A828', fontWeight: 600, marginBottom: 10 }}>Have a question?</div>
-              <h3 className="font-display" style={{ fontSize: 26, fontWeight: 600, color: '#fff', marginBottom: 8 }}>
-                Rather talk to a CA directly?
-              </h3>
-              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.42)', lineHeight: 1.7 }}>
-                Our team handles incorporation, transfer pricing, FEMA, GST, payroll, and international tax. Free 30-minute consultation.
-              </p>
-            </div>
-            <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <Link href="/contact" className="ics-btn ics-btn-primary ics-btn-lg" style={{ display: 'inline-block' }}>
-                Book Free Consultation →
-              </Link>
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,.25)', marginTop: 8 }}>CA, CS & accountant team</div>
-            </div>
-          </div>
+
 
         </div>
       </section>

@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Free online tools for India taxation: Income Tax Calculator for companies, LLP and individuals; TDS rates FY 2026-27; GST HSN/SAC code finder. Built by Ex-Big 4 CAs.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools' },
   openGraph: {
-    title: 'Free India Tax & GST Tools | India Company Setup',
+    title: 'Free India Tax & GST Tools',
     description: 'Free online tools for India taxation: Income Tax Calculator for companies, LLP and individuals; TDS rates FY 2026-27; GST HSN/SAC code finder.',
     url: 'https://www.indiacompanysetup.com/tools',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Tax Tools' }],

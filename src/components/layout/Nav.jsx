@@ -3,8 +3,20 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { T, NAV_LINKS, PHONE } from '@/lib/config';
+import { T, NAV_LINKS, PHONE, CALENDLY_URL } from '@/lib/config';
 import Logo from '@/components/shared/Logo';
+
+const HV = 'Helvetica, Arial, sans-serif';
+const GOLD = '#c8870a';
+
+function WhatsAppIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.524 5.847L.057 23.494a.5.5 0 0 0 .614.619l5.757-1.505A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.013-1.374l-.36-.214-3.724.974.994-3.63-.234-.373A9.818 9.818 0 1 1 12 21.818z"/>
+    </svg>
+  );
+}
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 
@@ -23,10 +35,10 @@ function isLinkActive(link, pathname) {
 /* ─── component ───────────────────────────────────────────────── */
 
 export default function Nav() {
-  const [scrolled,          setScrolled]          = useState(false);
-  const [menuOpen,          setMenuOpen]           = useState(false);
-  const [openDropdown,      setOpenDropdown]       = useState(null); // desktop hover
-  const [mobileExpanded,    setMobileExpanded]     = useState(null); // mobile toggle
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null); // desktop hover
+  const [mobileExpanded, setMobileExpanded] = useState(null); // mobile toggle
   const pathname = usePathname();
 
   /* scroll listener */
@@ -49,18 +61,18 @@ export default function Nav() {
     return (
       <div
         style={{
-          position:     'absolute',
-          top:          'calc(100% + 6px)',
-          left:         '50%',
-          transform:    'translateX(-50%)',
-          background:   '#fff',
-          border:       `1px solid ${T.bdr}`,
+          position: 'absolute',
+          top: 'calc(100% + 6px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#fff',
+          border: `1px solid ${T.bdr}`,
           borderRadius: 12,
-          padding:      '6px 0',
-          minWidth:     236,
-          boxShadow:    '0 8px 28px rgba(11,61,46,.10), 0 2px 8px rgba(0,0,0,.06)',
-          zIndex:       500,
-          whiteSpace:   'nowrap',
+          padding: '6px 0',
+          minWidth: 236,
+          boxShadow: '0 8px 28px rgba(11,61,46,.10), 0 2px 8px rgba(0,0,0,.06)',
+          zIndex: 500,
+          whiteSpace: 'nowrap',
         }}
       >
         {items.map((child, idx) => {
@@ -71,13 +83,13 @@ export default function Nav() {
                 {child.groupLabel && (
                   <div
                     style={{
-                      fontSize:      10,
-                      fontWeight:    700,
-                      color:         T.lt,
+                      fontSize: 10,
+                      fontWeight: 700,
+                      color: T.lt,
                       letterSpacing: 0.9,
                       textTransform: 'uppercase',
-                      paddingTop:    8,
-                      fontFamily:    "'DM Sans', sans-serif",
+                      paddingTop: 8,
+                      fontFamily: HV,
                     }}
                   >
                     {child.groupLabel}
@@ -96,22 +108,22 @@ export default function Nav() {
               key={child.href}
               href={child.href}
               style={{
-                display:        'block',
-                padding:        '9px 18px',
-                fontSize:       13.5,
-                fontWeight:     childActive ? 600 : 400,
-                color:          childActive ? T.f : T.mid,
+                display: 'block',
+                padding: '9px 18px',
+                fontSize: 13.5,
+                fontWeight: childActive ? 600 : 400,
+                color: childActive ? '#111' : '#111',
                 textDecoration: 'none',
-                transition:     'background .12s, color .12s',
-                fontFamily:     "'DM Sans', sans-serif",
+                transition: 'background .12s, color .12s',
+                fontFamily: HV,
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = T.stone;
-                e.currentTarget.style.color      = T.f;
+                e.currentTarget.style.color = T.f;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color      = childActive ? T.f : T.mid;
+                e.currentTarget.style.color = childActive ? T.f : T.mid;
               }}
             >
               {child.label}
@@ -128,21 +140,21 @@ export default function Nav() {
       <nav
         className="site-nav"
         style={{
-          position:       'fixed',
-          top:            0,
-          left:           0,
-          right:          0,
-          zIndex:         400,
-          height:         70,
-          display:        'flex',
-          alignItems:     'center',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 400,
+          height: 70,
+          display: 'flex',
+          alignItems: 'center',
           justifyContent: 'space-between',
-          padding:        '0 40px',
-          background:     navBg,
+          padding: '0 40px',
+          background: navBg,
           backdropFilter: 'blur(12px)',
-          borderBottom:   `1px solid ${scrolled ? T.bdr : 'transparent'}`,
-          transition:     'background .25s, border-color .25s',
-          fontFamily:     "'DM Sans', sans-serif",
+          borderBottom: `1px solid ${scrolled ? T.bdr : 'transparent'}`,
+          transition: 'background .25s, border-color .25s',
+          fontFamily: HV,
         }}
       >
         {/* ── Logo ── */}
@@ -174,18 +186,18 @@ export default function Nav() {
                   <Link
                     href={link.href}
                     style={{
-                      display:        'inline-flex',
-                      alignItems:     'center',
-                      gap:            4,
-                      fontSize:       13.5,
-                      fontWeight:     active ? 600 : 400,
-                      color:          active ? T.f : T.mid,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      fontSize: 15,
+                      fontWeight: 400,
+                      color: active ? GOLD : '#111',
                       textDecoration: 'none',
-                      padding:        '6px 12px',
-                      borderRadius:   6,
-                      transition:     'color .18s',
-                      borderBottom:   active ? `2px solid ${T.f}` : '2px solid transparent',
-                      fontFamily:     "'DM Sans', sans-serif",
+                      padding: '6px 12px',
+                      borderRadius: 6,
+                      transition: 'color .18s',
+                      borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                      fontFamily: HV,
                     }}
                   >
                     {link.label}
@@ -197,9 +209,9 @@ export default function Nav() {
                       fill="none"
                       style={{
                         transition: 'transform .2s',
-                        transform:  openDropdown === link.href ? 'rotate(180deg)' : 'none',
+                        transform: openDropdown === link.href ? 'rotate(180deg)' : 'none',
                         flexShrink: 0,
-                        opacity:    0.55,
+                        opacity: 0.55,
                       }}
                     >
                       <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -219,15 +231,15 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize:       13.5,
-                  fontWeight:     active ? 600 : 400,
-                  color:          active ? T.f : T.mid,
+                  fontSize: 15,
+                  fontWeight: 400,
+                  color: active ? GOLD : '#111',
                   textDecoration: 'none',
-                  padding:        '6px 12px',
-                  borderRadius:   6,
-                  transition:     'color .18s',
-                  borderBottom:   active ? `2px solid ${T.f}` : '2px solid transparent',
-                  fontFamily:     "'DM Sans', sans-serif",
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  transition: 'color .18s',
+                  borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                  fontFamily: HV,
                 }}
               >
                 {link.label}
@@ -239,36 +251,52 @@ export default function Nav() {
         {/* ── Right side: phone + CTA + hamburger ── */}
         <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <a
-            href={`tel:${PHONE.replace(/\s/g, '')}`}
+            href={`https://wa.me/919915731447?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20company%20setup%20in%20India.`}
             className="nav-phone"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              fontSize:       13,
-              fontWeight:     500,
-              color:          T.mid,
+              fontSize: 13,
+              fontWeight: 700,
+              color: GOLD,
               textDecoration: 'none',
-              fontFamily:     "'DM Sans', sans-serif",
+              fontFamily: HV,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              background: 'rgba(200,135,10,0.08)',
+              border: '1px solid rgba(200,135,10,0.25)',
+              borderRadius: 6,
+              padding: '5px 10px',
             }}
           >
+            <WhatsAppIcon />
             {PHONE}
           </a>
 
-          <Link
-            href="/contact"
+          <a
+            href="https://calendly.com/indiacompanysetup"
+            target="_blank"
+            rel="noopener noreferrer"
             className="nav-cta-btn"
             style={{
-              background:     T.s,
-              color:          '#fff',
-              padding:        '9px 18px',
-              borderRadius:   8,
-              fontSize:       13.5,
-              fontWeight:     600,
+              background: T.f,
+              color: '#fff',
+              padding: '9px 18px',
+              borderRadius: 8,
+              fontSize: 13.5,
+              fontWeight: 600,
               textDecoration: 'none',
-              fontFamily:     "'DM Sans', sans-serif",
-              whiteSpace:     'nowrap',
+              fontFamily: HV,
+              whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
             }}
           >
-            Free Consultation →
-          </Link>
+            Free Consultation
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
 
           <button
             className="nav-hamburger"
@@ -278,42 +306,42 @@ export default function Nav() {
             type="button"
             style={{
               background: 'none',
-              border:     'none',
-              cursor:     'pointer',
-              padding:    0,
-              width:      44,
-              height:     44,
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              width: 44,
+              height: 44,
               flexShrink: 0,
             }}
           >
             <div
               style={{
-                width:      22,
-                height:     2,
+                width: 22,
+                height: 2,
                 background: T.ch,
                 borderRadius: 2,
                 transition: 'transform .2s ease',
-                transform:  menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+                transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
               }}
             />
             <div
               style={{
-                width:      22,
-                height:     2,
+                width: 22,
+                height: 2,
                 background: T.ch,
                 borderRadius: 2,
-                opacity:    menuOpen ? 0 : 1,
+                opacity: menuOpen ? 0 : 1,
                 transition: 'opacity .2s ease',
               }}
             />
             <div
               style={{
-                width:      22,
-                height:     2,
+                width: 22,
+                height: 2,
                 background: T.ch,
                 borderRadius: 2,
                 transition: 'transform .2s ease',
-                transform:  menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
+                transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
               }}
             />
           </button>
@@ -338,12 +366,12 @@ export default function Nav() {
                   {/* parent toggle row */}
                   <div
                     style={{
-                      display:         'flex',
-                      alignItems:      'center',
-                      justifyContent:  'space-between',
-                      padding:         '12px 0',
-                      borderBottom:    '1px solid rgba(255,255,255,.07)',
-                      cursor:          'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '12px 0',
+                      borderBottom: '1px solid rgba(255,255,255,.07)',
+                      cursor: 'pointer',
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -354,10 +382,10 @@ export default function Nav() {
                   >
                     <span
                       style={{
-                        fontSize:    26,
-                        fontWeight:  active ? 600 : 400,
-                        color:       active ? T.sl : 'rgba(255,255,255,.88)',
-                        fontFamily:  "'Cormorant Garamond', serif",
+                        fontSize: 26,
+                        fontWeight: active ? 600 : 400,
+                        color: active ? T.sl : 'rgba(255,255,255,.88)',
+                        fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
                       }}
                     >
                       {link.label}
@@ -369,7 +397,7 @@ export default function Nav() {
                       fill="none"
                       style={{
                         transition: 'transform .2s',
-                        transform:  expanded ? 'rotate(180deg)' : 'none',
+                        transform: expanded ? 'rotate(180deg)' : 'none',
                         flexShrink: 0,
                       }}
                     >
@@ -381,9 +409,9 @@ export default function Nav() {
                   {expanded && (
                     <div
                       style={{
-                        paddingLeft:   16,
+                        paddingLeft: 16,
                         paddingBottom: 8,
-                        borderBottom:  '1px solid rgba(255,255,255,.07)',
+                        borderBottom: '1px solid rgba(255,255,255,.07)',
                       }}
                     >
                       {link.children.map((child, idx) => {
@@ -393,13 +421,13 @@ export default function Nav() {
                               {child.groupLabel && (
                                 <div
                                   style={{
-                                    fontSize:      10,
-                                    fontWeight:    700,
-                                    color:         'rgba(255,255,255,.35)',
+                                    fontSize: 10,
+                                    fontWeight: 700,
+                                    color: 'rgba(255,255,255,.35)',
                                     letterSpacing: 0.9,
                                     textTransform: 'uppercase',
-                                    padding:       '10px 0 4px',
-                                    fontFamily:    "'DM Sans', sans-serif",
+                                    padding: '10px 0 4px',
+                                    fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
                                   }}
                                 >
                                   {child.groupLabel}
@@ -418,13 +446,13 @@ export default function Nav() {
                             key={child.href}
                             href={child.href}
                             style={{
-                              display:        'block',
-                              fontSize:       20,
-                              fontWeight:     childActive ? 600 : 400,
-                              color:          childActive ? T.sl : 'rgba(255,255,255,.75)',
+                              display: 'block',
+                              fontSize: 20,
+                              fontWeight: childActive ? 600 : 400,
+                              color: childActive ? T.sl : 'rgba(255,255,255,.75)',
                               textDecoration: 'none',
-                              padding:        '9px 0',
-                              fontFamily:     "'Cormorant Garamond', serif",
+                              padding: '9px 0',
+                              fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
                             }}
                             onClick={() => setMenuOpen(false)}
                           >
@@ -444,14 +472,14 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize:       26,
-                  fontWeight:     active ? 600 : 400,
-                  color:          active ? T.sl : 'rgba(255,255,255,.88)',
+                  fontSize: 26,
+                  fontWeight: active ? 600 : 400,
+                  color: active ? T.sl : 'rgba(255,255,255,.88)',
                   textDecoration: 'none',
-                  padding:        '12px 0',
-                  borderBottom:   '1px solid rgba(255,255,255,.07)',
-                  fontFamily:     "'Cormorant Garamond', serif",
-                  display:        'block',
+                  padding: '12px 0',
+                  borderBottom: '1px solid rgba(255,255,255,.07)',
+                  fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif",
+                  display: 'block',
                 }}
                 onClick={() => setMenuOpen(false)}
               >
@@ -460,33 +488,37 @@ export default function Nav() {
             );
           })}
 
-          <Link
-            href="/contact"
+          <a
+            href="https://calendly.com/indiacompanysetup"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              marginTop:      24,
-              display:        'inline-flex',
-              alignItems:     'center',
-              background:     T.s,
-              color:          '#fff',
-              padding:        '13px 26px',
-              borderRadius:   8,
-              fontSize:       15,
-              fontWeight:     600,
+              marginTop: 24,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              background: T.f,
+              color: '#fff',
+              padding: '13px 26px',
+              borderRadius: 8,
+              fontSize: 15,
+              fontWeight: 600,
               textDecoration: 'none',
-              fontFamily:     "'DM Sans', sans-serif",
-              width:          'fit-content',
+              fontFamily: HV,
+              width: 'fit-content',
             }}
             onClick={() => setMenuOpen(false)}
           >
-            Free Consultation →
-          </Link>
+            Free Consultation
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
 
           <div
             style={{
-              marginTop:  32,
-              fontSize:   12,
-              color:      'rgba(255,255,255,.3)',
-              fontFamily: "'DM Sans', sans-serif",
+              marginTop: 32,
+              fontSize: 12,
+              color: 'rgba(255,255,255,.3)',
+              fontFamily: "var(--font-cardo),'Cardo',Georgia,serif",
             }}
           >
             {PHONE} · info@indiacompanysetup.com

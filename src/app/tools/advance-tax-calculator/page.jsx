@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Calculate quarterly advance tax instalments for FY 2026-27. Due dates: 15 June, 15 September, 15 December, 15 March.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/advance-tax-calculator' },
   openGraph: {
-    title: 'Advance Tax Calculator India FY 2026-27 | India Company Setup',
+    title: 'Advance Tax Calculator India FY 2026-27',
     description: 'Calculate quarterly advance tax instalments for FY 2026-27. Due dates: 15 June, 15 September, 15 December, 15 March.',
     url: 'https://www.indiacompanysetup.com/tools/advance-tax-calculator',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'Advance Tax Calculator India FY 2026-27' }],

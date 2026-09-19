@@ -1,419 +1,802 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { T } from '@/lib/config';
-import { trackConsultationRequest, trackGuideDownload, trackWhatsApp, submitToZoho } from '@/lib/utils';
+import PricingSection from '@/app/PricingSection';
 
 const ROUTES = {
-  home:'/',services:'/setup',gcc:'/post-setup',tax:'/international-tax',
-  hub:'/knowledge-hub',about:'/about',contact:'/contact',industries:'/industries',
-  seo_fcri:'/foreign-company-registration-india',seo_sub:'/subsidiary-company-india',
-  seo_tp:'/transfer-pricing-india',seo_fdi:'/fdi-rules-india',
-  seo_us:'/us-company-setting-up-india',seo_uk:'/uk-company-setting-up-india',
-  seo_uae:'/uae-company-setting-up-india',seo_sg:'/singapore-company-setting-up-india',
-  seo_gcc:'/gcc-setup-india',seo_entry:'/india-market-entry-advisory',
-  seo_pvtltd:'/private-limited-company-registration-india',
-  seo_nri:'/nri-company-registration-india',
-  seo_startup:'/startup-foreign-investment-india',
+  home: '/', services: '/setup', gcc: '/post-setup', tax: '/international-tax',
+  hub: '/knowledge-hub', about: '/about', contact: '/contact', industries: '/industries',
+  seo_fcri: '/foreign-company-registration-india', seo_sub: '/subsidiary-company-india',
+  seo_tp: '/transfer-pricing-india', seo_fdi: '/fdi-rules-india',
 };
 
-export default function Page() {
-  const router = useRouter();
-    const [activeEntity, setActiveEntity] = useState("pvtltd");
+const HV = "Helvetica, Arial, sans-serif";
+const BDR = "1px solid #111";
+const GREEN = "#0B3D2E";
+const GOLD = "#e69819";
+const HS = "clamp(22px, 3vw, 42px)";
 
-  const entities = {
-    pvtltd: {
-      icon: "🏢", title: "Private Limited Company", badge: "Most Common",
-      tax: "25.17%", fdi: "As applicable", rbi: "Not required", revenue: "✅ Full", timeline: "2–3 weeks",
-      desc: "The most common structure for businesses in India. A Private Limited Company offers limited liability, separate legal existence, and the ability to raise funding. Ideal for startups, domestic businesses, joint ventures, and foreign-owned entities alike.",
-      points: [
-        "Separate legal entity — limited liability for shareholders",
-        "Minimum 2 directors and 2 shareholders required",
-        "At least one director must be an Indian resident",
-        "No minimum paid-up capital requirement",
-        "Corporate tax at 25.17% (22% base + surcharge + cess)",
-        "Can accept FDI under Automatic Route (most sectors)",
-        "SPICe+ e-filing: Certificate of Incorporation in 7–12 days",
-        "Easily convertible to public company for future fundraising",
-      ],
-      docs: ["PAN & Aadhaar of all directors and shareholders", "Address proof (utility bill / bank statement)", "Passport-size photographs of all directors", "Proposed registered office address proof", "DSC (Digital Signature Certificate) for all directors"],
-      bestFor: "Startups, domestic businesses, joint ventures, foreign companies wanting full commercial operations in India",
-    },
-    llp: {
-      icon: "🤝", title: "Limited Liability Partnership (LLP)", badge: null,
-      tax: "30%", fdi: "Approval Route only", rbi: "Not required", revenue: "✅ Full", timeline: "2–3 weeks",
-      desc: "An LLP combines the flexibility of a partnership with the protection of limited liability. Popular with professional services firms (CA, law, consulting), small businesses, and joint ventures. Simpler compliance than a Pvt Ltd but less suitable for raising equity funding.",
-      points: [
-        "Partners have limited liability — personal assets protected",
-        "Minimum 2 designated partners required",
-        "At least one designated partner must be an Indian resident",
-        "No minimum capital contribution required",
-        "Taxed at 30% flat (no surcharge below ₹1 crore turnover)",
-        "FDI permitted only via Government Approval Route",
-        "Lower compliance burden vs. Pvt Ltd (no statutory audit below ₹40L turnover)",
-        "Cannot issue equity shares — not suitable for VC/PE funding",
-      ],
-      docs: ["PAN & Aadhaar of all designated partners", "Address proof of all designated partners", "Passport-size photographs", "Registered office address proof", "LLP Agreement (drafted and notarised)"],
-      bestFor: "Professional services firms, consulting businesses, small domestic businesses, joint ventures not seeking equity funding",
-    },
-    subsidiary: {
-      icon: "🏗️", title: "Wholly Owned Subsidiary", badge: "Foreign Co. Choice",
-      tax: "25.17%", fdi: "Automatic Route", rbi: "Not required", revenue: "✅ Full", timeline: "3–4 weeks",
-      desc: "A Private Limited Company where 100% shares are held by a foreign parent. The gold standard for foreign companies entering India — full commercial operations, complete ownership, and no Indian partner required. The default choice for GCCs, SaaS companies, and multinationals.",
-      points: [
-        "100% foreign ownership — no Indian partner needed",
-        "Full FDI via Automatic Route (most sectors)",
-        "Complete control over operations and management",
-        "Can earn, invoice, and repatriate profits freely",
-        "Preferred structure for GCC, SaaS, manufacturing",
-        "Corporate tax at 25.17% (new manufacturing: 17%)",
-        "SPICe+ e-filing: Certificate of Incorporation in 7–12 days",
-        "Intercompany transactions require transfer pricing documentation",
-      ],
-      docs: ["Certificate of Incorporation of parent company", "Memorandum & Articles of Association of parent", "Board resolution authorising India subsidiary", "KYC of directors: passport, address proof", "Proposed registered office address in India"],
-      bestFor: "GCC / Captive Centres, SaaS & Tech companies, Manufacturing, Any foreign company wanting 100% control",
-    },
-    branch: {
-      icon: "🏛️", title: "Branch Office", badge: null,
-      tax: "40%", fdi: "RBI Approval Route", rbi: "Required", revenue: "⚠️ Limited", timeline: "6–8 weeks",
-      desc: "A branch office is an extension of the foreign parent in India — not a separate legal entity. It can undertake specific permitted activities but is taxed at 40% on India-sourced profits, making it expensive for most businesses.",
-      points: [
-        "Not a separate legal entity — parent is fully liable",
-        "Requires prior RBI approval (Form FNC)",
-        "Taxed at 40% on India-attributable profits",
-        "Permitted: manufacturing, trading, professional services, R&D",
-        "Cannot undertake retail trading or agriculture",
-        "Profits can be repatriated after tax",
-        "Annual Activity Certificate required from CA",
-        "Good for specific project execution or export operations",
-      ],
-      docs: ["Latest audited financials of parent (last 5 years)", "Certificate of Incorporation of parent", "Memorandum & Articles of Association", "Board resolution for branch opening", "Banker's report from parent's bank"],
-      bestFor: "Project-based operations, Export/import businesses, Professional service firms with specific India engagements",
-    },
-    liaison: {
-      icon: "📡", title: "Liaison Office", badge: null,
-      tax: "None", fdi: "RBI Approval Route", rbi: "Required", revenue: "❌ No revenue", timeline: "6–8 weeks",
-      desc: "A liaison office cannot undertake commercial activity or earn revenue. Its sole purpose is market research, promoting the parent's products, and facilitating communication. All expenses must be funded by the parent via inward remittance.",
-      points: [
-        "Cannot earn any revenue in India",
-        "No corporate tax — but no deductions either",
-        "Requires RBI prior approval",
-        "All expenses funded by parent remittances only",
-        "Permitted: market research, promoting parent's products",
-        "Not permitted: signing contracts, negotiating on parent's behalf",
-        "Must file Annual Activity Certificate with RBI annually",
-        "Best used as a stepping stone before full incorporation",
-      ],
-      docs: ["Latest audited financials of parent (last 3 years)", "Certificate of Incorporation of parent", "Board resolution for LO opening", "Banker's report from parent's bank", "Brief on proposed activities in India"],
-      bestFor: "Market assessment before committing to full setup, Companies exploring India before incorporation",
-    },
-  };
+const ENTITY_COLORS = {
+  pvtltd: { primary: "#0B3D2E", bg: "rgba(11,61,46,0.05)", border: "1px solid #111" },
+  llp: { primary: "#1a5c9a", bg: "rgba(26,92,154,0.05)", border: "1px solid #111" },
+  subsidiary: { primary: "#e69819", bg: "rgba(230,152,25,0.05)", border: "1px solid #111" },
+  branch: { primary: "#7a5f10", bg: "rgba(122,95,16,0.05)", border: "1px solid #111" },
+  liaison: { primary: "#3a2d72", bg: "rgba(58,45,114,0.05)", border: "1px solid #111" },
+};
 
-  const activeData = entities[activeEntity];
+function useReveal(t = 0.12) {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setVis(true); obs.disconnect(); }
+    }, { threshold: t });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, vis];
+}
 
-  const process = [
-    { n: "01", title: "Structure Consultation", time: "Day 1", icon: "💬",
-      desc: "Free 30-minute call to understand your business, India objectives, sector, and scale. We recommend the right entity type, FDI route, and tax structure before any filing begins." },
-    { n: "02", title: "Pre-Incorporation Planning", time: "Week 1", icon: "📐",
-      desc: "Transfer pricing model design, DTAA analysis, intercompany agreement framework, and registered office identification. Everything decided on paper before the first filing." },
-    { n: "03", title: "SPICe+ Filing (MCA)", time: "Week 2", icon: "📋",
-      desc: "Company name reservation (RUN), SPICe+ integrated form covering incorporation, PAN, TAN, GSTIN, EPFO, ESIC, and opening bank account — all in one MCA submission." },
-    { n: "04", title: "Certificate of Incorporation", time: "Week 2–3", icon: "🎯",
-      desc: "Ministry of Corporate Affairs issues Certificate of Incorporation (CIN). The company legally exists. PAN, TAN issued simultaneously. Typical time: 7–12 working days from filing." },
-    { n: "05", title: "RBI & FEMA Compliance", time: "Week 3–4", icon: "🏦",
-      desc: "FCGPR filing with RBI within 30 days of receiving FDI. GST registration. Bank account opening. Payroll and TDS registration. First compliance calendar issued to client." },
-    { n: "06", title: "Ongoing Compliance Retainer", time: "Month 2+", icon: "🔄",
-      desc: "Monthly GST, TDS, and payroll filings. Quarterly advance tax. Annual TP benchmarking study, Form 3CEB, statutory audit, corporate tax return, and MCA annual filing." },
-  ];
-
-  const included = [
-    { cat: "Incorporation", items: ["Company name reservation (RUN)", "SPICe+ integrated filing", "Certificate of Incorporation", "PAN & TAN registration", "GST registration", "EPFO & ESIC registration"] },
-    { cat: "Tax & FEMA", items: ["FCGPR filing with RBI", "Transfer pricing model design", "Intercompany MSA drafting", "DTAA analysis & TRC advice", "Form 15CA / 15CB", "Bank account opening support"] },
-    { cat: "Ongoing (Retainer)", items: ["Monthly GST return filing", "Monthly TDS / payroll filing", "Quarterly advance tax", "Annual Form 3CEB (TP)", "Statutory audit coordination", "Annual corporate tax return"] },
-  ];
-
-  const faqs = [
-    { q: "Do I need a local Indian director?", a: "Yes — at least one director must be an Indian resident (someone who has stayed in India for 182+ days in the preceding calendar year). We help you identify a suitable nominee director if needed, or your Indian hire can serve in this role." },
-    { q: "How long does incorporation actually take?", a: "For a Wholly Owned Subsidiary via SPICe+, typically 7–12 working days from filing to Certificate of Incorporation. Total time from engagement start to a fully operational entity (including GST, bank account, FCGPR) is 4–6 weeks." },
-    { q: "What is the minimum paid-up capital required?", a: "There is no statutory minimum paid-up capital for a private limited company in India. However, the initial share capital must be sufficient to cover first-year operations and must reflect the arm's length pricing in your transfer pricing structure." },
-    { q: "Can a 100% foreign-owned company repatriate profits?", a: "Yes — dividends can be repatriated freely after payment of Dividend Distribution Tax (now abolished — dividends taxed in hands of shareholder). There is no cap on profit repatriation, subject to applicable withholding tax under the relevant DTAA." },
-    { q: "Which sectors require government approval for FDI?", a: "Most sectors operate under the Automatic Route with no RBI or government approval required. Sectors requiring approval include defence (beyond 74%), print media, satellites, and certain financial services. We assess your specific sector before filing." },
-    { q: "Do I need transfer pricing documentation from day one?", a: "Yes — the moment your India entity transacts with its foreign parent (management fees, IT services, royalties), those transactions must be priced at arm's length. We design the TP model before incorporation, not as an afterthought when the audit notice arrives." },
-  ];
-
+function Fade({ children, delay = 0, up = true }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => { setIsMobile(window.innerWidth <= 768); }, []);
+  const [ref, vis] = useReveal();
+  if (isMobile) return <div>{children}</div>;
   return (
-    <div>
-      {/* ── HERO ── */}
-      <section style={{ background: T.f, padding: "100px 56px 72px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)`, backgroundSize: "64px 64px" }}/>
-        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 50% 80% at 95% 50%, rgba(232,144,10,.09) 0%,transparent 55%)` }}/>
-        <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="hero-grid">
-          <div style={{ textAlign: "left" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(232,144,10,.13)", border: "1px solid rgba(232,144,10,.28)", color: T.sl, padding: "5px 13px", borderRadius: 50, fontSize: 10.5, fontWeight: 600, letterSpacing: ".6px", textTransform: "uppercase", marginBottom: 20 }}>
-              Company Incorporation & Setup
-            </div>
-            <h1 className="font-display" style={{ fontSize: "clamp(36px,4vw,58px)", fontWeight: 600, color: "#fff", lineHeight: 1.05, marginBottom: 18 }}>
-              Set up your India entity —<br/><span style={{ fontStyle: "italic", color: T.sl, fontWeight: 400 }}>structured correctly<br/>from day one.</span>
-            </h1>
-            <p style={{ fontSize: 15, color: "rgba(255,255,255,.5)", lineHeight: 1.82, fontWeight: 300, maxWidth: 480, marginBottom: 32 }}>
-              India entry is not just an incorporation exercise. The legal structure, FDI route, transfer pricing model, and DTAA analysis must be decided <em style={{ color: "rgba(255,255,255,.7)" }}>before</em> the first filing. We design the full picture first — then we file.
-            </p>
-            <div style={{ display: "flex", gap: 12, marginBottom: 40, flexWrap: "wrap" }}>
-              <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>Get Free Structure Review →</button>
-              <button className="ics-btn ics-btn-ghost ics-btn-lg" onClick={() => router.push(ROUTES["gcc"] || "/")}>Post Setup →</button>
-            </div>
-            <div style={{ display: "flex", gap: 0, flexWrap: "wrap" }}>
-              {[["100+", "Companies incorporated"], ["7–12", "Days to incorporate"], ["18+", "Years of experience"], ["4 wks", "End-to-end setup"]].map(([n, l]) => (
-                <div key={n} style={{ padding: "12px 20px", border: "1px solid rgba(255,255,255,.09)", borderRight: "none", textAlign: "center" }}>
-                  <div className="font-display" style={{ fontSize: 24, fontWeight: 700, color: "#fff", lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,.32)", marginTop: 3 }}>{l}</div>
-                </div>
-              ))}
-              <div style={{ padding: "12px 20px", border: "1px solid rgba(255,255,255,.09)" }}/>
-            </div>
-          </div>
-          {/* Right side — quick facts panel */}
-          <div style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 16, padding: "32px 28px", textAlign: "left" }}>
-            <div style={{ fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase", color: "rgba(255,255,255,.35)", fontWeight: 600, marginBottom: 20, textAlign: "left" }}>What We Handle — End to End</div>
-            {[
-              ["📋", "Incorporation", "MCA SPICe+ filing, CIN, PAN, TAN, GSTIN"],
-              ["🏦", "RBI / FEMA", "FCGPR within 30 days, FLA, ECB, compounding"],
-              ["⚖️", "Transfer Pricing", "TP model, MSA, Form 3CEB, APA advisory"],
-              ["📊", "DTAA Planning", "Withholding tax optimisation, TRC, PPT analysis"],
-              ["💼", "Payroll & HR Compliance", "TDS, PF, ESI, professional tax setup"],
-              ["🔄", "Ongoing Compliance", "Monthly GST, TDS, quarterly advance tax, annual audit"],
-            ].map(([ico, title, sub]) => (
-              <div key={title} style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 16, textAlign: "left" }}>
-                <div style={{ width: 32, height: 32, borderRadius: 7, background: "rgba(232,144,10,.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>{ico}</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginBottom: 1 }}>{title}</div>
-                  <div style={{ fontSize: 11.5, color: "rgba(255,255,255,.38)", lineHeight: 1.5 }}>{sub}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div ref={ref} style={{
+      opacity: vis ? 1 : 0,
+      transform: vis ? 'none' : (up ? 'translateY(22px)' : 'translateY(0)'),
+      transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms`
+    }}>{children}</div>
+  );
+}
 
-      {/* ── ENTITY SELECTOR ── */}
-      <section style={{ padding: "88px 56px", background: T.ivory }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <div style={{ maxWidth: 600, marginBottom: 48 }}>
-            <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: T.s, fontWeight: 600, marginBottom: 12 }}>Entity Types</div>
-            <h2 className="font-display" style={{ fontSize: "clamp(28px,3.2vw,44px)", fontWeight: 600, color: T.ch, lineHeight: 1.1, marginBottom: 12 }}>
-              Which India entity is <span style={{ fontStyle: "italic", color: T.f }}>right for you?</span>
-            </h2>
-            <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.8, fontWeight: 300 }}>
-              Your entity choice determines tax rate, activity scope, compliance burden, and FDI route. Select each to explore in detail.
-            </p>
-          </div>
+function CountUp({ target, suffix = '', prefix = '', duration = 1400, delay = 0 }) {
+  const [val, setVal] = useState(0);
+  const [ref, vis] = useReveal(0.3);
+  const started = useRef(false);
+  useEffect(() => {
+    if (!vis || started.current) return;
+    started.current = true;
+    if (target === 0) { setTimeout(() => setVal(0), delay); return; }
+    const steps = 40, stepTime = duration / steps;
+    let step = 0;
+    setTimeout(() => {
+      const id = setInterval(() => {
+        step++;
+        setVal(Math.round(target * step / steps));
+        if (step >= steps) clearInterval(id);
+      }, stepTime);
+    }, delay);
+  }, [vis]);
+  return <span ref={ref} style={{ opacity: vis ? 1 : 0, transition: 'opacity 0.3s ease' }}>{prefix}{val}{suffix}</span>;
+}
 
-          {/* Tab switcher — 5 entities */}
-          <div style={{ display: "flex", gap: 8, marginBottom: 32, flexWrap: "wrap" }}>
-            {[["pvtltd", "🏢", "Pvt Ltd Company"], ["llp", "🤝", "LLP"], ["subsidiary", "🏗️", "WOS (Foreign)"], ["branch", "🏛️", "Branch Office"], ["liaison", "📡", "Liaison Office"]].map(([key, ico, label]) => (
-              <button key={key} onClick={() => setActiveEntity(key)} style={{
-                padding: "10px 18px", border: `1px solid ${activeEntity === key ? T.f : T.bdr}`,
-                borderRadius: 8, cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
-                fontSize: 12.5, fontWeight: 600, display: "flex", alignItems: "center", gap: 7,
-                background: activeEntity === key ? T.f : "#fff",
-                color: activeEntity === key ? "#fff" : T.mid,
-                transition: "all .2s",
-              }}>
-                {ico} {label}
-              </button>
-            ))}
-          </div>
-
-          {/* Active entity detail */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }} className="inner-page-layout">
-            {/* Left — description + points */}
-            <div style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 16, padding: "32px 28px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: `linear-gradient(90deg, ${T.f}, ${T.s})` }}/>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-                <span style={{ fontSize: 32 }}>{activeData.icon}</span>
-                <div>
-                  <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: T.ch }}>{activeData.title}</h3>
-                  {activeData.badge && <span style={{ background: "#E4F0EB", color: T.f, padding: "2px 9px", borderRadius: 4, fontSize: 10, fontWeight: 700 }}>{activeData.badge}</span>}
-                </div>
-              </div>
-
-              {/* Key metrics row */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10, margin: "20px 0", padding: "16px 0", borderTop: `1px solid ${T.bdr}`, borderBottom: `1px solid ${T.bdr}` }}>
-                {[["Tax Rate", activeData.tax], ["FDI Route", activeData.fdi], ["RBI Approval", activeData.rbi], ["Timeline", activeData.timeline]].map(([label, val]) => (
-                  <div key={label} style={{ textAlign: "center" }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: T.f, marginBottom: 3 }}>{val}</div>
-                    <div style={{ fontSize: 10, color: T.lt, fontWeight: 600, textTransform: "uppercase", letterSpacing: .5 }}>{label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.75, marginBottom: 20, textAlign: "left" }}>{activeData.desc}</p>
-
-              <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, color: T.lt, marginBottom: 12, textAlign: "left" }}>Key Features</div>
-              {activeData.points.map(pt => (
-                <div key={pt} style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 13, color: T.mid, marginBottom: 9 }}>
-                  <span style={{ color: T.s, fontWeight: 700, flexShrink: 0 }}>›</span>{pt}
-                </div>
-              ))}
-
-              <div style={{ marginTop: 20, background: "#E4F0EB", borderRadius: 10, padding: "12px 16px" }}>
-                <div style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, color: T.f, marginBottom: 5 }}>Best For</div>
-                <div style={{ fontSize: 12.5, color: T.f, lineHeight: 1.6 }}>{activeData.bestFor}</div>
-              </div>
-            </div>
-
-            {/* Right — documents + CTA */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 16, padding: "28px 24px" }}>
-                <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, color: T.lt, marginBottom: 16 }}>Documents Required from Parent</div>
-                {activeData.docs.map((doc, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: T.mid, marginBottom: 10 }}>
-                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: T.stone, border: `1px solid ${T.bdr}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700, color: T.f, flexShrink: 0 }}>{i + 1}</div>
-                    {doc}
-                  </div>
-                ))}
-              </div>
-
-              {/* Comparison table */}
-              <div style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 16, padding: "28px 24px" }}>
-                <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, color: T.lt, marginBottom: 16 }}>Quick Comparison</div>
-                <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr 1fr 1fr", gap: 0 }} className="comparison-table-wrap">
-                  {/* Header */}
-                  {["", "Pvt Ltd", "LLP", "WOS", "Branch", "Liaison"].map((h, i) => (
-                    <div key={h} style={{ fontSize: 9.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: .5, color: i === 0 ? T.lt : T.f, padding: "6px 6px", borderBottom: `2px solid ${T.bdr}`, textAlign: i === 0 ? "left" : "center", background: i > 0 && activeEntity === ["","pvtltd","llp","subsidiary","branch","liaison"][i] ? "#E4F0EB" : "transparent", borderRadius: i > 0 && activeEntity === ["","pvtltd","llp","subsidiary","branch","liaison"][i] ? "4px 4px 0 0" : 0 }}>{h}</div>
-                  ))}
-                  {/* Rows */}
-                  {[
-                    ["Tax Rate", "25.17%", "30%", "25.17%", "40%", "Nil"],
-                    ["Earn Revenue", "✅", "✅", "✅", "⚠️", "❌"],
-                    ["FDI / Foreign", "✅", "Gov. Appr.", "✅ Auto", "RBI Appr.", "RBI Appr."],
-                    ["Timeline", "2–3 wks", "2–3 wks", "3–4 wks", "6–8 wks", "6–8 wks"],
-                    ["Liability", "Limited", "Limited", "Limited", "Unlimited", "Unlimited"],
-                  ].map(([label, ...vals]) => (
-                    vals.map((v, i) => (
-                      [
-                        <div key={label} style={{ fontSize: 11, fontWeight: 500, color: T.mid, padding: "9px 6px", borderBottom: `1px solid ${T.bdr}` }}>{label}</div>,
-                        ...vals.map((v2, j) => (
-                          <div key={j} style={{ fontSize: 11, fontWeight: 600, color: T.ch, padding: "9px 6px", textAlign: "center", borderBottom: `1px solid ${T.bdr}`, background: activeEntity === ["pvtltd","llp","subsidiary","branch","liaison"][j] ? "rgba(11,61,46,.03)" : "transparent" }}>{v2}</div>
-                        ))
-                      ]
-                    ))[0]
-                  ))}
-                </div>
-              </div>
-
-              <button className="ics-btn ics-btn-primary" style={{ width: "100%", justifyContent: "center", padding: 14, fontSize: 14 }} onClick={() => router.push(ROUTES["contact"] || "/")}>
-                Discuss {activeData.title} Setup →
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── PROCESS ── */}
-      <section style={{ padding: "80px 56px 72px", background: T.stone }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <div style={{ maxWidth: 580, marginBottom: 56 }}>
-            <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: T.s, fontWeight: 600, marginBottom: 12 }}>Step-by-Step Process</div>
-            <h2 className="font-display" style={{ fontSize: "clamp(28px,3.2vw,44px)", fontWeight: 600, color: T.ch, lineHeight: 1.1, marginBottom: 12 }}>
-              From decision to <span style={{ fontStyle: "italic", color: T.f }}>fully operational</span> — exactly what happens.
-            </h2>
-            <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.8, fontWeight: 300 }}>No surprises, no hidden steps. Here is the complete journey, week by week.</p>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="entity-detail-grid">
-            {process.map((step, i) => (
-              <div key={step.n} style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 14, padding: "26px 24px", display: "flex", gap: 18, alignItems: "flex-start", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, left: 0, bottom: 0, width: 3, background: i === 0 ? T.s : T.bdr }}/>
-                <div style={{ width: 48, height: 48, borderRadius: "50%", background: i === 0 ? T.f : T.stone, border: `2px solid ${i === 0 ? T.f : T.bdr}`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Cormorant Garamond',serif", fontSize: 18, fontWeight: 700, color: i === 0 ? "#fff" : T.mid, flexShrink: 0 }}>
-                  {step.n}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                    <span style={{ fontSize: 16 }}>{step.icon}</span>
-                    <span style={{ fontSize: 14.5, fontWeight: 600, color: T.ch }}>{step.title}</span>
-                    <span style={{ background: "#E4F0EB", color: T.f, padding: "2px 9px", borderRadius: 50, fontSize: 10, fontWeight: 600, marginLeft: "auto", flexShrink: 0 }}>{step.time}</span>
-                  </div>
-                  <p style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.7 }}>{step.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHAT'S INCLUDED ── */}
-      <section style={{ padding: "72px 56px", background: T.ivory }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <div style={{ maxWidth: 580, marginBottom: 52 }}>
-            <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: T.s, fontWeight: 600, marginBottom: 12 }}>Scope of Work</div>
-            <h2 className="font-display" style={{ fontSize: "clamp(28px,3.2vw,44px)", fontWeight: 600, color: T.ch, lineHeight: 1.1, marginBottom: 12 }}>
-              Everything that's <span style={{ fontStyle: "italic", color: T.f }}>included</span>
-            </h2>
-            <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.8, fontWeight: 300 }}>No hidden deliverables, no surprises. Here is exactly what we cover — from day one through ongoing compliance.</p>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} className="inner-service-cards">
-            {included.map((cat, ci) => (
-              <div key={cat.cat} style={{ background: "#fff", border: `1px solid ${T.bdr}`, borderRadius: 14, padding: "28px 24px", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: ci === 0 ? T.f : ci === 1 ? T.s : T.mid }}/>
-                <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: ci === 0 ? T.f : ci === 1 ? T.s : T.mid, marginBottom: 16 }}>{cat.cat}</div>
-                {cat.items.map(item => (
-                  <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 13, color: T.mid, marginBottom: 10, lineHeight: 1.5 }}>
-                    <span style={{ color: ci === 0 ? T.f : ci === 1 ? T.s : T.mid, fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✓</span>{item}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section style={{ padding: "72px 56px 80px", background: T.ch }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <div style={{ maxWidth: 580, marginBottom: 52 }}>
-            <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: T.sl, fontWeight: 600, marginBottom: 12 }}>Common Questions</div>
-            <h2 className="font-display" style={{ fontSize: "clamp(28px,3.2vw,44px)", fontWeight: 600, color: "#fff", lineHeight: 1.1 }}>
-              Questions we get <span style={{ fontStyle: "italic", color: T.sl }}>every time</span>
-            </h2>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-            {faqs.map((faq, i) => (
-              <div key={i} style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.09)", borderRadius: 13, padding: "24px 22px" }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "#fff", marginBottom: 10, lineHeight: 1.4 }}>Q: {faq.q}</div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,.48)", lineHeight: 1.75 }}>{faq.a}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section style={{ background: T.f, padding: "80px 56px 80px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 70% at 50% 0%,rgba(232,144,10,.08) 0%,transparent 60%)", pointerEvents: "none" }}/>
-        <div style={{ maxWidth: 560, margin: "0 auto", position: "relative" }}>
-          <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: T.sl, fontWeight: 600, marginBottom: 14 }}>Get Started</div>
-          <h2 className="font-display" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 600, color: "#fff", lineHeight: 1.1, marginBottom: 16 }}>
-            Ready to set up your<br/><span style={{ fontStyle: "italic", color: T.sl }}>India entity the right way?</span>
-          </h2>
-          <p style={{ fontSize: 15, color: "rgba(255,255,255,.45)", lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
-            Book a free 30-minute structure review. We'll assess your business, recommend the right entity type and FDI route, and give you a clear week-by-week plan.
-          </p>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 24 }}>
-            <button className="ics-btn ics-btn-primary ics-btn-lg" onClick={() => router.push(ROUTES["contact"] || "/")}>Book Free Structure Review →</button>
-            <a href="tel:+919915731447" className="ics-btn ics-btn-ghost ics-btn-lg">Call +91 99157 31447</a>
-          </div>
-          <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
-            {["Free 30-min consultation", "CA, CS & accountant team", "Response within 24 hours"].map(t => (
-              <span key={t} style={{ fontSize: 12, color: "rgba(255,255,255,.28)", display: "flex", alignItems: "center", gap: 5 }}>
-                <span>✓</span>{t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+function SH({ eyebrow, green, gold, center = true, mb = 40 }) {
+  return (
+    <div style={{ textAlign: center ? "center" : "left", marginBottom: mb, fontFamily: HV }}>
+      {eyebrow && (
+        <p style={{ fontSize: 10, letterSpacing: "0.42em", textTransform: "uppercase", color: GREEN, fontWeight: 700, margin: "0 0 14px", fontFamily: HV }}>{eyebrow}</p>
+      )}
+      <h2 style={{ fontSize: HS, fontWeight: 700, lineHeight: 1.1, margin: 0, fontFamily: HV }}>
+        <span style={{ color: GREEN }}>{green}</span>
+        {gold && <>{" "}<em style={{ color: GOLD, fontStyle: "italic" }}>{gold}</em></>}
+      </h2>
     </div>
   );
 }
 
-// ─── POST SETUP PAGE ──────────────────────────────────────────────────────────
+const handleSpotlight = (e) => {
+  const el = e.currentTarget;
+  const rect = el.getBoundingClientRect();
+  el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+  el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+};
+
+const ENTITIES = {
+  pvtltd: {
+    letter: "P", title: "Private Limited Company", badge: "Most Common",
+    tax: "25.17%", fdi: "Automatic", rbi: "Not required", timeline: "2–3 wks",
+    desc: "The most common structure for businesses in India. A Private Limited Company offers limited liability, separate legal existence, and the ability to raise funding. Ideal for startups, domestic businesses, joint ventures, and foreign-owned entities alike.",
+    points: [
+      "Separate legal entity — limited liability for shareholders",
+      "Minimum 2 directors and 2 shareholders required",
+      "At least one director must be an Indian resident",
+      "No minimum paid-up capital requirement",
+      "Corporate tax at 25.17% (22% base + surcharge + cess)",
+      "Can accept FDI under Automatic Route (most sectors)",
+      "SPICe+ e-filing: Certificate of Incorporation in 7–12 days",
+      "Easily convertible to public company for future fundraising",
+    ],
+    docs: [
+      "PAN & Aadhaar of all directors and shareholders",
+      "Address proof (utility bill / bank statement)",
+      "Passport-size photographs of all directors",
+      "Proposed registered office address proof",
+      "DSC (Digital Signature Certificate) for all directors",
+    ],
+    bestFor: "Startups, domestic businesses, joint ventures, foreign companies wanting full commercial operations in India",
+  },
+  llp: {
+    letter: "L", title: "Limited Liability Partnership", badge: null,
+    tax: "30%", fdi: "Gov. Approval", rbi: "Not required", timeline: "2–3 wks",
+    desc: "An LLP combines the flexibility of a partnership with the protection of limited liability. Popular with professional services firms, small businesses, and joint ventures. Simpler compliance than a Pvt Ltd but less suitable for raising equity funding.",
+    points: [
+      "Partners have limited liability — personal assets protected",
+      "Minimum 2 designated partners required",
+      "At least one designated partner must be an Indian resident",
+      "No minimum capital contribution required",
+      "Taxed at 30% flat (no surcharge below ₹1 crore turnover)",
+      "FDI permitted only via Government Approval Route",
+      "Lower compliance burden vs. Pvt Ltd",
+      "Cannot issue equity shares — not suitable for VC/PE funding",
+    ],
+    docs: [
+      "PAN & Aadhaar of all designated partners",
+      "Address proof of all designated partners",
+      "Passport-size photographs",
+      "Registered office address proof",
+      "LLP Agreement (drafted and notarised)",
+    ],
+    bestFor: "Professional services firms, consulting businesses, small domestic businesses, joint ventures not seeking equity funding",
+  },
+  subsidiary: {
+    letter: "W", title: "Wholly Owned Subsidiary", badge: "Foreign Co. Choice",
+    tax: "25.17%", fdi: "Automatic", rbi: "Not required", timeline: "3–4 wks",
+    desc: "A Private Limited Company where 100% shares are held by a foreign parent. The gold standard for foreign companies entering India — full commercial operations, complete ownership, and no Indian partner required.",
+    points: [
+      "100% foreign ownership — no Indian partner needed",
+      "Full FDI via Automatic Route (most sectors)",
+      "Complete control over operations and management",
+      "Can earn, invoice, and repatriate profits freely",
+      "Preferred structure for GCC, SaaS, manufacturing",
+      "Corporate tax at 25.17% (new manufacturing: 17%)",
+      "SPICe+ e-filing: Certificate of Incorporation in 7–12 days",
+      "Intercompany transactions require transfer pricing documentation",
+    ],
+    docs: [
+      "Certificate of Incorporation of parent company",
+      "Memorandum & Articles of Association of parent",
+      "Board resolution authorising India subsidiary",
+      "KYC of directors: passport, address proof",
+      "Proposed registered office address in India",
+    ],
+    bestFor: "GCC / Captive Centres, SaaS & Tech companies, Manufacturing, Any foreign company wanting 100% control",
+  },
+  branch: {
+    letter: "B", title: "Branch Office", badge: null,
+    tax: "40%", fdi: "RBI Approval", rbi: "Required", timeline: "6–8 wks",
+    desc: "A branch office is an extension of the foreign parent in India — not a separate legal entity. It can undertake specific permitted activities but is taxed at 40% on India-sourced profits, making it expensive for most businesses.",
+    points: [
+      "Not a separate legal entity — parent is fully liable",
+      "Requires prior RBI approval (Form FNC)",
+      "Taxed at 40% on India-attributable profits",
+      "Permitted: manufacturing, trading, professional services, R&D",
+      "Cannot undertake retail trading or agriculture",
+      "Profits can be repatriated after tax",
+      "Annual Activity Certificate required from CA",
+      "Good for specific project execution or export operations",
+    ],
+    docs: [
+      "Latest audited financials of parent (last 5 years)",
+      "Certificate of Incorporation of parent",
+      "Memorandum & Articles of Association",
+      "Board resolution for branch opening",
+      "Banker's report from parent's bank",
+    ],
+    bestFor: "Project-based operations, Export/import businesses, Professional service firms with specific India engagements",
+  },
+  liaison: {
+    letter: "O", title: "Liaison Office", badge: null,
+    tax: "None", fdi: "RBI Approval", rbi: "Required", timeline: "6–8 wks",
+    desc: "A liaison office cannot undertake commercial activity or earn revenue. Its sole purpose is market research, promoting the parent's products, and facilitating communication. All expenses must be funded by the parent via inward remittance.",
+    points: [
+      "Cannot earn any revenue in India",
+      "No corporate tax — but no deductions either",
+      "Requires RBI prior approval",
+      "All expenses funded by parent remittances only",
+      "Permitted: market research, promoting parent's products",
+      "Not permitted: signing contracts, negotiating on parent's behalf",
+      "Must file Annual Activity Certificate with RBI annually",
+      "Best used as a stepping stone before full incorporation",
+    ],
+    docs: [
+      "Latest audited financials of parent (last 3 years)",
+      "Certificate of Incorporation of parent",
+      "Board resolution for LO opening",
+      "Banker's report from parent's bank",
+      "Brief on proposed activities in India",
+    ],
+    bestFor: "Market assessment before committing to full setup, Companies exploring India before incorporation",
+  },
+};
+
+const ENTITY_TABS = [
+  ["pvtltd", "Pvt Ltd"],
+  ["llp", "LLP"],
+  ["subsidiary", "WOS"],
+  ["branch", "Branch"],
+  ["liaison", "Liaison"],
+];
+
+const COMPARISON = [
+  ["Tax Rate", "25.17%", "30%", "25.17%", "40%", "Nil"],
+  ["Earn Revenue", "✔", "✔", "✔", "⚠", "✖"],
+  ["Foreign Owner", "Auto", "Gov.Appr", "Auto", "RBI Appr", "RBI Appr"],
+  ["Timeline", "2–3 wks", "2–3 wks", "3–4 wks", "6–8 wks", "6–8 wks"],
+  ["Liability", "Limited", "Limited", "Limited", "Unlimited", "Unlimited"],
+];
+
+const PROCESS = [
+  { n: "01", title: "Structure Consultation", time: "Day 1", desc: "Free 30-minute call to understand your business, India objectives, sector, and scale. We recommend the right entity type, FDI route, and tax structure before any filing begins." },
+  { n: "02", title: "Pre-Incorporation Planning", time: "Week 1", desc: "Transfer pricing model design, DTAA analysis, intercompany agreement framework, and registered office identification. Everything decided on paper before the first filing." },
+  { n: "03", title: "SPICe+ Filing (MCA)", time: "Week 2", desc: "Company name reservation (RUN), SPICe+ integrated form covering incorporation, PAN, TAN, GSTIN, EPFO, ESIC, and opening bank account — all in one MCA submission." },
+  { n: "04", title: "Certificate of Incorporation", time: "Wk 2–3", desc: "Ministry of Corporate Affairs issues Certificate of Incorporation (CIN). The company legally exists. PAN, TAN issued simultaneously. Typical time: 7–12 working days from filing." },
+  { n: "05", title: "RBI & FEMA Compliance", time: "Wk 3–4", desc: "FCGPR filing with RBI within 30 days of receiving FDI. GST registration. Bank account opening. Payroll and TDS registration. First compliance calendar issued to client." },
+  { n: "06", title: "Ongoing Compliance Retainer", time: "Month 2+", desc: "Monthly GST, TDS, and payroll filings. Quarterly advance tax. Annual TP benchmarking study, Form 3CEB, statutory audit, corporate tax return, and MCA annual filing." },
+];
+
+const INCLUDED = [
+  { cat: "Incorporation", acc: "#0B3D2E", bg: "rgba(11,61,46,0.06)", items: ["Company name reservation (RUN)", "SPICe+ integrated filing", "Certificate of Incorporation", "PAN & TAN registration", "GST registration", "EPFO & ESIC registration"] },
+  { cat: "Tax & FEMA", acc: "#e69819", bg: "rgba(230,152,25,0.06)", items: ["FCGPR filing with RBI", "Transfer pricing model design", "Intercompany MSA drafting", "DTAA analysis & TRC advice", "Form 15CA / 15CB", "Bank account opening support"] },
+  { cat: "Ongoing (Retainer)", acc: "#1a5c9a", bg: "rgba(26,92,154,0.06)", items: ["Monthly GST return filing", "Monthly TDS / payroll filing", "Quarterly advance tax", "Annual Form 3CEB (TP)", "Statutory audit coordination", "Annual corporate tax return"] },
+];
+
+const FAQS = [
+  { q: "What is the minimum number of directors and shareholders required?", a: "For a Private Limited Company, a minimum of 2 directors and 2 shareholders are required. The directors and shareholders can be the same individuals." },
+  { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e Rs. 100,000 (USD – 1100 approximately)" },
+  { q: "Can a foreign national be a director or shareholder?", a: "Yes, foreign nationals and foreign corporate bodies can be directors and shareholders. However, at least one director must be a resident of India." },
+  { q: "How long does registration take?", a: "Once all documents are submitted and DSC is generated, it typically takes 7 to 12 working days to get the Certificate of Incorporation from the MCA." },
+  { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum value of shares a company can issue to shareholders, while paid-up capital is the actual amount paid by shareholders to the company." },
+  { q: "Do I need a physical office address at the time of incorporation?", a: "Yes – a registered office address is mandatory. Many founders use a virtual office or co-working address initially and upgrade to a commercial space later." },
+];
+
+const HANDLE = [
+  ["01", "Incorporation", "MCA SPICe+ filing, CIN, PAN, TAN, GSTIN"],
+  ["02", "RBI / FEMA", "FCGPR within 30 days, FLA, ECB, compounding"],
+  ["03", "Transfer Pricing", "TP model, MSA, Form 3CEB, APA advisory"],
+  ["04", "DTAA Planning", "Withholding tax optimisation, TRC, PPT analysis"],
+  ["05", "Payroll & HR", "TDS, PF, ESI, professional tax setup"],
+  ["06", "Ongoing Compliance", "Monthly GST, TDS, quarterly advance tax, annual audit"],
+];
+
+export default function Page() {
+  const router = useRouter();
+  const [active, setActive] = useState("pvtltd");
+  const ent = ENTITIES[active];
+  const activeIdx = ENTITY_TABS.findIndex(([k]) => k === active);
+  const ec = ENTITY_COLORS[active];
+
+  const [openFaq, setOpenFaq] = useState(null);
+  const toggleFaq = (idx) => setOpenFaq(openFaq === idx ? null : idx);
+
+  const [activeStep, setActiveStep] = useState(0);
+
+  return (
+    <div style={{ fontFamily: HV, color: "#111", background: "#fff", overflowX: "hidden", maxWidth: "100vw" }}>
+      <style>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .sec { padding: clamp(48px,8vw,96px) clamp(16px,5vw,56px); width: 100%; overflow-x: hidden; }
+        .sec-sm { padding: clamp(40px,6vw,80px) clamp(16px,5vw,56px); }
+        .inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 400px;
+          gap: 48px;
+          align-items: start;
+        }
+        @media(max-width:900px){
+          .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+
+        .stats-strip {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          border: 1.5px solid rgba(255, 255, 255, 0.5);
+          border-radius: 10px;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.04);
+          backdrop-filter: blur(8px);
+        }
+        .stat-cell {
+          padding: 16px 12px;
+          text-align: center;
+          border-right: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .stat-cell:last-child { border-right: none; }
+        @media(max-width:600px){
+          .stats-strip { 
+            grid-template-columns: 1fr 1fr; 
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+          }
+          .stat-cell { 
+            padding: 16px 10px; 
+            border-right: 1px solid rgba(255, 255, 255, 0.2); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+          }
+          .stat-cell:nth-child(2n) { border-right: none; }
+          .stat-cell:nth-child(n+3) { border-bottom: none; }
+        }
+
+        .entity-tabs {
+          display: flex;
+          gap: 8px;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          justify-content: center;
+          padding-bottom: 4px;
+        }
+        .entity-tabs::-webkit-scrollbar { display: none; }
+        @media(max-width:640px){
+          .entity-tabs {
+            justify-content: flex-start;
+            padding: 4px 8px;
+            gap: 6px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.02);
+          }
+        }
+
+        .two-col {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          align-items: start;
+        }
+        .three-col {
+          display: grid;
+          grid-template-columns: repeat(3,1fr);
+          gap: 18px;
+        }
+        @media(max-width:900px){
+          .two-col   { grid-template-columns: 1fr; }
+          .three-col { grid-template-columns: 1fr 1fr; }
+        }
+        @media(max-width:540px){
+          .three-col { grid-template-columns: 1fr; }
+        }
+
+        .handle-panel { display: flex; flex-direction: column; gap: 14px; }
+        .handle-row { display: flex; gap: 12px; align-items: flex-start; }
+
+        .metrics-grid {
+          display: grid;
+          grid-template-columns: repeat(4,1fr);
+          gap: 8px;
+          padding: 14px 0;
+          border-top: 1.5px solid #111;
+          border-bottom: 1.5px solid #111;
+          margin-bottom: 18px;
+        }
+        @media(max-width:480px){
+          .metrics-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
+        }
+
+        .feature-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; min-width: 0; }
+        .feature-row { display: flex; align-items: flex-start; gap: 10px; padding: 4px 0; min-width: 0; }
+        .feature-tick { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; }
+        .feature-text { font-size: clamp(11px,1.2vw,13px); font-weight: 600; color: #111; font-family: ${HV}; line-height: 1.5; min-width: 0; overflow-wrap: break-word; word-break: break-word; }
+
+        .timeline-wrap { display: flex; flex-direction: column; gap: 16px; max-width: 850px; margin: 0 auto; position: relative; width: 100%; }
+        .timeline-line { position: absolute; left: 23px; top: 24px; bottom: 24px; width: 2px; background: rgba(11,61,46,0.18); }
+        .timeline-row { display: flex; gap: 16px; align-items: flex-start; position: relative; cursor: pointer; width: 100%; }
+        .timeline-node { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; z-index: 2; flex-shrink: 0; transition: all 0.4s ease; }
+        @media(max-width:480px){
+          .timeline-line { left: 19px; }
+          .timeline-node { width: 40px; height: 40px; font-size: 11px; }
+        }
+
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; max-width: 100%; }
+        .cmp-table { width: 100%; min-width: 460px; border-collapse: collapse; border: 1.5px solid #111; font-family: ${HV}; table-layout: fixed; }
+        .cmp-table th, .cmp-table td { word-break: break-word; }
+        @media(max-width:600px){
+          .cmp-table { min-width: 100%; }
+          .cmp-table th, .cmp-table td { font-size: 9px !important; padding: 6px 3px !important; letter-spacing: 0px !important; white-space: normal !important; word-wrap: break-word !important; }
+        }
+        @media(max-width:480px){
+          .cmp-table { min-width: 100%; }
+          .cmp-table th, .cmp-table td { font-size: 8px !important; padding: 4px 1px !important; letter-spacing: 0px !important; white-space: normal !important; word-wrap: break-word !important; }
+        }
+
+        .gc { background: #fff; border: ${BDR}; border-radius: 16px; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+        .gc:hover { transform: translateY(-4px); border-color: rgba(11,61,46,0.3); box-shadow: 0 12px 36px rgba(11,61,46,0.09); }
+        .gc-static { background: #fff; border: ${BDR}; border-radius: 16px; }
+        .lbl { font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 700; color: #111; font-family: ${HV}; }
+
+        .lime-btn { display: inline-flex; align-items: center; gap: 8px; background: ${GREEN}; color: #fff; font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 700; padding: 13px 24px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.2s ease, transform 0.15s ease; text-decoration: none; white-space: nowrap; }
+        .lime-btn:hover { background: #0a3d2c; transform: translateY(-1px); }
+        .ghost-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #111; font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 600; padding: 13px 24px; border-radius: 6px; border: ${BDR}; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
+        .ghost-btn:hover { background: #111; color: #fff; }
+        .ghost-dark { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; font-family: ${HV}; font-size: clamp(13px,1.5vw,15px); font-weight: 600; padding: 13px 24px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
+        .ghost-dark:hover { background: rgba(255,255,255,0.08); }
+
+        .tab-off { background: #fff; border: ${BDR}; color: #111; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-family: ${HV}; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+        .tab-off:hover { background: #f5f5f5; }
+        .tab-on { background: ${GREEN}; border: 1px solid ${GREEN}; color: #fff; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-family: ${HV}; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0; }
+
+        .spot-card { position: relative; overflow: hidden; --mouse-x: 50%; --mouse-y: 50%; }
+        .spot-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at center, var(--spot-color, rgba(11,61,46,0.08)) 0%, transparent 70%); background-size: 200% 200%; background-position: 50% 50%; opacity: 0.85; animation: floatSpotlight 15s ease-in-out infinite; animation-delay: inherit; transition: opacity .5s ease; }
+        .spot-card:hover::before, .spot-card:focus-within::before { background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spot-color, rgba(11,61,46,0.08)), transparent 70%); background-size: 100% 100%; background-position: 0 0; animation: none; opacity: 1; }
+        .spot-card-content { position: relative; z-index: 1; }
+        .row-div { border-bottom: 1px solid #111; }
+        .row-div:last-child { border-bottom: none; }
+
+        .doc-pill { display: flex; align-items: center; gap: 10px; font-size: clamp(11px,1.2vw,13px); color: #111; padding: 10px 14px; background: #fafafa; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; font-family: ${HV}; }
+        .doc-pill span { font-weight: 600; }
+
+        .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+        @media(max-width:480px){ .btn-row > * { width: 100%; justify-content: center; } }
+        .cta-btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+        @media(max-width:480px){ .cta-btn-row > * { width: 100%; justify-content: center; } }
+
+        .faq-wrap { display: flex; flex-direction: column; gap: 12px; max-width: 1000px; margin: 0 auto; }
+
+        @keyframes floatSpotlight {
+          0%   { background-position: 50% 50%; }
+          25%  { background-position: 80% 20%; }
+          50%  { background-position: 20% 80%; }
+          75%  { background-position: 80% 80%; }
+          100% { background-position: 50% 50%; }
+        }
+        @keyframes popTimelineNode {
+          0%   { transform: scale(0.3); opacity: 0; }
+          50%  { transform: scale(1.15); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .timeline-node-anim { animation: popTimelineNode 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+        /* ── SETUP HERO — desktop & mobile bg swap ── */
+        .setup-hero {
+          background-image: url('/banners and logos/private-limited-company-registration (main).png');
+          background-size: cover;
+          background-position: center;
+        }
+        @media(max-width:768px){
+          .setup-hero {
+            background-image: url('/mobile-banners/COMPANYSETUPFINALMOBILE.webp') !important;
+          }
+        }
+
+        /* ── STATS STRIP — mobile breathing room ── */
+        @media(max-width:768px){
+          .stats-strip {
+            margin-top: 16px;
+            border-radius: 14px;
+          }
+          .stat-cell {
+            padding: 18px 14px !important;
+          }
+        }
+        @media(max-width:600px){
+          .stat-cell {
+            padding: 16px 12px !important;
+          }
+        }
+        @media(max-width:420px){
+          .stat-cell {
+            padding: 14px 10px !important;
+          }
+        }
+
+        @media(max-width:768px){
+          .hero-grid { gap: 28px !important; }
+          .timeline-wrap { gap: 12px; }
+          .two-col { gap: 16px; }
+          .three-col { gap: 14px; }
+          .timeline-node-item { background: #fff !important; border: 2.5px solid rgba(0,0,0,0.18) !important; color: #0B3D2E !important; transition: none !important; }
+          .timeline-card-item { border: 1px solid rgba(0,0,0,0.15) !important; box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important; transform: none !important; transition: none !important; }
+        }
+        @media(max-width:600px){
+          .sec { padding: clamp(36px,7vw,72px) 16px !important; }
+          .sec-sm { padding: clamp(32px,5vw,56px) 16px !important; }
+          .hero-grid { gap: 22px !important; }
+          .handle-panel { gap: 10px; }
+          .handle-row { gap: 10px; }
+          .timeline-row { gap: 10px; }
+          .faq-wrap { gap: 8px; }
+          .btn-row { gap: 10px; margin-bottom: 24px; }
+          .cta-btn-row { gap: 10px; }
+          .gc-static { padding: 18px 14px !important; }
+          .gc { padding: 18px 14px !important; }
+          .doc-pill { padding: 9px 12px !important; }
+          .feature-row { padding: 3px 0; }
+          .feature-text { font-size: 11px !important; line-height: 1.4 !important; }
+          .feature-tick { width: 15px !important; height: 15px !important; font-size: 9px !important; }
+          .metrics-grid { gap: 6px !important; padding: 10px 0 !important; }
+          .cmp-table th, .cmp-table td { padding: 8px 5px !important; font-size: 11px !important; }
+          .entity-tabs { gap: 4px; }
+          .tab-on, .tab-off { padding: 7px 12px !important; font-size: 11px !important; }
+        }
+        @media(max-width:420px){
+          .sec { padding: clamp(28px,6vw,48px) 12px !important; }
+          .entity-tabs { gap: 4px; }
+          .tab-on, .tab-off { padding: 7px 9px !important; font-size: 10px !important; }
+          .lime-btn { font-size: 12px; padding: 11px 14px; }
+          .ghost-btn { font-size: 12px; padding: 11px 14px; }
+          .ghost-dark { font-size: 12px; padding: 11px 14px; }
+          .handle-panel { gap: 8px; }
+          .handle-row { gap: 8px; }
+          .timeline-wrap { gap: 8px; }
+          .timeline-row { gap: 8px; }
+          .faq-wrap { gap: 6px; }
+          .gc-static { padding: 14px 10px !important; }
+          .gc { padding: 14px 10px !important; }
+          .metrics-grid { gap: 6px !important; padding: 8px 0 !important; }
+          .doc-pill { padding: 7px 9px !important; font-size: 10px !important; }
+          .stat-cell { padding: 12px 10px !important; }
+          .cmp-table th, .cmp-table td { padding: 6px 3px !important; font-size: 9.5px !important; }
+          .feature-text { font-size: 10.5px !important; line-height: 1.4 !important; }
+          .feature-tick { width: 14px !important; height: 14px !important; font-size: 8px !important; }
+          .feature-row { padding: 2px 0 !important; }
+          h3 { font-size: 16px !important; }
+          .lbl { font-size: 9px !important; letter-spacing: 0.2em !important; }
+        }
+
+        .border-top { border-top: 1px solid #111; }
+      `}</style>
+
+      {/* HERO — .setup-hero class handles desktop + mobile bg swap */}
+      <section className="sec setup-hero">
+        <div className="inner">
+          <div className="hero-grid">
+
+            {/* LEFT */}
+            <div>
+              <div className="lbl" style={{ color: 'WHITE', letterSpacing: "0.3em", marginBottom: 20 }}>Company Incorporation &amp; Setup</div>
+              <h1 style={{ fontSize: "clamp(32px,5.5vw,72px)", fontWeight: 800, lineHeight: 1.04, letterSpacing: "-0.033em", margin: "0 0 20px", fontFamily: HV }}>
+                <span style={{ color: 'WHITE' }}>Set up your India entity —</span>{" "}
+                <em style={{ color: GOLD, fontStyle: "italic", fontWeight: 800 }}>structured correctly from day one.</em>
+              </h1>
+              <p style={{ fontSize: "clamp(14px,1.5vw,16px)", color: "#ffffffff", lineHeight: 1.78, maxWidth: 520, margin: "0 0 28px", fontFamily: HV }}>
+                India entry is not just an incorporation exercise. The legal structure, FDI route, transfer pricing model, and DTAA analysis must be decided <em>before</em> the first filing. We design the full picture first — then we file.
+              </p>
+
+              <div className="btn-row">
+                <button className="lime-btn" onClick={() => router.push(ROUTES.contact)}>Get Free Structure Review →</button>
+                <button className="ghost-btn" onClick={() => router.push(ROUTES.gcc)}>Post Setup →</button>
+              </div>
+
+              {/* Stats strip */}
+              <div className="stats-strip">
+                {[
+                  { target: 100, suffix: "+", label: "Companies incorporated" },
+                  { prefix: "7-", target: 12, suffix: "", label: "Days to incorporate" },
+                  { target: 18, suffix: "+", label: "Years of experience" },
+                  { target: 4, suffix: " wks", label: "End-to-end setup" },
+                ].map((s, i) => (
+                  <div key={i} className="stat-cell">
+                    <div style={{ fontSize: "clamp(18px,2.5vw,24px)", fontWeight: 800, color: "#ffffff", lineHeight: 1, fontFamily: HV }}>
+                      <CountUp target={s.target} suffix={s.suffix} prefix={s.prefix || ''} delay={i * 200} />
+                    </div>
+                    <div style={{ fontSize: 11, color: "#ffffffff", marginTop: 6, fontFamily: HV, fontWeight: 600 }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — what we handle */}
+            <div className="gc-static" style={{ padding: "24px 20px" }}>
+              <div className="lbl" style={{ letterSpacing: "0.25em", marginBottom: 18 }}>What We Handle — End to End</div>
+              <div className="handle-panel">
+                {HANDLE.map(([val, title, sub], i) => (
+                  <Fade key={title} delay={i * 80}>
+                    <div className="handle-row">
+                      <div style={{ width: 34, height: 34, borderRadius: 8, background: "rgba(11,61,46,0.06)", border: "1.5px solid #111", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, color: GREEN, flexShrink: 0 }}>{val}</div>
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 800, color: "#111", marginBottom: 2, fontFamily: HV }}>{title}</div>
+                        <div style={{ fontSize: 12, color: "#333", lineHeight: 1.5, fontFamily: HV }}>{sub}</div>
+                      </div>
+                    </div>
+                  </Fade>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ENTITY SELECTOR */}
+      <section className="sec" style={{ background: "#fff" }}>
+        <div className="inner">
+          <Fade>
+            <SH eyebrow="Entity Types" green="Which India entity is" gold="right for you?" mb={10} />
+            <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "#111", margin: "0 auto 28px", maxWidth: 680, textAlign: "center", fontFamily: HV, lineHeight: 1.6, fontWeight: 600 }}>
+              Your entity choice determines tax rate, activity scope, compliance burden, and FDI route. Select each to explore in detail.
+            </p>
+            <div className="entity-tabs" style={{ marginBottom: 24 }}>
+              {ENTITY_TABS.map(([key, label]) => (
+                <button key={key} className={active === key ? "tab-on" : "tab-off"} onClick={() => setActive(key)}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: active === key ? GOLD : "#111", transition: "all 0.25s ease", transform: active === key ? "scale(1.5)" : "scale(1)", flexShrink: 0 }} />
+                  {label}
+                </button>
+              ))}
+            </div>
+          </Fade>
+
+          <div className="two-col">
+            <Fade>
+              <div className="gc-static" style={{ padding: "24px 20px", display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+                  <div>
+                    <h3 style={{ fontSize: "clamp(16px,2vw,22px)", fontWeight: 800, color: ec.primary, margin: 0, letterSpacing: "-0.02em", fontFamily: HV }}>{ent.title}</h3>
+                    {ent.badge && (
+                      <span style={{ display: "inline-block", fontSize: 9, fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", background: ec.primary, color: "#fff", padding: "3px 8px", borderRadius: 4, marginTop: 4, fontFamily: HV }}>{ent.badge}</span>
+                    )}
+                  </div>
+                </div>
+                <div className="metrics-grid">
+                  {[["Tax Rate", ent.tax], ["FDI Route", ent.fdi], ["RBI Approval", ent.rbi], ["Timeline", ent.timeline]].map(([l, v]) => (
+                    <div key={l} style={{ textAlign: "center" }}>
+                      <div style={{ fontSize: "clamp(11px,1.2vw,13px)", fontWeight: 800, color: ec.primary, marginBottom: 3, fontFamily: HV }}>{v}</div>
+                      <div style={{ fontSize: 9, color: "#111", fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, fontFamily: HV }}>{l}</div>
+                    </div>
+                  ))}
+                </div>
+                <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#111", lineHeight: 1.75, margin: "0 0 16px", fontFamily: HV, fontWeight: 500 }}>{ent.desc}</p>
+                <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 12 }}>Key Features</div>
+                <div className="feature-list">
+                  {ent.points.map((pt, i) => (
+                    <div key={i} className="feature-row">
+                      <span className="feature-tick" style={{ background: ec.primary }}>✓</span>
+                      <span className="feature-text">{pt}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginTop: "auto", background: "rgba(230,152,25,0.08)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 10, padding: "12px 14px" }}>
+                  <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 5 }}>Best For</div>
+                  <div style={{ fontSize: "clamp(11px,1.2vw,12.5px)", color: "#111", lineHeight: 1.6, fontFamily: HV, fontWeight: 600 }}>{ent.bestFor}</div>
+                </div>
+              </div>
+            </Fade>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <Fade delay={80}>
+                <div className="gc-static" style={{ padding: "24px 20px" }}>
+                  <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 16 }}>Documents Required</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                    {ent.docs.map((doc, i) => (
+                      <div key={doc} className="doc-pill"><span>{doc}</span></div>
+                    ))}
+                  </div>
+                </div>
+              </Fade>
+
+              <Fade delay={120}>
+                <div className="gc-static" style={{ padding: "24px 20px" }}>
+                  <div className="lbl" style={{ color: GOLD, letterSpacing: "0.25em", marginBottom: 16 }}>Quick Comparison</div>
+                  <div className="table-scroll">
+                    <table className="cmp-table">
+                      <thead>
+                        <tr>
+                          <th style={{ textAlign: "left", fontSize: 10.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", color: "#111", padding: "10px 8px", borderBottom: "2.5px solid #111", borderRight: "1.5px solid #111" }}>Criteria</th>
+                          {["Pvt Ltd", "LLP", "WOS", "Branch", "Liaison"].map((h, i) => (
+                            <th key={h} style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px", color: i === activeIdx ? "#fff" : GREEN, padding: "10px 6px", textAlign: "center", background: i === activeIdx ? GREEN : "rgba(11,61,46,0.04)", borderBottom: "2.5px solid #111", borderRight: i < 4 ? "1.5px solid #111" : "none", transition: "all 0.3s ease" }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {COMPARISON.map(([label, ...vals]) => (
+                          <tr key={label}>
+                            <td style={{ fontSize: 11.5, fontWeight: 700, color: "#111", padding: "11px 8px", borderBottom: "1.5px solid #111", borderRight: "1.5px solid #111", whiteSpace: "nowrap" }}>{label}</td>
+                            {vals.map((v, j) => (
+                              <td key={j} style={{ fontSize: 12, fontWeight: 800, color: v === "✔" ? GREEN : (v === "✖" ? "#d32f2f" : "#111"), padding: "11px 5px", textAlign: "center", borderBottom: "1.5px solid #111", borderRight: j < 4 ? "1.5px solid #111" : "none", background: j === activeIdx ? "rgba(11,61,46,0.04)" : "transparent", transition: "all 0.3s ease" }}>{v}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p style={{ fontSize: 10.5, color: "#111", margin: "10px 0 0", fontStyle: "italic", fontFamily: HV, fontWeight: 600, textAlign: "center" }}>*Specifications vary for regulated sectors like banking and defense.</p>
+                </div>
+              </Fade>
+
+              <button className="lime-btn" style={{ width: "100%", justifyContent: "center", padding: "14px", border: "1px solid #111", borderRadius: 10 }} onClick={() => router.push(ROUTES.contact)}>
+                Discuss {ent.title} Setup →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="sec" style={{ background: "#fff" }}>
+        <div className="inner">
+          <Fade>
+            <SH eyebrow="Step-by-Step Process" green="From decision to fully operational —" gold="exactly what happens." mb={10} />
+            <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "#111", margin: "0 auto 36px", maxWidth: 680, textAlign: "center", fontFamily: HV, lineHeight: 1.6, fontWeight: 600 }}>
+              No surprises, no hidden steps. Here is the complete journey, week by week.
+            </p>
+          </Fade>
+          <div className="timeline-wrap">
+            <div className="timeline-line" />
+            {PROCESS.map((step, i) => {
+              const isActive = activeStep === i;
+              return (
+                <div key={step.n} className="timeline-row" onClick={() => setActiveStep(i)}>
+                  <div className="timeline-node timeline-node-item" style={{ background: isActive ? GREEN : "#fff", border: `2.5px solid ${isActive ? GREEN : "rgba(0,0,0,0.18)"}`, color: isActive ? "#fff" : GREEN, fontFamily: HV }}>{step.n}</div>
+                  <div className="timeline-card-item" style={{ flex: 1, minWidth: 0, background: "#fff", border: `1px solid ${isActive ? GREEN : "rgba(0,0,0,0.15)"}`, borderRadius: 14, padding: "16px 18px", boxShadow: isActive ? "0 8px 24px rgba(11,61,46,0.06)" : "0 2px 10px rgba(0,0,0,0.02)", transform: isActive ? "translateX(4px)" : "none", transition: "all 0.4s ease" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: "clamp(13px,1.5vw,15px)", fontWeight: 800, color: "#111", fontFamily: HV }}>{step.title}</span>
+                      <span style={{ marginLeft: "auto", background: "rgba(230,152,25,0.08)", border: "1px solid rgba(230,152,25,0.3)", color: GOLD, padding: "2px 10px", borderRadius: 50, fontSize: 10, fontWeight: 800, fontFamily: HV, flexShrink: 0 }}>{step.time}</span>
+                    </div>
+                    <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#111", lineHeight: 1.65, margin: 0, fontFamily: HV, fontWeight: 500 }}>{step.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* INCLUDED */}
+      <section className="sec" style={{ background: "#fff" }}>
+        <div className="inner">
+          <Fade>
+            <SH eyebrow="Scope of Work" green="Everything that's" gold="included." mb={10} />
+            <p style={{ fontSize: "clamp(13px,1.5vw,15px)", color: "#111", margin: "0 auto 36px", maxWidth: 680, textAlign: "center", fontFamily: HV, lineHeight: 1.6, fontWeight: 600 }}>
+              No hidden deliverables, no surprises. Exactly what we cover — from day one through ongoing compliance.
+            </p>
+          </Fade>
+          <div className="three-col">
+            {INCLUDED.map((cat, ci) => (
+              <Fade key={cat.cat} delay={ci * 80}>
+                <div className="gc spot-card" onMouseMove={handleSpotlight} style={{ padding: "22px 18px", animationDelay: `${ci * -3.5}s`, borderTop: `4px solid ${cat.acc}`, borderLeft: "1px solid #111", borderRight: "1px solid #111", borderBottom: "1px solid #111", '--spot-color': `${cat.acc}15` }}>
+                  <div className="spot-card-content">
+                    <div className="lbl" style={{ letterSpacing: "0.25em", marginBottom: 14, color: cat.acc }}>{cat.cat}</div>
+                    {cat.items.map((item, i) => (
+                      <div key={i} className="row-div" style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: i === cat.items.length - 1 ? "none" : "1px solid #111" }}>
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: cat.acc, marginRight: 10, flexShrink: 0 }} />
+                        <span style={{ fontSize: "clamp(12px,1.3vw,13.5px)", fontWeight: 600, color: "#111", fontFamily: HV }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Fade>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <PricingSection />
+
+      {/* FAQ */}
+      <section className="sec" style={{ background: "#fff" }}>
+        <div className="inner">
+          <Fade>
+            <SH eyebrow="Common Questions" green="Questions we get" gold="every time." mb={36} />
+          </Fade>
+          <div className="faq-wrap">
+            {FAQS.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <Fade key={i} delay={i * 40}>
+                  <div onClick={() => toggleFaq(i)} style={{ background: "#fff", border: "1.5px solid #111", borderRadius: 12, padding: "18px 20px", cursor: "pointer", transition: "all 0.3s ease", boxShadow: isOpen ? "0 8px 24px rgba(0,0,0,0.04)" : "none" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14 }}>
+                      <span style={{ fontSize: "clamp(13px,1.4vw,14.5px)", fontWeight: 800, color: "#111", fontFamily: HV, lineHeight: 1.4 }}>{faq.q}</span>
+                      <div style={{ width: 32, height: 32, borderRadius: "50%", flexShrink: 0, background: isOpen ? GREEN : "rgba(0,0,0,0.03)", border: "1px solid #111", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 800, color: isOpen ? "#fff" : GREEN, transition: "all 0.3s ease" }}>{isOpen ? "−" : "+"}</div>
+                    </div>
+                    <div style={{ maxHeight: isOpen ? "200px" : "0px", opacity: isOpen ? 1 : 0, overflow: "hidden", transition: "max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease", marginTop: isOpen ? 14 : 0, borderTop: isOpen ? "1px solid #111" : "none", paddingTop: isOpen ? 14 : 0 }}>
+                      <p style={{ fontSize: "clamp(12px,1.3vw,13.5px)", color: "#000", lineHeight: 1.72, margin: 0, fontFamily: HV, fontWeight: 600 }}>{faq.a}</p>
+                    </div>
+                  </div>
+                </Fade>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}

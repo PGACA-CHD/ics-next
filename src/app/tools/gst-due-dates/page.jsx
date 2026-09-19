@@ -5,7 +5,7 @@ export const metadata = {
   description: 'GST return filing due dates for FY 2026-27 — GSTR-1, GSTR-3B, GSTR-9, GSTR-4. Monthly and quarterly filers.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/gst-due-dates' },
   openGraph: {
-    title: 'GST Return Due Dates Calendar FY 2026-27 | India Company Setup',
+    title: 'GST Return Due Dates Calendar FY 2026-27',
     description: 'GST return filing due dates for FY 2026-27 — GSTR-1, GSTR-3B, GSTR-9, GSTR-4. Monthly and quarterly filers.',
     url: 'https://www.indiacompanysetup.com/tools/gst-due-dates',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'GST Return Due Dates Calendar FY 2026-27' }],

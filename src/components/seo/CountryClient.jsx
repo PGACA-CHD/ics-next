@@ -163,32 +163,32 @@ function SEOCountryPage({ country, setPage }) {
       title={<>{d.flag} {d.title.split(' Setting')[0]}<br/><span style={{ fontStyle:"italic", color:T.sl }}>Setting Up in India</span></>}
       description={d.description}>
 
-      <SEOSection label="Quick Facts" title={`India entry snapshot for ${d.name.replace('Company', 'Companies')}`}>
+      <SEOSection label="Quick Facts" title={<>India entry snapshot for <em>{d.name.replace('Company', 'Companies')}</em></>}>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:8 }} className="seo-2col">
           {d.stats.map(([n,l]) => (
             <div key={l} style={{ background:"#fff", border:`1px solid ${T.bdr}`, borderRadius:12, padding:"20px 16px", textAlign:"center" }}>
-              <div className="font-display" style={{ fontSize:28, fontWeight:700, color:T.f, lineHeight:1, marginBottom:6 }}>{n}</div>
-              <div style={{ fontSize:12, color:T.lt, lineHeight:1.4 }}>{l}</div>
+              <div className="font-display" style={{ fontSize:28, fontWeight:700, color:"#111111", lineHeight:1, marginBottom:6 }}>{n}</div>
+              <div style={{ fontSize:12, color:"#000000", lineHeight:1.4 }}>{l}</div>
             </div>
           ))}
         </div>
       </SEOSection>
 
-      <SEOSection label={d.whySection} title={d.whySection}>
+      <SEOSection label={d.whySection} title={<>Why {d.name.replace('Company', 'Companies')} <em>choose India</em></>}>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:8 }} className="seo-2col">
           {d.whyPoints.map(p => (
             <div key={p.title} style={{ background:"#fff", border:`1px solid ${T.bdr}`, borderRadius:12, padding:"20px 18px", display:"flex", gap:14 }}>
               <span style={{ fontSize:24, flexShrink:0 }}>{p.icon}</span>
               <div>
-                <div style={{ fontSize:14, fontWeight:600, color:T.ch, marginBottom:6 }}>{p.title}</div>
-                <p style={{ fontSize:13, color:T.mid, lineHeight:1.7, fontWeight:300 }}>{p.desc}</p>
+                <div style={{ fontSize:14, fontWeight:600, color:"#111111", marginBottom:6 }}>{p.title}</div>
+                <p style={{ fontSize:13, color:"#000000", lineHeight:1.7, fontWeight:300 }}>{p.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </SEOSection>
 
-      <SEOSection label="The Process" title={`How ${d.name.replace('Company', 'Companies')} incorporate in India`}>
+      <SEOSection label="The Process" title={<>How {d.name.replace('Company', 'Companies')} <em>incorporate in India</em></>}>
         <SEOSteps steps={[
           { title:"Structure decision & DTAA analysis", time:"Day 1", desc:"We assess your sector, FDI route, and applicable DTAA to recommend the right entity type. For " + d.region + " companies, this includes reviewing intercompany pricing implications from day one." },
           { title:"Document preparation", time:"Days 2–5", desc:"Parent company documents need apostilling or equivalent authentication in " + d.region + ". For foreign director KYC, this adds 3–5 days. We advise on exactly which documents are needed." },
@@ -198,18 +198,18 @@ function SEOCountryPage({ country, setPage }) {
         ]}/>
       </SEOSection>
 
-      <SEOSection label="Tax Considerations" title={`Key tax points for ${d.name.replace('Company', 'Companies')} in India`}>
+      <SEOSection label="Tax Considerations" title={<>Key tax points for <em>{d.name.replace('Company', 'Companies')} in India</em></>}>
         <div style={{ background:T.stone, borderRadius:14, padding:"24px 28px", border:`1px solid ${T.bdr}`, marginBottom:8 }}>
           {d.taxPoints.map((pt, i) => (
             <div key={i} style={{ display:"flex", gap:12, paddingBottom:12, marginBottom:12, borderBottom: i < d.taxPoints.length-1 ? `1px solid ${T.bdr}` : "none" }}>
               <span style={{ color:T.s, fontWeight:700, flexShrink:0, fontSize:14 }}>✓</span>
-              <p style={{ fontSize:13.5, color:T.mid, lineHeight:1.7, fontWeight:300 }}>{pt}</p>
+              <p style={{ fontSize:13.5, color:"#000000", lineHeight:1.7, fontWeight:300 }}>{pt}</p>
             </div>
           ))}
         </div>
       </SEOSection>
 
-      <SEOSection label="Real Client Example" title="How it works in practice">
+      <SEOSection label="Real Client Example" title={<>How it works <em>in practice</em></>}>
         <SEOClientStory flag={d.flag} region={d.region}
           headline={d.caseStudy.headline}
           challenge={d.caseStudy.challenge}
@@ -217,7 +217,7 @@ function SEOCountryPage({ country, setPage }) {
           proof={d.caseStudy.proof}/>
       </SEOSection>
 
-      <SEOSection label="FAQ" title={`Common questions from ${d.name.replace('Company', 'Companies')}`}>
+      <SEOSection label="FAQ" title={<>Common questions from <em>{d.name.replace('Company', 'Companies')}</em></>}>
         <SEOFAQs items={d.faqs}/>
       </SEOSection>
 

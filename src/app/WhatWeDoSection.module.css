@@ -1,0 +1,91 @@
+/* WhatWeDoSection.module.css */
+
+.section {
+  padding: 48px 56px;
+  position: relative;
+}
+
+/* ── merged in from SideRays.css ── */
+.section :global(.side-rays-container) {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.section :global(.wwd-card) {
+  /* No hover animations */
+}
+
+.section :global(.wwd-grid) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
+}
+
+.section :global(.wwd-grid::before) {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(ellipse 60% 60% at 50% 30%,
+      color-mix(in srgb, var(--theme-f) 10%, transparent) 0%,
+      transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.section :global(.wwd-intro) {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.section :global(.wwd-pills-row) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 56px;
+}
+
+.section :global(.wwd-pill) {
+  transition: box-shadow .25s ease, background .25s ease, transform .25s ease;
+}
+
+.section :global(.wwd-pill:hover) {
+  background: rgba(255, 255, 255, .85) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .09) !important;
+  transform: translateY(-3px) scale(1) !important;
+}
+
+@media (max-width: 900px) {
+  .section :global(.wwd-grid) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 32px 24px;
+  }
+
+  .section :global(.wwd-grid) {
+    grid-template-columns: 1fr;
+  }
+
+  .section :global(.wwd-pills-row) {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 40px;
+  }
+
+  .section :global(.wwd-pill) {
+    border-radius: 16px !important;
+  }
+
+  .section :global(.wwd-index) {
+    font-size: 24px !important;
+  }
+}

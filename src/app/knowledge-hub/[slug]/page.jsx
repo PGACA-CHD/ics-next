@@ -7,7 +7,10 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 const CF_SPACE_ID = 'qjo3cpray5h2';
-const CF_TOKEN = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN;
+const CF_TOKEN =
+  process.env.CONTENTFUL_DELIVERY_TOKEN ||
+  process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN ||
+  'Me3wAoh5C8R-voHvn3buH1R3nWLM9f4QrT6jKVaWDtY';
 const CF_URL = `https://cdn.contentful.com/spaces/${CF_SPACE_ID}/environments/master/entries`;
 const SITE = 'https://www.indiacompanysetup.com';
 const OG_DEFAULT_IMAGE = `${SITE}/og-image.jpg`;
@@ -506,7 +509,7 @@ export default async function ArticlePage({ params }) {
                         {faq.question}
                         <span style={{ color: '#0B3D2E', fontSize: 20, flexShrink: 0, marginLeft: 12 }}>&#43;</span>
                       </summary>
-                      <div style={{ padding: '14px 18px', fontSize: 14, color: '#5C5C52', lineHeight: 1.75, background: '#fff' }}>
+                      <div style={{ padding: '14px 18px', fontSize: 14, color: '#000', fontWeight: 600, lineHeight: 1.75, background: '#fff' }}>
                         {faq.answer}
                       </div>
                     </details>

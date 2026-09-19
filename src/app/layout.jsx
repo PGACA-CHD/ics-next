@@ -1,5 +1,5 @@
 import './globals.css';
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import { Cormorant_Garamond, Cardo } from 'next/font/google';
 
 const cormorant = Cormorant_Garamond({
     subsets: ['latin'],
@@ -9,15 +9,20 @@ const cormorant = Cormorant_Garamond({
     display: 'swap',
 });
 
-const dmSans = DM_Sans({
+
+
+const cardo = Cardo({
     subsets: ['latin'],
-    weight: ['300', '400', '500', '600', '700'],
-    variable: '--font-dm-sans',
+    weight: ['400', '700'],
+    style: ['normal', 'italic'],
+    variable: '--font-cardo',
     display: 'swap',
 });
+
 import { SITE_NAME, SITE_URL } from '@/lib/config';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
+import CommonCTA from '@/components/common/CommonCTA';
 import WhatsAppFloat from '@/components/shared/WhatsAppFloat';
 import ChatWidget from '@/components/shared/ChatWidget';
 import Analytics from '@/components/shared/Analytics';
@@ -44,10 +49,11 @@ export const metadata = {
 
 const GA4_ID = 'G-VFH7W7VQ44';
 const GTM_ID = 'GT-WKRW9GQZ';
+const GAD_ID = 'AW-16749732375';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${cardo.variable}`}>
       <head>
         {/* GTM dataLayer init */}
         <script dangerouslySetInnerHTML={{ __html: `
@@ -65,6 +71,7 @@ export default function RootLayout({ children }) {
         </noscript>
         <Nav />
         <main>{children}</main>
+        <CommonCTA />
         <Footer />
         <WhatsAppFloat />
         <ChatWidget />

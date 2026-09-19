@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Calculate LTCG and STCG tax on equity shares, property, debt funds and other assets. Updated for Budget 2025 rates.',
   alternates: { canonical: 'https://www.indiacompanysetup.com/tools/capital-gains-calculator' },
   openGraph: {
-    title: 'India Capital Gains Tax Calculator FY 2025-26 | India Company Setup',
+    title: 'India Capital Gains Tax Calculator FY 2025-26',
     description: 'Calculate LTCG and STCG tax on equity shares, property, debt funds and other assets. Updated for Budget 2025 rates.',
     url: 'https://www.indiacompanysetup.com/tools/capital-gains-calculator',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Capital Gains Tax Calculator FY 2025-26' }],
