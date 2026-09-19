@@ -1597,7 +1597,7 @@ function SEOFDIRulesPage({ setPage }) {
           { title: "Investing before confirming the FDI route", desc: "Sending funds to India and allotting shares before confirming the sector is under Automatic Route (or before Government approval for restricted sectors) is a FEMA violation. The penalty is up to 3x the amount of the violation – which can be the entire investment amount." },
           { title: "Using the wrong valuation methodology", desc: "Shares issued to foreign investors at below fair market value are treated as a deemed FDI violation. The valuation certificate must be from a qualified professional and must precede share allotment." },
           { title: "Missing the FC-GPR 30-day window", desc: "This is the most common FEMA violation we encounter. Many companies complete incorporation correctly but miss the FC-GPR filing deadline because they are unaware of it. A compounding application must then be filed – adding months of delay and regulatory cost." },
-          { title: "Not filing FLA Returns annually", desc: "The Annual FLA Return is not filed through MCA – it is filed directly with RBI and is separate from all other annual compliances. Many companies are unaware of it until they receive a notice." },
+          { title: "Not filing FLA Returns annually", desc: "The Annual FLA Return is not filed through Ministry of Corporate Affairs – it is filed directly with RBI and is separate from all other annual compliances. Many companies are unaware of it until they receive a notice." },
         ]} />
       </SEOSection>
 
@@ -1665,9 +1665,9 @@ function SEOForeignCompanyPage({ setPage }) {
         <SEOSteps steps={[
           { title: "Structure & FDI analysis", time: "Day 1", desc: "We assess your business model, sector, and India objectives to recommend the right entity type and FDI route, including DTAA and PE risk analysis. Free as part of the initial consultation." },
           { title: "Digital Signatures (DSC)", time: "Days 2–3", desc: "All proposed directors require DSCs. For foreign nationals, this requires passport copy, address proof, and notarisation. We handle the filing." },
-          { title: "Director ID (DIN)", time: "Days 3–5", desc: "Each director requires a DIN from MCA. For foreign directors, we file Form DIR-3 with apostilled documents." },
-          { title: "Name reservation", time: "Days 4–6", desc: "Company name is reserved through MCA's RUN system. We check trademark conflicts and regulatory restrictions before submission." },
-          { title: "SPICe+ filing", time: "Days 6–14", desc: "The main incorporation form – includes MOA, AOA, registered office, PAN, TAN, and GSTIN application. Certificate typically issues within 7–12 working days." },
+          { title: "Directors Identification Number", time: "Days 3–5", desc: "Each director requires a Directors Identification Number from Ministry of Corporate Affairs. For foreign directors, we file Form DIR-3 with apostilled documents." },
+          { title: "Name reservation", time: "Days 4–6", desc: "Company name is reserved through Ministry of Corporate Affairs' RUN system. We check trademark conflicts and regulatory restrictions before submission." },
+          { title: "Incorporation document forms filing", time: "Days 6–14", desc: "The main incorporation form – includes MOA, AOA, registered office, tax registration numbers, and GSTIN application. Certificate typically issues within 7–12 working days." },
           { title: "RBI FCGPR filing", time: "Within 30 days", desc: "Foreign Currency Gross Provisional Return – mandatory for all foreign investment under FEMA. We file via the RBI's FIRMS portal." },
           { title: "Bank & post-setup", time: "Weeks 3–5", desc: "Current account, GST registration, TDS registration, payroll setup, and a compliance calendar handed over ready to use." },
         ]} />
@@ -1699,8 +1699,8 @@ function SEOForeignCompanyPage({ setPage }) {
           { q: "Can a foreign company own 100% of an Indian company?", a: "Yes – in most sectors, 100% FDI is permitted under the Automatic Route. This means no prior Government approval is needed. Restricted sectors (defence, insurance, media) have lower caps. We check FDI eligibility as the first step of every engagement." },
           { q: "Does the company need an Indian director?", a: "Yes. At least one director of the Indian company must be a resident of India (present in India for at least 182 days in the previous calendar year). This can be a nominee director – we can help arrange one if needed." },
           { q: "What is the minimum paid-up capital required?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e  Rs. 100,000 (USD – 1100 approximately)" },
-          { q: "How long does registration take?", a: "For a straightforward Private Limited Company with Indian directors and no restricted sector issues, incorporation typically takes 14–21 working days from document submission. The Certificate of Incorporation from MCA issues in 7–12 working days once the SPICe+ is filed." },
-          { q: "What documents does the foreign parent company need to provide?", a: "Certificate of Incorporation of the parent, Memorandum & Articles of Association, Board Resolution authorising India incorporation, KYC documents (passport, address proof) for all proposed directors, and apostilled copies where required by MCA." },
+          { q: "How long does registration take?", a: "For a straightforward Private Limited Company with Indian directors and no restricted sector issues, incorporation typically takes 14–21 working days from document submission. The Incorporation Certificate from Ministry of Corporate Affairs issues in 7–12 working days once the incorporation document forms are filed." },
+          { q: "What documents does the foreign parent company need to provide?", a: "Certificate of Incorporation of the parent, Memorandum & Articles of Association, Board Resolution authorising India incorporation, KYC documents (passport, address proof) for all proposed directors, and apostilled copies where required by Ministry of Corporate Affairs." },
           { q: "Do we need a physical office in India?", a: "Yes – a registered office address in India is mandatory for incorporation. This can be a virtual/registered address initially. Many clients start with a virtual office and upgrade to physical space once the team grows." },
         ]} />
       </SEOSection>
@@ -1733,7 +1733,7 @@ function SEOGCCSetupPage({ setPage }) {
 
       <SEOSection label="What We Handle" title={<>Full GCC setup — <em>what's included</em></>}>
         <SEOInfoCards items={[
-          { icon: Ic.building, title: "Entity incorporation", desc: "Private Limited Company – SPICe+ filing, MOA/AOA, registered office, PAN, TAN, GSTIN.", value: "14–21 days" },
+          { icon: Ic.building, title: "Entity incorporation", desc: "Private Limited Company – incorporation document forms filing, MOA/AOA, registered office, tax registration numbers, GSTIN.", value: "14–21 days" },
           { icon: Ic.coins, title: "Cost-plus pricing model", desc: "Intercompany service agreement, cost allocation methodology, benchmarked mark-up, and annual TP documentation.", value: "TP-safe from day one" },
           { icon: Ic.users, title: "HR & payroll setup", desc: "Payroll structure, PF, ESI, professional tax, TDS on salary – compliant from hire #1.", value: "Hire-ready" },
           { icon: Ic.list, title: "ESOP structuring", desc: "Employee stock option plan design, FEMA compliance for foreign parent ESOPs, tax optimisation for employees.", value: "FEMA compliant" },
@@ -1745,7 +1745,7 @@ function SEOGCCSetupPage({ setPage }) {
       <SEOSection label="The Process" title={<>GCC setup timeline — <em>week by week</em></>}>
         <SEOSteps steps={[
           { title: "Structure & pricing design", time: "Week 1", desc: "Entity type, FDI route, cost-plus mark-up methodology, DTAA analysis. Intercompany service agreement drafted." },
-          { title: "Incorporation", time: "Weeks 1–3", desc: "SPICe+ filing, Certificate of Incorporation, PAN, TAN, GSTIN. Registered office established. Bank account initiation." },
+          { title: "Incorporation", time: "Weeks 1–3", desc: "Incorporation document forms filing, Incorporation Certificate, tax registration numbers, GSTIN. Registered office established. Bank account initiation." },
           { title: "FEMA & RBI filing", time: "Week 4", desc: "FC-GPR filed within 30 days of share allotment. Share valuation certificate from CA. Equity allotment confirmed." },
           { title: "HR & payroll infra", time: "Weeks 3–5", desc: "PF registration, ESI, professional tax, TDS on salary. Payroll software setup. Offer letter templates." },
           { title: "ESOP plan", time: "Weeks 4–6", desc: "Board resolution, ESOP trust deed or direct grant, FEMA compliance for foreign parent options." },
@@ -1939,7 +1939,7 @@ function SEONRIPage({ setPage }) {
         <SEOProseP>An NRI can invest in an Indian Private Limited Company by subscribing to shares at incorporation or purchasing shares from existing shareholders. The investment must be made from an NRE (Non-Resident External) or FCNR (Foreign Currency Non-Resident) account – not from an NRO account (unless specific conditions are met).</SEOProseP>
         <SEOSteps steps={[
           { title: "Confirm NRI status & route", time: "Day 1", desc: "NRI investment follows Schedule 4 FEMA. We confirm your residency status, investment amount, sector eligibility, and source of funds before any filing." },
-          { title: "Incorporation or acquisition", time: "Days 2–14", desc: "For a new company: SPICe+ filing with NRI as shareholder. For an existing company: share transfer or fresh allotment, updated share register." },
+          { title: "Incorporation or acquisition", time: "Days 2–14", desc: "For a new company: incorporation document forms filing with NRI as shareholder. For an existing company: share transfer or fresh allotment, updated share register." },
           { title: "Bank account & remittance", time: "Days 10–20", desc: "Investment must be received from NRE/FCNR account or inward remittance. Bank account opened in company name. Share capital deposited." },
           { title: "Post-investment compliance", time: "Within 30–60 days", desc: "For certain NRI investments, intimation to authorised dealer bank is required. We handle the documentation and ensure correct FEMA schedule recording." },
         ]} />
@@ -1967,13 +1967,13 @@ function SEONRIPage({ setPage }) {
           { title: "Investing through an NRO account instead of NRE/FCNR", desc: "NRI investment in Indian companies must typically come from an NRE (repatriable) account or via inward remittance. Using an NRO account for share subscription requires specific conditions to be met. Getting the source of funds wrong creates a FEMA violation at the point of investment." },
           { title: "Not planning residency transition before returning", desc: "NRIs who return to India without planning the transition often convert NRE accounts too early, lose RNOR tax status benefit, or fail to properly declare foreign assets. The planning should happen 3–6 months before physical return." },
           { title: "Mixing NRI investment route with FDI route documentation", desc: "NRI investment under Schedule 4 does not require RBI FCGPR filing. But many NRIs and their advisors prepare FDI documentation unnecessarily – creating confusion at future funding rounds about the nature of the investment." },
-          { title: "Ignoring overseas shareholding in Indian company tax filings", desc: "Indian companies with NRI shareholders must correctly disclose NRI ownership in annual returns. Misclassification of an NRI shareholder as a resident in MCA filings creates compliance gaps." },
+          { title: "Ignoring overseas shareholding in Indian company tax filings", desc: "Indian companies with NRI shareholders must correctly disclose NRI ownership in annual returns. Misclassification of an NRI shareholder as a resident in Ministry of Corporate Affairs filings creates compliance gaps." },
         ]} />
       </SEOSection>
 
       <SEOSection label="FAQ" title={<>NRI company registration <em>questions</em></>}>
         <SEOFAQs items={[
-          { q: "Can an NRI be a director of an Indian company while living abroad?", a: "Yes. There is no residency requirement for being a director – only one director needs to be an Indian resident. An NRI can be a director of an Indian company while continuing to reside abroad. They will need a DIN (Director Identification Number) from MCA and a DSC." },
+          { q: "Can an NRI be a director of an Indian company while living abroad?", a: "Yes. There is no residency requirement for being a director – only one director needs to be an Indian resident. An NRI can be a director of an Indian company while continuing to reside abroad. They will need a Directors Identification Number from Ministry of Corporate Affairs and a DSC." },
           { q: "What is the difference between NRI investment and FDI in an Indian company?", a: "NRI investment in India follows Schedule 4 of FEMA (Non-Debt Instruments) Rules. It is treated differently from FDI by foreign companies – no RBI FCGPR filing is required, different repatriation rules apply, and no valuation certificate is needed for new incorporations. The distinction matters significantly at future fundraising rounds." },
           { q: "Can an NRI repatriate dividends from an Indian company?", a: "Yes. Dividends paid by an Indian company to an NRI shareholder (from NRE account investment) are freely repatriable after payment of applicable withholding tax (typically 20% under domestic law, reduced under DTAA if applicable). Dividends from NRO account investments have repatriation limits." },
           { q: "What happens to my NRE account when I return to India?", a: "When you become a Resident Indian, NRE accounts must be re-designated as RFC (Resident Foreign Currency) accounts or converted to regular resident savings accounts. The funds in the NRE account at the time of conversion can be retained freely – there is no requirement to repatriate them." },
@@ -1993,16 +1993,16 @@ function SEOPvtLtdPage({ setPage }) {
   return (
     <SEOPageLayout eyebrow="Company Formation · India · CA-Led" setPage={setPage}
       title={<>Private Limited Company<br /><em>Registration in India</em></>}
-      description="Register a Private Limited Company in India – SPICe+ filing, MOA/AOA, PAN, TAN, GST, and post-incorporation compliance. CA-led. FDI-ready from day one. 7–12 working days.">
+      description="Register a Private Limited Company in India – incorporation document forms filing, MOA/AOA, tax registration numbers, GST, and post-incorporation compliance. CA-led. FDI-ready from day one. 7–12 working days.">
 
       <SEOSection label="What It Is">
         <SEOWhatItIs
           eyebrow="What it is"
           title="India's most versatile business structure"
           paragraphs={[
-            "A Private Limited Company is the most widely used business structure in India. Governed by the Companies Act, 2013 and regulated by the Ministry of Corporate Affairs (MCA), it provides limited liability, separate legal identity, and the ability to raise funding – making it the default choice for startups, growing businesses, and foreign-owned Indian entities alike.",
+            "A Private Limited Company is the most widely used business structure in India. Governed by the Companies Act, 2013 and regulated by the Ministry of Corporate Affairs, it provides limited liability, separate legal identity, and the ability to raise funding – making it the default choice for startups, growing businesses, and foreign-owned Indian entities alike.",
             "A Pvt Ltd can have 2 to 200 shareholders. At least one director must be an Indian resident. There is no minimum paid-up capital requirement. It can accept FDI under the Automatic Route in most sectors, issue ESOPs, and raise angel or VC funding.",
-            "Our difference from low-cost incorporation platforms: we are a CA firm. We advise on the right MOA objects clause, share capital structure, director appointments, and post-incorporation compliance calendar before the Certificate of Incorporation is issued.",
+            "Our difference from low-cost incorporation platforms: we are a CA firm. We advise on the right MOA objects clause, share capital structure, director appointments, and post-incorporation compliance calendar before the Incorporation Certificate is issued.",
           ]}
         />
       </SEOSection>
@@ -2020,19 +2020,19 @@ function SEOPvtLtdPage({ setPage }) {
 
       <SEOSection label="The Process" title={<>How Private Limited Company <em>registration works</em></>}>
         <SEOSteps steps={[
-          { title: "Name reservation", time: "Days 1–2", desc: "We check trademark conflicts, MCA name availability, and regulatory restrictions. Name reserved through RUN. We advise on the MOA objects clause." },
+          { title: "Name reservation", time: "Days 1–2", desc: "We check trademark conflicts, Ministry of Corporate Affairs name availability, and regulatory restrictions. Name reserved through RUN. We advise on the MOA objects clause." },
           { title: "Digital Signatures (DSC)", time: "Days 2–3", desc: "All proposed directors require DSCs. For Indian nationals, this takes 1–2 working days. For foreign nationals, apostilled documents are required." },
-          { title: "Director ID (DIN)", time: "Days 3–4", desc: "Each director requires a DIN from MCA. For new directors with no existing DIN, we apply through SPICe+ simultaneously." },
-          { title: "SPICe+ filing", time: "Days 4–12", desc: "The main incorporation form – MOA, AOA, registered office address, PAN, TAN, and GSTIN applied simultaneously. Certificate issued in 7–12 working days." },
+          { title: "Directors Identification Number", time: "Days 3–4", desc: "Each director requires a Directors Identification Number from Ministry of Corporate Affairs. For new directors with no existing Directors Identification Number, we apply through incorporation document forms simultaneously." },
+          { title: "Incorporation document forms filing", time: "Days 4–12", desc: "The main incorporation form – MOA, AOA, registered office address, tax registration numbers, and GSTIN applied simultaneously. Certificate issued in 7–12 working days." },
           { title: "Bank & post-incorporation", time: "Days 12–20", desc: "Current account opened. Share capital deposited. GST registration completed. Auditor appointed. Compliance calendar handed over." },
         ]} />
       </SEOSection>
 
-      <SEOSection label="What We Handle" title={<>Complete incorporation — <em>not just MCA filing</em></>}>
+      <SEOSection label="What We Handle" title={<>Complete incorporation — <em>not just Ministry of Corporate Affairs filing</em></>}>
         <SEOInfoCards items={[
           { icon: Ic.clipboard, title: "MOA & AOA drafting", desc: "Objects clause, shareholding structure, governance rules", value: "Included" },
           { icon: Ic.lock, title: "DSC for all directors", desc: "Indian and foreign nationals – we handle apostille coordination", value: "Included" },
-          { icon: Ic.file, title: "SPICe+ filing", desc: "MCA incorporation form – PAN, TAN, GSTIN in one shot", value: "Included" },
+          { icon: Ic.file, title: "Incorporation document forms filing", desc: "Ministry of Corporate Affairs incorporation form – tax registration numbers, GSTIN in one shot", value: "Included" },
           { icon: Ic.coins, title: "Share capital structure", desc: "Authorised vs paid-up, share certificate preparation", value: "Included" },
           { icon: Ic.building, title: "GST registration", desc: "Within 30 days of incorporation if applicable", value: "Included" },
           { icon: Ic.shield, title: "Auditor appointment", desc: "Form ADT-1 within 30 days – statutory requirement", value: "Included" },
@@ -2059,7 +2059,7 @@ function SEOPvtLtdPage({ setPage }) {
           { q: "What is the minimum number of directors and shareholders required?", a: "A minimum of 2 directors and 2 shareholders are required. The same person can be both a director and a shareholder. At least one director must be a resident of India (present in India for at least 182 days in the previous calendar year)." },
           { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e  Rs. 100,000 (USD – 1100 approximately)" },
           { q: "Can a foreign national be a director or shareholder?", a: "Yes. Foreign nationals can be directors and shareholders. At least one director must be an Indian resident. Foreign shareholders investing in the company must comply with FEMA's FDI regulations – share allotment triggers an RBI FCGPR filing requirement." },
-          { q: "How long does registration take?", a: "7–12 working days from the date of document submission with MCA. Name approval takes 2–3 working days. DSC procurement for foreign nationals can add 5–7 days if apostille is required." },
+          { q: "How long does registration take?", a: "7–12 working days from the date of document submission with Ministry of Corporate Affairs. Name approval takes 2–3 working days. DSC procurement for foreign nationals can add 5–7 days if apostille is required." },
           { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum shares the company can issue, as declared in the MOA. Paid-up capital is the amount actually received from shareholders for shares already issued. You can always issue shares up to the authorised limit without amending the MOA." },
           { q: "Do I need a physical office address at the time of incorporation?", a: "Yes, a registered office is mandatory. Many founders use a virtual office or co-working address initially and upgrade to a commercial space later." },
         ]} />
@@ -2193,7 +2193,7 @@ function SEOSubsidiaryPage({ setPage }) {
           { title: "Share capital & structure", time: "Days 1–2", desc: "Determine authorised and paid-up share capital. For most subsidiaries, ₹1–10 lakh is sufficient to start." },
           { title: "Resident director", time: "Days 1–5", desc: "At least one director must be an Indian resident. This can be a nominee director if your team is entirely overseas." },
           { title: "Documents & DSC", time: "Days 3–7", desc: "Draft MOA and AOA, obtain Digital Signature Certificates for all directors, prepare apostilled parent company documents." },
-          { title: "SPICe+ filing", time: "Days 7–19", desc: "The consolidated MCA filing – covers company name, directors, registered office, PAN, TAN, and GSTIN. Certificate typically issues within 7–12 working days." },
+          { title: "Incorporation document forms filing", time: "Days 7–19", desc: "The consolidated Ministry of Corporate Affairs filing – covers company name, directors, registered office, tax registration numbers, and GSTIN. Certificate typically issues within 7–12 working days." },
           { title: "FEMA & RBI compliance", time: "Within 30 days", desc: "File FC-GPR with RBI through the FIRMS portal. Mandatory for all foreign investment. Missing this window requires a compounding application." },
           { title: "Post-incorporation setup", time: "Weeks 4–6", desc: "Bank account, GST registration, TDS registration, payroll setup, compliance calendar. Full operational readiness." },
         ]} />

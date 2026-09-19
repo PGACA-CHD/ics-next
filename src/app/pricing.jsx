@@ -46,7 +46,7 @@ function buildTabs(p) {
         {
           tier: 'Starter', price: p[0], unit: 'one-time', includedLabel: "What's included",
           description: 'Core incorporation for an NRI-owned entity, filed correctly under the right FEMA route.',
-          features: ['NRI route check', 'Name reservation', 'MOA/AOA', 'SPICe+', 'DIN/DSC for up to 2 directors', 'Certificate of Incorporation', 'PAN', 'TAN', 'PF/ESI'],
+          features: ['NRI route check', 'Name reservation', 'MOA/AOA', 'Incorporation document forms', 'Directors Identification Number / DSC for up to 2 directors', 'Incorporation Certificate', 'Tax registration numbers', 'PF/ESI'],
           cta: 'Get Started →'
         },
         {
@@ -71,7 +71,7 @@ function buildTabs(p) {
         {
           tier: 'Starter', price: p[3], unit: 'one-time', includedLabel: "What's included",
           description: 'FDI-compliant incorporation for your India subsidiary, structured right from day one.',
-          features: ['FDI route check', 'Subsidiary structure note', 'Name reservation', 'MOA/AOA', 'SPICe+', 'DIN/DSC for up to 2 directors', 'Certificate of Incorporation', 'PAN', 'TAN', 'PF/ESI'],
+          features: ['FDI route check', 'Subsidiary structure note', 'Name reservation', 'MOA/AOA', 'Incorporation document forms', 'Directors Identification Number / DSC for up to 2 directors', 'Incorporation Certificate', 'Tax registration numbers', 'PF/ESI'],
           cta: 'Get Started →'
         },
         {
@@ -96,13 +96,13 @@ function buildTabs(p) {
         {
           tier: 'Liaison Office', price: p[6], unit: 'onwards', includedLabel: "What's included",
           description: 'RBI-compliant liaison office setup with full banking and first-year groundwork.',
-          features: ['Route suitability review', 'FNC support', 'AD-bank coordination', 'RBI pack', 'PAN/TAN', 'First-year checklist'],
+          features: ['Route suitability review', 'FNC support', 'AD-bank coordination', 'RBI pack', 'Tax registration numbers', 'First-year checklist'],
           cta: 'Get Started →'
         },
         {
           tier: 'Branch Office', price: p[7], unit: 'onwards', popular: true, includedLabel: 'Everything in Liaison, plus',
           description: 'Everything in the liaison scope, extended for a fully operational branch office.',
-          features: ['FC-1 / MCA support', 'Tax registration pack', 'Banking pack', 'First-year roadmap'],
+          features: ['FC-1 / Ministry of Corporate Affairs support', 'Tax registration pack', 'Banking pack', 'First-year roadmap'],
           cta: 'Get Started →'
         },
         {

@@ -394,7 +394,7 @@ export default function Page() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="sec-pad" style={{ padding: "80px 56px" }}>
+      <section id="fema" className="sec-pad" style={{ padding: "80px 56px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Our Services" green="International tax services for" gold="foreign companies in India." mb={40} />
@@ -475,7 +475,7 @@ export default function Page() {
       </section>
 
       {/* ── DTAA TABLE ── */}
-      <section className="sec-pad" style={{ padding: "80px 56px 88px" }}>
+      <section id="dtaa" className="sec-pad" style={{ padding: "80px 56px 88px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Fade>
             <SH eyebrow="Withholding Rates" green="India DTAA" gold="withholding rates." mb={16} />

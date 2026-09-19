@@ -10,8 +10,8 @@ const FONT_UI = "var(--font-poppins),'Poppins',sans-serif";
 
 const MILESTONES = [
   { label: 'Entity structure finalized', tag: 'Day 1–3' },
-  { label: 'MCA incorporation filed', tag: 'Day 4–10' },
-  { label: 'Certificate of Incorporation issued', tag: 'Day 11–14' },
+  { label: 'Ministry of Corporate Affairs incorporation filed', tag: 'Day 4–10' },
+  { label: 'Incorporation Certificate issued', tag: 'Day 11–14' },
   { label: 'RBI FCGPR filing complete', tag: 'Day 15–20' },
   { label: 'Compliance calendar active', tag: 'Day 21+' },
 ];

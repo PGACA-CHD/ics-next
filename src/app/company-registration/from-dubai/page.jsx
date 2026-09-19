@@ -270,9 +270,9 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Dubai-based NRIs and UAE residents most commonly register a Private Limited Company or a Wholly Owned Subsidiary. We advise on the best structure based on your sector and FDI requirements.' },
   { n: '02', title: 'Attestation of UAE Documents', time: 'Week 1', desc: 'UAE documents must be attested by the UAE Ministry of Foreign Affairs (MOFA) and then by the Indian Embassy/Consulate in the UAE. We provide a complete step-by-step attestation guide.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. The process is handled remotely — no India visit required.' },
-  { n: '04', title: 'Name Reservation — MCA RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) portal and confirm availability before proceeding.' },
-  { n: '05', title: 'File SPICe+ Incorporation Form', time: 'Week 2–3', desc: 'The SPICe+ (INC-32) form is a combined online application for company incorporation, DIN, PAN, TAN, and GSTIN — submitted in one go to the MCA.' },
-  { n: '06', title: 'Certificate of Incorporation', time: 'Week 3–4', desc: 'Upon ROC approval, you receive the Certificate of Incorporation, PAN, and TAN. Your Indian company is now officially registered.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) portal and confirm availability before proceeding.' },
+  { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) is a combined online application for company incorporation, Directors Identification Number, tax registration numbers, and GSTIN — submitted in one go to the Ministry of Corporate Affairs.' },
+  { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'Upon ROC approval, you receive the Incorporation Certificate and tax registration numbers. Your Indian company is now officially registered.' },
 ];
 
 const whyPoints = [
@@ -289,7 +289,7 @@ const documents = [
   { label: 'UAE Address Proof', detail: 'UAE utility bill or bank statement (attested), dated within 2 months' },
   { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
-  { label: 'DIN', detail: 'Director Identification Number — allotted through the SPICe+ filing' },
+  { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted through the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
 ];
 
@@ -431,7 +431,7 @@ export default function Page() {
                   </div>
                 ))}
                 <div style={{ padding: '13px 22px', background: 'rgba(9,48,36,0.05)', borderRadius: '0 0 15px 15px', borderTop: '1px solid rgba(9,48,36,0.10)' }}>
-                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
+                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Incorporation Certificate.</p>
                 </div>
               </div>
             </Fade>
@@ -469,7 +469,7 @@ export default function Page() {
           <Fade>
             <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Dubai to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From Dubai to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Incorporation Certificate.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
             </div>
           </Fade>

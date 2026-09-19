@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Private Limited Company Registration in India',
-  description: "Register a Private Limited Company in India. SPICe+ filing, DSC, DIN, bank account, and post-incorporation compliance. 14-21 working days.",
+  description: "Register a Private Limited Company in India. Incorporation document forms filing, DSC, Directors Identification Number, bank account, and post-incorporation compliance. 14-21 working days.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/private-limited-company-registration-india' },
   openGraph: {
     title: 'Private Limited Company Registration in India',
-    description: "Register a Private Limited Company in India. SPICe+ filing, DSC, DIN, bank account, and post-incorporation compliance. 14-21 working days.",
+    description: "Register a Private Limited Company in India. Incorporation document forms filing, DSC, Directors Identification Number, bank account, and post-incorporation compliance. 14-21 working days.",
     url: 'https://www.indiacompanysetup.com/private-limited-company-registration-india',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Private Limited Company Registration in India',
-    description: "Register a Private Limited Company in India. SPICe+ filing, DSC, DIN, bank account, and post-incorporation compliance. 14-21 working days.",
+    description: "Register a Private Limited Company in India. Incorporation document forms filing, DSC, Directors Identification Number, bank account, and post-incorporation compliance. 14-21 working days.",
     images: ['https://www.indiacompanysetup.com/og-image.jpg'],
   },
 };
@@ -27,7 +27,7 @@ export const schemaJson = JSON.stringify([{
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Private Limited Company Registration in India",
-      "description": "Register a Private Limited Company in India. SPICe+ filing, DSC, DIN, bank account, and post-incorporation compliance. 14-21 working days.",
+      "description": "Register a Private Limited Company in India. Incorporation document forms filing, DSC, Directors Identification Number, bank account, and post-incorporation compliance. 14-21 working days.",
       "url": "https://www.indiacompanysetup.com/private-limited-company-registration-india",
       "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],

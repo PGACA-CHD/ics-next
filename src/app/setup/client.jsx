@@ -107,7 +107,7 @@ const ENTITIES = {
       "No minimum paid-up capital requirement",
       "Corporate tax at 25.17% (22% base + surcharge + cess)",
       "Can accept FDI under Automatic Route (most sectors)",
-      "SPICe+ e-filing: Certificate of Incorporation in 7–12 days",
+      "Incorporation document forms e-filing: Incorporation Certificate in 7–12 days",
       "Easily convertible to public company for future fundraising",
     ],
     docs: [
@@ -153,7 +153,7 @@ const ENTITIES = {
       "Can earn, invoice, and repatriate profits freely",
       "Preferred structure for GCC, SaaS, manufacturing",
       "Corporate tax at 25.17% (new manufacturing: 17%)",
-      "SPICe+ e-filing: Certificate of Incorporation in 7–12 days",
+      "Incorporation document forms e-filing: Incorporation Certificate in 7–12 days",
       "Intercompany transactions require transfer pricing documentation",
     ],
     docs: [
@@ -232,14 +232,14 @@ const COMPARISON = [
 const PROCESS = [
   { n: "01", title: "Structure Consultation", time: "Day 1", desc: "Free 30-minute call to understand your business, India objectives, sector, and scale. We recommend the right entity type, FDI route, and tax structure before any filing begins." },
   { n: "02", title: "Pre-Incorporation Planning", time: "Week 1", desc: "Transfer pricing model design, DTAA analysis, intercompany agreement framework, and registered office identification. Everything decided on paper before the first filing." },
-  { n: "03", title: "SPICe+ Filing (MCA)", time: "Week 2", desc: "Company name reservation (RUN), SPICe+ integrated form covering incorporation, PAN, TAN, GSTIN, EPFO, ESIC, and opening bank account — all in one MCA submission." },
-  { n: "04", title: "Certificate of Incorporation", time: "Wk 2–3", desc: "Ministry of Corporate Affairs issues Certificate of Incorporation (CIN). The company legally exists. PAN, TAN issued simultaneously. Typical time: 7–12 working days from filing." },
+  { n: "03", title: "Incorporation Document Forms Filing (Ministry of Corporate Affairs)", time: "Week 2", desc: "Company name reservation (RUN), incorporation document forms integrated form covering incorporation, tax registration numbers, GSTIN, EPFO, ESIC, and opening bank account — all in one Ministry of Corporate Affairs submission." },
+  { n: "04", title: "Incorporation Certificate", time: "Wk 2–3", desc: "Ministry of Corporate Affairs issues Incorporation Certificate (CIN). The company legally exists. Tax registration numbers issued simultaneously. Typical time: 7–12 working days from filing." },
   { n: "05", title: "RBI & FEMA Compliance", time: "Wk 3–4", desc: "FCGPR filing with RBI within 30 days of receiving FDI. GST registration. Bank account opening. Payroll and TDS registration. First compliance calendar issued to client." },
-  { n: "06", title: "Ongoing Compliance Retainer", time: "Month 2+", desc: "Monthly GST, TDS, and payroll filings. Quarterly advance tax. Annual TP benchmarking study, Form 3CEB, statutory audit, corporate tax return, and MCA annual filing." },
+  { n: "06", title: "Ongoing Compliance Retainer", time: "Month 2+", desc: "Monthly GST, TDS, and payroll filings. Quarterly advance tax. Annual TP benchmarking study, Form 3CEB, statutory audit, corporate tax return, and Ministry of Corporate Affairs annual filing." },
 ];
 
 const INCLUDED = [
-  { cat: "Incorporation", acc: "#0B3D2E", bg: "rgba(11,61,46,0.06)", items: ["Company name reservation (RUN)", "SPICe+ integrated filing", "Certificate of Incorporation", "PAN & TAN registration", "GST registration", "EPFO & ESIC registration"] },
+  { cat: "Incorporation", acc: "#0B3D2E", bg: "rgba(11,61,46,0.06)", items: ["Company name reservation (RUN)", "Incorporation document forms integrated filing", "Incorporation Certificate", "Tax registration numbers", "GST registration", "EPFO & ESIC registration"] },
   { cat: "Tax & FEMA", acc: "#e69819", bg: "rgba(230,152,25,0.06)", items: ["FCGPR filing with RBI", "Transfer pricing model design", "Intercompany MSA drafting", "DTAA analysis & TRC advice", "Form 15CA / 15CB", "Bank account opening support"] },
   { cat: "Ongoing (Retainer)", acc: "#1a5c9a", bg: "rgba(26,92,154,0.06)", items: ["Monthly GST return filing", "Monthly TDS / payroll filing", "Quarterly advance tax", "Annual Form 3CEB (TP)", "Statutory audit coordination", "Annual corporate tax return"] },
 ];
@@ -248,13 +248,13 @@ const FAQS = [
   { q: "What is the minimum number of directors and shareholders required?", a: "For a Private Limited Company, a minimum of 2 directors and 2 shareholders are required. The directors and shareholders can be the same individuals." },
   { q: "Is there a minimum paid-up capital requirement?", a: "Yes there is a statutory minimum paid up capital required to start a company in India i.e Rs. 100,000 (USD – 1100 approximately)" },
   { q: "Can a foreign national be a director or shareholder?", a: "Yes, foreign nationals and foreign corporate bodies can be directors and shareholders. However, at least one director must be a resident of India." },
-  { q: "How long does registration take?", a: "Once all documents are submitted and DSC is generated, it typically takes 7 to 12 working days to get the Certificate of Incorporation from the MCA." },
+  { q: "How long does registration take?", a: "Once all documents are submitted and DSC is generated, it typically takes 7 to 12 working days to get the Incorporation Certificate from the Ministry of Corporate Affairs." },
   { q: "What is the difference between authorised and paid-up capital?", a: "Authorised capital is the maximum value of shares a company can issue to shareholders, while paid-up capital is the actual amount paid by shareholders to the company." },
   { q: "Do I need a physical office address at the time of incorporation?", a: "Yes – a registered office address is mandatory. Many founders use a virtual office or co-working address initially and upgrade to a commercial space later." },
 ];
 
 const HANDLE = [
-  ["01", "Incorporation", "MCA SPICe+ filing, CIN, PAN, TAN, GSTIN"],
+  ["01", "Incorporation", "Ministry of Corporate Affairs incorporation document forms filing, CIN, tax registration numbers, GSTIN"],
   ["02", "RBI / FEMA", "FCGPR within 30 days, FLA, ECB, compounding"],
   ["03", "Transfer Pricing", "TP model, MSA, Form 3CEB, APA advisory"],
   ["04", "DTAA Planning", "Withholding tax optimisation, TRC, PPT analysis"],

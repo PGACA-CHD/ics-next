@@ -533,7 +533,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <div className="disc-grid">
             {[
               { num: '01', title: 'International Tax & Advisory', items: ['DTAA structuring & TRC advisory', 'Transfer pricing — design, benchmarking, Form 3CEB', 'PE risk assessment & FEMA compliance', 'Withholding tax optimisation'] },
-              { num: '02', title: 'Company Secretary & MCA', items: ['Company incorporation & SPICe+ filing', 'FCGPR & FLA — RBI filings', 'Board resolutions & statutory registers', 'Annual ROC filings (MGT-7, AOC-4)'] },
+              { num: '02', title: 'Company Secretary & Ministry of Corporate Affairs', items: ['Company incorporation & incorporation document forms filing', 'FCGPR & FLA — RBI filings', 'Board resolutions & statutory registers', 'Annual ROC filings (MGT-7, AOC-4)'] },
               { num: '03', title: 'Accounts, GST & Payroll', items: ['Monthly bookkeeping & MIS reports', 'GST registration, returns & reconciliation', 'TDS computation & 26Q / 27Q returns', 'Payroll — PF, ESI, professional tax'] },
               { num: '04', title: 'Legal & Contracts', items: ['Shareholder & subscription agreements', 'Intercompany service agreements (MSA)', 'Employment contracts & ESOP plans', 'Regulatory advisory — SEBI, RBI, DPIIT'] },
             ].map((p, ci) => (

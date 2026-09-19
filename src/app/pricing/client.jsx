@@ -46,7 +46,7 @@ const ENTITY_TABS = [
 ];
 
 const DOMESTIC = {
-  intro: 'Your Private Limited Company, incorporated correctly from day one — not just a SPICe+ filing. We review your share capital structure, objects clause, GST readiness, and first-year compliance path before a single document is filed.',
+  intro: 'Your Private Limited Company, incorporated correctly from day one — not just an Incorporation document forms filing. We review your share capital structure, objects clause, GST readiness, and first-year compliance path before a single document is filed.',
   tiers: [
     {
       name: 'Essential', inr: 9999,timeline: '7–12 working days',
@@ -54,10 +54,10 @@ const DOMESTIC = {
       items: [
         'Name reservation (RUN)',
         'MOA & AOA drafting',
-        'SPICe+ integrated filing',
-        'DIN / DSC for 2 directors',
-        'Certificate of Incorporation',
-        'PAN + TAN registration',
+        'Incorporation document forms integrated filing',
+        'Directors Identification Number / DSC for 2 directors',
+        'Incorporation Certificate',
+        'Tax registration numbers',
         'PF / ESI registration',
       ],
     },
@@ -87,7 +87,7 @@ const DOMESTIC = {
       ],
     },
   ],
-  govFees: 'Government fees (MCA filing, stamp duty) billed at actual — typically $35–$90. DSC included in all packages.',
+  govFees: 'Government fees (Ministry of Corporate Affairs filing, stamp duty) billed at actual — typically $35–$90. DSC included in all packages.',
 };
 
 const NRI = {
@@ -100,9 +100,9 @@ const NRI = {
         'NRI route check (Schedule 4 FEMA)',
         'Name reservation (RUN)',
         'MOA & AOA drafting',
-        'SPICe+ integrated filing',
-        'DIN / DSC for 2 directors',
-        'COI + PAN + TAN',
+        'Incorporation document forms integrated filing',
+        'Directors Identification Number / DSC for 2 directors',
+        'Incorporation Certificate + tax registration numbers',
         'PF / ESI registration',
       ],
     },
@@ -147,9 +147,9 @@ const WOS = {
         'Subsidiary structure note',
         'Name reservation (RUN)',
         'MOA & AOA drafting',
-        'SPICe+ integrated filing',
-        'DIN / DSC for 2 directors',
-        'COI + PAN + TAN + PF/ESI',
+        'Incorporation document forms integrated filing',
+        'Directors Identification Number / DSC for 2 directors',
+        'Incorporation Certificate + tax registration numbers + PF/ESI',
       ],
     },
     {
@@ -184,7 +184,7 @@ const WOS = {
 };
 
 const BRLO = {
-  intro: 'Branch and Liaison Offices are governed by FEMA and require RBI approval, AD-bank coordination, and MCA registration under a different compliance framework than a Pvt Ltd. Getting it wrong creates FEMA exposure for the foreign parent.',
+  intro: 'Branch and Liaison Offices are governed by FEMA and require RBI approval, AD-bank coordination, and Ministry of Corporate Affairs registration under a different compliance framework than a Pvt Ltd. Getting it wrong creates FEMA exposure for the foreign parent.',
   tiers: [
     {
       name: 'Liaison Office', inr: 150000, timeline: '6–8 weeks',
@@ -194,7 +194,7 @@ const BRLO = {
         'FNC support',
         'AD-bank coordination',
         'RBI application pack',
-        'PAN / TAN registration',
+        'Tax registration numbers',
         'First-year compliance checklist',
       ],
     },
@@ -204,7 +204,7 @@ const BRLO = {
       best: 'Foreign companies executing contracts, providing services, or conducting research in India without a separate subsidiary.',
       items: [
         'Everything in Liaison Office',
-        'FC-1 / MCA support',
+        'FC-1 / Ministry of Corporate Affairs support',
         'Tax registration pack',
         'Banking setup pack',
         'First-year compliance roadmap',
@@ -293,9 +293,9 @@ const ADDONS = [
 
 const STEPS = [
   { num: '01', title: 'Free Consultation', desc: 'We review your business model, shareholding pattern, and advise on structure, FDI route, objects clause, and GST timing.' },
-  { num: '02', title: 'Document Collection', desc: 'We coordinate digital signatures, DIN processing, and collect identity, address, and registered-office proofs. Apostille support for foreign/NRI documents.' },
-  { num: '03', title: 'SPICe+ / RBI Filing', desc: 'Integrated filing covers incorporation, PAN, TAN, GSTIN, EPFO, and ESIC. For Branch/LO, we file the RBI application and coordinate with the AD bank.' },
-  { num: '04', title: 'Operational Handover', desc: 'You receive your COI, PAN, TAN, compliance calendar, and (for higher packages) bank account setup, FCGPR, and transfer pricing readiness.' },
+  { num: '02', title: 'Document Collection', desc: 'We coordinate digital signatures, Directors Identification Number processing, and collect identity, address, and registered-office proofs. Apostille support for foreign/NRI documents.' },
+  { num: '03', title: 'Incorporation document forms / RBI Filing', desc: 'Integrated filing covers incorporation, tax registration numbers, GSTIN, EPFO, and ESIC. For Branch/LO, we file the RBI application and coordinate with the AD bank.' },
+  { num: '04', title: 'Operational Handover', desc: 'You receive your Incorporation Certificate, tax registration numbers, compliance calendar, and (for higher packages) bank account setup, FCGPR, and transfer pricing readiness.' },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -303,17 +303,17 @@ const STEPS = [
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const FAQS = [
-  { q: 'What does the NRI Starter package fee cover?', a: 'The fee covers professional services — NRI route check, incorporation filing, MOA/AOA drafting, DIN/DSC, and all statutory registrations. Government fees (MCA filing, stamp duty) and applicable taxes are billed at actual and disclosed upfront before you commit. DSC is included.' },
-  { q: 'How long does Private Limited Company registration take in India?', a: 'For a standard case with complete documents, expect 7–12 working days from SPICe+ filing to Certificate of Incorporation. Total timeline from first consultation to a fully operational entity (including PAN, TAN, and bank account) is typically 3–4 weeks.' },
+  { q: 'What does the NRI Starter package fee cover?', a: 'The fee covers professional services — NRI route check, incorporation filing, MOA/AOA drafting, Directors Identification Number / DSC, and all statutory registrations. Government fees (Ministry of Corporate Affairs filing, stamp duty) and applicable taxes are billed at actual and disclosed upfront before you commit. DSC is included.' },
+  { q: 'How long does Private Limited Company registration take in India?', a: 'For a standard case with complete documents, expect 7–12 working days from Incorporation document forms filing to Incorporation Certificate. Total timeline from first consultation to a fully operational entity (including tax registration numbers and bank account) is typically 3–4 weeks.' },
   { q: 'Is NRI investment treated the same as FDI?', a: 'Not always. NRI investment under Schedule 4 of FEMA follows a different compliance path from corporate FDI under Schedule 1. The route, reporting, and repatriation rules differ. We confirm the correct route during the NRI route check included in every NRI package.' },
   { q: 'Do I need to travel to India to register the company?', a: 'Usually not. If your identity and address documents are in order, the digital signature, document legalisation, and filing process can be completed remotely. We coordinate the entire process without requiring physical presence.' },
   { q: 'Why is foreign subsidiary setup priced above commodity platforms?', a: 'A foreign-owned subsidiary involves FDI route verification, parent-country document legalisation, RBI reporting (FC-GPR within 30 days), cross-border banking coordination, and transfer pricing exposure from day one. The cost of getting the structure wrong — FEMA penalties, PE risk, TP adjustments — dwarfs any saving on incorporation fees.' },
   { q: 'Does the Market Entry package include FC-GPR filing?', a: 'Yes. FC-GPR filing with RBI is included in both the Market Entry and CFO Desk packages. It is the mandatory post-allotment reporting when a foreign company invests in an Indian entity, and must be filed within 30 days.' },
   { q: 'When is a Liaison Office better than a subsidiary?', a: 'When the foreign parent only needs representation, market research, or coordination activity in India and does not intend to earn revenue, execute contracts, or hire a large team. Liaison Offices have zero income tax exposure but are restricted in what they can do.' },
-  { q: 'How long does Branch or Liaison Office approval take?', a: 'RBI processing times vary. Budget 6–8 weeks for the full process including AD-bank coordination, RBI approval, MCA registration, and PAN/TAN. Complex or government-route cases can take longer.' },
+  { q: 'How long does Branch or Liaison Office approval take?', a: 'RBI processing times vary. Budget 6–8 weeks for the full process including AD-bank coordination, RBI approval, Ministry of Corporate Affairs registration, and tax registration numbers. Complex or government-route cases can take longer.' },
   { q: 'Is the compliance retainer only for foreign-owned entities?', a: 'Primarily designed for foreign-owned subsidiaries, NRI companies, and GCCs where GST, TDS, payroll, FEMA, and parent-company reporting are interconnected. Domestic companies with simpler compliance needs may not require the full scope of these retainers.' },
   { q: 'Is there a lock-in period for retainers?', a: 'The minimum term is 6 months, which allows us to complete at least one full compliance cycle. After the minimum term, the retainer continues month-to-month with 30 days\' notice.' },
-  { q: 'Can I split payment?', a: 'Yes. Standard payment is 50% on engagement, 50% on Certificate of Incorporation. For retainers, monthly billing on the 1st.' },
+  { q: 'Can I split payment?', a: 'Yes. Standard payment is 50% on engagement, 50% on Incorporation Certificate. For retainers, monthly billing on the 1st.' },
   { q: 'Do you offer a refund if you can\'t deliver?', a: 'Yes. If we cannot complete your incorporation within the published timeline due to our delay (not government processing time or document delays from your side), we refund 100% of professional fees. Government fees are non-refundable.' },
   { q: 'What payment methods do you accept?', a: 'Wire transfer (all currencies), Stripe, and PayPal (for invoices under USD 5,000). For India-based payments: bank transfer, UPI, and Razorpay.' },
 ];
@@ -454,7 +454,7 @@ function QuoteModal({ pkg, currency, onClose }) {
                 padding: '12px 14px', marginBottom: 20, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <span style={{ fontSize: 16, flexShrink: 0 }}>📋</span>
                 <div style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.55 }}>
-                  Your quote will include a <strong style={{ color: T.ch }}>separate line-item estimate</strong> for government fees (MCA filing, stamp duty, notarisation) based on your specific situation.
+                  Your quote will include a <strong style={{ color: T.ch }}>separate line-item estimate</strong> for government fees (Ministry of Corporate Affairs filing, stamp duty, notarisation) based on your specific situation.
                 </div>
               </div>
 
@@ -824,7 +824,7 @@ export default function PricingPage() {
           <div style={{ background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 16, padding: '28px 32px' }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: T.ch, marginBottom: 12 }}>Transparency Disclosure — What's Not Included</div>
             <p style={{ fontSize: 14, color: T.mid, lineHeight: 1.75, marginBottom: 0 }}>
-              Government fees (MCA filing fees, stamp duty), taxes, notarisation/apostille, translations, courier, banking charges, and third-party costs are billed at actual unless expressly included. DSC is included in all packages. Statutory audit fees are engaged separately. Transfer pricing benchmarking studies, legal opinions, and one-time project work outside package scope require separate engagement with written approval. No hidden markups.
+              Government fees (Ministry of Corporate Affairs filing fees, stamp duty), taxes, notarisation/apostille, translations, courier, banking charges, and third-party costs are billed at actual unless expressly included. DSC is included in all packages. Statutory audit fees are engaged separately. Transfer pricing benchmarking studies, legal opinions, and one-time project work outside package scope require separate engagement with written approval. No hidden markups.
             </p>
           </div>
         </div>

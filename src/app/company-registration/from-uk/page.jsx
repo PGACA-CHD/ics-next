@@ -225,9 +225,9 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'UK-based founders commonly register a Private Limited Company, LLP, or a Wholly Owned Subsidiary. We help you choose based on your sector, FDI requirements, and long-term plans.' },
   { n: '02', title: 'Apostille Documents', time: 'Week 1', desc: 'UK documents (passport, address proof) must be apostilled. We provide a step-by-step guide.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. The application is handled remotely — no travel to India required.' },
-  { n: '04', title: 'Name Reservation — MCA RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and verify availability before proceeding to incorporation.' },
-  { n: '05', title: 'File SPICe+ Incorporation Form', time: 'Week 2–3', desc: 'The SPICe+ (INC-32) form combines company incorporation, DIN, PAN, TAN, and GSTIN applications in a single online submission to the Ministry of Corporate Affairs.' },
-  { n: '06', title: 'Certificate of Incorporation', time: 'Week 3–4', desc: 'Once the ROC approves the application, you receive your Certificate of Incorporation, PAN, and TAN. Your Indian company is ready to operate.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and verify availability before proceeding to incorporation.' },
+  { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) combines company incorporation, Directors Identification Number, tax registration numbers, and GSTIN applications in a single online submission to the Ministry of Corporate Affairs.' },
+  { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'Once the ROC approves the application, you receive your Incorporation Certificate and tax registration numbers. Your Indian company is ready to operate.' },
 ];
 
 const whyPoints = [
@@ -244,7 +244,7 @@ const documents = [
   { label: 'UK Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
   { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
-  { label: 'DIN', detail: 'Director Identification Number — allotted through the SPICe+ filing' },
+  { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted through the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
 ];
 
@@ -260,7 +260,7 @@ const faqs = [
   { q: 'Does my Indian company need a UK national as director?', a: 'No — but it needs at least one director who is a resident of India (present in India for 182+ days in the previous calendar year). We can help arrange a nominee resident director if needed.' },
   { q: 'Can a British national own 100% of an Indian company?', a: 'Yes, in most sectors. India allows 100% FDI under the Automatic Route in sectors including IT, consulting, manufacturing, and e-commerce (marketplace model). A few sectors require prior government approval.' },
   { q: 'How long does it take to register a company in India from the UK?', a: 'Typically 15–25 working days once all apostilled documents are ready. The FCDO apostille process in the UK takes approximately 2–5 working days.' },
-  { q: 'Can I open an Indian bank account from the UK?', a: 'Yes. After receiving the Certificate of Incorporation, you can open an Indian current account. Many major Indian banks have processes for NRI and foreign-director-led companies.' },
+  { q: 'Can I open an Indian bank account from the UK?', a: 'Yes. After receiving the Incorporation Certificate, you can open an Indian current account. Many major Indian banks have processes for NRI and foreign-director-led companies.' },
 ];
 
 const countries = [
@@ -378,7 +378,7 @@ export default function Page() {
                   </div>
                 ))}
                 <div style={{ padding: '13px 22px', background: 'rgba(9,48,36,0.05)', borderRadius: '0 0 15px 15px', borderTop: '1px solid rgba(9,48,36,0.10)' }}>
-                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
+                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Incorporation Certificate.</p>
                 </div>
               </div>
             </Fade>
@@ -416,7 +416,7 @@ export default function Page() {
           <Fade>
             <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the UK to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the UK to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Incorporation Certificate.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 5 s — click any step to jump.</p>
             </div>
           </Fade>

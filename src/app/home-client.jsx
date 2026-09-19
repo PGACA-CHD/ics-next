@@ -99,7 +99,7 @@ function AudiencePathsSection() {
       n: "02", tab: "Incorporating a Pvt Ltd", headline: "Incorporating a Pvt Ltd in India",
       desc: "You're an Indian founder, entrepreneur, or promoter incorporating a Private Limited Company. You want it done right — right objects clause, right share structure, FDI-ready if investors come later.",
       bullets: ["MOA objects clause advice", "Share capital structure", "FDI-ready from day one", "Post-incorporation compliance"],
-      stat: "7–10 days", statLabel: "Typical MCA incorporation after document submission.", cta: "Pvt Ltd registration guide", page: "seo_pvtltd"
+      stat: "7–10 days", statLabel: "Typical Ministry of Corporate Affairs incorporation after document submission.", cta: "Pvt Ltd registration guide", page: "seo_pvtltd"
     },
     {
       n: "03", tab: "Building from scratch", headline: "Building a team in India",
@@ -464,9 +464,9 @@ export default function HomePage() {
   const process = [
     { n: "01", title: "Free Consultation", time: "Day 1", desc: "30 minutes. We understand your business model, India objectives, and team plan — then give you a clear structure recommendation before any engagement begins." },
     { n: "02", title: "Structure Design", time: "Week 1", desc: "Entity type, FDI route, transfer pricing model, DTAA analysis, PE risk check. Designed before any filing — never retrofitted after." },
-    { n: "03", title: "Incorporation", time: "Weeks 2–3", desc: "MCA SPICe+ filing, DIN, DSC, PAN, TAN, Certificate of Incorporation. Typical timeline: 7–12 working days after document submission." },
+    { n: "03", title: "Incorporation", time: "Weeks 2–3", desc: "Incorporation document forms filing, Directors Identification Number, DSC, tax registration numbers, Incorporation Certificate. Typical timeline: 7–12 working days after document submission." },
     { n: "04", title: "Post-Incorporation Setup", time: "Week 4", desc: "RBI FCGPR filing, GST registration, bank account, payroll setup, and your complete compliance calendar — handed over ready to use." },
-    { n: "05", title: "Ongoing Compliance", time: "Month 2+", desc: "Monthly retainer: GST, TDS, payroll, MCA filings, annual audit, corporate tax return. One firm, full coverage, fixed fee." },
+    { n: "05", title: "Ongoing Compliance", time: "Month 2+", desc: "Monthly retainer: GST, TDS, payroll, Ministry of Corporate Affairs filings, annual audit, corporate tax return. One firm, full coverage, fixed fee." },
   ];
 
   const inp = (extra = {}) => ({ width: "100%", padding: "12px 15px", border: `1.5px solid ${T.bdr}`, borderRadius: 7, fontFamily: HV, fontSize: 13.5, color: "#000", background: "#fff", outline: "none", marginBottom: 10, boxSizing: "border-box", transition: "border-color .18s", ...extra });

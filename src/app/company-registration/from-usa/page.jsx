@@ -269,9 +269,9 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'US-based founders typically register a Private Limited Company (most common), LLP, or a Wholly Owned Subsidiary. We recommend the right structure based on your goals, sector, and FDI requirements.' },
   { n: '02', title: 'Prepare & Apostille Documents', time: 'Week 1', desc: 'US documents (passport, address proof) must be apostilled before submission to Indian authorities. We provide a precise checklist so nothing is missed.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. We coordinate the application remotely — no India visit required.' },
-  { n: '04', title: 'Name Reservation — MCA RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
-  { n: '05', title: 'File SPICe+ Incorporation Form', time: 'Week 2–3', desc: 'The SPICe+ (INC-32) form bundles company incorporation, DIN allotment, PAN, TAN, and GSTIN applications in one submission. We handle the complete filing.' },
-  { n: '06', title: 'Certificate of Incorporation', time: 'Week 3–4', desc: 'ROC approves your application and issues the Certificate of Incorporation, PAN, and TAN — your company is officially registered in India.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
+  { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) bundles company incorporation, Directors Identification Number allotment, tax registration numbers, and GSTIN applications in one submission. We handle the complete filing.' },
+  { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'ROC approves your application and issues the Incorporation Certificate and tax registration numbers — your company is officially registered in India.' },
 ];
 
 const whyPoints = [
@@ -288,7 +288,7 @@ const documents = [
   { label: 'US Address Proof', detail: 'Utility bill or bank statement, apostilled, within 2 months' },
   { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
-  { label: 'DIN', detail: 'Director Identification Number — allotted via SPICe+ filing' },
+  { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted via the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'We provide a virtual registered office address if needed' },
 ];
 
@@ -435,7 +435,7 @@ export default function Page() {
                   </div>
                 ))}
                 <div style={{ padding: '13px 22px', background: 'rgba(9,48,36,0.05)', borderRadius: '0 0 15px 15px', borderTop: '1px solid rgba(9,48,36,0.10)' }}>
-                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Certificate of Incorporation.</p>
+                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Incorporation Certificate.</p>
                 </div>
               </div>
             </Fade>
@@ -473,7 +473,7 @@ export default function Page() {
           <Fade>
             <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the USA to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Certificate of Incorporation.</span></h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the USA to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Incorporation Certificate.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
             </div>
           </Fade>

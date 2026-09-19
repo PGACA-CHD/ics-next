@@ -88,8 +88,8 @@ export const FOOTER_COLS = [
     links: [
       { label: "Transfer Pricing",            href: "/transfer-pricing-india" },
       { label: "FDI Rules India",             href: "/fdi-rules-india" },
-      { label: "FEMA Compliance",             href: "/international-tax" },
-      { label: "DTAA Planning",               href: "/international-tax" },
+      { label: "FEMA Compliance",             href: "/international-tax#fema" },
+      { label: "DTAA Planning",               href: "/international-tax#dtaa" },
     ],
   },
   {

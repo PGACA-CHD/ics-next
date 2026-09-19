@@ -86,7 +86,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How long does India incorporation take for a UAE company?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Standard incorporation via SPICe+ with the MCA takes 7-12 working days after document submission. UAE parent documents need apostilling or notarisation, adding 3-5 days. For straightforward structures, total timeline is 3-4 weeks. Complex restructures - such as converting an existing branch office to a private limited company or regularising past FEMA non-compliance - typically take 6-8 weeks." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Standard incorporation via incorporation document forms with the Ministry of Corporate Affairs takes 7-12 working days after document submission. UAE parent documents need apostilling or notarisation, adding 3-5 days. For straightforward structures, total timeline is 3-4 weeks. Complex restructures - such as converting an existing branch office to a private limited company or regularising past FEMA non-compliance - typically take 6-8 weeks." }
     }
   ]
 };

@@ -190,7 +190,7 @@ export default function WhatWeDoSection({ T, ROUTES }) {
         {
             label: "Company Entry",
             headline: "Incorporated in India. Done properly.",
-            desc: "Private limited company, wholly owned subsidiary, branch office, or LLP — we advise on the right structure for your model, then handle every filing from MCA to RBI.",
+            desc: "Private limited company, wholly owned subsidiary, branch office, or LLP — we advise on the right structure for your model, then handle every filing from Ministry of Corporate Affairs to RBI.",
             cta: "Subsidiary setup guide", link: "seo_sub",
         },
         {

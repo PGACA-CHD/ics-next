@@ -37,12 +37,12 @@ const CTA_MAP = {
   },
   '/foreign-company-registration-india': {
     title: 'Ready to register your foreign company in India?',
-    desc: 'Liaison Office, Project Office, or Branch Office setup with RBI and MCA approvals.',
+    desc: 'Liaison Office, Project Office, or Branch Office setup with RBI and Ministry of Corporate Affairs approvals.',
     btnText: 'Book Free Consultation →'
   },
   '/subsidiary-company-india': {
     title: 'Ready to establish your wholly-owned subsidiary in India?',
-    desc: 'Complete SPICe+ filing, PAN/TAN, bank account opening, and post-incorporation compliance.',
+    desc: 'Complete incorporation document forms filing, tax registration numbers, bank account opening, and post-incorporation compliance.',
     btnText: 'Book Free Consultation →'
   },
   '/nri-company-registration-india': {
@@ -57,52 +57,52 @@ const CTA_MAP = {
   },
   '/company-registration/from-usa': {
     title: 'Ready to register your Indian company from the USA?',
-    desc: 'Apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'Apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/company-registration/from-uk': {
     title: 'Ready to register your Indian company from the UK?',
-    desc: 'FCDO apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'FCDO apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/company-registration/from-dubai': {
     title: 'Ready to register your Indian company from Dubai?',
-    desc: 'Consulate attestation guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'Consulate attestation guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/company-registration/from-singapore': {
     title: 'Ready to register your Indian company from Singapore?',
-    desc: 'Apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'Apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/company-registration/from-canada': {
     title: 'Ready to register your Indian company from Canada?',
-    desc: 'GAC apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'GAC apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/company-registration/from-australia': {
     title: 'Ready to register your Indian company from Australia?',
-    desc: 'DFAT apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'DFAT apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/us-company-setting-up-india': {
     title: 'Ready to set up your US company in India?',
-    desc: 'Apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'Apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/uk-company-setting-up-india': {
     title: 'Ready to set up your UK company in India?',
-    desc: 'FCDO apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'FCDO apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/uae-company-setting-up-india': {
     title: 'Ready to set up your UAE company in India?',
-    desc: 'Consulate attestation guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'Consulate attestation guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/singapore-company-setting-up-india': {
     title: 'Ready to set up your Singapore company in India?',
-    desc: 'Apostille guidance to Certificate of Incorporation — we handle everything.',
+    desc: 'Apostille guidance to Incorporation Certificate — we handle everything.',
     btnText: 'Book a Free Consultation →'
   },
   '/gcc-setup-india': {

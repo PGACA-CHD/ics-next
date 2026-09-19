@@ -413,7 +413,7 @@ export function CountryPageComponent({ country, setPage }) {
         <SEOSteps steps={[
           { title: "Structure decision & DTAA analysis", time: "Day 1", desc: "We assess your sector, FDI route, and applicable DTAA to recommend the right entity type. For " + d.region + " companies, this includes reviewing intercompany pricing implications from day one." },
           { title: "Document preparation", time: "Days 2–5", desc: "Parent company documents need apostilling or equivalent authentication in " + d.region + ". For foreign director KYC, this adds 3–5 days. We advise on exactly which documents are needed." },
-          { title: "MCA incorporation", time: "Days 6–19", desc: "SPICe+ filing — company name, directors, registered office, PAN, TAN, GSTIN. Certificate of Incorporation typically in 7–12 working days after document submission." },
+          { title: "Ministry of Corporate Affairs incorporation", time: "Days 6–19", desc: "Incorporation document forms filing — company name, directors, registered office, tax registration numbers, GSTIN. Incorporation Certificate typically in 7–12 working days after document submission." },
           { title: "RBI FCGPR filing", time: "Within 30 days", desc: "Foreign Currency Gross Provisional Return — mandatory FEMA filing after share allotment. For " + d.region + " companies, the valuation methodology and exchange rate documentation must align with your home jurisdiction requirements." },
           { title: "Post-incorporation setup", time: "Weeks 4–6", desc: "Bank account, GST registration, TDS, payroll, transfer pricing policy, and compliance calendar. Full operational readiness." },
         ]} />
