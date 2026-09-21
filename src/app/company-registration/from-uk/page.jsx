@@ -225,7 +225,7 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'UK-based founders commonly register a Private Limited Company, LLP, or a Wholly Owned Subsidiary. We help you choose based on your sector, FDI requirements, and long-term plans.' },
   { n: '02', title: 'Apostille Documents', time: 'Week 1', desc: 'UK documents (passport, address proof) must be apostilled. We provide a step-by-step guide.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. The application is handled remotely — no travel to India required.' },
-  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and verify availability before proceeding to incorporation.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and verify availability before proceeding to incorporation.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) combines company incorporation, Directors Identification Number, tax registration numbers, and GSTIN applications in a single online submission to the Ministry of Corporate Affairs.' },
   { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'Once the ROC approves the application, you receive your Incorporation Certificate and tax registration numbers. Your Indian company is ready to operate.' },
 ];
@@ -242,7 +242,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Apostilled' },
   { label: 'UK Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'Tax ID Card (Form 49AA) or tax ID declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted through the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
@@ -255,7 +255,7 @@ const structures = [
 ];
 
 const faqs = [
-  { q: 'Can I register a company in India from the UK without visiting India?', a: 'Yes. The entire registration process is done online through the MCA21 portal. All documents are submitted digitally with apostilled copies. No physical presence in India is required.' },
+  { q: 'Can I register a company in India from the UK without visiting India?', a: 'Yes. The entire registration process is done online through the government incorporation portal. All documents are submitted digitally with apostilled copies. No physical presence in India is required.' },
   { q: 'How do I apostille documents in the UK for India company registration?', a: 'UK documents must be apostilled through the FCDO Legalisation Office in Milton Keynes. The process typically takes 2–5 working days. Notarisation by a UK solicitor may be required for some documents prior to apostille.' },
   { q: 'Does my Indian company need a UK national as director?', a: 'No — but it needs at least one director who is a resident of India (present in India for 182+ days in the previous calendar year). We can help arrange a nominee resident director if needed.' },
   { q: 'Can a British national own 100% of an Indian company?', a: 'Yes, in most sectors. India allows 100% FDI under the Automatic Route in sectors including IT, consulting, manufacturing, and e-commerce (marketplace model). A few sectors require prior government approval.' },

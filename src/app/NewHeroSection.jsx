@@ -69,8 +69,10 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         }
         .nhero-bg {
           position: absolute; inset: 0;
-          background-image: url('/banners and logos/1.png');
-          background-size: cover; background-position: center 38%;
+        }
+        .nhero-bg img {
+          width: 100%; height: 100%;
+          object-fit: cover; object-position: center 38%;
         }
         .nhero-bg-tint {
           position: absolute; inset: 0;
@@ -301,7 +303,14 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         }
       `}} />
 
-      <div className="nhero-bg" />
+      <div className="nhero-bg">
+        <img
+          src="/banners-and-logos/1.webp"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+        />
+      </div>
       <div className="nhero-bg-tint" />
 
       <div className="nhero-wrap">

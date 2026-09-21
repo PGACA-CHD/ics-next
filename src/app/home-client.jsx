@@ -1,11 +1,13 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { T, CALENDLY_URL, PHONE, PHONE_RAW } from '@/lib/config';
 import { submitToZoho, trackConsultationRequest, trackGuideDownload, trackWhatsApp } from '@/lib/utils';
-import PricingTabsSection from './pricing';
-import WhatWeDoSection from './WhatWeDoSection';
 import NewHeroSection from './NewHeroSection';
-import ClientOutcomes from './clientOutcomes';
+
+const PricingTabsSection = dynamic(() => import('./pricing'));
+const WhatWeDoSection = dynamic(() => import('./WhatWeDoSection'));
+const ClientOutcomes = dynamic(() => import('./clientOutcomes'));
 
 const HV = "Helvetica, Arial, sans-serif";
 const G = "#0B3D2E";
@@ -529,9 +531,21 @@ export default function HomePage() {
           <div className="logo-row-left" style={{ display: "flex", width: "max-content", alignItems: "center" }}>
             {[...Array(2)].map((_, di) => (
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                {["Protiviti India", "Mahindra Defence Systems", "Saregama India", "Ethos Limited", "Polyplex Corporation Limited (Listed)", "Tube Investment of India", "Vibracoustic India Private Limited", "Newtech Filter (BOSCH group Company)", "Godrej, UAE entities", "Ognibene power", "Cloud EQ"].map(name => (
+                {[
+                  { name: "Protiviti India", file: "protiviti-india" },
+                  { name: "Mahindra Defence Systems", file: "mahindra-defence" },
+                  { name: "Saregama India", file: "saregama-india" },
+                  { name: "Ethos Limited", file: "ethos-limited" },
+                  { name: "Polyplex Corporation Limited (Listed)", file: "polyplex-corp" },
+                  { name: "Tube Investment of India", file: "tube-investment" },
+                  { name: "Vibracoustic India Private Limited", file: "vibracoustic" },
+                  { name: "Newtech Filter (BOSCH group Company)", file: "newtech-filter-bosch" },
+                  { name: "Godrej, UAE entities", file: "godrej-uae" },
+                  { name: "Ognibene power", file: "ognibene-power" },
+                  { name: "Cloud EQ", file: "cloud-eq" },
+                ].map(({ name, file }) => (
                   <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
-                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} loading="lazy" />
+                    <img src={`/logos/${file}.webp`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -540,9 +554,22 @@ export default function HomePage() {
           <div className="logo-row-right" style={{ display: "flex", width: "max-content", alignItems: "center", marginTop: 8 }}>
             {[...Array(2)].map((_, di) => (
               <div key={di} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                {["Defacto Infotech India, AU, US", "CrimsonInsights", "Alleshealth", "Foodjam", "Grid advertising", "Talink", "Mcube capital", "SML Mahindra Limited", "Cheema Boilers Limited", "AWFIS India Private Limited", "Skin elements", "Vyra Life (Modebencura)"].map(name => (
+                {[
+                  { name: "Defacto Infotech India, AU, US", file: "defacto-infotech" },
+                  { name: "CrimsonInsights", file: "crimson-insights" },
+                  { name: "Alleshealth", file: "alleshealth" },
+                  { name: "Foodjam", file: "foodjam" },
+                  { name: "Grid advertising", file: "grid-advertising" },
+                  { name: "Talink", file: "talink" },
+                  { name: "Mcube capital", file: "mcube-capital" },
+                  { name: "SML Mahindra Limited", file: "sml-mahindra" },
+                  { name: "Cheema Boilers Limited", file: "cheema-boilers" },
+                  { name: "AWFIS India Private Limited", file: "awfis" },
+                  { name: "Skin elements", file: "skin-elements" },
+                  { name: "Vyra Life (Modebencura)", file: "vyra-life" },
+                ].map(({ name, file }) => (
                   <div key={`${di}-${name}`} style={{ flexShrink: 0, width: 150, height: 72, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}>
-                    <img src={`/logos/${encodeURIComponent(name)}.png`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} loading="lazy" />
+                    <img src={`/logos/${file}.webp`} alt={name} style={{ maxWidth: "130px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain" }} loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -559,7 +586,7 @@ export default function HomePage() {
       {/* QUOTE CALLOUT */}
       <section className="quote-callout-sec" style={{ padding: "0 56px 60px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <div className="quote-callout-grid" style={{ position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center", borderRadius: 18, padding: "38px 44px", display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center" }}>
+          <div className="quote-callout-grid" style={{ position: "relative", overflow: "hidden", backgroundImage: "url('/banners-and-logos/2.webp')", backgroundSize: "cover", backgroundPosition: "center", borderRadius: 18, padding: "38px 44px", display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center" }}>
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", borderRadius: 18 }} />
             <div style={{ position: "relative", zIndex: 1 }}>
               <p style={{ fontSize: 19, color: "#fff", lineHeight: 1.65, fontWeight: 400, fontFamily: HV, fontStyle: "italic", margin: 0 }}>"Most foreign companies enter India with the wrong structure and fix it at audit time. We design it right the first time — saving you 2–3× the cost in corrections."</p>
@@ -655,8 +682,8 @@ export default function HomePage() {
             <div className="gr-map">
               <img
                 key={isMobileMap ? "mobile-map" : "desktop-map"}
-                src={isMobileMap ? "/worldmap-mobile.png" : "/worldmap.png"}
-                onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = "/worldmap.png"; }}
+                src={isMobileMap ? "/worldmap-mobile.png" : "/worldmap.webp"}
+                onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = "/worldmap.webp"; }}
                 alt="World map"
                 className="gr-map-img"
                 loading="lazy"
@@ -669,7 +696,7 @@ export default function HomePage() {
       {/* DTAA */}
       <section className="dtaa-sec" style={{ padding: "0 56px 60px", background: "#fff" }}>
         <div style={{ maxWidth: 1360, margin: "0 auto" }}>
-          <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", backgroundImage: "url('/banners and logos/Home pg medium size banner.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", backgroundImage: "url('/banners-and-logos/home-banner.webp')", backgroundSize: "cover", backgroundPosition: "center" }}>
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
             <div className="dtaa-grid" style={{ position: "relative", zIndex: 1, padding: "40px 48px", display: "grid", gridTemplateColumns: "1fr auto", gap: 28, alignItems: "center" }}>
               <div>
@@ -739,7 +766,7 @@ export default function HomePage() {
       <KnowledgeHubSection />
 
       {/* PGA */}
-      <section style={{ padding: "70px 20px", position: "relative", backgroundImage: "url('/banners and logos/Knowledge partner-2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section style={{ padding: "70px 20px", position: "relative", backgroundImage: "url('/banners-and-logos/knowledge-partner.webp')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.72)" }} />
         <div style={{ maxWidth: 1360, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 16 }}>
@@ -757,7 +784,7 @@ export default function HomePage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="final-cta-section" id="final-cta" style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners and logos/2.png')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
+      <section className="final-cta-section" id="final-cta" style={{ padding: "80px 56px", position: "relative", overflow: "hidden", backgroundImage: "url('/banners-and-logos/2.webp')", backgroundSize: "cover", backgroundPosition: "center 38%" }}>
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "linear-gradient(100deg,rgba(0,0,0,0.85) 4%,rgba(0,0,0,0.68) 42%,rgba(0,0,0,0.45) 78%)" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", display: "grid", gridTemplateColumns: "1fr 420px", gap: 64, alignItems: "center" }} className="final-cta-grid">
           <div>

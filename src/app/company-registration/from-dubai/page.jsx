@@ -270,7 +270,7 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Dubai-based NRIs and UAE residents most commonly register a Private Limited Company or a Wholly Owned Subsidiary. We advise on the best structure based on your sector and FDI requirements.' },
   { n: '02', title: 'Attestation of UAE Documents', time: 'Week 1', desc: 'UAE documents must be attested by the UAE Ministry of Foreign Affairs (MOFA) and then by the Indian Embassy/Consulate in the UAE. We provide a complete step-by-step attestation guide.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. The process is handled remotely — no India visit required.' },
-  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) portal and confirm availability before proceeding.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and confirm availability before proceeding.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) is a combined online application for company incorporation, Directors Identification Number, tax registration numbers, and GSTIN — submitted in one go to the Ministry of Corporate Affairs.' },
   { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'Upon ROC approval, you receive the Incorporation Certificate and tax registration numbers. Your Indian company is now officially registered.' },
 ];
@@ -287,7 +287,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Attested by UAE MOFA + Indian Embassy/Consulate in UAE' },
   { label: 'UAE Address Proof', detail: 'UAE utility bill or bank statement (attested), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'Tax ID Card (Form 49AA) or tax ID declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted through the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
@@ -300,7 +300,7 @@ const structures = [
 ];
 
 const faqs = [
-  { q: 'Can I register a company in India from Dubai without visiting India?', a: 'Yes. The entire process is completed online via the MCA21 portal. You only need to get your UAE documents attested through the UAE Ministry of Foreign Affairs and the Indian Embassy in Dubai — no India visit required.' },
+  { q: 'Can I register a company in India from Dubai without visiting India?', a: 'Yes. The entire process is completed online via the government incorporation portal. You only need to get your UAE documents attested through the UAE Ministry of Foreign Affairs and the Indian Embassy in Dubai — no India visit required.' },
   { q: 'How do I attest documents in the UAE for India company registration?', a: 'UAE documents follow a two-step process: first attestation by the UAE Ministry of Foreign Affairs (MOFA), then attestation by the Indian Embassy or Consulate in Abu Dhabi or Dubai. Note: The UAE is not part of the Hague Apostille Convention, so MOFA + Indian Embassy attestation is required instead of apostille.' },
   { q: 'Can a UAE resident own 100% of an Indian company?', a: 'Yes, in most sectors. India allows 100% FDI under the Automatic Route in sectors like IT, consulting, manufacturing, and e-commerce marketplace models. Sectors like defence, media, and banking may require prior government approval.' },
   { q: 'How long does it take to register a company in India from Dubai?', a: 'Typically 15–25 working days once attested documents are ready. The MOFA + Indian Embassy attestation in the UAE takes approximately 5–10 working days.' },

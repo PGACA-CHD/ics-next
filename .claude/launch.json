@@ -1,0 +1,36 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pgaca-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "/Users/pankajgupta/Documents/Claude/ICS Github Code/pgaca-next-main"
+      ],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "ics-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "divsam-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "/Users/pankajgupta/Documents/Claude/divsam-consulting"
+      ],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

@@ -269,7 +269,7 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'US-based founders typically register a Private Limited Company (most common), LLP, or a Wholly Owned Subsidiary. We recommend the right structure based on your goals, sector, and FDI requirements.' },
   { n: '02', title: 'Prepare & Apostille Documents', time: 'Week 1', desc: 'US documents (passport, address proof) must be apostilled before submission to Indian authorities. We provide a precise checklist so nothing is missed.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. We coordinate the application remotely — no India visit required.' },
-  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) bundles company incorporation, Directors Identification Number allotment, tax registration numbers, and GSTIN applications in one submission. We handle the complete filing.' },
   { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'ROC approves your application and issues the Incorporation Certificate and tax registration numbers — your company is officially registered in India.' },
 ];
@@ -286,7 +286,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Notarized + Apostilled' },
   { label: 'US Address Proof', detail: 'Utility bill or bank statement, apostilled, within 2 months' },
-  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'Tax ID Card (Form 49AA) or tax ID declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted via the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'We provide a virtual registered office address if needed' },
@@ -299,7 +299,7 @@ const structures = [
 ];
 
 const faqs = [
-  { q: 'Can I register from the USA without visiting India?', a: 'Yes. The entire process is online through MCA21. All documents are submitted digitally. As long as your passport and address proof are apostilled, no India visit is needed.' },
+  { q: 'Can I register from the USA without visiting India?', a: 'Yes. The entire process is online through the government incorporation portal. All documents are submitted digitally. As long as your passport and address proof are apostilled, no India visit is needed.' },
   { q: 'Does my company need an Indian director?', a: 'Yes. At least one director must have stayed in India for 182+ days in the previous calendar year. We help you identify a nominee resident director if required.' },
   { q: 'Can a US citizen own 100% of an Indian company?', a: 'Yes, in most sectors under the Automatic Route. 100% FDI is permitted in IT, consulting, manufacturing, and e-commerce marketplace models.' },
   { q: 'How long does registration take?', a: 'Typically 15–25 working days once apostilled documents are ready. The apostille process in the US takes 3–7 business days depending on your state.' },

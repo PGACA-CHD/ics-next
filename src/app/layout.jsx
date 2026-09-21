@@ -24,9 +24,11 @@ import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
 import CommonCTA from '@/components/common/CommonCTA';
 import WhatsAppFloat from '@/components/shared/WhatsAppFloat';
-import ChatWidget from '@/components/shared/ChatWidget';
 import Analytics from '@/components/shared/Analytics';
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
+
+const ChatWidget = dynamic(() => import('@/components/shared/ChatWidget'), { ssr: false });
 
 export const viewport = { };
 
@@ -55,8 +57,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${cardo.variable}`}>
       <head>
-        {/* GTM dataLayer init */}
-        <script dangerouslySetInnerHTML={{ __html: `
+        <link rel="preload" href="/banners-and-logos/1.webp" as="image" type="image/webp" />
+        <Script id="datalayer-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           window._icsTrack = function(event, params) {

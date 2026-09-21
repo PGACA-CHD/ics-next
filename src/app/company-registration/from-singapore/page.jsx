@@ -270,7 +270,7 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Singapore-based founders commonly register a Private Limited Company or Wholly Owned Subsidiary in India. For professional services, an LLP may be preferred. We advise on the right fit for your goals, sector, and FDI requirements.' },
   { n: '02', title: 'Apostille Singapore Documents', time: 'Week 1', desc: 'Singapore is a member of the Hague Apostille Convention. Documents (passport, address proof) must be apostilled through the Singapore Academy of Law (SAL) or the relevant Singapore authority before submission to Indian authorities.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. We coordinate the application remotely — no India visit required.' },
-  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the MCA21 Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) bundles company incorporation, Directors Identification Number allotment, tax registration numbers, and GSTIN applications in one submission. We handle the complete filing.' },
   { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'ROC approves your application and issues the Incorporation Certificate and tax registration numbers — your company is officially registered in India.' },
 ];
@@ -287,7 +287,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Apostilled through Singapore Academy of Law (SAL) or relevant authority' },
   { label: 'Singapore Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'Tax ID Card (Form 49AA) or tax ID declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained remotely' },
   { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted via the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'We provide a virtual registered office address if needed' },
@@ -300,7 +300,7 @@ const structures = [
 ];
 
 const faqs = [
-  { q: 'Can I register a company in India from Singapore without visiting India?', a: 'Yes. The entire process is completed online via the MCA21 portal. Singapore documents are apostilled through the Singapore Academy of Law — no India visit required.' },
+  { q: 'Can I register a company in India from Singapore without visiting India?', a: 'Yes. The entire process is completed online via the government incorporation portal. Singapore documents are apostilled through the Singapore Academy of Law — no India visit required.' },
   { q: 'Does Singapore have an Apostille arrangement with India?', a: 'Yes. Singapore is a member of the Hague Apostille Convention, so apostilled Singapore documents are directly accepted by Indian authorities — no Indian Embassy attestation needed.' },
   { q: 'Is there a tax treaty between India and Singapore?', a: 'Yes. The India-Singapore Double Taxation Avoidance Agreement (DTAA) has been in place since 1994 (revised in 2016). This prevents double taxation on income flowing between the two countries, which is a key advantage for Singapore-based founders with Indian entities.' },
   { q: 'Can a Singapore company own 100% of an Indian company?', a: 'Yes, in most sectors. 100% FDI is permitted under the Automatic Route in sectors like IT, e-commerce (marketplace model), consulting, and manufacturing. A Singapore-registered entity can be the holding company for an Indian subsidiary.' },

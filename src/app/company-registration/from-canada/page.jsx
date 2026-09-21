@@ -112,7 +112,7 @@ const steps = [
   { n: '01', title: 'Choose Your Business Structure', time: 'Day 1', desc: 'Canadian founders most commonly register a Private Limited Company (WOS) in India. We advise on the right structure based on your sector, FIPA treaty benefits, and long-term India plans.' },
   { n: '02', title: 'Apostille Documents via GAC', time: 'Week 1', desc: 'Canadian documents must be apostilled through Global Affairs Canada (GAC). We provide a complete step-by-step guide to the authentication process.' },
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors require a Class 3 Digital Signature Certificate from an Indian certifying authority. The process is handled entirely remotely.' },
-  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We reserve your preferred company name through the MCA21 Reserve Unique Name (RUN) service and verify availability before proceeding.' },
+  { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We reserve your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and verify availability before proceeding.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) covers company incorporation, Directors Identification Number, tax registration numbers, and GSTIN in a single online submission to the Ministry of Corporate Affairs.' },
   { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'On ROC approval you receive your Incorporation Certificate and tax registration numbers. Your Indian entity is ready to operate.' },
 ];
@@ -129,7 +129,7 @@ const whyPoints = [
 const documents = [
   { label: 'Passport', detail: 'Apostilled by Global Affairs Canada (GAC)' },
   { label: 'Canadian Address Proof', detail: 'Utility bill or bank statement (apostilled), dated within 2 months' },
-  { label: 'PAN Card (Form 49AA) or non PAN Declaration', detail: 'For foreign nationals — we assist with the application' },
+  { label: 'Tax ID Card (Form 49AA) or tax ID declaration', detail: 'For foreign nationals — we assist with the application' },
   { label: 'DSC (Class 3)', detail: 'Digital Signature Certificate — obtained fully remotely' },
   { label: 'Directors Identification Number', detail: 'Directors Identification Number — allotted through the Incorporation document forms filing' },
   { label: 'Registered Office Proof', detail: 'Virtual registered office in India available through us' },
@@ -142,7 +142,7 @@ const structures = [
 ];
 
 const faqs = [
-  { q: 'Can I register a company in India from Canada without visiting India?', a: 'Yes. The entire process is done online through MCA21. All documents are submitted digitally with apostilled copies from Global Affairs Canada. No travel to India is required.' },
+  { q: 'Can I register a company in India from Canada without visiting India?', a: 'Yes. The entire process is done online through the government incorporation portal. All documents are submitted digitally with apostilled copies from Global Affairs Canada. No travel to India is required.' },
   { q: 'How do I apostille documents in Canada for India company registration?', a: 'Canadian documents must be authenticated through Global Affairs Canada (GAC) Authentication Services in Ottawa. The process typically takes 5–10 business days. A Canadian notary may be required before submission to GAC.' },
   { q: 'Does my Indian company need a Canadian director?', a: 'No — only one director must be a resident of India (present for 182+ days in the previous calendar year). We can help arrange a nominee resident director if needed.' },
   { q: 'Can a Canadian national own 100% of an Indian company?', a: 'Yes, in most sectors. India allows 100% FDI under the Automatic Route in IT, consulting, manufacturing, and e-commerce. A few sectors require prior government approval.' },
