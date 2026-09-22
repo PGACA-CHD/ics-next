@@ -9,6 +9,24 @@ const WHITE = '#ffffff';
 
 const PLANS = [
     {
+        tier: 'Lite',
+        price: '$150',
+        unit: '/ month',
+        minTerm: 'Fixed 6-month term',
+        popular: false,
+        description: 'Bridge retainer for newly incorporated entities in their first 6 months.',
+        includedLabel: "What's included",
+        features: [
+            'Monthly bookkeeping — up to 20 invoices/month',
+            'GST filing (quarterly or monthly)',
+            'TDS filing (if statutory)',
+            'ROC annual filing (Year 1)',
+            'Payroll support — up to 3 employees',
+            'Email/WhatsApp advisory (48-hr response)',
+        ],
+        note: 'Auto-converts to Core at Month 7 unless mutually agreed otherwise.',
+    },
+    {
         tier: 'Core',
         price: '$300',
         unit: '/ month',
@@ -21,12 +39,13 @@ const PLANS = [
             'GST/TDS for light volume — up to 50 invoices/month',
             'Payroll support — up to 20 employees',
             'ROC annual filing',
+            'WhatsApp advisory (same-day response)',
             'Quarterly review call',
         ],
     },
     {
         tier: 'Plus',
-        price: '$600',
+        price: '$700',
         unit: '/ month',
         minTerm: '6-month minimum term',
         popular: true,
@@ -70,8 +89,8 @@ export default function RetainerPricing({ contactUrl = '/contact' }) {
             <style>{`
         .rp-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 28px;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
           align-items: stretch;
           font-family: ${FONT};
         }
@@ -171,7 +190,10 @@ export default function RetainerPricing({ contactUrl = '/contact' }) {
           font-weight: 700;
           font-family: ${FONT};
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
+          .rp-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 700px) {
           .rp-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 540px) {
@@ -234,6 +256,11 @@ export default function RetainerPricing({ contactUrl = '/contact' }) {
                                     </li>
                                 ))}
                             </ul>
+                            {plan.note && (
+                                <div style={{ fontSize: 11.5, color: tc, lineHeight: 1.5, marginTop: 14, padding: '8px 10px', background: pop ? 'rgba(255,255,255,.08)' : '#F5F5F0', borderRadius: 8, fontStyle: 'italic', fontFamily: FONT }}>
+                                    {plan.note}
+                                </div>
+                            )}
                         </div>
                     );
                 })}

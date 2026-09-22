@@ -6,12 +6,12 @@ import { submitToZoho, trackConsultationRequest } from '@/lib/utils';
 
 const CURRENCIES = [
   { code: 'USD', symbol: '$',   rate: 90,  flag: '🇺🇸' },
-  { code: 'GBP', symbol: '£',   rate: 120, flag: '🇬🇧' },
-  { code: 'EUR', symbol: '€',   rate: 100, flag: '🇪🇺' },
-  { code: 'SGD', symbol: 'S$',  rate: 70,  flag: '🇸🇬' },
+  { code: 'GBP', symbol: '£',   rate: 114, flag: '🇬🇧' },
+  { code: 'EUR', symbol: '€',   rate: 98,  flag: '🇪🇺' },
+  { code: 'SGD', symbol: 'S$',  rate: 67,  flag: '🇸🇬' },
   { code: 'AED', symbol: 'AED', rate: 25,  flag: '🇦🇪' },
-  { code: 'CAD', symbol: 'CA$', rate: 65,  flag: '🇨🇦' },
-  { code: 'AUD', symbol: 'A$',  rate: 65,  flag: '🇦🇺' },
+  { code: 'CAD', symbol: 'CA$', rate: 66,  flag: '🇨🇦' },
+  { code: 'AUD', symbol: 'A$',  rate: 58,  flag: '🇦🇺' },
 ];
 
 const fmtPrice = (inr, currency) => {
@@ -94,7 +94,7 @@ const NRI = {
   intro: 'Starting a company as an NRI is not a standard domestic incorporation. The investment route, funding mechanism, bank account type, and repatriation structure must be correct from the first filing — or you risk FEMA complications that are expensive to fix later.',
   tiers: [
     {
-      name: 'Starter', inr: 14900, timeline: '10–18 working days',
+      name: 'Starter', inr: 16200, timeline: '10–18 working days',
       best: 'NRIs who need correct NRI route identification upfront and will handle post-setup steps separately.',
       items: [
         'NRI route check (Schedule 4 FEMA)',
@@ -107,7 +107,7 @@ const NRI = {
       ],
     },
     {
-      name: 'Growth', inr: 39900, timeline: '18–25 working days',
+      name: 'Growth', inr: 43200, timeline: '18–25 working days',
       badge: 'Most Popular',
       best: 'Most NRI founders — incorporation plus FCGPR, banking, and the post-setup steps NRI companies specifically need.',
       items: [
@@ -121,7 +121,7 @@ const NRI = {
       ],
     },
     {
-      name: 'Repatriation-Ready', inr: 74900, timeline: '18–25 days + full Year 1',
+      name: 'Repatriation-Ready', inr: 81000, timeline: '18–25 days + full Year 1',
       best: 'NRIs who need first-year setup with repatriation planning and DTAA awareness built in.',
       items: [
         'Everything in Growth',
@@ -140,7 +140,7 @@ const WOS = {
   intro: 'Setting up an India subsidiary is not an incorporation exercise — it is an India-entry project. Entity structure, FDI route, RBI reporting, banking, transfer pricing model, and compliance calendar must be designed together before a single document is filed.',
   tiers: [
     {
-      name: 'Starter', inr: 39900, timeline: '7–12 working days',
+      name: 'Starter', inr: 43200, timeline: '7–12 working days',
       best: 'Foreign companies with an India-based finance resource or existing advisor for post-setup work.',
       items: [
         'FDI route and sector check',
@@ -153,7 +153,7 @@ const WOS = {
       ],
     },
     {
-      name: 'Market Entry', inr: 99900, timeline: '4–6 weeks',
+      name: 'Market Entry', inr: 108000, timeline: '4–6 weeks',
       badge: 'Recommended',
       best: 'Most foreign companies — complete setup including bank account, GST, FCGPR, FIRMS, and 1-month compliance.',
       items: [
@@ -167,7 +167,7 @@ const WOS = {
       ],
     },
     {
-      name: 'CFO Desk', inr: 149000, timeline: '4–6 weeks',
+      name: 'CFO Desk', inr: 162000, timeline: '4–6 weeks',
       featured: true,
       best: 'CFOs who want 90-day operating readiness — not just an incorporated entity. Full handover to parent\'s finance team.',
       items: [
@@ -187,7 +187,7 @@ const BRLO = {
   intro: 'Branch and Liaison Offices are governed by FEMA and require RBI approval, AD-bank coordination, and Ministry of Corporate Affairs registration under a different compliance framework than a Pvt Ltd. Getting it wrong creates FEMA exposure for the foreign parent.',
   tiers: [
     {
-      name: 'Liaison Office', inr: 150000, timeline: '6–8 weeks',
+      name: 'Liaison Office', inr: 162000, timeline: '6–8 weeks',
       prefix: 'From', best: 'Foreign parent needing India presence for representation, market development, or coordination — no revenue in India.',
       items: [
         'Route suitability review',
@@ -199,7 +199,7 @@ const BRLO = {
       ],
     },
     {
-      name: 'Branch Office', inr: 225000, timeline: '6–8 weeks',
+      name: 'Branch Office', inr: 243000, timeline: '6–8 weeks',
       prefix: 'From', badge: 'Full Setup',
       best: 'Foreign companies executing contracts, providing services, or conducting research in India without a separate subsidiary.',
       items: [
@@ -211,7 +211,7 @@ const BRLO = {
       ],
     },
     {
-      name: 'Special Situations', inr: 375000, timeline: '8–14 weeks',
+      name: 'Special Situations', inr: 405000, timeline: '8–14 weeks',
       prefix: 'From', best: 'Regulated sectors, government-route applications, or conversions from one structure to another.',
       items: [
         'Everything in Branch Office',
@@ -232,7 +232,21 @@ const BRLO = {
 
 const RETAINERS = [
   {
-    name: 'Core', inr: 25000, suffix: '/mo',
+    name: 'Lite', inr: 13500, suffix: '/mo',
+    min: 'Fixed 6-month term',
+    best: 'Newly incorporated entities in their first 6 months — bridge to a full retainer.',
+    items: [
+      'Monthly bookkeeping (up to 20 invoices, Zoho Books)',
+      'GST filing (quarterly composition or monthly regular)',
+      'TDS filing (if statutory)',
+      'ROC annual filing (Year 1)',
+      'Payroll support (up to 3 employees)',
+      'Email / WhatsApp advisory (48-hr response)',
+    ],
+    note: 'Auto-converts to Core at Month 7 unless mutually agreed otherwise.',
+  },
+  {
+    name: 'Core', inr: 27000, suffix: '/mo',
     min: '6-month minimum',
     best: 'Small or early-stage India entities with light transaction volume and a lean team.',
     items: [
@@ -240,11 +254,12 @@ const RETAINERS = [
       'GST / TDS filing (light volume)',
       'Payroll support (up to 20 employees)',
       'ROC annual filing',
+      'WhatsApp advisory (same-day response)',
       'Quarterly review call',
     ],
   },
   {
-    name: 'Plus', inr: 50000, suffix: '/mo',
+    name: 'Plus', inr: 63000, suffix: '/mo',
     min: '6-month minimum', badge: 'Most Popular',
     best: 'Operating subsidiaries — up to 200 invoices/mo, 40 employees, with monthly MIS and audit support.',
     items: [
@@ -257,7 +272,7 @@ const RETAINERS = [
     ],
   },
   {
-    name: 'Controller Desk', inr: 150000, suffix: '/mo',
+    name: 'Controller Desk', inr: 162000, suffix: '/mo',
     min: '6-month minimum',
     best: 'Foreign groups needing an outsourced India finance function — fractional controller equivalent.',
     items: [
@@ -323,21 +338,22 @@ const FAQS = [
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const ALL_PACKAGES = [
-  { entity: 'NRI Setup', name: 'Starter', inr: 14900 },
-  { entity: 'NRI Setup', name: 'Growth', inr: 39900 },
-  { entity: 'NRI Setup', name: 'Repatriation-Ready', inr: 74900 },
-  { entity: 'Foreign / WOS', name: 'Starter', inr: 39900 },
-  { entity: 'Foreign / WOS', name: 'Market Entry', inr: 99900 },
-  { entity: 'Foreign / WOS', name: 'CFO Desk', inr: 149000 },
-  { entity: 'Branch & Liaison', name: 'Liaison Office', inr: 150000, prefix: 'From' },
-  { entity: 'Branch & Liaison', name: 'Branch Office', inr: 225000, prefix: 'From' },
-  { entity: 'Branch & Liaison', name: 'Special Situations', inr: 375000, prefix: 'From' },
+  { entity: 'NRI Setup', name: 'Starter', inr: 16200 },
+  { entity: 'NRI Setup', name: 'Growth', inr: 43200 },
+  { entity: 'NRI Setup', name: 'Repatriation-Ready', inr: 81000 },
+  { entity: 'Foreign / WOS', name: 'Starter', inr: 43200 },
+  { entity: 'Foreign / WOS', name: 'Market Entry', inr: 108000 },
+  { entity: 'Foreign / WOS', name: 'CFO Desk', inr: 162000 },
+  { entity: 'Branch & Liaison', name: 'Liaison Office', inr: 162000, prefix: 'From' },
+  { entity: 'Branch & Liaison', name: 'Branch Office', inr: 243000, prefix: 'From' },
+  { entity: 'Branch & Liaison', name: 'Special Situations', inr: 405000, prefix: 'From' },
   { entity: 'Domestic Pvt Ltd', name: 'Essential', inr: 9999 },
   { entity: 'Domestic Pvt Ltd', name: 'Launch', inr: 14900 },
   { entity: 'Domestic Pvt Ltd', name: 'Ultimate One Year', inr: 49900 },
-  { entity: 'Compliance Retainer', name: 'Core', inr: 25000, suffix: '/mo' },
-  { entity: 'Compliance Retainer', name: 'Plus', inr: 50000, suffix: '/mo' },
-  { entity: 'Compliance Retainer', name: 'Controller Desk', inr: 150000, suffix: '/mo' },
+  { entity: 'Compliance Retainer', name: 'Lite', inr: 13500, suffix: '/mo' },
+  { entity: 'Compliance Retainer', name: 'Core', inr: 27000, suffix: '/mo' },
+  { entity: 'Compliance Retainer', name: 'Plus', inr: 63000, suffix: '/mo' },
+  { entity: 'Compliance Retainer', name: 'Controller Desk', inr: 162000, suffix: '/mo' },
 ];
 
 const WA_URL = `https://wa.me/${PHONE_RAW}?text=`;
@@ -710,9 +726,9 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }} className="service-cards-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 20 }} className="retainer-cards-grid">
             {RETAINERS.map((plan, idx) => {
-              const star = idx === 1;
+              const star = idx === 2;
               return (
                 <div key={plan.name} style={{
                   background: star ? T.f : '#fff', border: `1px solid ${star ? T.f : T.bdr}`,
@@ -739,11 +755,17 @@ export default function PricingPage() {
                     <strong style={{ color: star ? 'rgba(255,255,255,.75)' : T.ch }}>Best for:</strong> {plan.best}
                   </div>
 
-                  <ul style={{ listStyle: 'none', padding: 0, flex: 1, marginBottom: 24 }}>
+                  <ul style={{ listStyle: 'none', padding: 0, flex: 1, marginBottom: plan.note ? 12 : 24 }}>
                     {plan.items.map(item => (
                       <Check key={item} light={star}>{item}</Check>
                     ))}
                   </ul>
+
+                  {plan.note && (
+                    <div style={{ fontSize: 11.5, color: star ? 'rgba(255,255,255,.45)' : T.lt, lineHeight: 1.5, marginBottom: 16, padding: '8px 10px', background: star ? 'rgba(255,255,255,.05)' : '#FDF9F3', borderRadius: 8, fontStyle: 'italic' }}>
+                      {plan.note}
+                    </div>
+                  )}
 
                   <button onClick={() => setQuotePkg({ entity: 'Compliance Retainer', name: plan.name, inr: plan.inr })}
                     className="ics-btn" style={{

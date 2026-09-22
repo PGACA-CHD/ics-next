@@ -28,12 +28,12 @@ const CURRENCY = {
 //          core_mo, plus_mo, controller_mo]
 // ─────────────────────────────────────────────
 const PRICES = {
-    usa: ['$180', '$480', '$900', '$480', '$1,200', '$1,800', '$1,800', '$2,700', '$4,500', '$300', '$600', '$1,800'],
-    australia: ['AUD 300', 'AUD 700', 'AUD 1,400', 'AUD 700', 'AUD 1,800', 'AUD 2,800', 'AUD 2,800', 'AUD 4,200', 'AUD 7,000', 'AUD 450', 'AUD 900', 'AUD 2,800'],
-    singapore: ['SGD 250', 'SGD 600', 'SGD 1,200', 'SGD 600', 'SGD 1,600', 'SGD 2,400', 'SGD 2,400', 'SGD 3,600', 'SGD 6,000', 'SGD 400', 'SGD 800', 'SGD 2,400'],
-    dubai: ['AED 700', 'AED 1,800', 'AED 3,400', 'AED 1,800', 'AED 4,400', 'AED 6,600', 'AED 6,600', 'AED 10,000', 'AED 16,600', 'AED 1,100', 'AED 2,200', 'AED 6,600'],
-    canada: ['CAD 250', 'CAD 700', 'CAD 1,200', 'CAD 700', 'CAD 1,600', 'CAD 2,400', 'CAD 2,400', 'CAD 3,600', 'CAD 6,200', 'CAD 400', 'CAD 800', 'CAD 2,400'],
-    uk: ['£140', '£380', '£710', '£380', '£950', '£1,420', '£1,420', '£2,130', '£3,560', '£240', '£470', '£1,420'],
+    usa: ['$180', '$480', '$900', '$480', '$1,200', '$1,800', '$1,800', '$2,700', '$4,500', '$150', '$300', '$700', '$1,800'],
+    australia: ['AUD 300', 'AUD 700', 'AUD 1,400', 'AUD 700', 'AUD 1,800', 'AUD 2,800', 'AUD 2,800', 'AUD 4,200', 'AUD 7,000', 'AUD 230', 'AUD 450', 'AUD 1,100', 'AUD 2,800'],
+    singapore: ['SGD 250', 'SGD 600', 'SGD 1,200', 'SGD 600', 'SGD 1,600', 'SGD 2,400', 'SGD 2,400', 'SGD 3,600', 'SGD 6,000', 'SGD 200', 'SGD 400', 'SGD 950', 'SGD 2,400'],
+    dubai: ['AED 700', 'AED 1,800', 'AED 3,400', 'AED 1,800', 'AED 4,400', 'AED 6,600', 'AED 6,600', 'AED 10,000', 'AED 16,600', 'AED 550', 'AED 1,100', 'AED 2,600', 'AED 6,600'],
+    canada: ['CAD 250', 'CAD 700', 'CAD 1,200', 'CAD 700', 'CAD 1,600', 'CAD 2,400', 'CAD 2,400', 'CAD 3,600', 'CAD 6,200', 'CAD 200', 'CAD 400', 'CAD 950', 'CAD 2,400'],
+    uk: ['£140', '£380', '£710', '£380', '£950', '£1,420', '£1,420', '£2,130', '£3,560', '£120', '£240', '£550', '£1,420'],
 };
 
 function buildTabs(p) {
@@ -119,19 +119,26 @@ function buildTabs(p) {
             subheading: 'Monthly retainers for entities that need continuous compliance coverage. 6-month minimum term.',
             plans: [
                 {
-                    tier: 'Core', price: p[9], unit: '/ month', minTerm: '6-month minimum term', includedLabel: "What's included",
-                    description: 'For lean entities with light monthly transaction volume.',
-                    features: ['Monthly bookkeeping — up to 50 invoices/month', 'GST/TDS for light volume — up to 50 invoices/month', 'Payroll support — up to 20 employees', 'ROC annual filing', 'Quarterly review call'],
+                    tier: 'Lite', price: p[9], unit: '/ month', minTerm: 'Fixed 6-month term', includedLabel: "What's included",
+                    description: 'Bridge retainer for newly incorporated entities in their first 6 months.',
+                    features: ['Monthly bookkeeping — up to 20 invoices/month', 'GST filing (quarterly or monthly)', 'TDS filing (if statutory)', 'ROC annual filing (Year 1)', 'Payroll support — up to 3 employees', 'Email/WhatsApp advisory (48-hr response)'],
+                    note: 'Auto-converts to Core at Month 7 unless mutually agreed otherwise.',
                     cta: 'Contact Us →'
                 },
                 {
-                    tier: 'Plus', price: p[10], unit: '/ month', popular: true, minTerm: '6-month minimum term', includedLabel: 'Everything in Core, plus',
+                    tier: 'Core', price: p[10], unit: '/ month', minTerm: '6-month minimum term', includedLabel: "What's included",
+                    description: 'For lean entities with light monthly transaction volume.',
+                    features: ['Monthly bookkeeping — up to 50 invoices/month', 'GST/TDS for light volume — up to 50 invoices/month', 'Payroll support — up to 20 employees', 'ROC annual filing', 'WhatsApp advisory (same-day response)', 'Quarterly review call'],
+                    cta: 'Contact Us →'
+                },
+                {
+                    tier: 'Plus', price: p[11], unit: '/ month', popular: true, minTerm: '6-month minimum term', includedLabel: 'Everything in Core, plus',
                     description: 'For growing entities that need monthly reporting and audit support.',
                     features: ['Monthly bookkeeping — up to 200 invoices/month', 'GST/TDS for volume — up to 200 invoices/month', 'Payroll support — up to 40 employees', 'Monthly MIS pack', 'Audit support', 'Monthly PF/ESI filing'],
                     cta: 'Contact Us →'
                 },
                 {
-                    tier: 'Controller Desk', price: p[11], unit: '/ month', minTerm: '6-month minimum term', includedLabel: 'Everything in Plus, plus',
+                    tier: 'Controller Desk', price: p[12], unit: '/ month', minTerm: '6-month minimum term', includedLabel: 'Everything in Plus, plus',
                     description: 'Full controller-level coverage with board reporting and priority turnaround.',
                     features: ['Complete monthly bookkeeping', 'GST/TDS filings', 'Payroll support — up to 100 employees', 'Board/HQ reporting support', 'Controller close checklist', 'Expanded process support', 'Priority SLA'],
                     cta: 'Contact Us →'
@@ -180,9 +187,17 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
           grid-template-columns: repeat(3, 1fr);
           gap: 28px;
         }
+        .ps-grid.ps-grid-4 {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+        }
+        @media (max-width: 1100px) {
+          .ps-grid.ps-grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 900px) {
           .ps-section { padding: 64px 20px 72px !important; }
           .ps-grid    { grid-template-columns: 1fr; }
+          .ps-grid.ps-grid-4 { grid-template-columns: 1fr; }
           .ps-tabs    { justify-content: flex-start; padding-bottom: 10px; }
         }
       `}</style>
@@ -230,7 +245,7 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
                 </div>
 
                 {/* Cards */}
-                <div className="ps-grid">
+                <div className={`ps-grid${tab.plans.length > 3 ? ' ps-grid-4' : ''}`}>
                     {tab.plans.map(plan => {
                         const pop = !!plan.popular;
                         const tc = pop ? WHITE : BLACK;
@@ -291,6 +306,11 @@ export default function PricingSection({ country = 'usa', ROUTES }) {
                                         </li>
                                     ))}
                                 </ul>
+                                {plan.note && (
+                                    <div style={{ fontSize: 11.5, color: tc, lineHeight: 1.5, marginTop: 14, padding: '8px 10px', background: pop ? 'rgba(255,255,255,.08)' : '#F5F5F0', borderRadius: 8, fontStyle: 'italic' }}>
+                                        {plan.note}
+                                    </div>
+                                )}
                             </div>
                         );
                     })}
