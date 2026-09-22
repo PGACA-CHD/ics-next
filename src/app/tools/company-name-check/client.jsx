@@ -34,7 +34,7 @@ export default function Page() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="cnc-page" style={{ backgroundImage: "url('/banners and logos/Company name check (2).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section className="cnc-page" style={{ backgroundImage: "url('/banners and logos/Company name check (2).webp')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', fontFamily: HV }}>← Back to Tools</Link>

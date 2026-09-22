@@ -142,7 +142,7 @@ export default function PayrollCalculator() {
   return (
     <div style={helvetica}>
       {/* HERO — unchanged */}
-      <section style={{ backgroundImage: "url('/banners and logos/Payroll.png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/Payroll.webp')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ ...helvetica, fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginBottom: 18, display: 'inline-block', textDecoration: 'none' }}>← Back to Tools</Link>

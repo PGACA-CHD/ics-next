@@ -534,7 +534,7 @@ export default function Page() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="sec" style={{ backgroundImage: "url('/banners and logos/Post setup pg main banner-2.png')", backgroundSize: "cover", backgroundPosition: "center", padding: "96px 56px 88px", position: "relative", overflow: "hidden" }}>
+      <section className="sec" style={{ backgroundImage: "url('/banners and logos/Post setup pg main banner-2.webp')", backgroundSize: "cover", backgroundPosition: "center", padding: "96px 56px 88px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <RippleGrid enableRainbow={false} gridColor="#093024" rippleIntensity={0} gridSize={15} gridThickness={28} mouseInteraction={true} mouseInteractionRadius={0.2} opacity={0.07} fadeDistance={0.8} vignetteStrength={1.4} glowIntensity={0} />
         </div>

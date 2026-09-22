@@ -316,7 +316,7 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
 
         /* ── ABOUT HERO — desktop + mobile bg swap ── */
         .about-hero {
-          background-image: url('/banners and logos/About us main banner-2.png');
+          background-image: url('/banners and logos/About us main banner-2.webp');
           background-size: cover;
           background-position: center;
         }
@@ -565,9 +565,9 @@ export default function AboutPage({ T = {}, ROUTES = {} }) {
           <Fade>
             <div className="reg-strip">
               {[
-                { title: 'MCA / LLP Identification', desc: 'Divsam Consultants LLP (LLPIN: AAF-8044), incorporated on 26th Feb 2016, Ministry of Corporate Affairs, Government of India.', img: '/banners and logos/MCA_LLP.png' },
-                { title: 'Professional Liability', desc: 'Divsam Consultants LLP carries professional liability insurance, providing security and peace of mind for all client engagements.', img: '/banners and logos/Indemnity - About Us.png' },
-                { title: 'PGA & Co., CA', desc: 'Knowledge partner PGA & Co., Chartered Accountants, registered with ICAI since 13th August 2013.', img: '/banners and logos/MCA_LLP.png' },
+                { title: 'MCA / LLP Identification', desc: 'Divsam Consultants LLP (LLPIN: AAF-8044), incorporated on 26th Feb 2016, Ministry of Corporate Affairs, Government of India.', img: '/banners and logos/MCA_LLP.webp' },
+                { title: 'Professional Liability', desc: 'Divsam Consultants LLP carries professional liability insurance, providing security and peace of mind for all client engagements.', img: '/banners and logos/Indemnity - About Us.webp' },
+                { title: 'PGA & Co., CA', desc: 'Knowledge partner PGA & Co., Chartered Accountants, registered with ICAI since 13th August 2013.', img: '/banners and logos/MCA_LLP.webp' },
               ].map(item => (
                 <div key={item.title} className="reg-card">
                   <div className="reg-card-inner">

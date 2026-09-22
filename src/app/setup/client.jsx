@@ -457,7 +457,7 @@ export default function Page() {
 
         /* ── SETUP HERO — desktop & mobile bg swap ── */
         .setup-hero {
-          background-image: url('/banners and logos/private-limited-company-registration (main).png');
+          background-image: url('/banners and logos/private-limited-company-registration (main).webp');
           background-size: cover;
           background-position: center;
         }

@@ -92,7 +92,7 @@ export default async function KnowledgeHubPage() {
       `}</style>
 
       {/* Hero */}
-      <section style={{ backgroundImage: "url('/banners and logos/Knowledge Hub.png')", backgroundSize: 'cover', backgroundPosition: 'center', padding: 'clamp(72px,8vw,100px) clamp(20px,4vw,56px) clamp(52px,6vw,72px)', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/Knowledge Hub.webp')", backgroundSize: 'cover', backgroundPosition: 'center', padding: 'clamp(72px,8vw,100px) clamp(20px,4vw,56px) clamp(52px,6vw,72px)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 1 }} />
         <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(232,144,10,.13)', border: '1px solid rgba(232,144,10,.28)', color: '#F5A828', padding: '5px 13px', borderRadius: 50, fontSize: 10.5, fontWeight: 600, letterSpacing: '.6px', textTransform: 'uppercase', marginBottom: 20 }}>

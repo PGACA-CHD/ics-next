@@ -246,7 +246,7 @@ export default function Page() {
 
         /* ── HERO mobile override — same pattern as USA/UK/AU pages ── */
         .ca-hero {
-          background-image: url('/banners and logos/Canada copy.png');
+          background-image: url('/banners and logos/Canada copy.webp');
           background-size: cover;
           background-position: center;
         }

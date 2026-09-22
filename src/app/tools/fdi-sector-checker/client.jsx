@@ -83,7 +83,7 @@ export default function FDISectorChecker() {
   return (
     <div style={helvetica}>
       {/* ── HERO — unchanged ─────────────────────────────────────────────── */}
-      <section style={{ backgroundImage: "url('/banners and logos/FDI SECTOR LIMIT CHECKER (1).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/FDI SECTOR LIMIT CHECKER (1).webp')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: 'linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px)',

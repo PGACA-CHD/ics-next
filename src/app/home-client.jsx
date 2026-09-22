@@ -628,12 +628,12 @@ export default function HomePage() {
           <SH eyebrow="Industries We Serve" green="Sectors we know" gold="deeply." mb={40} />
           <div className="ind-cards" style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16 }}>
             {[
-              { img: "/banners and logos/SAAS.png", name: "SaaS &\nTechnology", proof: "30+ companies", detail: "USA, Singapore & UK" },
-              { img: "/banners and logos/GCCI Captive center.png", name: "GCC / Captive\nCentres", proof: "15+ setups", detail: "10–200 person teams" },
-              { img: "/banners and logos/Financial Services.png", name: "Financial\nServices", proof: "20+ companies", detail: "Fintech, funds, wealth" },
-              { img: "/banners and logos/Manufacturing.png", name: "Manufacturing\n& Engineering", proof: "15+ companies", detail: "UAE, Germany, Japan" },
-              { img: "/banners and logos/Health and Pharma.png", name: "Healthcare\n& Pharma", proof: "10+ companies", detail: "Research, devices" },
-              { img: "/banners and logos/E commerce.png", name: "E-commerce\n& Retail", proof: "10+ companies", detail: "D2C, marketplace" },
+              { img: "/banners and logos/SAAS.webp", name: "SaaS &\nTechnology", proof: "30+ companies", detail: "USA, Singapore & UK" },
+              { img: "/banners and logos/GCCI Captive center.webp", name: "GCC / Captive\nCentres", proof: "15+ setups", detail: "10–200 person teams" },
+              { img: "/banners and logos/Financial Services.webp", name: "Financial\nServices", proof: "20+ companies", detail: "Fintech, funds, wealth" },
+              { img: "/banners and logos/Manufacturing.webp", name: "Manufacturing\n& Engineering", proof: "15+ companies", detail: "UAE, Germany, Japan" },
+              { img: "/banners and logos/Health and Pharma.webp", name: "Healthcare\n& Pharma", proof: "10+ companies", detail: "Research, devices" },
+              { img: "/banners and logos/E commerce.webp", name: "E-commerce\n& Retail", proof: "10+ companies", detail: "D2C, marketplace" },
             ].map(({ img, name, proof, detail }) => (
               <div key={name} style={{ background: "#fff", borderRadius: 22, padding: "32px 20px 28px", border: "1px solid #ECE7E1", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", boxShadow: "0 12px 35px rgba(0,0,0,.05)", transition: "transform .22s ease,box-shadow .22s ease", cursor: "default", minHeight: 240 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 24px 56px rgba(0,0,0,.10)"; }}
@@ -658,10 +658,10 @@ export default function HomePage() {
               <SH eyebrow="Global Reach" green="Clients from every" gold="major market." center={false} mb={0} />
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid #ECE7E1", borderRadius: 10, overflow: "hidden" }}>
                 {[
-                  { img: "/banners and logos/Clients WorldWide.png", num: "200+", label: "Clients Worldwide" },
-                  { img: "/banners and logos/Countries Covered.png", num: "90+", label: "Countries Covered" },
-                  { img: "/banners and logos/Markets operate.png", num: "10+", label: "Markets Operate" },
-                  { img: "/banners and logos/Client Satisfaction (2).png", num: "98%", label: "Client Satisfaction" },
+                  { img: "/banners and logos/Clients WorldWide.webp", num: "200+", label: "Clients Worldwide" },
+                  { img: "/banners and logos/Countries Covered.webp", num: "90+", label: "Countries Covered" },
+                  { img: "/banners and logos/Markets operate.webp", num: "10+", label: "Markets Operate" },
+                  { img: "/banners and logos/Client Satisfaction (2).webp", num: "98%", label: "Client Satisfaction" },
                 ].map(({ img, num, label }, i) => (
                   <div key={label} style={{ padding: "16px 12px", textAlign: "center", borderLeft: i % 2 !== 0 ? "1px solid #ECE7E1" : "none", borderTop: i >= 2 ? "1px solid #ECE7E1" : "none", display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
                     <img src={img} alt={label} style={{ width: 38, height: 38, objectFit: "contain" }} loading="lazy" />

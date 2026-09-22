@@ -260,7 +260,7 @@ export default function Page() {
 
         /* ── HERO mobile override — same pattern as USA page ── */
         .au-hero {
-          background-image: url('/banners and logos/Australia.png');
+          background-image: url('/banners and logos/Australia.webp');
           background-size: cover;
           background-position: center;
         }

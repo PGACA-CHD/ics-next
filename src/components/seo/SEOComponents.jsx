@@ -102,7 +102,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/private-limited-company-registration (main).png')",
+      backgroundImage: "url('/banners and logos/private-limited-company-registration (main).webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -110,7 +110,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/India Market entry main banner.png')",
+      backgroundImage: "url('/banners and logos/India Market entry main banner.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -118,14 +118,14 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     noOverlay = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/NRI COMPANY REGISTRATION MAIN BANNER (1).png')",
+      backgroundImage: "url('/banners and logos/NRI COMPANY REGISTRATION MAIN BANNER (1).webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
   } else if (pathname === '/subsidiary-company-india') {
     isCustomBg = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/subsidiarycompany.png')",
+      backgroundImage: "url('/banners and logos/subsidiarycompany.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -133,7 +133,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/FOREIGN COMPANY REG.png')",
+      backgroundImage: "url('/banners and logos/FOREIGN COMPANY REG.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -141,7 +141,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/USA.png')",
+      backgroundImage: "url('/banners and logos/USA.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -149,7 +149,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/UK.png')",
+      backgroundImage: "url('/banners and logos/UK.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -157,7 +157,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/Singapore copy.png')",
+      backgroundImage: "url('/banners and logos/Singapore copy.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -165,7 +165,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/UAE copy.png')",
+      backgroundImage: "url('/banners and logos/UAE copy.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -173,7 +173,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/GCC Setup India .png')",
+      backgroundImage: "url('/banners and logos/GCC Setup India .webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -181,7 +181,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/Startup foreign funding.png')",
+      backgroundImage: "url('/banners and logos/Startup foreign funding.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -189,7 +189,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = false;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/FDI MAIN BANNER.png')",
+      backgroundImage: "url('/banners and logos/FDI MAIN BANNER.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
@@ -197,7 +197,7 @@ function SEOPageLayout({ children, title, description, eyebrow, setPage, heroVar
     isCustomBg = true;
     textIsWhite = true;
     heroStyle = {
-      backgroundImage: "url('/banners and logos/transferpricing.png')",
+      backgroundImage: "url('/banners and logos/transferpricing.webp')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };

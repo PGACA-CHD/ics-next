@@ -145,7 +145,7 @@ export default function ContactPage() {
         .contact-root { color: #111; }
 
         /* ── HERO */
-        .hero { background-image: url('/banners and logos/contact us.png'); background-size: cover; background-position: center; padding: 72px 48px 56px; position: relative; }
+        .hero { background-image: url('/banners and logos/contact us.webp'); background-size: cover; background-position: center; padding: 72px 48px 56px; position: relative; }
         .hero-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 2; }
         .hero-badge {
           display: inline-flex; align-items: center; gap: 7px;
@@ -413,7 +413,7 @@ export default function ContactPage() {
               {/* Guide */}
               <div className="guide-card">
                 <div className="guide-icon" style={{ background: 'transparent', width: 64, height: 64 }}>
-                  <img src="/banners and logos/freefownload.png" alt="Free Download Guide" style={{ width: '100%', height: '100%', objectFit: 'contain' }} loading="lazy" />
+                  <img src="/banners and logos/freefownload.webp" alt="Free Download Guide" style={{ width: '100%', height: '100%', objectFit: 'contain' }} loading="lazy" />
                 </div>
                 <div style={{ flex: 1 }}>
                   <div className="guide-kicker">Free Download</div>

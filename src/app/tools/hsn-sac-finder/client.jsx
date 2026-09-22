@@ -210,7 +210,7 @@ export default function Page() {
   return (
     <div style={helvetica}>
       {/* HERO — unchanged */}
-      <section style={{ backgroundImage: "url('/banners and logos/GST (1).png')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundImage: "url('/banners and logos/GST (1).webp')", backgroundSize: "cover", backgroundPosition: "center", padding: '100px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <Link href="/tools" style={{ ...helvetica, fontSize: 12.5, color: '#444', marginBottom: 18, display: 'inline-block' }}>← Back to Tools</Link>
           <div style={{ ...helvetica, display: 'inline-block', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', color: '#111', fontWeight: 600, marginBottom: 16, padding: '4px 12px', border: '1px solid rgba(0,0,0,.15)', borderRadius: 20 }}>

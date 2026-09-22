@@ -162,9 +162,9 @@ const DTAA_RATES = [
 ];
 
 const GUIDES = [
-  { label: "Transfer pricing in India", sub: "Complete guide to TP compliance", page: "seo_tp", img: "/banners and logos/Transfer pricing in INDIA.png" },
-  { label: "FDI rules & FEMA compliance", sub: "Sector limits, filings & penalties", page: "seo_fdi", img: "/banners and logos/FDI rules & FEMA compliance.png" },
-  { label: "Foreign company registration", sub: "Branch, LO, or subsidiary in India", page: "seo_fcri", img: "/banners and logos/Foreign Company Registration.png" },
+  { label: "Transfer pricing in India", sub: "Complete guide to TP compliance", page: "seo_tp", img: "/banners and logos/Transfer pricing in INDIA.webp" },
+  { label: "FDI rules & FEMA compliance", sub: "Sector limits, filings & penalties", page: "seo_fdi", img: "/banners and logos/FDI rules & FEMA compliance.webp" },
+  { label: "Foreign company registration", sub: "Branch, LO, or subsidiary in India", page: "seo_fcri", img: "/banners and logos/Foreign Company Registration.webp" },
 ];
 
 const RATE_CATEGORIES = [
@@ -334,7 +334,7 @@ export default function Page() {
         style={{
           position: 'relative',
           backgroundColor: GREEN,
-          backgroundImage: "linear-gradient(160deg, rgba(11,61,46,0.92) 0%, rgba(11,61,46,0.78) 55%, rgba(11,61,46,0.92) 100%), url('/banners and logos/INTL TAX-2.png')",
+          backgroundImage: "linear-gradient(160deg, rgba(11,61,46,0.92) 0%, rgba(11,61,46,0.78) 55%, rgba(11,61,46,0.92) 100%), url('/banners and logos/INTL TAX-2.webp')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

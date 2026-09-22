@@ -300,7 +300,7 @@ export default function Page() {
 
         /* ── HERO mobile override — same pattern as USA page ── */
         .uk-hero {
-          background-image: url('/banners and logos/UK.png');
+          background-image: url('/banners and logos/UK.webp');
           background-size: cover;
           background-position: center;
         }
