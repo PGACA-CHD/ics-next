@@ -25,6 +25,7 @@ import Footer from '@/components/layout/Footer';
 import CommonCTA from '@/components/common/CommonCTA';
 import WhatsAppFloat from '@/components/shared/WhatsAppFloat';
 import Analytics from '@/components/shared/Analytics';
+import CookieConsent from '@/components/shared/CookieConsent';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 
@@ -77,6 +78,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <WhatsAppFloat />
         <ChatWidget />
+        <CookieConsent />
         <Analytics />
         <Script id="gtm-script" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
           (function(w,d,s,l,i){

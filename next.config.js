@@ -342,11 +342,7 @@ const nextConfig = {
         destination: '/about',
         permanent: true,
       },
-      {
-        source: '/privacy-policy',
-        destination: '/',
-        permanent: true,
-      },
+      // /privacy-policy now has its own page — redirect removed
       {
         source: '/faqs',
         destination: '/',

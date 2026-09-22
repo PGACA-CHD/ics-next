@@ -123,6 +123,8 @@ export const FOOTER_COLS = [
       { label: "Knowledge Hub",               href: "/knowledge-hub" },
       { label: "Contact",                     href: "/contact" },
       { label: "PGA & Co. ↗",                href: "https://pgaca.in", external: true },
+      { label: "Privacy Policy",              href: "/privacy-policy" },
+      { label: "Terms of Service",            href: "/terms-of-service" },
     ],
   },
 ];

@@ -348,10 +348,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="footer-bottom-row">
           <span style={{ fontSize: 12, color: '#555' }}>
-            © {year} {SITE_NAME} · A Venture of Divsam Consultants LLP · Chandigarh, India
+            © {year} {SITE_NAME} · A Venture of Divsam Consultants LLP · LLPIN: AAF-8044 · GSTIN: 04ADAFS0612F1ZS
           </span>
           <span style={{ fontSize: 12, color: '#555' }}>
-            Confidentiality maintained
+            Chandigarh, India · Confidentiality maintained
           </span>
         </div>
 
