@@ -119,16 +119,16 @@ function buildTabs(p) {
       subheading: 'Monthly retainers for entities that need continuous compliance coverage. 6-month minimum term.',
       plans: [
         {
-          tier: 'Lite', price: p[9], unit: '/ month', minTerm: 'Fixed 6-month term', includedLabel: "What's included",
+          tier: 'Lite', price: p[9], unit: '/ month', includedLabel: "What's included",
           description: 'Bridge retainer for newly incorporated entities in their first 6 months.',
-          features: ['Monthly bookkeeping — up to 20 invoices/month', 'GST filing (quarterly or monthly)', 'TDS filing (if statutory)', 'ROC annual filing (Year 1)', 'Payroll support — up to 3 employees', 'Email/WhatsApp advisory (48-hr response)'],
+          features: ['Monthly bookkeeping — up to 20 invoices/month', 'GST filing (quarterly or monthly)', 'TDS filing (if statutory)', 'Payroll support — up to 10 employees', 'Email/WhatsApp advisory (48-hr response)'],
           note: 'Auto-converts to Core at Month 7 unless mutually agreed otherwise.',
           cta: 'Contact Us →'
         },
         {
           tier: 'Core', price: p[10], unit: '/ month', minTerm: '6-month minimum term', includedLabel: "What's included",
           description: 'For lean entities with light monthly transaction volume.',
-          features: ['Monthly bookkeeping — up to 50 invoices/month', 'GST/TDS for light volume — up to 50 invoices/month', 'Payroll support — up to 20 employees', 'ROC annual filing', 'WhatsApp advisory (same-day response)', 'Quarterly review call'],
+          features: ['Monthly bookkeeping — up to 50 invoices/month', 'GST/TDS filings', 'Payroll support — up to 20 employees', 'ROC annual filing', 'WhatsApp advisory (same-day response)', 'Quarterly review call'],
           cta: 'Contact Us →'
         },
         {

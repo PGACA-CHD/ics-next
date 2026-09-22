@@ -233,14 +233,12 @@ const BRLO = {
 const RETAINERS = [
   {
     name: 'Lite', inr: 13500, suffix: '/mo',
-    min: 'Fixed 6-month term',
     best: 'Newly incorporated entities in their first 6 months — bridge to a full retainer.',
     items: [
       'Monthly bookkeeping (up to 20 invoices, Zoho Books)',
       'GST filing (quarterly composition or monthly regular)',
       'TDS filing (if statutory)',
-      'ROC annual filing (Year 1)',
-      'Payroll support (up to 3 employees)',
+      'Payroll support (up to 10 employees)',
       'Email / WhatsApp advisory (48-hr response)',
     ],
     note: 'Auto-converts to Core at Month 7 unless mutually agreed otherwise.',
@@ -251,7 +249,7 @@ const RETAINERS = [
     best: 'Small or early-stage India entities with light transaction volume and a lean team.',
     items: [
       'Monthly bookkeeping (up to 50 invoices)',
-      'GST / TDS filing (light volume)',
+      'GST/TDS filings',
       'Payroll support (up to 20 employees)',
       'ROC annual filing',
       'WhatsApp advisory (same-day response)',
@@ -330,7 +328,7 @@ const FAQS = [
   { q: 'Is there a lock-in period for retainers?', a: 'The minimum term is 6 months, which allows us to complete at least one full compliance cycle. After the minimum term, the retainer continues month-to-month with 30 days\' notice.' },
   { q: 'Can I split payment?', a: 'Yes. Standard payment is 50% on engagement, 50% on Incorporation Certificate. For retainers, monthly billing on the 1st.' },
   { q: 'Do you offer a refund if you can\'t deliver?', a: 'Yes. If we cannot complete your incorporation within the published timeline due to our delay (not government processing time or document delays from your side), we refund 100% of professional fees. Government fees are non-refundable.' },
-  { q: 'What payment methods do you accept?', a: 'Wire transfer (all currencies), Stripe, and PayPal (for invoices under USD 5,000). For India-based payments: bank transfer, UPI, and Razorpay.' },
+  { q: 'What payment methods do you accept?', a: 'Wire transfer (all currencies). For India-based payments: bank transfer, UPI, and Razorpay.' },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -550,7 +548,7 @@ export default function PricingPage() {
     <div>
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: T.f, padding: '110px 56px 80px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: T.f, padding: '70px 56px 48px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 55% 70% at 105% 40%,rgba(232,144,10,.1) 0%,transparent 55%)' }} />
 
@@ -582,7 +580,7 @@ export default function PricingPage() {
             Published professional fees for every service — incorporation, compliance, transfer pricing, FEMA, and GCC setup. Ex-Big 4 CA team at boutique pricing.
           </p>
 
-          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 52 }}>
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 32 }}>
             <Link href="/contact" className="ics-btn ics-btn-primary ics-btn-lg">
               Book Free 30-min Strategy Call →
             </Link>

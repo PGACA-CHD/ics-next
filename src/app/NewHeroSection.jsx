@@ -107,7 +107,7 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         .nhero-sub {
           font-family: ${FONT_BODY};
           font-size:17px; line-height:1.85; font-weight:400;
-          color:rgba(255,255,255,.68); max-width:540px; margin-bottom:32px;
+          color:rgba(255,255,255,.92); max-width:540px; margin-bottom:32px;
         }
 
         /* ── Social proof row: avatars + rating + link ── */
@@ -215,10 +215,10 @@ export default function NewHeroSection({ T, ROUTES = {} }) {
         .nhero-trust-item:first-child { padding-left:0; }
         .nhero-trust-item:last-child { border-right:none; padding-right:0; }
         .nhero-trust-label {
-           font-family:${FONT_UI}; font-size:9px; color:#000000;
+           font-family:${FONT_UI}; font-size:9px; color:rgba(255,255,255,.7);
            letter-spacing:1.2px; text-transform:uppercase; margin-bottom:4px;
          }
-        .nhero-trust-value { font-family:${FONT_UI}; font-size:14px; color:#000000; font-weight:600; }
+        .nhero-trust-value { font-family:${FONT_UI}; font-size:14px; color:#ffffff; font-weight:600; }
 
         /* ── Live Status tracker ── */
         .nhero-track {
