@@ -387,7 +387,7 @@ function QuoteModal({ pkg, currency, onClose }) {
 
   const inp = (extra = {}) => ({
     width: '100%', padding: '11px 14px', border: `1.5px solid ${T.bdr}`, borderRadius: 8,
-    fontFamily: "'DM Sans',sans-serif", fontSize: 13.5, color: T.ch, background: '#fff',
+    fontFamily: "Helvetica, Arial, sans-serif", fontSize: 13.5, color: T.ch, background: '#fff',
     outline: 'none', boxSizing: 'border-box', marginBottom: 12, display: 'block',
     transition: 'border-color .18s', ...extra,
   });
@@ -605,7 +605,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── COMPANY REGISTRATION — TABBED ─────────────────────────────────── */}
-      <section id="registration" style={{ background: T.stone, padding: '80px 56px' }}>
+      <section id="registration" style={{ background: '#fff', padding: '80px 56px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <SectionLabel>Company Registration — Fixed Fees</SectionLabel>
@@ -645,7 +645,7 @@ export default function PricingPage() {
               return (
                 <div key={tier.name} style={{
                   background: isFeatured ? T.f : '#fff',
-                  border: isFeatured ? `2px solid ${T.f}` : `1px solid ${T.bdr}`,
+                  border: isFeatured ? `2px solid ${T.f}` : `1px solid #000`,
                   borderRadius: 20, padding: '32px 28px',
                   display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden',
                   ...(isFeatured ? { transform: 'scale(1.02)', boxShadow: '0 24px 64px rgba(11,61,46,.22)' } : {}),
@@ -665,7 +665,7 @@ export default function PricingPage() {
                   </h3>
                   <div style={{ marginBottom: 6 }}>
                     <span style={{ fontSize: 14, color: isFeatured ? 'rgba(255,255,255,.5)' : T.lt }}>{tier.prefix ? `${tier.prefix} ` : ''}</span>
-                    <span style={{ fontSize: 36, fontWeight: 700, color: isFeatured ? T.sl : T.f, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1 }}>
+                    <span style={{ fontSize: 36, fontWeight: 700, color: isFeatured ? T.sl : T.f, fontFamily: "Helvetica, Arial, sans-serif", lineHeight: 1 }}>
                       {p(tier.inr)}
                     </span>
                     {tier.suffix && <span style={{ fontSize: 15, fontWeight: 500, color: isFeatured ? 'rgba(255,255,255,.5)' : T.lt }}>{tier.suffix}</span>}
@@ -729,7 +729,7 @@ export default function PricingPage() {
               const star = idx === 2;
               return (
                 <div key={plan.name} style={{
-                  background: star ? T.f : '#fff', border: `1px solid ${star ? T.f : T.bdr}`,
+                  background: star ? T.f : '#fff', border: `1px solid ${star ? T.f : '#000'}`,
                   borderRadius: 20, padding: '32px 28px', display: 'flex', flexDirection: 'column',
                   position: 'relative', overflow: 'hidden',
                   ...(star ? { transform: 'scale(1.02)', boxShadow: '0 24px 64px rgba(11,61,46,.22)' } : {}),
@@ -744,7 +744,7 @@ export default function PricingPage() {
 
                   <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: star ? '#fff' : T.ch, lineHeight: 1.2, marginBottom: 8 }}>{plan.name}</h3>
                   <div style={{ marginBottom: 4 }}>
-                    <span style={{ fontSize: 36, fontWeight: 700, color: star ? T.sl : T.f, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1 }}>{p(plan.inr)}</span>
+                    <span style={{ fontSize: 36, fontWeight: 700, color: star ? T.sl : T.f, fontFamily: "Helvetica, Arial, sans-serif", lineHeight: 1 }}>{p(plan.inr)}</span>
                     <span style={{ fontSize: 15, fontWeight: 500, color: star ? 'rgba(255,255,255,.5)' : T.lt }}>/mo</span>
                   </div>
                   <div style={{ fontSize: 12, color: star ? 'rgba(255,255,255,.45)' : T.lt, marginBottom: 18 }}>{plan.min}</div>
@@ -829,7 +829,7 @@ export default function PricingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }} className="service-cards-grid">
             {STEPS.map(step => (
               <div key={step.num} style={{ padding: '28px 24px', background: T.stone, borderRadius: 16, borderTop: `4px solid ${T.f}` }}>
-                <div style={{ fontSize: 32, fontWeight: 700, color: T.f, fontFamily: "'Cormorant Garamond',serif", marginBottom: 8, opacity: 0.5 }}>{step.num}</div>
+                <div style={{ fontSize: 32, fontWeight: 700, color: T.f, fontFamily: "Helvetica, Arial, sans-serif", marginBottom: 8, opacity: 0.5 }}>{step.num}</div>
                 <div style={{ fontSize: 15, fontWeight: 700, color: T.ch, marginBottom: 10 }}>{step.title}</div>
                 <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.65, fontWeight: 300 }}>{step.desc}</p>
               </div>
@@ -883,8 +883,8 @@ export default function PricingPage() {
       <section style={{ background: '#fff', padding: '60px 56px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ background: T.stone, border: `1px solid ${T.bdr}`, borderRadius: 20, padding: '40px 48px', position: 'relative' }}>
-            <div style={{ fontSize: 56, color: T.f, lineHeight: 1, marginBottom: 20, fontFamily: "'Cormorant Garamond',serif", fontWeight: 300 }}>"</div>
-            <p style={{ fontSize: 18, color: T.ch, lineHeight: 1.75, fontStyle: 'italic', fontFamily: "'Cormorant Garamond',serif", marginBottom: 24, fontWeight: 500 }}>
+            <div style={{ fontSize: 56, color: T.f, lineHeight: 1, marginBottom: 20, fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 300 }}>"</div>
+            <p style={{ fontSize: 18, color: T.ch, lineHeight: 1.75, fontStyle: 'italic', fontFamily: "Helvetica, Arial, sans-serif", marginBottom: 24, fontWeight: 500 }}>
               We were quoted $5,000 for our India subsidiary setup. ICS delivered the same scope — entity, FCGPR, TP policy — for $1,500 in 19 business days. The structure passed our auditor's review on first look.
             </p>
             <div style={{ fontSize: 13, color: T.lt, fontWeight: 600 }}>— Finance Director, UK Technology Company (anonymised)</div>
