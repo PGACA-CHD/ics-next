@@ -608,7 +608,7 @@ export default function PricingPage() {
       <section id="registration" style={{ background: '#fff', padding: '80px 56px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <SectionLabel>Company Registration — Fixed Fees</SectionLabel>
+            <SectionLabel>Company Incorporation — Fixed Fees</SectionLabel>
             <h2 className="font-display" style={{ fontSize: 'clamp(28px,3.5vw,46px)', fontWeight: 600, color: T.ch, lineHeight: 1.1, marginBottom: 14 }}>
               Choose based on who you are.
             </h2>

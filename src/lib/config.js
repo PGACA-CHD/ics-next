@@ -39,7 +39,7 @@ export const GA4_ID        = "G-VFH7W7VQ44";
 export const NAV_LINKS = [
   { label: "Home",          href: "/" },
   {
-    label: "Company Registration",
+    label: "Company Setup",
     href:  "/setup",
     children: [
       { label: "Setup & Incorporation",   href: "/setup" },

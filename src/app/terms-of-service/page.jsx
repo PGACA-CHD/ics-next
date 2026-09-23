@@ -22,7 +22,7 @@ export default function TermsOfServicePage() {
     <main style={{ fontFamily: FONT, background: '#fff' }}>
       <section style={{ background: GREEN, padding: '70px 40px 48px', textAlign: 'center' }}>
         <h1 style={{ fontFamily: FONT, fontSize: 36, fontWeight: 700, color: '#fff', marginBottom: 8 }}>Terms of Service</h1>
-        <p style={{ fontFamily: FONT, fontSize: 14, color: 'rgba(255,255,255,.7)' }}>Last updated: 22 September 2025</p>
+        <p style={{ fontFamily: FONT, fontSize: 14, color: 'rgba(255,255,255,.7)' }}>Last updated: 22 September 2026</p>
       </section>
 
       <section style={{ maxWidth: 820, margin: '0 auto', padding: '56px 24px 80px' }}>
@@ -99,7 +99,7 @@ export default function TermsOfServicePage() {
 
         <Section title="11. Confidentiality">
           <p>
-            We treat all client information with the highest level of confidentiality, in accordance with the professional standards of the Institute of Chartered Accountants of India (ICAI) and applicable data protection laws. Details of our data handling practices are described in our <a href="/privacy-policy" style={{ color: GOLD }}>Privacy Policy</a>.
+            We treat all client information with the highest level of confidentiality, in accordance with applicable professional standards and data protection laws. Details of our data handling practices are described in our <a href="/privacy-policy" style={{ color: GOLD }}>Privacy Policy</a>.
           </p>
         </Section>
 

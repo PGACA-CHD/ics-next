@@ -22,14 +22,14 @@ export default function PrivacyPolicyPage() {
     <main style={{ fontFamily: FONT, background: '#fff' }}>
       <section style={{ background: GREEN, padding: '70px 40px 48px', textAlign: 'center' }}>
         <h1 style={{ fontFamily: FONT, fontSize: 36, fontWeight: 700, color: '#fff', marginBottom: 8 }}>Privacy Policy</h1>
-        <p style={{ fontFamily: FONT, fontSize: 14, color: 'rgba(255,255,255,.7)' }}>Last updated: 22 September 2025</p>
+        <p style={{ fontFamily: FONT, fontSize: 14, color: 'rgba(255,255,255,.7)' }}>Last updated: 22 September 2026</p>
       </section>
 
       <section style={{ maxWidth: 820, margin: '0 auto', padding: '56px 24px 80px' }}>
 
         <Section title="1. Who We Are">
           <p>
-            <strong>{SITE_NAME}</strong> (<a href={SITE_URL} style={{ color: GOLD }}>{SITE_URL}</a>) is operated by <strong>Divsam Consultants LLP</strong> (LLPIN: AAF-8044, GSTIN: 04ADAFS0612F1ZS), a firm of Chartered Accountants and corporate advisors based in Chandigarh, India. References to "we", "us", or "our" mean Divsam Consultants LLP.
+            <strong>{SITE_NAME}</strong> (<a href={SITE_URL} style={{ color: GOLD }}>{SITE_URL}</a>) is operated by <strong>Divsam Consultants LLP</strong> (LLPIN: AAF-8044, GSTIN: 04ADAFS0612F1ZS), a professional consultancy firm specialising in company incorporation, compliance, and corporate advisory services, based in Chandigarh, India. References to "we", "us", or "our" mean Divsam Consultants LLP.
           </p>
         </Section>
 

@@ -39,8 +39,8 @@ const PRICES = {
 function buildTabs(p) {
   return [
     {
-      key: 'nri', tabLabel: 'NRI Registration',
-      heading: 'NRI company registration in India',
+      key: 'nri', tabLabel: 'NRI Incorporation',
+      heading: 'NRI company incorporation in India',
       subheading: 'For NRIs investing in or starting a company in India under the FEMA NRI route.',
       plans: [
         {
