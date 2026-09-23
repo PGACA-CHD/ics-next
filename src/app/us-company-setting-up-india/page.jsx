@@ -81,7 +81,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How long does it take for a US company to set up in India?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Incorporation typically takes 7-12 working days after document submission via the incorporation document forms with the Ministry of Corporate Affairs. US parent company documents need apostilling, which adds 3-5 days. Total timeline from engagement to Incorporation Certificate is approximately 3-4 weeks. Bank account opening takes a further 2-4 weeks." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Incorporation typically takes 7-12 working days after document submission via the incorporation document forms with the Ministry of Corporate Affairs. US parent company documents need apostilling, which adds 3-5 days. Total timeline from engagement to incorporation certificate is approximately 3-4 weeks. Bank account opening takes a further 2-4 weeks." }
     },
     {
       "@type": "Question",

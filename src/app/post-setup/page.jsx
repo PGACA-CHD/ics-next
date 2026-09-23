@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Post-Incorporation Compliance in India | GST, TDS, Payroll',
-  description: "GST registration, TDS returns, payroll, ROC filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
+  description: "GST registration, TDS returns, payroll, annual company filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
   alternates: { canonical: 'https://www.indiacompanysetup.com/post-setup' },
   openGraph: {
     title: 'Post-Incorporation Compliance in India | GST, TDS, Payroll',
-    description: "GST registration, TDS returns, payroll, ROC filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
+    description: "GST registration, TDS returns, payroll, annual company filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
     url: 'https://www.indiacompanysetup.com/post-setup',
     images: [{ url: 'https://www.indiacompanysetup.com/og-image.jpg', width: 1200, height: 630, alt: 'India Company Setup' }],
     type: 'website',
@@ -18,7 +18,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Post-Incorporation Compliance in India | GST, TDS, Payroll',
-    description: "GST registration, TDS returns, payroll, ROC filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
+    description: "GST registration, TDS returns, payroll, annual company filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
     images: ['https://www.indiacompanysetup.com/og-image.jpg'],
   },
 };
@@ -27,7 +27,7 @@ export const schemaJson = JSON.stringify([{
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Post-Incorporation Compliance in India | GST, TDS, Payroll",
-      "description": "GST registration, TDS returns, payroll, ROC filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
+      "description": "GST registration, TDS returns, payroll, annual company filings, and ongoing compliance for foreign companies in India. Ex-Big 4 CA team. Fixed monthly retainer.",
       "url": "https://www.indiacompanysetup.com/post-setup",
       "provider": {"@type": "Organization", "@id": "https://www.indiacompanysetup.com/#organization", "name": "India Company Setup"},
       "areaServed": ["US", "GB", "AE", "SG", "AU"],

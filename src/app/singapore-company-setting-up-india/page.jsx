@@ -109,7 +109,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "What bank account does an India subsidiary of a Singapore company need?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The India subsidiary needs a Current Account with an AD Category-I bank — HDFC, ICICI, Axis, SBI, or Kotak are commonly used for foreign-owned companies. The account is required for receiving FDI from Singapore, paying salaries, GST, TDS, and vendor payments. Bank account opening typically takes 2-4 weeks and requires apostilled KYC documents from the Singapore parent including Certificate of Incorporation, M&A, and Board Resolution. This is often the critical path — not the incorporation itself." }
+      "acceptedAnswer": { "@type": "Answer", "text": "The India subsidiary needs a Current Account with an AD Category-I bank — HDFC, ICICI, Axis, SBI, or Kotak are commonly used for foreign-owned companies. The account is required for receiving FDI from Singapore, paying salaries, GST, TDS, and vendor payments. Bank account opening typically takes 2-4 weeks and requires apostilled KYC documents from the Singapore parent including incorporation certificate, M&A, and Board Resolution. This is often the critical path — not the incorporation itself." }
     },
     {
       "@type": "Question",

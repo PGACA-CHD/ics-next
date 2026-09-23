@@ -46,7 +46,7 @@ function buildTabs(p) {
         {
           tier: 'Starter', price: p[0], unit: 'one-time', includedLabel: "What's included",
           description: 'Core incorporation for an NRI-owned entity, filed correctly under the right FEMA route.',
-          features: ['NRI route check', 'Name reservation', 'MOA/AOA', 'Incorporation document forms', 'Directors Identification Number / DSC for up to 2 directors', 'Incorporation Certificate', 'Tax registration numbers', 'PF/ESI'],
+          features: ['NRI route check', 'Name reservation', 'MOA/AOA', 'Incorporation document forms', 'Directors Identification Number / DSC for up to 2 directors', 'incorporation certificate', 'Tax registration numbers', 'PF/ESI'],
           cta: 'Get Started →'
         },
         {
@@ -58,7 +58,7 @@ function buildTabs(p) {
         {
           tier: 'Repatriation-Ready', price: p[2], unit: 'one-time', includedLabel: 'Everything in Growth, plus',
           description: 'Everything you need for a clean first year, plus the repatriation and residency groundwork done early.',
-          features: ['Repatriation / dividend note', 'Residency-transition checklist', 'Basic DTAA orientation', 'One strategy call', "First year directors' report", 'First-year ROC filing complete', 'First year ITR filing', 'First year TDS returns filing'],
+          features: ['Repatriation / dividend note', 'Residency-transition checklist', 'Basic DTAA orientation', 'One strategy call', "First year directors' report", 'First-year annual filing complete', 'First year ITR filing', 'First year TDS returns filing'],
           cta: 'Get Started →'
         },
       ],
@@ -71,7 +71,7 @@ function buildTabs(p) {
         {
           tier: 'Starter', price: p[3], unit: 'one-time', includedLabel: "What's included",
           description: 'FDI-compliant incorporation for your India subsidiary, structured right from day one.',
-          features: ['FDI route check', 'Subsidiary structure note', 'Name reservation', 'MOA/AOA', 'Incorporation document forms', 'Directors Identification Number / DSC for up to 2 directors', 'Incorporation Certificate', 'Tax registration numbers', 'PF/ESI'],
+          features: ['FDI route check', 'Subsidiary structure note', 'Name reservation', 'MOA/AOA', 'Incorporation document forms', 'Directors Identification Number / DSC for up to 2 directors', 'incorporation certificate', 'Tax registration numbers', 'PF/ESI'],
           cta: 'Get Started →'
         },
         {
@@ -128,7 +128,7 @@ function buildTabs(p) {
         {
           tier: 'Core', price: p[10], unit: '/ month', minTerm: '6-month minimum term', includedLabel: "What's included",
           description: 'For lean entities with light monthly transaction volume.',
-          features: ['Monthly bookkeeping — up to 50 invoices/month', 'GST/TDS filings', 'Payroll support — up to 20 employees', 'ROC annual filing', 'WhatsApp advisory (same-day response)', 'Quarterly review call'],
+          features: ['Monthly bookkeeping — up to 50 invoices/month', 'GST/TDS filings', 'Payroll support — up to 20 employees', 'Annual regulatory filing', 'WhatsApp advisory (same-day response)', 'Quarterly review call'],
           cta: 'Contact Us →'
         },
         {

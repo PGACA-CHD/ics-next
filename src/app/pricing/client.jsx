@@ -56,7 +56,7 @@ const DOMESTIC = {
         'MOA & AOA drafting',
         'Incorporation document forms integrated filing',
         'Directors Identification Number / DSC for 2 directors',
-        'Incorporation Certificate',
+        'incorporation certificate',
         'Tax registration numbers',
         'PF / ESI registration',
       ],
@@ -81,7 +81,7 @@ const DOMESTIC = {
       items: [
         'Everything in Launch',
         'First-year directors\' report',
-        'First-year ROC filing (AOC-4 / MGT-7)',
+        'First-year regulatory filing (AOC-4 / MGT-7)',
         'First-year ITR filing',
         'First-year TDS returns filing',
       ],
@@ -102,7 +102,7 @@ const NRI = {
         'MOA & AOA drafting',
         'Incorporation document forms integrated filing',
         'Directors Identification Number / DSC for 2 directors',
-        'Incorporation Certificate + tax registration numbers',
+        'incorporation certificate + tax registration numbers',
         'PF / ESI registration',
       ],
     },
@@ -129,7 +129,7 @@ const NRI = {
         'Residency-transition checklist',
         'Basic DTAA orientation',
         'One strategy call (30 min)',
-        'First-year ROC + ITR + TDS filing',
+        'First-year regulatory + ITR + TDS filing',
       ],
     },
   ],
@@ -149,7 +149,7 @@ const WOS = {
         'MOA & AOA drafting',
         'Incorporation document forms integrated filing',
         'Directors Identification Number / DSC for 2 directors',
-        'Incorporation Certificate + tax registration numbers + PF/ESI',
+        'incorporation certificate + tax registration numbers + PF/ESI',
       ],
     },
     {
@@ -251,7 +251,7 @@ const RETAINERS = [
       'Monthly bookkeeping (up to 50 invoices)',
       'GST/TDS filings',
       'Payroll support (up to 20 employees)',
-      'ROC annual filing',
+      'Annual regulatory filing',
       'WhatsApp advisory (same-day response)',
       'Quarterly review call',
     ],
@@ -308,7 +308,7 @@ const STEPS = [
   { num: '01', title: 'Free Consultation', desc: 'We review your business model, shareholding pattern, and advise on structure, FDI route, objects clause, and GST timing.' },
   { num: '02', title: 'Document Collection', desc: 'We coordinate digital signatures, Directors Identification Number processing, and collect identity, address, and registered-office proofs. Apostille support for foreign/NRI documents.' },
   { num: '03', title: 'Incorporation document forms / RBI Filing', desc: 'Integrated filing covers incorporation, tax registration numbers, GSTIN, EPFO, and ESIC. For Branch/LO, we file the RBI application and coordinate with the AD bank.' },
-  { num: '04', title: 'Operational Handover', desc: 'You receive your Incorporation Certificate, tax registration numbers, compliance calendar, and (for higher packages) bank account setup, FCGPR, and transfer pricing readiness.' },
+  { num: '04', title: 'Operational Handover', desc: 'You receive your incorporation certificate, tax registration numbers, compliance calendar, and (for higher packages) bank account setup, FCGPR, and transfer pricing readiness.' },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -317,7 +317,7 @@ const STEPS = [
 
 const FAQS = [
   { q: 'What does the NRI Starter package fee cover?', a: 'The fee covers professional services — NRI route check, incorporation filing, MOA/AOA drafting, Directors Identification Number / DSC, and all statutory registrations. Government fees (Ministry of Corporate Affairs filing, stamp duty) and applicable taxes are billed at actual and disclosed upfront before you commit. DSC is included.' },
-  { q: 'How long does Private Limited Company registration take in India?', a: 'For a standard case with complete documents, expect 7–12 working days from Incorporation document forms filing to Incorporation Certificate. Total timeline from first consultation to a fully operational entity (including tax registration numbers and bank account) is typically 3–4 weeks.' },
+  { q: 'How long does Private Limited Company registration take in India?', a: 'For a standard case with complete documents, expect 7–12 working days from Incorporation document forms filing to incorporation certificate. Total timeline from first consultation to a fully operational entity (including tax registration numbers and bank account) is typically 3–4 weeks.' },
   { q: 'Is NRI investment treated the same as FDI?', a: 'Not always. NRI investment under Schedule 4 of FEMA follows a different compliance path from corporate FDI under Schedule 1. The route, reporting, and repatriation rules differ. We confirm the correct route during the NRI route check included in every NRI package.' },
   { q: 'Do I need to travel to India to register the company?', a: 'Usually not. If your identity and address documents are in order, the digital signature, document legalisation, and filing process can be completed remotely. We coordinate the entire process without requiring physical presence.' },
   { q: 'Why is foreign subsidiary setup priced above commodity platforms?', a: 'A foreign-owned subsidiary involves FDI route verification, parent-country document legalisation, RBI reporting (FC-GPR within 30 days), cross-border banking coordination, and transfer pricing exposure from day one. The cost of getting the structure wrong — FEMA penalties, PE risk, TP adjustments — dwarfs any saving on incorporation fees.' },
@@ -326,7 +326,7 @@ const FAQS = [
   { q: 'How long does Branch or Liaison Office approval take?', a: 'RBI processing times vary. Budget 6–8 weeks for the full process including AD-bank coordination, RBI approval, Ministry of Corporate Affairs registration, and tax registration numbers. Complex or government-route cases can take longer.' },
   { q: 'Is the compliance retainer only for foreign-owned entities?', a: 'Primarily designed for foreign-owned subsidiaries, NRI companies, and GCCs where GST, TDS, payroll, FEMA, and parent-company reporting are interconnected. Domestic companies with simpler compliance needs may not require the full scope of these retainers.' },
   { q: 'Is there a lock-in period for retainers?', a: 'The minimum term is 6 months, which allows us to complete at least one full compliance cycle. After the minimum term, the retainer continues month-to-month with 30 days\' notice.' },
-  { q: 'Can I split payment?', a: 'Yes. Standard payment is 50% on engagement, 50% on Incorporation Certificate. For retainers, monthly billing on the 1st.' },
+  { q: 'Can I split payment?', a: 'Yes. Standard payment is 50% on engagement, 50% on incorporation certificate. For retainers, monthly billing on the 1st.' },
   { q: 'Do you offer a refund if you can\'t deliver?', a: 'Yes. If we cannot complete your incorporation within the published timeline due to our delay (not government processing time or document delays from your side), we refund 100% of professional fees. Government fees are non-refundable.' },
   { q: 'What payment methods do you accept?', a: 'Wire transfer (all currencies). For India-based payments: bank transfer, UPI, and Razorpay.' },
 ];

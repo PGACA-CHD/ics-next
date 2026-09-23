@@ -271,7 +271,7 @@ const steps = [
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. We coordinate the application remotely — no India visit required.' },
   { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) bundles company incorporation, Directors Identification Number allotment, tax registration numbers, and GSTIN applications in one submission. We handle the complete filing.' },
-  { n: '06', title: 'Incorporation Certificate', time: 'Week 3–4', desc: 'ROC approves your application and issues the Incorporation Certificate and tax registration numbers — your company is officially registered in India.' },
+  { n: '06', title: 'Company Registration Complete', time: 'Week 3–4', desc: 'The registrar approves your application and issues the incorporation certificate and tax registration numbers — your company is officially registered in India.' },
 ];
 
 const whyPoints = [
@@ -435,7 +435,7 @@ export default function Page() {
                   </div>
                 ))}
                 <div style={{ padding: '13px 22px', background: 'rgba(9,48,36,0.05)', borderRadius: '0 0 15px 15px', borderTop: '1px solid rgba(9,48,36,0.10)' }}>
-                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to Incorporation Certificate.</p>
+                  <p style={{ fontSize: 12, color: '#444', margin: 0, lineHeight: 1.6, fontFamily: HV }}>Ex-Big 4 CA team — end to end, from structure advice to incorporation certificate.</p>
                 </div>
               </div>
             </Fade>
@@ -473,7 +473,7 @@ export default function Page() {
           <Fade>
             <div className="sec-heading-wrap" style={{ marginBottom: 36 }}>
               <span className="lbl">Step-by-Step Process</span>
-              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the USA to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>Incorporation Certificate.</span></h2>
+              <h2 style={{ fontSize: 'clamp(22px,3vw,36px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#111', marginBottom: 8, fontFamily: HV }}>From the USA to your <span style={{ fontStyle: 'italic', color: '#e69819' }}>incorporation certificate.</span></h2>
               <p style={{ fontSize: 15, color: '#666', fontFamily: HV }}>Auto-advances every 2.6 s — click any step to jump.</p>
             </div>
           </Fade>

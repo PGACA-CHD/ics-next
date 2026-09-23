@@ -36,7 +36,7 @@ const PLANS = [
             'Monthly bookkeeping — up to 50 invoices/month',
             'GST/TDS filings',
             'Payroll support — up to 20 employees',
-            'ROC annual filing',
+            'Annual regulatory filing',
             'WhatsApp advisory (same-day response)',
             'Quarterly review call',
         ],

@@ -466,7 +466,7 @@ export default function HomePage() {
   const process = [
     { n: "01", title: "Free Consultation", time: "Day 1", desc: "30 minutes. We understand your business model, India objectives, and team plan — then give you a clear structure recommendation before any engagement begins." },
     { n: "02", title: "Structure Design", time: "Week 1", desc: "Entity type, FDI route, transfer pricing model, DTAA analysis, PE risk check. Designed before any filing — never retrofitted after." },
-    { n: "03", title: "Incorporation", time: "Weeks 2–3", desc: "Incorporation document forms filing, Directors Identification Number, DSC, tax registration numbers, Incorporation Certificate. Typical timeline: 7–12 working days after document submission." },
+    { n: "03", title: "Incorporation", time: "Weeks 2–3", desc: "Incorporation document forms filing, Directors Identification Number, DSC, tax registration numbers, incorporation certificate. Typical timeline: 7–12 working days after document submission." },
     { n: "04", title: "Post-Incorporation Setup", time: "Week 4", desc: "RBI FCGPR filing, GST registration, bank account, payroll setup, and your complete compliance calendar — handed over ready to use." },
     { n: "05", title: "Ongoing Compliance", time: "Month 2+", desc: "Monthly retainer: GST, TDS, payroll, Ministry of Corporate Affairs filings, annual audit, corporate tax return. One firm, full coverage, fixed fee." },
   ];

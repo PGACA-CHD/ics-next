@@ -34,7 +34,7 @@ const PACKAGES = [
 
 const FAQS = [
   { q: 'What does the NRI Starter package fee cover?', a: 'The fee covers professional services — NRI route check, incorporation filing, MOA/AOA drafting, Directors Identification Number / DSC, and all statutory registrations. Government fees and applicable taxes are disclosed upfront. DSC is included.' },
-  { q: 'How long does Private Limited Company registration take in India?', a: 'For a standard case with complete documents, expect 7–12 working days from Incorporation document forms filing to Incorporation Certificate.' },
+  { q: 'How long does Private Limited Company registration take in India?', a: 'For a standard case with complete documents, expect 7–12 working days from Incorporation document forms filing to incorporation certificate.' },
   { q: 'Is NRI investment treated the same as FDI?', a: 'Not always. NRI investment under Schedule 4 of FEMA follows a different compliance path from corporate FDI. Route confirmation is included in every NRI package.' },
   { q: 'Do I need to travel to India to register the company?', a: 'Usually not. The entire process can be completed remotely if documents are in order.' },
   { q: 'Why is foreign subsidiary setup priced above commodity platforms?', a: 'Because it involves FDI route verification, parent-country documents, RBI reporting, cross-border banking, and transfer pricing exposure. The cost of structural errors far exceeds incorporation fees.' },
