@@ -271,7 +271,7 @@ const steps = [
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate from an Indian certifying authority. We coordinate the application remotely — no India visit required.' },
   { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We file your preferred company name through the government incorporation portal Reserve Unique Name (RUN) service and confirm availability before proceeding with incorporation.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) bundles company incorporation, Directors Identification Number allotment, tax registration numbers, and GSTIN applications in one submission. We handle the complete filing.' },
-  { n: '06', title: 'Company Registration Complete', time: 'Week 3–4', desc: 'The registrar approves your application and issues the incorporation certificate and tax registration numbers — your company is officially registered in India.' },
+  { n: '06', title: 'Incorporation Complete', time: 'Week 3–4', desc: 'The registrar approves your application and issues the incorporation certificate and tax registration numbers — your company is officially registered in India.' },
 ];
 
 const whyPoints = [
@@ -400,7 +400,7 @@ export default function Page() {
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <span className="lbl">Company Registration · From the United States</span>
+              <span className="lbl">Company Incorporation · From the United States</span>
               <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#fff', marginBottom: 22, fontFamily: HV }}>
                 <span style={{ color: 'rgba(255, 255, 255, 0.79)' }}>Register a Company<br />in India from</span>{' '}
                 <span style={{ position: 'relative', display: 'inline-block', color: '#c8870a' }}>

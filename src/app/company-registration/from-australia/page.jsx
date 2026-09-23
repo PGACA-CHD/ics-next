@@ -122,7 +122,7 @@ const steps = [
   { n: '03', title: 'Obtain DSC', time: 'Week 1–2', desc: 'All directors need a Class 3 Digital Signature Certificate. The entire process is handled remotely — no travel to India required.' },
   { n: '04', title: 'Name Reservation — Ministry of Corporate Affairs RUN', time: 'Week 2', desc: 'We reserve your preferred company name through the government incorporation portal RUN service and verify availability before proceeding.' },
   { n: '05', title: 'File Incorporation Document Forms', time: 'Week 2–3', desc: 'The Incorporation document forms (INC-32) covers company incorporation, Directors Identification Number, tax registration numbers, and GSTIN in one online submission to the Ministry of Corporate Affairs.' },
-  { n: '06', title: 'Company Registration Complete', time: 'Week 3–4', desc: 'On regulatory approval you receive your incorporation certificate and tax registration numbers. Your Indian company is fully operational.' },
+  { n: '06', title: 'Incorporation Complete', time: 'Week 3–4', desc: 'On regulatory approval you receive your incorporation certificate and tax registration numbers. Your Indian company is fully operational.' },
 ];
 
 const whyPoints = [
@@ -303,7 +303,7 @@ export default function Page() {
           <Link href="/setup" style={{ fontFamily: HV, fontSize: 12.5, color: 'rgba(0,0,0,0.55)', textDecoration: 'none', display: 'inline-block', marginBottom: 24 }}>← All Services</Link>
           <div className="hero-g" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(0,0,0,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Registration · From Australia</span>
+              <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(0,0,0,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Incorporation · From Australia</span>
               <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#010101', marginBottom: 22, fontFamily: HV }}>
                 <span style={{ color: 'rgba(1,1,1,0.79)' }}>Register a Company<br />in India from</span>{' '}
                 <span style={{ position: 'relative', display: 'inline-block', color: '#e69819' }}>
