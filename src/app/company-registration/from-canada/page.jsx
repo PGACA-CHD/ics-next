@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import PricingSection from '@/app/PricingSection';
+import GovernmentDisclosure from '@/components/shared/GovernmentDisclosure';
 
 const HV = "Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
@@ -291,7 +292,7 @@ export default function Page() {
             <Fade>
               <span style={{ fontSize: 10, letterSpacing: '2.5px', textTransform: 'uppercase', fontWeight: 600, color: 'rgba(255,255,255,0.55)', fontFamily: HV, display: 'block', marginBottom: 12 }}>Company Incorporation · From Canada</span>
               <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#fff', marginBottom: 22, fontFamily: HV }}>
-                <span style={{ color: 'rgba(255,255,255,0.79)' }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ color: 'rgba(255,255,255,0.79)' }}>Set Up a Company<br />in India from</span>{' '}
                 <span style={{ position: 'relative', display: 'inline-block', color: '#e69819' }}>
                   Canada
                   <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#e69819', borderRadius: 2 }} />
@@ -438,6 +439,7 @@ export default function Page() {
           ))}
         </div>
       </section>
+      <GovernmentDisclosure />
     </>
   );
 }

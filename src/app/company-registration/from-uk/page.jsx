@@ -5,6 +5,7 @@ import Link from 'next/link';
 const HV = "Helvetica, Arial, sans-serif";
 const GREEN = "#093024";
 import PricingSection from '@/app/PricingSection';
+import GovernmentDisclosure from '@/components/shared/GovernmentDisclosure';
 
 function useReveal(t = 0.12) {
   const ref = useRef(null);
@@ -345,7 +346,7 @@ export default function Page() {
             <Fade>
               <span className="lbl">Company Incorporation · From the United Kingdom</span>
               <h1 style={{ fontSize: 'clamp(36px,5vw,66px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.033em', color: '#fff', marginBottom: 22, fontFamily: HV }}>
-                <span style={{ color: 'rgba(255, 255, 255, 0.79)' }}>Register a Company<br />in India from</span>{' '}
+                <span style={{ color: 'rgba(255, 255, 255, 0.79)' }}>Set Up a Company<br />in India from</span>{' '}
                 <span style={{ position: 'relative', display: 'inline-block', color: '#e69819' }}>
                   the UK
                   <span style={{ position: 'absolute', left: 0, bottom: '-4px', width: '100%', height: '5px', background: '#e69819', borderRadius: 2 }} />
@@ -495,6 +496,7 @@ export default function Page() {
           ))}
         </div>
       </section>
+      <GovernmentDisclosure />
     </>
   );
 }

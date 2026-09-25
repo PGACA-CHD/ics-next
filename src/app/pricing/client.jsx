@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { T, PHONE_RAW } from '@/lib/config';
 import { submitToZoho, trackConsultationRequest } from '@/lib/utils';
+import GovernmentDisclosure from '@/components/shared/GovernmentDisclosure';
 
 const CURRENCIES = [
   { code: 'USD', symbol: '$',   rate: 90,  flag: '🇺🇸' },
@@ -409,7 +410,8 @@ function QuoteModal({ pkg, currency, onClose }) {
           <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,.5)', lineHeight: 1.5 }}>
             Professional fees + government fees & stamp duty — all in one quote.
           </p>
-        </div>
+          <GovernmentDisclosure />
+    </div>
 
         <div style={{ padding: '24px 28px' }}>
           {status === 'success' ? (
@@ -432,14 +434,17 @@ function QuoteModal({ pkg, currency, onClose }) {
                   fontSize: 13, cursor: 'pointer', fontFamily: 'inherit', marginTop: 8 }}>
                   Close this window
                 </button>
-              </div>
-            </div>
+                <GovernmentDisclosure />
+    </div>
+              <GovernmentDisclosure />
+    </div>
           ) : (
             <>
               {/* Package selector */}
               <div style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.5, color: T.lt, marginBottom: 10 }}>
                 Package
-              </div>
+                <GovernmentDisclosure />
+    </div>
               <div style={{ position: 'relative', marginBottom: 16 }}>
                 <select value={selectedPkg} onChange={e => setSelectedPkg(e.target.value)}
                   style={inp({ marginBottom: 0, paddingRight: 36, cursor: 'pointer',
@@ -461,7 +466,8 @@ function QuoteModal({ pkg, currency, onClose }) {
                   })()}
                 </select>
                 <span style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', color: T.lt, pointerEvents: 'none', fontSize: 10 }}>▼</span>
-              </div>
+                <GovernmentDisclosure />
+    </div>
 
               {/* Gov fees note */}
               <div style={{ background: '#FDF9F3', border: '1px solid #F0E6D2', borderRadius: 10,
@@ -469,13 +475,16 @@ function QuoteModal({ pkg, currency, onClose }) {
                 <span style={{ fontSize: 16, flexShrink: 0 }}>📋</span>
                 <div style={{ fontSize: 12.5, color: T.mid, lineHeight: 1.55 }}>
                   Your quote will include a <strong style={{ color: T.ch }}>separate line-item estimate</strong> for government fees (Ministry of Corporate Affairs filing, stamp duty, notarisation) based on your specific situation.
-                </div>
-              </div>
+                  <GovernmentDisclosure />
+    </div>
+                <GovernmentDisclosure />
+    </div>
 
               {/* Contact details */}
               <div style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.5, color: T.lt, marginBottom: 10 }}>
                 Your Details
-              </div>
+                <GovernmentDisclosure />
+    </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <input placeholder="First name *" type="text" value={f.firstName} onChange={set('firstName')}
@@ -484,7 +493,8 @@ function QuoteModal({ pkg, currency, onClose }) {
                   onBlur={e => e.target.style.borderColor = (status === 'error' && !f.firstName.trim()) ? '#E74C3C' : T.bdr} />
                 <input placeholder="Last name" type="text" value={f.lastName} onChange={set('lastName')}
                   style={inp()} onFocus={e => e.target.style.borderColor = T.f} onBlur={e => e.target.style.borderColor = T.bdr} />
-              </div>
+                <GovernmentDisclosure />
+    </div>
 
               <input placeholder="Work email *" type="email" value={f.email} onChange={set('email')}
                 style={inp({ borderColor: status === 'error' && !f.email.trim() ? '#E74C3C' : T.bdr })}
@@ -499,13 +509,15 @@ function QuoteModal({ pkg, currency, onClose }) {
                   style={inp()} onFocus={e => e.target.style.borderColor = T.f} onBlur={e => e.target.style.borderColor = T.bdr} />
                 <input placeholder="Country" type="text" value={f.country} onChange={set('country')}
                   style={inp()} onFocus={e => e.target.style.borderColor = T.f} onBlur={e => e.target.style.borderColor = T.bdr} />
-              </div>
+                <GovernmentDisclosure />
+    </div>
 
               {status === 'error' && (
                 <div style={{ background: '#FFF0F0', border: '1px solid #FFCCCC', borderRadius: 8,
                   padding: '10px 14px', marginBottom: 12, fontSize: 13, color: '#C0392B' }}>
                   Please fill in your name, email, and select a package.
-                </div>
+                  <GovernmentDisclosure />
+    </div>
               )}
 
               <button onClick={handleSubmit} disabled={status === 'submitting'}
@@ -522,11 +534,15 @@ function QuoteModal({ pkg, currency, onClose }) {
                     <span style={{ color: '#22c55e' }}>✓</span> {t}
                   </span>
                 ))}
-              </div>
+                <GovernmentDisclosure />
+    </div>
             </>
           )}
-        </div>
-      </div>
+          <GovernmentDisclosure />
+    </div>
+        <GovernmentDisclosure />
+    </div>
+      <GovernmentDisclosure />
     </div>
   );
 }
@@ -564,12 +580,15 @@ export default function PricingPage() {
                   {c.flag} {c.code}
                 </button>
               ))}
-            </div>
-          </div>
+              <GovernmentDisclosure />
+    </div>
+            <GovernmentDisclosure />
+    </div>
 
           <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)', marginBottom: 20, lineHeight: 1.6 }}>
             For founders, CFOs & NRIs setting up or running a company in India — priced in your currency.
-          </div>
+            <GovernmentDisclosure />
+    </div>
 
           <h1 className="font-display" style={{ fontSize: 'clamp(40px,5vw,70px)', fontWeight: 600, color: '#fff', lineHeight: 1.04, marginBottom: 22, letterSpacing: '-.01em' }}>
             Transparent pricing.<br />
@@ -584,7 +603,8 @@ export default function PricingPage() {
             <Link href="/contact" className="ics-btn ics-btn-primary ics-btn-lg">
               Book Free 30-min Strategy Call →
             </Link>
-          </div>
+            <GovernmentDisclosure />
+    </div>
 
           <div style={{ display: 'flex', gap: 0, flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,.09)', paddingTop: 24 }}>
             {[
@@ -598,10 +618,13 @@ export default function PricingPage() {
                 <span style={{ fontSize: 13, color: 'rgba(255,255,255,.6)', fontWeight: 500 }}>
                   <span style={{ color: T.sl, marginRight: 6 }}>✓</span>{item}
                 </span>
-              </div>
+                <GovernmentDisclosure />
+    </div>
             ))}
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── COMPANY REGISTRATION — TABBED ─────────────────────────────────── */}
@@ -630,8 +653,10 @@ export default function PricingPage() {
                   {tab.label}
                 </button>
               ))}
-            </div>
-          </div>
+              <GovernmentDisclosure />
+    </div>
+            <GovernmentDisclosure />
+    </div>
 
           {/* Intro */}
           <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.75, maxWidth: 800, margin: '0 auto 36px', textAlign: 'center', fontWeight: 300 }}>
@@ -656,7 +681,8 @@ export default function PricingPage() {
                   {tier.badge && (
                     <div style={{ display: 'inline-block', background: isFeatured ? T.s : '#E4F0EB', color: isFeatured ? '#fff' : T.f, fontSize: 11.5, fontWeight: 700, padding: '3px 12px', borderRadius: 20, marginBottom: 12, width: 'fit-content' }}>
                       ⭐ {tier.badge}
-                    </div>
+                      <GovernmentDisclosure />
+    </div>
                   )}
 
                   {/* Name + Price */}
@@ -669,15 +695,18 @@ export default function PricingPage() {
                       {p(tier.inr)}
                     </span>
                     {tier.suffix && <span style={{ fontSize: 15, fontWeight: 500, color: isFeatured ? 'rgba(255,255,255,.5)' : T.lt }}>{tier.suffix}</span>}
-                  </div>
+                    <GovernmentDisclosure />
+    </div>
                   <div style={{ fontSize: 12, color: isFeatured ? 'rgba(255,255,255,.45)' : T.lt, marginBottom: 18 }}>
                     ⏱ {tier.timeline}
-                  </div>
+                    <GovernmentDisclosure />
+    </div>
 
                   {/* Best for */}
                   <div style={{ fontSize: 12.5, color: isFeatured ? 'rgba(255,255,255,.55)' : T.mid, lineHeight: 1.55, marginBottom: 18, padding: '10px 12px', background: isFeatured ? 'rgba(255,255,255,.07)' : T.stone, borderRadius: 10 }}>
                     <strong style={{ color: isFeatured ? 'rgba(255,255,255,.75)' : T.ch }}>Best for:</strong> {tier.best}
-                  </div>
+                    <GovernmentDisclosure />
+    </div>
 
                   {/* Features */}
                   <ul style={{ listStyle: 'none', padding: 0, flex: 1, marginBottom: 24 }}>
@@ -699,16 +728,19 @@ export default function PricingPage() {
                   }}>
                     Get Quote →
                   </button>
-                </div>
+                  <GovernmentDisclosure />
+    </div>
               );
             })}
-          </div>
+            <GovernmentDisclosure />
+    </div>
 
           {/* Gov fees note */}
           <p style={{ fontSize: 12.5, color: T.lt, textAlign: 'center', maxWidth: 700, margin: '0 auto', lineHeight: 1.6 }}>
             {entityData.govFees}
           </p>
-        </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── COMPLIANCE RETAINERS ──────────────────────────────────────────── */}
@@ -722,7 +754,8 @@ export default function PricingPage() {
             <p style={{ fontSize: 16, color: T.mid, maxWidth: 680, margin: '0 auto' }}>
               India has 200+ compliance deadlines a year. One coordinated team on a fixed monthly retainer means your books are audit-ready every month, not scrambled at year-end.
             </p>
-          </div>
+            <GovernmentDisclosure />
+    </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 20 }} className="retainer-cards-grid">
             {RETAINERS.map((plan, idx) => {
@@ -739,19 +772,22 @@ export default function PricingPage() {
                   {plan.badge && (
                     <div style={{ display: 'inline-block', background: star ? T.s : '#E4F0EB', color: star ? '#fff' : T.f, fontSize: 11.5, fontWeight: 700, padding: '3px 12px', borderRadius: 20, marginBottom: 12, width: 'fit-content' }}>
                       ⭐ {plan.badge}
-                    </div>
+                      <GovernmentDisclosure />
+    </div>
                   )}
 
                   <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: star ? '#fff' : T.ch, lineHeight: 1.2, marginBottom: 8 }}>{plan.name}</h3>
                   <div style={{ marginBottom: 4 }}>
                     <span style={{ fontSize: 36, fontWeight: 700, color: star ? T.sl : T.f, fontFamily: "Helvetica, Arial, sans-serif", lineHeight: 1 }}>{p(plan.inr)}</span>
                     <span style={{ fontSize: 15, fontWeight: 500, color: star ? 'rgba(255,255,255,.5)' : T.lt }}>/mo</span>
-                  </div>
+                    <GovernmentDisclosure />
+    </div>
                   <div style={{ fontSize: 12, color: star ? 'rgba(255,255,255,.45)' : T.lt, marginBottom: 18 }}>{plan.min}</div>
 
                   <div style={{ fontSize: 12.5, color: star ? 'rgba(255,255,255,.55)' : T.mid, lineHeight: 1.55, marginBottom: 18, padding: '10px 12px', background: star ? 'rgba(255,255,255,.07)' : T.stone, borderRadius: 10 }}>
                     <strong style={{ color: star ? 'rgba(255,255,255,.75)' : T.ch }}>Best for:</strong> {plan.best}
-                  </div>
+                    <GovernmentDisclosure />
+    </div>
 
                   <ul style={{ listStyle: 'none', padding: 0, flex: 1, marginBottom: plan.note ? 12 : 24 }}>
                     {plan.items.map(item => (
@@ -762,7 +798,8 @@ export default function PricingPage() {
                   {plan.note && (
                     <div style={{ fontSize: 11.5, color: star ? 'rgba(255,255,255,.45)' : T.lt, lineHeight: 1.5, marginBottom: 16, padding: '8px 10px', background: star ? 'rgba(255,255,255,.05)' : '#FDF9F3', borderRadius: 8, fontStyle: 'italic' }}>
                       {plan.note}
-                    </div>
+                      <GovernmentDisclosure />
+    </div>
                   )}
 
                   <button onClick={() => setQuotePkg({ entity: 'Compliance Retainer', name: plan.name, inr: plan.inr })}
@@ -774,11 +811,14 @@ export default function PricingPage() {
                   }}>
                     Get a Retainer Quote →
                   </button>
-                </div>
+                  <GovernmentDisclosure />
+    </div>
               );
             })}
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── ADD-ON SERVICES ───────────────────────────────────────────────── */}
@@ -792,7 +832,8 @@ export default function PricingPage() {
             <p style={{ fontSize: 15, color: T.mid, maxWidth: 580, margin: '0 auto' }}>
               Add to any package or engage standalone. Government and third-party costs are additional.
             </p>
-          </div>
+            <GovernmentDisclosure />
+    </div>
 
           <div className="comparison-table-wrap" style={{ background: '#fff', border: `1px solid ${T.bdr}`, borderRadius: 16, overflow: 'hidden' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -813,8 +854,10 @@ export default function PricingPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── HOW IT WORKS ──────────────────────────────────────────────────── */}
@@ -825,17 +868,21 @@ export default function PricingPage() {
             <h2 className="font-display" style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 600, color: T.ch, lineHeight: 1.1 }}>
               From first call to operational entity.
             </h2>
-          </div>
+            <GovernmentDisclosure />
+    </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24 }} className="service-cards-grid">
             {STEPS.map(step => (
               <div key={step.num} style={{ padding: '28px 24px', background: T.stone, borderRadius: 16, borderTop: `4px solid ${T.f}` }}>
                 <div style={{ fontSize: 32, fontWeight: 700, color: T.f, fontFamily: "Helvetica, Arial, sans-serif", marginBottom: 8, opacity: 0.5 }}>{step.num}</div>
                 <div style={{ fontSize: 15, fontWeight: 700, color: T.ch, marginBottom: 10 }}>{step.title}</div>
                 <p style={{ fontSize: 13.5, color: T.mid, lineHeight: 1.65, fontWeight: 300 }}>{step.desc}</p>
-              </div>
+                <GovernmentDisclosure />
+    </div>
             ))}
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── WHAT'S NOT INCLUDED ────────────────────────────────────────────── */}
@@ -846,8 +893,10 @@ export default function PricingPage() {
             <p style={{ fontSize: 14, color: T.mid, lineHeight: 1.75, marginBottom: 0 }}>
               Government fees (Ministry of Corporate Affairs filing fees, stamp duty), taxes, notarisation/apostille, translations, courier, banking charges, and third-party costs are billed at actual unless expressly included. DSC is included in all packages. Statutory audit fees are engaged separately. Transfer pricing benchmarking studies, legal opinions, and one-time project work outside package scope require separate engagement with written approval. No hidden markups.
             </p>
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── FAQ ────────────────────────────────────────────────────────────── */}
@@ -858,7 +907,8 @@ export default function PricingPage() {
             <h2 className="font-display" style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 600, color: T.ch, lineHeight: 1.1 }}>
               Common questions, straight answers.
             </h2>
-          </div>
+            <GovernmentDisclosure />
+    </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {FAQS.map((faq, i) => (
@@ -871,12 +921,16 @@ export default function PricingPage() {
                 {openFaq === i && (
                   <div style={{ padding: '0 22px 20px', fontSize: 14.5, color: T.mid, lineHeight: 1.78, fontWeight: 300 }}>
                     {faq.a}
-                  </div>
+                    <GovernmentDisclosure />
+    </div>
                 )}
-              </div>
+                <GovernmentDisclosure />
+    </div>
             ))}
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── SOCIAL PROOF ───────────────────────────────────────────────────── */}
@@ -888,8 +942,10 @@ export default function PricingPage() {
               We were quoted $5,000 for our India subsidiary setup. ICS delivered the same scope — entity, FCGPR, TP policy — for $1,500 in 19 business days. The structure passed our auditor's review on first look.
             </p>
             <div style={{ fontSize: 13, color: T.lt, fontWeight: 600 }}>— Finance Director, UK Technology Company (anonymised)</div>
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── FINAL CTA ──────────────────────────────────────────────────────── */}
@@ -911,18 +967,22 @@ export default function PricingPage() {
               target="_blank" rel="noopener noreferrer" className="ics-btn ics-btn-ghost ics-btn-lg">
               WhatsApp Us
             </a>
-          </div>
+            <GovernmentDisclosure />
+    </div>
           <div style={{ display: 'flex', gap: 28, justifyContent: 'center', flexWrap: 'wrap' }}>
             {['No retainer to start', 'Written quote within 24 hrs', 'Fixed, transparent fees'].map(t => (
               <span key={t} style={{ fontSize: 13, color: 'rgba(255,255,255,.38)', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ color: T.sl }}>✓</span> {t}
               </span>
             ))}
-          </div>
+            <GovernmentDisclosure />
+    </div>
           <div style={{ fontSize: 12, color: 'rgba(255,255,255,.25)', marginTop: 28, lineHeight: 1.6 }}>
             Confidentiality maintained. A CA-led team reviews every enquiry. No spam. No obligation. Response within 24 business hours.
-          </div>
-        </div>
+            <GovernmentDisclosure />
+    </div>
+          <GovernmentDisclosure />
+    </div>
       </section>
 
       {/* ── QUOTE MODAL ────────────────────────────────────────────────── */}
@@ -930,6 +990,7 @@ export default function PricingPage() {
         <QuoteModal pkg={quotePkg} currency={currency} onClose={() => setQuotePkg(null)} />
       )}
 
+      <GovernmentDisclosure />
     </div>
   );
 }
